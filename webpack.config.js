@@ -1,45 +1,68 @@
-// Use path module to create absolute path in output obj.
-import 'path';
+const path = require("path");
 
 module.exports = {
     // Specify our input (entry) file to be compiled
     entry: {
-        main: "/src/main.ts"
+        main: "/src/main.ts",
     },
-    // Rules defining compiling & bundling of the result file
+    // Rules defining compiling & bundling of the resulting file
     module: {
-        rules: [{
-            test: /\.ts$/, // Look for .ts files: RegExp means look for ts files at the end
-            use: "ts-loader", // Compile .ts > .js
-            include: [path.resolve(__dirname, "src")], // Where .ts files are located
-            exclude: /node_modules/,
-        }]
+        rules: [
+            {
+                test: /\.ts$/,
+                use: "ts-loader",
+                include: [path.resolve(__dirname, "src")],
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"],
+            },
+            {
+                test: /\.s[ac]ss$/i, // Optional for Bootstraps' SCSS
+                use: ["style-loader", "css-loader", "sass-loader"],
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg|ico)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: "assets/images/[name][ext]",
+                },
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: "assets/fonts/[name][ext]",
+                },
+            },
+        ],
     },
     // Specify our output directory
     output: {
-        // Tell webpack to serve compiled JS to actual file for live changes
-        publicPath: "public",
+        publicPath: "/",
         filename: "bundle.js",
-        //.resolve's first parameter search for in the directory
-        // for absolute path and public is our result
         path: path.resolve(__dirname, "public")
     },
     mode: "development",
     devServer: {
         static: {
-            directory: path.join(__dirname, 'public')
+            directory: path.join(__dirname, "public"),
         },
         compress: false,
         client: {
             logging: "warn",
             overlay: {
                 errors: true,
-                warnings: false
+                warnings: false,
             },
-            progress: true
+            progress: true,
         },
         port: 1234,
-        host: "0.0.0.0"
-    }
-
+        host: "0.0.0.0",
+        hot: true,
+    },
+    resolve: {
+        extensions: [".ts", ".js"],
+    },
 };
