@@ -1,0 +1,25 @@
+{
+  "name": "new-portfolio",
+  "version": "1.0.0",
+  "description": "Derviş's Personel Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "compile": "tsc",
+    "live": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "author": "Derviş Öksüzoğlu",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^9.28.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "dependencies": {
+    "fastbootstrap": "^2.2.0"
+  }
+}

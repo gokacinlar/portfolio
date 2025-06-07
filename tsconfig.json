@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    /* Modern ES module output */
+    "module": "ESNext",
+    /* Use Node-style resolution to allow importing from node_modules */
+    "moduleResolution": "node",
+    /* Allow default imports from CommonJS modules */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    /* Let Webpack/Web Dev Server handle JSX and output paths */
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "useDefineForClassFields": true,
+    "baseUrl": "./src",
+    "allowJs": true,
+    "checkJs": false
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "public"
+  ]
+}
