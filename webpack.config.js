@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
     // Specify our input (entry) file to be compiled
     entry: {
-        main: "/src/main.ts",
+        main: "./src/main.ts",
     },
     // Rules defining compiling & bundling of the resulting file
     module: {
@@ -44,7 +44,7 @@ module.exports = {
         filename: "bundle.js",
         path: path.resolve(__dirname, "public")
     },
-    mode: "development",
+    mode: "development", // Later change this to "production" for final result
     devServer: {
         static: {
             directory: path.join(__dirname, "public"),
@@ -61,6 +61,11 @@ module.exports = {
         port: 1234,
         host: "0.0.0.0",
         hot: true,
+        watchFiles: ["src/**/*"] // For constant changes
+    },
+    watchOptions: {
+        poll: 1000, // Every 1s check for changes automatically
+        ignored: /node_modules/,
     },
     resolve: {
         extensions: [".ts", ".js"],
