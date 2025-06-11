@@ -1,40 +1,94 @@
 // Crucial imports
-import '../assets/css/index.css';
-import '../assets/images/favicon/favicon.ico';
+import "../assets/css/index.css";
 // Libraries
-import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Template } from '../helper';
+import "bootstrap-icons/font/bootstrap-icons.css";
+// Components
+import { Template, DomEvents } from '../helper';
 
-export default class Header extends HTMLElement {
+class Header extends HTMLElement {
     private template: Template;
     private headerTemplate: HeaderNode;
+    private domEvents: DomEvents;
     constructor() {
         super();
         this.template = new Template();
         this.headerTemplate = new HeaderNode();
+        this.domEvents = new DomEvents();
 
         const template = this.template.createTemplate(this.headerTemplate.headerItself());
         this.appendChild(template.content.cloneNode(true));
     }
+
+    connectedCallback(): void {
+        const hrBtn = document.querySelector("#hrBtn") as HTMLButtonElement;
+        this.domEvents.headerRightActions(hrBtn);
+        const dayNightModeSwitchingBtn = document.querySelector("#hrDayNightBtn") as HTMLButtonElement;
+        this.domEvents.dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-btn-logo");
+    }
 }
 
-class HeaderNode {
+export class HeaderNode {
     public headerItself(): string {
         return `
-            <nav class="header-bg m-1 shadow-lg px-2 py-2 rounded-5">
-                <section>
+            <nav class="header-bg bg-gradient m-1 shadow-lg px-2 py-2 d-flex flex-row align-items-center justify-content-between position-relative">
+                <section class="d-inline-flex header-left">
+                    ${this.headerLeft()}
                 </section>
-                <ul class="list-unstyled mb-0 d-flex flex-row gap-2">
-                    <li><a href="" title="Home" class="bg-gradient btn header-btn-bg btn-lg  rounded-5"><i class="bi bi-house-door"></i> Home</a></li>
-                    <li><a href="" title="Blog" class="bg-gradient btn header-btn-bg btn-lg rounded-5"><i class="bi bi-journals"></i> Blog</a></li>
-                    <li><a href="" title="About" class="bg-gradient btn header-btn-bg btn-lg rounded-5"><i class="bi bi-person-circle"></i> About</a></li>
-                </ul>
-                <section>
+                <section class="position-absolute top-50 start-50 translate-middle">
+                    ${this.headerMiddle()}
+                </section>
+                <section class="header-right d-flex flex-row align-items-center gap-1">
+                    ${this.headerRight()}
                 </section>
             </nav>
         `;
     }
+
+    public headerLeft(): string {
+        return `
+            <a href="" class="d-inline-flex flex-row align-items-center justify-content-start gap-1 bg-gradient header-btn-bg rounded-5
+                link-offset-2 link-underline link-underline-opacity-0">
+                <img
+                    class="header-logo"
+                    src="../assets/images/static/logo.jpg"
+                    srcset="../assets/images/static/logo_256x256.jpg 256w, ../assets/images/static/logo_512x512.jpg 512w,
+                    ../assets/images/static/logo.jpg 1024w"
+                    sizes="(max-width: 600px) 256px, (max-width: 960px) 512px, 1024px"
+                    alt="Derviş Öksüzoğlu"
+                    title="Derviş Öksüzoğlu"
+                    height="auto"
+                    loading="lazy"
+                    decoding="async"
+                    />
+            </a>
+        `;
+    }
+
+    private headerMiddle(): string {
+        return `
+            <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-row gap-2">
+                <li><a href="" title="Home" class="bg-gradient btn header-btn-bg btn-lg rounded-5 fs-4 shadow-md"><i class="bi bi-house-door"></i> Home</a></li>
+                <li><a href="" title="Blog" class="bg-gradient btn header-btn-bg btn-lg rounded-5 fs-4 shadow-md"><i class="bi bi-journals"></i> Blog</a></li>
+                <li><a href="" title="About" class="bg-gradient btn header-btn-bg btn-lg rounded-5 fs-4 shadow-md"><i class="bi bi-person-circle"></i> About</a></li>
+            </ul>
+        `;
+    }
+
+    private headerRight(): string {
+        return `
+            <button id="hrBtn" type="button" class="header-btn-bg-important bg-gradient btn btn-lg rounded-5 fs-4 shadow-md d-flex flex-row align-items-center gap-2"
+                title="Proceed to hire me for your web projects.">
+                <i class="bi bi-star-half pulsate-fwd"></i>
+                <span class="hr-btn-text">Hire me!</span>
+            </button>
+            <button id="hrDayNightBtn" type="button" class="header-btn-bg-alt bg-gradient btn btn-lg fs-4 shadow-md d-flex flex-row align-items-center gap-1"
+                title="Change Day/Night Mode">
+                <i class="hr-btn-logo bi bi-sun text-black fw-bold"></i>
+            </button>
+        `;
+    }
 }
 
+export default Header;
 customElements.define("app-header", Header);
