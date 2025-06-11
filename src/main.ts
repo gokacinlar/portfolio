@@ -1,14 +1,14 @@
 // Crucial imports
-import './assets/css/index.css';
-import './assets/images/favicon/favicon.ico';
+import "./assets/css/index.css";
 // Libraries
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Template } from './helper';
 // Components
-import './components/header';
+import { Template } from './helper';
+import "./components/header";
+import "./components/footer";
 
-export default class HomePage extends HTMLElement {
+class HomePage extends HTMLElement {
     private template: Template;
     private homePageNode: HomePageNode;
     constructor() {
@@ -31,4 +31,5 @@ class HomePageNode {
     }
 }
 
+export default HomePage;
 customElements.define("app-main", HomePage);
