@@ -1,4 +1,5 @@
 const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     // Specify our input (entry) file to be compiled
@@ -70,4 +71,16 @@ module.exports = {
     resolve: {
         extensions: [".ts", ".js"],
     },
+    // For copying static assets as a whole without importing them individually
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, "src/assets/images"),
+                    to: "assets/images",
+                    noErrorOnMissing: true,
+                },
+            ],
+        }),
+    ],
 };
