@@ -27,6 +27,7 @@
     --clr-five: #2A293B;
     --clr-six: #FCD93A;
     --clr-seven: #F9C80E;
+    --clr-eight: #f0ebf0;
     --rounded-pill: 23px;
     --rounded-big: 28px;
 }
@@ -45,8 +46,6 @@
 @layer init {
     body {
         background: var(--clr-one) !important;
-        /* Temporary */
-        min-height: 100vh !important;
     }
 
     /* Header */
@@ -164,6 +163,103 @@
                 transform: translateX(-50%) scaleX(1);
             }
         }
+    }
+
+    /********** Hero **********/
+    #hero {
+        min-height: 650px !important;
+        background: var(--clr-eight);
+    }
+
+    #heroLogoBg {
+        border-radius: var(--rounded-big);
+        background-image:
+            radial-gradient(var(--clr-five) 10%, transparent 10%);
+        background-position: 5px 8px;
+        background-size: 24px 24px;
+        background-color: var(--clr-eight);
+    }
+
+    .hero-logo {
+        --logo-w: 412px;
+        width: var(--logo-w);
+        height: auto;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .motto-elements {
+        color: var(--clr-one);
+        background: var(--clr-two);
+        -webkit-animation: fade-in-fwd .55s cubic-bezier(.25, .46, .45, .94) both;
+        animation: fade-in-fwd .55s cubic-bezier(.25, .46, .45, .94) both
+    }
+
+    @keyframes fade-in-fwd {
+        0% {
+            transform: translateZ(-80px);
+            opacity: 0
+        }
+
+        100% {
+            transform: translateZ(0);
+            opacity: 1
+        }
+    }
+
+    #ocps {
+        font-family: monospace !important;
+        display: inline-block;
+        min-height: 2ch;
+        white-space: nowrap;
+    }
+
+    .cursor {
+        display: inline-block;
+        width: 1ch;
+        color: var(--clr-five);
+        animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+    }
+
+    /********** Promo **********/
+
+    #promo {
+        min-height: 650px !important;
+    }
+
+    .marquee-content {
+        animation: marquee 30s linear infinite;
+    }
+
+    .marquee-item-img {
+        width: 128px;
+        filter: grayscale(75%);
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(100%);
+        }
+
+        100% {
+            transform: translateX(-75%);
+        }
+    }
+
+    .marquee-container:hover .marquee-content {
+        animation-play-state: paused;
     }
 
     /********** Footer **********/
