@@ -7,6 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Template } from './helper';
 import "./components/header";
 import "./components/footer";
+import "./components/hero";
+import "./components/promo";
 
 class HomePage extends HTMLElement {
     private template: Template;
@@ -25,7 +27,7 @@ class HomePageNode {
     public homePageTemplate(): string {
         return `
             <div class="px-2">
-                Hi
+
             </div>
         `;
     }
