@@ -1,5 +1,13 @@
 import { HeroParts, PromoParts } from "./static";
 
+// Detecting dark/light mode
+export class DarkLightMode {
+    public detectDarkLightMode(): void {
+        const dlMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute("data-bs-theme", dlMode ? "dark" : "light");
+    }
+}
+
 // Create a template content to be appended to every Light DOM
 export class Template {
     public createTemplate(content: any): HTMLTemplateElement {
@@ -20,7 +28,7 @@ export class DomEvents {
         });
 
         elem.addEventListener("mouseleave", () => {
-            textSpan.textContent = "Hire me!";
+            textSpan.textContent = "Work w/me!";
         });
     }
 
@@ -32,13 +40,31 @@ export class DomEvents {
             if (reset) {
                 dayNightModeSwitchingBtn.classList.remove("bi-sun");
                 dayNightModeSwitchingBtn.classList.add("bi-moon-stars");
+                document.documentElement.setAttribute("data-bs-theme", "dark");
             } else {
                 dayNightModeSwitchingBtn.classList.remove("bi-moon-stars");
                 dayNightModeSwitchingBtn.classList.add("bi-sun");
+                document.documentElement.setAttribute("data-bs-theme", "light");
             }
             // Reset the flag
             reset = !reset;
         });
+    }
+
+    // Function to append mottos into DOM with sequential order
+    public async appendContent(target: HTMLElement, content: Array<string>): Promise<void> {
+        for (let i in content) {
+            let p = document.createElement("p") as HTMLParagraphElement;
+            p.textContent = content[i];
+            p.classList.add("motto-elements", "p-3", "fs-6", "fw-bolder", "rounded-5", "pe-none", "shadow-sm")
+            // Use promise-resolve to sequentially place the array items into dom
+            await new Promise<void>((resolve) => {
+                setTimeout(() => {
+                    target.appendChild(p);
+                    resolve();
+                }, 1000);
+            });
+        }
     }
 }
 
@@ -50,6 +76,7 @@ export class TypeWriterDisplay {
     private charIndex: number = 0;
     private isDeleting: boolean = false;
 
+    // Initialize the core elements
     constructor(heroParts: HeroParts, elementId: string) {
         this.heroParts = heroParts;
         const targetElement = document.getElementById(elementId);
@@ -73,31 +100,30 @@ export class TypeWriterDisplay {
             textSpan.textContent = displayedText;
         }
 
-        let delay = 100;
-
+        let typingDelay = 100;
         if (!this.isDeleting) {
             if (this.charIndex < currentText.length) {
                 this.charIndex++;
             } else {
                 // When full word is written, pause before deleting
-                delay = 2000;
+                typingDelay = 2000;
                 this.isDeleting = true;
             }
         } else {
             if (this.charIndex > 0) {
                 this.charIndex--;
-                delay = 50;
+                typingDelay = 50;
             } else {
                 // Move to next word
                 this.isDeleting = false;
                 this.textIndex = (this.textIndex + 1) % this.heroParts.occupationsData.length;
-                delay = 500;
+                typingDelay = 500;
             }
         }
 
         setTimeout(() => {
             this.type();
-        }, delay);
+        }, typingDelay);
     }
 }
 
@@ -120,7 +146,7 @@ export class PromoFunctions {
             anchor.setAttribute("target", "_blank");
 
             const img = document.createElement("img") as HTMLImageElement;
-            img.className = "marquee-item-img img-fluid img-responsive rounded-4";
+            img.className = "marquee-item-img img-fluid img-responsive lazyload rounded-4";
             img.title = item.title;
             img.src = item.imgSrc;
             img.setAttribute("loading", "lazy");
@@ -129,6 +155,5 @@ export class PromoFunctions {
             anchor.appendChild(img);
             container.appendChild(anchor);
         }
-
     }
 }

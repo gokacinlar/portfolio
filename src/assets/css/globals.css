@@ -1,0 +1,49 @@
+@font-face {
+    font-family: "Inter";
+    src: url(../fonts/Geist.woff2) format("woff2");
+}
+
+[data-bs-theme="dark"] {
+    #hero {
+        background-color: var(--clr-two);
+        color: var(--clr-one);
+    }
+
+    #heroLogoBg {
+        background-image: radial-gradient(var(--clr-one) 10%, transparent 10%);
+        background-color: transparent;
+    }
+
+    #promo:has(div > h3) {
+        color: var(--clr-two);
+    }
+
+    .motto-elements {
+        color: var(--clr-two) !important;
+        background: var(--clr-eight);
+    }
+
+    .cursor {
+        color: var(--clr-two) !important;
+    }
+}
+
+:root {
+    [data-bs-theme="light"] {
+        --bs-body-bg: #FDF9FD;
+        --bs-body-color: #1F1F24;
+
+        --clr-one: #FDF9FD;
+        --clr-two: #1F1F24;
+        --clr-eight: #f0ebf0;
+    }
+
+    [data-bs-theme="dark"] {
+        --bs-body-bg: #1F1F24;
+        --bs-body-color: #FDF9FD;
+
+        --clr-one: #1F1F24;
+        --clr-two: #FDF9FD;
+        --clr-eight: #2A293B;
+    }
+}

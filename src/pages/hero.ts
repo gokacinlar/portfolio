@@ -1,10 +1,9 @@
-// Crucial imports
-import "../assets/css/index.css";
 // Libraries
+import "lazysizes";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 // Components"
-import { Template, TypeWriterDisplay } from "../helper";
+import { Template, TypeWriterDisplay, DomEvents } from "../helper";
 import { BodyParts, HeroParts } from "../static";
 
 class HeroSection extends HTMLElement {
@@ -34,7 +33,7 @@ class HeroTemplate {
     public hero(): string {
         return `
             <section class="mx-2 my-2">
-                <div id="hero" class="d-flex align-items-center justify-content-between flex-column rounded-5 bg-gradient shadow-md">
+                <div id="hero" class="d-flex align-items-center justify-content-around flex-column rounded-5 bg-gradient shadow-md">
                     <div class="container-fluid mx-0 px-5 py-5 d-flex flex-row align-items-center justify-content-around">
                         <section class="row col-6 d-flex flex-column align-items-start gap-4">
                             <div>
@@ -46,14 +45,14 @@ class HeroTemplate {
                                     <span class="ocps-written-text"></span><span class="cursor">|</span
                                 </h1>
                             </div>
-                            <div class="d-flex flex-row align-items-center gap-1">
+                            <div class="d-flex flex-row align-items-center gap-2">
                                 ${this.heroBtns()}
                             </div>
                         </section>
                         <section class="row col-6">
                             <a id="heroLogoBg"href="" class="d-flex justify-content-center link-offset-2 link-underline link-underline-opacity-0">
                                 <img
-                                    class="hero-logo img-fluid"
+                                    class="hero-logo img-fluid lazyload"
                                     src="../assets/images/static/logo.jpg"
                                     srcset="../assets/images/static/logo_256x256.jpg 256w, ../assets/images/static/logo_512x512.jpg 512w,
                                     ../assets/images/static/logo.jpg 1024w"
@@ -67,7 +66,7 @@ class HeroTemplate {
                             </a>
                         </section>
                     </div>
-                    <section id="mottosMarquee" class="d-flex flex-row align-items-center justify-content-center gap-2">
+                    <section id="mottosSection" class="d-flex flex-row align-items-center justify-content-center gap-2">
                     </section>
                 </div>
             </section>
@@ -76,55 +75,25 @@ class HeroTemplate {
 
     private heroBtns(): string {
         return `
-            <button id="hrBtn" type="button" class="header-btn-bg-important bg-gradient btn btn-lg fs-4 shadow-md d-flex flex-row align-items-center gap-2
-                rounded-5 shadow-sm border border-secondary-subtle"
-                title="Proceed to hire me for your eduation or web demands.">
+            <button id="hrBtn" type="button" class="hero-btn hero-hire-btn bg-gradient btn btn-lg fs-4 shadow-md d-flex flex-row align-items-center gap-2
+                rounded-5 shadow-sm" title="Proceed to hire me for your eduation or web demands.">
                 <i class="bi bi-star-half pulsate-fwd"></i>
-                <span class="hr-btn-text">Hire me!</span>
+                <span class="hr-btn-text">Work w/me!</span>
             </button>
-            <button id="hrDayNightBtn" type="button" class="header-btn-bg-alt bg-gradient btn btn-lg fs-4 shadow-md d-flex flex-row align-items-center gap-1 
-                shadow-sm border border-secondary-subtle"
-                title="Download My CV">
+            <button id="hrGetCvBtn" type="button" class="hero-btn hero-get-cv-btn bg-gradient btn btn-lg fs-4 shadow-md d-flex flex-row align-items-center gap-1
+                rounded-5 shadow-sm" title="Download My CV">
                 <i class="bi bi-paperclip"></i>
                 <span class="hr-btn-text">Get Derviş's CV</span>
             </button>
         `;
     }
 
-    // Function to append mottos into DOM with sequential order
-    private async appendContent(target: HTMLElement, content: Array<string>): Promise<void> {
-        for (let i in content) {
-            let p = document.createElement("p") as HTMLParagraphElement;
-            p.textContent = content[i];
-            p.classList.add("motto-elements", "p-3", "fs-6", "fw-bolder", "rounded-5", "pe-none", "shadow-sm")
-            // Use promise-resolve to sequentially place the array items into dom
-            await new Promise<void>((resolve) => {
-                setTimeout(() => {
-                    target.appendChild(p);
-                    resolve();
-                }, 1000);
-            });
-        }
-    }
-
     connectedCallback(): void {
+        const domEvents = new DomEvents();
         document.addEventListener("DOMContentLoaded", () => {
-            const mottosElement = document.querySelector("#mottosMarquee") as HTMLDivElement;
+            const mottosElement = document.querySelector("#mottosSection") as HTMLDivElement;
             const mottos = this.bodyParts.mottos;
-            this.appendContent(mottosElement, mottos).then(() => {
-
-                // After all mottos are appended, apply the scale-up effect sequentially
-                // indicating mottos are finished and now marquee now can begin
-                const paragraphs = document.querySelectorAll(".main-landing-mottos > p");
-                paragraphs.forEach((p, index) => {
-                    setTimeout(() => {
-                        p.classList.add("scale-up");
-                        setTimeout(() => {
-                            p.classList.remove("scale-up");
-                        }, 1000);
-                    }, index * 2000);
-                });
-            });
+            domEvents.appendContent(mottosElement, mottos);
         });
     }
 }

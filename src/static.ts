@@ -27,8 +27,8 @@ export class PromoParts {
         { title: "WordPress", imgSrc: "./assets/images/static/svg/wp.svg", href: "https://wordpress.com/" },
         { title: "MySQL", imgSrc: "./assets/images/static/svg/mysql.svg", href: "https://www.mysql.com/" },
         { title: "PostgreSQL", imgSrc: "./assets/images/static/svg/postgrsql.svg", href: "https://www.postgresql.org/" },
-        { title: "Python", imgSrc: "./assets/images/static/svg/py.svg", href: "https://www.python.org/" },
-        { title: "C#", imgSrc: "./assets/images/static/svg/cs.svg", href: "https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps" }
+        { title: "SQLite", imgSrc: "./assets/images/static/svg/sqlite.svg", href: "https://www.sqlite.org/" },
+        { title: "Python", imgSrc: "./assets/images/static/svg/py.svg", href: "https://www.python.org/" }
     ];
 }
 

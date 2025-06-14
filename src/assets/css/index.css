@@ -1,22 +1,3 @@
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: var(--clr-two) !important;
-        color: var(--clr-one) !important;
-    }
-}
-
-@media (prefers-color-scheme: light) {
-    body {
-        background-color: var(--clr-one) !important;
-        color: var(--clr-two) !important;
-    }
-}
-
-@font-face {
-    font-family: "Inter";
-    src: url(../fonts/Geist.woff2) format("woff2");
-}
-
 :root {
     --font-family: Inter;
     --font-display: auto;
@@ -28,6 +9,7 @@
     --clr-six: #FCD93A;
     --clr-seven: #F9C80E;
     --clr-eight: #f0ebf0;
+    --rounded-sm: 18px;
     --rounded-pill: 23px;
     --rounded-big: 28px;
 }
@@ -39,6 +21,7 @@
     box-sizing: border-box;
     font-family: var(--font-family);
     font-display: var(--font-display);
+    transition: background-color .25s ease-in-out, color .25s ease-in;
 }
 
 @layer init, secondary, third;
@@ -49,10 +32,6 @@
     }
 
     /* Header */
-    .header-bg {
-        background: var(--clr-five);
-        border-radius: var(--rounded-big);
-    }
 
     .header-btn-bg {
         color: var(--clr-two) !important;
@@ -60,14 +39,11 @@
     }
 
     .header-btn-bg-alt,
-    .header-btn-bg-important {
-        color: var(--clr-five);
+    .header-day-night-btn,
+    .header-btn-bg-important,
+    .hero-btn {
+        color: var(--clr-two) !important;
         background-color: var(--clr-six) !important;
-    }
-
-    .header-btn-bg-important {
-        border-top-right-radius: 0px !important;
-        border-bottom-right-radius: 0px !important;
     }
 
     .hr-btn-text {
@@ -94,29 +70,25 @@
         }
     }
 
-    .hr-btn-logo {
+    .hr-daynight-switch-icon {
         transform: rotate(0deg);
         transition: transform 0.25s cubic-bezier(0.785, 0.135, 0.150, 0.860);
     }
 
-    .header-btn-bg-alt {
-        border-top-left-radius: 0px !important;
-        border-bottom-left-radius: 0px !important;
-        border-top-right-radius: var(--rounded-pill) !important;
-        border-bottom-right-radius: var(--rounded-pill) !important;
+    .header-day-night-btn {
         transition: all .25s ease-in-out;
 
         &:hover {
-            .hr-btn-logo {
+            .hr-daynight-switch-icon {
                 transform: rotate(90deg);
             }
         }
     }
 
     .header-logo {
-        width: 54px;
+        width: 64px;
         height: auto;
-        border: 2px solid transparent;
+        border: 3px solid var(--clr-two);
         border-radius: 50%;
         object-fit: cover;
     }
@@ -150,10 +122,9 @@
                 content: "";
                 position: absolute;
                 left: 50%;
-                bottom: 7.5px;
+                bottom: 5.5px;
                 width: 75%;
-                border: 1px solid var(--clr-five);
-                border-radius: var(--rounded-pill);
+                border: 1px solid var(--clr-two);
                 transform: translateX(-50%) scaleX(0);
                 transform-origin: left;
                 transition: transform .25s ease;
@@ -177,7 +148,6 @@
             radial-gradient(var(--clr-five) 10%, transparent 10%);
         background-position: 5px 8px;
         background-size: 24px 24px;
-        background-color: var(--clr-eight);
     }
 
     .hero-logo {
@@ -208,16 +178,22 @@
     }
 
     #ocps {
-        font-family: monospace !important;
-        display: inline-block;
         min-height: 2ch;
-        white-space: nowrap;
+
+        &>.ocps-written-text {
+            font-family: monospace !important;
+            display: inline-block;
+            white-space: nowrap;
+        }
+    }
+
+    #mottosSection {
+        min-height: 8ch;
     }
 
     .cursor {
         display: inline-block;
         width: 1ch;
-        color: var(--clr-five);
         animation: blink 1s step-end infinite;
     }
 
@@ -239,6 +215,14 @@
         min-height: 650px !important;
     }
 
+    .marquee-container {
+        &:hover {
+            .marquee-content {
+                animation-play-state: paused;
+            }
+        }
+    }
+
     .marquee-content {
         animation: marquee 30s linear infinite;
     }
@@ -258,8 +242,32 @@
         }
     }
 
-    .marquee-container:hover .marquee-content {
-        animation-play-state: paused;
+    #promoCard {
+        width: 34ch;
+        height: 34ch;
+        background: var(--clr-two);
+        border-radius: var(--rounded-sm);
+    }
+
+    #promoLink {
+        min-width: 5.5ch;
+        border-top: 6px solid var(--clr-one) !important;
+        border-left: 6px solid var(--clr-one) !important;
+        border-top-right-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+        transition: min-width .25s ease-in-out;
+
+        &:hover {
+            min-width: 7.30ch;
+
+            .promo-project-link-icon {
+                display: inline-block;
+            }
+        }
+    }
+
+    .promo-project-link-icon {
+        display: none;
     }
 
     /********** Footer **********/

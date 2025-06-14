@@ -1,14 +1,15 @@
 // Crucial imports
 import "./assets/css/index.css";
+import "./assets/css/globals.css";
 // Libraries
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // Components
-import { Template } from './helper';
-import "./components/header";
-import "./components/footer";
-import "./components/hero";
-import "./components/promo";
+import { Template, DarkLightMode } from './helper';
+import "./pages/header";
+import "./pages/footer";
+import "./pages/hero";
+import "./pages/promo";
 
 class HomePage extends HTMLElement {
     private template: Template;
@@ -17,6 +18,7 @@ class HomePage extends HTMLElement {
         super();
         this.template = new Template();
         this.homePageNode = new HomePageNode();
+        new DarkLightMode();
 
         const template = this.template.createTemplate(this.homePageNode.homePageTemplate());
         this.appendChild(template.content.cloneNode(true));
