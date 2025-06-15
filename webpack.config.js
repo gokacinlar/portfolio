@@ -1,5 +1,7 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
     // Specify our input (entry) file to be compiled
@@ -16,12 +18,8 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"],
-            },
-            {
-                test: /\.s[ac]ss$/i, // Optional for Bootstraps' SCSS
-                use: ["style-loader", "css-loader", "sass-loader"],
+                test: /\.s?[ac]ss$/i,
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
             {
                 test: /\.(png|jpe?g|gif|svg|ico)$/i,
@@ -71,6 +69,11 @@ module.exports = {
     resolve: {
         extensions: [".ts", ".js"],
     },
+    optimization: {
+        minimizer: [
+            new CssMinimizerPlugin()
+        ],
+    },
     // For copying static assets as a whole without importing them individually
     plugins: [
         new CopyPlugin({
@@ -82,5 +85,6 @@ module.exports = {
                 },
             ],
         }),
+        new MiniCssExtractPlugin()
     ],
 };
