@@ -1,0 +1,10 @@
+[
+    {
+        "postName": "Post One",
+        "postDesc": "Description 1",
+        "postImgSrc": "img1.jpg",
+        "postLangType": "TypeScript",
+        "postLangTypeImgSrc": "../images/static/svg/ts.svg",
+        "projectLink": "https://example.com/1"
+    }
+]
