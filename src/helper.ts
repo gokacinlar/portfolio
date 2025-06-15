@@ -1,3 +1,5 @@
+import * as Type from "./types"
+import { PromoCard } from "./components/promo";
 import { HeroParts, PromoParts } from "./static";
 
 // Detecting dark/light mode
@@ -133,6 +135,20 @@ export class PromoFunctions {
         this.promoParts = new PromoParts();
     }
 
+    // Function to create project posts in promo component
+    public createPromoPosts(target: string, posts: Type.PromoCardData[]) {
+        const container = document.querySelector(`${target}`) as HTMLDivElement;
+        if (container) {
+            // Create an html element with map by rendering promo cards in renderPromoCard() with
+            // posts as its data
+            const cardsHTML = posts
+                .map((post) => new PromoCard().renderPromoCard(post))
+                .join("\n");
+            container.innerHTML = cardsHTML;
+        }
+    }
+
+    // Function to create marquee stack
     public createMarqueeStack(targetSelector: string) {
         const container = document.querySelector(`${targetSelector}`) as HTMLDivElement;
         if (!container) {

@@ -4,6 +4,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 // Components"
 import { PromoTitle, PromoCard } from "../components/promo";
 import { Template, PromoFunctions } from "../helper";
+// Json Data
+import posts from '../assets/json/posts.json';
 
 class Promo extends HTMLElement {
     private template: Template;
@@ -21,7 +23,8 @@ class Promo extends HTMLElement {
     }
 
     connectedCallback(): void {
-        this.promoFunctions.createMarqueeStack(".marquee-content")
+        this.promoFunctions.createMarqueeStack(".marquee-content");
+        this.promoFunctions.createPromoPosts("#promoCardContainer", posts);
     }
 }
 
@@ -46,8 +49,8 @@ class PromoTemplate {
                         <div>
                             ${new PromoTitle("Some of my projects are:")}
                         </div>
-                        <div>
-                            ${new PromoCard("", "", "", "", "", "")}
+                        <div id="promoCardContainer" class="d-flex flex-wrap gap-3 justify-content-center">
+                            <!-- Cards will be injected here -->
                         </div>
                     </div>
                 </div>
