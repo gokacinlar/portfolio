@@ -4,7 +4,7 @@ export class PromoTitle {
     constructor(private titleText: string) { }
 
     public render(): string {
-        return `<h3 class="promo-title display-4">${this.titleText}</h3>`;
+        return `<h3 class="promo-title display-1">${this.titleText}</h3>`;
     }
 
     // Stringify the output
