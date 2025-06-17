@@ -30,16 +30,24 @@ class Header extends HTMLElement {
 export class HeaderNode {
     public headerItself(): string {
         return `
-            <nav class="m-1 px-2 py-2 d-flex flex-row align-items-center justify-content-between position-relative">
-                <section class="d-inline-flex header-left">
-                    ${this.headerLeft()}
-                </section>
-                <section class="position-absolute top-50 start-50 translate-middle">
-                    ${this.headerMiddle()}
-                </section>
-                <section class="header-right d-flex flex-row align-items-center gap-2">
-                    ${this.headerRight()}
-                </section>
+            <nav class="m-1 px-2 py-2">
+                <ul class="list-unstyled mb-0 d-flex flex-row align-items-center justify-content-between position-relative">
+                    <li>
+                        <section class="d-inline-flex header-left">
+                            ${this.headerLeft()}
+                        </section>
+                    </li>
+                    <li>
+                        <section class="position-absolute top-50 start-50 translate-middle">
+                            ${this.headerMiddle()}
+                        </section>
+                    </li>
+                    <li>
+                        <section class="header-right d-flex flex-row align-items-center gap-2">
+                            ${this.headerRight()}
+                        </section>
+                    </li>
+                </ul>
             </nav>
         `;
     }
