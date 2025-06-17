@@ -35,6 +35,13 @@ module.exports = {
                     filename: "assets/fonts/[name][ext]",
                 },
             },
+            {
+                test: /\.(mp4|webm|ogg|mov)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: "assets/videos/[name][ext]",
+                },
+            }
         ],
     },
     // Specify our output directory
@@ -83,8 +90,13 @@ module.exports = {
                     to: "assets/images",
                     noErrorOnMissing: true,
                 },
+                {
+                    from: path.resolve(__dirname, "src/assets/videos"),
+                    to: "assets/videos",
+                    noErrorOnMissing: true,
+                },
             ],
         }),
         new MiniCssExtractPlugin()
-    ],
+    ]
 };
