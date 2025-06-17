@@ -26,7 +26,7 @@
     .header-day-night-btn,
     .header-btn-bg-important,
     .hero-btn {
-        color: var(--clr-two) !important;
+        color: #1F1F24 !important;
         background-color: var(--clr-six) !important;
     }
 
@@ -41,7 +41,7 @@
             left: 50%;
             bottom: 0px;
             width: 100%;
-            border: 1px solid var(--clr-five);
+            border: 1px solid #1F1F24;
             border-radius: 24px;
             z-index: 999;
             transform: translateX(-50%) scaleX(0);
@@ -251,6 +251,10 @@
 
     .promo-project-link-icon {
         display: none;
+    }
+
+    .promo-video {
+        filter: opacity(85%);
     }
 
     /********** Footer **********/
