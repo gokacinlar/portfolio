@@ -1,6 +1,6 @@
 import * as Type from "./types"
-import { PromoCard } from "./components/promo";
-import { HeroParts, PromoParts } from "./static";
+import { PromoCard, PromoSkillsShowCase, PromoContact } from "./components/promo";
+import { HeroParts } from "./static";
 
 // Detecting dark/light mode
 export class DarkLightMode {
@@ -130,25 +130,21 @@ export class TypeWriterDisplay {
 }
 
 export class PromoFunctions {
-    private promoParts: PromoParts;
-    constructor() {
-        this.promoParts = new PromoParts();
-    }
-
-    // Function to create project posts in promo component
-    public createPromoPosts(target: string, posts: Type.PromoCardData[]) {
+    // Function to create html elements wrapped in desired content
+    public createPromoContent(target: string, posts: any[], renderFunction: (post: any) => string) {
         const container = document.querySelector(`${target}`) as HTMLDivElement;
         if (container) {
-            // Create an html element with map by rendering promo cards in renderPromoCard() with
-            // posts as its data
             const cardsHTML = posts
-                .map((post) => new PromoCard().renderPromoCard(post))
+                // Map the elements with desired content
+                .map((post) => renderFunction(post))
                 .join("\n");
             container.innerHTML = cardsHTML;
         }
     }
 
     // Function to create marquee stack
+    // I won't be using this in the near future
+    /*
     public createMarqueeStack(targetSelector: string) {
         const container = document.querySelector(`${targetSelector}`) as HTMLDivElement;
         if (!container) {
@@ -172,4 +168,5 @@ export class PromoFunctions {
             container.appendChild(anchor);
         }
     }
+    */
 }
