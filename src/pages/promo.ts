@@ -1,12 +1,15 @@
 // Libraries
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import VanillaTilt from "vanilla-tilt";
 // Components"
-import { PromoTitle } from "../components/promo";
+import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoContact } from "../components/promo";
 import { VideoElement } from "../components/video";
 import { Template, PromoFunctions } from "../helper";
 // Json Data
 import posts from '../assets/json/posts.json';
+import skills from '../assets/json/promo_Skills.json';
+import links from '../assets/json/social_Links.json';
 
 class Promo extends HTMLElement {
     private template: Template;
@@ -24,8 +27,13 @@ class Promo extends HTMLElement {
     }
 
     connectedCallback(): void {
-        this.promoFunctions.createMarqueeStack(".marquee-content");
-        this.promoFunctions.createPromoPosts("#promoCardContainer", posts);
+        this.promoFunctions.createPromoContent("#promoCardContainer", posts, (post) => new PromoCard().renderPromoCard(post));
+        this.promoFunctions.createPromoContent("#promoSkillsContainer", skills, (skill) => new PromoSkillsShowCase().renderPromoSkillsShowCase(skill));
+        this.promoFunctions.createPromoContent("#pfnSocials", links, (link) => new PromoContact().renderPromoContacts(link));
+
+        // Initialize the tilt.js
+        const elements = document.querySelectorAll(".js-tilt") as any;
+        VanillaTilt.init(elements);
     }
 }
 
@@ -54,17 +62,32 @@ class PromoTemplate {
                     <div class="column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoDesc()}
                     </div>
-                    <div class="column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
-                        ${this.promoMarquee()}
+                    <div class="column col-12 d-flex flex-column gap-4 align-items-center justify-content-center">
+                        ${this.promoSkills()}
+                        <div id="promoSkillsContainer" class="w-75 d-flex flex-row align-items-center justify-content-center gap-4">
+                        </div>
                     </div>
                     <div class="column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoProjectCards()}
+                    </div>
+                    <div class="column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                        ${this.promoFinalNote()}
                     </div>
                 </div>
             </section>
         `;
     }
 
+    private promoSkills(): string {
+        return `
+            <div class="align-self-start">
+                ${new PromoTitle("I'm proficient in")}
+            </div>
+        `;
+    }
+
+    // Since I didn't like this marquee thing, static showcase would be sufficient for now
+    /*
     private promoMarquee(): string {
         return `
             <div class="align-self-start">
@@ -79,6 +102,7 @@ class PromoTemplate {
             </div>
         `;
     }
+    */
 
     private promoProjectCards(): string {
         return `
@@ -108,32 +132,17 @@ class PromoTemplate {
                 ${new PromoTitle("I describe myself as")}
             </div>
             <div id="promo_Description" class="container-fluid w-100 px-4 py-4 d-flex flex-row gap-2 align-items-center justify-content-around">
-                <div class="col-4">
-                    <ul class="list-unstyled">
-                        <li>
-                            <button class="btn btn-lg">
-                                Problem Solver
-                            </button>
-                        </li>
-                        <li>
-                            <button class="btn btn-lg">
-                                Progressive
-                            </button>
-                        </li>
-                        <li>
-                            <button class="btn btn-lg">
-                                Realistic
-                            </button>
-                        </li>
-                        <li>
-                            <button class="btn btn-lg">
-                                Progressive
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-8">
-                    hi
+                ${new PromoDescription().renderPromoDesc()}
+            </div>
+        `;
+    }
+
+    private promoFinalNote(): string {
+        return `
+            <div id="promoFinalNote" class="container-fluid w-100 px-4 py-4 d-flex flex-column gap-2 align-items-center justify-content-evenly">
+                <h2 class="display-1 fw-bolder">Keep in touch with me!</h2>
+                <div id="pfnSocials" class="d-flex flex-row align-items-center justify-content-center gap-4">
+                    <!--Social Links will go here-->
                 </div>
             </div>
         `;
