@@ -12,26 +12,9 @@ import "./pages/hero";
 import "./pages/promo";
 
 class HomePage extends HTMLElement {
-    private template: Template;
-    private homePageNode: HomePageNode;
     constructor() {
         super();
-        this.template = new Template();
-        this.homePageNode = new HomePageNode();
         new DarkLightMode();
-
-        const template = this.template.createTemplate(this.homePageNode.homePageTemplate());
-        this.appendChild(template.content.cloneNode(true));
-    }
-}
-
-class HomePageNode {
-    public homePageTemplate(): string {
-        return `
-            <div class="px-2">
-
-            </div>
-        `;
     }
 }
 
