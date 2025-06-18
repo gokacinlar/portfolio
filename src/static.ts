@@ -17,7 +17,7 @@ export class HeroParts {
         "Wordpress Developer"
     ]
 }
-
+/*
 export class PromoParts {
     public marqueeElements: Array<{ title: string; imgSrc: string, href: string }> = [
         { title: "JavaScript", imgSrc: "./assets/images/static/svg/js.svg", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
@@ -31,6 +31,7 @@ export class PromoParts {
         { title: "Python", imgSrc: "./assets/images/static/svg/py.svg", href: "https://www.python.org/" }
     ];
 }
+*/
 
 export class FooterLinks {
     public fLinks = {
