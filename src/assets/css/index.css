@@ -195,7 +195,8 @@
 
     /********** Promo **********/
 
-    #promo {
+    #promo,
+    #promoFinalNote {
         min-height: 650px !important;
     }
 
@@ -211,11 +212,6 @@
         animation: marquee 30s linear infinite;
     }
 
-    .marquee-item-img {
-        width: 128px;
-        filter: grayscale(75%);
-    }
-
     @keyframes marquee {
         0% {
             transform: translateX(100%);
@@ -223,6 +219,22 @@
 
         100% {
             transform: translateX(-75%);
+        }
+    }
+
+    .promo-skills-fig {
+        min-height: 19ch !important;
+    }
+
+    .promo-skills-img {
+        width: 164px;
+        height: fit-content;
+        object-fit: cover;
+        filter: grayscale(75%);
+        transition: all .25s ease-in-out;
+
+        &:hover {
+            filter: grayscale(0);
         }
     }
 
@@ -255,6 +267,13 @@
 
     .promo-video {
         filter: opacity(85%);
+    }
+
+    .promo-socials-fig {
+        &>a>img {
+            width: 156px;
+            background: var(--clr-eight);
+        }
     }
 
     /********** Footer **********/
