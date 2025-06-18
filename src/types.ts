@@ -6,3 +6,15 @@ export type PromoCardData = {
     postLangTypeImgSrc: string;
     projectLink: string;
 };
+
+export type PromoSkills = {
+    skillName: string;
+    skillLogoSrc: string;
+    skillAnchor: string;
+}
+
+export type PromoSocials = {
+    socialName: string;
+    socialLink: string;
+    socialLogo: string;
+}
