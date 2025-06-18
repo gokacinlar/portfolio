@@ -1,0 +1,42 @@
+[
+    {
+        "skillName": "JavaScript",
+        "skillLogoSrc": "./assets/images/static/svg/js.svg",
+        "skillAnchor": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+    },
+    {
+        "skillName": "TypeScript",
+        "skillLogoSrc": "./assets/images/static/svg/ts.svg",
+        "skillAnchor": "https://www.typescriptlang.org/"
+    },
+    {
+        "skillName": "ReactJS",
+        "skillLogoSrc": "./assets/images/static/svg/react.svg",
+        "skillAnchor": "https://react.dev/"
+    },
+    {
+        "skillName": "PHP",
+        "skillLogoSrc": "./assets/images/static/svg/php.svg",
+        "skillAnchor": "https://www.php.net/"
+    },
+    {
+        "skillName": "WordPress",
+        "skillLogoSrc": "./assets/images/static/svg/wp.svg",
+        "skillAnchor": "https://wordpress.com/"
+    },
+    {
+        "skillName": "PostgreSQL",
+        "skillLogoSrc": "./assets/images/static/svg/postgrsql.svg",
+        "skillAnchor": "https://www.postgresql.org/"
+    },
+    {
+        "skillName": "MongoDB",
+        "skillLogoSrc": "./assets/images/static/svg/mongodb.svg",
+        "skillAnchor": "https://www.mongodb.com/"
+    },
+    {
+        "skillName": "Python",
+        "skillLogoSrc": "./assets/images/static/svg/py.svg",
+        "skillAnchor": "https://www.python.org/"
+    }
+]

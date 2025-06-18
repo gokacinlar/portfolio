@@ -1,0 +1,17 @@
+[
+    {
+        "socialName": "X/Twitter",
+        "socialLogo": "./assets/images/static/svg/x-twitter.svg",
+        "socialLink": "https://x.com/devDissentNT"
+    },
+    {
+        "socialName": "GitHub",
+        "socialLogo": "./assets/images/static/svg/github.svg",
+        "socialLink": "https://github.com/gokacinlar"
+    },
+    {
+        "socialName": "HashNode (Blog)",
+        "socialLogo": "./assets/images/static/svg/hnode.svg",
+        "socialLink": "https://gokacinlar.hashnode.dev/"
+    }
+]
