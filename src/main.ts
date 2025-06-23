@@ -5,7 +5,7 @@ import "./assets/css/globals.css";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // Components
-import { Template, DarkLightMode } from './helper';
+import { DarkLightMode } from './helper';
 import "./pages/header";
 import "./pages/footer";
 import "./pages/hero";
