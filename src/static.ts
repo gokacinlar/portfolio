@@ -17,8 +17,9 @@ export class HeroParts {
         "Wordpress Developer"
     ]
 }
-/*
+
 export class PromoParts {
+    /*
     public marqueeElements: Array<{ title: string; imgSrc: string, href: string }> = [
         { title: "JavaScript", imgSrc: "./assets/images/static/svg/js.svg", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
         { title: "TypeScript", imgSrc: "./assets/images/static/svg/ts.svg", href: "https://www.typescriptlang.org/" },
@@ -30,8 +31,27 @@ export class PromoParts {
         { title: "SQLite", imgSrc: "./assets/images/static/svg/sqlite.svg", href: "https://www.sqlite.org/" },
         { title: "Python", imgSrc: "./assets/images/static/svg/py.svg", href: "https://www.python.org/" }
     ];
+    */
+
+    public promoTabData: any = {
+        PS: {
+            iconData: "bi bi-stack",
+            desc: "I strive to implement solutions to various problems we encounter at anywhere extending from work to casual life."
+        },
+        PE: {
+            iconData: "bi bi-suit-heart",
+            desc: "I try to keep up with the latest and greatest positive developments around the global and embrace them as a whole."
+        },
+        PL: {
+            iconData: "bi bi-wrench-adjustable-circle",
+            desc: "I always try to fit the theory with the experienced reality thus creating a self-sustaining environment through reason."
+        },
+        RC: {
+            iconData: "bi bi-rainbow",
+            desc: "When I encounter a real issue in my classroom or my computer, I search for applicable solution to deal with observed phenomenon."
+        }
+    }
 }
-*/
 
 export class FooterLinks {
     public fLinks = {
