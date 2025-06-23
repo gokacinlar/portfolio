@@ -1,5 +1,3 @@
-import * as Type from "./types"
-import { PromoCard, PromoSkillsShowCase, PromoContact } from "./components/promo";
 import { HeroParts } from "./static";
 
 // Detecting dark/light mode
@@ -142,6 +140,97 @@ export class PromoFunctions {
         }
     }
 
+    public createVerticalTabContent(target: string, data: any): void {
+        const container = document.getElementById("tabGroupDetailsLister") as HTMLDivElement;
+        if (!container || !data[target]) {
+            return;
+        } else {
+            const { iconData, desc } = data[target];
+            container.innerHTML =
+                `
+                <div class="promo-tab-content h-100 d-flex flex-column align-items-center justify-content-evenly">
+                    <i class="promo-tc-icon ${iconData}"></i>
+                    <p class="text-center fs-4 w-75">${desc}</p>
+                </div>
+            `;
+        }
+    }
+
+    public bindVerticalTabEventsAndautoCycleTabs(data: any): void {
+        const buttons = Array.from(document.querySelectorAll(".promo-desc-tab-group-btn")) as HTMLButtonElement[];
+        if (!buttons.length) return;
+
+        let index: number = 0;
+        let duration: number = 5000;
+        let activeInterval: ReturnType<typeof setInterval> | null = null;
+
+        const clearAllProgressBars = () => {
+            buttons.forEach(btn => {
+                const bar = btn.querySelector(".progress-bar") as HTMLDivElement;
+                if (bar) {
+                    bar.style.width = "0%";
+                    bar.classList.remove("progress-bar-animated");
+                }
+            });
+
+            if (activeInterval) {
+                clearInterval(activeInterval);
+                activeInterval = null;
+            }
+        };
+
+        const startProgressForButton = (button: HTMLElement) => {
+            clearAllProgressBars();
+
+            const progressBar = button.querySelector(".progress-bar") as HTMLDivElement;
+            if (!progressBar) return;
+
+            progressBar.style.width = "0%";
+            progressBar.classList.add("progress-bar-animated");
+
+            let progress = 0;
+            const step = 100 / (duration / 100);
+
+            activeInterval = setInterval(() => {
+                progress += step;
+                progressBar.style.width = `${progress}%`;
+
+                if (progress >= 100) {
+                    clearInterval(activeInterval!);
+                    activeInterval = null;
+
+                    // Go to next
+                    index = (index + 1) % buttons.length;
+                    const nextButton = buttons[index];
+                    const type = nextButton.getAttribute("data-type");
+                    if (type) {
+                        this.createVerticalTabContent(type, data);
+                    }
+                    startProgressForButton(nextButton);
+                }
+            }, 100);
+        };
+
+        // Bind click events to buttons
+        buttons.forEach((btn, i) => {
+            btn.addEventListener("click", () => {
+                index = i;
+                const type = btn.getAttribute("data-type");
+                if (type) {
+                    this.createVerticalTabContent(type, data);
+                    startProgressForButton(btn);
+                }
+            });
+        });
+
+        // Auto-start from the first
+        const initialType = buttons[index].getAttribute("data-type");
+        if (initialType) {
+            this.createVerticalTabContent(initialType, data);
+            startProgressForButton(buttons[index]);
+        }
+    }
+
     // Function to create marquee stack
     // I won't be using this in the near future
     /*
@@ -150,20 +239,20 @@ export class PromoFunctions {
         if (!container) {
             return;
         }
-
+ 
         for (const item of this.promoParts.marqueeElements) {
             const anchor = document.createElement("a") as HTMLAnchorElement;
             anchor.className = "marquee-item";
             anchor.href = item.href;
             anchor.setAttribute("target", "_blank");
-
+ 
             const img = document.createElement("img") as HTMLImageElement;
             img.className = "marquee-item-img img-fluid img-responsive lazyload rounded-4";
             img.title = item.title;
             img.src = item.imgSrc;
             img.setAttribute("loading", "lazy");
             img.setAttribute("decoding", "async");
-
+ 
             anchor.appendChild(img);
             container.appendChild(anchor);
         }
