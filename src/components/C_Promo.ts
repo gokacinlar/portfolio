@@ -5,9 +5,11 @@ export class PromoTitle {
 
     public render(): string {
         return `
-            <h3 class="promo-title display-1 fw-bolder pe-none">
-                ${this.titleText}
-            </h3>
+            <div class="promo-title-container text-center w-100 py-2">
+                <h3 class="promo-title display-1 mb-0 fw-bolder pe-none">
+                    ${this.titleText}
+                </h3>
+            </div>
         `;
     }
 
@@ -20,33 +22,42 @@ export class PromoTitle {
 export class PromoDescription {
     public renderPromoDesc(): string {
         return `
-            <div class="col-4">
-                <ul class="list-unstyled">
+            <div class="col-5">
+                <ul class="list-unstyled d-flex flex-column gap-4 align-items-baseline">
                     <li>
-                        <button class="btn btn-lg">
-                            Problem Solver
-                        </button>
+                        ${this.renderTabGroupBtn("Problem Solver", "PS")}
                     </li>
                     <li>
-                        <button class="btn btn-lg">
-                            Progressive
-                        </button>
+                        ${this.renderTabGroupBtn("Progressive", "PE")}
                     </li>
                     <li>
-                        <button class="btn btn-lg">
-                            Realistic
-                        </button>
+                        ${this.renderTabGroupBtn("Practical", "PL")}
                     </li>
                     <li>
-                        <button class="btn btn-lg">
-                            Progressive
-                        </button>
+                        ${this.renderTabGroupBtn("Realistic", "RC")}
                     </li>
                 </ul>
             </div>
-            <div class="col-8">
-                hi
+            <div id="tabGroupDetailsLister" class="col-7">
+
             </div>
+        `;
+    }
+
+    public renderTabGroupBtn(btnText: string, dataType: string): string {
+        return `
+            <button class="promo-desc-tab-group-btn btn btn-lg fs-1 d-flex flex-row align-items-center justify-items-start"
+                data-type="${dataType}">
+                <span>
+                    <div class="progress p-vertical rounded-0">
+                        <div class="progress-bar bg-warning progress-bar-animated"
+                        role="progressbar" ></div>
+                    </div>
+                </span>
+                <span>
+                    ${btnText}
+                </span>
+            </button>
         `;
     }
 }
@@ -84,13 +95,13 @@ export class PromoContact {
 export class PromoCard {
     public renderPromoCard(data: Type.PromoCardData): string {
         return `
-            <div id="promoCard" class="bg-gradient d-flex flex-column align-items-center justify-content-between shadow-sm">
+            <div id="promoCard" class="d-flex flex-column align-items-center justify-content-between shadow-sm">
                 <div class="w-100 h-100 d-flex flex-column justify-content-between px-2 py-2">
                     <div>
-                        <h4 class="text-center">${data.postName}</h4>
+                        <img class="img-fluid lazyload" src="${data.postImgSrc}" alt="${data.postName}" title="${data.postName}">
                     </div>
                     <div>
-                        <img class="img-fluid lazyload" src="${data.postImgSrc}" alt="${data.postName}" title="${data.postName}">
+                        <h4 class="text-center">${data.postName}</h4>
                     </div>
                     <div>
                         <img class="img-fluid lazyload" src="${data.postLangTypeImgSrc}" alt="Written in ${data.postLangType}" title="${data.postLangType}">
@@ -100,8 +111,7 @@ export class PromoCard {
                     </div>
                 </div>
                 <div class="align-self-end">
-                    <button id="promoLink" type="button" class="bg-gradient btn btn-lg fs-4 d-inline-flex flex-row align-items-center rounded-4 shadow-sm
-                        link-offset-2 link-underline link-underline-opacity-0" title="Navigate to ${data.postName}">
+                    <button id="promoLink" type="button" class="bg-gradient btn btn-lg fs-4 d-inline-flex flex-row align-items-center rounded-4 shadow-sm border border-4" title="Navigate to ${data.postName}">
                         <a href="${data.projectLink}">
                             <span class="hr-btn-text">Link</span>
                             <i class="promo-project-link-icon bi bi-link-45deg"></i>
