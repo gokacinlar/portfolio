@@ -1,11 +1,42 @@
 * {
-    padding: 0;
     margin: 0;
-    scroll-behavior: smooth;
+    padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
     font-family: var(--font-family);
     font-display: var(--font-display);
-    transition: background-color .25s ease-in-out, color .25s ease-in;
+    @include transition(background-color 0.25s ease-in-out, color 0.25s ease-in);
+}
+
+@mixin transition($props...) {
+    transition: $props;
+}
+
+@mixin borderRadius($radius) {
+    border-radius: $radius;
+}
+
+@mixin hover-underline($color) {
+    position: relative;
+    display: inline-block;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 100%;
+        border: 1px solid $color;
+        border-radius: 24px;
+        transform: translateX(-50%) scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+        z-index: 999;
+    }
+
+    &:hover::after {
+        transform: translateX(-50%) scaleX(1);
+    }
 }
 
 @layer init, secondary, third;
@@ -14,8 +45,6 @@
     body {
         background: var(--clr-one) !important;
     }
-
-    /* Header */
 
     .header-btn-bg {
         color: var(--clr-two) !important;
@@ -27,54 +56,33 @@
     .header-btn-bg-important,
     .hero-btn {
         color: #1F1F24 !important;
-        background-color: var(--clr-six) !important;
+        background: var(--clr-six) !important;
     }
 
     .hr-btn-text {
-        position: relative;
-        display: inline-block;
-        transition: all ease-in-out .5s;
-
-        &::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            bottom: 0px;
-            width: 100%;
-            border: 1px solid #1F1F24;
-            border-radius: 24px;
-            z-index: 999;
-            transform: translateX(-50%) scaleX(0);
-            transform-origin: left;
-            transition: transform .25s ease;
-        }
-
-        &:hover::after {
-            transform: translateX(-50%) scaleX(1);
-        }
+        @include hover-underline(#1F1F24);
+        @include transition(all 0.5s ease-in-out);
     }
 
     .hr-daynight-switch-icon {
-        transform: rotate(0deg);
-        transition: transform 0.25s cubic-bezier(0.785, 0.135, 0.150, 0.860);
+        transform: rotate(0);
+        @include transition(transform 0.25s cubic-bezier(0.785, 0.135, 0.150, 0.860));
     }
 
     .header-day-night-btn {
-        transition: all .25s ease-in-out;
+        @include transition(all 0.25s ease-in-out);
 
-        &:hover {
-            .hr-daynight-switch-icon {
-                transform: rotate(90deg);
-            }
+        &:hover .hr-daynight-switch-icon {
+            transform: rotate(90deg);
         }
     }
 
     .header-logo {
         width: 64px;
         height: auto;
-        border: 3px solid var(--clr-two);
-        border-radius: 50%;
         object-fit: cover;
+        border: 3px solid var(--clr-two);
+        @include borderRadius(50%);
     }
 
     .pulsate-fwd {
@@ -82,87 +90,70 @@
     }
 
     @keyframes pulsate-fwd {
-        0% {
+
+        0%,
+        100% {
             transform: scale(1);
         }
 
         50% {
             transform: scale(1.15);
         }
+    }
 
-        100% {
-            transform: scale(1);
+    .header-middle-nav-links>li>a {
+        position: relative;
+        display: inline-block;
+        @include transition(all 0.25s ease-in-out);
+        @include hover-underline(var(--clr-two));
+
+        &::after {
+            bottom: 5.5px;
+            width: 75%;
         }
     }
 
-    .header-middle-nav-links {
-        &>li>a {
-            position: relative;
-            display: inline-block;
-            transition: all ease-in-out .25s;
-
-            &::after {
-                content: "";
-                position: absolute;
-                left: 50%;
-                bottom: 5.5px;
-                width: 75%;
-                border: 1px solid var(--clr-two);
-                transform: translateX(-50%) scaleX(0);
-                transform-origin: left;
-                transition: transform .25s ease;
-            }
-
-            &:hover::after {
-                transform: translateX(-50%) scaleX(1);
-            }
-        }
-    }
-
-    /********** Hero **********/
     #hero {
         min-height: 650px !important;
         background: var(--clr-eight);
     }
 
     #heroLogoBg {
-        border-radius: var(--rounded-big);
-        background-image:
-            radial-gradient(var(--clr-five) 10%, transparent 10%);
+        @include borderRadius(var(--rounded-big));
+        background-image: radial-gradient(var(--clr-five) 10%, transparent 10%);
         background-position: 5px 8px;
         background-size: 24px 24px;
     }
 
     .hero-logo {
-        --logo-w: 412px;
         width: var(--logo-w);
         height: auto;
         object-fit: cover;
-        border-radius: 50%;
+        @include borderRadius(50%);
     }
 
     .motto-elements {
         color: var(--clr-one);
         background: var(--clr-two);
-        animation: fade-in-fwd .55s cubic-bezier(.25, .46, .45, .94) both;
+        animation: fade-in-fwd 0.55s cubic-bezier(.25, .46, .45, .94) both;
     }
 
     @keyframes fade-in-fwd {
         0% {
             transform: translateZ(-80px);
-            opacity: 0
+            opacity: 0;
         }
 
         100% {
             transform: translateZ(0);
-            opacity: 1
+            opacity: 1;
         }
     }
 
     #ocps {
         min-height: 2ch;
 
-        &>.ocps-written-text {
+        >.ocps-written-text {
             font-family: monospace !important;
             display: inline-block;
             white-space: nowrap;
@@ -191,8 +182,7 @@
         }
     }
 
-    /********** Promo **********/
-
+    // Promo
     #promo,
     #promoFinalNote {
         min-height: 650px !important;
@@ -202,12 +192,8 @@
         min-height: 450px !important;
     }
 
-    .marquee-container {
-        &:hover {
-            .marquee-content {
-                animation-play-state: paused;
-            }
-        }
+    .marquee-container:hover .marquee-content {
+        animation-play-state: paused;
     }
 
     .marquee-content {
@@ -233,7 +219,7 @@
         height: fit-content;
         object-fit: cover;
         filter: grayscale(75%);
-        transition: all .25s ease-in-out;
+        @include transition(all 0.25s ease-in-out);
 
         &:hover {
             filter: grayscale(0);
@@ -245,7 +231,7 @@
         background: var(--clr-two);
         width: 34ch;
         height: 34ch;
-        border-radius: var(--rounded-sm);
+        @include borderRadius(var(--rounded-sm));
     }
 
     #promoLink {
@@ -261,11 +247,9 @@
         filter: opacity(85%);
     }
 
-    .promo-socials-fig {
-        &>a>img {
-            width: 156px;
-            background: var(--clr-eight);
-        }
+    .promo-socials-fig>a>img {
+        width: 156px;
+        background: var(--clr-eight);
     }
 
     .p-vertical {
@@ -275,17 +259,16 @@
 
     .promo-tc-icon {
         font-size: 6rem !important;
-        animation: fade-in-fwd .55s cubic-bezier(.25, .46, .45, .94) both;
+        animation: fade-in-fwd 0.55s cubic-bezier(.25, .46, .45, .94) both;
     }
 
     .promo-title-container {
         color: var(--clr-one);
         background: var(--clr-two);
-        border-radius: 42px;
+        @include borderRadius(42px);
     }
 
-    /********** Footer **********/
-
+    // Footer
     .footer-container {
         background: var(--clr-five);
         border-top-left-radius: 28px;
@@ -306,7 +289,7 @@
         font-size: 2rem;
         color: var(--clr-two) !important;
         background: var(--clr-one) !important;
-        border-radius: 50%;
+        @include borderRadius(50%);
     }
 
     .footer-right-brand {

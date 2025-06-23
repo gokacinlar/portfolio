@@ -1,0 +1,56 @@
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Geist.woff2") format("woff2");
+}
+
+$font-family: "Inter", sans-serif;
+$font-display: auto;
+
+$rounded: (
+    sm: 18px,
+    l: 23px,
+    xl: 28px,
+    xxl: 42px
+);
+
+$colors: (
+    three: #0F3D75,
+    four: #F03D1F,
+    five: #2A293B,
+    six: #FCD93A,
+    seven: #F9C80E,
+);
+
+$themes: (
+    light: (clr-one: #FDF9FD,
+        clr-two: #1F1F24,
+        clr-eight: #f0ebf0,
+        bs-body-bg: #FDF9FD,
+        bs-body-color: #1F1F24),
+    dark: (clr-one: #1F1F24,
+        clr-two: #FDF9FD,
+        clr-eight: #2A293B,
+        bs-body-bg: #1F1F24,
+        bs-body-color: #FDF9FD)
+);
+
+@mixin define-css-variables($map, $prefix: "") {
+    @each $key, $value in $map {
+        --#{$prefix}#{$key}: #{$value};
+    }
+}
+
+:root {
+    --font-family: #{$font-family};
+    --font-display: #{$font-display};
+    @include define-css-variables($rounded, "rounded-");
+    @include define-css-variables($colors, "clr-");
+
+    &[data-bs-theme="light"] {
+        @include define-css-variables(map-get($themes, light));
+    }
+
+    &[data-bs-theme="dark"] {
+        @include define-css-variables(map-get($themes, dark));
+    }
+}
