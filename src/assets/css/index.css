@@ -78,7 +78,6 @@
     }
 
     .pulsate-fwd {
-        -webkit-animation: pulsate-fwd 4s cubic-bezier(0.445, 0.050, 0.550, 0.950) infinite both;
         animation: pulsate-fwd 4s cubic-bezier(0.445, 0.050, 0.550, 0.950) infinite both;
     }
 
@@ -145,8 +144,7 @@
     .motto-elements {
         color: var(--clr-one);
         background: var(--clr-two);
-        -webkit-animation: fade-in-fwd .55s cubic-bezier(.25, .46, .45, .94) both;
-        animation: fade-in-fwd .55s cubic-bezier(.25, .46, .45, .94) both
+        animation: fade-in-fwd .55s cubic-bezier(.25, .46, .45, .94) both;
     }
 
     @keyframes fade-in-fwd {
@@ -200,6 +198,10 @@
         min-height: 650px !important;
     }
 
+    #promo_Description {
+        min-height: 450px !important;
+    }
+
     .marquee-container {
         &:hover {
             .marquee-content {
@@ -239,6 +241,8 @@
     }
 
     #promoCard {
+        color: var(--clr-one);
+        background: var(--clr-two);
         width: 34ch;
         height: 34ch;
         border-radius: var(--rounded-sm);
@@ -246,19 +250,7 @@
 
     #promoLink {
         min-width: 5.5ch;
-        border-top: 6px solid var(--clr-one) !important;
-        border-left: 6px solid var(--clr-one) !important;
-        border-top-right-radius: 0px !important;
-        border-bottom-left-radius: 0px !important;
-        transition: min-width .25s ease-in-out;
-
-        &:hover {
-            min-width: 7.30ch;
-
-            .promo-project-link-icon {
-                display: inline-block;
-            }
-        }
+        border-color: var(--clr-one) !important;
     }
 
     .promo-project-link-icon {
@@ -274,6 +266,22 @@
             width: 156px;
             background: var(--clr-eight);
         }
+    }
+
+    .p-vertical {
+        width: 60px !important;
+        transform: rotate(90deg);
+    }
+
+    .promo-tc-icon {
+        font-size: 6rem !important;
+        animation: fade-in-fwd .55s cubic-bezier(.25, .46, .45, .94) both;
+    }
+
+    .promo-title-container {
+        color: var(--clr-one);
+        background: var(--clr-two);
+        border-radius: 42px;
     }
 
     /********** Footer **********/

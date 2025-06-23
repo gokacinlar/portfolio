@@ -10,8 +10,9 @@
 
     /* Border Radius */
     --rounded-sm: 18px;
-    --rounded-pill: 23px;
-    --rounded-big: 28px;
+    --rounded-l: 23px;
+    --rounded-xl: 28px;
+    --rounded-xxl: 42px;
 
     /* Static Colors */
     --clr-three: #0F3D75;
