@@ -3,9 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import VanillaTilt from "vanilla-tilt";
 // Components"
-import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoContact } from "../components/promo";
-import { VideoElement } from "../components/video";
+import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoContact } from "../components/C_Promo";
+import { VideoElement } from "../components/C_Video";
 import { Template, PromoFunctions } from "../helper";
+import { PromoParts } from "../static";
 // Json Data
 import posts from '../assets/json/posts.json';
 import skills from '../assets/json/promo_Skills.json';
@@ -27,9 +28,12 @@ class Promo extends HTMLElement {
     }
 
     connectedCallback(): void {
+        // Create promo elements
         this.promoFunctions.createPromoContent("#promoCardContainer", posts, (post) => new PromoCard().renderPromoCard(post));
         this.promoFunctions.createPromoContent("#promoSkillsContainer", skills, (skill) => new PromoSkillsShowCase().renderPromoSkillsShowCase(skill));
         this.promoFunctions.createPromoContent("#pfnSocials", links, (link) => new PromoContact().renderPromoContacts(link));
+        // Create vertical tab grouping showcase
+        this.promoFunctions.bindVerticalTabEventsAndautoCycleTabs(new PromoParts().promoTabData);
 
         // Initialize the tilt.js
         const elements = document.querySelectorAll(".js-tilt") as any;
@@ -64,8 +68,7 @@ class PromoTemplate {
                     </div>
                     <div class="column col-12 d-flex flex-column gap-4 align-items-center justify-content-center">
                         ${this.promoSkills()}
-                        <div id="promoSkillsContainer" class="w-75 d-flex flex-row align-items-center justify-content-center gap-4">
-                        </div>
+                        <div id="promoSkillsContainer" class="w-75 py-4 d-flex flex-row align-items-center justify-content-center gap-4"></div>
                     </div>
                     <div class="column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoProjectCards()}
@@ -80,9 +83,7 @@ class PromoTemplate {
 
     private promoSkills(): string {
         return `
-            <div class="align-self-start">
-                ${new PromoTitle("I'm proficient in")}
-            </div>
+            ${new PromoTitle("I'm proficient in")}
         `;
     }
 
@@ -106,9 +107,7 @@ class PromoTemplate {
 
     private promoProjectCards(): string {
         return `
-            <div class="align-self-start">
-                ${new PromoTitle("Some of my projects are")}
-            </div>
+            ${new PromoTitle("Some of my projects are")}
             <div id="promoCardContainer" class="d-flex flex-wrap gap-3 justify-content-center">
                 <!-- Cards will be injected here -->
             </div>
@@ -128,10 +127,8 @@ class PromoTemplate {
 
     private promoDesc(): string {
         return `
-            <div class="align-self-start">
-                ${new PromoTitle("I describe myself as")}
-            </div>
-            <div id="promo_Description" class="container-fluid w-100 px-4 py-4 d-flex flex-row gap-2 align-items-center justify-content-around">
+            ${new PromoTitle("I describe myself as")}
+            <div id="promo_Description" class="container-fluid w-100 px-4 py-4 my-4 d-flex flex-row gap-2">
                 ${new PromoDescription().renderPromoDesc()}
             </div>
         `;
