@@ -1,12 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    font-family: var(--font-family);
-    font-display: var(--font-display);
-    @include transition(background-color 0.25s ease-in-out, color 0.25s ease-in);
-}
+@use "m_queries";
 
 @mixin transition($props...) {
     transition: $props;
@@ -39,6 +31,16 @@
     }
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: var(--font-family);
+    font-display: var(--font-display);
+    @include transition(background-color 0.25s ease-in-out, color 0.25s ease-in);
+}
+
 @layer init, secondary, third;
 
 @layer init {
@@ -54,7 +56,8 @@
     .header-btn-bg-alt,
     .header-day-night-btn,
     .header-btn-bg-important,
-    .hero-btn {
+    .hero-btn,
+    .header-responsive-btn {
         color: #1F1F24 !important;
         background: var(--clr-six) !important;
     }
@@ -77,12 +80,93 @@
         }
     }
 
+    #headerM {
+        $header-middle-content: phone, phone-landscape, phone-portrait, tablet;
+
+        @each $bp in $header-middle-content {
+            @include m_queries.responsive($bp) {
+                display: none !important;
+            }
+        }
+
+        @include m_queries.responsive(desktop) {
+            display: block !important;
+        }
+    }
+
+    #headerRM {
+        position: absolute;
+        inset-inline-end: 2px;
+        inset-block-start: 62px;
+        background: var(--bs-body-color) !important;
+        animation: tilt-in-right-1 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+        &>ul {
+            margin: .20rem !important;
+        }
+
+        &>ul>li {
+            padding: .25rem !important;
+        }
+
+        &>ul>li>a {
+            min-width: 150px !important;
+        }
+
+        $header-middle-content: desktop, large-screen;
+
+        @each $bp in $header-middle-content {
+            @include m_queries.responsive($bp) {
+                display: none !important;
+            }
+        }
+    }
+
+    @keyframes tilt-in-right-1 {
+        0% {
+            transform: rotateX(-30deg) translateX(300px) skewX(30deg);
+            opacity: 0;
+        }
+
+        100% {
+            transform: rotateX(0deg) translateX(0) skewX(0deg);
+            opacity: 1;
+        }
+    }
+
+    .header-responsive-btn {
+        @include borderRadius(var(--rounded-sm));
+        $hide-breakpoints: desktop, tablet, tablet-landscape, tablet-portrait, large-screen;
+
+        @each $bp in $hide-breakpoints {
+            @include m_queries.responsive($bp) {
+                display: none !important;
+            }
+        }
+
+        @include m_queries.responsive(phone) {
+            display: block;
+        }
+    }
+
     .header-logo {
         width: 64px;
         height: auto;
         object-fit: cover;
         border: 3px solid var(--clr-two);
         @include borderRadius(50%);
+
+        $header-logo-content: phone, phone-landscape, phone-portrait;
+
+        @each $bp in $header-logo-content {
+            @include m_queries.responsive($bp) {
+                width: 54px;
+            }
+        }
+
+        @include m_queries.responsive(desktop) {
+            width: 64px;
+        }
     }
 
     .pulsate-fwd {
@@ -113,8 +197,13 @@
         }
     }
 
+    #responsiveNavbar {
+        flex-direction: column !important;
+        width: 100%;
+    }
+
     #hero {
-        min-height: 650px !important;
+        max-height: 650px !important;
         background: var(--clr-eight);
     }
 
@@ -126,6 +215,7 @@
     }
 
     .hero-logo {
+        --logo-w: 412px;
         width: var(--logo-w);
         height: auto;
         object-fit: cover;
