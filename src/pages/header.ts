@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 // Components
 import { Template, DomEvents } from '../helper';
+import ResponsiveNavbar from '../components/responsive/R_navbar';
 
 class Header extends HTMLElement {
     private template: Template;
@@ -24,6 +25,7 @@ class Header extends HTMLElement {
         this.domEvents.headerRightActions(hrBtn);
         const dayNightModeSwitchingBtn = document.querySelector("#hrDayNightBtn") as HTMLButtonElement;
         this.domEvents.dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
+        const responsiveNavbarMode = new ResponsiveNavbar().connectedCallback();
     }
 }
 
@@ -71,20 +73,26 @@ export class HeaderNode {
         `;
     }
 
-    private headerMiddle(): string {
+    public headerMiddle(): string {
         return `
-            <nav>
+            <nav id="headerM">
                 <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-row gap-1">
-                    <li><a href="" title="Home" class="btn header-btn-bg btn-lg rounded-5 fs-4">
-                        <i class="bi bi-house-door"></i> Home</a></li>
-                    <li><a href="" title="Blog" class="btn header-btn-bg btn-lg rounded-5 fs-4">
-                        <i class="bi bi-journals"></i> Updates</a></li>
-                    <li><a href="" title="About" class="btn header-btn-bg btn-lg rounded-5 fs-4">
-                        <i class="bi bi-person-circle"></i> About</a></li>
-                    <li><a href="" title="Socials" class="btn header-btn-bg btn-lg rounded-5 fs-4">
-                        <i class="bi bi-share-fill"></i> Socials</a></li>
+                    ${this.headerMiddleContent()}
                 </ul>
             </nav>
+        `;
+    }
+
+    public headerMiddleContent(): string {
+        return `
+            <li><a href="" title="Home" class="btn header-btn-bg btn-lg rounded-5 fs-4">
+                <i class="bi bi-house-door"></i> Home</a></li>
+            <li><a href="" title="Blog" class="btn header-btn-bg btn-lg rounded-5 fs-4">
+                <i class="bi bi-journals"></i> Updates</a></li>
+            <li><a href="" title="About" class="btn header-btn-bg btn-lg rounded-5 fs-4">
+                <i class="bi bi-person-circle"></i> About</a></li>
+            <li><a href="" title="Socials" class="btn header-btn-bg btn-lg rounded-5 fs-4">
+                <i class="bi bi-share-fill"></i> Socials</a></li>
         `;
     }
 
@@ -99,6 +107,9 @@ export class HeaderNode {
                 title="Change Day/Night Mode">
                 <i class="hr-daynight-switch-icon bi bi-sun text-black fw-bold"></i>
             </button>
+            <div id="headerResponsive">
+                ${new ResponsiveNavbar().responsiveMenuToggleButton()}
+            </div>
         `;
     }
 }
