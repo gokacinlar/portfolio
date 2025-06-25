@@ -1,6 +1,6 @@
 // Crucial imports
-import "./assets/css/index.css";
-import "./assets/css/globals.css";
+import "./assets/scss/index.scss";
+import "./assets/scss/globals.scss";
 // Libraries
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
