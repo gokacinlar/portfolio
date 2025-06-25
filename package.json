@@ -4,10 +4,11 @@
   "description": "Derviş's Personel Website",
   "main": "index.js",
   "scripts": {
-    "test": "",
-    "compile": "tsc",
-    "live": "webpack serve --config webpack.config.js --mode development",
-    "build": "webpack"
+    "build:client": "webpack --config webpack.config.js --mode production",
+    "build:server": "webpack --config webpack.server.config.js --mode production",
+    "build": "npm run build:client && npm run build:server",
+    "start": "node dist/server.js",
+    "live": "webpack serve --config webpack.config.js --mode development"
   },
   "author": "Derviş Öksüzoğlu",
   "license": "CC0-1.0",
@@ -20,7 +21,7 @@
     "html-webpack-plugin": "^5.6.3",
     "mini-css-extract-plugin": "^2.9.2",
     "postcss-loader": "^8.1.1",
-    "sass": "^1.89.1",
+    "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.14",
@@ -37,6 +38,7 @@
     "htmx.org": "^2.0.4",
     "lazysizes": "^5.3.2",
     "sqlite": "^5.1.1",
-    "vanilla-tilt": "^1.8.1"
+    "vanilla-tilt": "^1.8.1",
+    "webpack-node-externals": "^3.0.0"
   }
 }
