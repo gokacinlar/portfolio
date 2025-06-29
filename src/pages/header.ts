@@ -7,24 +7,15 @@ import { Template, DomEvents } from '../helper';
 import ResponsiveNavbar from '../components/responsive/R_navbar';
 
 class Header extends HTMLElement {
-    private template: Template;
-    private headerTemplate: HeaderNode;
-    private domEvents: DomEvents;
     constructor() {
         super();
-        this.template = new Template();
-        this.headerTemplate = new HeaderNode();
-        this.domEvents = new DomEvents();
-
-        const template = this.template.createTemplate(this.headerTemplate.headerItself());
+        const template = new Template().createTemplate(new HeaderNode().headerItself());
         this.appendChild(template.content.cloneNode(true));
     }
 
     connectedCallback(): void {
-        const hrBtn = document.querySelector("#hrBtn") as HTMLButtonElement;
-        this.domEvents.headerRightActions(hrBtn);
         const dayNightModeSwitchingBtn = document.querySelector("#hrDayNightBtn") as HTMLButtonElement;
-        this.domEvents.dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
+        new DomEvents().dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
         const responsiveNavbarMode = new ResponsiveNavbar().connectedCallback();
     }
 }

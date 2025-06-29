@@ -7,16 +7,10 @@ import { Template } from "../helper";
 import { FooterLinks } from "../static";
 
 class Footer extends HTMLElement {
-    private template: Template;
-    private footer: FooterNodes;
-
     constructor() {
         super();
-        this.template = new Template();
-        this.footer = new FooterNodes();
 
-
-        const template = this.template.createTemplate(this.footer.footerTemplate());
+        const template = new Template().createTemplate(new FooterNodes().footerTemplate());
         this.appendChild(template.content.cloneNode(true));
     }
 }
