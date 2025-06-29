@@ -1,3 +1,5 @@
+@use "sass:map";
+
 @font-face {
     font-family: "Inter";
     src: url("../fonts/Geist.woff2") format("woff2");
@@ -47,10 +49,10 @@ $themes: (
     @include define-css-variables($colors, "clr-");
 
     &[data-bs-theme="light"] {
-        @include define-css-variables(map-get($themes, light));
+        @include define-css-variables(map.get($themes, light));
     }
 
     &[data-bs-theme="dark"] {
-        @include define-css-variables(map-get($themes, dark));
+        @include define-css-variables(map.get($themes, dark));
     }
 }

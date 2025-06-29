@@ -1,5 +1,13 @@
 @use "m_queries";
 
+// Global breakpoints
+$mobile-breakpoints: phone, phone-portrait, phone-landscape;
+$tablet-breakpoints: tablet, tablet-portrait, tablet-landscape;
+$desktop-breakpoints: desktop, large-screen;
+$all-desktop-breakpoints: desktop, large-screen;
+$all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet-landscape;
+
+// Helper mixins
 @mixin transition($props...) {
     transition: $props;
 }
@@ -28,6 +36,28 @@
 
     &:hover::after {
         transform: translateX(-50%) scaleX(1);
+    }
+}
+
+@mixin responsive-font-size($breakpoints, $size) {
+    @each $bp in $breakpoints {
+        @include m_queries.responsive($bp) {
+            font-size: $size !important;
+        }
+    }
+}
+
+@mixin hide-on($breakpoints) {
+    @each $bp in $breakpoints {
+        @include m_queries.responsive($bp) {
+            display: none !important;
+        }
+    }
+}
+
+@mixin show-on($breakpoint) {
+    @include m_queries.responsive($breakpoint) {
+        display: block !important;
     }
 }
 
@@ -62,6 +92,12 @@
         background: var(--clr-six) !important;
     }
 
+    .header-btn-bg-important {
+        @include responsive-font-size($mobile-breakpoints, 1.25rem);
+        @include show-on(desktop);
+        @include responsive-font-size($all-desktop-breakpoints, 1.50rem);
+    }
+
     .hr-btn-text {
         @include hover-underline(#1F1F24);
         @include transition(all 0.5s ease-in-out);
@@ -81,17 +117,8 @@
     }
 
     #headerM {
-        $header-middle-content: phone, phone-landscape, phone-portrait, tablet;
-
-        @each $bp in $header-middle-content {
-            @include m_queries.responsive($bp) {
-                display: none !important;
-            }
-        }
-
-        @include m_queries.responsive(desktop) {
-            display: block !important;
-        }
+        @include hide-on($all-mobile-tablet-breakpoints);
+        @include show-on(desktop);
     }
 
     #headerRM {
@@ -113,13 +140,7 @@
             min-width: 150px !important;
         }
 
-        $header-middle-content: desktop, large-screen;
-
-        @each $bp in $header-middle-content {
-            @include m_queries.responsive($bp) {
-                display: none !important;
-            }
-        }
+        @include hide-on($desktop-breakpoints);
     }
 
     @keyframes tilt-in-right-1 {
@@ -136,17 +157,8 @@
 
     .header-responsive-btn {
         @include borderRadius(var(--rounded-sm));
-        $hide-breakpoints: desktop, tablet, tablet-landscape, tablet-portrait, large-screen;
-
-        @each $bp in $hide-breakpoints {
-            @include m_queries.responsive($bp) {
-                display: none !important;
-            }
-        }
-
-        @include m_queries.responsive(phone) {
-            display: block;
-        }
+        @include hide-on($all-desktop-breakpoints);
+        @include show-on(phone);
     }
 
     .header-logo {
@@ -156,17 +168,8 @@
         border: 3px solid var(--clr-two);
         @include borderRadius(50%);
 
-        $header-logo-content: phone, phone-landscape, phone-portrait;
-
-        @each $bp in $header-logo-content {
-            @include m_queries.responsive($bp) {
-                width: 54px;
-            }
-        }
-
-        @include m_queries.responsive(desktop) {
-            width: 64px;
-        }
+        @include responsive-font-size($mobile-breakpoints, 54px);
+        @include show-on(desktop);
     }
 
     .pulsate-fwd {
@@ -202,9 +205,65 @@
         width: 100%;
     }
 
+    // Hero section
     #hero {
-        max-height: 650px !important;
+        min-height: 650px !important;
         background: var(--clr-eight);
+    }
+
+    .hero-child {
+        @each $bp in $all-mobile-tablet-breakpoints {
+            @include m_queries.responsive($bp) {
+                flex-direction: column-reverse !important;
+                padding: .75em !important;
+
+                #hero {
+                    min-height: fit-content !important;
+                }
+
+                .hero-logo {
+                    --logo-w: 256px;
+                    width: var(--logo-w);
+                }
+
+                .ocps-hero-img-container,
+                .ocps-container {
+                    min-width: 100% !important;
+                }
+
+                .ocps-container {
+                    gap: .65rem !important;
+
+                    &>.ocps-buttons {
+                        flex-direction: column !important;
+                        align-items: baseline !important;
+
+                        &>button {
+                            min-width: 100% !important;
+                        }
+                    }
+                }
+
+                .ocps-written-text {
+                    font-size: .70em !important;
+                    overflow: visible;
+                }
+
+                #mottosSection {
+                    padding-bottom: .55em !important;
+
+                    &>.motto-elements {
+                        margin-bottom: .15em !important;
+                    }
+                }
+            }
+        }
+
+        @each $bp in $all-desktop-breakpoints {
+            @include m_queries.responsive($bp) {
+                flex-direction: row;
+            }
+        }
     }
 
     #heroLogoBg {
@@ -272,14 +331,54 @@
         }
     }
 
-    // Promo
     #promo,
     #promoFinalNote {
         min-height: 650px !important;
     }
 
+    .promo-videos-container {
+        @each $bp in $mobile-breakpoints {
+            @include m_queries.responsive($bp) {
+                flex-direction: column !important;
+                gap: .55rem !important;
+            }
+        }
+
+        @each $bp in $tablet-breakpoints {
+            @include m_queries.responsive($bp) {
+                flex-direction: row !important;
+            }
+        }
+
+        @each $bp in $all-desktop-breakpoints {
+            @include m_queries.responsive($bp) {
+                flex-direction: row;
+            }
+        }
+    }
+
     #promo_Description {
         min-height: 450px !important;
+
+        @each $bp in $mobile-breakpoints {
+            @include m_queries.responsive($bp) {
+                padding: .25em !important;
+                margin: 0 !important;
+                flex-direction: column-reverse !important;
+
+                .promo-featured-tabs {
+                    flex-direction: row !important;
+                    overflow-x: scroll;
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                    scroll-behavior: smooth;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+            }
+        }
     }
 
     .marquee-container:hover .marquee-content {
@@ -300,20 +399,62 @@
         }
     }
 
+    #promoSkillsContainer {
+        width: 100%;
+        white-space: nowrap;
+
+        @each $bp in $mobile-breakpoints {
+            @include m_queries.responsive($bp) {
+                animation: marquee 20s linear infinite;
+
+                &:hover {
+                    animation-play-state: paused;
+                }
+
+                &>.promo-skills-fig {
+                    filter: brightness(100%) grayscale(0%);
+                }
+            }
+        }
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(100%);
+        }
+
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
     .promo-skills-fig {
-        min-height: 19ch !important;
+        flex: 0 0 auto;
+        min-height: 16.1ch !important;
+        width: 128px;
+        height: auto;
+        object-fit: cover;
+        filter: brightness(65%) grayscale(25%);
+
+        &:hover {
+            filter: brightness(100%) grayscale(0%);
+        }
     }
 
     .promo-skills-img {
-        width: 164px;
-        height: fit-content;
-        object-fit: cover;
-        filter: grayscale(75%);
-        @include transition(all 0.25s ease-in-out);
-
-        &:hover {
-            filter: grayscale(0);
-        }
+        --def-wh: 128px !important;
+        min-height: var(--def-wh);
+        max-width: var(--def-wh);
     }
 
     #promoCard {
@@ -353,9 +494,11 @@
     }
 
     .promo-title-container {
-        color: var(--clr-one);
-        background: var(--clr-two);
-        @include borderRadius(42px);
+        @each $bp in $all-mobile-tablet-breakpoints {
+            @include m_queries.responsive($bp) {
+                text-align: start !important;
+            }
+        }
     }
 
     // Footer
