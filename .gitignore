@@ -2,9 +2,7 @@
 
 .env
 .git
-public/assets/
-public/bundle.js
-public/main.css
+public/**/*
 
 # Logs
 logs
