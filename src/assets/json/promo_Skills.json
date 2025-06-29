@@ -23,20 +23,5 @@
         "skillName": "WordPress",
         "skillLogoSrc": "./assets/images/static/svg/wp.svg",
         "skillAnchor": "https://wordpress.com/"
-    },
-    {
-        "skillName": "PostgreSQL",
-        "skillLogoSrc": "./assets/images/static/svg/postgrsql.svg",
-        "skillAnchor": "https://www.postgresql.org/"
-    },
-    {
-        "skillName": "MongoDB",
-        "skillLogoSrc": "./assets/images/static/svg/mongodb.svg",
-        "skillAnchor": "https://www.mongodb.com/"
-    },
-    {
-        "skillName": "Python",
-        "skillLogoSrc": "./assets/images/static/svg/py.svg",
-        "skillAnchor": "https://www.python.org/"
     }
 ]
