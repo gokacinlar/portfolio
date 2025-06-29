@@ -19,19 +19,56 @@ export class Template {
     }
 }
 
+// Function to scroll horizontally in desired div
+export class HorizontalMiddleMouseScroll {
+    public hmmsScroll(element: string) {
+        const elem = document.querySelector(element) as HTMLElement;
+        let isScrolling = false;
+        let targetScrollLeft = elem.scrollLeft;
+
+        // Function to handle scroll behavior
+        const handleScroll = (e: WheelEvent) => {
+            e.preventDefault();
+
+            // Move the content in Y axis with deltaY property
+            const scrollAmount = e.deltaY < 0 ? -30 : 30;
+            targetScrollLeft += scrollAmount;
+
+            if (!isScrolling) {
+                isScrolling = true;
+                requestAnimationFrame(() => {
+                    elem.scrollTo({
+                        left: targetScrollLeft,
+                        behavior: "smooth"
+                    });
+                    isScrolling = false;
+                });
+            }
+        };
+
+        // Function to check viewport and toggle scroll behavior
+        const updateScrollBehavior = () => {
+            const isMobileView = window.innerWidth < 599;
+
+            // Remove existing listener to avoid duplicates
+            elem.removeEventListener("wheel", handleScroll);
+
+            // Add listener only in mobile view
+            if (isMobileView) {
+                elem.addEventListener("wheel", handleScroll);
+            }
+        };
+
+        // Initial check
+        updateScrollBehavior();
+
+        // Listen for window resize events to update behavior
+        window.addEventListener("resize", updateScrollBehavior);
+    }
+}
+
 // For DOM Manipulation
 export class DomEvents {
-    public headerRightActions(elem: HTMLButtonElement) {
-        const textSpan = elem.querySelector(".hr-btn-text") as HTMLElement;
-        elem.addEventListener("mouseover", () => {
-            textSpan.textContent = "For your education & web demands...";
-        });
-
-        elem.addEventListener("mouseleave", () => {
-            textSpan.textContent = "Work w/me!";
-        });
-    }
-
     public dayNightModeSwitching(elem: HTMLButtonElement, elemToBeManip: string) {
         // Flag for reversing roles
         let reset = true;
@@ -56,7 +93,7 @@ export class DomEvents {
         for (let i in content) {
             let p = document.createElement("p") as HTMLParagraphElement;
             p.textContent = content[i];
-            p.classList.add("motto-elements", "p-3", "fs-6", "fw-bolder", "rounded-5", "pe-none", "shadow-sm")
+            p.classList.add("motto-elements", "p-3", "fs-6", "fw-bolder", "rounded-5", "pe-none", "shadow-sm", "mb-0")
             // Use promise-resolve to sequentially place the array items into dom
             await new Promise<void>((resolve) => {
                 setTimeout(() => {
@@ -150,7 +187,7 @@ export class PromoFunctions {
                 `
                 <div class="promo-tab-content h-100 d-flex flex-column align-items-center justify-content-evenly">
                     <i class="promo-tc-icon ${iconData}"></i>
-                    <p class="text-center fs-4 w-75">${desc}</p>
+                    <p class="text-center text-break fs-4 w-75">${desc}</p>
                 </div>
             `;
         }
@@ -230,32 +267,4 @@ export class PromoFunctions {
             startProgressForButton(buttons[index]);
         }
     }
-
-    // Function to create marquee stack
-    // I won't be using this in the near future
-    /*
-    public createMarqueeStack(targetSelector: string) {
-        const container = document.querySelector(`${targetSelector}`) as HTMLDivElement;
-        if (!container) {
-            return;
-        }
- 
-        for (const item of this.promoParts.marqueeElements) {
-            const anchor = document.createElement("a") as HTMLAnchorElement;
-            anchor.className = "marquee-item";
-            anchor.href = item.href;
-            anchor.setAttribute("target", "_blank");
- 
-            const img = document.createElement("img") as HTMLImageElement;
-            img.className = "marquee-item-img img-fluid img-responsive lazyload rounded-4";
-            img.title = item.title;
-            img.src = item.imgSrc;
-            img.setAttribute("loading", "lazy");
-            img.setAttribute("decoding", "async");
- 
-            anchor.appendChild(img);
-            container.appendChild(anchor);
-        }
-    }
-    */
 }
