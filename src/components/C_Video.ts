@@ -21,20 +21,11 @@ export class VideoElement {
     public render(header: string): string {
         return `
             <div id="component_Video" class="position-relative shadow">
-                <video
-                    id="promoVideo"
-                    class="promo-video rounded-5 w-100"
-                    preload="metadata"
-                    poster="${this.posterSrc}"
-                    loading="lazy"
-                    playsinline
-                    disablepictureinpicture
-                    loop
-                    muted
-                    autoplay
+                <video id="promoVideo" class="promo-video rounded-5 w-100 pe-none" preload="metadata" poster="${this.posterSrc}" loading="lazy"
+                    disablepictureinpicture loop muted autoplay
                     aria-labelledby="${this.title}"
                     aria-describedby="${this.title}"
-                >
+                    >
                     <source src="${this.webmSrc}" type="video/webm">
                     <source src="${this.mp4FallbackSrc}" type="video/mp4">
                 </video>

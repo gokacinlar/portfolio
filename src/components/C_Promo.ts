@@ -6,7 +6,7 @@ export class PromoTitle {
     public render(): string {
         return `
             <div class="promo-title-container text-center w-100 py-2">
-                <h3 class="promo-title display-1 mb-0 fw-bolder pe-none">
+                <h3 class="promo-title display-4 mb-0 fw-bolder pe-none">
                     ${this.titleText}
                 </h3>
             </div>
@@ -22,8 +22,8 @@ export class PromoTitle {
 export class PromoDescription {
     public renderPromoDesc(): string {
         return `
-            <div class="col-5">
-                <ul class="list-unstyled d-flex flex-column gap-4 align-items-baseline">
+            <div class="col-sm">
+                <ul class="promo-featured-tabs list-unstyled d-flex flex-column gap-4 align-items-baseline">
                     <li>
                         ${this.renderTabGroupBtn("Problem Solver", "PS")}
                     </li>
@@ -38,20 +38,16 @@ export class PromoDescription {
                     </li>
                 </ul>
             </div>
-            <div id="tabGroupDetailsLister" class="col-7">
-
-            </div>
+            <div id="tabGroupDetailsLister" class="col-sm"></div>
         `;
     }
 
     public renderTabGroupBtn(btnText: string, dataType: string): string {
         return `
-            <button class="promo-desc-tab-group-btn btn btn-lg fs-1 d-flex flex-row align-items-center justify-items-start"
-                data-type="${dataType}">
+            <button class="promo-desc-tab-group-btn btn btn-lg fs-1 d-flex flex-row align-items-center justify-items-start" data-type="${dataType}">
                 <span>
                     <div class="progress p-vertical rounded-0">
-                        <div class="progress-bar bg-warning progress-bar-animated"
-                        role="progressbar" ></div>
+                        <div class="progress-bar bg-warning progress-bar-animated" role="progressbar"></div>
                     </div>
                 </span>
                 <span>
@@ -68,7 +64,7 @@ export class PromoSkillsShowCase {
             <figure class="promo-skills-fig figure d-flex flex-column justify-content-between">
                 <a href="${data.skillAnchor}" target="_blank">
                     <img src="${data.skillLogoSrc}" alt="${data.skillName}" title="${data.skillName}"
-                    class="promo-skills-img figure-img img-fluid rounded-4 lazyload">
+                    class="promo-skills-img figure-img rounded-4 lazyload">
                 </a>
                 <figcaption class="figure-caption text-center fs-4 mt-auto">${data.skillName}</figcaption>
             </figure>
