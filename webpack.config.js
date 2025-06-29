@@ -2,6 +2,8 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserWebpackPlugin = require("terser-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     // Specify our input (entry) file to be compiled
@@ -29,7 +31,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.(woff2?|eot|ttf|otf)$/i,
+                test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/i,
                 type: "asset/resource",
                 generator: {
                     filename: "assets/fonts/[name][ext]",
@@ -47,8 +49,12 @@ module.exports = {
     // Specify our output directory
     output: {
         publicPath: "/",
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "public")
+        filename: "js/[name].[contenthash].js",
+        chunkFilename: "js/[name].[contenthash].chunk.js",
+        path: path.resolve(__dirname, "public"),
+        clean: {
+            keep: "public/index.html",
+        },
     },
     mode: "development", // Later change this to "production" for final result
     devServer: {
@@ -77,7 +83,26 @@ module.exports = {
         extensions: [".ts", ".js"],
     },
     optimization: {
+        splitChunks: {
+            chunks: "all",
+            cacheGroups: {
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: "vendors",
+                    chunks: "all",
+                },
+            },
+        },
+        minimize: true,
         minimizer: [
+            new TerserWebpackPlugin({
+                terserOptions: {
+                    format: {
+                        comments: false,
+                    },
+                },
+                extractComments: false,
+            }),
             new CssMinimizerPlugin()
         ],
     },
@@ -97,6 +122,16 @@ module.exports = {
                 },
             ],
         }),
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin({
+            filename: "css/[name].[contenthash].css",
+            chunkFilename: "css/[name].[contenthash].chunk.css",
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, "public/index.html"),
+            inject: "body",
+            minify: false,
+            template: "./src/index.html",
+            filename: "./index.html"
+        }),
     ]
 };
