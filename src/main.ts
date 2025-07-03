@@ -1,10 +1,7 @@
-// Crucial imports
 import "./assets/scss/index.scss";
 import "./assets/scss/globals.scss";
-// Libraries
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-// Components
 import { DarkLightMode } from './helper';
 import "./pages/header";
 import "./pages/footer";
