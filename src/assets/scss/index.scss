@@ -93,9 +93,9 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 
     .header-btn-bg-important {
-        @include responsive-font-size($mobile-breakpoints, 1.25rem);
-        @include show-on(desktop);
-        @include responsive-font-size($all-desktop-breakpoints, 1.50rem);
+        &>span {
+            @include hide-on($mobile-breakpoints);
+        }
     }
 
     .hr-btn-text {
@@ -512,6 +512,30 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         &>.pfns-icon {
             color: var(--clr-two);
             background: var(--clr-one);
+        }
+    }
+
+    // Teaching Section
+
+    #promoTE {
+        @each $bp in $all-mobile-tablet-breakpoints {
+            @include m_queries.responsive($bp) {
+                display: flex !important;
+                flex-direction: column !important;
+                margin-top: 0 !important;
+                padding: .25em !important;
+            }
+        }
+    }
+
+
+    .te-img-container {
+        &>ul>li {
+            border: none !important;
+        }
+
+        &>ul>li>img {
+            width: 128px;
         }
     }
 

@@ -16,8 +16,8 @@ class ResponsiveNavbar extends HTMLElement {
     public render(): string {
         return `
             <div id="responsiveNavbar" class="position relative" data-type="closed">
-                <nav id="headerRM" class="rounded-4 shadow">
-                    <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-column align-items-center gap-1">
+                <nav id="headerRM" class="rounded-4 mt-2 shadow">
+                    <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-column align-items-center gap-1 bg-gradient">
                         ${new HeaderNode().headerMiddleContent()}
                     </ul>
                 </nav>
