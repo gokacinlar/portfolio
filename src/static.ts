@@ -18,6 +18,11 @@ export class HeroParts {
     ]
 }
 
+interface Principle {
+    title: string;
+    description: string;
+}
+
 export class PromoParts {
     /*
     public marqueeElements: Array<{ title: string; imgSrc: string, href: string }> = [
@@ -51,6 +56,41 @@ export class PromoParts {
             desc: "When I encounter a real issue in my classroom or my computer, I search for applicable solution to deal with observed phenomenon."
         }
     }
+
+    public principles: Principle[] = [
+        {
+            title: "Contextual immersion",
+            description: "I integrate real-world scenarios, like role-playing daily conversations or analyzing various texts depending on our topic in classroom, to make English relevant and engaging for students."
+        },
+        {
+            title: "Scaffolded autonomy",
+            description: "I design tasks that gradually increase in complexity, empowering students to take ownership of their learning, from crafting simple sentences to debating complex ideas."
+        },
+        {
+            title: "Error as opportunity",
+            description: "I encourage students to view mistakes as critical stepping stones, using targeted feedback to refine their language skills without fear of judgment."
+        },
+        {
+            title: "Multimodal engagement",
+            description: "I blend visual, auditory, and kinesthetic activities—like storytelling through comics or pronunciation through rhythm exercises—to cater to diverse learning styles."
+        },
+        {
+            title: "Cultural storytelling",
+            description: "I weave global and local narratives into lessons, helping students to connect English to their own identities while exploring new perspectives."
+        }
+    ];
+
+    public principleImagePaths: Array<string> = [
+        "./assets/images/static/svg/TE_alphabet.svg",
+        "./assets/images/static/svg/TE_book.svg",
+        "./assets/images/static/svg/TE_booklet.svg",
+        "./assets/images/static/svg/TE_brightness.svg",
+        "./assets/images/static/svg/TE_globe.svg",
+        "./assets/images/static/svg/TE_keywords.svg",
+        "./assets/images/static/svg/TE_lang.svg",
+        "./assets/images/static/svg/TE_quote.svg",
+        "./assets/images/static/svg/TE_reception.svg"
+    ]
 }
 
 export class FooterLinks {
