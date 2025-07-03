@@ -2,9 +2,41 @@ import { HeroParts } from "./static";
 
 // Detecting dark/light mode
 export class DarkLightMode {
-    public detectDarkLightMode(): void {
-        const dlMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute("data-bs-theme", dlMode ? "dark" : "light");
+    private mediaQuery: MediaQueryList;
+    private currentTheme: "dark" | "light" | "auto" = "auto";
+
+    constructor() {
+        this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark');
+        this.initialize();
+    }
+
+    private initialize(): void {
+        // Set initial page theme
+        this.applyTheme();
+        // Listen for system theme changes (light/dark mode switching)
+        this.mediaQuery.addEventListener("change", this.handleSystemThemeChange.bind(this));
+    }
+
+    private handleSystemThemeChange(): void {
+        if (this.currentTheme === "auto") {
+            this.applyTheme();
+        }
+    }
+
+    // Dark-light mode switching happens here
+    private applyTheme(): void {
+        const effectiveTheme = this.getEffectiveTheme();
+
+        document.documentElement.setAttribute("data-bs-theme", effectiveTheme);
+        document.documentElement.setAttribute("data-theme", effectiveTheme);
+    }
+
+    // Function to get which mode is in effect in page
+    private getEffectiveTheme(): "dark" | "light" {
+        if (this.currentTheme === "auto") {
+            return this.mediaQuery.matches ? "dark" : "light";
+        }
+        return this.currentTheme;
     }
 }
 
@@ -93,7 +125,7 @@ export class DomEvents {
         for (let i in content) {
             let p = document.createElement("p") as HTMLParagraphElement;
             p.textContent = content[i];
-            p.classList.add("motto-elements", "p-3", "fs-6", "fw-bolder", "rounded-5", "pe-none", "shadow-sm", "mb-0")
+            p.classList.add("motto-element", "p-3", "fs-6", "fw-bolder", "rounded-5", "pe-none", "shadow-sm", "mb-0")
             // Use promise-resolve to sequentially place the array items into dom
             await new Promise<void>((resolve) => {
                 setTimeout(() => {
