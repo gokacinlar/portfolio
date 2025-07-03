@@ -1,12 +1,9 @@
-// Libraries
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-// Components"
-import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase } from "../components/C_Promo";
+import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish } from "../components/C_Promo";
 import { VideoElement } from "../components/C_Video";
-import { Template, PromoFunctions, HorizontalMiddleMouseScroll } from "../helper";
+import { Template, PromoFunctions, HorizontalMiddleMouseScroll, ScrollRevealAction } from "../helper";
 import { PromoParts } from "../static";
-// Json Data
 import posts from '../assets/json/posts.json';
 import skills from '../assets/json/promo_Skills.json';
 
@@ -25,7 +22,14 @@ class Promo extends HTMLElement {
         promoFunctions.createPromoContent("#promoSkillsContainer", skills, (skill) => new PromoSkillsShowCase().renderPromoSkillsShowCase(skill));
         // Create vertical tab grouping showcase
         promoFunctions.bindVerticalTabEventsAndautoCycleTabs(new PromoParts().promoTabData);
-        new HorizontalMiddleMouseScroll().hmmsScroll(".promo-featured-tabs")
+        new HorizontalMiddleMouseScroll().hmmsScroll(".promo-featured-tabs");
+        const dynamicContentDivs: Array<string> =
+            ["promo-videos-container",
+                "promo-desc-container",
+                "promo-skills-container",
+                "promo-projects-container",
+                "promo-teacheng-container"];
+        new ScrollRevealAction().scrollReveal(dynamicContentDivs);
     }
 }
 
@@ -46,20 +50,27 @@ class PromoTemplate {
 
     public promoTemplate(): string {
         return `
-            <section id="promo" class="mx-2 my-2 rounded-5">
+            <section
+                    data-sal="slide-up"
+                    data-sal-delay="300"
+                    data-sal-easing="ease-out-back"
+            id="promo" class="mx-2 my-2 rounded-5">
                 <div class="container-fluid w-100 px-2 py-2 d-flex flex-column gap-4">
                     <div class="promo-videos-container column col-12 d-flex flex-row gap-3 align-items-center justify-content-center">
                         ${this.promoVideos()}
                     </div>
-                    <div class="column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                    <div class="promo-desc-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoDesc()}
                     </div>
-                    <div class="column col-12 d-flex flex-column gap-4 align-items-center justify-content-center overflow-hidden">
+                    <div class="promo-skills-container column col-12 d-flex flex-column gap-4 align-items-center justify-content-center overflow-hidden">
                         ${this.promoSkills()}
                         <div id="promoSkillsContainer" class="d-flex flex-row align-items-center justify-content-center gap-4"></div>
                     </div>
-                    <div class="column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                    <div class="promo-projects-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoProjectCards()}
+                    </div>
+                    <div class="promo-teacheng-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                        ${this.promoEngTeach()}
                     </div>
                 </div>
             </section>
@@ -75,28 +86,29 @@ class PromoTemplate {
     private promoProjectCards(): string {
         return `
             ${new PromoTitle("Some of my projects are")}
-            <div id="promoCardContainer" class="d-flex flex-wrap gap-3 justify-content-center">
-                <!-- Cards will be injected here -->
-            </div>
+            <div id="promoCardContainer" class="d-flex flex-wrap gap-3 justify-content-center"></div>
         `;
     }
 
     private promoVideos(): string {
         return `
-            <div class="col-sm overflow-hidden">
-                ${this.videoOne.render("Teaching for Life")}
-            </div>
-            <div class="col-sm overflow-hidden">
-                ${this.videoTwo.render("Coding for Passion")}
-            </div>
+            <div class="col-sm overflow-hidden">${this.videoOne.render("Teaching for Life")}</div>
+            <div class="col-sm overflow-hidden">${this.videoTwo.render("Coding for Passion")}</div>
         `;
     }
 
     private promoDesc(): string {
         return `
             ${new PromoTitle("I describe myself as")}
-            <div id="promo_Description" class="container-fluid w-100 px-4 py-4 my-4 d-flex flex-row gap-2">
-                ${new PromoDescription().renderPromoDesc()}
+            <div id="promo_Description" class="container-fluid w-100 px-4 py-4 my-4 d-flex flex-row gap-2">${new PromoDescription().renderPromoDesc()}</div>
+        `;
+    }
+
+    private promoEngTeach(): string {
+        return `
+            ${new PromoTitle("Teaching English?")}
+            <div id="promoTE" class="container-fluid w-100 px-4 py-4 my-4 d-flex flex-row gap-2">
+                ${new PromoTeachEnglish().render()}
             </div>
         `;
     }

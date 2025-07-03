@@ -1,4 +1,5 @@
-import * as Type from "../types"
+import * as Type from "../types";
+import { PromoParts } from "../static";
 
 export class PromoTitle {
     constructor(private titleText: string) { }
@@ -97,5 +98,56 @@ export class PromoCard {
                 </div>
             </div>
     `;
+    }
+}
+
+export class PromoTeachEnglish {
+    public render(): string {
+        return `
+            <div class="col-sm">
+                <div>
+                    <p class="h1">My main profession is being an
+                        <span class="mark rounded-4">English Teacher!</span></p>
+                    <hr class="w-25">
+                    <p class="h3 fs-3 lead fw-medium">
+                        I've been teaching mostly in private schools since I graduated with my BA degree. My students range from
+                        <u>elementary to high-school level</u>. I literally had the opportunity to <strong>teach students of all ages!</strong>
+                    </p>
+                    <hr class="w-25">
+                    <p class="h3 fs-3 lead fw-medium">
+                        My primary philosophy and principles about teaching are:
+                    </p>
+                </div>
+                <div>
+                    <ul class="list-group list-group-numbered list-group-flush fs-5 fw-medium">
+                        ${this.createListContentForPrinciples()}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm te-img-container d-flex align-self-center justify-self-center list-group list-group-numbered list-group-flush pe-none">
+                <ul class="d-flex flex-row flex-wrap align-items-center justify-content-evenly p-0">
+                    ${this.createImageIconsForPrinciples()}
+                </ul>
+            </div>
+        `;
+    }
+
+    public createListContentForPrinciples(): string {
+        const principles = new PromoParts().principles;
+        if (!principles) {
+            throw new Error("Unable to fetch content");
+        }
+
+        return principles.map(content =>
+            `<li class="list-group-item"><strong>${content.title}</strong>: ${content.description}</li>`
+        ).join('');
+    }
+
+    public createImageIconsForPrinciples(): string {
+        const images = new PromoParts().principleImagePaths;
+
+        return images.map(path =>
+            `<li class="list-group-item"><img src="${path}" title="Icon" class="lazyload img-fluid"></li>`
+        ).join("");
     }
 }
