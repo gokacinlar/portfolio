@@ -1,16 +1,14 @@
 // Libraries
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import VanillaTilt from "vanilla-tilt";
 // Components"
-import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoContact } from "../components/C_Promo";
+import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase } from "../components/C_Promo";
 import { VideoElement } from "../components/C_Video";
 import { Template, PromoFunctions, HorizontalMiddleMouseScroll } from "../helper";
 import { PromoParts } from "../static";
 // Json Data
 import posts from '../assets/json/posts.json';
 import skills from '../assets/json/promo_Skills.json';
-import links from '../assets/json/social_Links.json';
 
 class Promo extends HTMLElement {
     constructor() {
@@ -25,14 +23,9 @@ class Promo extends HTMLElement {
         const promoFunctions = new PromoFunctions();
         promoFunctions.createPromoContent("#promoCardContainer", posts, (post) => new PromoCard().renderPromoCard(post));
         promoFunctions.createPromoContent("#promoSkillsContainer", skills, (skill) => new PromoSkillsShowCase().renderPromoSkillsShowCase(skill));
-        promoFunctions.createPromoContent("#pfnSocials", links, (link) => new PromoContact().renderPromoContacts(link));
         // Create vertical tab grouping showcase
         promoFunctions.bindVerticalTabEventsAndautoCycleTabs(new PromoParts().promoTabData);
         new HorizontalMiddleMouseScroll().hmmsScroll(".promo-featured-tabs")
-
-        // Initialize the tilt.js
-        const elements = document.querySelectorAll(".js-tilt") as any;
-        VanillaTilt.init(elements);
     }
 }
 
@@ -67,9 +60,6 @@ class PromoTemplate {
                     </div>
                     <div class="column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoProjectCards()}
-                    </div>
-                    <div class="column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
-                        ${this.promoFinalNote()}
                     </div>
                 </div>
             </section>
@@ -107,17 +97,6 @@ class PromoTemplate {
             ${new PromoTitle("I describe myself as")}
             <div id="promo_Description" class="container-fluid w-100 px-4 py-4 my-4 d-flex flex-row gap-2">
                 ${new PromoDescription().renderPromoDesc()}
-            </div>
-        `;
-    }
-
-    private promoFinalNote(): string {
-        return `
-            <div id="promoFinalNote" class="container-fluid w-100 px-4 py-4 d-flex flex-column gap-2 align-items-center justify-content-evenly">
-                <h2 class="display-1 fw-bolder">Keep in touch with me!</h2>
-                <div id="pfnSocials" class="d-flex flex-row align-items-center justify-content-center gap-4">
-                    <!--Social Links will go here-->
-                </div>
             </div>
         `;
     }

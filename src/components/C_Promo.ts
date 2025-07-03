@@ -72,27 +72,11 @@ export class PromoSkillsShowCase {
     }
 }
 
-export class PromoContact {
-    public renderPromoContacts(data: Type.PromoSocials): string {
-        return `
-            <div class="js-tilt" data-tilt data-tilt-full-page-listening">
-                <figure class="promo-socials-fig figure d-flex flex-column align-items-center justify-content-between">
-                    <a href="${data.socialLink}" target="_blank">
-                        <img src="${data.socialLogo}" alt="${data.socialName}" title="${data.socialName}"
-                        class="figure-img img-fluid rounded-4 lazyload px-2 py-2">
-                    </a>
-                    <figcaption class="figure-caption text-center fs-4 mt-auto">${data.socialName}</figcaption>
-                </figure>
-            </div>
-        `;
-    }
-}
-
 export class PromoCard {
     public renderPromoCard(data: Type.PromoCardData): string {
         return `
-            <div id="promoCard" class="d-flex flex-column align-items-center justify-content-between shadow-sm">
-                <div class="w-100 h-100 d-flex flex-column justify-content-between px-2 py-2">
+            <div id="promoCard" class="card d-flex flex-column align-items-center justify-content-between shadow-sm rounded-4">
+                <div class="card-body w-100 h-100 d-flex flex-column justify-content-between px-2 py-2">
                     <div>
                         <img class="img-fluid lazyload" src="${data.postImgSrc}" alt="${data.postName}" title="${data.postName}">
                     </div>
@@ -103,16 +87,13 @@ export class PromoCard {
                         <img class="img-fluid lazyload" src="${data.postLangTypeImgSrc}" alt="Written in ${data.postLangType}" title="${data.postLangType}">
                     </div>
                     <div>
-                        <p>${data.postDesc}</p>
+                        <p class="card-text">${data.postDesc}</p>
                     </div>
-                </div>
-                <div class="align-self-end">
-                    <button id="promoLink" type="button" class="bg-gradient btn btn-lg fs-4 d-inline-flex flex-row align-items-center rounded-4 shadow-sm border border-4" title="Navigate to ${data.postName}">
-                        <a href="${data.projectLink}">
-                            <span class="hr-btn-text">Link</span>
-                            <i class="promo-project-link-icon bi bi-link-45deg"></i>
-                        </a>
-                    </button>
+                    <div>
+                        <button id="promoLink" type="button" class="btn fs-4 w-100 rounded-pill shadow-sm border border-secondary-subtle" title="Navigate to ${data.postName}">
+                            <a href="${data.projectLink}"><span class="hr-btn-text">Link</span></a>
+                        </button>
+                    </div>
                 </div>
             </div>
     `;
