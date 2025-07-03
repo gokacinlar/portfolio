@@ -1,3 +1,4 @@
+import ScrollReveal from "scrollreveal";
 import { HeroParts } from "./static";
 
 // Detecting dark/light mode
@@ -297,6 +298,14 @@ export class PromoFunctions {
         if (initialType) {
             this.createVerticalTabContent(initialType, data);
             startProgressForButton(buttons[index]);
+        }
+    }
+}
+
+export class ScrollRevealAction {
+    public scrollReveal(classes: Array<string>) {
+        for (const id of classes) {
+            ScrollReveal().reveal(`.${id}`), { delay: 10000 };
         }
     }
 }
