@@ -15,6 +15,6 @@ export type PromoSkills = {
 
 export type PromoSocials = {
     socialName: string;
+    socialClass: string;
     socialLink: string;
-    socialLogo: string;
 }

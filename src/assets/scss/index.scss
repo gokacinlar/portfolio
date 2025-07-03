@@ -207,7 +207,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
 
     // Hero section
     #hero {
-        min-height: 650px !important;
+        min-height: var(--sizes-content);
         background: var(--clr-eight);
     }
 
@@ -221,9 +221,13 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
                     min-height: fit-content !important;
                 }
 
+                #heroLogoBg {
+                    background-position: center;
+                }
+
                 .hero-logo {
-                    --logo-w: 256px;
-                    width: var(--logo-w);
+                    --logo-mw: 256px;
+                    width: var(--logo-mw);
                 }
 
                 .ocps-hero-img-container,
@@ -232,6 +236,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
                 }
 
                 .ocps-container {
+                    margin-top: .75em !important;
                     gap: .65rem !important;
 
                     &>.ocps-buttons {
@@ -252,7 +257,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
                 #mottosSection {
                     padding-bottom: .55em !important;
 
-                    &>.motto-elements {
+                    &>.motto-element {
                         margin-bottom: .15em !important;
                     }
                 }
@@ -274,14 +279,13 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 
     .hero-logo {
-        --logo-w: 412px;
-        width: var(--logo-w);
+        width: var(--sizes-logo);
         height: auto;
         object-fit: cover;
         @include borderRadius(50%);
     }
 
-    .motto-elements {
+    .motto-element {
         color: var(--clr-one);
         background: var(--clr-two);
         animation: fade-in-fwd 0.55s cubic-bezier(.25, .46, .45, .94) both;
@@ -333,7 +337,11 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
 
     #promo,
     #promoFinalNote {
-        min-height: 650px !important;
+        min-height: var(--sizes-content);
+    }
+
+    #pfnSocials {
+        background: var(--clr-eight);
     }
 
     .promo-videos-container {
@@ -420,21 +428,11 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
 
     @keyframes marquee {
         0% {
-            transform: translateX(0);
+            transform: translateX(150%);
         }
 
         100% {
-            transform: translateX(-100%);
-        }
-    }
-
-    @keyframes marquee {
-        0% {
-            transform: translateX(100%);
-        }
-
-        100% {
-            transform: translateX(-100%);
+            transform: translateX(-150%);
         }
     }
 
@@ -465,9 +463,16 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         @include borderRadius(var(--rounded-sm));
     }
 
+    #promoCard {
+        min-height: 375px;
+    }
+
     #promoLink {
-        min-width: 5.5ch;
-        border-color: var(--clr-one) !important;
+        transition: all .25s ease-in-out;
+
+        &:hover {
+            border: 1px solid var(--clr-five) !important;
+        }
     }
 
     .promo-project-link-icon {
@@ -479,8 +484,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 
     .promo-socials-fig>a>img {
-        width: 156px;
-        background: var(--clr-eight);
+        width: 46px;
     }
 
     .p-vertical {
@@ -498,6 +502,16 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
             @include m_queries.responsive($bp) {
                 text-align: start !important;
             }
+        }
+    }
+
+    .pfns-link {
+        color: var(--clr-one) !important;
+        background: var(--clr-two);
+
+        &>.pfns-icon {
+            color: var(--clr-two);
+            background: var(--clr-one);
         }
     }
 

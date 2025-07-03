@@ -23,6 +23,12 @@ $colors: (
     seven: #F9C80E,
 );
 
+$sizes: (
+    content: 650px,
+    logo: 412px,
+    icon: 72px
+);
+
 $themes: (
     light: (clr-one: #FDF9FD,
         clr-two: #1F1F24,
@@ -47,6 +53,7 @@ $themes: (
     --font-display: #{$font-display};
     @include define-css-variables($rounded, "rounded-");
     @include define-css-variables($colors, "clr-");
+    @include define-css-variables($sizes, "sizes-");
 
     &[data-bs-theme="light"] {
         @include define-css-variables(map.get($themes, light));
