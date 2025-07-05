@@ -323,6 +323,10 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         animation: blink 1s step-end infinite;
     }
 
+    .post-lang-img {
+        width: 32px;
+    }
+
     @keyframes blink {
 
         0%,

@@ -76,23 +76,23 @@ export class PromoSkillsShowCase {
 export class PromoCard {
     public renderPromoCard(data: Type.PromoCardData): string {
         return `
-            <div id="promoCard" class="card d-flex flex-column align-items-center justify-content-between shadow-sm rounded-4">
-                <div class="card-body w-100 h-100 d-flex flex-column justify-content-between px-2 py-2">
-                    <div>
-                        <img class="img-fluid lazyload" src="${data.postImgSrc}" alt="${data.postName}" title="${data.postName}">
+            <div id="promoCard" class="card d-flex flex-column align-items-center justify-content-between shadow-sm rounded-4 px-1 py-1">
+                <div class="card-body d-flex flex-column align-items-center justify-content-between px-2 py-2">
+                    <div class="text-center">
+                        <img class="img-fluid lazyload w-50 rounded-5" src="${data.postImgSrc}" alt="${data.postName}" title="${data.postName}">
+                    </div>
+                    <div class="text-start">
+                        <h4 class="mt-2">${data.postName}</h4>
                     </div>
                     <div>
-                        <h4 class="text-center">${data.postName}</h4>
+                        <img class="post-lang-img img-fluid lazyload shadow-sm" src="${data.postLangTypeImgSrc}" alt="Written in ${data.postLangType}" title="${data.postLangType}">
                     </div>
                     <div>
-                        <img class="img-fluid lazyload" src="${data.postLangTypeImgSrc}" alt="Written in ${data.postLangType}" title="${data.postLangType}">
+                        <p class="card-text my-2">${data.postDesc}</p>
                     </div>
-                    <div>
-                        <p class="card-text">${data.postDesc}</p>
-                    </div>
-                    <div>
+                    <div class="w-100">
                         <button id="promoLink" type="button" class="btn fs-4 w-100 rounded-pill shadow-sm border border-secondary-subtle" title="Navigate to ${data.postName}">
-                            <a href="${data.projectLink}"><span class="hr-btn-text">Link</span></a>
+                            <a href="${data.projectLink}" target="_blank"><span class="hr-btn-text">Link</span></a>
                         </button>
                     </div>
                 </div>
