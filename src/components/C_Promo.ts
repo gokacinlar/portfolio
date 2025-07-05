@@ -115,7 +115,7 @@ export class PromoTeachEnglish {
                     </p>
                     <hr class="w-25">
                     <p class="h3 fs-3 lead fw-medium">
-                        My primary philosophy and principles about teaching are:
+                        My primary focus and principles about teaching are:
                     </p>
                 </div>
                 <div>

@@ -393,6 +393,45 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         }
     }
 
+    .promo-projects-container {
+        @each $bp in $mobile-breakpoints {
+            @include m_queries.responsive($bp) {
+                align-items: unset !important;
+                justify-content: unset !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                overflow-x: scroll !important;
+                scroll-snap-type: x mandatory;
+                scroll-padding-left: 0 !important;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+                scroll-behavior: smooth;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    #promoCardContainer {
+        @each $bp in $mobile-breakpoints {
+            @include m_queries.responsive($bp) {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+            }
+        }
+
+        &>div {
+            @each $bp in $mobile-breakpoints {
+                @include m_queries.responsive($bp) {
+                    scroll-snap-align: start !important;
+                    flex-shrink: 0;
+                }
+            }
+        }
+    }
+
     .marquee-container:hover .marquee-content {
         animation-play-state: paused;
     }
