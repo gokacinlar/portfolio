@@ -3,7 +3,7 @@ import "lazysizes";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 // Components
-import { Template, DomEvents } from '../helper';
+import { Template, DarkLightMode } from '../helper';
 import ResponsiveNavbar from '../components/responsive/R_navbar';
 
 class Header extends HTMLElement {
@@ -15,7 +15,7 @@ class Header extends HTMLElement {
 
     connectedCallback(): void {
         const dayNightModeSwitchingBtn = document.querySelector("#hrDayNightBtn") as HTMLButtonElement;
-        new DomEvents().dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
+        new DarkLightMode().dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
         const responsiveNavbarMode = new ResponsiveNavbar().connectedCallback();
     }
 }

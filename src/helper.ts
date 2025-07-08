@@ -2,12 +2,14 @@ import ScrollReveal from "scrollreveal";
 import { HeroParts } from "./static";
 
 // Detecting dark/light mode
+// Detecting dark/light mode
 export class DarkLightMode {
     private mediaQuery: MediaQueryList;
     private currentTheme: "dark" | "light" | "auto" = "auto";
+    private iconElement: HTMLElement | null = null;
 
     constructor() {
-        this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark');
+        this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         this.initialize();
     }
 
@@ -21,6 +23,7 @@ export class DarkLightMode {
     private handleSystemThemeChange(): void {
         if (this.currentTheme === "auto") {
             this.applyTheme();
+            this.updateIcon();
         }
     }
 
@@ -38,6 +41,35 @@ export class DarkLightMode {
             return this.mediaQuery.matches ? "dark" : "light";
         }
         return this.currentTheme;
+    }
+
+    private updateIcon(): void {
+        if (!this.iconElement) return;
+
+        const effectiveTheme = this.getEffectiveTheme();
+
+        if (effectiveTheme === "dark") {
+            this.iconElement.classList.remove("bi-sun");
+            this.iconElement.classList.add("bi-moon-stars");
+        } else {
+            this.iconElement.classList.remove("bi-moon-stars");
+            this.iconElement.classList.add("bi-sun");
+        }
+    }
+
+    public dayNightModeSwitching(elem: HTMLButtonElement, elemToBeManip: string) {
+        this.iconElement = document.querySelector(`${elemToBeManip}`) as HTMLElement;
+
+        // Set initial icon state based on current theme
+        this.updateIcon();
+        elem.addEventListener("click", () => {
+            // Toggle between light and dark (override auto mode)
+            const currentEffectiveTheme = this.getEffectiveTheme();
+            this.currentTheme = currentEffectiveTheme === "dark" ? "light" : "dark";
+
+            this.applyTheme();
+            this.updateIcon();
+        });
     }
 }
 
@@ -102,25 +134,6 @@ export class HorizontalMiddleMouseScroll {
 
 // For DOM Manipulation
 export class DomEvents {
-    public dayNightModeSwitching(elem: HTMLButtonElement, elemToBeManip: string) {
-        // Flag for reversing roles
-        let reset = true;
-        elem.addEventListener("click", () => {
-            const dayNightModeSwitchingBtn = document.querySelector(`${elemToBeManip}`) as HTMLElement;
-            if (reset) {
-                dayNightModeSwitchingBtn.classList.remove("bi-sun");
-                dayNightModeSwitchingBtn.classList.add("bi-moon-stars");
-                document.documentElement.setAttribute("data-bs-theme", "dark");
-            } else {
-                dayNightModeSwitchingBtn.classList.remove("bi-moon-stars");
-                dayNightModeSwitchingBtn.classList.add("bi-sun");
-                document.documentElement.setAttribute("data-bs-theme", "light");
-            }
-            // Reset the flag
-            reset = !reset;
-        });
-    }
-
     // Function to append mottos into DOM with sequential order
     public async appendContent(target: HTMLElement, content: Array<string>): Promise<void> {
         for (let i in content) {
