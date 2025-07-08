@@ -1,10 +1,34 @@
 [
     {
-        "postName": "Post One",
-        "postDesc": "Description 1",
-        "postImgSrc": "img1.jpg",
+        "postName": "Toolguide Companion",
+        "postDesc": "Your toolbox companion to accomplish many handy stuff, without leaving the browser.",
+        "postImgSrc": "https://raw.githubusercontent.com/gokacinlar/toolguide-companion-browser-extension/refs/heads/main/images/logo/final-icon-without-text-minified.png",
         "postLangType": "TypeScript",
-        "postLangTypeImgSrc": "../images/static/svg/ts.svg",
-        "projectLink": "https://example.com/1"
+        "postLangTypeImgSrc": "/assets/images/static/svg/ts.svg",
+        "projectLink": "https://github.com/gokacinlar/toolguide-companion-browser-extension"
+    },
+    {
+        "postName": "Cr:OS HWID",
+        "postDesc": "ChromeOS Hardware Info & Monitor Utility",
+        "postImgSrc": "https://raw.githubusercontent.com/gokacinlar/chromeos-hw-resource-app/refs/heads/main/images/logo.png",
+        "postLangType": "JavaScript",
+        "postLangTypeImgSrc": "/assets/images/static/svg/js.svg",
+        "projectLink": "https://github.com/gokacinlar/chromeos-hw-resource-app"
+    },
+    {
+        "postName": "MSEdge Duplicate Favorites Remover",
+        "postDesc": "An extension to identify duplicate favorites/bookmarks and remove them.",
+        "postImgSrc": "https://raw.githubusercontent.com/gokacinlar/Edge-Duplicate-Favorites-Remover-Extension/refs/heads/main/icons/icon-128x128.png",
+        "postLangType": "JavaScript",
+        "postLangTypeImgSrc": "/assets/images/static/svg/js.svg",
+        "projectLink": "https://github.com/gokacinlar/Edge-Duplicate-Favorites-Remover-Extension"
+    },
+    {
+        "postName": "Aletheia: Exif Data Remover",
+        "postDesc": "An extension to identify & list metadata (exif data) in your images",
+        "postImgSrc": "https://raw.githubusercontent.com/gokacinlar/exifdata-explorer-extension/refs/heads/main/images/logo.png",
+        "postLangType": "JavaScript",
+        "postLangTypeImgSrc": "/assets/images/static/svg/js.svg",
+        "projectLink": "https://github.com/gokacinlar/exifdata-explorer-extension"
     }
 ]

@@ -66,11 +66,17 @@ class PromoTemplate {
                         ${this.promoSkills()}
                         <div id="promoSkillsContainer" class="d-flex flex-row align-items-center justify-content-center gap-4"></div>
                     </div>
-                    <div class="promo-projects-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
-                        ${this.promoProjectCards()}
+                    <div class="promo-projects-container-parent">
+                        ${new PromoTitle("Some of my projects are")}
+                        <div class="promo-projects-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center overflow-hidden">
+                            ${this.promoProjectCards()}
+                        </div>
                     </div>
                     <div class="promo-teacheng-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoEngTeach()}
+                    </div>
+                    <div class="promo-work-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                        ${this.promoWork()}
                     </div>
                 </div>
             </section>
@@ -85,8 +91,9 @@ class PromoTemplate {
 
     private promoProjectCards(): string {
         return `
-            ${new PromoTitle("Some of my projects are")}
-            <div id="promoCardContainer" class="d-flex flex-wrap gap-3 justify-content-center"></div>
+            <div class="promo-scrollable">
+                <div id="promoCardContainer" class="d-flex flex-wrap gap-3 justify-content-center"></div>
+            </div>
         `;
     }
 
@@ -109,6 +116,15 @@ class PromoTemplate {
             ${new PromoTitle("Teaching English?")}
             <div id="promoTE" class="container-fluid w-100 px-4 py-4 my-4 d-flex flex-row gap-2">
                 ${new PromoTeachEnglish().render()}
+            </div>
+        `;
+    }
+
+    private promoWork(): string {
+        return `
+            ${new PromoTitle("Interested in working?")}
+            <div id="promoWork">
+
             </div>
         `;
     }

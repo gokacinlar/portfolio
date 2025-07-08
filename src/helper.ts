@@ -229,13 +229,20 @@ export class PromoFunctions {
             return;
         } else {
             const { iconData, desc } = data[target];
-            container.innerHTML =
-                `
-                <div class="promo-tab-content h-100 d-flex flex-column align-items-center justify-content-evenly">
-                    <i class="promo-tc-icon ${iconData}"></i>
-                    <p class="text-center text-break fs-4 w-75">${desc}</p>
-                </div>
-            `;
+            container.innerHTML = ""; // Clear previous content
+
+            const wrapper = document.createElement("section");
+            const icon = document.createElement("i");
+            wrapper.className = "promo-tab-content h-100 d-flex flex-column align-items-center justify-content-evenly";
+            icon.className = `promo-tc-icon ${iconData}`;
+
+            const p = document.createElement("p");
+            p.className = "text-center text-break fs-4 w-75";
+            p.textContent = desc;
+
+            wrapper.appendChild(icon);
+            wrapper.appendChild(p);
+            container.appendChild(wrapper);
         }
     }
 
