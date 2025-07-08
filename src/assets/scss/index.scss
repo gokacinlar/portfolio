@@ -100,20 +100,20 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
 
     .hr-btn-text {
         @include hover-underline(#1F1F24);
-        @include transition(all 0.5s ease-in-out);
+        @include transition(all .35s ease-in-out);
     }
 
     .hr-daynight-switch-icon {
         transform: rotate(0);
-        @include transition(transform 0.25s cubic-bezier(0.785, 0.135, 0.150, 0.860));
+        @include transition(transform .25s ease-in-out !important);
+
+        &:hover {
+            transform: rotate(90deg);
+        }
     }
 
     .header-day-night-btn {
         @include transition(all 0.25s ease-in-out);
-
-        &:hover .hr-daynight-switch-icon {
-            transform: rotate(90deg);
-        }
     }
 
     #headerM {
