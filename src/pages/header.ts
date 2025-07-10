@@ -1,5 +1,7 @@
+import * as Type from "../types";
 // Components
 import { Template, DarkLightMode } from '../helper';
+import { HtmxControls } from "../components/M_htmx";
 import ResponsiveNavbar from '../components/responsive/R_navbar';
 
 class Header extends HTMLElement {
@@ -70,25 +72,37 @@ export class HeaderNode {
         `;
     }
 
-    private hxSwapTarget: string = "#swappable";
+    private htmxOptions: Type.HTMXOptions[] = [
+        {
+            hxget: "/index.html",
+            hxtrigger: "click",
+            hxswap: "innerHTML",
+            hxpushurl: "true",
+        },
+        {
+            hxget: "/about.html",
+            hxtrigger: "click",
+            hxswap: "innerHTML",
+            hxpushurl: "true",
+        },
+        {
+            hxget: "/index.html",
+            hxtrigger: "click",
+            hxswap: "innerHTML",
+            hxpushurl: "true",
+        },
+    ];
+
     public headerMiddleContent(): string {
         return `
             <li><a
                 href="/index.html"
-                hx-get="/about.html"
-                hx-trigger="click"
-                hx-target="${this.hxSwapTarget}"
-                hx-swap="innerHTML"
-                hx-push-url="true"
+                ${new HtmxControls(this.htmxOptions[0]).render()}
                 title="Home" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-house-door"></i> Home</a></li>
-            <li><a href="" title="Blog" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-journals"></i> Updates</a></li>
-            <a
+            <li><a href="" title="Blog" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-journals"></i> Updates</a>
+            </li><a
                 href="/about.html"
-                hx-get="/about.html"
-                hx-trigger="click"
-                hx-target="${this.hxSwapTarget}"
-                hx-swap="innerHTML"
-                hx-push-url="true"
+                ${new HtmxControls(this.htmxOptions[1]).render()}
                 title="About"
                 class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-person-circle"></i> About</a>
             <li><a href="" title="Socials" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-share-fill"></i> Socials</a></li>

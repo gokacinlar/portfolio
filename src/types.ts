@@ -18,3 +18,7 @@ export type PromoSocials = {
     socialClass: string;
     socialLink: string;
 }
+
+export type HTMXOptions = {
+    [key: string]: string;
+}

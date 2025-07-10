@@ -1,4 +1,4 @@
-// Components"
+// Components
 import { HeroImageWithLink } from "../components/C_Hero";
 import { Template, TypeWriterDisplay, DomEvents } from "../helper";
 import { BodyParts, HeroParts } from "../static";
