@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-<<<<<<< HEAD
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 
 // For static page's script linking
@@ -18,9 +17,6 @@ let multipleHtmlPlugins = htmlPageNames.map(name => {
         chunks: ["main"]
     })
 });
-=======
-const CspHtmlWebpackPlugin = require('csp-html-webpack-plugin');
->>>>>>> c7dfd9ef33b43f155d3fffc7d94a0782dd499cac
 
 module.exports = {
     // Specify our input (entry) file to be compiled
@@ -176,9 +172,5 @@ module.exports = {
                 }
             }
         )
-<<<<<<< HEAD
     ].concat(multipleHtmlPlugins)
-=======
-    ]
->>>>>>> c7dfd9ef33b43f155d3fffc7d94a0782dd499cac
 };
