@@ -1,9 +1,9 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
+// Components
 import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish } from "../components/C_Promo";
 import { VideoElement } from "../components/C_Video";
 import { Template, PromoFunctions, HorizontalMiddleMouseScroll, ScrollRevealAction } from "../helper";
 import { PromoParts } from "../static";
+// JSON Data
 import posts from '../assets/json/posts.json';
 import skills from '../assets/json/promo_Skills.json';
 
@@ -50,11 +50,7 @@ class PromoTemplate {
 
     public promoTemplate(): string {
         return `
-            <section
-                    data-sal="slide-up"
-                    data-sal-delay="300"
-                    data-sal-easing="ease-out-back"
-            id="promo" class="mx-2 my-2 rounded-5">
+            <section id="promo" class="mx-2 my-2 rounded-5">
                 <div class="container-fluid w-100 px-2 py-2 d-flex flex-column gap-4">
                     <div class="promo-videos-container column col-12 d-flex flex-row gap-3 align-items-center justify-content-center">
                         ${this.promoVideos()}

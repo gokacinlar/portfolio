@@ -2,7 +2,6 @@ import ScrollReveal from "scrollreveal";
 import { HeroParts } from "./static";
 
 // Detecting dark/light mode
-// Detecting dark/light mode
 export class DarkLightMode {
     private mediaQuery: MediaQueryList;
     private currentTheme: "dark" | "light" | "auto" = "auto";

@@ -1,7 +1,3 @@
-// Libraries
-import "lazysizes";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
 // Components"
 import { HeroImageWithLink } from "../components/C_Hero";
 import { Template, TypeWriterDisplay, DomEvents } from "../helper";

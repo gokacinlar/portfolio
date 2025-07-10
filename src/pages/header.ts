@@ -1,7 +1,3 @@
-// Libraries
-import "lazysizes";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
 // Components
 import { Template, DarkLightMode } from '../helper';
 import ResponsiveNavbar from '../components/responsive/R_navbar';
@@ -74,16 +70,28 @@ export class HeaderNode {
         `;
     }
 
+    private hxSwapTarget: string = "#swappable";
     public headerMiddleContent(): string {
         return `
-            <li><a href="" title="Home" class="btn header-btn-bg btn-lg rounded-5 fs-4">
-                <i class="bi bi-house-door"></i> Home</a></li>
-            <li><a href="" title="Blog" class="btn header-btn-bg btn-lg rounded-5 fs-4">
-                <i class="bi bi-journals"></i> Updates</a></li>
-            <li><a href="" title="About" class="btn header-btn-bg btn-lg rounded-5 fs-4">
-                <i class="bi bi-person-circle"></i> About</a></li>
-            <li><a href="" title="Socials" class="btn header-btn-bg btn-lg rounded-5 fs-4">
-                <i class="bi bi-share-fill"></i> Socials</a></li>
+            <li><a
+                href="/index.html"
+                hx-get="/about.html"
+                hx-trigger="click"
+                hx-target="${this.hxSwapTarget}"
+                hx-swap="innerHTML"
+                hx-push-url="true"
+                title="Home" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-house-door"></i> Home</a></li>
+            <li><a href="" title="Blog" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-journals"></i> Updates</a></li>
+            <a
+                href="/about.html"
+                hx-get="/about.html"
+                hx-trigger="click"
+                hx-target="${this.hxSwapTarget}"
+                hx-swap="innerHTML"
+                hx-push-url="true"
+                title="About"
+                class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-person-circle"></i> About</a>
+            <li><a href="" title="Socials" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-share-fill"></i> Socials</a></li>
         `;
     }
 

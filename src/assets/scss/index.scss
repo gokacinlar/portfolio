@@ -74,6 +74,17 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
 @layer init, secondary, third;
 
 @layer init {
+    /* htmx related */
+
+    .htmx-anim.faded {
+        opacity: .25;
+    }
+
+    .htmx-anim {
+        opacity: 1;
+        transition: opacity ease-in 900ms;
+    }
+
     body {
         background: var(--clr-one) !important;
     }
