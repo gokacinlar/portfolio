@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 
 module.exports = {
     // Specify our input (entry) file to be compiled
@@ -57,6 +58,7 @@ module.exports = {
         },
     },
     mode: "development", // Later change this to "production" for final result
+    devtool: "cheap-module-source-map", // Later remove for production since we won't be needing eval() in prod
     devServer: {
         static: {
             directory: path.join(__dirname, "public"),
@@ -131,7 +133,31 @@ module.exports = {
             inject: "body",
             minify: false,
             template: "./src/index.html",
-            filename: "./index.html"
+            filename: "./index.html",
         }),
+        new CspHtmlWebpackPlugin(
+            {
+                "base-uri": ["'self'"],
+                "object-src": ["'none'"],
+                "script-src": ["'self'"],
+                "style-src": ["'self'"],
+                "img-src": ["'self'", "data:", "https:"], // Allow https:// because I link some images outside
+                "font-src": ["'self'", "https:", "data:"],
+                "connect-src": ["'self'"],
+                "frame-ancestors": ["'none'"]
+            },
+            {
+                enabled: true,
+                hashingMethod: "sha256",
+                hashEnabled: {
+                    "script-src": true,
+                    "style-src": true
+                },
+                nonceEnabled: {
+                    "script-src": true,
+                    "style-src": true
+                }
+            }
+        )
     ]
 };
