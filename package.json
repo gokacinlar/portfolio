@@ -37,6 +37,7 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.13.1",
+    "htmx-ext-class-tools": "^2.0.2",
     "htmx.org": "^2.0.4",
     "lazysizes": "^5.3.2",
     "scrollreveal": "^4.0.9",

@@ -6,6 +6,18 @@ const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 
+// For static page's script linking
+let htmlPageNames = ["about.html", "socials.html", "updates.html"];
+let multipleHtmlPlugins = htmlPageNames.map(name => {
+    return new HtmlWebpackPlugin({
+        template: path.resolve(__dirname, `./src/pages/static/${name}`),
+        filename: `${name}`,
+        inject: "body",
+        minify: false,
+        chunks: ["main"]
+    })
+});
+
 module.exports = {
     // Specify our input (entry) file to be compiled
     entry: {
@@ -85,8 +97,9 @@ module.exports = {
         extensions: [".ts", ".js"],
     },
     optimization: {
+        chunkIds: "total-size",
         splitChunks: {
-            chunks: "all",
+            chunks: "async",
             cacheGroups: {
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
@@ -121,7 +134,7 @@ module.exports = {
                     from: path.resolve(__dirname, "src/assets/videos"),
                     to: "assets/videos",
                     noErrorOnMissing: true,
-                },
+                }
             ],
         }),
         new MiniCssExtractPlugin({
@@ -159,5 +172,5 @@ module.exports = {
                 }
             }
         )
-    ]
+    ].concat(multipleHtmlPlugins)
 };
