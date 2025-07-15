@@ -1,15 +1,176 @@
-import { Template } from '../helper';
+const shuffleLetters = require("shuffle-letters").default;
+// Components
+import { Template } from "../helper";
+import { HeroImageWithLink } from "../components/C_Hero";
+
+// Interfaces
+interface SkillConfig {
+    imageOne: string;
+    imageTwo: string;
+    title: string;
+}
+
+interface HeroConfig {
+    name: string;
+    className: string;
+    link: string;
+    imageSrc: string;
+    srcSet: string;
+}
+
+interface ShuffleElement {
+    selector: string;
+    multiple: boolean;
+}
+
+interface SocialsElement {
+    name: string;
+    icon: string;
+}
 
 class About extends HTMLElement {
+    private readonly heroConfig: HeroConfig = {
+        name: "Derviş Öksüzoğlu",
+        className: "heroLogoBg",
+        link: "",
+        imageSrc: "../assets/images/static/logo.jpg",
+        srcSet: "../assets/images/static/logo_256x256.jpg 256w, ../assets/images/static/logo_512x512.jpg 512w, ../assets/images/static/logo.jpg 1024w"
+    };
+
+    private readonly skillConfigs: SkillConfig[] = [
+        {
+            imageOne: "../assets/images/static/svg/flags/uk.svg",
+            imageTwo: "../assets/images/static/svg/flags/tr.svg",
+            title: "English Teacher"
+        },
+        {
+            imageOne: "../assets/images/static/svg/js.svg",
+            imageTwo: "../assets/images/static/svg/ts.svg",
+            title: "Frontend Developer"
+        }
+    ];
+
+    private readonly shuffleElements: ShuffleElement[] = [
+        { selector: ".aside-title", multiple: false },
+        { selector: ".aside-skill", multiple: true },
+        { selector: ".aside-social-text", multiple: true }
+    ];
+
+    private readonly SocialsElements: SocialsElement[] = [
+        { name: "GitHub", icon: "bi bi-github" },
+        { name: "X/Twitter", icon: "bi bi-twitter-x" },
+        { name: "Hashnode", icon: "bi bi-book" },
+        { name: "E-mail", icon: "bi bi-mailbox" }
+    ]
+
     constructor() {
         super();
+        this.render();
+        this.initializeShuffleEffects();
+    }
+
+    private render(): void {
         const template = new Template().createTemplate(this.renderContent());
         this.appendChild(template.content.cloneNode(true));
     }
 
-    public renderContent(): string {
+    private initializeShuffleEffects(): void {
+        // Case for choosing multiple or singular elements
+        this.shuffleElements.forEach(({ selector, multiple }) => {
+            if (multiple) {
+                document.querySelectorAll(selector).forEach(element => {
+                    shuffleLetters(element);
+                });
+            } else {
+                const element = document.querySelector(selector);
+                if (element) {
+                    shuffleLetters(element);
+                }
+            }
+        });
+    }
+
+    private renderContent(): string {
         return `
-            <h1>Hello</h1>
+            <section id="about-grid" class="container mb-4">
+                <div class="row h-100 d-flex flex-column gap-4">
+                    ${this.renderAside()}
+                    ${this.renderMain()}
+                </div>
+            </section>
+        `;
+    }
+
+    private renderAside(): string {
+        return `
+            <aside id="about-aside" class="col-4 h-100 bg-gradient rounded-5 shadow-sm py-3 px-4">
+                <div>
+                    ${this.renderHeroSection()}
+                    ${this.renderSkillsSection()}
+                    ${this.renderSocials()}
+                </div>
+                <div>
+                </div>
+            </aside>
+        `;
+    }
+
+    private renderMain(): string {
+        return `
+            <section id="about-main" class="col-8 h-100 bg-gradient rounded-5 shadow-sm py-3 px-4">
+                hi
+            </section>
+        `;
+    }
+
+    private renderHeroSection(): string {
+        // I should probably begin to use destructuring with interfaces on importing elements like these
+        // why didn't I define these as another web component is beyond me
+        const { name, className, link, imageSrc, srcSet } = this.heroConfig;
+        return `
+            ${new HeroImageWithLink().render(name, className, link, imageSrc, srcSet)}
+            <div class="pe-none">
+                <h1 class="aside-title fw-medium mt-3 mb-0 text-center">${name}</h1>
+                <hr class="border border-2 border-secondary">
+            </div>
+        `;
+    }
+
+    private renderSkillsSection(): string {
+        return `
+            <div>
+                ${this.skillConfigs.map(skill => this.renderSkill(skill)).join("")}
+                <hr class="border border-2 border-secondary">
+            </div>
+        `;
+    }
+
+    private renderSkill({ imageOne, imageTwo, title }: SkillConfig): string {
+        return `
+            <h2 class="d-flex flex-row align-items-center gap-1 mb-1">
+                <div class="d-flex align-items-center gap-1 px-1 py-1">
+                    <img src="${imageOne}" class="aside-ico img-fluid lazyload rounded-1">
+                    <img src="${imageTwo}" class="aside-ico img-fluid lazyload rounded-1">
+                </div>
+                <span class="aside-skill fs-4">${title}</span>
+            </h2>
+        `;
+    }
+
+    private renderSocials(): string {
+        return `
+            <div class="d-flex flex-row flex-wrap align-items-start justify-content-evenly gap-1">
+                ${this.SocialsElements.map(({ name, icon }) => `
+                    <div class="aside-socials mb-2 rounded-pill shadow-sm flex-grow-1">
+                        <a href="" class="d-flex flex-row align-items-center gap-2 px-2 py-2 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                            <i class="${icon} fs-3 px-1 py-1"></i>
+                            <p class="aside-social-text h6 fw-medium mb-0">${name}</p>
+                            <i class="bi bi-arrow-right fs-4"></i>
+                        </a>
+                    </div>
+                `).join("")}
+            </div>
+            <hr class="border border-2 border-secondary">
         `;
     }
 }

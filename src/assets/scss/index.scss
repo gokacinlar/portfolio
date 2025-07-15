@@ -582,7 +582,6 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         }
     }
 
-
     .te-img-container {
         &>ul>li {
             border: none !important;
@@ -621,6 +620,38 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         width: 142px !important;
         height: 52px !important;
         aspect-ratio: 16 / 9;
+    }
+
+    /***** ABOUT *****/
+    #about-aside,
+    #about-main {
+        background: var(--clr-eight);
+    }
+
+    .aside-socials {
+        color: var(--clr-two);
+        background: var(--clr-one);
+        transition: all .25s ease-in-out;
+
+        &>a>.bi-arrow-right {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-6px);
+        }
+
+        &:hover {
+            &>a>.bi-arrow-right {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(6px);
+            }
+        }
+    }
+
+    .aside-ico {
+        --ico-w: 34px;
+        width: var(--ico-w);
+        height: auto;
     }
 }
 
