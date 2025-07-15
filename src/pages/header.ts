@@ -99,13 +99,11 @@ export class HeaderNode {
                 href="/index.html"
                 ${new HtmxControls(this.htmxOptions[0]).render()}
                 title="Home" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-house-door"></i> Home</a></li>
-            <li><a href="" title="Blog" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-journals"></i> Updates</a>
-            </li><a
+            <li><a href="" title="Blog" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-journals"></i> Updates</a></li>
+            <li><a
                 href="/about.html"
                 ${new HtmxControls(this.htmxOptions[1]).render()}
-                title="About"
-                class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-person-circle"></i> About</a>
-            <li><a href="" title="Socials" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-share-fill"></i> Socials</a></li>
+                title="About" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-person-circle"></i> About</a></li>
         `;
     }
 

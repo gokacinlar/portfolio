@@ -19,7 +19,7 @@ export class HeroImageWithLink {
 
     // Stringify the output
     public toString(): string {
-        return this.render("Derviş Öksüzoğlu", "heroLogoBg", "",
+        return this.render("Derviş Öksüzoğlu", "heroLogoBg", "https://www.github.com/gokacinlar",
             "../assets/images/static/logo.jpg", "../assets/images/static/logo_256x256.jpg 256w, ../assets/images/static/logo_512x512.jpg 512w, ../assets/images/static/logo.jpg 1024w");
     }
 }
