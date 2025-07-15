@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import ScrollReveal from "scrollreveal";
 import { HeroParts } from "./static";
 
@@ -74,11 +75,14 @@ export class DarkLightMode {
 
 // Create a template content to be appended to every Light DOM
 export class Template {
-    public createTemplate(content: any): HTMLTemplateElement {
+    public createTemplate(content: string): HTMLTemplateElement {
+        if (typeof content !== "string" || !content.trim()) {
+            throw new Error("Template content must be a non-empty string");
+        }
+
         const template = document.createElement("template");
-        template.innerHTML = `
-            ${content}
-        `;
+        const sanitizedContent = DOMPurify.sanitize(content);
+        template.innerHTML = sanitizedContent;
         return template;
     }
 }

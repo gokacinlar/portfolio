@@ -35,13 +35,15 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "better-sqlite3": "^12.2.0",
     "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.13.1",
+    "dompurify": "^3.2.6",
     "htmx-ext-class-tools": "^2.0.2",
     "htmx.org": "^2.0.4",
     "lazysizes": "^5.3.2",
     "scrollreveal": "^4.0.9",
-    "sqlite": "^5.1.1",
+    "shuffle-letters": "^1.1.0",
     "vanilla-tilt": "^1.8.1",
     "webpack-node-externals": "^3.0.0"
   }
