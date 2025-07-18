@@ -1,24 +1,20 @@
-import * as Type from "../types";
+interface HtmxOptions {
+    hxget: string;
+    hxtrigger: string;
+    hxswap: string;
+    hxpushurl: string;
+}
 
 export class HtmxControls {
-    private hxget: string;
-    private hxtrigger: string;
-    private hxswap: string;
-    private hxpushurl: string;
-
-    constructor(options: any) {
-        this.hxget = options.hxget;
-        this.hxtrigger = options.hxtrigger;
-        this.hxswap = options.hxswap;
-        this.hxpushurl = options.hxpushurl;
-    }
+    constructor(private options: HtmxOptions) { }
 
     public render(): string {
+        const { hxget, hxtrigger, hxswap, hxpushurl } = this.options;
         return `
-            hx-get="${this.hxget}"
-            hx-trigger="${this.hxtrigger}"
-            hx-swap="${this.hxswap}"
-            hx-push-url="${this.hxpushurl}"
+            hx-get="${hxget}"
+            hx-trigger="${hxtrigger}"
+            hx-swap="${hxswap}"
+            hx-push-url="${hxpushurl}"
         `.trim();
     }
 }
