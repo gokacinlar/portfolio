@@ -61,6 +61,16 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 }
 
+@mixin hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -74,8 +84,8 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
 @layer init, secondary, third;
 
 @layer init {
-    /* htmx related */
 
+    /* htmx related */
     .htmx-anim.faded {
         opacity: .25;
     }
@@ -98,7 +108,8 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     .header-day-night-btn,
     .header-btn-bg-important,
     .hero-btn,
-    .header-responsive-btn {
+    .header-responsive-btn,
+    #aboutFormSubmitBtn {
         color: #1F1F24 !important;
         background: var(--clr-six) !important;
     }
@@ -170,6 +181,12 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         @include borderRadius(var(--rounded-sm));
         @include hide-on($all-desktop-breakpoints);
         @include show-on(phone);
+    }
+
+    #hrBtnt,
+    #hrDayNightBtn,
+    #responsiveMenuToggleBtn {
+        height: 54px !important;
     }
 
     .header-logo {
@@ -392,13 +409,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
                 .promo-featured-tabs {
                     flex-direction: row !important;
                     overflow-x: scroll;
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                    scroll-behavior: smooth;
-
-                    &::-webkit-scrollbar {
-                        display: none;
-                    }
+                    @include hide-scrollbar();
                 }
             }
         }
@@ -414,13 +425,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
                 overflow-x: scroll !important;
                 scroll-snap-type: x mandatory;
                 scroll-padding-left: 0 !important;
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-                scroll-behavior: smooth;
-
-                &::-webkit-scrollbar {
-                    display: none;
-                }
+                @include hide-scrollbar();
             }
         }
     }
@@ -626,6 +631,16 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     #about-aside,
     #about-main {
         background: var(--clr-eight);
+    }
+
+    #about-main {
+        @include hide-scrollbar();
+    }
+
+    .about-li1-text {
+        &>mark {
+            border-radius: var(--rounded-sm);
+        }
     }
 
     .aside-socials {
