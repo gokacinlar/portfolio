@@ -1,7 +1,8 @@
 const shuffleLetters = require("shuffle-letters").default;
 // Components
-import { Template } from "../helper";
+import { Template, HorizontalMiddleMouseScroll } from "../helper";
 import { HeroImageWithLink } from "../components/C_Hero";
+import ScrollSpy from "../components/A_ScrollSpy";
 
 // Interfaces
 interface SkillConfig {
@@ -29,6 +30,13 @@ interface SocialsElement {
 }
 
 class About extends HTMLElement {
+    constructor() {
+        super();
+        this.render();
+        this.initializeShuffleEffects();
+        new HorizontalMiddleMouseScroll().hmmsScroll(".scrollspy-nav");
+    }
+
     private readonly heroConfig: HeroConfig = {
         name: "Derviş Öksüzoğlu",
         className: "heroLogoBg",
@@ -53,7 +61,7 @@ class About extends HTMLElement {
     private readonly shuffleElements: ShuffleElement[] = [
         { selector: ".aside-title", multiple: false },
         { selector: ".aside-skill", multiple: true },
-        { selector: ".aside-social-text", multiple: true }
+        { selector: ".aside-social-text", multiple: true },
     ];
 
     private readonly SocialsElements: SocialsElement[] = [
@@ -62,12 +70,6 @@ class About extends HTMLElement {
         { name: "Hashnode", icon: "bi bi-book" },
         { name: "E-mail", icon: "bi bi-mailbox" }
     ]
-
-    constructor() {
-        super();
-        this.render();
-        this.initializeShuffleEffects();
-    }
 
     private render(): void {
         const template = new Template().createTemplate(this.renderContent());
@@ -108,6 +110,7 @@ class About extends HTMLElement {
                     ${this.renderHeroSection()}
                     ${this.renderSkillsSection()}
                     ${this.renderSocials()}
+                    ${this.renderMotto()}
                 </div>
                 <div>
                 </div>
@@ -117,8 +120,8 @@ class About extends HTMLElement {
 
     private renderMain(): string {
         return `
-            <section id="about-main" class="col-8 h-100 bg-gradient rounded-5 shadow-sm py-3 px-4">
-                hi
+            <section id="about-main" class="col-8 h-100 bg-gradient rounded-5 shadow-sm py-3 px-3 overflow-scroll">
+                ${new ScrollSpy().render()}
             </section>
         `;
     }
@@ -171,6 +174,14 @@ class About extends HTMLElement {
                 `).join("")}
             </div>
             <hr class="border border-2 border-secondary">
+        `;
+    }
+
+    private renderMotto(): string {
+        return `
+            <blockquote class="blockquote text-center mt-auto mb-auto">
+                <p><em>Teaching for <strong>life</strong>, coding for <strong>passion</strong>.</em></p>
+            </blockquote>
         `;
     }
 }
