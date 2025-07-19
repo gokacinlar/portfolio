@@ -20,5 +20,14 @@ export type PromoSocials = {
 }
 
 export type HTMXOptions = {
-    [key: string]: string;
+    hxget: string;
+    hxtrigger: string;
+    hxswap: string;
+    hxpushurl: string;
+}
+
+export type Education = {
+    institution: string;
+    field: string;
+    degree: string;
 }
