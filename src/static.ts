@@ -1,5 +1,10 @@
+interface Principle {
+    title: string;
+    description: string;
+}
+
 export class BodyParts {
-    public mottos: Array<string> = [
+    public readonly mottos: Array<string> = [
         "Progressive",
         "Problem-solving",
         "Realistic",
@@ -10,7 +15,7 @@ export class BodyParts {
 }
 
 export class HeroParts {
-    public occupationsData: Array<string> = [
+    public readonly occupationsData: Array<string> = [
         "English Teacher",
         "Front-end Developer",
         "React Developer",
@@ -18,27 +23,8 @@ export class HeroParts {
     ]
 }
 
-interface Principle {
-    title: string;
-    description: string;
-}
-
 export class PromoParts {
-    /*
-    public marqueeElements: Array<{ title: string; imgSrc: string, href: string }> = [
-        { title: "JavaScript", imgSrc: "./assets/images/static/svg/js.svg", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
-        { title: "TypeScript", imgSrc: "./assets/images/static/svg/ts.svg", href: "https://www.typescriptlang.org/" },
-        { title: "ReactJS", imgSrc: "./assets/images/static/svg/react.svg", href: "https://react.dev/" },
-        { title: "PHP", imgSrc: "./assets/images/static/svg/php.svg", href: "https://www.php.net/" },
-        { title: "WordPress", imgSrc: "./assets/images/static/svg/wp.svg", href: "https://wordpress.com/" },
-        { title: "MySQL", imgSrc: "./assets/images/static/svg/mysql.svg", href: "https://www.mysql.com/" },
-        { title: "PostgreSQL", imgSrc: "./assets/images/static/svg/postgrsql.svg", href: "https://www.postgresql.org/" },
-        { title: "SQLite", imgSrc: "./assets/images/static/svg/sqlite.svg", href: "https://www.sqlite.org/" },
-        { title: "Python", imgSrc: "./assets/images/static/svg/py.svg", href: "https://www.python.org/" }
-    ];
-    */
-
-    public promoTabData: any = {
+    public readonly promoTabData: any = {
         PS: {
             iconData: "bi bi-stack",
             desc: "I strive to implement solutions to various problems we encounter at anywhere extending from work to casual life."
@@ -57,7 +43,7 @@ export class PromoParts {
         }
     }
 
-    public principles: Principle[] = [
+    public readonly principles: Principle[] = [
         {
             title: "Contextual immersion",
             description: "I integrate real-world scenarios, like role-playing daily conversations or analyzing various texts depending on our topic in classroom, to make English relevant and engaging for students."
@@ -98,4 +84,54 @@ export class FooterLinks {
         cc010: "https://creativecommons.org/publicdomain/zero/1.0/",
         notByAi: "https://notbyai.fyi/"
     }
+}
+
+export class AboutData {
+    public readonly tableData = [
+        {
+            category: "Front-end",
+            technologies: "JavaScript (ES6+), TypeScript",
+            libraries: "React, Redux"
+        },
+        {
+            category: "Back-end",
+            technologies: "PHP(7+), Node.js, Express.js",
+            libraries: "Laravel"
+        },
+        {
+            category: "Styling",
+            technologies: "Bootstrap (+derivatives), SASS, Tailwind CSS, Material UI",
+            libraries: "Shadcn, DaisyUI"
+        },
+        {
+            category: "Databases",
+            technologies: "MySQL, SQLite, PostgreSQL",
+            libraries: "-"
+        },
+        {
+            category: "DevOps",
+            technologies: "Apache, Docker, Linux (WSL + Native)",
+            libraries: "-"
+        },
+        {
+            category: "CMS",
+            technologies: "Wordpress, Headless Wordpress",
+            libraries: "-"
+        },
+        {
+            category: "Tools",
+            technologies: "Git, Webpack",
+            libraries: "-"
+        },
+        {
+            category: "Testing",
+            technologies: "Mocha, Jest",
+            libraries: "-"
+        },
+        {
+            category: "Design & UX",
+            technologies: "Figma, Adobe Illustrator, Adobe Photoshop",
+            libraries: "-"
+        }
+    ];
 }
