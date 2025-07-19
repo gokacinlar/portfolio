@@ -1,6 +1,8 @@
 import DOMPurify from "dompurify";
 import ScrollReveal from "scrollreveal";
+import isEmail from "validator/lib/isEmail";
 import { HeroParts } from "./static";
+import * as Type from "./types";
 
 // Detecting dark/light mode
 export class DarkLightMode {
@@ -330,5 +332,24 @@ export class ScrollRevealAction {
         for (const id of classes) {
             ScrollReveal().reveal(`.${id}`), { delay: 10000 };
         }
+    }
+}
+
+export function formatDate(date: Date): String {
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })
+};
+
+export function validateEmail(emailString: string): boolean {
+    const eMailInput = document.querySelector(`${emailString}`) as HTMLInputElement | null;
+
+    if (!eMailInput) {
+        console.warn(`Element not found for selector: ${emailString}`);
+        return false;
+    }
+
+    if (eMailInput.value && isEmail(eMailInput.value)) {
+        return true;
+    } else {
+        return false;
     }
 }
