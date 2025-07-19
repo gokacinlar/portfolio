@@ -1,4 +1,4 @@
-interface HtmxOptions {
+interface HTMXOptions {
     hxget: string;
     hxtrigger: string;
     hxswap: string;
@@ -6,7 +6,7 @@ interface HtmxOptions {
 }
 
 export class HtmxControls {
-    constructor(private options: HtmxOptions) { }
+    constructor(private options: HTMXOptions) { }
 
     public render(): string {
         const { hxget, hxtrigger, hxswap, hxpushurl } = this.options;
