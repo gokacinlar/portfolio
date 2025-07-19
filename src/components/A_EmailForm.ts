@@ -8,7 +8,7 @@ class EmailForm {
                     <input type="hidden" name="from_name" value="https://dervisoksuzoglu.com.tr">
                     <input type="checkbox" name="botcheck" class="d-none">
                 </div>
-                <table class="table table-bordered align-middle">
+                <table class="table table-bordered align-middle table-responsive">
                     <tbody>
                         <tr>
                             <th scope="row">

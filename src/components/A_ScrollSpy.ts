@@ -29,7 +29,7 @@ class ScrollSpy {
     public render(): string {
         return `
             <section id="aside-content" class="d-flex flex-column gap-4">
-                <div id="about-scroll-spy-id" class="sticky-top scrollspy-nav list-group d-flex flex-row align-items-center justify-content-between fs-4 fw-medium gap-2 text-truncate">
+                <div id="about-scroll-spy-id" class="z-0 sticky-top scrollspy-nav list-group d-flex flex-row align-items-center justify-content-between fs-4 fw-medium gap-2 text-truncate">
                     <a class="list-group-item list-group-item-action rounded-pill shadow-sm" href="#li-1">🧑 About Me</a>
                     <a class="list-group-item list-group-item-action rounded-pill shadow-sm" href="#li-2">📚 Education</a>
                     <a class="list-group-item list-group-item-action rounded-pill shadow-sm" href="#li-3">📠 Work</a>
@@ -51,7 +51,7 @@ class ScrollSpy {
                     </div>
                     <h4 id="li-2">📚 Education</h4>
                     <hr class="w-25">
-                    <div>
+                    <div class="table-responsive">
                         <table id="eduTable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
@@ -83,62 +83,64 @@ class ScrollSpy {
                     <h4 id="li-4">🚀 Tech Stack & Tools</h4>
                     <hr class="w-25">
                     <div>
-                        <table id="stackTable" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Category</th>
-                                    <th>Technologies</th>
-                                    <th>Libraries</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Front-end</td>
-                                    <td>JavaScript (ES6+), TypeScript</td>
-                                    <td>React, Redux</td>
-                                </tr>
-                                <tr>
-                                    <td>Back-end</td>
-                                    <td>PHP(7+), Node.js, Express.js</td>
-                                    <td>Laravel</td>
-                                </tr>
-                                <tr>
-                                    <td>Styling</td>
-                                    <td>Bootstrap (+derivatives), SASS, Tailwind CSS, Material UI</td>
-                                    <td>Shadcn, DaisyUI</td>
-                                </tr>
-                                <tr>
-                                    <td>Databases</td>
-                                    <td>MySQL, SQLite, PostgreSQL</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>DevOps</td>
-                                    <td>Apache, Docker, Linux (WSL + Native)</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>CMS</td>
-                                    <td>Wordpress, Headless Wordpress</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>Tools</td>
-                                    <td>Git, Webpack</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>Testing</td>
-                                    <td>Mocha, Jest</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>Design & UX</td>
-                                    <td>Figma, Adobe Illustrator, Adobe Photoshop</td>
-                                    <td>-</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="stackTable" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Technologies</th>
+                                        <th>Libraries</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Front-end</td>
+                                        <td>JavaScript (ES6+), TypeScript</td>
+                                        <td>React, Redux</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Back-end</td>
+                                        <td>PHP(7+), Node.js, Express.js</td>
+                                        <td>Laravel</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Styling</td>
+                                        <td>Bootstrap (+derivatives), SASS, Tailwind CSS, Material UI</td>
+                                        <td>Shadcn, DaisyUI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Databases</td>
+                                        <td>MySQL, SQLite, PostgreSQL</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DevOps</td>
+                                        <td>Apache, Docker, Linux (WSL + Native)</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CMS</td>
+                                        <td>Wordpress, Headless Wordpress</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tools</td>
+                                        <td>Git, Webpack</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Testing</td>
+                                        <td>Mocha, Jest</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Design & UX</td>
+                                        <td>Figma, Adobe Illustrator, Adobe Photoshop</td>
+                                        <td>-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <h4 id="li-5">📧 E-mail</h4>
                     <hr class="w-25">

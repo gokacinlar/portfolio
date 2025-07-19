@@ -145,8 +145,9 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
 
     #headerRM {
         position: absolute;
-        inset-inline-end: 2px;
-        inset-block-start: 62px;
+        z-index: 999 !important;
+        inset-inline-end: 0;
+        inset-block-start: 6px;
         background: var(--bs-body-color) !important;
         animation: tilt-in-right-1 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
@@ -183,14 +184,15 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         @include show-on(phone);
     }
 
-    #hrBtnt,
+    #hrBtn,
     #hrDayNightBtn,
     #responsiveMenuToggleBtn {
         height: 54px !important;
     }
 
     .header-logo {
-        width: 64px;
+        --icon-w: 54px;
+        width: var(--icon-w);
         height: auto;
         object-fit: cover;
         border: 3px solid var(--clr-two);
@@ -635,6 +637,53 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
 
     #about-main {
         @include hide-scrollbar();
+    }
+
+    #about-scroll-spy-id {
+        @each $bp in $mobile-breakpoints {
+            @include m_queries.responsive($bp) {
+                align-items: unset !important;
+                justify-content: unset !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                overflow-x: scroll !important;
+                scroll-snap-type: x mandatory;
+                scroll-padding-left: 0 !important;
+            }
+        }
+    }
+
+    #about-grid-parent {
+        height: 100dvh !important;
+        margin-bottom: 2.75rem !important;
+
+        @each $bp in $mobile-breakpoints {
+            @include m_queries.responsive($bp) {
+                height: auto !important;
+                flex-direction: column !important;
+                padding-left: .55rem !important;
+                padding-right: .55rem !important;
+                margin-bottom: .25rem !important;
+                gap: .05rem !important;
+            }
+        }
+
+        @each $bp in $tablet-breakpoints {
+            @include m_queries.responsive($bp) {
+                height: 100dvh !important;
+                flex-direction: row !important;
+                gap: .50rem !important;
+                margin-bottom: .50rem !important;
+            }
+        }
+
+        &>#about-aside {
+            @each $bp in $mobile-breakpoints {
+                @include m_queries.responsive($bp) {
+                    height: fit-content !important;
+                }
+            }
+        }
     }
 
     .about-li1-text {

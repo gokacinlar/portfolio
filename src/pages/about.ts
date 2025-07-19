@@ -95,7 +95,7 @@ class About extends HTMLElement {
     private renderContent(): string {
         return `
             <section id="about-grid" class="container mb-4">
-                <div class="row h-100 d-flex flex-column gap-4">
+                <div id="about-grid-parent" class="row gy-4 d-flex flex-row flex-nowrap gap-4">
                     ${this.renderAside()}
                     ${this.renderMain()}
                 </div>
@@ -105,14 +105,12 @@ class About extends HTMLElement {
 
     private renderAside(): string {
         return `
-            <aside id="about-aside" class="col-4 h-100 bg-gradient rounded-5 shadow-sm py-3 px-4">
+            <aside id="about-aside" class="col-12 col-md-4 h-100 bg-gradient rounded-5 shadow-sm py-3 px-4">
                 <div>
                     ${this.renderHeroSection()}
                     ${this.renderSkillsSection()}
                     ${this.renderSocials()}
                     ${this.renderMotto()}
-                </div>
-                <div>
                 </div>
             </aside>
         `;
@@ -120,7 +118,7 @@ class About extends HTMLElement {
 
     private renderMain(): string {
         return `
-            <section id="about-main" class="col-8 h-100 bg-gradient rounded-5 shadow-sm py-3 px-3 overflow-scroll">
+            <section id="about-main" class="col-12 col-md-8 h-100 bg-gradient rounded-5 shadow-sm py-3 px-3 overflow-scroll">
                 ${new ScrollSpy().render()}
             </section>
         `;
