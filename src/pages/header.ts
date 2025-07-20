@@ -79,46 +79,46 @@ export class HeaderNode {
         `;
     }
 
+    // All the HTMX attributes will go here
+    private defaultHtmxOptions: Type.HTMXOptions = {
+        hxget: "",
+        hxtrigger: "click",
+        hxswap: "innerHTML",
+        hxpushurl: "true",
+    };
+
     private navLinks: NavLink[] = [
         {
             href: "/index.html",
             title: "Home",
             icon: "bi bi-house-door",
-            htmxOptions: {
-                hxget: "/index.html",
-                hxtrigger: "click",
-                hxswap: "innerHTML",
-                hxpushurl: "true",
-            },
+            htmxOptions: { ...this.defaultHtmxOptions, hxget: "/index.html" },
         },
         {
             href: "",
             title: "Blog",
             icon: "bi bi-journals",
+            // No htmxOptions for Blog
         },
         {
             href: "/about.html",
             title: "About",
             icon: "bi bi-person-circle",
-            htmxOptions: {
-                hxget: "/about.html",
-                hxtrigger: "click",
-                hxswap: "innerHTML",
-                hxpushurl: "true",
-            },
+            htmxOptions: { ...this.defaultHtmxOptions, hxget: "/about.html" },
         },
     ];
 
+    // Avoid the undefined type error with ??
+    // I've used ternary operator but this is better I guess
     public headerMiddleContent(): string {
         return this.navLinks
             .map(({ href, title, icon, htmxOptions }) => `
                 <li>
                     <a
                         href="${href}"
-                        ${htmxOptions ? new HtmxControls(htmxOptions).render() : ""}
+                        ${new HtmxControls(htmxOptions ?? this.defaultHtmxOptions).render()}
                         title="${title}"
-                      class="btn header-btn-bg btn-lg rounded-5 fs-4"
-                    >
+                        class="btn header-btn-bg btn-lg rounded-5 fs-4">
                         <i class="bi ${icon}"></i> ${title}
                     </a>
                 </li>
