@@ -18,6 +18,13 @@ class Header extends HTMLElement {
     }
 }
 
+interface NavLink {
+    href: string;
+    title: string;
+    icon: string;
+    htmxOptions?: Type.HTMXOptions;
+}
+
 export class HeaderNode {
     public headerItself(): string {
         return `
@@ -72,39 +79,50 @@ export class HeaderNode {
         `;
     }
 
-    private htmxOptions: Type.HTMXOptions[] = [
+    private navLinks: NavLink[] = [
         {
-            hxget: "/index.html",
-            hxtrigger: "click",
-            hxswap: "innerHTML",
-            hxpushurl: "true",
+            href: "/index.html",
+            title: "Home",
+            icon: "bi bi-house-door",
+            htmxOptions: {
+                hxget: "/index.html",
+                hxtrigger: "click",
+                hxswap: "innerHTML",
+                hxpushurl: "true",
+            },
         },
         {
-            hxget: "/about.html",
-            hxtrigger: "click",
-            hxswap: "innerHTML",
-            hxpushurl: "true",
+            href: "",
+            title: "Blog",
+            icon: "bi bi-journals",
         },
         {
-            hxget: "/index.html",
-            hxtrigger: "click",
-            hxswap: "innerHTML",
-            hxpushurl: "true",
+            href: "/about.html",
+            title: "About",
+            icon: "bi bi-person-circle",
+            htmxOptions: {
+                hxget: "/about.html",
+                hxtrigger: "click",
+                hxswap: "innerHTML",
+                hxpushurl: "true",
+            },
         },
     ];
 
     public headerMiddleContent(): string {
-        return `
-            <li><a
-                href="/index.html"
-                ${new HtmxControls(this.htmxOptions[0]).render()}
-                title="Home" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-house-door"></i> Home</a></li>
-            <li><a href="" title="Blog" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-journals"></i> Updates</a></li>
-            <li><a
-                href="/about.html"
-                ${new HtmxControls(this.htmxOptions[1]).render()}
-                title="About" class="btn header-btn-bg btn-lg rounded-5 fs-4"><i class="bi bi-person-circle"></i> About</a></li>
-        `;
+        return this.navLinks
+            .map(({ href, title, icon, htmxOptions }) => `
+                <li>
+                    <a
+                        href="${href}"
+                        ${htmxOptions ? new HtmxControls(htmxOptions).render() : ""}
+                        title="${title}"
+                      class="btn header-btn-bg btn-lg rounded-5 fs-4"
+                    >
+                        <i class="bi ${icon}"></i> ${title}
+                    </a>
+                </li>
+                `).join("");
     }
 
     private headerRight(): string {
