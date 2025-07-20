@@ -21,6 +21,10 @@
     "checkJs": false,
     "removeComments": true
   },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
   "include": [
     "src"
   ],

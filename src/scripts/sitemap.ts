@@ -1,0 +1,40 @@
+#!/usr/bin/env tsx
+import fs from "fs";
+import path from "path";
+import { SitemapStream, streamToPromise } from "sitemap";
+
+let siteName: string = "https://dervisoksuzoglu.com.tr";
+async function applySiteMap() {
+    // Create empty XML file to be manipulated
+    const outputPath = path.resolve(__dirname, "../../public/sitemap.xml");
+    const sitemap = new SitemapStream({
+        hostname: siteName
+    });
+    // Define URLs to be crawled to be represented in XML format
+    // These should locate the domain url, not the files in the project
+    const urls = [
+        { url: "/index.html", changefreq: "daily", priority: 1.0 },
+        { url: "/about.html", changefreq: "monthly", priority: 0.8 }
+    ];
+
+    urls.forEach((url: Object) => {
+        sitemap.write(url)
+    });
+
+    sitemap.end();
+
+    // Actual buffer manipulation
+    try {
+        // Convert stream to buffer
+        const buffer = await streamToPromise(sitemap);
+        const stringifiedBuffer = buffer.toString("utf-8");
+
+        // Write stringified buffer to file
+        fs.writeFileSync(outputPath, stringifiedBuffer);
+        return stringifiedBuffer;
+    } catch (error: unknown) {
+        console.error("Failed to generate sitemap:", error);
+    }
+}
+
+applySiteMap();
