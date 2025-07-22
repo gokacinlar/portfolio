@@ -21,7 +21,7 @@ let multipleHtmlPlugins = htmlPageNames.map(name => {
 // Web3forms connections
 let web3FormConnections = ["https://web3forms.com/client/script.js", "https://api.web3forms.com/submit"];
 // Footer images
-let imageConnections = ["https://creativecommons.org/publicdomain/zero/1.0/", "https://notbyai.fyi/"];
+let imageConnections = ["https://creativecommons.org/publicdomain/zero/1.0/", "https://notbyai.fyi/", "https://raw.githubusercontent.com"];
 
 module.exports = {
     // Specify our input (entry) file to be compiled
