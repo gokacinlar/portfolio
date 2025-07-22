@@ -62,12 +62,12 @@ export class PromoDescription {
 export class PromoSkillsShowCase {
     public renderPromoSkillsShowCase(data: Type.PromoSkills): string {
         return `
-            <figure class="promo-skills-fig figure d-flex flex-column justify-content-between">
+            <figure class="promo-skills-fig figure d-flex flex-column align-items-center justify-content-around">
                 <a href="${data.skillAnchor}" target="_blank">
                     <img src="${data.skillLogoSrc}" alt="${data.skillName}" title="${data.skillName}"
                     class="promo-skills-img figure-img rounded-4 lazyload">
                 </a>
-                <figcaption class="figure-caption text-center fs-4 mt-auto">${data.skillName}</figcaption>
+                <figcaption class="figure-caption text-center fs-4 ">${data.skillName}</figcaption>
             </figure>
         `;
     }

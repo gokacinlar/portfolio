@@ -511,7 +511,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 
     .promo-skills-img {
-        --def-wh: 128px !important;
+        --def-wh: 100px !important;
         min-height: var(--def-wh);
         max-width: var(--def-wh);
     }
