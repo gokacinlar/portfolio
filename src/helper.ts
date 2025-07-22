@@ -1,8 +1,9 @@
 import DOMPurify from "dompurify";
 import ScrollReveal from "scrollreveal";
 import isEmail from "validator/lib/isEmail";
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css"
 import { HeroParts } from "./static";
-import * as Type from "./types";
 
 // Detecting dark/light mode
 export class DarkLightMode {
@@ -16,9 +17,8 @@ export class DarkLightMode {
     }
 
     private initialize(): void {
-        // Set initial page theme
+        this.loadThemeFromStorage();
         this.applyTheme();
-        // Listen for system theme changes (light/dark mode switching)
         this.mediaQuery.addEventListener("change", this.handleSystemThemeChange.bind(this));
     }
 
@@ -27,6 +27,45 @@ export class DarkLightMode {
             this.applyTheme();
             this.updateIcon();
         }
+    }
+
+    private loadThemeFromStorage(): void {
+        try {
+            const savedTheme = localStorage.getItem("userThemePreference");
+            const options: Array<string> = ["dark", "light", "auto"];
+            if (savedTheme && options.includes(savedTheme)) {
+                this.currentTheme = savedTheme as "dark" | "light" | "auto";
+            }
+        } catch (error: unknown) {
+            throw new Error("Could not load theme from localStorage.");
+        }
+    }
+
+    private saveThemeToStorage(val: string): void {
+        try {
+            localStorage.setItem("userThemePreference", val);
+        } catch (error: unknown) {
+            throw new Error("Could not save theme to localStorage");
+        }
+    }
+
+    private readonly toastConfig = {
+        duration: 2500,
+        newWindow: true,
+        close: true,
+        gravity: "bottom" as const,
+        position: "right" as const,
+        stopOnFocus: true,
+        style: {
+            background: "#0f3d75",
+        },
+    } as const;
+
+    private notifyUserAboutThemeChange(): void {
+        Toastify({
+            ...this.toastConfig,
+            text: `Saved your theme: ${this.currentTheme}`,
+        }).showToast();
     }
 
     // Dark-light mode switching happens here
@@ -46,10 +85,11 @@ export class DarkLightMode {
     }
 
     private updateIcon(): void {
-        if (!this.iconElement) return;
+        if (!this.iconElement) {
+            return;
+        }
 
         const effectiveTheme = this.getEffectiveTheme();
-
         if (effectiveTheme === "dark") {
             this.iconElement.classList.remove("bi-sun");
             this.iconElement.classList.add("bi-moon-stars");
@@ -69,6 +109,8 @@ export class DarkLightMode {
             const currentEffectiveTheme = this.getEffectiveTheme();
             this.currentTheme = currentEffectiveTheme === "dark" ? "light" : "dark";
 
+            this.notifyUserAboutThemeChange();
+            this.saveThemeToStorage(this.currentTheme);
             this.applyTheme();
             this.updateIcon();
         });
