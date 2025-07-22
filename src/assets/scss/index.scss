@@ -71,6 +71,12 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 }
 
+@mixin gradient-inset-box-shadow {
+    box-shadow:
+        inset 30px 0 30px -20px rgba(0, 0, 0, 0.05),
+        inset -30px 0 30px -20px rgba(0, 0, 0, 0.05);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -286,10 +292,12 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
 
                 #mottosSection {
                     padding-bottom: .55em !important;
+                }
 
-                    &>.motto-element {
-                        margin-bottom: .15em !important;
-                    }
+                .motto-element {
+                    font-size: .25em !important;
+                    font-weight: 400 !important;
+                    margin-bottom: .15em !important;
                 }
             }
         }
@@ -468,13 +476,19 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         }
     }
 
+    .psc-container {
+        width: 100%;
+        background: var(--clr-eight);
+        @include gradient-inset-box-shadow;
+    }
+
     #promoSkillsContainer {
         width: 100%;
         white-space: nowrap;
 
         @each $bp in $mobile-breakpoints {
             @include m_queries.responsive($bp) {
-                animation: marquee 20s linear infinite;
+                animation: marquee 30s linear infinite;
 
                 &:hover {
                     animation-play-state: paused;
@@ -500,7 +514,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     .promo-skills-fig {
         flex: 0 0 auto;
         min-height: 16.1ch !important;
-        width: 128px;
+        width: 100px;
         height: auto;
         object-fit: cover;
         filter: brightness(65%) grayscale(25%);
@@ -521,11 +535,14 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         background: var(--clr-two);
         width: 34ch;
         height: 34ch;
-        @include borderRadius(var(--rounded-sm));
-    }
-
-    #promoCard {
         min-height: 375px;
+        @include borderRadius(var(--rounded-sm));
+
+        @each $bp in $mobile-breakpoints {
+            @include m_queries.responsive($bp) {
+                width: 27ch !important;
+            }
+        }
     }
 
     #promoLink {
@@ -576,8 +593,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         }
     }
 
-    // Teaching Section
-
+    /* Teaching Section */
     #promoTE {
         @each $bp in $all-mobile-tablet-breakpoints {
             @include m_queries.responsive($bp) {
@@ -585,6 +601,33 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
                 flex-direction: column !important;
                 margin-top: 0 !important;
                 padding: .25em !important;
+                font-size: smaller !important;
+            }
+        }
+
+        &>div>.pt-head>p.h1 {
+            @each $bp in $mobile-breakpoints {
+                @include m_queries.responsive($bp) {
+                    font-size: 1.85em !important;
+                    line-height: 1.45em !important;
+                }
+            }
+        }
+
+        &>div>.pt-head>p {
+            @each $bp in $mobile-breakpoints {
+                @include m_queries.responsive($bp) {
+                    font-size: 1.65em !important;
+                    line-height: 1.35em !important;
+                }
+            }
+        }
+
+        &>.te-img-container {
+            @each $bp in $mobile-breakpoints {
+                @include m_queries.responsive($bp) {
+                    display: none !important;
+                }
             }
         }
     }

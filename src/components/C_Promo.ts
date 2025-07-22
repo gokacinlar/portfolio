@@ -46,7 +46,7 @@ export class PromoDescription {
     public renderTabGroupBtn(btnText: string, dataType: string): string {
         return `
             <button class="promo-desc-tab-group-btn btn btn-lg fs-1 d-flex flex-row align-items-center justify-items-start" data-type="${dataType}">
-                <span>
+                <span style="width: 64px">
                     <div class="progress p-vertical rounded-0">
                         <div class="progress-bar bg-warning progress-bar-animated" role="progressbar"></div>
                     </div>
@@ -62,7 +62,7 @@ export class PromoDescription {
 export class PromoSkillsShowCase {
     public renderPromoSkillsShowCase(data: Type.PromoSkills): string {
         return `
-            <figure class="promo-skills-fig figure d-flex flex-column align-items-center justify-content-around">
+            <figure class="promo-skills-fig figure d-flex flex-column align-items-center justify-content-center mb-0">
                 <a href="${data.skillAnchor}" target="_blank">
                     <img src="${data.skillLogoSrc}" alt="${data.skillName}" title="${data.skillName}"
                     class="promo-skills-img figure-img rounded-4 lazyload">
@@ -105,7 +105,7 @@ export class PromoTeachEnglish {
     public render(): string {
         return `
             <div class="col-sm">
-                <div>
+                <div class="pt-head">
                     <p class="h1">My main profession is being an
                         <span class="mark rounded-4">English Teacher!</span></p>
                     <hr class="w-25">
