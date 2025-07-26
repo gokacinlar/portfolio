@@ -19,9 +19,12 @@ let multipleHtmlPlugins = htmlPageNames.map(name => {
 });
 
 // Web3forms connections
-let web3FormConnections = ["https://web3forms.com/client/script.js", "https://api.web3forms.com/submit"];
+let scripts = ["https://web3forms.com/client/script.js",
+    "https://api.web3forms.com/submit"];
 // Footer images
-let imageConnections = ["https://creativecommons.org/publicdomain/zero/1.0/", "https://notbyai.fyi/", "https://raw.githubusercontent.com"];
+let imageConnections = ["https://creativecommons.org/publicdomain/zero/1.0/",
+    "https://notbyai.fyi/",
+    "https://raw.githubusercontent.com"];
 
 module.exports = {
     // Specify our input (entry) file to be compiled
@@ -157,7 +160,7 @@ module.exports = {
             {
                 "base-uri": ["'self'"],
                 "object-src": ["'none'"],
-                "script-src": ["'self'", ...web3FormConnections],
+                "script-src": ["'self'", ...scripts],
                 "style-src": ["'self'"],
                 "img-src": ["'self'", "data:", ...imageConnections],
                 "font-src": ["'self'", "https:", "data:"],
