@@ -15,6 +15,7 @@ import "./pages/footer";
 import "./pages/hero";
 import "./pages/promo";
 import "./pages/about";
+import "./pages/blog";
 
 class HomePage extends HTMLElement {
     constructor() {
