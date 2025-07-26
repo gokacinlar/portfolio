@@ -77,6 +77,30 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         inset -30px 0 30px -20px rgba(0, 0, 0, 0.05);
 }
 
+@mixin apply-to-selectors($selectors, $rules) {
+    @each $selector in $selectors {
+        #{$selector} {
+            @content;
+        }
+    }
+}
+
+@mixin responsive-flex-direction($breakpoints, $direction) {
+    @each $bp in $breakpoints {
+        @include m_queries.responsive($bp) {
+            flex-direction: $direction !important;
+        }
+    }
+}
+
+@mixin responsive-spacing($breakpoints, $property, $value) {
+    @each $bp in $breakpoints {
+        @include m_queries.responsive($bp) {
+            #{$property}: $value !important;
+        }
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -120,10 +144,8 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         background: var(--clr-six) !important;
     }
 
-    .header-btn-bg-important {
-        &>span {
-            @include hide-on($mobile-breakpoints);
-        }
+    .header-btn-bg-important>span {
+        @include hide-on($mobile-breakpoints);
     }
 
     .hr-btn-text {
@@ -203,7 +225,6 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         object-fit: cover;
         border: 3px solid var(--clr-two);
         @include borderRadius(50%);
-
         @include responsive-font-size($mobile-breakpoints, 54px);
         @include show-on(desktop);
     }
@@ -248,9 +269,11 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 
     .hero-child {
+        @include responsive-flex-direction($all-mobile-tablet-breakpoints, column-reverse);
+        @include responsive-flex-direction($all-desktop-breakpoints, row);
+
         @each $bp in $all-mobile-tablet-breakpoints {
             @include m_queries.responsive($bp) {
-                flex-direction: column-reverse !important;
                 padding: .75em !important;
 
                 #hero {
@@ -299,12 +322,6 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
                     font-weight: 400 !important;
                     margin-bottom: .15em !important;
                 }
-            }
-        }
-
-        @each $bp in $all-desktop-breakpoints {
-            @include m_queries.responsive($bp) {
-                flex-direction: row;
             }
         }
     }
@@ -387,24 +404,10 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 
     .promo-videos-container {
-        @each $bp in $mobile-breakpoints {
-            @include m_queries.responsive($bp) {
-                flex-direction: column !important;
-                gap: .55rem !important;
-            }
-        }
-
-        @each $bp in $tablet-breakpoints {
-            @include m_queries.responsive($bp) {
-                flex-direction: row !important;
-            }
-        }
-
-        @each $bp in $all-desktop-breakpoints {
-            @include m_queries.responsive($bp) {
-                flex-direction: row;
-            }
-        }
+        @include responsive-flex-direction($mobile-breakpoints, column);
+        @include responsive-flex-direction($tablet-breakpoints, row);
+        @include responsive-flex-direction($all-desktop-breakpoints, row);
+        gap: .55rem !important;
     }
 
     #promo_Description {
@@ -441,12 +444,8 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 
     #promoCardContainer {
-        @each $bp in $mobile-breakpoints {
-            @include m_queries.responsive($bp) {
-                flex-direction: row !important;
-                flex-wrap: nowrap !important;
-            }
-        }
+        @include responsive-flex-direction($mobile-breakpoints, row);
+        flex-wrap: nowrap !important;
 
         &>div {
             @each $bp in $mobile-breakpoints {
@@ -606,40 +605,36 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         }
 
         &>div>.pt-head>p.h1 {
+            @include responsive-font-size($mobile-breakpoints, 1.85em);
+
             @each $bp in $mobile-breakpoints {
                 @include m_queries.responsive($bp) {
-                    font-size: 1.85em !important;
                     line-height: 1.45em !important;
                 }
             }
         }
 
         &>div>.pt-head>p {
+            @include responsive-font-size($mobile-breakpoints, 1.65em);
+
             @each $bp in $mobile-breakpoints {
                 @include m_queries.responsive($bp) {
-                    font-size: 1.65em !important;
                     line-height: 1.35em !important;
                 }
             }
         }
 
         &>.te-img-container {
-            @each $bp in $mobile-breakpoints {
-                @include m_queries.responsive($bp) {
-                    display: none !important;
-                }
-            }
+            @include hide-on($mobile-breakpoints);
         }
     }
 
-    .te-img-container {
-        &>ul>li {
-            border: none !important;
-        }
+    .te-img-container>ul>li {
+        border: none !important;
+    }
 
-        &>ul>li>img {
-            width: 128px;
-        }
+    .te-img-container>ul>li>img {
+        width: 128px;
     }
 
     // Footer
@@ -721,26 +716,16 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         }
 
         &>#about-aside {
-            @each $bp in $mobile-breakpoints {
-                @include m_queries.responsive($bp) {
-                    height: fit-content !important;
-                }
-            }
+            @include responsive-spacing($mobile-breakpoints, height, fit-content);
         }
     }
 
     .aside-skill {
-        @each $bp in $mobile-breakpoints {
-            @include m_queries.responsive($bp) {
-                font-size: .85em !important;
-            }
-        }
+        @include responsive-font-size($mobile-breakpoints, .85em);
     }
 
-    .about-li1-text {
-        &>mark {
-            border-radius: var(--rounded-sm);
-        }
+    .about-li1-text>mark {
+        border-radius: var(--rounded-sm);
     }
 
     .aside-socials {
@@ -754,12 +739,10 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
             transform: translateX(-6px);
         }
 
-        &:hover {
-            &>a>.bi-arrow-right {
-                opacity: 1;
-                visibility: visible;
-                transform: translateX(6px);
-            }
+        &:hover>a>.bi-arrow-right {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(6px);
         }
     }
 
@@ -770,7 +753,6 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 
     /* Modals */
-
     .modal-content {
         background-color: var(--clr-eight) !important;
     }
