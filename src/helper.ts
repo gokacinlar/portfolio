@@ -64,7 +64,10 @@ export class DarkLightMode {
     private notifyUserAboutThemeChange(): void {
         Toastify({
             ...this.toastConfig,
-            text: `Saved your theme: ${this.currentTheme}`,
+            text: `Saved your theme preference.`,
+            close: false,
+            duration: 2500,
+            ariaLive: "polite"
         }).showToast();
     }
 
