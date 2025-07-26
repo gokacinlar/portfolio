@@ -729,6 +729,14 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         }
     }
 
+    .aside-skill {
+        @each $bp in $mobile-breakpoints {
+            @include m_queries.responsive($bp) {
+                font-size: .85em !important;
+            }
+        }
+    }
+
     .about-li1-text {
         &>mark {
             border-radius: var(--rounded-sm);
@@ -759,6 +767,12 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         --ico-w: 34px;
         width: var(--ico-w);
         height: auto;
+    }
+
+    /* Modals */
+
+    .modal-content {
+        background-color: var(--clr-eight) !important;
     }
 }
 

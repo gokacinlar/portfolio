@@ -1,6 +1,7 @@
 import { formatDate, validateEmail } from "../helper";
 import { loadWeb3Forms, formState } from "../utils/form";
 import EmailForm from "./A_EmailForm";
+import Accordion from "./A_Accordion";
 
 class ScrollSpy {
     constructor() {
@@ -35,6 +36,7 @@ class ScrollSpy {
                     <a class="list-group-item list-group-item-action rounded-pill shadow-sm" href="#li-3">📠 Work</a>
                     <a class="list-group-item list-group-item-action rounded-pill shadow-sm" href="#li-4">🚀 Tech Stack & Tools</a>
                     <a class="list-group-item list-group-item-action rounded-pill shadow-sm" href="#li-5">📧 E-mail</a>
+                    <a class="list-group-item list-group-item-action rounded-pill shadow-sm" href="#li-6">🔎 Advanced</a>
                 </div>
                 <div data-bs-spy="scroll" data-bs-target="#about-scroll-spy-id" data-bs-offset="0" class="scrollspy-content" tabindex="0">
                     <h4 id="li-1">🧑 About Me</h4>
@@ -72,7 +74,7 @@ class ScrollSpy {
                                     <th scope="row">Atatürk University</th>
                                     <td>Computer Programming</td>
                                     <td>Associate Degree</td>
-                                    <td>${formatDate(new Date(2023, 8))} - ${formatDate(new Date(2025, 6))}</td>
+                                    <td>${formatDate(new Date(2023, 8))} - current</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -145,6 +147,9 @@ class ScrollSpy {
                     <h4 id="li-5">📧 E-mail</h4>
                     <hr class="w-25">
                     ${new EmailForm().render()}
+                    <h4 id="li-6">🔎 Advanced</h4>
+                    <hr class="w-25">
+                    ${new Accordion().render()}
                     </div>
                 </div>
             </section>
