@@ -96,9 +96,9 @@ export class HeaderNode {
         },
         {
             href: "",
-            title: "Blog",
+            title: "Updates",
             icon: "bi bi-journals",
-            // No htmxOptions for Blog
+            // No htmxOptions for Updates
         },
         {
             href: "/about.html",
@@ -127,12 +127,12 @@ export class HeaderNode {
 
     private headerRight(): string {
         return `
-            <button id="hrBtn" type="button" class="header-btn-bg-important bg-gradient btn btn-lg rounded-5 fs-4 shadow-md d-flex flex-row align-items-center gap-2"
+            <button id="hrBtn" type="button" class="header-btn-bg-important bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-2"
                 title="Proceed to hire me for your web projects.">
                 <i class="bi bi-star-half text-black fw-bold pulsate-fwd"></i>
                 <span class="hr-btn-text">Work w/me!</span>
             </button>
-            <button id="hrDayNightBtn" type="button" class="header-day-night-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-md d-flex flex-row align-items-center gap-1"
+            <button id="hrDayNightBtn" type="button" class="header-day-night-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1"
                 title="Change Day/Night Mode">
                 <i class="hr-daynight-switch-icon bi bi-sun text-black fw-bold"></i>
             </button>

@@ -41,20 +41,6 @@ const MODALS: ModalConfig[] = [
                 </p>
             </div>
         `
-    },
-    {
-        id: "moneroModal",
-        title: "💲 Monero",
-        content: `
-            <img class="lazyload img-fluid w-100" src="../assets/images/static/webp/monero_dervisoksuzoglu.webp" alt="Monero QR Code" title="Monero QR Code">
-            <div class="mt-2 fs-6 fw-medium bg-dark-subtle px-2 py-2">
-                <p>
-                    <code>
-                        8AunEhdAgiYXRVXmxS5WGSbA6PdHviWcUg9e74qH74YtfKXXD79cyhzRYWgMezVWoWGSHm8AWwYxZWdBMpSB4SvfECTLDMt
-                    </code>
-                </p>
-            </div>
-        `
     }
 ];
 
@@ -92,21 +78,8 @@ const ACCORDION_ITEMS: AccordionItem[] = [
                         <th scope="row">BuyMeACoffee</th>
                         <td>View <a class="link-info link-opacity-75-hover link-offset-2" href="https://coff.ee/gokacinlar" target="_blank">here.</a></td>
                     </tr>
-                    <tr>
-                        <th scope="row">Monero</th>
-                        <td>View <a class="link-info link-opacity-75-hover link-offset-2 modal-trigger" data-modal="moneroModal" href="#">here.</a></td>
-                    </tr>
                 </tbody>
             </table>
-        `,
-        modalTriggerId: "monero",
-        modalId: "moneroModal"
-    },
-    {
-        id: "Three",
-        header: "Accordion Item #3",
-        body: `
-            Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
         `
     }
 ];

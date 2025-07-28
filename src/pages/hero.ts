@@ -28,7 +28,7 @@ class HeroTemplate {
     public hero(): string {
         return `
             <section class="mx-2 my-2 px-2 py-2">
-                <div id="hero" class="d-flex align-items-center justify-content-around flex-column rounded-5 bg-gradient shadow-md">
+                <div id="hero" class="d-flex align-items-center justify-content-around flex-column rounded-5 bg-gradient shadow-sm">
                     <div class="hero-child container-fluid mx-0 px-5 py-5 d-flex flex-row align-items-center justify-content-around">
                         <section class="row ocps-container col-sm d-flex flex-column align-items-start gap-4">
                             <div>
@@ -63,12 +63,12 @@ class HeroTemplate {
 
     private heroBtns(): string {
         return `
-            <button id="hrBtn" type="button" class="hero-btn text-truncate hero-hire-btn bg-gradient btn btn-lg fs-4 shadow-md d-flex flex-row align-items-center justify-content-center gap-1
+            <button id="hrBtn" type="button" class="hero-btn text-truncate hero-hire-btn bg-gradient btn btn-lg fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
                 rounded-5 shadow-sm" title="Proceed to hire me for your eduation or web demands.">
                 <i class="bi bi-star-half pulsate-fwd"></i>
                 <span class="hr-btn-text">Work w/me!</span>
             </button>
-            <button id="hrGetCvBtn" type="button" class="hero-btn text-truncate hero-get-cv-btn bg-gradient btn btn-lg fs-4 shadow-md d-flex flex-row align-items-center justify-content-center gap-1
+            <button id="hrGetCvBtn" type="button" class="hero-btn text-truncate hero-get-cv-btn bg-gradient btn btn-lg fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
                 rounded-5 shadow-sm" title="Download My CV">
                 <i class="bi bi-paperclip"></i>
                 <span class="hr-btn-text">Get Derviş's CV</span>
