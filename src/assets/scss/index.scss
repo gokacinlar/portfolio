@@ -407,7 +407,10 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
         @include responsive-flex-direction($mobile-breakpoints, column);
         @include responsive-flex-direction($tablet-breakpoints, row);
         @include responsive-flex-direction($all-desktop-breakpoints, row);
-        gap: .55rem !important;
+
+        & {
+            gap: .55rem !important;
+        }
     }
 
     #promo_Description {
@@ -445,7 +448,10 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
 
     #promoCardContainer {
         @include responsive-flex-direction($mobile-breakpoints, row);
-        flex-wrap: nowrap !important;
+
+        & {
+            flex-wrap: nowrap !important;
+        }
 
         &>div {
             @each $bp in $mobile-breakpoints {
