@@ -3,7 +3,7 @@ import { HeaderNode } from "../../pages/header";
 class ResponsiveNavbar extends HTMLElement {
     public responsiveMenuToggleButton(): string {
         return `
-            <button id="responsiveMenuToggleBtn" type="button" class="header-responsive-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-md
+            <button id="responsiveMenuToggleBtn" type="button" class="header-responsive-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm
                 d-flex flex-row align-items-center gap-1" title="Change Day/Night Mode">
                 <i class="bi bi-three-dots"></i>
             </button>

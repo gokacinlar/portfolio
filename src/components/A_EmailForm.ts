@@ -47,7 +47,7 @@ class EmailForm {
                     <div class="my-3">
                         <div class="h-captcha" data-captcha="true"></div>
                     </div>
-                    <button id="aboutFormSubmitBtn" type="submit" class="bg-gradient btn btn-lg rounded-5 fs-5 shadow-md" title="Submit Form">Send Message</button>
+                    <button id="aboutFormSubmitBtn" type="submit" class="bg-gradient btn btn-lg rounded-5 fs-5 shadow-sm" title="Submit Form">Send Message</button>
                 </div>
             </form>
         `;
