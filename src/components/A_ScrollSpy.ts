@@ -2,12 +2,29 @@ import { formatDate, validateEmail } from "../helper";
 import { loadWeb3Forms, formState } from "../utils/form";
 import EmailForm from "./A_EmailForm";
 import Accordion from "./A_Accordion";
-
-type NavLink = { id: string; icon: string; label: string };
-type TableRow = string[];
+import * as Type from "../types";
 
 class ScrollSpy {
-    private navLinks: NavLink[] = [
+    constructor() {
+        // Email input validator
+        document.addEventListener("DOMContentLoaded", () => {
+            validateEmail(".email-validate");
+            formState();
+            loadWeb3Forms();
+        });
+
+        document.querySelectorAll<HTMLFormElement>(".needs-validation").forEach((form) => {
+            form.addEventListener("submit", (event) => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add("was-validated");
+            });
+        });
+    }
+
+    private navLinks: Type.NavLink[] = [
         { id: "li-1", icon: "🧑", label: "About Me" },
         { id: "li-2", icon: "📚", label: "Education" },
         { id: "li-3", icon: "📠", label: "Work" },
@@ -16,7 +33,7 @@ class ScrollSpy {
         { id: "li-6", icon: "🔎", label: "Advanced" },
     ];
 
-    private educationRows: TableRow[] = [
+    private educationRows: Type.TableRow[] = [
         [
             "Atatürk University",
             "English Language Teaching",
@@ -31,7 +48,7 @@ class ScrollSpy {
         ],
     ];
 
-    private stackRows: TableRow[] = [
+    private stackRows: Type.TableRow[] = [
         ["Front-end", "JavaScript (ES6+), TypeScript", "React, Redux"],
         ["Back-end", "PHP(7+), Node.js, Express.js", "Laravel"],
         ["Styling", "Bootstrap (+derivatives), SASS, Tailwind CSS", "Shadcn, DaisyUI & MaterialUI"],
@@ -43,35 +60,19 @@ class ScrollSpy {
         ["Design & UX", "Figma, Adobe Illustrator, Adobe Photoshop", "-"],
     ];
 
-    constructor() {
-        // Email input validator
-        document.addEventListener("DOMContentLoaded", () => {
-            validateEmail(".email-validate");
-            document.addEventListener("DOMContentLoaded", () => {
-                formState();
-                loadWeb3Forms();
-            });
-        });
-
-        document.querySelectorAll<HTMLFormElement>(".needs-validation").forEach((form) => {
-            form.addEventListener("submit", (event) => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add("was-validated");
-            });
-        });
+    private quote: Type.GenericString = {
+        text: "These skills actually doesn't correlate to 100% familiarity with them. I know how to utilize them efficiently in project's context.",
+        author: "me"
     }
 
-    // Scrol
+    // Scrollspy list items
     private renderNavLinks() {
         return this.navLinks.map(({ id, icon, label }) =>
             `<a class="list-group-item list-group-item-action rounded-pill shadow-sm" href="#${id}">${icon} ${label}</a>`
         ).join("");
     }
 
-    private renderTable(headers: string[], rows: TableRow[], id: string) {
+    private renderTable(headers: string[], rows: Type.TableRow[], id: string): string {
         return `
             <div class="table-responsive">
                 <table id="${id}" class="table table-striped table-bordered">
@@ -82,15 +83,26 @@ class ScrollSpy {
                     </thead>
                     <tbody>
                         ${rows.map((row) =>
-            `<tr>${row.map((cell, i) =>
-                i === 0
-                    ? `<th scope="row">${cell}</th>`
-                    : `<td>${cell}</td>`
-            ).join("")}</tr>`
-        ).join("")}
+            `<tr>${row.map((cell, i) => i === 0 ? `<th scope="row">${cell}</th>` : `<td>${cell}</td>`
+            ).join("")}</tr>`).join("")}
                     </tbody>
                 </table>
             </div>
+        `;
+    }
+
+    private renderQuote(quote: Type.GenericString): string {
+        return `
+            <blockquote class="blockquote">
+                <figure>
+                    <blockquote class="blockquote">
+                        <p>${quote.text}</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        <cite title="${quote.author}">${quote.author}</cite>
+                    </figcaption>
+                </figure>
+            </blockquote>
         `;
     }
 
@@ -100,7 +112,7 @@ class ScrollSpy {
                 <div id="about-scroll-spy-id" class="z-0 sticky-top scrollspy-nav list-group d-flex flex-row align-items-center justify-content-between fs-4 fw-medium gap-2 text-truncate">
                     ${this.renderNavLinks()}
                 </div>
-                <div data-bs-spy="scroll" data-bs-target="#about-scroll-spy-id" data-bs-offset="0" class="scrollspy-content" tabindex="0">
+                <div data-bs-spy="scroll" data-bs-target="#about-scroll-spy-id" data-bs-offset="0" data-bs-smooth-scroll="true"  class="scrollspy-content" tabindex="0">
                     <h4 id="li-1">🧑 About Me</h4>
                     <hr class="w-25">
                     <div>
@@ -121,14 +133,11 @@ class ScrollSpy {
                     ${this.renderTable(["Institution", "Field", "Degree", "Date"], this.educationRows, "eduTable")}
                     <h4 id="li-3">📠 Work</h4>
                     <hr class="w-25">
-                        <p class="fs-5 fw-medium">You can download or view my CV here.</p>
+                    <p class="fs-5 fw-medium">You can download or view my CV here.</p>
                     <h4 id="li-4">🚀 Tech Stack & Tools</h4>
                     <hr class="w-25">
-                    ${this.renderTable(
-            ["Category", "Technologies", "Libraries"],
-            this.stackRows,
-            "stackTable"
-        )}
+                    ${this.renderTable(["Category", "Technologies", "Libraries"], this.stackRows, "stackTable")}
+                    ${this.renderQuote(this.quote)}
                     <h4 id="li-5">📧 E-mail</h4>
                     <hr class="w-25">
                     ${new EmailForm().render()}

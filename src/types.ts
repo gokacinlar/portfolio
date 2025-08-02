@@ -1,3 +1,7 @@
+export type GenericString = {
+    [key: string]: string;
+}
+
 export type PromoCardData = {
     postName: string;
     postDesc: string;
@@ -31,3 +35,11 @@ export type Education = {
     field: string;
     degree: string;
 }
+
+export type NavLink = {
+    id: string;
+    icon: string;
+    label: string
+};
+
+export type TableRow = string[];

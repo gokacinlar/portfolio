@@ -50,7 +50,9 @@ const ACCORDION_ITEMS: AccordionItem[] = [
         header: "🔑 Secure & Private Communication",
         body: `
             <p class="lead fs-6 fw-medium">If you want to contact me <mark class="rounded-3">in a more private way</mark>, you can use one of the actions given below.
-                If you don't know how to use these methods, here's a <a class="link-info link-opacity-75-hover link-offset-2" href="https://www.youtube.com/watch?v=mu2TVYJE5Gc" target="_blank">tutorial</a> on the go.</p>
+                If you don't know how to use these methods, here's a <a class="link-info link-opacity-75-hover link-offset-2" href="https://www.youtube.com/watch?v=mu2TVYJE5Gc" target="_blank">tutorial</a> on the go.
+                However, you should use this <strong>if you really have good reason to do so.</strong>
+            </p>
             <table id="commsTable" class="table table-striped table-bordered">
                 <tbody>
                     <tr>

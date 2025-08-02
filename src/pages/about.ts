@@ -95,7 +95,7 @@ class About extends HTMLElement {
 
     private renderContent(): string {
         return `
-            <section id="about-grid" class="container mb-4">
+            <section id="about-grid" class="container mb-5">
                 <div id="about-grid-parent" class="row gy-4 d-flex flex-row flex-nowrap gap-4">
                     ${this.renderAside()}
                     ${this.renderMain()}
@@ -106,7 +106,7 @@ class About extends HTMLElement {
 
     private renderAside(): string {
         return `
-            <aside id="about-aside" class="col-12 col-md-4 h-100 bg-gradient rounded-5 shadow-sm py-3 px-4">
+            <aside id="about-aside" class="col-12 col-md-4 col-sm-4 h-100 bg-gradient rounded-5 shadow-sm py-3 px-4">
                 <div>
                     ${this.renderHeroSection()}
                     ${this.renderSkillsSection()}
@@ -119,7 +119,7 @@ class About extends HTMLElement {
 
     private renderMain(): string {
         return `
-            <section id="about-main" class="col-12 col-md-8 h-100 bg-gradient rounded-5 shadow-sm py-3 px-3 overflow-scroll">
+            <section id="about-main" class="col-12 col-md-8 col-sm-8 h-100 bg-gradient rounded-5 shadow-sm py-3 px-3 overflow-scroll">
                 ${new ScrollSpy().render()}
             </section>
         `;
@@ -149,12 +149,12 @@ class About extends HTMLElement {
 
     private renderSkill({ imageOne, imageTwo, title }: SkillConfig): string {
         return `
-            <h2 class="d-flex flex-row align-items-center gap-1 mb-1">
+            <h2 class="aside-skill-name d-flex flex-row align-items-center gap-1 mb-1">
                 <div class="d-flex align-items-center gap-1 px-1 py-1">
                     <img src="${imageOne}" class="aside-ico img-fluid lazyload rounded-1">
                     <img src="${imageTwo}" class="aside-ico img-fluid lazyload rounded-1">
                 </div>
-                <span class="aside-skill fs-4">${title}</span>
+                <span class="aside-skill fs-4 text-center">${title}</span>
             </h2>
         `;
     }

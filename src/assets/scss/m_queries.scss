@@ -30,13 +30,19 @@
     }
 
     @else if $breakpoint ==tablet-landscape {
-        @media only screen and (min-width: 900px) and (max-width: 1023px) and (orientation: landscape) {
+        @media only screen and (min-width: 900px) and (max-width: 1024px) and (orientation: landscape) {
             @content;
         }
     }
 
-    @else if $breakpoint ==desktop {
-        @media only screen and (min-width: 1024px) and (max-width: 1439px) {
+    @else if $breakpoint ==desktop-small {
+        @media only screen and (min-width: 1024px) and (max-width: 1280px) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint ==desktop-large {
+        @media only screen and (min-width: 1280px) and (max-width: 1439px) {
             @content;
         }
     }

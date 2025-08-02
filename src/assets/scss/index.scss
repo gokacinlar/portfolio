@@ -3,9 +3,10 @@
 // Global breakpoints
 $mobile-breakpoints: phone, phone-portrait, phone-landscape;
 $tablet-breakpoints: tablet, tablet-portrait, tablet-landscape;
-$desktop-breakpoints: desktop, large-screen;
-$all-desktop-breakpoints: desktop, large-screen;
+$desktop-small-breakpoints: desktop-small, desktop-large;
+$desktop-breakpoints: desktop-small, desktop-large, large-screen;
 $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet-landscape;
+$global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet-landscape, desktop-small, desktop-large, large-screen;
 
 // Helper mixins
 @mixin transition($props...) {
@@ -61,16 +62,6 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 }
 
-@mixin hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    scroll-behavior: smooth;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
-}
-
 @mixin gradient-inset-box-shadow {
     box-shadow:
         inset 30px 0 30px -20px rgba(0, 0, 0, 0.05),
@@ -93,7 +84,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 }
 
-@mixin responsive-spacing($breakpoints, $property, $value) {
+@mixin responsive-styling($breakpoints, $property, $value) {
     @each $bp in $breakpoints {
         @include m_queries.responsive($bp) {
             #{$property}: $value !important;
@@ -101,6 +92,19 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 }
 
+@mixin hide-scrollbar {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    & {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
+    }
+}
+
+// Reset
 * {
     margin: 0;
     padding: 0;
@@ -172,26 +176,26 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 
     #headerRM {
+        width: max-content !important;
         position: absolute;
         z-index: 999 !important;
         inset-inline-end: 0;
         inset-block-start: 6px;
         background: var(--bs-body-color) !important;
         animation: tilt-in-right-1 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        @include hide-on($desktop-breakpoints);
 
         &>ul {
             margin: .20rem !important;
-        }
 
-        &>ul>li {
-            padding: .25rem !important;
-        }
+            >li {
+                padding: .25rem !important;
 
-        &>ul>li>a {
-            min-width: 150px !important;
+                >a {
+                    min-width: 150px !important;
+                }
+            }
         }
-
-        @include hide-on($desktop-breakpoints);
     }
 
     @keyframes tilt-in-right-1 {
@@ -208,7 +212,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
 
     .header-responsive-btn {
         @include borderRadius(var(--rounded-sm));
-        @include hide-on($all-desktop-breakpoints);
+        @include hide-on($desktop-breakpoints);
         @include show-on(phone);
     }
 
@@ -270,7 +274,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
 
     .hero-child {
         @include responsive-flex-direction($all-mobile-tablet-breakpoints, column-reverse);
-        @include responsive-flex-direction($all-desktop-breakpoints, row);
+        @include responsive-flex-direction($desktop-breakpoints, row);
 
         @each $bp in $all-mobile-tablet-breakpoints {
             @include m_queries.responsive($bp) {
@@ -383,8 +387,6 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     }
 
     @keyframes blink {
-
-        0%,
         100% {
             opacity: 1;
         }
@@ -406,7 +408,7 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
     .promo-videos-container {
         @include responsive-flex-direction($mobile-breakpoints, column);
         @include responsive-flex-direction($tablet-breakpoints, row);
-        @include responsive-flex-direction($all-desktop-breakpoints, row);
+        @include responsive-flex-direction($desktop-breakpoints, row);
 
         & {
             gap: .55rem !important;
@@ -691,43 +693,40 @@ $all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, 
                 flex-direction: row !important;
                 flex-wrap: nowrap !important;
                 overflow-x: scroll !important;
-                scroll-snap-type: x mandatory;
+                scroll-snap-type: x mandatory !important;
                 scroll-padding-left: 0 !important;
             }
         }
     }
 
     #about-grid-parent {
-        height: 100dvh !important;
         margin-bottom: 2.75rem !important;
-
-        @each $bp in $mobile-breakpoints {
-            @include m_queries.responsive($bp) {
-                height: auto !important;
-                flex-direction: column !important;
-                padding-left: .55rem !important;
-                padding-right: .55rem !important;
-                margin-bottom: .25rem !important;
-                gap: .05rem !important;
-            }
-        }
-
-        @each $bp in $tablet-breakpoints {
-            @include m_queries.responsive($bp) {
-                height: 100dvh !important;
-                flex-direction: row !important;
-                gap: .50rem !important;
-                margin-bottom: .50rem !important;
-            }
-        }
+        @include responsive-styling($mobile-breakpoints, height, auto);
+        @include responsive-styling($mobile-breakpoints, flex-direction, column);
+        @include responsive-styling($mobile-breakpoints, padding-inline, .55rem);
+        @include responsive-styling($mobile-breakpoints, gap, .05rem);
+        @include responsive-styling($tablet-breakpoints, height, 100dvh);
+        @include responsive-styling($tablet-breakpoints, flex-direction, row);
+        @include responsive-styling($tablet-breakpoints, gap, .50rem);
+        @include responsive-styling($tablet-breakpoints, margin, .50rem);
+        @include responsive-styling($desktop-breakpoints, height, 100dvh);
 
         &>#about-aside {
-            @include responsive-spacing($mobile-breakpoints, height, fit-content);
+            @include responsive-styling($mobile-breakpoints, height, fit-content);
+            @include responsive-styling($desktop-breakpoints, overflow-y, scroll);
+            @include responsive-styling($tablet-breakpoints, overflow-y, scroll);
+            @include hide-scrollbar();
         }
+    }
+
+    .aside-skill-name {
+        @include responsive-styling($tablet-breakpoints, flex-direction, column);
     }
 
     .aside-skill {
         @include responsive-font-size($mobile-breakpoints, .85em);
+        @include responsive-font-size($tablet-breakpoints, .65em);
+        @include responsive-font-size($desktop-small-breakpoints, .65em);
     }
 
     .about-li1-text>mark {
