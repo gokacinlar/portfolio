@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 
 // For static page's script linking
-let htmlPageNames = ["about.html", "socials.html", "updates.html"];
+let htmlPageNames = ["about.html", "updates.html", "404.html"];
 let multipleHtmlPlugins = htmlPageNames.map(name => {
     return new HtmlWebpackPlugin({
         template: path.resolve(__dirname, `./src/pages/static/${name}`),
@@ -141,6 +141,16 @@ module.exports = {
                 {
                     from: path.resolve(__dirname, "src/assets/videos"),
                     to: "assets/videos",
+                    noErrorOnMissing: true,
+                },
+                {
+                    from: path.resolve(__dirname, "src/php"),
+                    to: "php",
+                    noErrorOnMissing: true,
+                },
+                {
+                    from: path.resolve(__dirname, "vendor"),
+                    to: "php/vendor",
                     noErrorOnMissing: true,
                 }
             ],

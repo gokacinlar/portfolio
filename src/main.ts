@@ -3,12 +3,13 @@ import "./assets/scss/index.scss";
 import "./assets/scss/globals.scss";
 // CSS Framework & Framework-related
 import "bootstrap";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 // Libraries
 import "lazysizes";
 // Components & Helper functions
-import { DarkLightMode } from './helper';
+import { DarkLightMode } from "./helper";
 // Pages
 import "./pages/header";
 import "./pages/footer";
