@@ -111,6 +111,21 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     background-size: cover;
 }
 
+@mixin custom-font($font-name) {
+    font-family: $font-name !important;
+}
+
+@mixin wavy-text {
+    -webkit-text-decoration-style: wavy;
+    -moz-text-decoration-style: wavy;
+    text-decoration-style: wavy;
+    text-decoration: underline wavy .07em #1F1F24;
+}
+
+@mixin dynamic-font-size($min-size, $viewport-factor, $max-size) {
+    font-size: clamp($min-size, $viewport-factor, $max-size);
+}
+
 // Reset
 * {
     margin: 0;
@@ -423,6 +438,27 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         & {
             gap: .55rem !important;
         }
+    }
+
+    .promo-motto-quote-container {
+        --def-height: 256px;
+        min-height: var(--def-height);
+        color: #1F1F24 !important;
+        background: var(--clr-six) !important;
+        @include responsive-styling($all-mobile-tablet-breakpoints, align-items, start);
+
+        &>h3 {
+            @include responsive-styling($all-mobile-tablet-breakpoints, font-size, 1rem);
+            @include custom-font(Franuces);
+        }
+    }
+
+    .promo-motto-quote-icon {
+        @include dynamic-font-size(2rem, calc(8vw + 4rem), 12rem);
+    }
+
+    .wavy-text {
+        @include wavy-text;
     }
 
     #promo_Description {

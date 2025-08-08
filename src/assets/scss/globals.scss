@@ -5,7 +5,12 @@
     src: url("../fonts/Geist.woff2") format("woff2");
 }
 
-$font-family: "Inter", sans-serif;
+@font-face {
+    font-family: "Franuces";
+    src: url("../fonts/Franuces.woff2") format("woff2");
+}
+
+$font-family: "Inter", "Franuces", sans-serif, monospace;
 $font-display: auto;
 
 $rounded: (

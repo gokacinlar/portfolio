@@ -151,3 +151,18 @@ export class PromoTeachEnglish {
         ).join("");
     }
 }
+
+export class PromoMotto {
+    public render(): string {
+        return `
+            <div class="promo-motto-quote-container rounded-5 px-4 py-4 shadow-sm d-flex flex-row align-items-center justify-content-baseline gap-4">
+                <div>
+                    <i class="promo-motto-quote-icon bi bi-quote"></i>
+                </div>
+                <div>
+                    <h3 class="display-3 fw-medium">Our children will <span class="wavy-text">live amongst</span> the very people <strong>we educate</strong>.</h3>
+                </div>
+            </div>
+        `;
+    }
+}

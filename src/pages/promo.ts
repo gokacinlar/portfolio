@@ -1,5 +1,5 @@
 // Components
-import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish } from "../components/C_Promo";
+import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish, PromoMotto } from "../components/C_Promo";
 import { VideoElement } from "../components/C_Video";
 import { Template, PromoFunctions, HorizontalMiddleMouseScroll, ScrollRevealAction } from "../helper";
 import { PromoParts } from "../static";
@@ -73,6 +73,9 @@ class PromoTemplate {
                     <div class="promo-teacheng-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoEngTeach()}
                     </div>
+                    <div class="promo-motto-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                        ${this.promoMotto()}
+                    </div>
                     <div class="promo-work-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoWork()}
                     </div>
@@ -114,6 +117,15 @@ class PromoTemplate {
             ${new PromoTitle("Teaching English?")}
             <div id="promoTE" class="container-fluid w-100 px-4 py-4 my-4 d-flex flex-row gap-2">
                 ${new PromoTeachEnglish().render()}
+            </div>
+        `;
+    }
+
+    private promoMotto(): string {
+        return `
+            ${new PromoTitle("What I believe in?")}
+            <div class="promo-motto-base w-100">
+                ${new PromoMotto().render()}
             </div>
         `;
     }
