@@ -10,7 +10,7 @@ This is my own portfolio site which I'll be using to briefly introduce myself to
 Site will primarily use;
 
 * HTMX
-* SQLite (better-sqlite3)
+* MySQL
 * PHP
 * Bootstrap
 
@@ -19,7 +19,8 @@ Site will primarily use;
 ## How to run?
 
 ```
-npm install
-npm run build
+npm i
+npm run composer:install
+npm run dev
 npm run live
 ```
