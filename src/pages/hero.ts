@@ -28,23 +28,23 @@ class HeroTemplate {
     public hero(): string {
         return `
             <section class="mx-2 my-2 px-2 py-2">
-                <div id="hero" class="d-flex align-items-center justify-content-around flex-column rounded-5 bg-gradient shadow-sm">
-                    <div class="hero-child container-fluid mx-0 px-5 py-5 d-flex flex-row align-items-center justify-content-around">
-                        <section class="row ocps-container col-sm d-flex flex-column align-items-start gap-4">
+                <div id="hero" class="container mx-0 my-0 rounded-5 mw-100 bg-gradient shadow-sm py-5">
+                    <div class="row align-items-center justify-content-evenly hero-child px-4">
+                        <section class="col-12 col-md-6 d-flex flex-column align-items-start gap-4 ocps-container mb-4 mb-md-0">
                             <div>
                                 <h3 class="font-weight-bolder text-muted">Hi! I'm</h3>
                                 <h2 class="font-weight-bolder text-decoration-underline">Derviş</h2>
                             </div>
                             <div>
                                 <h1 id="ocps" class="occupations display-3">
-                                    <span class="ocps-written-text"></span><span class="cursor">|</span
+                                    <span class="ocps-written-text"></span><span class="cursor">|</span>
                                 </h1>
                             </div>
                             <div class="ocps-buttons d-flex flex-row align-items-center gap-2">
                                 ${this.heroBtns()}
                             </div>
                         </section>
-                        <section class="row ocps-hero-img-container col-sm">
+                        <section class="col-12 col-md-6 d-flex justify-content-center ocps-hero-img-container">
                             ${new HeroImageWithLink().render(
             "Derviş Öksüzoğlu",
             "heroLogoBg",
@@ -54,7 +54,7 @@ class HeroTemplate {
         )}
                         </section>
                     </div>
-                    <section id="mottosSection" class="d-flex flex-row flex-wrap align-items-center justify-content-center gap-2 mb-2">
+                    <section id="mottosSection" class="d-flex flex-row flex-wrap align-items-center justify-content-center gap-2 mt-4 mb-0">
                     </section>
                 </div>
             </section>
