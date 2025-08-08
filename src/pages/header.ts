@@ -95,17 +95,17 @@ export class HeaderNode {
             htmxOptions: { ...this.defaultHtmxOptions, hxget: "/index.html" },
         },
         {
-            href: "",
+            href: "/updates.html",
             title: "Updates",
             icon: "bi bi-journals",
-            // No htmxOptions for Updates
+            htmxOptions: { ...this.defaultHtmxOptions, hxget: "/updates.html" },
         },
         {
             href: "/about.html",
             title: "About",
             icon: "bi bi-person-circle",
             htmxOptions: { ...this.defaultHtmxOptions, hxget: "/about.html" },
-        },
+        }
     ];
 
     // Avoid the undefined type error with ??
