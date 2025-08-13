@@ -23,11 +23,13 @@ class Promo extends HTMLElement {
         // Create vertical tab grouping showcase
         promoFunctions.bindVerticalTabEventsAndautoCycleTabs(new PromoParts().promoTabData);
         new HorizontalMiddleMouseScroll().hmmsScroll(".promo-featured-tabs");
+        // Dyanmic scroll revealing
         const dynamicContentDivs: Array<string> =
             ["promo-videos-container",
                 "promo-desc-container",
                 "promo-skills-container",
                 "promo-projects-container",
+                "promo-motto-container",
                 "promo-teacheng-container"];
         new ScrollRevealAction().scrollReveal(dynamicContentDivs);
     }

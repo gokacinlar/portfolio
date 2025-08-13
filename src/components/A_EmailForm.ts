@@ -43,7 +43,7 @@ class EmailForm {
                         </tr>
                     </tbody>
                 </table>
-                <div class="d-flex flex-row align-items-center justify-content-between">
+                <div class="d-flex flex-row align-items-center justify-content-between mb-2">
                     <div class="my-3">
                         <div class="h-captcha" data-captcha="true"></div>
                     </div>

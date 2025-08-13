@@ -112,7 +112,9 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 }
 
 @mixin custom-font($font-name) {
-    font-family: $font-name !important;
+    & {
+        font-family: #{$font-name} !important;
+    }
 }
 
 @mixin wavy-text {
@@ -124,6 +126,11 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
 @mixin dynamic-font-size($min-size, $viewport-factor, $max-size) {
     font-size: clamp($min-size, $viewport-factor, $max-size);
+}
+
+@mixin custom-bee-color {
+    color: #1F1F24 !important;
+    background: var(--clr-six) !important;
 }
 
 // Reset
@@ -166,8 +173,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     .hero-btn,
     .header-responsive-btn,
     #aboutFormSubmitBtn {
-        color: #1F1F24 !important;
-        background: var(--clr-six) !important;
+        @include custom-bee-color();
     }
 
     .header-btn-bg-important>span {
@@ -198,14 +204,17 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     #headerRM {
-        width: max-content !important;
-        position: absolute;
-        z-index: 999 !important;
-        inset-inline-end: 0;
-        inset-block-start: 6px;
-        background: var(--bs-body-color) !important;
-        animation: tilt-in-right-1 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
         @include hide-on($desktop-breakpoints);
+
+        & {
+            width: max-content !important;
+            position: absolute;
+            z-index: 999 !important;
+            inset-inline-end: 0;
+            inset-block-start: 6px;
+            background: var(--bs-body-color) !important;
+            animation: tilt-in-right-1 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
 
         &>ul {
             margin: .20rem !important;
@@ -341,9 +350,8 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         }
     }
 
-    .ocps-written-text {
-        @include responsive-styling($desktop-small-breakpoints, font-size, smaller);
-        @include responsive-styling($all-mobile-tablet-breakpoints, font-size, .85em);
+    .hero-title-container {
+        @include responsive-styling($all-mobile-tablet-breakpoints, margin-top, .75rem);
     }
 
     .ocps-buttons {
@@ -389,12 +397,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     #ocps {
         min-height: 2ch;
-
-        >.ocps-written-text {
-            font-family: monospace !important;
-            display: inline-block;
-            white-space: nowrap;
-        }
+        @include responsive-styling($mobile-breakpoints, min-height, 4ch);
     }
 
     #mottosSection {
@@ -443,9 +446,10 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     .promo-motto-quote-container {
         --def-height: 256px;
         min-height: var(--def-height);
-        color: #1F1F24 !important;
-        background: var(--clr-six) !important;
+        @include custom-bee-color();
         @include responsive-styling($all-mobile-tablet-breakpoints, align-items, start);
+        @include responsive-styling($mobile-breakpoints, flex-direction, column);
+        @include responsive-styling($mobile-breakpoints, gap, .25em);
 
         &>h3 {
             @include responsive-styling($all-mobile-tablet-breakpoints, font-size, 1rem);
@@ -496,10 +500,8 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     #promoCardContainer {
         @include responsive-flex-direction($mobile-breakpoints, row);
-
-        & {
-            flex-wrap: nowrap !important;
-        }
+        @include responsive-styling($mobile-breakpoints, flex-wrap, nowrap);
+        @include responsive-styling($tablet-breakpoints, flex-wrap, wrap);
 
         &>div {
             @each $bp in $mobile-breakpoints {
@@ -693,26 +695,12 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     // Footer
     .footer-container {
-        background: var(--clr-five);
-        border-top-left-radius: 28px;
-        border-top-right-radius: 28px;
-    }
+        background: var(--clr-eight);
 
-    .footer-title {
-        color: var(--clr-two);
-        background: var(--clr-one);
-    }
-
-    .footer-promo-links>li>a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 3.25rem;
-        height: 3.25rem;
-        font-size: 2rem;
-        color: var(--clr-two) !important;
-        background: var(--clr-one) !important;
-        @include borderRadius(50%);
+        & {
+            border-top-left-radius: 28px;
+            border-top-right-radius: 28px;
+        }
     }
 
     .footer-right-brand {
@@ -728,6 +716,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     #about-main {
+        @include responsive-styling($desktop-breakpoints, height, 100dvh);
         @include hide-scrollbar();
     }
 
@@ -745,32 +734,12 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         }
     }
 
-    #about-grid-parent {
-        margin-bottom: 2.75rem !important;
-        @include responsive-styling($mobile-breakpoints, height, auto);
-        @include responsive-styling($mobile-breakpoints, flex-direction, column);
-        @include responsive-styling($mobile-breakpoints, padding-inline, .55rem);
-        @include responsive-styling($mobile-breakpoints, gap, .05rem);
-        @include responsive-styling($tablet-breakpoints, height, 100dvh);
-        @include responsive-styling($tablet-breakpoints, flex-direction, row);
-        @include responsive-styling($tablet-breakpoints, gap, .50rem);
-        @include responsive-styling($tablet-breakpoints, margin, .50rem);
-        @include responsive-styling($desktop-breakpoints, height, 100dvh);
-
-        &>#about-aside {
-            @include responsive-styling($mobile-breakpoints, height, fit-content);
-            @include responsive-styling($desktop-breakpoints, overflow-y, scroll);
-            @include responsive-styling($tablet-breakpoints, overflow-y, scroll);
-            @include hide-scrollbar();
-        }
-    }
-
     .aside-skill-name {
         @include responsive-styling($tablet-breakpoints, flex-direction, column);
     }
 
     .aside-skill {
-        @include responsive-font-size($mobile-breakpoints, .85em);
+        @include responsive-font-size($mobile-breakpoints, .80em);
         @include responsive-font-size($tablet-breakpoints, .65em);
         @include responsive-font-size($desktop-small-breakpoints, .65em);
     }

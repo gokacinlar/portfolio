@@ -6,58 +6,94 @@ import { FooterLinks } from "../static";
 class Footer extends HTMLElement {
     constructor() {
         super();
-
         const template = new Template().createTemplate(new FooterNodes().footerTemplate());
         this.appendChild(template.content.cloneNode(true));
     }
 }
 
 class FooterNodes {
-    private fLinks: FooterLinks;
-    private headerN: HeaderNode;
-
-    constructor() {
-        this.fLinks = new FooterLinks();
-        this.headerN = new HeaderNode();
-    }
+    constructor() { }
 
     public footerTemplate(): string {
         return `
-            <div class="footer-container p-2 my-0 d-flex flex-row align-content-center justify-content-between">
-                <section class="d-flex align-items-center gap-2">
+            <section class="footer-container mx-2 my-2 px-2 py-2 my-0 d-flex flex-row align-content-center justify-content-between">
+                <div class="d-flex align-items-start gap-3 px-2 py-2">
                     ${this.footerLeft()}
-                </section>
-                <section class="d-flex align-items-center">
+                </div>
+                <div class="d-flex align-items-center">
                     ${this.footerRight()}
-                </section>
-            </div>
+                </div>
+            </section>
         `;
     }
 
     public footerLeft(): string {
+        const headerLeft = new HeaderNode().headerLeft();
+        const personalLinks = this.createPersonalLinks();
+
         return `
-            ${this.headerN.headerLeft()}
-            <div class="vr text-white"></div>
+            ${headerLeft}
+            <hr class="vr text-white border border-warning"></hr>
             <nav>
-                <ul class="footer-promo-links list-unstyled d-flex flex-row align-items-center justify-content-center gap-2 mb-0">
-                    <li><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover p-2 shadow-lg"
-                    title="GitHub" href="" target="_blank"><i class="bi bi-github"></i></a></li>
-                    <li><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover p-2 shadow-lg"
-                    title="E-mail" href="" target="_blank"><i class="bi bi-envelope-paper"></i></a></li>
+                <ul class="footer-promo-links list-unstyled d-flex flex-column align-items-start justify-content-center gap-1 mb-0">
+                    ${personalLinks}
                 </ul>
             </nav>
         `;
     }
 
     public footerRight(): string {
+        const brandingLinks = [
+            {
+                href: FooterLinks.BRANDING_LINKS.cc010,
+                ariaLabel: "Creative Commons CC0 1.0 Universal License",
+                src: "cc-zero.svg",
+                title: "Creative Commons CC0 1.0 Universal License"
+            },
+            {
+                href: FooterLinks.BRANDING_LINKS.notByAi,
+                ariaLabel: "NotByAI Badge",
+                src: "notbyai_eng.svg",
+                title: "NotByAI Badge"
+            }
+        ];
+
+        const brandingHTML = brandingLinks.map(link => `<li>${this.createFooterLink(link.href, link.ariaLabel, link.src, link.title)}</li>`)
+            .join("");
+
         return `
-            <ul class="list-unstyled d-flex flex-row align-content-center justify-content-around gap-2 px-2 mb-0">
-                <li><a href="${this.fLinks.fLinks.cc010}"" target="_blank" aria-label ="Creative Commons CC0 1.0 Universal License">
-                    <img class="footer-right-brand img-fluid w-100 h-100" src="../assets/images/static/svg/cc-zero.svg" title="Creative Commons CC0 1.0 Universal License"></a></li>
-                <div class="vr text-white"></div>
-                <li><a href="${this.fLinks.fLinks.notByAi}" target="_blank" aria-label="NotByAI Badge">
-                    <img class="footer-right-brand img-fluid" src="../assets/images/static/svg/notbyai_eng.svg" title="NotByAI Badge"></a></li>
+            <ul class="list-unstyled d-flex flex-column h-100 align-content-center justify-content-center gap-2 px-2 mb-0">
+                ${brandingHTML}
             </ul>
+        `;
+    }
+
+    private createPersonalLinks(): string {
+        const { github, xTwitter, mastodon } = FooterLinks.PERSONAL_LINKS;
+
+        const linkData = [
+            { title: "GitHub", href: github, iconClass: "bi-github" },
+            { title: "X (Twitter)", href: xTwitter, iconClass: "bi-twitter-x" },
+            { title: "Mastodon", href: mastodon, iconClass: "bi-mastodon" },
+        ];
+
+        return linkData
+            .map(link => `
+                <li class="w-100">
+                    <a class="d-flex flex-row align-items-center gap-2 px-2 py-2 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                        title="${link.title}" href="${link.href}" target="_blank">
+                        <i class="bi ${link.iconClass} fs-2"></i> ${link.title}
+                    </a>
+                </li>
+            `).join("");
+    }
+
+    private createFooterLink(href: string, ariaLabel: string, src: string, title: string): string {
+        return `
+            <a href="${href}" target="_blank" aria-label="${ariaLabel}">
+                <img class="footer-right-brand img-fluid w-100 h-100"
+                    src="../assets/images/static/svg/${src}" title="${title}">
+            </a>
         `;
     }
 }

@@ -95,34 +95,34 @@ class About extends HTMLElement {
 
     private renderContent(): string {
         return `
-            <section id="about-grid" class="container mb-5">
-                <div id="about-grid-parent" class="row gy-4 d-flex flex-row flex-nowrap gap-4">
-                    ${this.renderAside()}
-                    ${this.renderMain()}
-                </div>
-            </section>
-        `;
+        <section id="about-grid" class="container mb-3">
+            <div id="about-grid-parent" class="row gy-4 gx-4">
+                ${this.renderAside()}
+                ${this.renderMain()}
+            </div>
+        </section>
+    `;
     }
 
     private renderAside(): string {
         return `
-            <aside id="about-aside" class="col-12 col-md-4 col-sm-4 h-100 bg-gradient rounded-5 shadow-sm py-3 px-4">
-                <div>
-                    ${this.renderHeroSection()}
-                    ${this.renderSkillsSection()}
-                    ${this.renderSocials()}
-                    ${this.renderMotto()}
-                </div>
-            </aside>
-        `;
+        <aside id="about-aside" class="col-12 col-md-4 bg-gradient rounded-5 shadow-sm py-3 px-4">
+            <div>
+                ${this.renderHeroSection()}
+                ${this.renderSkillsSection()}
+                ${this.renderSocials()}
+                ${this.renderMotto()}
+            </div>
+        </aside>
+    `;
     }
 
     private renderMain(): string {
         return `
-            <section id="about-main" class="col-12 col-md-8 col-sm-8 h-100 bg-gradient rounded-5 shadow-sm py-3 px-3 overflow-scroll">
-                ${new ScrollSpy().render()}
-            </section>
-        `;
+        <section id="about-main" class="col-12 col-md-8 bg-gradient rounded-5 shadow-sm py-3 px-3 overflow-auto">
+            ${new ScrollSpy().render()}
+        </section>
+    `;
     }
 
     private renderHeroSection(): string {
@@ -154,7 +154,7 @@ class About extends HTMLElement {
                     <img src="${imageOne}" class="aside-ico img-fluid lazyload rounded-1">
                     <img src="${imageTwo}" class="aside-ico img-fluid lazyload rounded-1">
                 </div>
-                <span class="aside-skill fs-4 text-center">${title}</span>
+                <span class="aside-skill fs-4 text-start">${title}</span>
             </h2>
         `;
     }

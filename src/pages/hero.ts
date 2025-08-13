@@ -31,11 +31,11 @@ class HeroTemplate {
                 <div id="hero" class="container mx-0 my-0 rounded-5 mw-100 bg-gradient shadow-sm py-5">
                     <div class="row align-items-center justify-content-evenly hero-child px-4">
                         <section class="col-12 col-md-6 d-flex flex-column align-items-start gap-4 ocps-container mb-4 mb-md-0">
-                            <div>
+                            <div class="hero-title-container">
                                 <h3 class="font-weight-bolder text-muted">Hi! I'm</h3>
                                 <h2 class="font-weight-bolder text-decoration-underline">Derviş</h2>
                             </div>
-                            <div>
+                            <div class="hero-dynamic-text-container">
                                 <h1 id="ocps" class="occupations display-3">
                                     <span class="ocps-written-text"></span><span class="cursor">|</span>
                                 </h1>
