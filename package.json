@@ -42,6 +42,10 @@
     "webpack-dev-server": "^5.2.2"
   },
   "dependencies": {
+    "@analytics/google-analytics": "^1.1.0",
+    "ajv": "^8.17.1",
+    "ajv-keywords": "^5.1.0",
+    "analytics": "^0.8.19",
     "bootstrap": "^5.3.7",
     "bootstrap-icons": "^1.13.1",
     "dompurify": "^3.2.6",
