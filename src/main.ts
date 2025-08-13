@@ -10,6 +10,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "lazysizes";
 // Components & Helper functions
 import { DarkLightMode } from "./helper";
+import GoogleAnalytics from "./utils/gTag";
 // Pages
 import "./pages/header";
 import "./pages/footer";
@@ -21,7 +22,12 @@ import "./pages/blog";
 class HomePage extends HTMLElement {
     constructor() {
         super();
+        this.connectedCallback();
+    }
+
+    connectedCallback(): void {
         new DarkLightMode();
+        new GoogleAnalytics().trackPage();
     }
 }
 
