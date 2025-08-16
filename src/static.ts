@@ -80,14 +80,22 @@ export class PromoParts {
 }
 
 export class FooterLinks {
-    public fLinks = {
+    public static readonly PERSONAL_LINKS = {
+        github: "https://github.com/gokacinlar",
+        xTwitter: "https://x.com/devDissentNT",
+        mastodon: "https://mastodon.social/@gokacinlar",
+        hashnode: "https://gokacinlar.hashnode.dev",
+        email: "mailto:gokacinlar@tutanota.com?subject=To%20Dervi%C5%9F"
+    };
+
+    public static readonly BRANDING_LINKS = {
         cc010: "https://creativecommons.org/publicdomain/zero/1.0/",
         notByAi: "https://notbyai.fyi/"
-    }
+    };
 }
 
 export class AboutData {
-    public readonly tableData = [
+    public static readonly tableData = [
         {
             category: "Front-end",
             technologies: "JavaScript (ES6+), TypeScript",
