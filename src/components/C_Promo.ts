@@ -23,7 +23,7 @@ export class PromoTitle {
 export class PromoDescription {
     public renderPromoDesc(): string {
         return `
-            <div class="col-sm">
+            <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
                 <ul class="promo-featured-tabs list-unstyled d-flex flex-column gap-4 align-items-baseline">
                     <li>
                         ${this.renderTabGroupBtn("Problem Solver", "PS")}
@@ -39,7 +39,7 @@ export class PromoDescription {
                     </li>
                 </ul>
             </div>
-            <div id="tabGroupDetailsLister" class="col-sm"></div>
+            <div id="tabGroupDetailsLister" class="col-md-6 col-sm-12 col-sm"></div>
         `;
     }
 
