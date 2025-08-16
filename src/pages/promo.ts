@@ -49,18 +49,17 @@ class PromoTemplate {
         mp4FallbackSrc: "./assets/videos/code.mp4",
         posterSrc: ""
     });
-
     public promoTemplate(): string {
         return `
             <section id="promo" class="mx-2 my-2 rounded-5">
                 <div class="container-fluid w-100 px-2 py-2 d-flex flex-column gap-4">
-                    <div class="promo-videos-container column col-12 d-flex flex-row gap-3 align-items-center justify-content-center">
+                    <div class="promo-videos-container row col-12 mx-auto d-flex flex-row gap-3 align-items-center justify-content-center">
                         ${this.promoVideos()}
                     </div>
-                    <div class="promo-desc-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                    <div class="promo-desc-container row col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoDesc()}
                     </div>
-                    <div class="promo-skills-container column col-12 d-flex flex-column gap-4 align-items-center justify-content-center overflow-hidden">
+                    <div class="promo-skills-container row col-12 d-flex flex-column gap-4 align-items-center justify-content-center overflow-hidden">
                         ${this.promoSkills()}
                         <div class="psc-container w-100 position-relative overflow-hidden rounded-5">
                             <div id="promoSkillsContainer" class="d-flex flex-row align-items-center justify-content-center gap-4"></div>
@@ -68,17 +67,17 @@ class PromoTemplate {
                     </div>
                     <div class="promo-projects-container-parent">
                         ${new PromoTitle("Some of my projects are")}
-                        <div class="promo-projects-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center overflow-hidden">
+                        <div class="promo-projects-container row col-12 d-flex flex-column gap-2 align-items-center justify-content-center overflow-hidden">
                             ${this.promoProjectCards()}
                         </div>
                     </div>
-                    <div class="promo-teacheng-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                    <div class="promo-teacheng-container row col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoEngTeach()}
                     </div>
-                    <div class="promo-motto-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                    <div class="promo-motto-container row col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoMotto()}
                     </div>
-                    <div class="promo-work-container column col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                    <div class="promo-work-container row col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoWork()}
                     </div>
                 </div>
@@ -102,8 +101,8 @@ class PromoTemplate {
 
     private promoVideos(): string {
         return `
-            <div class="col-sm overflow-hidden">${this.videoOne.render("Teaching for Life")}</div>
-            <div class="col-sm overflow-hidden">${this.videoTwo.render("Coding for Passion")}</div>
+            <div class="col-sm overflow-hidden px-1">${this.videoOne.render("Teaching for Life")}</div>
+            <div class="col-sm overflow-hidden px-1">${this.videoTwo.render("Coding for Passion")}</div>
         `;
     }
 

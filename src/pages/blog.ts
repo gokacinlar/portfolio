@@ -1,4 +1,5 @@
 import DOMPurify from "dompurify";
+import ListXPosts from "../utils/xPosts";
 import { Template } from "../helper";
 
 class Updates extends HTMLElement {
@@ -8,7 +9,11 @@ class Updates extends HTMLElement {
         const template = new Template().createTemplate(this.render());
         this.appendChild(template.content.cloneNode(true));
 
-        this.fetchAndRenderContent();
+        // Init timeline fetching from X
+        document.addEventListener("DOMContentLoaded", () => {
+            new ListXPosts("blogMain", "devDissentNT");
+        });
+        // this.fetchAndRenderContent();
     }
 
     private render(): string {
@@ -44,8 +49,8 @@ class Updates extends HTMLElement {
                 ${this.blogAsideTab()}
                 <section id="blogAsideChild" class="rounded-5 h-75 px-3 py-3 border border-1 border-dark-subtle">
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="updates" role="tabpanel" aria-labelledby="updates">..xcvxcvxcvxcv.</div>
-                        <div class="tab-pane fade" id="writings" role="tabpanel" aria-labelledby="writings">sdfsfsdfsd</div>
+                        <div class="tab-pane fade show active" id="updates" role="tabpanel" aria-labelledby="updates">-</div>
+                        <div class="tab-pane fade" id="writings" role="tabpanel" aria-labelledby="writings">-</div>
                     </div>
                 </section>
             </aside>
