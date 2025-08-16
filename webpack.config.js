@@ -18,9 +18,13 @@ let multipleHtmlPlugins = htmlPageNames.map(name => {
     })
 });
 
-// Web3forms connections
+// CspHtmlWebpackPlugin related outer connections
 let scripts = ["https://web3forms.com/client/script.js",
-    "https://api.web3forms.com/submit"];
+    "https://api.web3forms.com/submit",
+    "https://platform.twitter.com/widgets.js",
+    "https://platform.twitter.com/js/",
+    "https://www.googletagmanager.com/gtag/js?id=G-XMT56BGFP8&l=ga4DataLayer"];
+
 // Footer images
 let imageConnections = ["https://creativecommons.org/publicdomain/zero/1.0/",
     "https://notbyai.fyi/",
@@ -102,7 +106,7 @@ module.exports = {
         ignored: /node_modules/,
     },
     resolve: {
-        extensions: [".ts", ".js"],
+        extensions: [".ts", ".js", "..."],
     },
     optimization: {
         chunkIds: "total-size",
