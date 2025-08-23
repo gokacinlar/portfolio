@@ -14,7 +14,7 @@ class ListXPosts {
 
     private async init(): Promise<void> {
         try {
-            const twttr = await this.loadTwitterWidgets();
+            const twttr: Promise<Function> = await this.loadTwitterWidgets();
             await this.createTimeline(twttr);
         } catch (error) {
             console.error("Error initializing Twitter widgets:", error);

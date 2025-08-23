@@ -68,7 +68,7 @@ class ScrollSpy {
     // Scrollspy list items
     private renderNavLinks() {
         return this.navLinks.map(({ id, icon, label }) =>
-            `<a class="list-group-item list-group-item-action rounded-pill shadow-sm" href="#${id}">${icon} ${label}</a>`
+            `<a class="list-group-item list-group-item-action rounded-pill shadow-sm focus-ring focus-ring-secondary" href="#${id}">${icon} ${label}</a>`
         ).join("");
     }
 
@@ -113,37 +113,69 @@ class ScrollSpy {
                     ${this.renderNavLinks()}
                 </div>
                 <div data-bs-spy="scroll" data-bs-target="#about-scroll-spy-id" data-bs-offset="0" data-bs-smooth-scroll="true"  class="scrollspy-content" tabindex="0">
-                    <h4 id="li-1">🧑 About Me</h4>
-                    <hr class="w-25">
                     <div>
-                        <p class="about-li1-text fs-5 fw-medium">
-                            I'm highly interested in creating <mark>content-first</mark> websites as well as crafting stand-alone
-                            <mark>web applications (SPAs)</mark> or <mark>multi-page</mark> static content where <em>speed</em> &amp;
-                            <em>progressive enhancement</em> are critically important. I love building user interfaces with mainly
-                            <strong>React.</strong>
-                        </p>
-                        <p class="about-li1-text fs-5 fw-medium">
-                            My primary field is teaching English in <mark>ESL (English as a Second Language)</mark> context. My main
-                            focus is to maximize practical usage of English in almost every aspect related to casual or academical
-                            way of interacting with the language.
-                        </p>
+                        <div>
+                            <h4 id="li-1">🧑 About Me</h4>
+                            <hr class="w-25">
+                        </div>
+                        <div>
+                            <p class="about-li1-text fs-5 fw-medium">
+                                I'm highly interested in creating <mark>content-first</mark> websites as well as crafting stand-alone
+                                <mark>web applications (SPAs)</mark> or <mark>multi-page</mark> static content where <em>speed</em> &amp;
+                                <em>progressive enhancement</em> are critically important. I love building user interfaces with mainly
+                                <strong>React.</strong>
+                            </p>
+                            <p class="about-li1-text fs-5 fw-medium">
+                                My primary field is teaching English in <mark>ESL (English as a Second Language)</mark> context. My main
+                                focus is to maximize practical usage of English in almost every aspect related to casual or academical
+                                way of interacting with the language.
+                            </p>
+                        </div>
                     </div>
-                    <h4 id="li-2">📚 Education</h4>
-                    <hr class="w-25">
-                    ${this.renderTable(["Institution", "Field", "Degree", "Date"], this.educationRows, "eduTable")}
-                    <h4 id="li-3">📠 Work</h4>
-                    <hr class="w-25">
-                    <p class="fs-5 fw-medium">You can download or view my CV here.</p>
-                    <h4 id="li-4">🚀 Tech Stack & Tools</h4>
-                    <hr class="w-25">
-                    ${this.renderTable(["Category", "Technologies", "Libraries"], this.stackRows, "stackTable")}
-                    ${this.renderQuote(this.quote)}
-                    <h4 id="li-5">📧 E-mail</h4>
-                    <hr class="w-25">
-                    ${new EmailForm().render()}
-                    <h4 id="li-6">🔎 Advanced</h4>
-                    <hr class="w-25">
-                    ${new Accordion().render()}
+                    <div>
+                        <div>
+                            <h4 id="li-2">📚 Education</h4>
+                            <hr class="w-25">
+                        </div>
+                        ${this.renderTable(["Institution", "Field", "Degree", "Date"], this.educationRows, "eduTable")}
+                    </div>
+                    <div>
+                        <div>
+                            <h4 id="li-3">📠 Work</h4>
+                            <hr class="w-25">
+                        </div>
+                        <div>
+                            <p class="fs-5 fw-medium">You can download or view my CV here.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <h4 id="li-4">🚀 Tech Stack & Tools</h4>
+                            <hr class="w-25">
+                        </div>
+                        <div>
+                            ${this.renderTable(["Category", "Technologies", "Libraries"], this.stackRows, "stackTable")}
+                        </div>
+                        ${this.renderQuote(this.quote)}
+                    </div>
+                    <div>
+                        <div>
+                            <h4 id="li-5">📧 E-mail</h4>
+                            <hr class="w-25">
+                        </div>
+                        <div>
+                            ${new EmailForm().render()}
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <h4 id="li-6">🔎 Advanced</h4>
+                            <hr class="w-25">
+                        </div>
+                        <div>
+                            ${new Accordion().render()}
+                        </div>
+                    </div>
                 </div>
             </section>
         `;

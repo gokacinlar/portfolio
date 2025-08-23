@@ -68,8 +68,9 @@ class About extends HTMLElement {
     private readonly SocialsElements: SocialsElement[] = [
         { name: "GitHub", icon: "bi bi-github", href: new URL("https://github.com/gokacinlar") },
         { name: "X/Twitter", icon: "bi bi-twitter-x", href: new URL("https://x.com/devDissentNT") },
+        { name: "Mastodon", icon: "bi bi-mastodon", href: new URL("https://mastodon.social/@gokacinlar") },
         { name: "Hashnode", icon: "bi bi-book", href: new URL("https://gokacinlar.hashnode.dev/") },
-        { name: "E-mail", icon: "bi bi-mailbox", href: new URL("mailto:gokacinlar@yaani.com?subject=To%20Dervi%C5%9F ") }
+        { name: "E-mail", icon: "bi bi-mailbox", href: new URL("mailto:gokacinlar@tutanota.com?subject=To%20Dervi%C5%9F ") }
     ]
 
     private render(): void {
@@ -95,18 +96,22 @@ class About extends HTMLElement {
 
     private renderContent(): string {
         return `
-        <section id="about-grid" class="container mb-3">
-            <div id="about-grid-parent" class="row px-2">
-                ${this.renderAside()}
-                ${this.renderMain()}
-            </div>
-        </section>
-    `;
+            <section id="about-grid" class="container mb-3">
+                <div id="about-grid-parent" class="row gy-4 px-2">
+                    <div class="col-12 col-md-4 col-sm">
+                        ${this.renderAside()}
+                    </div>
+                    <div class="col-12 col-md-8 col-sm">
+                        ${this.renderMain()}
+                    </div>
+                </div>
+            </section>
+        `;
     }
 
     private renderAside(): string {
         return `
-        <aside id="about-aside" class="col-12 col-md-4 bg-gradient rounded-5 shadow-sm py-3 px-4">
+        <aside id="about-aside" class="bg-gradient rounded-5 shadow-sm py-3 px-4 h-100">
             <div>
                 ${this.renderHeroSection()}
                 ${this.renderSkillsSection()}
@@ -119,7 +124,7 @@ class About extends HTMLElement {
 
     private renderMain(): string {
         return `
-        <section id="about-main" class="col-12 col-md-8 bg-gradient rounded-5 shadow-sm py-3 px-3 overflow-auto">
+        <section id="about-main" class="bg-gradient rounded-5 shadow-sm py-3 px-3 overflow-auto">
             ${new ScrollSpy().render()}
         </section>
     `;

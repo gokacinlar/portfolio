@@ -484,10 +484,11 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     .promo-projects-container {
+        @include responsive-styling($mobile-breakpoints, align-items, baseline);
+        @include responsive-styling($mobile-breakpoints, justify-content, baseline);
+
         @each $bp in $mobile-breakpoints {
             @include m_queries.responsive($bp) {
-                align-items: unset !important;
-                justify-content: unset !important;
                 flex-direction: row !important;
                 flex-wrap: nowrap !important;
                 overflow-x: scroll !important;
@@ -501,15 +502,12 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     #promoCardContainer {
         @include responsive-flex-direction($mobile-breakpoints, row);
         @include responsive-styling($mobile-breakpoints, flex-wrap, nowrap);
+        @include responsive-styling($mobile-breakpoints, justify-content, start);
         @include responsive-styling($tablet-breakpoints, flex-wrap, wrap);
 
         &>div {
-            @each $bp in $mobile-breakpoints {
-                @include m_queries.responsive($bp) {
-                    scroll-snap-align: start !important;
-                    flex-shrink: 0;
-                }
-            }
+            @include responsive-styling($mobile-breakpoints, scroll-snap-align, start);
+            @include responsive-styling($mobile-breakpoints, flex-shrink, 0);
         }
     }
 
@@ -696,17 +694,20 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     // Footer
     .footer-container {
         background: var(--clr-eight);
-
-        & {
-            border-top-left-radius: 28px;
-            border-top-right-radius: 28px;
-        }
     }
 
-    .footer-right-brand {
-        width: 142px !important;
-        height: 52px !important;
-        aspect-ratio: 16 / 9;
+    .footer-links {
+        white-space: nowrap;
+    }
+
+    .footer-promo-links {
+        @include responsive-styling($mobile-breakpoints, flex-direction, column);
+    }
+
+    .footer-brading-list {
+        @include responsive-styling($mobile-breakpoints, flex-direction, column);
+        @include responsive-styling($mobile-breakpoints, align-items, end);
+        @include responsive-styling($mobile-breakpoints, justify-content, space-evenly);
     }
 
     /***** ABOUT *****/
@@ -721,6 +722,15 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     #about-scroll-spy-id {
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        & {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         @each $bp in $mobile-breakpoints {
             @include m_queries.responsive($bp) {
                 align-items: unset !important;
@@ -784,12 +794,14 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     /* Blog (updates) */
 
-    #blogContainer {
+    #blogContainer,
+    #blogMain {
+        @include responsive-styling($mobile-breakpoints, height, auto)
+    }
 
-        &>aside,
-        main {
-            background: var(--clr-eight);
-        }
+    #blogMain,
+    #blogAside {
+        background: var(--clr-eight);
     }
 
     #blogAsideChild {

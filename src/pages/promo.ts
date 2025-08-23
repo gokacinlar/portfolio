@@ -56,10 +56,10 @@ class PromoTemplate {
                     <div class="promo-videos-container row col-12 mx-auto d-flex flex-row gap-3 align-items-center justify-content-center">
                         ${this.promoVideos()}
                     </div>
-                    <div class="promo-desc-container row col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                    <div class="promo-desc-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoDesc()}
                     </div>
-                    <div class="promo-skills-container row col-12 d-flex flex-column gap-4 align-items-center justify-content-center overflow-hidden">
+                    <div class="promo-skills-container row col-12 mx-auto d-flex flex-column gap-4 align-items-center justify-content-center overflow-hidden">
                         ${this.promoSkills()}
                         <div class="psc-container w-100 position-relative overflow-hidden rounded-5">
                             <div id="promoSkillsContainer" class="d-flex flex-row align-items-center justify-content-center gap-4"></div>
@@ -67,17 +67,17 @@ class PromoTemplate {
                     </div>
                     <div class="promo-projects-container-parent">
                         ${new PromoTitle("Some of my projects are")}
-                        <div class="promo-projects-container row col-12 d-flex flex-column gap-2 align-items-center justify-content-center overflow-hidden">
+                        <div class="promo-projects-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center overflow-hidden">
                             ${this.promoProjectCards()}
                         </div>
                     </div>
-                    <div class="promo-teacheng-container row col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                    <div class="promo-teacheng-container row mx-auto col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoEngTeach()}
                     </div>
-                    <div class="promo-motto-container row col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                    <div class="promo-motto-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoMotto()}
                     </div>
-                    <div class="promo-work-container row col-12 d-flex flex-column gap-2 align-items-center justify-content-center">
+                    <div class="promo-work-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoWork()}
                     </div>
                 </div>

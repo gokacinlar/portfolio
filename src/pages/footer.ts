@@ -16,8 +16,8 @@ class FooterNodes {
 
     public footerTemplate(): string {
         return `
-            <section class="footer-container mx-2 my-2 px-2 py-2 my-0 d-flex flex-row align-content-center justify-content-between">
-                <div class="d-flex align-items-start gap-3 px-2 py-2">
+            <section class="footer-container rounded-top-5 mx-2 my-2 px-2 py-2 d-flex flex-row align-content-center justify-content-between">
+                <div class="footer-left d-flex align-items-start gap-3 px-2 py-2 rounded-5">
                     ${this.footerLeft()}
                 </div>
                 <div class="d-flex align-items-center">
@@ -33,9 +33,9 @@ class FooterNodes {
 
         return `
             ${headerLeft}
-            <hr class="vr text-white border border-warning"></hr>
+            <hr class="vr text-white border border-opacity-75 border-warning h-100 my-auto"></hr>
             <nav>
-                <ul class="footer-promo-links list-unstyled d-flex flex-column align-items-start justify-content-center gap-1 mb-0">
+                <ul class="footer-promo-links list-unstyled d-flex flex-row align-items-start justify-content-center gap-1 mb-0">
                     ${personalLinks}
                 </ul>
             </nav>
@@ -53,7 +53,7 @@ class FooterNodes {
             {
                 href: FooterLinks.BRANDING_LINKS.notByAi,
                 ariaLabel: "NotByAI Badge",
-                src: "notbyai_eng.svg",
+                src: "notbyai.svg",
                 title: "NotByAI Badge"
             }
         ];
@@ -62,7 +62,7 @@ class FooterNodes {
             .join("");
 
         return `
-            <ul class="list-unstyled d-flex flex-column h-100 align-content-center justify-content-center gap-2 px-2 mb-0">
+            <ul class="footer-brading-list list-unstyled d-flex flex-row gap-2 px-2 mb-0 h-100">
                 ${brandingHTML}
             </ul>
         `;
@@ -77,12 +77,12 @@ class FooterNodes {
             { title: "Mastodon", href: mastodon, iconClass: "bi-mastodon" },
         ];
 
-        return linkData
-            .map(link => `
+        return linkData.map(link => `
                 <li class="w-100">
-                    <a class="d-flex flex-row align-items-center gap-2 px-2 py-2 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                    <a class="d-flex flex-row align-items-center footer-links gap-2 px-2 py-2
+                    fw-medium link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
                         title="${link.title}" href="${link.href}" target="_blank">
-                        <i class="bi ${link.iconClass} fs-2"></i> ${link.title}
+                        <i class="bi ${link.iconClass} fs-3"></i> ${link.title}
                     </a>
                 </li>
             `).join("");

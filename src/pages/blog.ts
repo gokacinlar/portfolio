@@ -19,12 +19,16 @@ class Updates extends HTMLElement {
     private render(): string {
         return `
             <section class="container h-100">
-                <div id="blogContainer" class="row g-3 h-100"> <!-- Added g-3 for gutter -->
-                    ${this.blogAside()}
-                    <main id="blogMain" class="col-xs-12 col-md-8 col-lg-9 col-sm rounded-5 px-3 py-3 shadow-sm">
-                        <h1>Main Content</h1>
-                        <p>This is the main section.</p>
-                    </main>
+                <div id="blogContainer" class="row mb-3 h-100">
+                    <div class="bwrapper col-md-4 col-lg-4 col-sm h-100">
+                        ${this.blogAside()}
+                    </div>
+                    <div class="bwrapper col-md-8 col-lg-8 col-sm h-100">
+                        <main id="blogMain" class="h-100 rounded-5 px-3 py-3 shadow-sm">
+                            <h1>Main Content</h1>
+                            <p>This is the main section.</p>
+                        </main>
+                    </div>
                 </div>
             </section>
         `;
@@ -45,7 +49,7 @@ class Updates extends HTMLElement {
 
     private blogAside(): string {
         return `
-            <aside id="blogAside" class="col-xs-12 col-md-4 col-lg-3 col-sm rounded-5 px-3 py-3 shadow-sm">
+            <aside id="blogAside" class="h-100 rounded-5 p-3 shadow-sm">
                 ${this.blogAsideTab()}
                 <section id="blogAsideChild" class="rounded-5 h-75 px-3 py-3 border border-1 border-dark-subtle">
                     <div class="tab-content" id="pills-tabContent">
