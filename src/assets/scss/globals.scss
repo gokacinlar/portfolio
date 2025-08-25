@@ -3,15 +3,45 @@
 @font-face {
     font-family: "Inter";
     src: url("../fonts/Geist.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Franuces";
     src: url("../fonts/Franuces.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
-$font-family: "Inter", "Franuces", sans-serif, monospace;
-$font-display: auto;
+// Font fallback stack
+$font-family: "Inter",
+    "Franuces",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+// Monospace context
+$monospace-font-family: "Cascadia Code",
+    "Fira Code",
+    "Source Code Pro",
+    Menlo,
+    Consolas,
+    "Courier New",
+    monospace;
+
+$font-display: swap;
 
 $rounded: (
     sm: 18px,
