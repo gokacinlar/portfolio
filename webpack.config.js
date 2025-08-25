@@ -160,8 +160,12 @@ module.exports = {
             ],
         }),
         new MiniCssExtractPlugin({
+            linkType: "text/css",
             filename: "css/[name].[contenthash].css",
             chunkFilename: "css/[name].[contenthash].chunk.css",
+            attributes: {
+                media: "print"
+            }
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "public/index.html"),
