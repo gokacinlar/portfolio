@@ -1,5 +1,3 @@
-import DOMPurify from "dompurify";
-import ListXPosts from "../utils/xPosts";
 import { Template } from "../helper";
 
 class Updates extends HTMLElement {
@@ -8,12 +6,6 @@ class Updates extends HTMLElement {
 
         const template = new Template().createTemplate(this.render());
         this.appendChild(template.content.cloneNode(true));
-
-        // Init timeline fetching from X
-        document.addEventListener("DOMContentLoaded", () => {
-            new ListXPosts("blogMain", "devDissentNT");
-        });
-        // this.fetchAndRenderContent();
     }
 
     private render(): string {
@@ -75,50 +67,6 @@ class Updates extends HTMLElement {
                 </div>
             </div>
         `;
-    }
-
-    private async fetchAndRenderContent(): Promise<void> {
-        const types: Array<string> = ["update", "writing"];
-        for (const type of types) {
-            try {
-                const response = await fetch(`../php/init.php?type=${type}`);
-                if (!response.ok) {
-                    throw new Error("Network error.");
-                } else {
-                    const data = await response.json();
-
-                    const tab = this.querySelector(`#${type}s`);
-                    if (tab) {
-                        tab.innerHTML = DOMPurify.sanitize(this.renderContent(data));
-                    }
-                }
-            } catch (error: unknown) {
-                console.error(`Error fetching ${type}s:`, error);
-                const tab = this.querySelector(`#${type}s`);
-                if (tab) {
-                    tab.innerHTML = DOMPurify.sanitize(`<p class="text-danger">Failed to load ${type}s.</p>`);
-                }
-            }
-        }
-    }
-
-    // Render the received content from init.php in aside
-    private renderContent(data: any[]): string {
-        if (!data.length) {
-            return "<p>No content available.</p>";
-        } else {
-            return `
-            <ul class="list-group">
-                ${data.map(item => `
-                    <li class="list-group-item">
-                        <h5>${item.title}</h5>
-                        <p>${item.body}</p>
-                        <small>By ${item.author} on ${item.date}</small>
-                    </li>
-                `).join("")}
-            </ul>
-        `;
-        }
     }
 }
 
