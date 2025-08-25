@@ -6,7 +6,7 @@ const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 
-// For static page's script linking
+// For static page"s script linking
 let htmlPageNames = ["about.html", "updates.html", "404.html"];
 let multipleHtmlPlugins = htmlPageNames.map(name => {
     return new HtmlWebpackPlugin({
@@ -82,7 +82,7 @@ module.exports = {
         },
     },
     mode: "development", // Later change this to "production" for final result
-    devtool: "cheap-module-source-map", // Later remove for production since we won't be needing eval() in prod
+    devtool: "cheap-module-source-map", // Later remove for production since we won"t be needing eval() in prod
     devServer: {
         static: {
             directory: path.join(__dirname, "public"),
@@ -173,6 +173,30 @@ module.exports = {
             minify: false,
             template: "./src/index.html",
             filename: "./index.html",
+            meta: {
+                description: { name: "description", content: "Derviş Öksüzoğlu: İngilizce Öğretmeni & Front-end Web Geliştiricisi; Pedagoji, Teknoloji, Bilim ve Sanat | Eğitimin teknoloji ile buluştuğu yer." },
+                keywords: { name: "keywords", content: "derviş, öksüzoğlu, derviş öksüzoğlu, blog, portfolyo, ingilizce öğretmeni, english teacher, web geliştiricisi, front-end web developer" },
+                author: { name: "author", content: "Derviş Öksüzoğlu" },
+                owner: { name: "owner", content: "Derviş Öksüzoğlu" },
+                canonical: { rel: "canonical", href: "https://dervisoksuzoglu.com.tr" },
+                // Open Graph
+                "og:type": { property: "og:type", content: "website" },
+                "og:url": { property: "og:url", content: "https://dervisoksuzoglu.com.tr" },
+                "og:title": { property: "og:title", content: "Derviş Öksüzoğlu" },
+                "og:description": { property: "og:description", content: "Derviş Öksüzoğlu: İngilizce Öğretmeni & Front-end Web Geliştiricisi; Pedagoji, Teknoloji, Bilim ve Sanat | Eğitimin teknoloji ile buluştuğu yer." },
+                "og:image": { property: "og:image", content: "https://dervisoksuzoglu.com.tr/src/assets/images/static/webp/logo.webp" },
+                // Twitter/X
+                "twitter:card": { name: "twitter:card", content: "summary_large_image" },
+                "twitter:url": { name: "twitter:url", content: "https://dervisoksuzoglu.com.tr" },
+                "twitter:title": { name: "twitter:title", content: "Derviş Öksüzoğlu" },
+                "twitter:description": { name: "twitter:description", content: "Derviş Öksüzoğlu: İngilizce Öğretmeni & Front-end Web Geliştiricisi; Pedagoji, Teknoloji, Bilim ve Sanat | Eğitimin teknoloji ile buluştuğu yer." },
+                "twitter:image": { name: "twitter:image", content: "https://dervisoksuzoglu.com.tr/src/assets/images/static/webp/logo.webp" },
+                robots: { name: "robots", content: "index, follow, noarchive, max-snippet: -1, max-image-preview:standard" },
+                "revisit-after": { name: "revisit-after", content: "7 days" },
+                "geo.region": { name: "geo.region", content: "TR-34" },
+                "geo.placename": { name: "geo.placename", content: "Istanbul" }
+            },
+            hash: true
         }),
         new CspHtmlWebpackPlugin(
             {
