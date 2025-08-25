@@ -49,8 +49,8 @@ class HeroTemplate {
             "Derviş Öksüzoğlu",
             "heroLogoBg",
             "",
-            "../assets/images/static/logo.jpg",
-            "../assets/images/static/logo_256x256.jpg 256w, ../assets/images/static/logo_512x512.jpg 512w, ../assets/images/static/logo.jpg 1024w",
+            "../assets/images/static/webp/logo.webp",
+            "../assets/images/static/webp/logo_256x256.webp 256w, ../assets/images/static/webp/logo_512x512.webp 512w, ../assets/images/static/webp/logo.webp 1024w",
         )}
                         </section>
                     </div>

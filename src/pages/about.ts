@@ -42,8 +42,8 @@ class About extends HTMLElement {
         name: "Derviş Öksüzoğlu",
         className: "heroLogoBg",
         link: "",
-        imageSrc: "../assets/images/static/logo.jpg",
-        srcSet: "../assets/images/static/logo_256x256.jpg 256w, ../assets/images/static/logo_512x512.jpg 512w, ../assets/images/static/logo.jpg 1024w"
+        imageSrc: "../assets/images/static/webp/logo.webp",
+        srcSet: "../assets/images/static/webp/logo_256x256.webp 256w, ../assets/images/static/webp/logo_512x512.webp 512w, ../assets/images/static/webp/logo.webp 1024w"
     };
 
     private readonly skillConfigs: SkillConfig[] = [

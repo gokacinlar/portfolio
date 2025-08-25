@@ -55,9 +55,9 @@ export class HeaderNode {
             <a href="">
                 <img
                     class="header-logo img-fluid img-responsive lazyload"
-                    src="../assets/images/static/logo.jpg"
-                    srcset="../assets/images/static/logo_256x256.jpg 256w, ../assets/images/static/logo_512x512.jpg 512w,
-                    ../assets/images/static/logo.jpg 1024w"
+                    src="../assets/images/static/webp/logo.webp"
+                    srcset="../assets/images/static/webp/logo_256x256.webp 256w, ../assets/images/static/webp/logo_512x512.webp 512w,
+                    ../assets/images/static/webp/logo.webp 1024w"
                     sizes="(max-width: 600px) 256px, (max-width: 960px) 512px, 1024px"
                     alt="Derviş Öksüzoğlu"
                     title="Derviş Öksüzoğlu"
