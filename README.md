@@ -10,9 +10,9 @@ This is my own portfolio site which I'll be using to briefly introduce myself to
 Site will primarily use;
 
 * HTMX
-* MySQL
-* PHP
 * Bootstrap
+* Custom Components
+* GraphQL
 
 > As this project doesn't require that many entitlement on fancy libraries, **minimal usage of external resources** as well as **maximizing native platforms** was primary choice & motivation for me.
 
