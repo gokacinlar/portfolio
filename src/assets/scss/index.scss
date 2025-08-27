@@ -807,6 +807,19 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     #blogAsideChild {
         background: var(--clr-one);
     }
+
+    /* Promo - Interested In Working */
+
+    .promo-interested-container {
+        background: var(--clr-eight);
+    }
+
+    .promo-interested-img {
+        --def-height: 512px;
+        max-width: 100%;
+        max-height: var(--def-height);
+        object-fit: cover;
+    }
 }
 
 @layer secondary {}
