@@ -1,5 +1,5 @@
 // Components
-import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish, PromoMotto } from "../components/C_Promo";
+import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish, PromoMotto, PromoInterested } from "../components/C_Promo";
 import { VideoElement } from "../components/C_Video";
 import { Template, PromoFunctions, HorizontalMiddleMouseScroll, ScrollRevealAction } from "../helper";
 import { PromoParts } from "../static";
@@ -30,7 +30,8 @@ class Promo extends HTMLElement {
                 "promo-skills-container",
                 "promo-projects-container",
                 "promo-motto-container",
-                "promo-teacheng-container"];
+                "promo-teacheng-container",
+                "promo-interested-container"];
         new ScrollRevealAction().scrollReveal(dynamicContentDivs);
     }
 }
@@ -135,7 +136,7 @@ class PromoTemplate {
         return `
             ${new PromoTitle("Interested in working?")}
             <div id="promoWork">
-
+                ${new PromoInterested().render()}
             </div>
         `;
     }
