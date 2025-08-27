@@ -11,6 +11,7 @@ import "lazysizes";
 // Components & Helper functions
 import { DarkLightMode } from "./helper";
 import GoogleAnalytics from "./utils/gTag";
+import EffectiveCaching from "./utils/cache";
 // Pages
 import "./pages/header";
 import "./pages/footer";
@@ -28,6 +29,7 @@ class HomePage extends HTMLElement {
     connectedCallback(): void {
         new DarkLightMode();
         new GoogleAnalytics().trackPage();
+        new EffectiveCaching().ensureCache();
     }
 }
 
