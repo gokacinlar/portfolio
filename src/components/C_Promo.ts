@@ -166,3 +166,83 @@ export class PromoMotto {
         `;
     }
 }
+
+interface InterestedOptions {
+    title: string;
+    description: string;
+    img: string;
+    link: URL;
+}
+
+export class PromoInterested {
+    private options: InterestedOptions[];
+    private data: InterestedOptions[];
+
+    constructor() {
+        this.options = [];
+        this.data = [];
+        this.setData([
+            {
+                title: "Do you need assistance in learning English?",
+                description: `
+                    I can offer you P2P online teaching exprience with appropriate enrollments chosen by you. These include plans such as
+                    <strong>Supplementary English Course</strong>, <strong>Proficiency English Course</strong>, and <strong>Exam-Focused English
+                    Course</strong>. For more broad information, see the plans below!
+                `,
+                img: "../assets/images/static/webp/qualifications-main-english.webp",
+                link: new URL("https://dervisoksuzoglu.com.tr")
+            },
+            {
+                title: "Do you have a web project?",
+                description: `
+                    I can design, prototype and develop with on-demand considerations for a fully-functional web application using React as well as
+                    classical CMS approaches like WordPress or multi-page static content websites such as hobby sites, portfolios, blogs and many more!
+                    I also offer maintenance for your personal or business web solutions. For more broad information, see the plans below!
+                `,
+                img: "../assets/images/static/webp/qualifications-main-webdev.webp",
+                link: new URL("https://dervisoksuzoglu.com.tr")
+            }
+        ]);
+    }
+
+    // Function to populate data with actual information
+    public setData(data: InterestedOptions[]): void {
+        this.data = data;
+    }
+
+    public render(): string {
+        return `
+            <div class="promo-interested-container row rounded-5 shadow-sm">
+                ${this.renderTabs(this.data)}
+            </div>
+        `;
+    }
+
+    private renderTabs(data: InterestedOptions[] = this.options): string {
+        return data.map((item) => {
+            return `
+                <section class="container-fluid p-4">
+                    <div class="row gy-4 gx-4">
+                        <div class="col-lg-6 col-md-6 col-sm">
+                            <div>
+                                <h3 class="display-5 fw-medium">${item.title}</h3>
+                            </div>
+                            <hr class="w-50">
+                            <div class="d-flex flex-column align-items-start justify-content-start">
+                                <p class="lead fw-medium fs-4">${item.description}</p>
+                                <button class="btn btn-lg btn-outline-success rounded-5 fs-3 fw-medium">
+                                    <a class="text-reset link-offset-2 link-underline link-underline-opacity-0" href="${item.link}">See plans</a>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm">
+                            <a href="${item.link}" target="_blank">
+                                <img class="promo-interested-img lazyload img-fluid rounded-5 w-100" src="${item.img}" alt="${item.title}" title="${item.title}">
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }).join("");
+    }
+}
