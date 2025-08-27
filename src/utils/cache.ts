@@ -41,7 +41,6 @@ class EffectiveCaching {
         return cachedResponses;
     }
 
-    // Insert items into cache
     private async insertCachedItems(): Promise<void> {
         const cache = await caches.open(this.cacheName);
 
@@ -53,7 +52,6 @@ class EffectiveCaching {
         }
     }
 
-    // Public method to ensure cache exists and is populated
     public async ensureCache(): Promise<Response[]> {
         const cachedItems = await this.getCachedItems();
 
@@ -65,3 +63,5 @@ class EffectiveCaching {
         }
     }
 }
+
+export default EffectiveCaching;
