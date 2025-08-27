@@ -49,21 +49,16 @@ class ScrollSpy {
     ];
 
     private stackRows: Type.TableRow[] = [
-        ["Front-end", "JavaScript (ES6+), TypeScript", "React, Redux"],
-        ["Back-end", "PHP(7+), Node.js, Express.js", "Laravel"],
-        ["Styling", "Bootstrap (+derivatives), SASS, Tailwind CSS", "Shadcn, DaisyUI & MaterialUI"],
-        ["Databases", "MySQL, SQLite, PostgreSQL (PG preffered)", "-"],
-        ["DevOps", "Apache, Docker, Linux (WSL + Native[Ubuntu])", "-"],
+        ["Front-end", "JavaScript (ES6+), TypeScript", "React, Redux, Next.js"],
+        ["Back-end", "PHP(7+), Node.js", "Express.js, Codeigniter"],
+        ["Styling", "Bootstrap (+derivatives), SASS, Tailwind CSS", "Shadcn & DaisyUI"],
+        ["Databases", "MySQL, PostgreSQL", "Supabase"],
+        ["DevOps", "Docker, Linux", "-"],
         ["CMS", "Wordpress, Headless Wordpress", "-"],
-        ["Tools", "Git, Webpack", "-"],
-        ["Testing", "Mocha, Jest & Playwright", "-"],
-        ["Design & UX", "Figma, Adobe Illustrator, Adobe Photoshop", "-"],
+        ["SSG", "Astro & Gatsby", "Next.js"],
+        ["Testing", "Jest & Playwright", "-"],
+        ["Design & UX", "Figma, Adobe Illustrator & Adobe Photoshop", "-"],
     ];
-
-    private quote: Type.GenericString = {
-        text: "These skills actually doesn't correlate to 100% familiarity with them. I know how to utilize them efficiently in project's context.",
-        author: "me"
-    }
 
     // Scrollspy list items
     private renderNavLinks() {
@@ -88,21 +83,6 @@ class ScrollSpy {
                     </tbody>
                 </table>
             </div>
-        `;
-    }
-
-    private renderQuote(quote: Type.GenericString): string {
-        return `
-            <blockquote class="blockquote">
-                <figure>
-                    <blockquote class="blockquote">
-                        <p>${quote.text}</p>
-                    </blockquote>
-                    <figcaption class="blockquote-footer">
-                        <cite title="${quote.author}">${quote.author}</cite>
-                    </figcaption>
-                </figure>
-            </blockquote>
         `;
     }
 
@@ -154,9 +134,8 @@ class ScrollSpy {
                             <hr class="w-25">
                         </div>
                         <div>
-                            ${this.renderTable(["Category", "Technologies", "Libraries"], this.stackRows, "stackTable")}
+                            ${this.renderTable(["Category", "Technologies", "Libraries & Tools"], this.stackRows, "stackTable")}
                         </div>
-                        ${this.renderQuote(this.quote)}
                     </div>
                     <div>
                         <div>
