@@ -45,9 +45,15 @@ class EffectiveCaching {
         const cache = await caches.open(this.cacheName);
 
         for (const item of EffectiveCaching.ITEMS_TO_BE_CACHED) {
-            const response = await fetch(item);
-            if (response.ok) {
-                await cache.put(item, response);
+            try {
+                const response = await fetch(item);
+                if (response.ok) {
+                    // Clone the response before caching
+                    const responseToCache = response.clone();
+                    await cache.put(item, responseToCache);
+                }
+            } catch (error) {
+                console.error(`Failed to fetch and cache ${item}:`, error);
             }
         }
     }
