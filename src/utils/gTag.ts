@@ -1,9 +1,8 @@
 import Analytics, { AnalyticsInstance } from "analytics";
 import googleAnalytics from "@analytics/google-analytics";
 
-
 class GoogleAnalytics {
-    public static readonly ANALYTICS_KEY: Array<string> = ["G-XMT56BGFP8"];
+    public static readonly ANALYTICS_KEY: Array<string> = [`${process.env.GTAG}`];
     public analytics: AnalyticsInstance;
 
     constructor() {

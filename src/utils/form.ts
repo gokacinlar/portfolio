@@ -17,7 +17,7 @@ export function loadWeb3Forms(): Promise<void> {
 
         script.onload = () => {
             resolve();
-            console.log("Web3Forms script loaded successfully");
+            console.log("Web3Forms script loaded successfully. Ready to accept e-mails.");
         };
         script.onerror = () => {
             reject(new Error("Failed to load Web3Forms script"))

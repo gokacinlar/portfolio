@@ -54,8 +54,8 @@ class ScrollSpy {
         ["Styling", "Bootstrap (+derivatives), SASS, Tailwind CSS", "Shadcn & DaisyUI"],
         ["Databases", "MySQL, PostgreSQL", "Supabase"],
         ["DevOps", "Docker, Linux", "-"],
-        ["CMS", "Wordpress, Headless Wordpress", "-"],
-        ["SSG", "Astro & Gatsby", "Next.js"],
+        ["CMS", "Wordpress, Headless Wordpress", "Next.js"],
+        ["SSG", "Astro & Gatsby", "-"],
         ["Testing", "Jest & Playwright", "-"],
         ["Design & UX", "Figma, Adobe Illustrator & Adobe Photoshop", "-"],
     ];
@@ -63,7 +63,7 @@ class ScrollSpy {
     // Scrollspy list items
     private renderNavLinks() {
         return this.navLinks.map(({ id, icon, label }) =>
-            `<a class="list-group-item list-group-item-action rounded-pill shadow-sm focus-ring focus-ring-secondary" href="#${id}">${icon} ${label}</a>`
+            `<a class="list-group-item list-group-item-action rounded-pill shadow-sm focus-ring focus-ring-secondary text-center" href="#${id}">${icon} ${label}</a>`
         ).join("");
     }
 
@@ -77,9 +77,7 @@ class ScrollSpy {
                         </tr>
                     </thead>
                     <tbody>
-                        ${rows.map((row) =>
-            `<tr>${row.map((cell, i) => i === 0 ? `<th scope="row">${cell}</th>` : `<td>${cell}</td>`
-            ).join("")}</tr>`).join("")}
+                        ${rows.map((row) => `<tr>${row.map((cell, i) => i === 0 ? `<th scope="row">${cell}</th>` : `<td>${cell}</td>`).join("")}</tr>`).join("")}
                     </tbody>
                 </table>
             </div>

@@ -3,7 +3,7 @@ class EmailForm {
         return `
             <form id="emailForm" class="was-validated" action="https://api.web3forms.com/submit" method="POST">
                 <div>
-                    <input type="hidden" name="access_key" value="062eaab4-5d36-49de-b350-a37ea9a751d1">
+                    <input type="hidden" name="access_key" value="${process.env.WEB3_FORM_ACCESS_KEY}">
                     <input type="hidden" name="subject" value="New Message">
                     <input type="hidden" name="from_name" value="https://dervisoksuzoglu.com.tr">
                     <input type="checkbox" name="botcheck" class="d-none">
