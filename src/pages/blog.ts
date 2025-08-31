@@ -10,8 +10,8 @@ class Updates extends HTMLElement {
 
     private render(): string {
         return `
-            <section class="container h-100">
-                <div id="blogContainer" class="row mb-3 h-100">
+            <section class="container-fluid h-100">
+                <div id="blogContainer" class="row gx-3 mb-3 h-100">
                     <div class="bwrapper col-md-4 col-lg-4 col-sm h-100">
                         ${this.blogAside()}
                     </div>

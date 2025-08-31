@@ -1,5 +1,4 @@
 // Components
-import { HeaderNode } from "./header";
 import { Template } from "../helper";
 import { FooterLinks } from "../static";
 
@@ -28,12 +27,9 @@ class FooterNodes {
     }
 
     public footerLeft(): string {
-        const headerLeft = new HeaderNode().headerLeft();
         const personalLinks = this.createPersonalLinks();
 
         return `
-            ${headerLeft}
-            <hr class="vr text-white border border-opacity-75 border-warning h-100 my-auto"></hr>
             <nav>
                 <ul class="footer-promo-links list-unstyled d-flex flex-row align-items-start justify-content-center gap-1 mb-0">
                     ${personalLinks}

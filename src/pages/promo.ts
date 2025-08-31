@@ -110,7 +110,7 @@ class PromoTemplate {
     private promoDesc(): string {
         return `
             ${new PromoTitle("I describe myself as")}
-            <div id="promo_Description" class="container-fluid w-100 px-4 py-4 my-4 d-flex flex-row gap-2">${new PromoDescription().renderPromoDesc()}</div>
+            <div id="promo_Description" class="container-fluid w-100 d-flex flex-row overflow-hidden">${new PromoDescription().renderPromoDesc()}</div>
         `;
     }
 

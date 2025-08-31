@@ -96,8 +96,8 @@ class About extends HTMLElement {
 
     private renderContent(): string {
         return `
-            <section id="about-grid" class="container mb-3">
-                <div id="about-grid-parent" class="row gy-4 px-2">
+            <section id="about-grid" class="container-fluid mb-3">
+                <div id="about-grid-parent" class="row gy-3 gx-3 px-2">
                     <div class="col-12 col-md-4 col-sm">
                         ${this.renderAside()}
                     </div>
