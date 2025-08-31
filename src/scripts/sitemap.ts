@@ -14,6 +14,7 @@ async function applySiteMap() {
     // These should locate the domain url, not the files in the project
     const urls = [
         { url: "/index.html", changefreq: "daily", priority: 1.0 },
+        { url: "/updates.html", changefreq: "daily", priority: 0.9 },
         { url: "/about.html", changefreq: "monthly", priority: 0.8 }
     ];
 
@@ -31,6 +32,7 @@ async function applySiteMap() {
 
         // Write stringified buffer to file
         fs.writeFileSync(outputPath, stringifiedBuffer);
+        console.log("Sitemap has been successfully generated into: ", outputPath);
         return stringifiedBuffer;
     } catch (error: unknown) {
         console.error("Failed to generate sitemap:", error);
