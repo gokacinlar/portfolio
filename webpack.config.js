@@ -1,10 +1,22 @@
 const path = require("path");
+const webpack = require("webpack");
+const dotenv = require("dotenv");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+
+// Load .env
+dotenv.config();
+const envKeys = ["GTAG", "WEB3_FORM_ACCESS_KEY"];
+const definePluginEntries = {};
+
+envKeys.forEach((key) => {
+    definePluginEntries[`process.env.${key}`] = JSON.stringify(process.env[key]);
+});
 
 // For static page"s script linking
 let htmlPageNames = ["about.html", "updates.html", "404.html"];
@@ -21,8 +33,6 @@ let multipleHtmlPlugins = htmlPageNames.map(name => {
 // CspHtmlWebpackPlugin related outer connections
 let scripts = ["https://web3forms.com/client/script.js",
     "https://api.web3forms.com/submit",
-    "https://platform.twitter.com/widgets.js",
-    "https://platform.twitter.com/js/",
     "https://www.googletagmanager.com/gtag/js?id=G-XMT56BGFP8&l=ga4DataLayer"];
 
 // Footer images
@@ -109,6 +119,10 @@ module.exports = {
         extensions: [".ts", ".js", "..."],
     },
     optimization: {
+        usedExports: false,
+        removeEmptyChunks: true,
+        removeAvailableModules: true,
+        realContentHash: true,
         chunkIds: "total-size",
         splitChunks: {
             chunks: "async",
@@ -135,6 +149,8 @@ module.exports = {
     },
     // For copying static assets as a whole without importing them individually
     plugins: [
+        new webpack.DefinePlugin(definePluginEntries),
+        new NodePolyfillPlugin(),
         new CopyPlugin({
             patterns: [
                 {
@@ -205,9 +221,8 @@ module.exports = {
                 "script-src": ["'self'", ...scripts],
                 "style-src": ["'self'"],
                 "img-src": ["'self'", "data:", ...imageConnections],
-                "font-src": ["'self'", "https:", "data:"],
+                "font-src": ["'self'"],
                 "connect-src": ["'self'"],
-                "frame-ancestors": ["'none'"]
             },
             {
                 enabled: true,
