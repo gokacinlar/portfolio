@@ -435,7 +435,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     .promo-videos-container {
         @include responsive-flex-direction($mobile-breakpoints, column);
-        @include responsive-flex-direction($tablet-breakpoints, row);
+        @include responsive-flex-direction($tablet-breakpoints, column);
         @include responsive-flex-direction($desktop-breakpoints, row);
 
         & {
@@ -467,19 +467,19 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     #promo_Description {
         min-height: 450px !important;
+        @include responsive-styling($mobile-breakpoints, flex-direction, column-reverse);
+        @include responsive-styling($mobile-breakpoints, align-items, start);
+        @include responsive-styling($tablet-breakpoints, flex-direction, column-reverse);
+        @include responsive-styling($mobile-breakpoints, margin, 0);
+        @include responsive-styling($mobile-breakpoints, padding, .25em);
+    }
 
-        @each $bp in $mobile-breakpoints {
-            @include m_queries.responsive($bp) {
-                padding: .25em !important;
-                margin: 0 !important;
-                flex-direction: column-reverse !important;
+    .promo-featured-tabs {
+        @include responsive-styling($mobile-breakpoints, flex-direction, row);
+        @include hide-scrollbar();
 
-                .promo-featured-tabs {
-                    flex-direction: row !important;
-                    overflow-x: scroll;
-                    @include hide-scrollbar();
-                }
-            }
+        & {
+            overflow-x: scroll;
         }
     }
 
@@ -796,7 +796,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     #blogContainer,
     #blogMain {
-        @include responsive-styling($mobile-breakpoints, height, auto)
+        @include responsive-styling($mobile-breakpoints, height, auto);
     }
 
     #blogMain,
