@@ -1,8 +1,10 @@
+// toastify.css
+import "toastify-js/src/toastify.css"
+// other imports
 import DOMPurify from "dompurify";
 import ScrollReveal from "scrollreveal";
 import isEmail from "validator/lib/isEmail";
 import Toastify from "toastify-js";
-import "toastify-js/src/toastify.css"
 import { HeroParts } from "./static";
 
 // Detecting dark/light mode
@@ -58,6 +60,7 @@ export class DarkLightMode {
         stopOnFocus: true,
         style: {
             background: "#0f3d75",
+            borderRadius: "24px"
         },
     } as const;
 
@@ -138,15 +141,15 @@ export class Template {
 export class HorizontalMiddleMouseScroll {
     public hmmsScroll(element: string) {
         const elem = document.querySelector(element) as HTMLElement;
-        let isScrolling = false;
-        let targetScrollLeft = elem.scrollLeft;
+        let isScrolling: boolean = false;
+        let targetScrollLeft: number = elem.scrollLeft;
 
         // Function to handle scroll behavior
         const handleScroll = (e: WheelEvent) => {
             e.preventDefault();
 
             // Move the content in Y axis with deltaY property
-            const scrollAmount = e.deltaY < 0 ? -30 : 30;
+            const scrollAmount = e.deltaY < 0 ? -35 : 35;
             targetScrollLeft += scrollAmount;
 
             if (!isScrolling) {
@@ -163,7 +166,7 @@ export class HorizontalMiddleMouseScroll {
 
         // Function to check viewport and toggle scroll behavior
         const updateScrollBehavior = () => {
-            const isMobileView = window.innerWidth < 599;
+            const isMobileView: boolean = window.innerWidth <= 1024;
 
             // Remove existing listener to avoid duplicates
             elem.removeEventListener("wheel", handleScroll);
@@ -269,7 +272,8 @@ export class PromoFunctions {
                 // Map the elements with desired content
                 .map((post) => renderFunction(post))
                 .join("\n");
-            container.innerHTML = cardsHTML;
+            const cleaned = DOMPurify.sanitize(cardsHTML);
+            container.innerHTML = cleaned;
         }
     }
 
@@ -287,7 +291,7 @@ export class PromoFunctions {
             icon.className = `promo-tc-icon ${iconData}`;
 
             const p = document.createElement("p");
-            p.className = "text-center text-break fs-4 w-75";
+            p.className = "text-center text-break fs-4 w-100";
             p.textContent = desc;
 
             wrapper.appendChild(icon);
@@ -375,7 +379,7 @@ export class PromoFunctions {
 export class ScrollRevealAction {
     public scrollReveal(classes: Array<string>) {
         for (const id of classes) {
-            ScrollReveal().reveal(`.${id}`), { delay: 10000 };
+            ScrollReveal().reveal(`.${id}`), { delay: 15000 };
         }
     }
 }
@@ -395,6 +399,15 @@ export function validateEmail(emailString: string): boolean {
     if (eMailInput.value && isEmail(eMailInput.value)) {
         return true;
     } else {
+        return false;
+    }
+}
+
+export function isValidUrl(url: string): boolean {
+    try {
+        new URL(url);
+        return true;
+    } catch (_error: unknown) {
         return false;
     }
 }
