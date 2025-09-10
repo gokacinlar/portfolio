@@ -63,11 +63,13 @@ class PromoTemplate {
                     <div class="promo-skills-container row col-12 mx-auto d-flex flex-column gap-4 align-items-center justify-content-center overflow-hidden">
                         ${this.promoSkills()}
                         <div class="psc-container w-100 position-relative overflow-hidden rounded-5">
-                            <div id="promoSkillsContainer" class="d-flex flex-row align-items-center justify-content-center gap-4"></div>
+                            <div id="promoSkillsContainer" class="d-flex flex-row align-items-center justify-content-center gap-4 py-2"></div>
                         </div>
                     </div>
                     <div class="promo-projects-container-parent">
-                        ${new PromoTitle("Some of my projects are")}
+                        <div class="mb-4">
+                            ${new PromoTitle("Some of my projects are")}
+                        </div>
                         <div class="promo-projects-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center overflow-hidden">
                             ${this.promoProjectCards()}
                         </div>

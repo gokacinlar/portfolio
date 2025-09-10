@@ -15,11 +15,11 @@ class FooterNodes {
 
     public footerTemplate(): string {
         return `
-            <section class="footer-container rounded-top-5 mx-2 my-2 px-2 py-2 d-flex flex-row align-content-center justify-content-between">
-                <div class="footer-left d-flex align-items-start gap-3 px-2 py-2 rounded-5">
+            <section class="footer-container rounded-top-5 mx-2 my-2 px-2 py-2 d-flex flex-row align-content-center justify-content-between gap-2">
+                <div class="footer-left d-flex align-items-start gap-3 px-2 py-2 rounded-5 bg-secondary-subtle shadow-sm">
                     ${this.footerLeft()}
                 </div>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center bg-secondary-subtle rounded-5">
                     ${this.footerRight()}
                 </div>
             </section>
@@ -58,7 +58,7 @@ class FooterNodes {
             .join("");
 
         return `
-            <ul class="footer-brading-list list-unstyled d-flex flex-row gap-2 px-2 mb-0 h-100">
+            <ul class="footer-brading-list list-unstyled d-flex flex-row align-items-center gap-2 px-2 mb-0 h-100">
                 ${brandingHTML}
             </ul>
         `;
@@ -87,7 +87,7 @@ class FooterNodes {
     private createFooterLink(href: string, ariaLabel: string, src: string, title: string): string {
         return `
             <a href="${href}" target="_blank" aria-label="${ariaLabel}">
-                <img class="footer-right-brand img-fluid w-100 h-100"
+                <img class="footer-right-brand rounded-pill img-fluid w-100 h-100"
                     src="../assets/images/static/svg/${src}" title="${title}">
             </a>
         `;
