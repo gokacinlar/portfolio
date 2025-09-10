@@ -411,3 +411,7 @@ export function isValidUrl(url: string): boolean {
         return false;
     }
 }
+
+export function generateNonce(): string {
+    return window.crypto.getRandomValues(new Uint32Array(4)).join("");
+}
