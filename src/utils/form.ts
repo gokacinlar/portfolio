@@ -1,4 +1,4 @@
-import { validateEmail } from "../helper";
+import { validateEmail, generateNonce } from "../helper";
 
 // Handle web3forms hCaptcha request
 export function loadWeb3Forms(): Promise<void> {
@@ -8,12 +8,16 @@ export function loadWeb3Forms(): Promise<void> {
             return;
         }
 
+        // Init nonce generator
+        const ng = generateNonce();
+
         // Append the script to page
         const script = document.createElement("script");
         script.id = "web3forms-script";
         script.src = "https://web3forms.com/client/script.js";
         script.async = true;
         script.defer = true;
+        script.nonce = ng;
 
         script.onload = () => {
             resolve();
