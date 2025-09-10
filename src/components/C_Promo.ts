@@ -230,7 +230,7 @@ export class PromoInterested {
                             <hr class="w-50">
                             <div class="d-flex flex-column align-items-start justify-content-start">
                                 <p class="lead fw-medium fs-4">${item.description}</p>
-                                <button class="btn btn-lg btn-outline-success rounded-5 fs-3 fw-medium">
+                                <button class="promo-interested-button btn btn-lg btn-outline-success border border-2 border-success shadow-sm rounded-5 fs-3 fw-bolder focus-ring focus-ring-primary">
                                     <a class="text-reset link-offset-2 link-underline link-underline-opacity-0" href="${item.link}">See plans</a>
                                 </button>
                             </div>

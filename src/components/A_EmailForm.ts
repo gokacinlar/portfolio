@@ -26,7 +26,7 @@ class EmailForm {
                                 <label for="email" class="form-label">Email</label>
                             </th>
                             <td>
-                                <input type="email" class="email-validate form-control" id="email" name="Email" placeholder="someone@example.com" required>
+                                <input type="email" class="email-validate form-control" id="email" name="Email" placeholder="someone@example.com" autocomplete="off" required>
                                 <div class="invalid-feedback">
                                     Please provide your e-mail address.
                                 </div>

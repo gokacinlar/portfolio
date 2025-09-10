@@ -90,7 +90,7 @@ class ScrollSpy {
                 <div id="about-scroll-spy-id" class="z-0 sticky-top scrollspy-nav list-group d-flex flex-row align-items-center justify-content-between fs-4 fw-medium gap-2 text-truncate">
                     ${this.renderNavLinks()}
                 </div>
-                <div data-bs-spy="scroll" data-bs-target="#about-scroll-spy-id" data-bs-offset="0" data-bs-smooth-scroll="true"  class="scrollspy-content" tabindex="0">
+                <div data-bs-spy="scroll" data-bs-target="#about-scroll-spy-id" data-bs-offset="40" data-bs-smooth-scroll="true" class="scrollspy-content" tabindex="0">
                     <div>
                         <div>
                             <h4 id="li-1">🧑 About Me</h4>
