@@ -24,6 +24,7 @@ class EffectiveCaching {
         "../assets/images",
         "../assets/json",
         "../assets/videos",
+        "../index.html"
     ];
 
     // Get cached items
@@ -32,6 +33,13 @@ class EffectiveCaching {
         const cachedResponses: Response[] = [];
 
         for (const item of EffectiveCaching.ITEMS_TO_BE_CACHED) {
+            if (this.isExpired(item)) {
+                // If expiration is due, delete
+                await cache.delete(item);
+                localStorage.removeItem(`${this.cacheName}:${item}:timestamp`);
+                continue;
+            }
+
             const response = await cache.match(item);
             if (response) {
                 cachedResponses.push(response);
@@ -51,6 +59,7 @@ class EffectiveCaching {
                     // Clone the response before caching
                     const responseToCache = response.clone();
                     await cache.put(item, responseToCache);
+                    this.setCacheTimestamp(item);
                 }
             } catch (error) {
                 console.error(`Failed to fetch and cache ${item}:`, error);
@@ -66,6 +75,27 @@ class EffectiveCaching {
         } else {
             await this.insertCachedItems();
             return this.getCachedItems();
+        }
+    }
+
+    // Function to set timestamp for cache's creation date to be later deleted w/expiration period
+    private setCacheTimestamp(item: string): void {
+        const now: number = Date.now();
+        localStorage.setItem(`${this.cacheName}:${item}:timestamp`, now.toString());
+    }
+
+    private getCacheTimestamp(item: string): number | null {
+        const ts = localStorage.getItem(`${this.cacheName}:${item}:timestamp`);
+        return ts ? parseInt(ts, 10) : null;
+    }
+
+    private isExpired(item: string): boolean {
+        const ts = this.getCacheTimestamp(item);
+        if (!ts) {
+            return true;
+        } else {
+            const age: number = (Date.now() - ts) / 1000;
+            return age > (this.options.maxAgeSeconds ?? 86400);
         }
     }
 }
