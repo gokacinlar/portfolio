@@ -5,7 +5,7 @@
     src: url("../fonts/Geist.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
+    font-display: fallback;
 }
 
 @font-face {
@@ -13,7 +13,7 @@
     src: url("../fonts/Franuces.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
+    font-display: fallback;
 }
 
 // Font fallback stack
@@ -41,8 +41,7 @@ $monospace-font-family: "Cascadia Code",
     "Courier New",
     monospace;
 
-$font-display: swap;
-
+$font-display: fallback;
 $rounded: (
     sm: 18px,
     l: 23px,
@@ -90,8 +89,8 @@ $themes: (
 }
 
 :root {
-    --font-family: #{$font-family};
-    --font-display: #{$font-display};
+    font-family: #{$font-family};
+    font-display: #{$font-display};
     @include define-css-variables($rounded, "rounded-");
     @include define-css-variables($colors, "clr-");
     @include define-css-variables($sizes, "sizes-");

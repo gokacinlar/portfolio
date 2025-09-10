@@ -466,9 +466,11 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     #promo_Description {
-        min-height: 450px !important;
+        & {
+            min-height: 450px !important;
+        }
+
         @include responsive-styling($mobile-breakpoints, flex-direction, column-reverse);
-        @include responsive-styling($mobile-breakpoints, align-items, start);
         @include responsive-styling($tablet-breakpoints, flex-direction, column-reverse);
         @include responsive-styling($mobile-breakpoints, margin, 0);
         @include responsive-styling($mobile-breakpoints, padding, .25em);
@@ -509,6 +511,10 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
             @include responsive-styling($mobile-breakpoints, scroll-snap-align, start);
             @include responsive-styling($mobile-breakpoints, flex-shrink, 0);
         }
+    }
+
+    .promo-interested-button {
+        @include responsive-styling($mobile-breakpoints, width, 100%);
     }
 
     .marquee-container:hover .marquee-content {
@@ -708,6 +714,15 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         @include responsive-styling($mobile-breakpoints, flex-direction, column);
         @include responsive-styling($mobile-breakpoints, align-items, end);
         @include responsive-styling($mobile-breakpoints, justify-content, space-evenly);
+    }
+
+    .footer-left {
+        @include responsive-styling($mobile-breakpoints, flex-grow, 1);
+    }
+
+    .footer-right-brand {
+        --def-h: 42px;
+        height: var(--def-h) !important;
     }
 
     /***** ABOUT *****/
