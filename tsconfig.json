@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     /* Modern ES module output */
-    "module": "es2015",
+    "module": "es2022",
     /* Use Node-style resolution to allow importing from node_modules */
     "moduleResolution": "node",
     /* Allow default imports from CommonJS modules */
