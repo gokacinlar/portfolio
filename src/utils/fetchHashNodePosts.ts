@@ -1,9 +1,6 @@
-import * as dotenv from 'dotenv'
-
 class HashNodePosts {
     constructor() {
-        dotenv.config();
-        this.fetchUserPosts(HashNodePosts.USER_NAME);
+        this.fetchUserPosts(HashNodePosts.USER_NAME, HashNodePosts.DEF_MAX_ARTICLE_LENGTH);
     }
 
     private static readonly USER_NAME: string = "gokacinlar";
@@ -15,7 +12,7 @@ class HashNodePosts {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `${process.env.HASHNODE_TOKEN}`
+                "Authorization": `${import.meta.env.HASHNODE_TOKEN}`
             },
             body: JSON.stringify({
                 query,
@@ -70,9 +67,8 @@ class HashNodePosts {
             } else {
                 console.error("Error fetching Hashnode posts.");
             }
-        } catch (error) {
-            console.error('Error fetching Hashnode posts:', error);
-            throw error;
+        } catch (error: unknown) {
+            throw new Error("Error fetching Hashnode posts." + error);
         }
     }
 }
