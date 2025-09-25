@@ -42,7 +42,8 @@ export class HeaderNode {
                     </li>
                     <li>
                         <section class="header-right d-flex flex-row align-items-center gap-2">
-                            ${this.headerRight()}
+                            ${this.headerHireBtn()}
+                            ${this.headerEtc()}
                         </section>
                     </li>
                 </ul>
@@ -108,8 +109,6 @@ export class HeaderNode {
         }
     ];
 
-    // Avoid the undefined type error with ??
-    // I've used ternary operator but this is better I guess
     public headerMiddleContent(): string {
         return this.navLinks
             .map(({ href, title, icon, htmxOptions }) => `
@@ -125,13 +124,26 @@ export class HeaderNode {
                 `).join("");
     }
 
-    private headerRight(): string {
+    private primaryBtn: NavLink = {
+        href: "/work.html",
+        title: "Proceed to hire me for your web projects.",
+        icon: "bi bi-star-half text-black fw-bold pulsate-fwd",
+        htmxOptions: { ...this.defaultHtmxOptions, hxget: "/work.html" },
+    }
+
+    public headerHireBtn(): string {
         return `
-            <button id="hrBtn" type="button" class="header-btn-bg-important bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-2"
-                title="Proceed to hire me for your web projects.">
-                <i class="bi bi-star-half text-black fw-bold pulsate-fwd"></i>
+            <a id="hrBtn" type="button" class="header-btn-bg-important bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-2"
+                title="${this.primaryBtn.title}" href="${this.primaryBtn.href}"
+                ${new HtmxControls(this.primaryBtn.htmxOptions ?? this.defaultHtmxOptions).render()}>
+                <i class="${this.primaryBtn.icon}"></i>
                 <span class="hr-btn-text">Work w/me!</span>
-            </button>
+            </a>
+        `;
+    }
+
+    private headerEtc(): string {
+        return `
             <button id="hrDayNightBtn" type="button" class="header-day-night-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1"
                 title="Change Day/Night Mode">
                 <i class="hr-daynight-switch-icon bi bi-sun text-black fw-bold"></i>

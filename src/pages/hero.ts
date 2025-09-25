@@ -1,4 +1,5 @@
 // Components
+import { HeaderNode } from "./header";
 import { HeroImageWithLink } from "../components/C_Hero";
 import { Template, TypeWriterDisplay, DomEvents } from "../helper";
 import { BodyParts, HeroParts } from "../static";
@@ -41,7 +42,8 @@ class HeroTemplate {
                                 </h1>
                             </div>
                             <div class="ocps-buttons d-flex flex-row align-items-center gap-2">
-                                ${this.heroBtns()}
+                                ${new HeaderNode().headerHireBtn()}
+                                ${this.heroDownloadCVButton()}
                             </div>
                         </section>
                         <section class="col-12 col-md-6 d-flex justify-content-center ocps-hero-img-container">
@@ -61,13 +63,8 @@ class HeroTemplate {
         `;
     }
 
-    private heroBtns(): string {
+    private heroDownloadCVButton(): string {
         return `
-            <button id="hrBtn" type="button" class="hero-btn text-truncate hero-hire-btn bg-gradient btn btn-lg fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
-                rounded-5 shadow-sm" title="Proceed to hire me for your eduation or web demands.">
-                <i class="bi bi-star-half pulsate-fwd"></i>
-                <span class="hr-btn-text">Work w/me!</span>
-            </button>
             <button id="hrGetCvBtn" type="button" class="hero-btn text-truncate hero-get-cv-btn bg-gradient btn btn-lg fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
                 rounded-5 shadow-sm" title="Download My CV">
                 <i class="bi bi-paperclip"></i>
