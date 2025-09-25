@@ -454,6 +454,8 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         &>h3 {
             @include responsive-styling($all-mobile-tablet-breakpoints, font-size, 1rem);
             @include custom-font(Franuces);
+            text-decoration-skip-ink: auto;
+            text-emphasis-position: under right;
         }
     }
 
@@ -834,6 +836,21 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         max-width: 100%;
         max-height: var(--def-height);
         object-fit: cover;
+    }
+
+    /* Work Page */
+
+    #mainWork {
+        --def-height: 512px;
+        height: var(--def-height);
+        background-image: linear-gradient(var(--clr-eight) 1px, transparent 1px, transparent calc(100% - 1px), var(--clr-eight) calc(100% - 1px)), linear-gradient(90deg, var(--clr-eight) 1px, transparent 1px, transparent calc(100% - 1px), var(--clr-eight) calc(100% - 1px));
+        background-size: 16.666666666666668% 16.666666666666668%;
+        background-repeat: repeat;
+        border: .50px solid var(--clr-eight);
+    }
+
+    .wavy-text {
+        @include wavy-text();
     }
 }
 

@@ -19,12 +19,13 @@ import "./pages/hero";
 import "./pages/promo";
 import "./pages/about";
 import "./pages/blog";
+import "./pages/work.ts";
 
 class HomePage extends HTMLElement {
     constructor() {
         super();
         this.connectedCallback();
-    }
+    };
 
     connectedCallback(): void {
         new DarkLightMode();
@@ -34,4 +35,4 @@ class HomePage extends HTMLElement {
 }
 
 export default HomePage;
-customElements.define("app-main", HomePage);
+customElements.define("app-main", HomePage)

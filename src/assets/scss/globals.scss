@@ -1,11 +1,39 @@
 @use "sass:map";
 
+@mixin define-css-variables($map, $prefix: "") {
+    @each $key, $value in $map {
+        --#{$prefix}#{$key}: #{$value};
+    }
+}
+
+@mixin low-level-font-management($val1, $val2, $val3, $val4) {
+    font-feature-settings: #{$val1},
+    #{$val2},
+    #{$val3},
+    #{$val4};
+    -moz-font-feature-settings: #{$val1},
+    #{$val2},
+    #{$val3},
+    #{$val4};
+    -ms-font-feature-settings: #{$val1},
+    #{$val2},
+    #{$val3},
+    #{$val4};
+    -webkit-font-feature-settings: #{$val1},
+    #{$val2},
+    #{$val3},
+    #{$val4};
+}
+
 @font-face {
     font-family: "Inter";
     src: url("../fonts/Geist.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
-    font-display: fallback;
+    font-display: swap;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    @include low-level-font-management("kern", "liga", "clig", "calt");
 }
 
 @font-face {
@@ -13,7 +41,10 @@
     src: url("../fonts/Franuces.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
-    font-display: fallback;
+    font-display: swap;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    @include low-level-font-management("kern", "liga", "clig", "calt");
 }
 
 // Font fallback stack
@@ -82,13 +113,8 @@ $themes: (
         bs-body-color: #FDF9FD)
 );
 
-@mixin define-css-variables($map, $prefix: "") {
-    @each $key, $value in $map {
-        --#{$prefix}#{$key}: #{$value};
-    }
-}
-
 :root {
+    font-size: 16px;
     font-family: #{$font-family};
     font-display: #{$font-display};
     @include define-css-variables($rounded, "rounded-");
