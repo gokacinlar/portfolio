@@ -20,7 +20,7 @@ envKeys.forEach((key) => {
 });
 
 // For static page"s script linking
-let htmlPageNames = ["about.html", "updates.html", "404.html"];
+let htmlPageNames = ["about.html", "updates.html", "404.html", "work.html"];
 let multipleHtmlPlugins = htmlPageNames.map(name => {
     return new HtmlWebpackPlugin({
         template: path.resolve(__dirname, `./src/pages/static/${name}`),
