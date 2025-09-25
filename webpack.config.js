@@ -8,6 +8,7 @@ const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 // Load .env
 dotenv.config();
@@ -30,15 +31,23 @@ let multipleHtmlPlugins = htmlPageNames.map(name => {
     })
 });
 
-// CspHtmlWebpackPlugin related outer connections
-let scripts = ["https://web3forms.com/client/script.js",
+// CspHtmlWebpackPlugin related outer connections regarding trusted scripts
+let scripts = [
+    "https://web3forms.com/client/script.js",
     "https://api.web3forms.com/submit",
-    "https://www.googletagmanager.com/gtag/js?id=G-XMT56BGFP8&l=ga4DataLayer"];
+    "https://www.googletagmanager.com/gtag/js?id=G-XMT56BGFP8&l=ga4DataLayer"
+];
+
+let apis = [
+    "https://api.hashnode.com/"
+]
 
 // Footer images
-let imageConnections = ["https://creativecommons.org/publicdomain/zero/1.0/",
+let imageConnections = [
+    "https://creativecommons.org/publicdomain/zero/1.0/",
     "https://notbyai.fyi/",
-    "https://raw.githubusercontent.com"];
+    "https://raw.githubusercontent.com"
+];
 
 module.exports = {
     // Specify our input (entry) file to be compiled
@@ -151,6 +160,16 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin(definePluginEntries),
         new NodePolyfillPlugin(),
+        new Dotenv({
+            path: "./.env",
+            safe: true,
+            allowEmptyValues: false,
+            systemvars: true,
+            silent: false,
+            defaults: false,
+            prefix: "import.meta.env.",
+            override: true
+        }),
         new CopyPlugin({
             patterns: [
                 {
@@ -222,7 +241,7 @@ module.exports = {
                 "style-src": ["'self'"],
                 "img-src": ["'self'", "data:", ...imageConnections],
                 "font-src": ["'self'"],
-                "connect-src": ["'self'"],
+                "connect-src": ["'self'", ...apis],
             },
             {
                 enabled: true,
