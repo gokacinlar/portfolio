@@ -13,6 +13,11 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     transition: $props;
 }
 
+@mixin animation($name, $duration, $timing-function, $fill-mode) {
+    -webkit-animation: #{$name} #{$duration} #{$timing-function} #{$fill-mode};
+    animation: #{$name} #{$duration} #{$timing-function} #{$fill-mode};
+}
+
 @mixin borderRadius($radius) {
     border-radius: $radius;
 }
@@ -117,11 +122,11 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 }
 
-@mixin wavy-text {
+@mixin wavy-text($color) {
     -webkit-text-decoration-style: wavy;
     -moz-text-decoration-style: wavy;
     text-decoration-style: wavy;
-    text-decoration: underline wavy .07em #1F1F24;
+    text-decoration: underline wavy .07em $color;
 }
 
 @mixin dynamic-font-size($min-size, $viewport-factor, $max-size) {
@@ -131,6 +136,10 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 @mixin custom-bee-color {
     color: #1F1F24 !important;
     background: var(--clr-six) !important;
+}
+
+@mixin neumorphic-background($border-radius: 50px) {
+    background: linear-gradient(225deg, #e3c334, #ffe83e) !important;
 }
 
 // Reset
@@ -464,7 +473,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     .wavy-text {
-        @include wavy-text;
+        @include wavy-text(var(--clr-two));
     }
 
     #promo_Description {
@@ -849,8 +858,95 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         border: .50px solid var(--clr-eight);
     }
 
+    #workScrollDownBtn {
+        --btn-w: 200px;
+        width: var(--btn-w);
+        position: relative;
+        overflow: hidden;
+        transition:
+            filter .25s ease-in-out,
+            width .45s ease-in;
+        @include custom-bee-color();
+
+        &>.work-scroll-down-icon {
+            @include animation(slide-in-blurred-top, .65s, cubic-bezier(0.230, 1.000, 0.320, 1.000), alternate both);
+            display: none;
+            position: absolute;
+            left: 35%;
+            top: 20%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        &:hover {
+            border: solid 1px #1F1F24 !important;
+            --max-w: 210px;
+            width: var(--max-w) !important;
+            justify-content: space-between !important;
+            @include neumorphic-background();
+
+            &>.work-scroll-down-icon {
+                display: block;
+            }
+        }
+
+        &:active {
+            filter: blur(0px) brightness(90%) contrast(110%) grayscale(0%) hue-rotate(0deg) invert(0%) opacity(100%) saturate(100%) sepia(0%);
+        }
+    }
+
+    @-webkit-keyframes slide-in-blurred-top {
+        0% {
+            -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+            transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+            -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+            -webkit-filter: blur(40px);
+            filter: blur(40px);
+            opacity: 0;
+        }
+
+        100% {
+            -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+            transform: translateY(0) scaleY(1) scaleX(1);
+            -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+            -webkit-filter: blur(0);
+            filter: blur(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slide-in-blurred-top {
+        0% {
+            -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+            transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+            -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+            -webkit-filter: blur(40px);
+            filter: blur(40px);
+            opacity: 0;
+        }
+
+        100% {
+            -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+            transform: translateY(0) scaleY(1) scaleX(1);
+            -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+            -webkit-filter: blur(0);
+            filter: blur(0);
+            opacity: 1;
+        }
+    }
+
+    #buyOptions {
+        background: var(--clr-eight);
+    }
+
     .wavy-text {
-        @include wavy-text();
+        @include wavy-text(var(--clr-two));
     }
 }
 
