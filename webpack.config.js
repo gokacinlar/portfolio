@@ -181,16 +181,6 @@ module.exports = {
                     from: path.resolve(__dirname, "src/assets/videos"),
                     to: "assets/videos",
                     noErrorOnMissing: true,
-                },
-                {
-                    from: path.resolve(__dirname, "src/php"),
-                    to: "php",
-                    noErrorOnMissing: true,
-                },
-                {
-                    from: path.resolve(__dirname, "vendor"),
-                    to: "php/vendor",
-                    noErrorOnMissing: true,
                 }
             ],
         }),
