@@ -8,8 +8,7 @@
     "dev": "webpack --config webpack.config.js --mode development",
     "live": "webpack serve --config webpack.config.js --mode development",
     "generate:sitemap": "npx tsx ./src/scripts/sitemap.ts",
-    "generate:robotstxt": "npx tsx ./src/scripts/robotsTxt.ts",
-    "composer:install": "composer install"
+    "generate:robotstxt": "npx tsx ./src/scripts/robotsTxt.ts"
   },
   "author": "Derviş Öksüzoğlu",
   "license": "CC0-1.0",
@@ -46,6 +45,7 @@
   },
   "dependencies": {
     "@analytics/google-analytics": "^1.1.0",
+    "@apollo/client": "^4.0.7",
     "ajv": "^8.17.1",
     "ajv-keywords": "^5.1.0",
     "analytics": "^0.8.19",
@@ -58,6 +58,7 @@
     "htmx.org": "^2.0.4",
     "lazysizes": "^5.3.2",
     "node-polyfill-webpack-plugin": "^4.1.0",
+    "rxjs": "^7.8.2",
     "scrollreveal": "^4.0.9",
     "shuffle-letters": "^1.1.0",
     "sitemap": "^8.0.0",

@@ -865,11 +865,11 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         overflow: hidden;
         transition:
             filter .25s ease-in-out,
-            width .45s ease-in;
+            width .25s ease-in-out;
         @include custom-bee-color();
 
         &>.work-scroll-down-icon {
-            @include animation(slide-in-blurred-top, .65s, cubic-bezier(0.230, 1.000, 0.320, 1.000), alternate both);
+            @include animation(slide-in-blurred-top, .35s, cubic-bezier(0.230, 1.000, 0.320, 1.000), alternate both);
             display: none;
             position: absolute;
             left: 35%;
@@ -885,7 +885,6 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
             --max-w: 210px;
             width: var(--max-w) !important;
             justify-content: space-between !important;
-            @include neumorphic-background();
 
             &>.work-scroll-down-icon {
                 display: block;
