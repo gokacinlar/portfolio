@@ -18,7 +18,7 @@ Site will primarily use;
 
 ## How to run?
 
-```
+```Bash
 npm i
 npm run composer:install
 npm run dev
