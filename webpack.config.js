@@ -37,11 +37,6 @@ let scripts = [
     "https://api.web3forms.com/submit",
     "https://www.googletagmanager.com/gtag/js?id=G-XMT56BGFP8&l=ga4DataLayer"
 ];
-
-let apis = [
-    "https://api.hashnode.com/"
-]
-
 // Footer images
 let imageConnections = [
     "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -231,7 +226,7 @@ module.exports = {
                 "style-src": ["'self'"],
                 "img-src": ["'self'", "data:", ...imageConnections],
                 "font-src": ["'self'"],
-                "connect-src": ["'self'", ...apis],
+                "connect-src": ["'self'", "http://localhost:10005/"],
             },
             {
                 enabled: true,
