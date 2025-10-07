@@ -1,4 +1,15 @@
+import WordPressGraphQLClient from "../utils/wp_graphql";
 import { Template } from "../helper";
+
+interface Author {
+    name: string;
+    avatarUrl: string;
+}
+interface Post {
+    id: string;
+    title: string;
+    author: Author;
+}
 
 class Updates extends HTMLElement {
     constructor() {
@@ -6,6 +17,7 @@ class Updates extends HTMLElement {
 
         const template = new Template().createTemplate(this.render());
         this.appendChild(template.content.cloneNode(true));
+        this.connectedCallback();
     }
 
     private render(): string {
@@ -26,29 +38,10 @@ class Updates extends HTMLElement {
         `;
     }
 
-    private blogAsideTab(): string {
-        return `
-            <ul class="nav nav-pills nav-fill gap-2 mb-3" id="blogAsideTabGroup" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="btn btn-lg nav-link rounded-pill shadow-sm fs-5 fw-medium active" aria-current="page" data-bs-toggle="pill" data-bs-target="#updates" type="button" role="tab" aria-controls="pills-contact" aria-selected="true">Updates</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="btn btn-lg nav-link rounded-pill shadow-sm fs-5 fw-medium" data-bs-toggle="pill" data-bs-target="#writings" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Writings</button>
-                </li>
-            </ul>
-        `;
-    }
-
     private blogAside(): string {
         return `
             <aside id="blogAside" class="h-100 rounded-5 p-3 shadow-sm">
-                ${this.blogAsideTab()}
-                <section id="blogAsideChild" class="rounded-5 h-75 px-3 py-3 border border-1 border-dark-subtle">
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="updates" role="tabpanel" aria-labelledby="updates">-</div>
-                        <div class="tab-pane fade" id="writings" role="tabpanel" aria-labelledby="writings">-</div>
-                    </div>
-                </section>
+                <section id="blogAsideChild" class="rounded-5 h-75 px-3 py-3 border border-1 border-dark-subtle"></section>
             </aside>
         `;
     }
@@ -67,6 +60,58 @@ class Updates extends HTMLElement {
                 </div>
             </div>
         `;
+    }
+
+    private async generateDomElementsRelatedToBlogsInAside(targetElement: string, data: Post[]) {
+        try {
+            console.log('Received data:', data); // Log the entire data array
+
+            // Use this.querySelector instead of document.querySelector
+            const element = this.querySelector(`#${targetElement}`) as HTMLElement | null;
+
+            if (!element) {
+                console.error(`Element with id "${targetElement}" not found`);
+                return;
+            }
+
+            // Check if data is empty or undefined
+            if (!data || data.length === 0) {
+                console.warn('No blog posts found');
+                element.innerHTML = '<p>No blog posts available</p>';
+                return;
+            }
+
+            // More robust mapping with type checking
+            const result = data.map((item: Post) => {
+                // Defensive checks to prevent undefined errors
+                const title = item.title || 'Untitled Post';
+                const authorName = item.author?.name || 'Unknown Author';
+
+                return `
+                <a href="#" class="blog-post-link">
+                    <span>${title}</span>
+                    <small>${authorName}</small>
+                </a>
+            `;
+            }).join("");
+
+            element.innerHTML = result;
+        } catch (error: unknown) {
+            console.error("Error during creating DOM Elements for Blog Post Entries:", error);
+        }
+    }
+
+    private async fetchAndPopulatePosts() {
+        try {
+            const posts = await WordPressGraphQLClient.fetchBlogPosts();
+            await this.generateDomElementsRelatedToBlogsInAside("blogAsideChild", posts);
+        } catch (error: unknown) {
+            console.error("Failed to fetch and populate posts:", error);
+        }
+    }
+
+    connectedCallback() {
+        this.fetchAndPopulatePosts();
     }
 }
 
