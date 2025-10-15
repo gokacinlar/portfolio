@@ -26,6 +26,11 @@ interface NavLink {
 }
 
 export class HeaderNode {
+    private static readonly SITE_URL: string = "https://dervisoksuzoglu.com.tr";
+    constructor() {
+
+    }
+
     public headerItself(): string {
         return `
             <nav class="m-1 px-2 py-2">
@@ -53,7 +58,7 @@ export class HeaderNode {
 
     public headerLeft(): string {
         return `
-            <a href="">
+            <a href="${HeaderNode.SITE_URL}">
                 <img
                     class="header-logo img-fluid img-responsive lazyload"
                     src="../assets/images/static/webp/logo.webp"
@@ -112,12 +117,12 @@ export class HeaderNode {
     public headerMiddleContent(): string {
         return this.navLinks
             .map(({ href, title, icon, htmxOptions }) => `
-                <li>
+                <li class="w-100">
                     <a
                         href="${href}"
                         ${new HtmxControls(htmxOptions ?? this.defaultHtmxOptions).render()}
                         title="${title}"
-                        class="btn header-btn-bg btn-lg rounded-5 fs-4">
+                        class="btn header-btn-bg btn-lg rounded-5 fs-4 w-100">
                         <i class="bi ${icon}"></i> ${title}
                     </a>
                 </li>

@@ -1,5 +1,4 @@
 import { HeaderNode } from "../../pages/header";
-
 class ResponsiveNavbar extends HTMLElement {
     public responsiveMenuToggleButton(): string {
         return `
@@ -15,14 +14,17 @@ class ResponsiveNavbar extends HTMLElement {
 
     public render(): string {
         return `
-            <div id="responsiveNavbar" class="position-relative" data-type="closed">
-                <nav id="headerRM" class="rounded-4 mt-2 shadow">
-                    <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-column align-items-center gap-1 bg-gradient">
-                        ${new HeaderNode().headerMiddleContent()}
-                    </ul>
-                </nav>
-            </div>
-        `;
+        <div id="responsiveNavbar" class="position-relative" data-type="closed">
+            <nav id="headerRM" class="rounded-5 mt-2 shadow" >
+                <div class="py-2 px-2">
+                    ${new HeaderNode().headerLeft()}
+                </div>
+                <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-column align-items-center gap-1 bg-gradient p-2">
+                    ${new HeaderNode().headerMiddleContent()}
+                </ul>
+            </nav>
+        </div>
+    `;
     }
 
     connectedCallback(): void {

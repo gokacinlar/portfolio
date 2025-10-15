@@ -256,6 +256,13 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         @include show-on(phone);
     }
 
+    .header-middle-nav-links {
+        width: calc(100dvw - 2rem);
+        min-height: calc(75dvh - 2rem);
+        margin: 1rem;
+        box-sizing: border-box;
+    }
+
     #hrBtn,
     #hrDayNightBtn,
     #responsiveMenuToggleBtn {
