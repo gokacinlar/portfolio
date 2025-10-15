@@ -4,7 +4,6 @@ import { Template } from "../helper";
 
 interface Author {
     name: string;
-    avatarUrl: string;
 }
 interface Post {
     id: string;
@@ -81,7 +80,7 @@ class Updates extends HTMLElement {
                 return;
             }
 
-            // Clear existing content
+            // Clear existing content first to avoid conflictions
             element.innerHTML = "";
 
             // Create and append each post button with event listener
@@ -119,17 +118,16 @@ class Updates extends HTMLElement {
         }
 
         // Sanitize the post content before displaying
-        const sanitizedContent = DOMPurify.sanitize(post.content || "");
+        const sanitizedContent = post.content;
         const sanitizedTitle = DOMPurify.sanitize(post.title || "Untitled Post");
         const authorName = post.author?.name || "Unknown Author";
-        const avatarUrl = post.author?.avatarUrl || "";
         const defaultImageSrc = "../assets/images/static/webp/logo.webp";
 
         const postHTML = `
             <article class="blog-post">
                 <header class="mb-4">
                     <h1 class="display-6 fw-medium mb-3">${sanitizedTitle}</h1>
-                    <div class="d-flex align-items-center gap-2">
+                    <div class="d-flex align-items-center justify-content-start gap-2">
                         <div>
                             <img class="img-fluid rounded-pill" src="${defaultImageSrc}" alt="${authorName}" class="rounded-circle" width="48" height="48">
                         </div>
@@ -138,6 +136,7 @@ class Updates extends HTMLElement {
                             <small class="text-muted">Author</small>
                         </div>
                     </div>
+                    <hr class="w-25">
                 </header>
                 <div class="blog-post-content">
                     ${sanitizedContent}
@@ -153,9 +152,6 @@ class Updates extends HTMLElement {
     private async fetchAndPopulatePosts() {
         try {
             const posts = await WordPressGraphQLClient.fetchBlogPosts();
-            console.log("Fetched posts:", posts);
-
-            // Now call your method to populate the DOM with the data
             const result = await this.generateDomElementsRelatedToBlogsInAside("blogAsideChild", posts);
             return result;
         } catch (error: unknown) {

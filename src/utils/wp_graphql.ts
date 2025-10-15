@@ -1,11 +1,7 @@
 // GraphQL-related interface entries
-interface GraphQLAvatar {
-    url: string;
-}
 
 interface GraphQLAuthorNode {
     name: string;
-    avatar: GraphQLAvatar;
 }
 
 interface GraphQLAuthor {
@@ -39,7 +35,6 @@ interface GraphQLResponse<T> {
 // Domain types we"ll convert from queries
 interface Author {
     name: string;
-    avatarUrl: string;
 }
 
 interface Post {
@@ -70,13 +65,10 @@ class WordPressGraphQLClient {
             nodes {
                 id
                 title
-                content
+                content(format: RENDERED)
                 author {
                     node {
                         name
-                        avatar {
-                            url
-                        }
                     }
                 }
             }
@@ -112,14 +104,14 @@ class WordPressGraphQLClient {
         }
     }
 
+    // Transform GraphQL data to readable as a readable JSON output
     private static transformPostNode(node: GraphQLPostNode): Post {
         return {
             id: node.id,
-            title: node.title,
-            content: node.content,
+            title: node.title || "Unknown Title",
+            content: node.content || "<p>No proper content.</p>",
             author: {
-                name: node.author.node.name,
-                avatarUrl: node.author.node.avatar.url,
+                name: node.author.node.name || "Unknown Author",
             },
         };
     }
@@ -127,6 +119,7 @@ class WordPressGraphQLClient {
     private static readonly DEF_BLOG_POST_NUMBER_TO_BE_FETCHED: number = 10;
     private static readonly CACHE_KEY = "wordpress_blog_posts";
     private static readonly CACHE_EXPIRATION_HOURS = 24; // Valid for 1 day
+
     // Actual blog post fetching
     public static async fetchBlogPosts(variables: GetPostsVariables = { first: WordPressGraphQLClient.DEF_BLOG_POST_NUMBER_TO_BE_FETCHED }): Promise<Post[]> {
         const cachedData = this.getCachedData();
