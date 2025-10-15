@@ -209,7 +209,6 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     #headerM {
         @include hide-on($all-mobile-tablet-breakpoints);
-        @include show-on(desktop);
     }
 
     #headerRM {

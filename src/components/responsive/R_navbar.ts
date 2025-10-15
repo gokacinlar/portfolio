@@ -1,9 +1,16 @@
+import { map } from "jquery";
 import { HeaderNode } from "../../pages/header";
 
 interface ToggleElements {
     target: HTMLButtonElement;
     navbar: HTMLDivElement;
     icon: HTMLElement;
+}
+
+interface ResponsiveNavBarElements {
+    title: string;
+    icon: string;
+    href: string;
 }
 
 class ResponsiveNavbar {
@@ -24,17 +31,36 @@ class ResponsiveNavbar {
 
     public render(): string {
         return `
-        <div id="responsiveNavbar" class="position-relative" data-type="closed">
-            <nav id="headerRM" class="rounded-5 mt-2 shadow" >
-                <div class="py-2 px-2">
-                    ${new HeaderNode().headerLeftIcon()}
-                </div>
-                <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-column align-items-center gap-1 bg-gradient p-2">
-                    ${new HeaderNode().headerMiddleContent()}
-                </ul>
-            </nav>
-        </div>
-    `;
+            <div id="responsiveNavbar" class="position-relative" data-type="closed">
+                <nav id="headerRM" class="rounded-5 mt-2 shadow" >
+                    <div class="border-1 border-secondary-subtle border-bottom py-2 px-2 d-flex flex-row align-items-center justify-content-between">
+                        ${new HeaderNode().headerLeftIcon()}
+                        <div class="d-flex flex-row align-items-center justify-content-center px-2 gap-3">
+                            ${this.renderNavbarHeaderContent()}
+                        </div>
+                    </div>
+                    <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-column align-items-center gap-1 bg-gradient p-2">
+                        ${new HeaderNode().headerMiddleContent()}
+                    </ul>
+                </nav>
+            </div>
+        `;
+    }
+
+    private static NAVBAR_HEADER_LINKS: ResponsiveNavBarElements[] = [
+        { title: "GitHub", icon: "bi bi-github", href: "https://www.github.com/gokacinlar" },
+        { title: "X", icon: "bi bi-twitter-x", href: "https://www.x.com/devDissentNT" },
+        { title: "Mastodon", icon: "bi bi-mastodon", href: "https://mastodon.social/@devDissentNT" }
+    ];
+
+    private renderNavbarHeaderContent(): string {
+        return ResponsiveNavbar.NAVBAR_HEADER_LINKS.map(({ title, icon, href }) =>
+            `
+            <a href="${href}" title="${title}" class="link-offset-2 link-underline link-underline-opacity-0 display-2 text-secondary">
+                <i class="${icon}"></i>
+            </a>
+            `
+        ).join("");
     }
 
     private changeMenuIconOnClick = (target: HTMLElement, oldData: string, data: string) => {
