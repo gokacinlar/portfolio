@@ -78,7 +78,7 @@ export class HeaderNode {
     public headerMiddle(): string {
         return `
             <nav id="headerM">
-                <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-row gap-1">
+                <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-row gap-1 text-truncate">
                     ${this.headerMiddleContent()}
                 </ul>
             </nav>

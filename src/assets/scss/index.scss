@@ -257,10 +257,9 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     .header-middle-nav-links {
-        width: calc(100dvw - 2rem);
-        min-height: calc(75dvh - 2rem);
-        margin: 1rem;
-        box-sizing: border-box;
+        @include responsive-styling($all-mobile-tablet-breakpoints, width, calc(100dvw - 2rem));
+        @include responsive-styling($all-mobile-tablet-breakpoints, min-height, calc(75dvh - 2rem));
+        @include responsive-styling($all-mobile-tablet-breakpoints, margin, 1rem);
     }
 
     #hrBtn,
