@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import WordPressGraphQLClient from "../utils/wp_graphql";
 import { Template } from "../helper";
 
@@ -9,6 +10,7 @@ interface Post {
     id: string;
     title: string;
     author: Author;
+    content: string;
 }
 
 class Updates extends HTMLElement {
@@ -40,7 +42,7 @@ class Updates extends HTMLElement {
 
     private blogAside(): string {
         return `
-            <aside id="blogAside" class="h-100 rounded-5 p-3 shadow-sm">
+            <aside id="blogAside" class="h-100 rounded-5 px-3 py-3 shadow-sm">
                 <section id="blogAsideChild" class="rounded-5 h-75 px-3 py-3 border border-1 border-dark-subtle"></section>
             </aside>
         `;
@@ -64,11 +66,7 @@ class Updates extends HTMLElement {
 
     private async generateDomElementsRelatedToBlogsInAside(targetElement: string, data: Post[]) {
         try {
-            console.log('Received data:', data); // Log the entire data array
-
-            // Use this.querySelector instead of document.querySelector
             const element = this.querySelector(`#${targetElement}`) as HTMLElement | null;
-
             if (!element) {
                 console.error(`Element with id "${targetElement}" not found`);
                 return;
@@ -76,35 +74,90 @@ class Updates extends HTMLElement {
 
             // Check if data is empty or undefined
             if (!data || data.length === 0) {
-                console.warn('No blog posts found');
-                element.innerHTML = '<p>No blog posts available</p>';
+                console.warn("No blog posts have been found");
+                element.innerHTML = `
+                    <h2>No blog posts <em>are available.</em></h2>
+            `;
                 return;
             }
 
-            // More robust mapping with type checking
-            const result = data.map((item: Post) => {
-                // Defensive checks to prevent undefined errors
-                const title = item.title || 'Untitled Post';
-                const authorName = item.author?.name || 'Unknown Author';
+            // Clear existing content
+            element.innerHTML = "";
 
-                return `
-                <a href="#" class="blog-post-link">
-                    <span>${title}</span>
-                    <small>${authorName}</small>
-                </a>
-            `;
-            }).join("");
+            // Create and append each post button with event listener
+            data.forEach((item: Post) => {
+                const title = item.title || "Untitled Post";
+                const authorName = item.author?.name || "Unknown Author";
 
-            element.innerHTML = result;
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "blog-post-link btn btn-sm fs-5 d-flex flex-row gap-2 align-items-center justify-content-between w-100 py-2 px-2 bg-secondary-subtle rounded-pill link-offset-2 link-underline link-underline-opacity-0 mb-2";
+
+
+                const buttonContent = `
+                    <span class="bg-primary-subtle rounded-pill py-1 px-2 flex-grow-1 text-start">${title}</span>
+                    <small class="bg-primary-subtle py-1 px-2 rounded-pill">${authorName}</small>
+                `;
+                button.innerHTML = DOMPurify.sanitize(buttonContent);
+                button.addEventListener("click", () => {
+                    this.displayPostContent(item);
+                });
+
+                element.appendChild(button);
+            });
         } catch (error: unknown) {
             console.error("Error during creating DOM Elements for Blog Post Entries:", error);
         }
     }
 
+    private displayPostContent(post: Post): void {
+        const contentArea = this.querySelector("#blogMain") as HTMLDivElement | null;
+
+        if (!contentArea) {
+            console.error(`Content area named ${contentArea} not found`);
+            return;
+        }
+
+        // Sanitize the post content before displaying
+        const sanitizedContent = DOMPurify.sanitize(post.content || "");
+        const sanitizedTitle = DOMPurify.sanitize(post.title || "Untitled Post");
+        const authorName = post.author?.name || "Unknown Author";
+        const avatarUrl = post.author?.avatarUrl || "";
+        const defaultImageSrc = "../assets/images/static/webp/logo.webp";
+
+        const postHTML = `
+            <article class="blog-post">
+                <header class="mb-4">
+                    <h1 class="display-6 fw-medium mb-3">${sanitizedTitle}</h1>
+                    <div class="d-flex align-items-center gap-2">
+                        <div>
+                            <img class="img-fluid rounded-pill" src="${defaultImageSrc}" alt="${authorName}" class="rounded-circle" width="48" height="48">
+                        </div>
+                        <div>
+                            <p class="mb-0 fw-semibold">${authorName}</p>
+                            <small class="text-muted">Author</small>
+                        </div>
+                    </div>
+                </header>
+                <div class="blog-post-content">
+                    ${sanitizedContent}
+                </div>
+            </article>
+        `;
+
+        contentArea.innerHTML = postHTML;
+        // Scroll to top for clear visibility of the beginning of the post
+        contentArea.scrollTop = 0;
+    }
+
     private async fetchAndPopulatePosts() {
         try {
             const posts = await WordPressGraphQLClient.fetchBlogPosts();
-            await this.generateDomElementsRelatedToBlogsInAside("blogAsideChild", posts);
+            console.log("Fetched posts:", posts);
+
+            // Now call your method to populate the DOM with the data
+            const result = await this.generateDomElementsRelatedToBlogsInAside("blogAsideChild", posts);
+            return result;
         } catch (error: unknown) {
             console.error("Failed to fetch and populate posts:", error);
         }

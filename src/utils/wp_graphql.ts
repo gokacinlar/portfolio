@@ -16,6 +16,7 @@ interface GraphQLPostNode {
     id: string;
     title: string;
     author: GraphQLAuthor;
+    content: string;
 }
 
 interface GraphQLPostsConnection {
@@ -45,6 +46,7 @@ interface Post {
     id: string;
     title: string;
     author: Author;
+    content: string;
 }
 
 // Query variable type
@@ -68,6 +70,7 @@ class WordPressGraphQLClient {
             nodes {
                 id
                 title
+                content
                 author {
                     node {
                         name
@@ -113,6 +116,7 @@ class WordPressGraphQLClient {
         return {
             id: node.id,
             title: node.title,
+            content: node.content,
             author: {
                 name: node.author.node.name,
                 avatarUrl: node.author.node.avatar.url,
@@ -126,25 +130,24 @@ class WordPressGraphQLClient {
     // Actual blog post fetching
     public static async fetchBlogPosts(variables: GetPostsVariables = { first: WordPressGraphQLClient.DEF_BLOG_POST_NUMBER_TO_BE_FETCHED }): Promise<Post[]> {
         const cachedData = this.getCachedData();
-
-        if (cachedData) {
+        if (cachedData && cachedData.length > 0) {
             return cachedData;
-        } else {
-            try {
-                // Actual data fetching happens here
-                const response = await this.executeQuery<GraphQLPostsData, GetPostsVariables>(
-                    this.GRAPHQL_QUERY_TO_FETCH_BLOG_POSTS,
-                    variables
-                );
+        }
 
-                // Caching process
-                const transformedPosts = response.data.posts.nodes.map(this.transformPostNode);
-                this.cachePosts(transformedPosts);
+        try {
+            // Actual data fetching happens here
+            const response = await this.executeQuery<GraphQLPostsData, GetPostsVariables>(
+                this.GRAPHQL_QUERY_TO_FETCH_BLOG_POSTS,
+                variables
+            );
 
-                return transformedPosts;
-            } catch (error: unknown) {
-                throw new Error("Error fetching WordPress posts:" + error);
-            }
+            // Caching process
+            const transformedPosts = response.data.posts.nodes.map(this.transformPostNode);
+            this.cachePosts(transformedPosts);
+
+            return transformedPosts;
+        } catch (error: unknown) {
+            throw new Error("Error fetching WordPress posts:" + error);
         }
     }
 
