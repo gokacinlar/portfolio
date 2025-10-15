@@ -1,8 +1,8 @@
-export type GenericString = {
+type GenericString = {
     [key: string]: string;
 }
 
-export type PromoCardData = {
+type PromoCardData = {
     postName: string;
     postDesc: string;
     postImgSrc: string;
@@ -11,35 +11,46 @@ export type PromoCardData = {
     projectLink: string;
 };
 
-export type PromoSkills = {
+type PromoSkills = {
     skillName: string;
     skillLogoSrc: string;
     skillAnchor: string;
 }
 
-export type PromoSocials = {
+type PromoSocials = {
     socialName: string;
     socialClass: string;
     socialLink: string;
 }
 
-export type HTMXOptions = {
+type HTMXOptions = {
     hxget: string;
     hxtrigger: string;
     hxswap: string;
     hxpushurl: string;
 }
 
-export type Education = {
+type Education = {
     institution: string;
     field: string;
     degree: string;
 }
 
-export type NavLink = {
+type NavLink = {
     id: string;
     icon: string;
     label: string
 };
 
-export type TableRow = string[];
+type TableRow = string[];
+
+export type {
+    GenericString,
+    PromoCardData,
+    PromoSkills,
+    PromoSocials,
+    HTMXOptions,
+    Education,
+    NavLink,
+    TableRow
+}
