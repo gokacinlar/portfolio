@@ -1,5 +1,15 @@
 import { HeaderNode } from "../../pages/header";
-class ResponsiveNavbar extends HTMLElement {
+
+interface ToggleElements {
+    target: HTMLButtonElement;
+    navbar: HTMLDivElement;
+    icon: HTMLElement;
+}
+
+class ResponsiveNavbar {
+    private static isClicked = false;
+    private documentClickHandler?: (e: MouseEvent) => void;
+
     public responsiveMenuToggleButton(): string {
         return `
             <button id="responsiveMenuToggleBtn" type="button" class="header-responsive-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm
@@ -17,7 +27,7 @@ class ResponsiveNavbar extends HTMLElement {
         <div id="responsiveNavbar" class="position-relative" data-type="closed">
             <nav id="headerRM" class="rounded-5 mt-2 shadow" >
                 <div class="py-2 px-2">
-                    ${new HeaderNode().headerLeft()}
+                    ${new HeaderNode().headerLeftIcon()}
                 </div>
                 <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-column align-items-center gap-1 bg-gradient p-2">
                     ${new HeaderNode().headerMiddleContent()}
@@ -27,11 +37,33 @@ class ResponsiveNavbar extends HTMLElement {
     `;
     }
 
+    private changeMenuIconOnClick = (target: HTMLElement, oldData: string, data: string) => {
+        target.classList.remove(oldData);
+        target.classList.add(data);
+    }
+
+    private handleMenuToggleState({ target, navbar, icon }: ToggleElements): void {
+        target.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            ResponsiveNavbar.isClicked = !ResponsiveNavbar.isClicked;
+
+            if (ResponsiveNavbar.isClicked) {
+                navbar.style.display = "block";
+                navbar.setAttribute("data-type", "open");
+                this.changeMenuIconOnClick(icon, "bi-three-dots", "bi-three-dots-vertical");
+            } else {
+                navbar.style.display = "none";
+                navbar.setAttribute("data-type", "closed");
+                this.changeMenuIconOnClick(icon, "bi-three-dots-vertical", "bi-three-dots");
+            }
+        });
+    }
+
     connectedCallback(): void {
         const responsiveMenuToggleBtn = document.querySelector("#responsiveMenuToggleBtn") as HTMLButtonElement;
-        const responsiveMenuToggleBtnIcon = document.querySelector("#responsiveMenuToggleBtn > i") as HTMLIFrameElement;
+        const responsiveMenuToggleBtnIcon = document.querySelector("#responsiveMenuToggleBtn > i") as HTMLElement;
         const responsiveNavbar = document.querySelector("#responsiveNavbar") as HTMLDivElement;
-        let isClicked: boolean = false;
 
         // Hide the navbar first
         const dataType = responsiveNavbar.getAttribute("data-type");
@@ -39,37 +71,34 @@ class ResponsiveNavbar extends HTMLElement {
             responsiveNavbar.style.display = "none";
         }
 
-        // Toggle button logic
-        responsiveMenuToggleBtn.addEventListener("click", (e) => {
-            e.stopPropagation(); // Say no to document click
-            isClicked = !isClicked;
-            if (isClicked) {
-                responsiveNavbar.style.display = "block";
-                responsiveNavbar.setAttribute("data-type", "open");
-                changeMenuIconOnClick(responsiveMenuToggleBtnIcon, "bi-three-dots", "bi-three-dots-vertical");
-            } else {
-                responsiveNavbar.style.display = "none";
-                responsiveNavbar.setAttribute("data-type", "closed");
-                changeMenuIconOnClick(responsiveMenuToggleBtnIcon, "bi-three-dots-vertical", "bi-three-dots");
-            }
+        this.handleMenuToggleState({
+            target: responsiveMenuToggleBtn,
+            navbar: responsiveNavbar,
+            icon: responsiveMenuToggleBtnIcon
         });
 
-        const changeMenuIconOnClick = (target: HTMLIFrameElement, oldData: string, data: string) => {
-            target.classList.remove(oldData);
-            target.classList.add(data);
-        }
-
-        // Additional implementation of closing the navbar menu when its clicked outside
-        document.addEventListener("click", (e: MouseEvent) => {
+        // Additional implementation of closing the navbar menu when clicked outside
+        this.documentClickHandler = (e: MouseEvent) => {
             const target = e.target as Node;
             if (!responsiveNavbar.contains(target) && !responsiveMenuToggleBtn.contains(target)) {
                 responsiveNavbar.style.display = "none";
                 responsiveNavbar.setAttribute("data-type", "closed");
-                isClicked = false;
+                ResponsiveNavbar.isClicked = false;
+
+                // Update icon when closing via outside click
+                this.changeMenuIconOnClick(responsiveMenuToggleBtnIcon, "bi-three-dots-vertical", "bi-three-dots");
             }
-        });
+        };
+
+        document.addEventListener("click", this.documentClickHandler);
+    }
+
+    disconnectedCallback(): void {
+        // Clean up event listener when component is removed
+        if (this.documentClickHandler) {
+            document.removeEventListener("click", this.documentClickHandler);
+        }
     }
 }
 
 export default ResponsiveNavbar;
-customElements.define("app-responsive-navbar", ResponsiveNavbar);

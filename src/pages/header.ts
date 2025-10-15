@@ -1,5 +1,4 @@
 import * as Type from "../types";
-// Components
 import { Template, DarkLightMode } from '../helper';
 import { HtmxControls } from "../components/M_htmx";
 import ResponsiveNavbar from '../components/responsive/R_navbar';
@@ -12,9 +11,9 @@ class Header extends HTMLElement {
     }
 
     connectedCallback(): void {
-        const dayNightModeSwitchingBtn = document.querySelector("#hrDayNightBtn") as HTMLButtonElement;
+        const dayNightModeSwitchingBtn = this.querySelector("#hrDayNightBtn") as HTMLButtonElement;
         new DarkLightMode().dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
-        const responsiveNavbarMode = new ResponsiveNavbar().connectedCallback();
+        new ResponsiveNavbar().connectedCallback();
     }
 }
 
@@ -27,36 +26,27 @@ interface NavLink {
 
 export class HeaderNode {
     private static readonly SITE_URL: string = "https://dervisoksuzoglu.com.tr";
-    constructor() {
-
-    }
 
     public headerItself(): string {
         return `
             <nav class="m-1 px-2 py-2">
                 <ul class="list-unstyled mb-0 d-flex flex-row align-items-center justify-content-between position-relative">
-                    <li>
-                        <section class="d-inline-flex header-left">
-                            ${this.headerLeft()}
-                        </section>
+                    <li class="d-inline-flex header-left">
+                        ${this.headerLeftIcon()}
                     </li>
-                    <li>
-                        <section class="position-absolute top-50 start-50 translate-middle">
-                            ${this.headerMiddle()}
-                        </section>
+                    <li class="position-absolute top-50 start-50 translate-middle">
+                        ${this.headerMiddle()}
                     </li>
-                    <li>
-                        <section class="header-right d-flex flex-row align-items-center gap-2">
-                            ${this.headerHireBtn()}
-                            ${this.headerEtc()}
-                        </section>
+                    <li class="header-right d-flex flex-row align-items-center gap-2">
+                        ${this.headerHireBtn()}
+                        ${this.headerEtc()}
                     </li>
                 </ul>
             </nav>
         `;
     }
 
-    public headerLeft(): string {
+    public headerLeftIcon(): string {
         return `
             <a href="${HeaderNode.SITE_URL}">
                 <img
