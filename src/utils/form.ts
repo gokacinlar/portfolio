@@ -52,16 +52,15 @@ export function formState(): void {
                     body: json
                 })
                     .then(async (response) => {
-                        let json: JSON = await response.json();
+                        await response.json();
                         if (response.status == 200) {
                             console.log("Your e-mail has been sent.");
                         } else {
-                            console.log(response);
-                            console.warn("Something bad has happened. Check console.");
+                            throw new Error("Something bad has happened: " + response);
                         }
                     })
                     .catch(error => {
-                        console.log(error);
+                        throw new Error("Unable to fetch form data: " + error);
                     })
                     .then(function () {
                         form.reset();
@@ -69,6 +68,6 @@ export function formState(): void {
             }
         });
     } else {
-        throw new Error("Unable to detect form element.")
+        throw new Error("Unable to detect form element.");
     }
 }

@@ -1,4 +1,3 @@
-import { map } from "jquery";
 import { HeaderNode } from "../../pages/header";
 
 interface ToggleElements {
