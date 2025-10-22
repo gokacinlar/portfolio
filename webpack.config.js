@@ -226,7 +226,7 @@ module.exports = {
                 "style-src": ["'self'"],
                 "img-src": ["'self'", "data:", ...imageConnections],
                 "font-src": ["'self'"],
-                "connect-src": ["'self'", "http://localhost:10005/"],
+                "connect-src": ["'self'", "https://dervisoksuzoglu.com.tr/wp_blog/graphql"],
             },
             {
                 enabled: true,

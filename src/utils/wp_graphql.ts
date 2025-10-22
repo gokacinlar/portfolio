@@ -58,7 +58,7 @@ export type {
 };
 
 class WordPressGraphQLClient {
-    private static readonly GRAPHQL_ENDPOINT = "http://localhost:10005/graphql";
+    private static readonly GRAPHQL_ENDPOINT = "https://dervisoksuzoglu.com.tr/wp_blog/graphql";
     private static readonly GRAPHQL_QUERY_TO_FETCH_BLOG_POSTS = `
     query GetPosts($first: Int, $after: String) {
         posts(first: $first, after: $after) {
@@ -140,7 +140,7 @@ class WordPressGraphQLClient {
 
             return transformedPosts;
         } catch (error: unknown) {
-            throw new Error("Error fetching WordPress posts:" + error);
+            throw new Error("Error fetching WordPress posts." + error);
         }
     }
 
