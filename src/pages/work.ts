@@ -67,8 +67,8 @@ class WorkPage extends HTMLElement {
     private content(): string {
         return `
             <div id="optionsContent" class="bg-secondary-subtle px-3 py-3 rounded-5 shadow-sm">
-                <div class="tab-pane fade show active" id="englishOptions" role="tabpanel" aria-labelledby="forEnglish">...dfgdfg</div>
-                <div class="tab-pane fade" id="programmingOptions" role="tabpanel" aria-labelledby="forProgramming">...qweqwew</div>
+                <div class="tab-pane fade show active" id="englishOptions" role="tabpanel" aria-labelledby="forEnglish">Coming soon...</div>
+                <div class="tab-pane fade" id="programmingOptions" role="tabpanel" aria-labelledby="forProgramming">Coming soon...</div>
             </div>
         `;
     }

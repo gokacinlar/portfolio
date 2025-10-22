@@ -842,6 +842,10 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         background: var(--clr-eight);
     }
 
+    #blogAside {
+        @include responsive-styling($all-mobile-tablet-breakpoints, display, none);
+    }
+
     #blogAsideChild {
         background: var(--clr-one);
     }
@@ -958,6 +962,19 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     .wavy-text {
         @include wavy-text(var(--clr-two));
+    }
+
+    #offCanvasControls {
+        @include responsive-styling($all-mobile-tablet-breakpoints, display, block);
+        @include responsive-styling($desktop-small-breakpoints, display, none);
+        @include responsive-styling($desktop-breakpoints, display, none);
+
+    }
+
+    #displayOffCanvasBtn {
+        --def-size: 48px;
+        width: var(--def-size);
+        height: var(--def-size);
     }
 }
 

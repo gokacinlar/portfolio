@@ -24,14 +24,14 @@ class Updates extends HTMLElement {
     private render(): string {
         return `
             <section class="container-fluid h-100">
-                <div id="blogContainer" class="row gx-3 mb-3 h-100">
+                <div id="blogContainer" class="row gx-3 gy-3 mb-3 h-100">
                     <div class="bwrapper col-md-4 col-lg-4 col-sm h-100">
                         ${this.blogAside()}
+                        ${this.offCanvas()}
+                        ${this.initiateOffCanvas()}
                     </div>
                     <div class="bwrapper col-md-8 col-lg-8 col-sm h-100">
                         <main id="blogMain" class="h-100 rounded-5 px-3 py-3 shadow-sm">
-                            <h1>Main Content</h1>
-                            <p>This is the main section.</p>
                         </main>
                     </div>
                 </div>
@@ -39,20 +39,32 @@ class Updates extends HTMLElement {
         `;
     }
 
+    private initiateOffCanvas() {
+        return `
+            <div id="offCanvasControls" class="btn-group w-100 gap-2" role="group" aria-label="Blog Post Display Settings">
+                <button type="button" class="btn btn-sm btn-success fs-3 fw-medium rounded-pill shadow-sm">Get Recent Post</button>
+                <button class="btn btn-sm btn-warning rounded-pill shadow-sm" type="button" id="displayOffCanvasBtn" data-bs-toggle="offcanvas" data-bs-target="#blogAsideOffcanvasTemplate"
+                    aria-controls="blogAsideOffcanvasTemplate" title="Display menu to see posts.">
+                    <i class="bi bi-x-lg display-6 fw-bold"></i>
+                </button>
+            </div>
+        `;
+    }
+
     private blogAside(): string {
         return `
             <aside id="blogAside" class="h-100 rounded-5 px-3 py-3 shadow-sm">
-                <section id="blogAsideChild" class="rounded-5 h-75 px-3 py-3 border border-1 border-dark-subtle"></section>
+                <section id="blogAsideChild" class="rounded-5 h-100 px-3 py-3 border border-1 border-dark-subtle"></section>
             </aside>
         `;
     }
 
     private offCanvas(): string {
         return `
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="blogAsideOffcanvasTemplate" aria-labelledby="blogAsideOffcanvas">
-                <div class="offcanvas-header">
+            <div class="offcanvas offcanvas-start rounded-end-4 w-75 show" tabindex="-1" id="blogAsideOffcanvasTemplate" aria-labelledby="blogAsideOffcanvas" data-bs-scroll="true" data-bs-backdrop="true">
+                <div class="offcanvas-header bg-secondary-subtle rounded-end-4">
                     <h5 class="offcanvas-title" id="blogAsideOffcanvas">Latest updates</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <button type="button" class="btn btn-sm btn-close fs-5 fw-bold" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <div>
@@ -75,38 +87,77 @@ class Updates extends HTMLElement {
             if (!data || data.length === 0) {
                 console.warn("No blog posts have been found");
                 element.innerHTML = `
-                    <h2>No blog posts <em>are available.</em></h2>
-            `;
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <h1>☹</h1>
+                        <h2>No blog posts <em>are available.</em></h2>
+                    </div>
+                `;
                 return;
             }
 
             // Clear existing content first to avoid conflictions
             element.innerHTML = "";
+            this.appendSpinner(element);
 
             // Create and append each post button with event listener
             data.forEach((item: Post) => {
-                const title = item.title || "Untitled Post";
-                const authorName = item.author?.name || "Unknown Author";
+                try {
+                    const title: string = item.title || "Untitled Post";
+                    const authorName: string = item.author?.name || "Unknown Author";
 
-                const button = document.createElement("button");
-                button.type = "button";
-                button.className = "blog-post-link btn btn-sm fs-5 d-flex flex-row gap-2 align-items-center justify-content-between w-100 py-2 px-2 bg-secondary-subtle rounded-pill link-offset-2 link-underline link-underline-opacity-0 mb-2";
+                    const button = document.createElement("button") as HTMLButtonElement;
+                    button.type = "button";
+                    button.className = "blog-post-link btn btn-sm fs-5 d-flex flex-row gap-2 align-items-center justify-content-between w-100 py-2 px-2 bg-secondary-subtle rounded-pill link-offset-2 link-underline link-underline-opacity-0 mb-2";
 
+                    const buttonContent = `
+                        <span class="bg-primary-subtle rounded-pill py-1 px-2 flex-grow-1 text-start">${title}</span>
+                        <small class="bg-primary-subtle py-1 px-2 rounded-pill">${authorName}</small>
+                    `;
+                    button.innerHTML = DOMPurify.sanitize(buttonContent);
+                    button.addEventListener("click", () => {
+                        this.displayPostContent(item);
+                    });
 
-                const buttonContent = `
-                    <span class="bg-primary-subtle rounded-pill py-1 px-2 flex-grow-1 text-start">${title}</span>
-                    <small class="bg-primary-subtle py-1 px-2 rounded-pill">${authorName}</small>
-                `;
-                button.innerHTML = DOMPurify.sanitize(buttonContent);
-                button.addEventListener("click", () => {
-                    this.displayPostContent(item);
-                });
-
-                element.appendChild(button);
+                    element.appendChild(button);
+                } catch (error: unknown) {
+                    element!.innerHTML = `
+                        <div class="d-flex flex-column align-items-center justify-content-center">
+                            <div>☹</div>
+                            <h2>Unable to <mark>display</mark> blog posts.</h2>
+                        </div>
+                    `;
+                    throw new Error("Unable to display blog posts." + error);
+                }
             });
+            this.removeSpinner();
         } catch (error: unknown) {
             console.error("Error during creating DOM Elements for Blog Post Entries:", error);
+            return;
         }
+    }
+
+    private appendSpinner(target: HTMLElement) {
+        const temporarySpinner = document.createElement("div") as HTMLDivElement;
+        temporarySpinner.className = "blog-post-loader spinner-border text-primary";
+        temporarySpinner.role = "status";
+
+        const temporarySpinnerContent = document.createElement("span") as HTMLSpanElement;
+        temporarySpinnerContent.className = "blog-post-loader bpl-spinner-text visually-hidden";
+        temporarySpinnerContent.textContent = "Loading Blog Posts";
+
+        temporarySpinner.appendChild(temporarySpinnerContent);
+        target.appendChild(temporarySpinner);
+    }
+
+    private removeSpinner() {
+        const elementsToBeRemoved = document.querySelectorAll(".blog-post-loader") as NodeListOf<HTMLElement>;
+        if (!elementsToBeRemoved) {
+            return;
+        }
+
+        elementsToBeRemoved.forEach((_elem) => {
+            _elem.remove();
+        });
     }
 
     private displayPostContent(post: Post): void {
