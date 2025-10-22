@@ -80,7 +80,7 @@ export class HeaderNode {
         hxget: "",
         hxtrigger: "click",
         hxswap: "innerHTML",
-        hxpushurl: "true",
+        hxpushurl: true,
     };
 
     private navLinks: NavLink[] = [

@@ -25,9 +25,9 @@ type PromoSocials = {
 
 type HTMXOptions = {
     hxget: string;
-    hxtrigger: string;
-    hxswap: string;
-    hxpushurl: string;
+    hxtrigger: "click" | "change" | "mouseover";
+    hxswap: "innerHTML" | "outerHTML" | "beforebegin" | "afterbegin" | "beforeend" | "afterend";
+    hxpushurl: boolean;
 }
 
 type Education = {
