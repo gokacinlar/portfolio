@@ -79,8 +79,10 @@ class WordPressGraphQLClient {
     private static async executeQuery<TData, TVariables = Record<string, unknown>>(query: string, variables?: TVariables): Promise<GraphQLResponse<TData>> {
         const response = await fetch(this.GRAPHQL_ENDPOINT, {
             method: "POST",
+            mode: "cors",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify({
                 query,
