@@ -965,7 +965,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     #offCanvasControls {
-        @include responsive-styling($all-mobile-tablet-breakpoints, display, block);
+        @include responsive-styling($all-mobile-tablet-breakpoints, display, flex);
         @include responsive-styling($desktop-small-breakpoints, display, none);
         @include responsive-styling($desktop-breakpoints, display, none);
 
