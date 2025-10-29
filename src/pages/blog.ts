@@ -5,11 +5,18 @@ import { Template } from "../helper";
 interface Author {
     name: string;
 }
+
 interface Post {
     id: string;
     title: string;
     author: Author;
     content: string;
+}
+
+interface PostPreview {
+    id: string;
+    title: string;
+    author: Author;
 }
 
 class Updates extends HTMLElement {
@@ -24,7 +31,7 @@ class Updates extends HTMLElement {
     private render(): string {
         return `
             <section class="container-fluid h-100">
-                <div id="blogContainer" class="row gx-3 gy-3 mb-3 h-100">
+                <div id="blogContainer" class="row gx-3 mb-3 h-100">
                     <div class="bwrapper col-md-4 col-lg-4 col-sm h-100">
                         ${this.blogAside()}
                         ${this.offCanvas()}
@@ -42,10 +49,10 @@ class Updates extends HTMLElement {
     private initiateOffCanvas() {
         return `
             <div id="offCanvasControls" class="btn-group w-100 gap-2" role="group" aria-label="Blog Post Display Settings">
-                <button type="button" class="btn btn-sm btn-success fs-3 fw-medium rounded-pill shadow-sm">Get Recent Post</button>
+                <button type="button" class="btn btn-sm btn-success fs-3 fw-medium rounded-pill shadow-sm">Get Most Recent Post</button>
                 <button class="btn btn-sm btn-warning rounded-pill shadow-sm" type="button" id="displayOffCanvasBtn" data-bs-toggle="offcanvas" data-bs-target="#blogAsideOffcanvasTemplate"
                     aria-controls="blogAsideOffcanvasTemplate" title="Display menu to see posts.">
-                    <i class="bi bi-x-lg display-6 fw-bold"></i>
+                    <i class="bi bi-list display-6 fw-bold"></i>
                 </button>
             </div>
         `;
@@ -61,7 +68,7 @@ class Updates extends HTMLElement {
 
     private offCanvas(): string {
         return `
-            <div class="offcanvas offcanvas-start rounded-end-4 w-75 show" tabindex="-1" id="blogAsideOffcanvasTemplate" aria-labelledby="blogAsideOffcanvas" data-bs-scroll="true" data-bs-backdrop="true">
+            <div class="offcanvas offcanvas-start rounded-end-4 w-75" tabindex="-1" id="blogAsideOffcanvasTemplate" aria-labelledby="blogAsideOffcanvas" data-bs-scroll="true" data-bs-backdrop="true">
                 <div class="offcanvas-header bg-secondary-subtle rounded-end-4">
                     <h5 class="offcanvas-title" id="blogAsideOffcanvas">Latest updates</h5>
                     <button type="button" class="btn btn-sm btn-close fs-5 fw-bold" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -75,7 +82,7 @@ class Updates extends HTMLElement {
         `;
     }
 
-    private async generateDomElementsRelatedToBlogsInAside(targetElement: string, data: Post[]) {
+    private async generateDomElementsRelatedToBlogsInAside(targetElement: string, data: PostPreview[]) {
         try {
             const element = this.querySelector(`#${targetElement}`) as HTMLElement | null;
             if (!element) {
@@ -97,10 +104,9 @@ class Updates extends HTMLElement {
 
             // Clear existing content first to avoid conflictions
             element.innerHTML = "";
-            this.appendSpinner(element);
 
             // Create and append each post button with event listener
-            data.forEach((item: Post) => {
+            data.forEach((item: PostPreview) => {
                 try {
                     const title: string = item.title || "Untitled Post";
                     const authorName: string = item.author?.name || "Unknown Author";
@@ -108,55 +114,110 @@ class Updates extends HTMLElement {
                     const button = document.createElement("button") as HTMLButtonElement;
                     button.type = "button";
                     button.className = "blog-post-link btn btn-sm fs-5 d-flex flex-row gap-2 align-items-center justify-content-between w-100 py-2 px-2 bg-secondary-subtle rounded-pill link-offset-2 link-underline link-underline-opacity-0 mb-2";
+                    button.dataset.postId = item.id; // Store the post ID for fetching
 
                     const buttonContent = `
                         <span class="bg-primary-subtle rounded-pill py-1 px-2 flex-grow-1 text-start">${title}</span>
                         <small class="bg-primary-subtle py-1 px-2 rounded-pill">${authorName}</small>
                     `;
                     button.innerHTML = DOMPurify.sanitize(buttonContent);
-                    button.addEventListener("click", () => {
-                        this.displayPostContent(item);
+
+                    // Actually load content with async call
+                    button.addEventListener("click", async () => {
+                        await this.loadAndDisplayPost(item.id, button);
                     });
 
                     element.appendChild(button);
                 } catch (error: unknown) {
-                    element!.innerHTML = `
-                        <div class="d-flex flex-column align-items-center justify-content-center">
-                            <div>☹</div>
-                            <h2>Unable to <mark>display</mark> blog posts.</h2>
-                        </div>
-                    `;
-                    throw new Error("Unable to display blog posts." + error);
+                    console.error("Error creating button for post:", error);
                 }
             });
-            this.removeSpinner();
         } catch (error: unknown) {
             console.error("Error during creating DOM Elements for Blog Post Entries:", error);
+            const element = this.querySelector(`#${targetElement}`) as HTMLElement | null;
+            if (element) {
+                element.innerHTML = `
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <div>☹</div>
+                        <h2>Unable to <mark>display</mark> blog posts.</h2>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    private async loadAndDisplayPost(postId: string, button: HTMLButtonElement) {
+        const contentArea = this.querySelector("#blogMain") as HTMLDivElement | null;
+
+        if (!contentArea) {
+            console.error("Content area not found");
             return;
+        }
+
+        // Disable button and show loading state
+        button.disabled = true;
+        const originalButtonHTML = button.innerHTML;
+        button.innerHTML = `
+            <span class="spinner-border spinner-border text-info" role="status" aria-hidden="true"></span>
+        `;
+
+        this.appendSpinner(contentArea);
+        try {
+            // Fetch the full post content
+            const post = await WordPressGraphQLClient.fetchSinglePost(postId);
+
+            if (post) {
+                console.log("Post loaded successfully", post);
+            }
+
+            // Display the post
+            this.displayPostContent(post);
+        } catch (error: unknown) {
+            console.error("Error loading post:", error);
+            contentArea.innerHTML = `
+                <div class="alert alert-danger shadow-sm rounded-5" role="alert">
+                    <h4 class="alert-heading"><i class="bi bi-exclamation-diamond"></i> Error Loading Post</h4>
+                    <hr class="my-1 w-50">
+                    <p class="mt-2 mb-0">Something went wrong. Try again later...</p>
+                </div>
+            `;
+
+            if (error instanceof Error) {
+                console.error("Error message:", error.message);
+                console.error("Error stack:", error.stack);
+            }
+        } finally {
+            this.removeSpinner();
+            button.disabled = false;
+            button.innerHTML = originalButtonHTML;
         }
     }
 
     private appendSpinner(target: HTMLElement) {
+        this.removeSpinner();
+
+        const spinnerContainer = document.createElement("div") as HTMLDivElement;
+        spinnerContainer.className = "blog-post-loader d-flex justify-content-center align-items-center h-100";
+
         const temporarySpinner = document.createElement("div") as HTMLDivElement;
-        temporarySpinner.className = "blog-post-loader spinner-border text-primary";
+        temporarySpinner.className = "spinner-border text-primary";
         temporarySpinner.role = "status";
+        temporarySpinner.style.width = "3rem";
+        temporarySpinner.style.height = "3rem";
 
         const temporarySpinnerContent = document.createElement("span") as HTMLSpanElement;
-        temporarySpinnerContent.className = "blog-post-loader bpl-spinner-text visually-hidden";
-        temporarySpinnerContent.textContent = "Loading Blog Posts";
+        temporarySpinnerContent.className = "visually-hidden";
+        temporarySpinnerContent.textContent = "Loading....";
 
         temporarySpinner.appendChild(temporarySpinnerContent);
-        target.appendChild(temporarySpinner);
+        spinnerContainer.appendChild(temporarySpinner);
+        target.appendChild(spinnerContainer);
     }
 
     private removeSpinner() {
         const elementsToBeRemoved = document.querySelectorAll(".blog-post-loader") as NodeListOf<HTMLElement>;
-        if (!elementsToBeRemoved) {
-            return;
-        }
-
-        elementsToBeRemoved.forEach((_elem) => {
-            _elem.remove();
+        elementsToBeRemoved.forEach((elem) => {
+            elem.remove();
         });
     }
 
@@ -164,7 +225,7 @@ class Updates extends HTMLElement {
         const contentArea = this.querySelector("#blogMain") as HTMLDivElement | null;
 
         if (!contentArea) {
-            console.error(`Content area named ${contentArea} not found`);
+            console.error("Content area not found");
             return;
         }
 
@@ -201,13 +262,62 @@ class Updates extends HTMLElement {
     }
 
     private async fetchAndPopulatePosts() {
+        const element = this.querySelector("#blogAsideChild") as HTMLElement | null;
+
+        if (!element) {
+            console.error("Blog aside child element not found");
+            return;
+        }
+
+        this.appendSpinnerInAside(element);
         try {
-            const posts = await WordPressGraphQLClient.fetchBlogPosts();
-            const result = await this.generateDomElementsRelatedToBlogsInAside("blogAsideChild", posts);
-            return result;
+            // Fetch only previews (lightweight data)
+            const previews = await WordPressGraphQLClient.fetchBlogPostPreviews();
+            await this.generateDomElementsRelatedToBlogsInAside("blogAsideChild", previews);
         } catch (error: unknown) {
             console.error("Failed to fetch and populate posts:", error);
+            element.innerHTML = `
+                <div class="alert alert-warning rounded-5 shadow-sm" role="alert">
+                    <h4 class="alert-heading"><i class="bi bi-exclamation-diamond"></i> Error</h4>
+                    <hr class="w-50 my-2">
+                    <p class="my-1">Unable to load blog posts. Please refresh the page.</p>
+                </div>
+            `;
+        } finally {
+            this.removeSpinnerInAside();
         }
+    }
+
+    // Placeholder spinner element
+    private appendSpinnerInAside(target: HTMLElement) {
+        const spinnerContainer = document.createElement("div") as HTMLDivElement;
+        spinnerContainer.className = "blog-aside-loader d-flex flex-column justify-content-center align-items-center h-100";
+
+        const temporarySpinner = document.createElement("div") as HTMLDivElement;
+        temporarySpinner.className = "spinner-border text-primary mb-3";
+        temporarySpinner.role = "status";
+        temporarySpinner.style.width = "3rem";
+        temporarySpinner.style.height = "3rem";
+
+        const temporarySpinnerContent = document.createElement("span") as HTMLSpanElement;
+        temporarySpinnerContent.className = "visually-hidden";
+        temporarySpinnerContent.textContent = "Loading Blog Posts";
+
+        const loadingText = document.createElement("p") as HTMLParagraphElement;
+        loadingText.className = "text-muted";
+        loadingText.textContent = "Loading blog posts...";
+
+        temporarySpinner.appendChild(temporarySpinnerContent);
+        spinnerContainer.appendChild(temporarySpinner);
+        spinnerContainer.appendChild(loadingText);
+        target.appendChild(spinnerContainer);
+    }
+
+    private removeSpinnerInAside() {
+        const elementsToBeRemoved = document.querySelectorAll(".blog-aside-loader") as NodeListOf<HTMLElement>;
+        elementsToBeRemoved.forEach((elem) => {
+            elem.remove();
+        });
     }
 
     connectedCallback() {
