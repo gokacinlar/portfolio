@@ -415,3 +415,34 @@ export function isValidUrl(url: string): boolean {
 export function generateNonce(): string {
     return window.crypto.getRandomValues(new Uint32Array(4)).join("");
 }
+
+interface ButtonIconOptions {
+    button: string;
+    iconClass: string;
+    priorIcon: string;
+    newIcon: string;
+}
+
+// Function to dynamically change a button's <i> element's classname with proper Bootstrap icon
+export function dynamicallyChangeButtonIcon({ button, iconClass, priorIcon, newIcon }: ButtonIconOptions): void {
+    const buttonItself = document.querySelector(`#${button}`) as HTMLButtonElement;
+    const buttonIconClass = document.querySelector(`.${iconClass}`) as HTMLElement;
+    let isChanged: boolean = false;
+
+    // Store the initial icon class
+    const initialIcon = buttonIconClass.className;
+
+    // Set up the event listener for click
+    buttonItself.addEventListener("click", (_e: MouseEvent) => {
+        if (isChanged) {
+            buttonIconClass.className = initialIcon;
+            isChanged = false;
+        } else {
+            if (buttonIconClass.classList.contains(priorIcon)) {
+                buttonIconClass.classList.remove(priorIcon);
+            }
+            buttonIconClass.classList.add(newIcon);
+            isChanged = true;
+        }
+    });
+}
