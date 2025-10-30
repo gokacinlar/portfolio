@@ -23,6 +23,11 @@ interface GraphQLPostsData {
     posts: GraphQLPostsConnection;
 }
 
+// Single post query response
+interface GraphQLSinglePostData {
+    post: GraphQLPostNode;
+}
+
 interface GraphQLResponse<T> {
     data: T;
     errors?: Array<{
@@ -32,7 +37,7 @@ interface GraphQLResponse<T> {
     }>;
 }
 
-// Domain types we"ll convert from queries
+// Domain types we'll convert from queries
 interface Author {
     name: string;
 }
@@ -44,32 +49,62 @@ interface Post {
     content: string;
 }
 
+// Lightweight post for initial listing
+interface PostPreview {
+    id: string;
+    title: string;
+    author: Author;
+}
+
 // Query variable type
 interface GetPostsVariables {
     first?: number;
     after?: string;
 }
 
+interface GetSinglePostVariables {
+    id: string;
+}
+
 export type {
     WordPressGraphQLClient,
     Post,
+    PostPreview,
     Author,
-    GetPostsVariables
+    GetPostsVariables,
+    GetSinglePostVariables
 };
 
 class WordPressGraphQLClient {
     private static readonly GRAPHQL_ENDPOINT = "https://dervisoksuzoglu.com.tr/wp_blog/graphql";
-    private static readonly GRAPHQL_QUERY_TO_FETCH_BLOG_POSTS = `
-    query GetPosts($first: Int, $after: String) {
+
+    // Query to fetch only post previews (no content for efficient loading & caching)
+    private static readonly GRAPHQL_QUERY_FETCH_POST_PREVIEWS = `
+    query GetPostPreviews($first: Int, $after: String) {
         posts(first: $first, after: $after) {
             nodes {
                 id
                 title
-                content(format: RENDERED)
                 author {
                     node {
                         name
                     }
+                }
+            }
+        }
+    }
+    ` as const;
+
+    // Query to fetch single post with full content on demand
+    private static readonly GRAPHQL_QUERY_FETCH_SINGLE_POST = `
+    query GetSinglePost($id: ID!) {
+        post(id: $id, idType: DATABASE_ID) {
+            id
+            title
+            content(format: RENDERED)
+            author {
+                node {
+                    name
                 }
             }
         }
@@ -106,7 +141,18 @@ class WordPressGraphQLClient {
         }
     }
 
-    // Transform GraphQL data to readable as a readable JSON output
+    // Transform GraphQL data to readable as a readable JSON output (partial)
+    private static transformPostPreview(node: GraphQLPostNode): PostPreview {
+        return {
+            id: node.id || "Unknown ID",
+            title: node.title || "Unknown Title",
+            author: {
+                name: node.author.node.name || "Unknown Author",
+            },
+        };
+    }
+
+    // Transform GraphQL data to full Post
     private static transformPostNode(node: GraphQLPostNode): Post {
         return {
             id: node.id,
@@ -119,36 +165,58 @@ class WordPressGraphQLClient {
     }
 
     private static readonly DEF_BLOG_POST_NUMBER_TO_BE_FETCHED: number = 10;
-    private static readonly CACHE_KEY = "wordpress_blog_posts";
+    private static readonly CACHE_KEY_PREVIEWS = "wordpress_blog_post_previews";
+    private static readonly CACHE_KEY_POST_PREFIX = "wordpress_blog_post_";
     private static readonly CACHE_EXPIRATION_HOURS = 24; // Valid for 1 day
 
-    // Actual blog post fetching
-    public static async fetchBlogPosts(variables: GetPostsVariables = { first: WordPressGraphQLClient.DEF_BLOG_POST_NUMBER_TO_BE_FETCHED }): Promise<Post[]> {
-        const cachedData = this.getCachedData();
+    // Fetch post previews (titles and authors only)
+    public static async fetchBlogPostPreviews(variables: GetPostsVariables = { first: WordPressGraphQLClient.DEF_BLOG_POST_NUMBER_TO_BE_FETCHED }): Promise<PostPreview[]> {
+        const cachedData = this.getCachedPreviews();
         if (cachedData && cachedData.length > 0) {
             return cachedData;
         }
 
         try {
-            // Actual data fetching happens here
             const response = await this.executeQuery<GraphQLPostsData, GetPostsVariables>(
-                this.GRAPHQL_QUERY_TO_FETCH_BLOG_POSTS,
+                this.GRAPHQL_QUERY_FETCH_POST_PREVIEWS,
                 variables
             );
 
-            // Caching process
-            const transformedPosts = response.data.posts.nodes.map(this.transformPostNode);
-            this.cachePosts(transformedPosts);
+            const transformedPreviews = response.data.posts.nodes.map(this.transformPostPreview);
+            this.cachePreviews(transformedPreviews);
 
-            return transformedPosts;
+            return transformedPreviews;
         } catch (error: unknown) {
-            throw new Error("Error fetching WordPress posts." + error);
+            throw new Error("Error fetching WordPress post previews: " + error);
         }
     }
 
-    private static getCachedData(): Post[] {
+    // Fetch single post with full content
+    public static async fetchSinglePost(postId: string): Promise<Post> {
+        // Check if this specific post is cached
+        const cachedPost = this.getCachedPost(postId);
+        if (cachedPost) {
+            return cachedPost;
+        }
+
         try {
-            const cachedItem = localStorage.getItem(this.CACHE_KEY);
+            const response = await this.executeQuery<GraphQLSinglePostData, GetSinglePostVariables>(
+                this.GRAPHQL_QUERY_FETCH_SINGLE_POST,
+                { id: postId }
+            );
+
+            const transformedPost = this.transformPostNode(response.data.post);
+            this.cachePost(transformedPost);
+
+            return transformedPost;
+        } catch (error: unknown) {
+            throw new Error("Error fetching WordPress post: " + error);
+        }
+    }
+
+    private static getCachedPreviews(): PostPreview[] {
+        try {
+            const cachedItem = localStorage.getItem(this.CACHE_KEY_PREVIEWS);
 
             if (!cachedItem) {
                 return [];
@@ -156,45 +224,69 @@ class WordPressGraphQLClient {
 
             const parsedCache = JSON.parse(cachedItem);
             const currentTime = new Date().getTime();
-            const cacheAge: number = (currentTime - parsedCache.timestamp) / (1000 * 60 * 60); // Convert to hours
+            const cacheAge: number = (currentTime - parsedCache.timestamp) / (1000 * 60 * 60);
 
-            // Check if cache is still valid
             if (cacheAge < this.CACHE_EXPIRATION_HOURS) {
-                return parsedCache.posts;
+                return parsedCache.previews;
             }
 
-            // Remove expired cache
-            localStorage.removeItem(this.CACHE_KEY);
+            localStorage.removeItem(this.CACHE_KEY_PREVIEWS);
             return [];
         } catch (error: unknown) {
-            console.error("Error retrieving cached posts:", error);
+            console.error("Error retrieving cached previews:", error);
             return [];
         }
     }
 
-    private static cachePosts(posts: Post[]): void {
+    private static cachePreviews(previews: PostPreview[]): void {
         try {
             const cacheItem = {
                 timestamp: new Date().getTime(),
-                posts: posts
+                previews: previews
             };
-            localStorage.setItem(this.CACHE_KEY, JSON.stringify(cacheItem));
+            localStorage.setItem(this.CACHE_KEY_PREVIEWS, JSON.stringify(cacheItem));
         } catch (error) {
-            console.error('Error caching posts in localStorage:', error);
+            console.error('Error caching previews in localStorage:', error);
+        }
+    }
+
+    private static getCachedPost(postId: string): Post | null {
+        try {
+            const cacheKey = this.CACHE_KEY_POST_PREFIX + postId;
+            const cachedItem = localStorage.getItem(cacheKey);
+
+            if (!cachedItem) {
+                return null;
+            }
+
+            const parsedCache = JSON.parse(cachedItem);
+            const currentTime = new Date().getTime();
+            const cacheAge: number = (currentTime - parsedCache.timestamp) / (1000 * 60 * 60);
+
+            if (cacheAge < this.CACHE_EXPIRATION_HOURS) {
+                return parsedCache.post;
+            }
+
+            localStorage.removeItem(cacheKey);
+            return null;
+        } catch (error: unknown) {
+            console.error("Error retrieving cached post:", error);
+            return null;
+        }
+    }
+
+    private static cachePost(post: Post): void {
+        try {
+            const cacheKey = this.CACHE_KEY_POST_PREFIX + post.id;
+            const cacheItem = {
+                timestamp: new Date().getTime(),
+                post: post
+            };
+            localStorage.setItem(cacheKey, JSON.stringify(cacheItem));
+        } catch (error) {
+            console.error('Error caching post in localStorage:', error);
         }
     }
 }
 
 export default WordPressGraphQLClient;
-
-// Incremental post fetching for pagination
-// For later use
-async function fetchCustomAmount(): Promise<void> {
-    try {
-        // Fetch with custom variables
-        const posts = await WordPressGraphQLClient.fetchBlogPosts({ first: 20 });
-        console.log(`Fetched ${posts.length} posts`);
-    } catch (error) {
-        console.error("Failed to fetch posts:", error);
-    }
-}
