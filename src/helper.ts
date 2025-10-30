@@ -427,10 +427,15 @@ interface ButtonIconOptions {
 export function dynamicallyChangeButtonIcon({ button, iconClass, priorIcon, newIcon }: ButtonIconOptions): void {
     const buttonItself = document.querySelector(`#${button}`) as HTMLButtonElement;
     const buttonIconClass = document.querySelector(`.${iconClass}`) as HTMLElement;
+
     let isChanged: boolean = false;
 
     // Store the initial icon class
     const initialIcon = buttonIconClass.className;
+
+    if (!initialIcon) {
+        throw new Error("Unable to detect target icon's class name.");
+    }
 
     // Set up the event listener for click
     buttonItself.addEventListener("click", (_e: MouseEvent) => {

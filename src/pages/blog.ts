@@ -1,6 +1,7 @@
 import DOMPurify from "dompurify";
+import bootstrap from "bootstrap";
 import WordPressGraphQLClient from "../utils/wp_graphql";
-import { Template } from "../helper";
+import { Template, dynamicallyChangeButtonIcon } from "../helper";
 
 interface Author {
     name: string;
@@ -52,7 +53,7 @@ class Updates extends HTMLElement {
                 <button type="button" class="btn btn-sm btn-success fs-3 fw-medium rounded-pill shadow-sm">Get Most Recent Post</button>
                 <button class="btn btn-sm btn-warning rounded-pill shadow-sm" type="button" id="displayOffCanvasBtn" data-bs-toggle="offcanvas" data-bs-target="#blogAsideOffcanvasTemplate"
                     aria-controls="blogAsideOffcanvasTemplate" title="Display menu to see posts.">
-                    <i class="bi bi-list display-6 fw-bold"></i>
+                    <i class="offcanvas-menu-icon bi bi-list display-6 fw-bold"></i>
                 </button>
             </div>
         `;
@@ -71,7 +72,7 @@ class Updates extends HTMLElement {
             <div class="offcanvas offcanvas-start rounded-end-4 w-75" tabindex="-1" id="blogAsideOffcanvasTemplate" aria-labelledby="blogAsideOffcanvas" data-bs-scroll="true" data-bs-backdrop="true">
                 <div class="offcanvas-header bg-secondary-subtle rounded-end-4">
                     <h5 class="offcanvas-title" id="blogAsideOffcanvas">Latest updates</h5>
-                    <button type="button" class="btn btn-sm btn-close fs-5 fw-bold" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <button id="dismissOffcanvasBtn" type="button" class="btn btn-sm btn-close fs-5 fw-bold" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <div>
@@ -320,8 +321,21 @@ class Updates extends HTMLElement {
         });
     }
 
+
+    private static handleOffCanvasOpenCloseEvent() {
+        const options = {
+            button: "displayOffCanvasBtn",
+            iconClass: "offcanvas-menu-icon",
+            priorIcon: "bi-list",
+            newIcon: "bi-x-lg",
+        }
+
+        dynamicallyChangeButtonIcon(options);
+    }
+
     connectedCallback() {
         this.fetchAndPopulatePosts();
+        Updates.handleOffCanvasOpenCloseEvent();
     }
 }
 
