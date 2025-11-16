@@ -129,3 +129,13 @@ $themes: (
         @include define-css-variables(map.get($themes, dark));
     }
 }
+
+article {
+    @supports (text-wrap: avoid-short-last-lines) {
+        text-wrap: avoid-short-last-lines;
+    }
+
+    @supports not (text-wrap: avoid-short-last-lines) {
+        text-wrap: pretty;
+    }
+}

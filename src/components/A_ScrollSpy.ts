@@ -25,12 +25,12 @@ class ScrollSpy {
     }
 
     private navLinks: Type.NavLink[] = [
-        { id: "li-1", icon: "🧑", label: "About Me" },
-        { id: "li-2", icon: "📚", label: "Education" },
-        { id: "li-3", icon: "📠", label: "Work" },
-        { id: "li-4", icon: "🚀", label: "Tech Stack & Tools" },
-        { id: "li-5", icon: "📧", label: "E-mail" },
-        { id: "li-6", icon: "🔎", label: "Advanced" },
+        { id: "about-me", icon: "🧑", label: "About Me" },
+        { id: "education", icon: "📚", label: "Education" },
+        { id: "work", icon: "📠", label: "Work" },
+        { id: "stack", icon: "🚀", label: "Tech Stack & Tools" },
+        { id: "mailing", icon: "📧", label: "E-mail" },
+        { id: "advanced", icon: "🔎", label: "Advanced" },
     ];
 
     private educationRows: Type.TableRow[] = [
@@ -93,7 +93,7 @@ class ScrollSpy {
                 <div data-bs-spy="scroll" data-bs-target="#about-scroll-spy-id" data-bs-offset="40" data-bs-smooth-scroll="true" class="scrollspy-content" tabindex="0">
                     <div>
                         <div>
-                            <h4 id="li-1">🧑 About Me</h4>
+                            <h4 id="about-me">🧑 About Me</h4>
                             <hr class="w-25">
                         </div>
                         <div>
@@ -112,23 +112,23 @@ class ScrollSpy {
                     </div>
                     <div>
                         <div>
-                            <h4 id="li-2">📚 Education</h4>
+                            <h4 id="education">📚 Education</h4>
                             <hr class="w-25">
                         </div>
                         ${this.renderTable(["Institution", "Field", "Degree", "Date"], this.educationRows, "eduTable")}
                     </div>
                     <div>
                         <div>
-                            <h4 id="li-3">📠 Work</h4>
+                            <h4 id="work">📠 Work</h4>
                             <hr class="w-25">
                         </div>
                         <div>
-                            <p class="fs-5 fw-medium">You can download or view my CV here.</p>
+                            <p class="fs-5 fw-medium d-flex flex-row align-items-center gap-1">You can download or view my CV <a class="link-info link-opacity-75-hover link-offset-2 modal-trigger" data-modal="requestCVModal" href="#" title="See/Download CV here.">here.</a></p>
                         </div>
                     </div>
                     <div>
                         <div>
-                            <h4 id="li-4">🚀 Tech Stack & Tools</h4>
+                            <h4 id="stack">🚀 Tech Stack & Tools</h4>
                             <hr class="w-25">
                         </div>
                         <div>
@@ -137,7 +137,7 @@ class ScrollSpy {
                     </div>
                     <div>
                         <div>
-                            <h4 id="li-5">📧 E-mail</h4>
+                            <h4 id="mailing">📧 E-mail</h4>
                             <hr class="w-25">
                         </div>
                         <div>
@@ -146,7 +146,7 @@ class ScrollSpy {
                     </div>
                     <div>
                         <div>
-                            <h4 id="li-6">🔎 Advanced</h4>
+                            <h4 id="advanced">🔎 Advanced</h4>
                             <hr class="w-25">
                         </div>
                         <div>

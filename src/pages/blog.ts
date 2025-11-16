@@ -1,5 +1,4 @@
 import DOMPurify from "dompurify";
-import bootstrap from "bootstrap";
 import WordPressGraphQLClient from "../utils/wp_graphql";
 import { Template, dynamicallyChangeButtonIcon } from "../helper";
 

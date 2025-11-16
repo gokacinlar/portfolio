@@ -20,11 +20,11 @@ import "./pages/promo";
 import "./pages/about";
 import "./pages/blog";
 import "./pages/work.ts";
+import "./pages/maintenance";
 
 class HomePage extends HTMLElement {
     constructor() {
         super();
-        this.connectedCallback();
     };
 
     connectedCallback(): void {

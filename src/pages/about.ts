@@ -1,6 +1,5 @@
-const shuffleLetters = require("shuffle-letters").default;
-// Components
-import { Template, HorizontalMiddleMouseScroll } from "../helper";
+import shuffleLetters from "shuffle-letters";
+import { Template, HorizontalMiddleMouseScroll, insertApprovedScript } from "../helper";
 import { HeroImageWithLink } from "../components/C_Hero";
 import ScrollSpy from "../components/A_ScrollSpy";
 
@@ -35,7 +34,30 @@ class About extends HTMLElement {
         super();
         this.render();
         this.initializeShuffleEffects();
+        this.initCaptcha();
         new HorizontalMiddleMouseScroll().hmmsScroll(".scrollspy-nav");
+    }
+
+    private initCaptcha() {
+        // Load reCAPTCHA script after DOMContentLoaded and render when loaded
+        document.addEventListener("DOMContentLoaded", () => {
+            const scriptUrl: string = "https://www.google.com/recaptcha/api.js";
+            const scriptOptions = {
+                scriptItself: scriptUrl,
+                target: document.head,
+                attributes: {
+                    defer: true,
+                    async: true
+                }
+            }
+
+            try {
+                insertApprovedScript(scriptOptions);
+            } catch (error: unknown) {
+                console.error("Error while inserting script:", error);
+                return;
+            }
+        });
     }
 
     private readonly heroConfig: HeroConfig = {

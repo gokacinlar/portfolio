@@ -5,7 +5,7 @@ import DOMPurify from "dompurify";
 import ScrollReveal from "scrollreveal";
 import isEmail from "validator/lib/isEmail";
 import Toastify from "toastify-js";
-import { HeroParts } from "./static";
+import { HeroParts, WhiteListedURLs } from "./static";
 
 // Detecting dark/light mode
 export class DarkLightMode {
@@ -134,6 +134,19 @@ export class Template {
         const sanitizedContent = DOMPurify.sanitize(content);
         template.innerHTML = sanitizedContent;
         return template;
+    }
+
+    public appendTemplate(content: HTMLTemplateElement, target: HTMLElement) {
+        try {
+            if (!content && !target) {
+                console.error(`${content} and ${target} does not exist.`);
+                return;
+            } else {
+                target.appendChild(content.content.cloneNode(true));
+            }
+        } catch (error: unknown) {
+            throw new Error("Unable to append template content as a web component." + error);
+        }
     }
 }
 
@@ -403,15 +416,17 @@ export function validateEmail(emailString: string): boolean {
     }
 }
 
+// Check if input is a valid URL
 export function isValidUrl(url: string): boolean {
     try {
         new URL(url);
         return true;
-    } catch (_error: unknown) {
+    } catch (error: unknown) {
         return false;
     }
 }
 
+// Function to generate nonce for each script tag
 export function generateNonce(): string {
     return window.crypto.getRandomValues(new Uint32Array(4)).join("");
 }
@@ -450,4 +465,83 @@ export function dynamicallyChangeButtonIcon({ button, iconClass, priorIcon, newI
             isChanged = true;
         }
     });
+}
+
+interface ScriptOptions {
+    scriptItself: string;
+    target: HTMLElement;
+    attributes?: ScriptAttributes;
+}
+
+interface ScriptAttributes {
+    src?: string | null;
+    defer?: boolean;
+    async?: boolean;
+    nonce?: string;
+    crossorigin?: "anonymous" | "use-credentials";
+}
+
+// Function to insert custom script into the page
+export function insertApprovedScript({ scriptItself, target, attributes = {} }: ScriptOptions): HTMLScriptElement {
+    if (!target) {
+        throw new Error(`Unable to insert script. ${target} element does not exist.`);
+    }
+
+    // Validate script source against the whitelist
+    if (!WhiteListedURLs.approvedScripts.has(scriptItself)) {
+        throw new Error(`Script source ${scriptItself} is not approved. Aborting procedure...`);
+    }
+
+    try {
+        const element = document.createElement("script") as HTMLScriptElement;
+        element.src = scriptItself;
+        element.defer = attributes.defer ?? false;
+        element.async = attributes.async ?? false;
+
+        // Generate nonce for each creation
+        const nonceGenerated = generateNonce();
+        element.nonce = nonceGenerated;
+
+        element.crossOrigin = "anonymous"; // for CORS related, mostly unnecessary
+        target.appendChild(element);
+        console.log(`Script ${scriptItself} successfully added to DOM.`);
+        return element;
+    } catch (error: unknown) {
+        throw new Error(`Failed to create script ${scriptItself}: ${error}`);
+    }
+}
+
+interface AlertDialogue {
+    target: HTMLElement;
+    alertType: "alert-primary" | "alert-secondary" | "alert-success" | "alert-danger" |
+    "alert-warning" | "alert-info" | "alert-light" | "alert-dark";
+    role: "alert";
+    content: string;
+}
+
+export function insertAlertDialogue({ target, alertType, role, content }: AlertDialogue): void {
+    let elementExists: boolean = false;
+
+    try {
+        const mainElement = target as HTMLElement;
+        if (!mainElement) {
+            console.error("Unable to find target element for alert dialogue to be appended.");
+            return;
+        } else {
+            elementExists = true;
+            if (elementExists === true) {
+                return;
+            } else {
+                const AlertDialogue = document.createElement("div") as HTMLDivElement;
+                AlertDialogue.role = role;
+                AlertDialogue.classList.add("alert");
+                AlertDialogue.classList.add(alertType);
+                AlertDialogue.innerHTML = DOMPurify.sanitize(content);
+
+                mainElement.appendChild(AlertDialogue);
+            }
+        }
+    } catch (error: unknown) {
+        throw new Error("Unable to insert alert dialogue:" + error);
+    }
 }

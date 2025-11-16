@@ -1,4 +1,5 @@
 @use "m_queries";
+@use "globals";
 
 // Global breakpoints
 $mobile-breakpoints: phone, phone-portrait, phone-landscape;
@@ -116,10 +117,8 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     background-size: cover;
 }
 
-@mixin custom-font($font-name) {
-    & {
-        font-family: #{$font-name} !important;
-    }
+@mixin custom-font($font-family) {
+    font-family: $font-family !important;
 }
 
 @mixin wavy-text($color) {
@@ -467,6 +466,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     .promo-motto-quote-container {
         --def-height: 256px;
         min-height: var(--def-height);
+        @include custom-font("Franuces");
         @include custom-bee-color();
         @include responsive-styling($all-mobile-tablet-breakpoints, align-items, start);
         @include responsive-styling($mobile-breakpoints, flex-direction, column);
@@ -474,7 +474,6 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
         &>h3 {
             @include responsive-styling($all-mobile-tablet-breakpoints, font-size, 1rem);
-            @include custom-font(Franuces);
             text-decoration-skip-ink: auto;
             text-emphasis-position: under right;
         }
@@ -823,6 +822,35 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     /* Modals */
     .modal-content {
         background-color: var(--clr-eight) !important;
+        @include animation(scale-in-center, .45s, cubic-bezier(0.770, 0.000, 0.175, 1.000), alternate both);
+    }
+
+    @-webkit-keyframes scale-in-center {
+        0% {
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            opacity: 1;
+        }
+
+        100% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes scale-in-center {
+        0% {
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            opacity: 1;
+        }
+
+        100% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            opacity: 1;
+        }
     }
 
     /* 404 */

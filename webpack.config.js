@@ -12,7 +12,7 @@ const Dotenv = require("dotenv-webpack");
 
 // Load .env
 dotenv.config();
-const envKeys = ["GTAG", "WEB3_FORM_ACCESS_KEY"];
+const envKeys = ["GTAG", "WEB3_FORM_ACCESS_KEY", "RECAPTCHA"];
 const definePluginEntries = {};
 
 envKeys.forEach((key) => {
@@ -20,8 +20,8 @@ envKeys.forEach((key) => {
 });
 
 // For static page"s script linking
-let htmlPageNames = ["about.html", "updates.html", "404.html", "work.html"];
-let multipleHtmlPlugins = htmlPageNames.map(name => {
+const htmlPageNames = ["about.html", "updates.html", "404.html", "work.html"];
+const multipleHtmlPlugins = htmlPageNames.map(name => {
     return new HtmlWebpackPlugin({
         template: path.resolve(__dirname, `./src/pages/static/${name}`),
         filename: `${name}`,
@@ -32,13 +32,14 @@ let multipleHtmlPlugins = htmlPageNames.map(name => {
 });
 
 // CspHtmlWebpackPlugin related outer connections regarding trusted scripts
-let scripts = [
+const scripts = [
     "https://web3forms.com/client/script.js",
     "https://api.web3forms.com/submit",
-    "https://www.googletagmanager.com/gtag/js?id=G-XMT56BGFP8&l=ga4DataLayer"
+    "https://www.googletagmanager.com/gtag/js?id=G-XMT56BGFP8&l=ga4DataLayer",
+    "https://www.google.com/recaptcha/api.js"
 ];
-// Footer images
-let imageConnections = [
+
+const imageConnections = [
     "https://creativecommons.org/publicdomain/zero/1.0/",
     "https://notbyai.fyi/",
     "https://raw.githubusercontent.com"
@@ -175,6 +176,16 @@ module.exports = {
                 {
                     from: path.resolve(__dirname, "src/assets/videos"),
                     to: "assets/videos",
+                    noErrorOnMissing: true,
+                },
+                {
+                    from: path.resolve(__dirname, "src/php"),
+                    to: "php",
+                    noErrorOnMissing: true,
+                },
+                {
+                    from: path.resolve(__dirname, "vendor"),
+                    to: "php/vendor",
                     noErrorOnMissing: true,
                 }
             ],
