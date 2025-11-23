@@ -1,8 +1,10 @@
 <?php
 namespace App\Security;
+require_once realpath(path: __DIR__ . "../vendor/autoload.php");
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client;
+use Exception;
 use InvalidArgumentException;
 
 class CaptchaVerifier
@@ -44,7 +46,7 @@ class CaptchaVerifier
 
             $responseBody = json_decode(json: $verifyResponse->getBody()->getContents(), associative: false);
             return $responseBody->success ?? false;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             error_log(message: "reCAPTCHA verification failed: " . $e->getMessage());
             return false;
         }
@@ -67,22 +69,63 @@ class FormProcessor
 
     public function __construct()
     {
-        $dotenv = Dotenv::createImmutable(paths: __DIR__);
+        $dotenv = Dotenv::createImmutable(paths: __DIR__ . "/../../");
         $dotenv->load();
         # Load secret key from environment variable
-        $this->captchaVerifier = new CaptchaVerifier(secretKey: $_ENV["RECAPTCHA_SECRET_KEY"]);
+        $secret_key = $_ENV["RECAPTCHA_SECRET_KEY"];
+        echo $secret_key;
+        try {
+            if (!isset($secret_key)) {
+                throw new InvalidArgumentException(message: "RECAPTCHA_SECRET_KEY is not set in the environment.");
+            } else {
+                $this->captchaVerifier = new CaptchaVerifier(secretKey: $_ENV["RECAPTCHA_SECRET_KEY"]);
+            }
+        } catch (Exception $error) {
+            throw new Exception(message: "Unable to verify captcha" + $error->getMessage());
+        }
     }
 
     public function processForm(): void
     {
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $verificationResult = $this->captchaVerifier->handleSubmission(formData: $_POST);
+        header(header: "Content-Type: application/json");
 
-            if ($verificationResult) {
-                echo json_encode(value: ["success" => true, "message" => "Captcha verified successfully"]);
-            } else {
-                echo json_encode(value: ["success" => false, "message" => "Captcha verification failed"]);
-            }
+        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+            http_response_code(response_code: 405);
+            echo json_encode(value: [
+                "success" => false,
+                "message" => "Method Not Allowed"
+            ]);
+            exit;
         }
+
+        # Validate form submission from front-end
+        if (!isset($_POST["captcha_submit"])) {
+            http_response_code(response_code: 400);
+            echo json_encode(value: [
+                "success" => false,
+                "message" => "Invalid submission"
+            ]);
+            exit;
+        }
+
+        $verificationResult = $this->captchaVerifier->handleSubmission(formData: $_POST);
+        if ($verificationResult) {
+            echo json_encode(value: [
+                "success" => true,
+                "message" => "Captcha verified successfully",
+                "nextAction" => "proceed"
+            ]);
+        } else {
+            http_response_code(response_code: 401);
+            echo json_encode(value: [
+                "success" => false,
+                "message" => "Captcha verification failed",
+                "action" => "retry"
+            ]);
+        }
+        exit;
     }
 }
+
+$form = new FormProcessor();
+$form->processForm();
