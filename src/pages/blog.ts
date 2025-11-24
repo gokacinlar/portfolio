@@ -166,12 +166,17 @@ class Updates extends HTMLElement {
             // Fetch the full post content
             const post = await WordPressGraphQLClient.fetchSinglePost(postId);
 
-            if (post) {
-                console.log("Post loaded successfully", post);
+            try {
+                if (post) {
+                    console.log("Post loaded successfully", post);
+                    this.displayPostContent(post);
+                } else {
+                    console.error("Post cannot be loaded properly.");
+                    return;
+                }
+            } catch (error: unknown) {
+                throw new Error("Error while loading single post:" + error);
             }
-
-            // Display the post
-            this.displayPostContent(post);
         } catch (error: unknown) {
             console.error("Error loading post:", error);
             contentArea.innerHTML = `
@@ -193,6 +198,7 @@ class Updates extends HTMLElement {
         }
     }
 
+    // Spinner-related dom manip
     private appendSpinner(target: HTMLElement) {
         this.removeSpinner();
 

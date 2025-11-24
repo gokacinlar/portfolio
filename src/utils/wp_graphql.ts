@@ -97,18 +97,18 @@ class WordPressGraphQLClient {
 
     // Query to fetch single post with full content on demand
     private static readonly GRAPHQL_QUERY_FETCH_SINGLE_POST = `
-    query GetSinglePost($id: ID!) {
-        post(id: $id, idType: DATABASE_ID) {
-            id
-            title
-            content(format: RENDERED)
-            author {
-                node {
-                    name
+        query GetSinglePost($id: ID!) {
+            post(id: $id, idType: ID) {
+                id
+                title
+                content(format: RENDERED)
+                author {
+                    node {
+                        name
+                    }
                 }
             }
         }
-    }
     ` as const;
 
     private static async executeQuery<TData, TVariables = Record<string, unknown>>(query: string, variables?: TVariables): Promise<GraphQLResponse<TData>> {
@@ -154,14 +154,18 @@ class WordPressGraphQLClient {
 
     // Transform GraphQL data to full Post
     private static transformPostNode(node: GraphQLPostNode): Post {
-        return {
-            id: node.id,
-            title: node.title || "Unknown Title",
-            content: node.content || "<p>No proper content.</p>",
-            author: {
-                name: node.author.node.name || "Unknown Author",
-            },
-        };
+        if (!node) {
+            throw new Error(`<b>Post not found </b>`);
+        } else {
+            return {
+                id: node.id,
+                title: node.title || "Unknown Title",
+                content: node.content || "<p>No proper content.</p>",
+                author: {
+                    name: node.author.node.name || "Unknown Author",
+                },
+            };
+        }
     }
 
     private static readonly DEF_BLOG_POST_NUMBER_TO_BE_FETCHED: number = 10;
@@ -204,6 +208,13 @@ class WordPressGraphQLClient {
                 this.GRAPHQL_QUERY_FETCH_SINGLE_POST,
                 { id: postId }
             );
+
+            // For external debuggining purposes
+            // console.log('Full GraphQL Response:', JSON.stringify(response, null, 2));
+
+            if (!response.data.post) {
+                throw new Error("No post found with the given ID");
+            }
 
             const transformedPost = this.transformPostNode(response.data.post);
             this.cachePost(transformedPost);
