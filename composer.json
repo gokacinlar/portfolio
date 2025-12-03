@@ -8,5 +8,8 @@
             "@php public/php/captcha_verify.php",
             "phpunit"
         ]
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
     }
 }
