@@ -1,4 +1,4 @@
-import * as Type from "../types";
+import * as Type from "../types/types";
 import { PromoParts } from "../static";
 
 export class PromoTitle {

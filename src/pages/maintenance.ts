@@ -1,4 +1,4 @@
-import { Template } from "../helper";
+import { Template } from "../utils/helper";
 
 export class MaintenanceStatus extends HTMLElement {
     private templating = new Template();

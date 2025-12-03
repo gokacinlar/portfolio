@@ -17,6 +17,11 @@
     "noUnusedParameters": true,
     "useDefineForClassFields": true,
     "baseUrl": "./src",
+    "paths": {
+      "@types": [
+        "@types"
+      ],
+    },
     "allowJs": true,
     "checkJs": false,
     "removeComments": true
@@ -26,7 +31,8 @@
     "experimentalSpecifierResolution": "node"
   },
   "include": [
-    "src"
+    "src",
+    "@types"
   ],
   "exclude": [
     "node_modules",

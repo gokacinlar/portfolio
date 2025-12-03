@@ -8,6 +8,7 @@ const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+const LocalizeAssetsPlugin = require("webpack-localize-assets-plugin");
 const Dotenv = require("dotenv-webpack");
 
 // Load .env

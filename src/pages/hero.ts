@@ -1,7 +1,8 @@
+import Localize from "../i18n";
 // Components
 import { HeaderNode } from "./header";
 import { HeroImageWithLink } from "../components/C_Hero";
-import { Template, TypeWriterDisplay, DomEvents } from "../helper";
+import { Template, TypeWriterDisplay, DomEvents } from "../utils/helper";
 import { BodyParts, HeroParts } from "../static";
 
 class HeroSection extends HTMLElement {
@@ -9,7 +10,7 @@ class HeroSection extends HTMLElement {
     constructor() {
         super();
         this.template = new Template();
-
+        Localize.init();
         const template = this.template.createTemplate(new HeroTemplate().hero());
         this.appendChild(template.content.cloneNode(true));
     }
@@ -33,7 +34,7 @@ class HeroTemplate {
                     <div class="row align-items-center justify-content-evenly hero-child px-4">
                         <section class="col-12 col-md-6 d-flex flex-column align-items-start gap-4 ocps-container mb-4 mb-md-0">
                             <div class="hero-title-container">
-                                <h3 class="font-weight-bolder text-muted">Hi! I'm</h3>
+                                <h3 class="font-weight-bolder text-muted">${Localize.translate("ns1:hero:greet")}</h3>
                                 <h2 class="font-weight-bolder text-decoration-underline">Derviş</h2>
                             </div>
                             <div class="hero-dynamic-text-container">

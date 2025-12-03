@@ -1,0 +1,14 @@
+{
+    "hero": {
+        "greet": "Merhaba! Ben",
+        "buttons": {
+            "workWMe": "Benimle Çalışın",
+            "cv": "CV'mi İndirin"
+        }
+    },
+    "title": "İngilizce Öğretmeni & Ön-yüz Geliştiricisi",
+    "description": {
+        "part1": "x",
+        "part2": "y"
+    }
+}

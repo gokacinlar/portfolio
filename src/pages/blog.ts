@@ -1,6 +1,6 @@
 import DOMPurify from "dompurify";
 import WordPressGraphQLClient from "../utils/wp_graphql";
-import { Template, dynamicallyChangeButtonIcon } from "../helper";
+import { Template, dynamicallyChangeButtonIcon } from "../utils/helper";
 
 interface Author {
     name: string;

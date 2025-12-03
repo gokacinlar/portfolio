@@ -1,6 +1,6 @@
 <?php
 namespace App\Security;
-require_once realpath(path: __DIR__ . "../vendor/autoload.php");
+require_once dirname(path: __FILE__) . "../../../vendor/autoload.php";
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client;
@@ -13,7 +13,7 @@ class CaptchaVerifier
     private string $secretKey;
     private Client $httpClient;
 
-    public function __construct(string $secretKey, string $buttonName = "captcha_submit_btn")
+    public function __construct(string $secretKey, string $buttonName = "captcha_submit")
     {
         $this->buttonName = $buttonName;
         $this->secretKey = $this->validateSecretKey(secretKey: $secretKey);
@@ -89,6 +89,7 @@ class FormProcessor
     {
         header(header: "Content-Type: application/json");
 
+        # Validate form submission via posting through a form element
         if ($_SERVER["REQUEST_METHOD"] !== "POST") {
             http_response_code(response_code: 405);
             echo json_encode(value: [

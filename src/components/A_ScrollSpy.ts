@@ -1,8 +1,8 @@
-import { formatDate, validateEmail } from "../helper";
+import { formatDate, validateEmail } from "../utils/helper";
 import { loadWeb3Forms, formState } from "../utils/form";
 import EmailForm from "./A_EmailForm";
 import Accordion from "./A_Accordion";
-import * as Type from "../types";
+import * as Type from "../types/types";
 
 class ScrollSpy {
     constructor() {

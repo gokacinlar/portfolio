@@ -1,8 +1,7 @@
-import { Template } from "../helper";
+import { Template } from "../utils/helper";
+import ValidateCaptcha from "../utils/validate_captcha";
 
 class WorkPage extends HTMLElement {
-    private vantaEffect: any = null;
-
     constructor() {
         super();
 
@@ -73,7 +72,19 @@ class WorkPage extends HTMLElement {
         `;
     }
 
+    private static watchCaptcha() {
+        const captchaForm = document.querySelector("form") as HTMLFormElement;
+        if (captchaForm) {
+            try {
+                new ValidateCaptcha("submitCaptcha");
+            } catch (error: unknown) {
+                throw new Error("Unable to submit captcha:" + error);
+            }
+        }
+    }
+
     connectedCallback(): void {
+        WorkPage.watchCaptcha();
     }
 }
 

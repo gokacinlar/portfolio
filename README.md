@@ -9,7 +9,7 @@ This is my own portfolio site which I'll be using to briefly introduce myself to
 
 Site will primarily use;
 
-* HTMX
+* HTMX (for SPAish interaction)
 * Bootstrap
 * Custom Components
 * Headless WordPress for Back-end Stuff & Blogs etc.
@@ -24,4 +24,7 @@ npm i
 npm run composer:install
 npm run dev
 npm run live
+
+# For production
+npm run build
 ```

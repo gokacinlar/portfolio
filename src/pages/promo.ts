@@ -1,7 +1,7 @@
 // Components
 import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish, PromoMotto, PromoInterested } from "../components/C_Promo";
 import { VideoElement } from "../components/C_Video";
-import { Template, PromoFunctions, HorizontalMiddleMouseScroll, ScrollRevealAction } from "../helper";
+import { Template, PromoFunctions, HorizontalMiddleMouseScroll, ScrollRevealAction } from "../utils/helper";
 import { PromoParts } from "../static";
 // JSON Data
 import posts from '../assets/json/posts.json';

@@ -139,3 +139,28 @@ article {
         text-wrap: pretty;
     }
 }
+
+.htmx-animation {
+    -webkit-animation: fade-in 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) alternate both;
+    animation: fade-in 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) alternate both;
+}
+
+@-webkit-keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

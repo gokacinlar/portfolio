@@ -1,4 +1,4 @@
-import { validateEmail, generateNonce } from "../helper";
+import { validateEmail, generateNonce } from "../utils/helper";
 
 // Handle web3forms hCaptcha request
 export function loadWeb3Forms(): Promise<void> {

@@ -1,5 +1,5 @@
-import * as Type from "../types";
-import { Template, DarkLightMode } from '../helper';
+import * as Type from "../types/types";
+import { Template, DarkLightMode } from "../utils/helper";
 import { HtmxControls } from "../components/M_htmx";
 import ResponsiveNavbar from '../components/responsive/R_navbar';
 

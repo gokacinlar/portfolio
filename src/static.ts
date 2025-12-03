@@ -194,9 +194,9 @@ export class ModalList {
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
                     <div>
-                        <form method="post">
+                        <form id="captchaForm" action="./php/captcha_verify.php" method="post">
                             <div class="g-recaptcha" data-sitekey="${ModalList.RECAPTCHA_SITE_KEY}"></div>
-                            <button class="btn btn-sm w-100 fw-bold fs-5" type="submit" name="captcha_submit">Confirm Action</button>
+                            <button id="submitCaptcha" class="btn btn-sm w-100 fw-bold fs-5" type="submit" name="captcha_submit">Confirm Action</button>
                         </form>
                     </div>
                 </div>

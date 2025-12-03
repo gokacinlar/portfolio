@@ -1,5 +1,5 @@
 // Components
-import { Template } from "../helper";
+import { Template } from "../utils/helper";
 import { FooterLinks } from "../static";
 
 class Footer extends HTMLElement {

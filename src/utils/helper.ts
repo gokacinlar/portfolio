@@ -5,7 +5,7 @@ import DOMPurify from "dompurify";
 import ScrollReveal from "scrollreveal";
 import isEmail from "validator/lib/isEmail";
 import Toastify from "toastify-js";
-import { HeroParts, WhiteListedURLs } from "./static";
+import { HeroParts, WhiteListedURLs } from "../static";
 
 // Detecting dark/light mode
 export class DarkLightMode {

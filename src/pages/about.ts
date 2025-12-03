@@ -1,5 +1,5 @@
 import shuffleLetters from "shuffle-letters";
-import { Template, HorizontalMiddleMouseScroll, insertApprovedScript } from "../helper";
+import { Template, HorizontalMiddleMouseScroll, insertApprovedScript } from "../utils/helper";
 import { HeroImageWithLink } from "../components/C_Hero";
 import ScrollSpy from "../components/A_ScrollSpy";
 

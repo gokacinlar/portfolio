@@ -9,7 +9,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 // Libraries
 import "lazysizes";
 // Components & Helper functions
-import { DarkLightMode } from "./helper";
+import { DarkLightMode } from "./utils/helper";
 import GoogleAnalytics from "./utils/gTag";
 import EffectiveCaching from "./utils/cache";
 // Pages
