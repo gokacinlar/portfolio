@@ -20,7 +20,7 @@ import "./pages/promo";
 import "./pages/about";
 import "./pages/blog";
 import "./pages/work.ts";
-import "./pages/maintenance";
+import "./components/G_Maintenance";
 
 class HomePage extends HTMLElement {
     constructor() {
