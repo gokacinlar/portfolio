@@ -755,6 +755,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     #about-main {
         @include responsive-styling($desktop-breakpoints, height, 100dvh);
+        @include responsive-styling($desktop-breakpoints, min-height, 664px);
         @include hide-scrollbar();
     }
 
@@ -863,6 +864,14 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     #blogContainer,
     #blogMain {
         @include responsive-styling($mobile-breakpoints, height, auto);
+    }
+
+    #blogContainer {
+        @include responsive-styling($mobile-breakpoints, row-gap, 1rem);
+    }
+
+    #blogMain {
+        @include responsive-styling($mobile-breakpoints, height, 85dvh);
     }
 
     #blogMain,
@@ -992,7 +1001,8 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         @include wavy-text(var(--clr-two));
     }
 
-    #offCanvasControls {
+    #offCanvasControls,
+    #blogAsideOffcanvasTemplate {
         @include responsive-styling($all-mobile-tablet-breakpoints, display, flex);
         @include responsive-styling($desktop-small-breakpoints, display, none);
         @include responsive-styling($desktop-breakpoints, display, none);
@@ -1000,7 +1010,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     #displayOffCanvasBtn {
-        --def-size: 48px;
+        --def-size: 54px;
         width: var(--def-size);
         height: var(--def-size);
     }

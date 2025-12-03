@@ -1,6 +1,6 @@
 import DOMPurify from "dompurify";
 import WordPressGraphQLClient from "../utils/wp_graphql";
-import { Template, dynamicallyChangeButtonIcon } from "../utils/helper";
+import { Template } from "../utils/helper";
 
 interface Author {
     name: string;
@@ -48,8 +48,7 @@ class Updates extends HTMLElement {
 
     private initiateOffCanvas() {
         return `
-            <div id="offCanvasControls" class="btn-group w-100 gap-2" role="group" aria-label="Blog Post Display Settings">
-                <button type="button" class="btn btn-sm btn-success fs-3 fw-medium rounded-pill shadow-sm">Get Most Recent Post</button>
+            <div id="offCanvasControls" class="d-flex flex-row align-items-center justify-content-end" role="group" aria-label="Blog Post Display Settings">
                 <button class="btn btn-sm btn-warning rounded-pill shadow-sm" type="button" id="displayOffCanvasBtn" data-bs-toggle="offcanvas" data-bs-target="#blogAsideOffcanvasTemplate"
                     aria-controls="blogAsideOffcanvasTemplate" title="Display menu to see posts.">
                     <i class="offcanvas-menu-icon bi bi-list display-6 fw-bold"></i>
@@ -73,10 +72,8 @@ class Updates extends HTMLElement {
                     <h5 class="offcanvas-title" id="blogAsideOffcanvas">Latest updates</h5>
                     <button id="dismissOffcanvasBtn" type="button" class="btn btn-sm btn-close fs-5 fw-bold" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div class="offcanvas-body">
-                    <div>
-                        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-                    </div>
+                <div id="offCanvasArea" class="offcanvas-body">
+
                 </div>
             </div>
         `;
@@ -268,27 +265,32 @@ class Updates extends HTMLElement {
     }
 
     private async fetchAndPopulatePosts() {
-        const element = this.querySelector("#blogAsideChild") as HTMLElement | null;
+        const blogAside = this.querySelector("#blogAsideChild") as HTMLElement | null;
+        const offCanvasAside = this.querySelector("#offCanvasArea") as HTMLElement | null;
 
-        if (!element) {
+        if (!blogAside || !offCanvasAside) {
             console.error("Blog aside child element not found");
             return;
         }
 
-        this.appendSpinnerInAside(element);
+        this.appendSpinnerInAside(blogAside);
+        this.appendSpinnerInAside(offCanvasAside);
         try {
             // Fetch only previews (lightweight data)
             const previews = await WordPressGraphQLClient.fetchBlogPostPreviews();
             await this.generateDomElementsRelatedToBlogsInAside("blogAsideChild", previews);
+            await this.generateDomElementsRelatedToBlogsInAside("offCanvasArea", previews);
         } catch (error: unknown) {
             console.error("Failed to fetch and populate posts:", error);
-            element.innerHTML = `
+            const errorAlert: string = `
                 <div class="alert alert-warning rounded-5 shadow-sm" role="alert">
                     <h4 class="alert-heading"><i class="bi bi-exclamation-diamond"></i> Error</h4>
                     <hr class="w-50 my-2">
                     <p class="my-1">Unable to load blog posts. Please refresh the page.</p>
                 </div>
             `;
+            blogAside.innerHTML = errorAlert;
+            offCanvasAside.innerHTML = errorAlert;
         } finally {
             this.removeSpinnerInAside();
         }
@@ -326,21 +328,8 @@ class Updates extends HTMLElement {
         });
     }
 
-
-    private static handleOffCanvasOpenCloseEvent() {
-        const options = {
-            button: "displayOffCanvasBtn",
-            iconClass: "offcanvas-menu-icon",
-            priorIcon: "bi-list",
-            newIcon: "bi-x-lg",
-        }
-
-        dynamicallyChangeButtonIcon(options);
-    }
-
     connectedCallback() {
         this.fetchAndPopulatePosts();
-        Updates.handleOffCanvasOpenCloseEvent();
     }
 }
 
