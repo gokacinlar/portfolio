@@ -1,0 +1,43 @@
+{
+    "upperNavigation": {
+        "home": "Anasayfa",
+        "updates": "Blog",
+        "about": "Hakkımda"
+    },
+    "hero": {
+        "greet": "Merhaba! Ben",
+        "buttons": {
+            "workWMe": "Benimle Çalışın",
+            "cv": "CV'mi İndirin"
+        },
+        "buttonTitles": {
+            "workHire": "Web projesi için çalışalım.",
+            "downloadCV": "CV'mi indirmek için tıklayın."
+        },
+        "mottos": {
+            "prof": "Profesyonel",
+            "problemSolver": "Problem Çözücü",
+            "realistic": "Gerçekçi",
+            "practical": "Pratik",
+            "applicable": "Uyumlu",
+            "inDemand": "Hızlı"
+        }
+    },
+    "fields": {
+        "teacher": "İngilizce Öğretmeni",
+        "frontEnd": "Ön-yüz Geliştiricisi",
+        "react": "React Geliştiricisi",
+        "wordpress": "WordPress Geliştiricisi",
+        "js": "JavaScript Geliştiricisi",
+        "ts": "TypeScript Geliştiricisi"
+    },
+    "video": {
+        "teach": "Hayat Boyu Öğretim",
+        "code": "Tutku İçin Yazılım"
+    },
+    "title": "İngilizce Öğretmeni & Ön-yüz Geliştiricisi",
+    "description": {
+        "part1": "x",
+        "part2": "y"
+    }
+}

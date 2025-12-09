@@ -1,49 +1,46 @@
 import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
+import XHR from "i18next-http-backend"
 // English
-import EnNs1 from "./locales/en/ns1.json";
-import EnFallback from "./locales/en/enFallback.json";
+import EnNs1 from "./locales/en/en.json";
 // Turkish
-import TrNs1 from "./locales/tr/ns1.json";
-import TrFallback from "./locales/tr/trFallback.json";
+import TrNs1 from "./locales/tr/tr.json";
 
-interface Resources {
-    [key: string]: {
-        [namespace: string]: any; //lazy
-    };
-}
-
-const resources: Resources = {
+export const defaultNS = "common";
+export const resources = {
     en: {
-        ns1: EnNs1,
-        fallback: EnFallback,
+        common: EnNs1,
     },
     tr: {
-        ns1: TrNs1,
-        fallback: TrFallback,
+        common: TrNs1,
     },
 };
 
-export class Localize {
+class Localize {
+    private static readonly LANG_DETECTION_OPTIONS: Object = {
+        order: ["querystring", "navigator"],
+        lookupQuerystring: "lng",
+        lookupCookie: "i18next",
+        lookupLocalStorage: "i18nextLng",
+        caches: ["localStorage", "cookie"],
+    }
+
     private static initI18n(): void {
         i18next
+            .use(XHR)
             .use(LanguageDetector)
             .init({
+                load: "languageOnly",
                 debug: false,
                 fallbackLng: "en",
-                defaultNS: "ns1",
-                fallbackNS: "fallback",
-                ns: ["ns1", "ns2", "fallback"],
+                defaultNS: "common",
+                ns: ["common"],
                 resources,
                 interpolation: { escapeValue: false },
                 supportedLngs: ["en", "tr"],
-                detection: {
-                    order: ["querystring", "cookie", "localStorage", "navigator", "htmlTag"],
-                    lookupQuerystring: "lng",
-                    lookupCookie: "i18next",
-                    lookupLocalStorage: "i18nextLng",
-                    caches: ["localStorage", "cookie"],
-                },
+                detection: Localize.LANG_DETECTION_OPTIONS,
+                retryTimeout: 350,
+                maxRetries: 5,
             });
     }
 

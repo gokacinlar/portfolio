@@ -1,0 +1,43 @@
+{
+    "upperNavigation": {
+        "home": "Homepage",
+        "updates": "Blog",
+        "about": "About"
+    },
+    "hero": {
+        "greet": "Hi! I'm",
+        "buttons": {
+            "workWMe": "Work w/me!",
+            "cv": "Get my CV!"
+        },
+        "buttonTitles": {
+            "workHire": "Proceed to hire me for your web demands.",
+            "downloadCV": "Proceed to download my CV."
+        },
+        "mottos": {
+            "prof": "Professional",
+            "problemSolver": "Problem Solver",
+            "realistic": "Realist",
+            "practical": "Practical",
+            "applicable": "Applicable",
+            "inDemand": "In-demand"
+        }
+    },
+    "fields": {
+        "teacher": "English Teacher",
+        "frontEnd": "Front-end Developer",
+        "react": "React Developer",
+        "wordpress": "WordPress Developer",
+        "js": "JavaScript Developer",
+        "ts": "TypeScript Developer"
+    },
+    "video": {
+        "teach": "Teaching for Life",
+        "code": "Coding for Passion"
+    },
+    "title": "İngilizce Öğretmeni & Ön-yüz Geliştiricisi",
+    "description": {
+        "part1": "x",
+        "part2": "y"
+    }
+}
