@@ -211,6 +211,7 @@ module.exports = {
                 author: { name: "author", content: "Derviş Öksüzoğlu" },
                 owner: { name: "owner", content: "Derviş Öksüzoğlu" },
                 canonical: { rel: "canonical", href: "https://dervisoksuzoglu.com.tr" },
+                copyright: { name: "copyright", content: "CC0-1.0 Universal License" },
                 // Open Graph
                 "og:type": { property: "og:type", content: "website" },
                 "og:url": { property: "og:url", content: "https://dervisoksuzoglu.com.tr" },
