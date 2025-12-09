@@ -84,6 +84,7 @@ class WordPressGraphQLClient {
         posts(first: $first, after: $after) {
             nodes {
                 id
+                databaseId
                 title
                 author {
                     node {
