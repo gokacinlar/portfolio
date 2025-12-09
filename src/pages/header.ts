@@ -1,3 +1,4 @@
+import Localize from "../utils/initLocalization";
 import * as Type from "../types/types";
 import { Template, DarkLightMode } from "../utils/helper";
 import { HtmxControls } from "../components/M_htmx";
@@ -6,6 +7,7 @@ import ResponsiveNavbar from '../components/responsive/R_navbar';
 class Header extends HTMLElement {
     constructor() {
         super();
+        Localize.init();
         const template = new Template().createTemplate(new HeaderNode().headerItself());
         this.appendChild(template.content.cloneNode(true));
     }
@@ -86,19 +88,19 @@ export class HeaderNode {
     private navLinks: NavLink[] = [
         {
             href: "/index.html",
-            title: "Home",
+            title: Localize.translate("common:upperNavigation:home"),
             icon: "bi bi-house-door",
             htmxOptions: { ...this.defaultHtmxOptions, hxget: "/index.html" },
         },
         {
             href: "/updates.html",
-            title: "Updates",
+            title: Localize.translate("common:upperNavigation:updates"),
             icon: "bi bi-journals",
             htmxOptions: { ...this.defaultHtmxOptions, hxget: "/updates.html" },
         },
         {
             href: "/about.html",
-            title: "About",
+            title: Localize.translate("common:upperNavigation:about"),
             icon: "bi bi-person-circle",
             htmxOptions: { ...this.defaultHtmxOptions, hxget: "/about.html" },
         }
@@ -121,7 +123,7 @@ export class HeaderNode {
 
     private primaryBtn: NavLink = {
         href: "/work.html",
-        title: "Proceed to hire me for your web projects.",
+        title: Localize.translate("common:hero:buttonTitles:workHire"),
         icon: "bi bi-star-half text-black fw-bold pulsate-fwd",
         htmxOptions: { ...this.defaultHtmxOptions, hxget: "/work.html" },
     }
@@ -132,7 +134,7 @@ export class HeaderNode {
                 title="${this.primaryBtn.title}" href="${this.primaryBtn.href}"
                 ${new HtmxControls(this.primaryBtn.htmxOptions ?? this.defaultHtmxOptions).render()}>
                 <i class="${this.primaryBtn.icon}"></i>
-                <span class="hr-btn-text">Work w/me!</span>
+                <span class="hr-btn-text">${Localize.translate("common:hero:buttons:workWMe")}</span>
             </a>
         `;
     }

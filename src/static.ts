@@ -1,3 +1,5 @@
+import Localize from "./utils/initLocalization";
+
 interface Principle {
     title: string;
     description: string;
@@ -5,21 +7,23 @@ interface Principle {
 
 export class BodyParts {
     public readonly mottos: Array<string> = [
-        "Progressive",
-        "Problem-solving",
-        "Realistic",
-        "Pratical",
-        "Applicable",
-        "In-demand"
+        Localize.translate("common:hero:mottos:prof"),
+        Localize.translate("common:hero:mottos:problemSolver"),
+        Localize.translate("common:hero:mottos:realistic"),
+        Localize.translate("common:hero:mottos:practical"),
+        Localize.translate("common:hero:mottos:applicable"),
+        Localize.translate("common:hero:mottos:inDemand"),
     ];
 }
 
 export class HeroParts {
     public readonly occupationsData: Array<string> = [
-        "English Teacher",
-        "Front-end Developer",
-        "React Developer",
-        "Wordpress Developer"
+        Localize.translate("common:fields:teacher"),
+        Localize.translate("common:fields:frontEnd"),
+        Localize.translate("common:fields:react"),
+        Localize.translate("common:fields:wordpress"),
+        Localize.translate("common:fields:js"),
+        Localize.translate("common:fields:ts")
     ]
 }
 
@@ -250,6 +254,31 @@ export class AccordionList {
                         <tr>
                             <th scope="row">BuyMeACoffee</th>
                             <td>View <a class="link-info link-opacity-75-hover link-offset-2" href="https://coff.ee/gokacinlar" target="_blank">here.</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            `
+        },
+        {
+            id: "Three",
+            header: "🍫 About This Site",
+            body: `
+                <p class="lead fs-6 fw-medium">Here you can find all the necessary information for this website.</p>
+                <table id="commsTable" class="table table-striped table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Site Version</th>
+                            <td><code>1.1.0</code></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">License</th>
+                            <td>This site is licensed under <code>CC0-1.0 Universal License.</code></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Source Code</th>
+                            <td>Available on
+                                <a class="link-info link-opacity-75-hover link-offset-2" href="https://github.com/gokacinlar" target="_blank">GitHub</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

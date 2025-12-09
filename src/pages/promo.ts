@@ -1,11 +1,10 @@
-// Components
 import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish, PromoMotto, PromoInterested } from "../components/C_Promo";
 import { VideoElement } from "../components/C_Video";
 import { Template, PromoFunctions, HorizontalMiddleMouseScroll, ScrollRevealAction } from "../utils/helper";
 import { PromoParts } from "../static";
-// JSON Data
 import posts from '../assets/json/posts.json';
 import skills from '../assets/json/promo_Skills.json';
+import Localize from "../utils/initLocalization";
 
 class Promo extends HTMLElement {
     constructor() {
@@ -38,18 +37,19 @@ class Promo extends HTMLElement {
 
 class PromoTemplate {
     private videoOne = new VideoElement({
-        title: "Teaching for Life",
+        title: Localize.translate("common:video:teach"),
         webmSrc: "./assets/videos/teach.webm",
         mp4FallbackSrc: "./assets/videos/teach.mp4",
         posterSrc: ""
     });
 
     private videoTwo = new VideoElement({
-        title: "Coding for Passion",
+        title: Localize.translate("common:video:code"),
         webmSrc: "./assets/videos/code.webm",
         mp4FallbackSrc: "./assets/videos/code.mp4",
         posterSrc: ""
     });
+
     public promoTemplate(): string {
         return `
             <section id="promo" class="mx-2 my-2 rounded-5">
@@ -104,8 +104,8 @@ class PromoTemplate {
 
     private promoVideos(): string {
         return `
-            <div class="col-sm overflow-hidden px-1">${this.videoOne.render("Teaching for Life")}</div>
-            <div class="col-sm overflow-hidden px-1">${this.videoTwo.render("Coding for Passion")}</div>
+            <div class="col-sm overflow-hidden px-1">${this.videoOne.render(Localize.translate("common:video:teach"))}</div>
+            <div class="col-sm overflow-hidden px-1">${this.videoTwo.render(Localize.translate("common:video:code"))}</div>
         `;
     }
 

@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 // Libraries
 import "lazysizes";
-// Components & Helper functions
+// Utilieis
 import { DarkLightMode } from "./utils/helper";
 import GoogleAnalytics from "./utils/gTag";
 import EffectiveCaching from "./utils/cache";
@@ -20,6 +20,7 @@ import "./pages/promo";
 import "./pages/about";
 import "./pages/blog";
 import "./pages/work.ts";
+// My Own Components
 import "./components/G_Maintenance";
 
 class HomePage extends HTMLElement {

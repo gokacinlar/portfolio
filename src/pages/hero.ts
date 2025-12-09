@@ -1,4 +1,4 @@
-import Localize from "../i18n";
+import Localize from "../utils/initLocalization";
 // Components
 import { HeaderNode } from "./header";
 import { HeroImageWithLink } from "../components/C_Hero";
@@ -34,7 +34,7 @@ class HeroTemplate {
                     <div class="row align-items-center justify-content-evenly hero-child px-4">
                         <section class="col-12 col-md-6 d-flex flex-column align-items-start gap-4 ocps-container mb-4 mb-md-0">
                             <div class="hero-title-container">
-                                <h3 class="font-weight-bolder text-muted">${Localize.translate("ns1:hero:greet")}</h3>
+                                <h3 class="font-weight-bolder text-muted">${Localize.translate("common:hero:greet")}</h3>
                                 <h2 class="font-weight-bolder text-decoration-underline">Derviş</h2>
                             </div>
                             <div class="hero-dynamic-text-container">
@@ -67,9 +67,9 @@ class HeroTemplate {
     private heroDownloadCVButton(): string {
         return `
             <button id="hrGetCvBtn" type="button" class="hero-btn text-truncate hero-get-cv-btn bg-gradient btn btn-lg fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
-                rounded-5 shadow-sm" title="Download My CV">
+                rounded-5 shadow-sm" title="${Localize.translate("common:hero:buttonTitles:downloadCV")}">
                 <i class="bi bi-paperclip"></i>
-                <span class="hr-btn-text">Get Derviş's CV</span>
+                <span class="hr-btn-text">${Localize.translate("common:hero:buttons:cv")}</span>
             </button>
         `;
     }
