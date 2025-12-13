@@ -13,6 +13,7 @@ interface GraphQLPostNode {
     title: string;
     author: GraphQLAuthor;
     content: string;
+    slug: string;
 }
 
 interface GraphQLPostsConnection {
@@ -47,6 +48,7 @@ interface Post {
     title: string;
     author: Author;
     content: string;
+    url: string;
 }
 
 // Lightweight post for initial listing
@@ -76,16 +78,18 @@ export type {
 };
 
 class WordPressGraphQLClient {
-    private static readonly GRAPHQL_ENDPOINT = "https://dervisoksuzoglu.com.tr/wp_blog/graphql";
+    private static readonly BASE_DOMAIN: string = "https://dervisoksuzoglu.com.tr";
+    private static readonly GRAPHQL_ENDPOINT: string = "https://dervisoksuzoglu.com.tr/wp_blog/graphql";
 
     // Query to fetch only post previews (no content for efficient loading & caching)
-    private static readonly GRAPHQL_QUERY_FETCH_POST_PREVIEWS = `
+    private static readonly GRAPHQL_QUERY_FETCH_POST_PREVIEWS: string = `
     query GetPostPreviews($first: Int, $after: String) {
         posts(first: $first, after: $after) {
             nodes {
                 id
                 databaseId
                 title
+                slug
                 author {
                     node {
                         name
@@ -97,11 +101,29 @@ class WordPressGraphQLClient {
     ` as const;
 
     // Query to fetch single post with full content on demand
-    private static readonly GRAPHQL_QUERY_FETCH_SINGLE_POST = `
+    private static readonly GRAPHQL_QUERY_FETCH_SINGLE_POST: string = `
         query GetSinglePost($id: ID!) {
             post(id: $id, idType: ID) {
                 id
                 title
+                slug
+                content(format: RENDERED)
+                author {
+                    node {
+                        name
+                    }
+                }
+            }
+        }
+    ` as const;
+
+    // Query to fetch single post with "URL"
+    private static readonly GRAPHQL_QUERY_FETCH_POST_BY_SLUG: string = `
+        query GetPostBySlug($slug: String!) {
+            postBy(slug: $slug) {
+                id
+                title
+                slug
                 content(format: RENDERED)
                 author {
                     node {
@@ -149,14 +171,16 @@ class WordPressGraphQLClient {
             title: node.title || "Unknown Title",
             author: {
                 name: node.author.node.name || "Unknown Author",
-            },
+            }
         };
     }
 
+
     // Transform GraphQL data to full Post
     private static transformPostNode(node: GraphQLPostNode): Post {
+        const postUrl = this.generatePostUrl(node.slug); // Add URL for each post
         if (!node) {
-            throw new Error(`<b>Post not found </b>`);
+            throw new Error(`<b>Post not found.</b>`);
         } else {
             return {
                 id: node.id,
@@ -165,14 +189,15 @@ class WordPressGraphQLClient {
                 author: {
                     name: node.author.node.name || "Unknown Author",
                 },
+                url: postUrl
             };
         }
     }
 
     private static readonly DEF_BLOG_POST_NUMBER_TO_BE_FETCHED: number = 10;
-    private static readonly CACHE_KEY_PREVIEWS = "wordpress_blog_post_previews";
-    private static readonly CACHE_KEY_POST_PREFIX = "wordpress_blog_post_";
-    private static readonly CACHE_EXPIRATION_HOURS = 24; // Valid for 1 day
+    private static readonly CACHE_KEY_PREVIEW: string = "wordpress_blog_post_previews";
+    private static readonly CACHE_KEY_POST_PREFIX: string = "wordpress_blog_post_";
+    private static readonly CACHE_EXPIRATION_HOURS: number = 24; // Valid for 1 day
 
     // Fetch post previews (titles and authors only)
     public static async fetchBlogPostPreviews(variables: GetPostsVariables = { first: WordPressGraphQLClient.DEF_BLOG_POST_NUMBER_TO_BE_FETCHED }): Promise<PostPreview[]> {
@@ -206,12 +231,7 @@ class WordPressGraphQLClient {
 
         try {
             const response = await this.executeQuery<GraphQLSinglePostData, GetSinglePostVariables>(
-                this.GRAPHQL_QUERY_FETCH_SINGLE_POST,
-                { id: postId }
-            );
-
-            // For external debuggining purposes
-            // console.log('Full GraphQL Response:', JSON.stringify(response, null, 2));
+                this.GRAPHQL_QUERY_FETCH_SINGLE_POST, { id: postId, });
 
             if (!response.data.post) {
                 throw new Error("No post found with the given ID");
@@ -226,9 +246,35 @@ class WordPressGraphQLClient {
         }
     }
 
+    // Get post via URL a.k.a slug
+    public static async fetchPostBySlug(slug: string): Promise<Post> {
+        const cachedPost = this.getCachedPostBySlug(slug);
+        if (cachedPost) {
+            return cachedPost;
+        } else {
+            try {
+                const response = await this.executeQuery<{ postBy: GraphQLPostNode }, { slug: string }>(
+                    this.GRAPHQL_QUERY_FETCH_POST_BY_SLUG,
+                    { slug }
+                );
+
+                if (!response.data.postBy) {
+                    throw new Error("No post found with the given slug");
+                }
+
+                const transformedPost = this.transformPostNode(response.data.postBy);
+                this.cachePost(transformedPost);
+
+                return transformedPost;
+            } catch (error: unknown) {
+                throw new Error("Error fetching WordPress post by slug: " + error);
+            }
+        }
+    }
+
     private static getCachedPreviews(): PostPreview[] {
         try {
-            const cachedItem = localStorage.getItem(this.CACHE_KEY_PREVIEWS);
+            const cachedItem = localStorage.getItem(WordPressGraphQLClient.CACHE_KEY_PREVIEW);
 
             if (!cachedItem) {
                 return [];
@@ -242,7 +288,7 @@ class WordPressGraphQLClient {
                 return parsedCache.previews;
             }
 
-            localStorage.removeItem(this.CACHE_KEY_PREVIEWS);
+            localStorage.removeItem(WordPressGraphQLClient.CACHE_KEY_PREVIEW);
             return [];
         } catch (error: unknown) {
             console.error("Error retrieving cached previews:", error);
@@ -256,7 +302,7 @@ class WordPressGraphQLClient {
                 timestamp: new Date().getTime(),
                 previews: previews
             };
-            localStorage.setItem(this.CACHE_KEY_PREVIEWS, JSON.stringify(cacheItem));
+            localStorage.setItem(WordPressGraphQLClient.CACHE_KEY_PREVIEW, JSON.stringify(cacheItem));
         } catch (error) {
             console.error('Error caching previews in localStorage:', error);
         }
@@ -287,6 +333,32 @@ class WordPressGraphQLClient {
         }
     }
 
+    // Get cached posts via URL if they exist
+    private static getCachedPostBySlug(slug: string): Post | null {
+        try {
+            const cacheKey: string = `${this.CACHE_KEY_POST_PREFIX}slug_${slug}`;
+            const cachedItem = localStorage.getItem(cacheKey);
+
+            if (!cachedItem) {
+                return null;
+            }
+
+            const parsedCache = JSON.parse(cachedItem);
+            const currentTime = new Date().getTime();
+            const cacheAge: number = (currentTime - parsedCache.timestamp) / (1000 * 60 * 60);
+
+            if (cacheAge < this.CACHE_EXPIRATION_HOURS) {
+                return parsedCache.post;
+            }
+
+            localStorage.removeItem(cacheKey);
+            return null;
+        } catch (error: unknown) {
+            console.error("Error retrieving cached post by slug:", error);
+            return null;
+        }
+    }
+
     private static cachePost(post: Post): void {
         try {
             const cacheKey = this.CACHE_KEY_POST_PREFIX + post.id;
@@ -297,6 +369,16 @@ class WordPressGraphQLClient {
             localStorage.setItem(cacheKey, JSON.stringify(cacheItem));
         } catch (error) {
             console.error('Error caching post in localStorage:', error);
+        }
+    }
+
+    // Generate post URL from slug via wordpress graphql query
+    private static generatePostUrl(slug: string): string {
+        const newDomain: string = WordPressGraphQLClient.BASE_DOMAIN;
+        if (!newDomain) {
+            throw new Error(`Unable to localte ${newDomain}`);
+        } else {
+            return `${newDomain}/${slug}`;
         }
     }
 }

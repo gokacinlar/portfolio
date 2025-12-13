@@ -11,6 +11,7 @@ interface Post {
     title: string;
     author: Author;
     content: string;
+    url: string;
 }
 
 interface PostPreview {
@@ -121,7 +122,7 @@ class Updates extends HTMLElement {
 
                     // Actually load content with async call
                     button.addEventListener("click", async () => {
-                        await this.loadAndDisplayPost(item.id, button);
+                        await this.loadAndDisplayPost(item.id, button, true);
                     });
 
                     element.appendChild(button);
@@ -143,36 +144,32 @@ class Updates extends HTMLElement {
         }
     }
 
-    private async loadAndDisplayPost(postId: string, button: HTMLButtonElement) {
+    private async loadAndDisplayPost(postId: string, button: HTMLButtonElement, updateUrl: boolean = true) {
         const contentArea = this.querySelector("#blogMain") as HTMLDivElement | null;
-
         if (!contentArea) {
             console.error("Content area not found");
             return;
         }
 
-        // Disable button and show loading state
         button.disabled = true;
         const originalButtonHTML = button.innerHTML;
-        button.innerHTML = `
-            <span class="spinner-border spinner-border text-info" role="status" aria-hidden="true"></span>
-        `;
+        button.innerHTML = `<span class="spinner-border spinner-border text-info" role="status" aria-hidden="true"></span>`;
 
         this.appendSpinner(contentArea);
         try {
-            // Fetch the full post content
             const post = await WordPressGraphQLClient.fetchSinglePost(postId);
 
-            try {
-                if (post) {
-                    console.log("Post loaded successfully", post);
-                    this.displayPostContent(post);
-                } else {
-                    console.error("Post cannot be loaded properly.");
-                    return;
+            if (post) {
+                console.log("Post loaded successfully", post);
+                this.displayPostContent(post);
+
+                // Update URL with slug if requested
+                if (updateUrl) {
+                    this.updateUrlWithPost(post);
                 }
-            } catch (error: unknown) {
-                throw new Error("Error while loading single post:" + error);
+            } else {
+                console.error("Post cannot be loaded properly.");
+                return;
             }
         } catch (error: unknown) {
             console.error("Error loading post:", error);
@@ -183,15 +180,23 @@ class Updates extends HTMLElement {
                     <p class="mt-2 mb-0">Something went wrong. Try again later...</p>
                 </div>
             `;
-
-            if (error instanceof Error) {
-                console.error("Error message:", error.message);
-                console.error("Error stack:", error.stack);
-            }
         } finally {
             this.removeSpinner();
             button.disabled = false;
             button.innerHTML = originalButtonHTML;
+        }
+    }
+
+    private updateUrlWithPost(post: Post): void {
+        try {
+            const slug = post.url.split("/").filter(Boolean).pop() || "";
+            const currentUrl = new URL(window.location.href);
+
+            currentUrl.searchParams.set("post", slug);
+            // Add URL state according to article name
+            window.history.pushState({ postId: post.id, slug }, "", currentUrl.toString());
+        } catch (error) {
+            console.error("Error updating URL:", error);
         }
     }
 
@@ -232,9 +237,8 @@ class Updates extends HTMLElement {
             return;
         }
 
-        // Sanitize the post content before displaying
         const sanitizedContent = post.content;
-        const sanitizedTitle = DOMPurify.sanitize(post.title || "Untitled Post");
+        const sanitizedTitle = post.title || "Untitled Post";
         const authorName = post.author?.name || "Unknown Author";
         const defaultImageSrc = "../assets/images/static/webp/logo.webp";
 
@@ -259,9 +263,44 @@ class Updates extends HTMLElement {
             </article>
         `;
 
-        contentArea.innerHTML = postHTML;
-        // Scroll to top for clear visibility of the beginning of the post
+        contentArea.innerHTML = DOMPurify.sanitize(postHTML);
         contentArea.scrollTop = 0;
+    }
+
+    // Add method to load post from URL (slug)
+    private async loadPostFromUrl(): Promise<void> {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postSlug = urlParams.get("post");
+
+        if (!postSlug) {
+            return;
+        }
+
+        const contentArea = this.querySelector("#blogMain") as HTMLDivElement | null;
+        if (!contentArea) {
+            return;
+        }
+
+        this.appendSpinner(contentArea);
+        try {
+            const post = await WordPressGraphQLClient.fetchPostBySlug(postSlug);
+            if (post) {
+                // Visual enhancements
+                this.displayPostContent(post);
+                this.highlightActivePost(post.id);
+            }
+        } catch (error) {
+            console.error("Error loading post from URL:", error);
+            contentArea.innerHTML = `
+                <div class="alert alert-warning shadow-sm rounded-5" role="alert">
+                    <h4 class="alert-heading"><i class="bi bi-exclamation-triangle"></i> Post Not Found</h4>
+                    <hr class="my-1 w-50">
+                    <p class="mt-2 mb-0">The requested post could not be found.</p>
+                </div>
+            `;
+        } finally {
+            this.removeSpinner();
+        }
     }
 
     private async fetchAndPopulatePosts() {
@@ -328,8 +367,30 @@ class Updates extends HTMLElement {
         });
     }
 
-    connectedCallback() {
-        this.fetchAndPopulatePosts();
+    // Add method to highlight active post button
+    private highlightActivePost(postId: string): void {
+        const buttons = this.querySelectorAll(".blog-post-link") as NodeListOf<HTMLButtonElement>;
+        buttons.forEach(button => {
+            if (button.dataset.postId === postId) {
+                button.classList.add("active", "border", "border-primary");
+            } else {
+                button.classList.remove("active", "border", "border-primary");
+            }
+        });
+    }
+
+    async connectedCallback() {
+        await this.fetchAndPopulatePosts();
+
+        // Check if there"s a post in the URL and load it
+        await this.loadPostFromUrl();
+
+        // Listen for browser back/forward navigation
+        window.addEventListener("popstate", async (event) => {
+            if (event.state?.postId) {
+                await this.loadPostFromUrl();
+            }
+        });
     }
 }
 
