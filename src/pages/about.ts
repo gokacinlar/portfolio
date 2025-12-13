@@ -96,8 +96,7 @@ class About extends HTMLElement {
     ]
 
     private render(): void {
-        const template = new Template().createTemplate(this.renderContent());
-        this.appendChild(template.content.cloneNode(true));
+        const template = new Template().createTemplate(this.renderContent(), this);
     }
 
     private initializeShuffleEffects(): void {

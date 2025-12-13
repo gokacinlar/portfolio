@@ -8,8 +8,7 @@ class Header extends HTMLElement {
     constructor() {
         super();
         Localize.init();
-        const template = new Template().createTemplate(new HeaderNode().headerItself());
-        this.appendChild(template.content.cloneNode(true));
+        new Template().createTemplate(new HeaderNode().headerItself(), this);
     }
 
     connectedCallback(): void {

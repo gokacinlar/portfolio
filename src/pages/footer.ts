@@ -5,8 +5,7 @@ import { FooterLinks } from "../static";
 class Footer extends HTMLElement {
     constructor() {
         super();
-        const template = new Template().createTemplate(new FooterNodes().footerTemplate());
-        this.appendChild(template.content.cloneNode(true));
+        new Template().createTemplate(new FooterNodes().footerTemplate(), this);
     }
 }
 

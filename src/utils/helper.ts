@@ -125,27 +125,31 @@ export class DarkLightMode {
 
 // Create a template content to be appended to every Light DOM
 export class Template {
-    public createTemplate(content: string): HTMLTemplateElement {
+    public createTemplate(content: string, target: HTMLElement): HTMLTemplateElement {
         if (typeof content !== "string" || !content.trim()) {
             throw new Error("Template content must be a non-empty string");
         }
 
         const template = document.createElement("template");
-        const sanitizedContent = DOMPurify.sanitize(content);
-        template.innerHTML = sanitizedContent;
-        return template;
-    }
+        // allow our webcomponents to pass
+        const sanitizedContent = DOMPurify.sanitize(content, {
+            CUSTOM_ELEMENT_HANDLING: {
+                tagNameCheck: /^[a-z]+-/, // allow all our custom elements
+                attributeNameCheck: /.*/,
+                allowCustomizedBuiltInElements: false,
+            },
+        });
 
-    public appendTemplate(content: HTMLTemplateElement, target: HTMLElement) {
+        template.innerHTML = sanitizedContent;
         try {
-            if (!content && !target) {
-                console.error(`${content} and ${target} does not exist.`);
-                return;
-            } else {
-                target.appendChild(content.content.cloneNode(true));
+            if (!content || !target) {
+                throw new Error("Content or target does not exist.");
             }
+
+            target.appendChild(template.content.cloneNode(true));
+            return template;
         } catch (error: unknown) {
-            throw new Error("Unable to append template content as a web component." + error);
+            throw new Error("Unable to append template content as a web component: " + error);
         }
     }
 }

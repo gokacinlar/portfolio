@@ -5,8 +5,7 @@ class WorkPage extends HTMLElement {
     constructor() {
         super();
 
-        const template = new Template().createTemplate(this.render());
-        this.appendChild(template.content.cloneNode(true));
+        const template = new Template().createTemplate(this.render(), this);
     }
 
     private render(): string {
@@ -28,27 +27,12 @@ class WorkPage extends HTMLElement {
                 </div>
             </section>
             <article id="buyOptions" class="px-2 py-2 mx-2 my-2 rounded-5 h-100 shadow-sm">
-                ${this.optionsContainer()}
+                <component-options></component-options>
             </article>
         `;
     }
 
-    private optionsContainer(): string {
-        return `
-            <section class="py-2 px-2">
-                <div class="container-fluid gy-2">
-                    <div class="row">
-                        ${this.navigate()}
-                    </div>
-                    <div class="row mt-3 h-50">
-                        ${this.content()}
-                    </div>
-                </div>
-            </section>
-        `;
-    }
-
-    private navigate(): string {
+    public static navigate(): string {
         return `
             <ul class="nav nav-pills nav-fill px-0 gap-3" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -63,7 +47,7 @@ class WorkPage extends HTMLElement {
         `;
     }
 
-    private content(): string {
+    public static content(): string {
         return `
             <div id="optionsContent" class="bg-secondary-subtle px-3 py-3 rounded-5 shadow-sm">
                 <div class="tab-pane fade show active" id="englishOptions" role="tabpanel" aria-labelledby="forEnglish">Coming soon...</div>
@@ -88,5 +72,29 @@ class WorkPage extends HTMLElement {
     }
 }
 
+
+class Options extends HTMLElement {
+    constructor() {
+        super();
+        new Template().createTemplate(Options.renderOptions(), this);
+    }
+
+    public static renderOptions(): string {
+        return `
+            <section class="py-2 px-2">
+                <div class="container-fluid gy-2 h-100">
+                    <div class="row">
+                        ${WorkPage.navigate()}
+                    </div>
+                    <div class="row mt-3 h-75">
+                        ${WorkPage.content()}
+                    </div>
+                </div>
+            </section>
+        `;
+    }
+}
+
+customElements.define("component-options", Options);
 customElements.define("app-work", WorkPage);
 export default WorkPage;

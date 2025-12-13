@@ -1,12 +1,10 @@
 import { Template } from "../utils/helper";
 
 export class MaintenanceStatus extends HTMLElement {
-    private templating = new Template();
     constructor() {
         super();
 
-        const template = this.templating.createTemplate(MaintenanceStatus.render());
-        this.templating.appendTemplate(template, this);
+        new Template().createTemplate(MaintenanceStatus.render(), this);
     }
 
     connectedCallback(): void {

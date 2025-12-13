@@ -6,13 +6,10 @@ import { Template, TypeWriterDisplay, DomEvents } from "../utils/helper";
 import { BodyParts, HeroParts } from "../static";
 
 class HeroSection extends HTMLElement {
-    private template: Template;
     constructor() {
         super();
-        this.template = new Template();
         Localize.init();
-        const template = this.template.createTemplate(new HeroTemplate().hero());
-        this.appendChild(template.content.cloneNode(true));
+        new Template().createTemplate(new HeroTemplate().hero(), this);
     }
 
     connectedCallback(): void {

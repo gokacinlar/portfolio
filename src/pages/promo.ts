@@ -10,8 +10,7 @@ class Promo extends HTMLElement {
     constructor() {
         super();
 
-        const template = new Template().createTemplate(new PromoTemplate().promoTemplate());
-        this.appendChild(template.content.cloneNode(true));
+        new Template().createTemplate(new PromoTemplate().promoTemplate(), this);
     }
 
     connectedCallback(): void {

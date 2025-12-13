@@ -24,8 +24,7 @@ class Updates extends HTMLElement {
     constructor() {
         super();
 
-        const template = new Template().createTemplate(this.render());
-        this.appendChild(template.content.cloneNode(true));
+        new Template().createTemplate(this.render(), this);
         this.connectedCallback();
     }
 
