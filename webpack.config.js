@@ -8,7 +8,7 @@ const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
-const LocalizeAssetsPlugin = require("webpack-localize-assets-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const Dotenv = require("dotenv-webpack");
 
 // Load .env
@@ -98,7 +98,7 @@ module.exports = {
         },
     },
     mode: "development", // Later change this to "production" for final result
-    devtool: "cheap-module-source-map", // Later remove for production since we won"t be needing eval() in prod
+    devtool: "source-map", // Later remove for production since we won"t be needing eval() in prod
     devServer: {
         static: {
             directory: path.join(__dirname, "public"),
@@ -153,8 +153,8 @@ module.exports = {
             new CssMinimizerPlugin()
         ],
     },
-    // For copying static assets as a whole without importing them individually
     plugins: [
+        // new BundleAnalyzerPlugin(),
         new webpack.DefinePlugin(definePluginEntries),
         new NodePolyfillPlugin(),
         new Dotenv({
