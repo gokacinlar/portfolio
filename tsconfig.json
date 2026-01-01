@@ -22,6 +22,10 @@
         "@types"
       ],
     },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
     "allowJs": true,
     "checkJs": false,
     "removeComments": true

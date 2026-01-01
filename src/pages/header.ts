@@ -1,8 +1,10 @@
 import Localize from "../utils/initLocalization";
 import * as Type from "../types/types";
-import { Template, DarkLightMode } from "../utils/helper";
+import { Template, DarkLightMode, renderModal, listenForBootstrapModalEventDelegation } from "../utils/helper";
 import { HtmxControls } from "../components/M_htmx";
-import ResponsiveNavbar from '../components/responsive/R_navbar';
+import ResponsiveNavbar from "../components/responsive/R_navbar";
+import LazyImage from "../components/M_image";
+import { ModalList } from "../static";
 
 class Header extends HTMLElement {
     constructor() {
@@ -15,6 +17,7 @@ class Header extends HTMLElement {
         const dayNightModeSwitchingBtn = this.querySelector("#hrDayNightBtn") as HTMLButtonElement;
         new DarkLightMode().dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
         new ResponsiveNavbar().connectedCallback();
+        new LazyImage().connectedCallback();
     }
 }
 
@@ -26,6 +29,9 @@ interface NavLink {
 }
 
 export class HeaderNode {
+    constructor() {
+        this.connectedCallback();
+    };
     private static readonly SITE_URL: string = "https://dervisoksuzoglu.com.tr";
 
     public headerItself(): string {
@@ -36,11 +42,11 @@ export class HeaderNode {
                         ${this.headerLeftIcon()}
                     </li>
                     <li class="position-absolute top-50 start-50 translate-middle">
-                        ${this.headerMiddle()}
+                        ${HeaderNode.headerMiddle()}
                     </li>
                     <li class="header-right d-flex flex-row align-items-center gap-2">
-                        ${this.headerHireBtn()}
-                        ${this.headerEtc()}
+                        ${HeaderNode.headerHireBtn()}
+                        ${HeaderNode.headerEtc()}
                     </li>
                 </ul>
             </nav>
@@ -66,52 +72,52 @@ export class HeaderNode {
         `;
     }
 
-    public headerMiddle(): string {
+    public static headerMiddle(): string {
         return `
             <nav id="headerM">
                 <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-row gap-1 text-truncate">
-                    ${this.headerMiddleContent()}
+                    ${HeaderNode.headerMiddleContent()}
                 </ul>
             </nav>
         `;
     }
 
     // All the HTMX attributes will go here
-    private defaultHtmxOptions: Type.HTMXOptions = {
+    private static readonly defaultHtmxOptions: Type.HTMXOptions = {
         hxget: "",
         hxtrigger: "click",
         hxswap: "innerHTML",
         hxpushurl: true,
     };
 
-    private navLinks: NavLink[] = [
+    private static readonly navLinks: NavLink[] = [
         {
             href: "/index.html",
             title: Localize.translate("common:upperNavigation:home"),
             icon: "bi bi-house-door",
-            htmxOptions: { ...this.defaultHtmxOptions, hxget: "/index.html" },
+            htmxOptions: { ...HeaderNode.defaultHtmxOptions, hxget: "/index.html" },
         },
         {
             href: "/updates.html",
             title: Localize.translate("common:upperNavigation:updates"),
             icon: "bi bi-journals",
-            htmxOptions: { ...this.defaultHtmxOptions, hxget: "/updates.html" },
+            htmxOptions: { ...HeaderNode.defaultHtmxOptions, hxget: "/updates.html" },
         },
         {
             href: "/about.html",
             title: Localize.translate("common:upperNavigation:about"),
             icon: "bi bi-person-circle",
-            htmxOptions: { ...this.defaultHtmxOptions, hxget: "/about.html" },
+            htmxOptions: { ...HeaderNode.defaultHtmxOptions, hxget: "/about.html" },
         }
     ];
 
-    public headerMiddleContent(): string {
-        return this.navLinks
+    public static headerMiddleContent(): string {
+        return HeaderNode.navLinks
             .map(({ href, title, icon, htmxOptions }) => `
                 <li class="w-100">
                     <a
                         href="${href}"
-                        ${new HtmxControls(htmxOptions ?? this.defaultHtmxOptions).render()}
+                        ${new HtmxControls(htmxOptions ?? HeaderNode.defaultHtmxOptions).render()}
                         title="${title}"
                         class="btn header-btn-bg btn-lg rounded-5 fs-4 w-100">
                         <i class="bi ${icon}"></i> ${title}
@@ -120,14 +126,14 @@ export class HeaderNode {
                 `).join("");
     }
 
-    private primaryBtn: NavLink = {
+    private static readonly primaryBtn: NavLink = {
         href: "/work.html",
         title: Localize.translate("common:hero:buttonTitles:workHire"),
         icon: "bi bi-star-half text-black fw-bold pulsate-fwd",
-        htmxOptions: { ...this.defaultHtmxOptions, hxget: "/work.html" },
+        htmxOptions: { ...HeaderNode.defaultHtmxOptions, hxget: "/work.html" },
     }
 
-    public headerHireBtn(): string {
+    public static headerHireBtn(): string {
         return `
             <a id="hrBtn" type="button" class="header-btn-bg-important bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-2"
                 title="${this.primaryBtn.title}" href="${this.primaryBtn.href}"
@@ -138,16 +144,35 @@ export class HeaderNode {
         `;
     }
 
-    private headerEtc(): string {
+    private static headerEtc(): string {
         return `
-            <button id="hrDayNightBtn" type="button" class="header-day-night-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1"
-                title="Change Day/Night Mode">
-                <i class="hr-daynight-switch-icon bi bi-sun text-black fw-bold"></i>
-            </button>
+            <div class="d-flex flex-row align-items-center justify-content-center flex-1 gap-2">
+                <button id="hrDayNightBtn" type="button" class="header-day-night-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1"
+                    title="Change Day/Night Mode">
+                    <i class="hr-daynight-switch-icon bi bi-sun text-black fw-bold"></i>
+                </button>
+                ${HeaderNode.headerLangSwitch()}
+            </div>
             <div id="headerResponsive">
                 ${new ResponsiveNavbar().responsiveMenuToggleButton()}
             </div>
         `;
+    }
+
+    private static headerLangSwitch(): string {
+        return `
+            <button id="hrLangSwitchBtn" type="button" class="header-lang-switch-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1 modal-trigger"
+                role="button" title="Change Site Language" data-modal="langSwitchModal">
+                <i class="bi bi-translate text-black fw-bold"></i>
+            </button>
+            ${renderModal(ModalList.MODALS.filter(modal => modal.id === "langSwitchModal"))}
+        `;
+    }
+
+    connectedCallback(): void {
+        document.addEventListener("DOMContentLoaded", () => {
+            listenForBootstrapModalEventDelegation();
+        });
     }
 }
 

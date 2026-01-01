@@ -1,5 +1,4 @@
 import Localize from "../utils/initLocalization";
-// Components
 import { HeaderNode } from "./header";
 import { HeroImageWithLink } from "../components/C_Hero";
 import { Template, TypeWriterDisplay, DomEvents } from "../utils/helper";
@@ -40,7 +39,7 @@ class HeroTemplate {
                                 </h1>
                             </div>
                             <div class="ocps-buttons d-flex flex-row align-items-center gap-2">
-                                ${new HeaderNode().headerHireBtn()}
+                                ${HeaderNode.headerHireBtn()}
                                 ${this.heroDownloadCVButton()}
                             </div>
                         </section>

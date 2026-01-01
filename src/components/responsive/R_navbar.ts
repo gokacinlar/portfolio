@@ -39,7 +39,7 @@ class ResponsiveNavbar {
                         </div>
                     </div>
                     <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-column align-items-center gap-1 bg-gradient p-2">
-                        ${new HeaderNode().headerMiddleContent()}
+                        ${HeaderNode.headerMiddleContent()}
                     </ul>
                 </nav>
             </div>

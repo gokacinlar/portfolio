@@ -1,11 +1,11 @@
-// toastify.css
 import "toastify-js/src/toastify.css"
-// other imports
 import DOMPurify from "dompurify";
+import * as bootstrap from "bootstrap";
+window.bootstrap = bootstrap;
 import ScrollReveal from "scrollreveal";
 import isEmail from "validator/lib/isEmail";
 import Toastify from "toastify-js";
-import { HeroParts, WhiteListedURLs } from "../static";
+import { HeroParts, WhiteListedURLs, ModalConfig } from "../static";
 
 // Detecting dark/light mode
 export class DarkLightMode {
@@ -125,19 +125,22 @@ export class DarkLightMode {
 
 // Create a template content to be appended to every Light DOM
 export class Template {
+    private nonce: string;
+    constructor() { this.nonce = generateNonce() };
+
     public createTemplate(content: string, target: HTMLElement): HTMLTemplateElement {
         if (typeof content !== "string" || !content.trim()) {
             throw new Error("Template content must be a non-empty string");
         }
 
-        const template = document.createElement("template");
-        // allow our webcomponents to pass
+        const template = document.createElement("template") as HTMLTemplateElement;
         const sanitizedContent = DOMPurify.sanitize(content, {
+            ADD_ATTR: ["nonce"],
             CUSTOM_ELEMENT_HANDLING: {
-                tagNameCheck: /^[a-z]+-/, // allow all our custom elements
+                tagNameCheck: /^[a-z]+-/,
                 attributeNameCheck: /.*/,
                 allowCustomizedBuiltInElements: false,
-            },
+            }
         });
 
         template.innerHTML = sanitizedContent;
@@ -146,7 +149,15 @@ export class Template {
                 throw new Error("Content or target does not exist.");
             }
 
-            target.appendChild(template.content.cloneNode(true));
+            const fragment = template.content.cloneNode(true) as DocumentFragment;
+            // Add nonce to all style and script elements if nonce exists
+            if (this.nonce) {
+                fragment.querySelectorAll("style, script").forEach((element) => {
+                    element.setAttribute("nonce", this.nonce);
+                });
+            }
+
+            target.appendChild(fragment);
             return template;
         } catch (error: unknown) {
             throw new Error("Unable to append template content as a web component: " + error);
@@ -432,7 +443,25 @@ export function isValidUrl(url: string): boolean {
 
 // Function to generate nonce for each script tag
 export function generateNonce(): string {
-    return window.crypto.getRandomValues(new Uint32Array(4)).join("");
+    try {
+        // csp-html-webpack-plugin adds nonce to script tags automatically
+        const scriptWithNonce = document.querySelector("script[nonce]") as HTMLScriptElement;
+        if (scriptWithNonce) {
+            return scriptWithNonce.getAttribute("nonce") || "";
+        }
+
+        // check nonce in styletags
+        const styleWithNonce = document.querySelector("style[nonce]") as HTMLStyleElement;
+        if (styleWithNonce) {
+            return styleWithNonce.getAttribute("nonce") || "";
+        }
+
+        console.warn("No nonce found. CSP may block dynamic content.");
+        return "";
+    } catch (error: unknown) {
+        console.error("Error retrieving nonce:", error);
+        return "";
+    }
 }
 
 interface ButtonIconOptions {
@@ -508,7 +537,6 @@ export function insertApprovedScript({ scriptItself, target, attributes = {} }: 
 
         element.crossOrigin = "anonymous"; // for CORS related, mostly unnecessary
         target.appendChild(element);
-        console.log(`Script ${scriptItself} successfully added to DOM.`);
         return element;
     } catch (error: unknown) {
         throw new Error(`Failed to create script ${scriptItself}: ${error}`);
@@ -548,4 +576,111 @@ export function insertAlertDialogue({ target, alertType, role, content }: AlertD
     } catch (error: unknown) {
         throw new Error("Unable to insert alert dialogue:" + error);
     }
+}
+
+export function insertToastifiedMessage(message: string) {
+    const toastConfig = {
+        duration: 2500,
+        newWindow: true,
+        close: true,
+        gravity: "bottom" as const,
+        position: "right" as const,
+        stopOnFocus: true,
+        style: {
+            background: "#0f3d75",
+            borderRadius: "24px"
+        },
+    } as const;
+
+    try {
+        const msg = message as string;
+        if (msg) {
+            Toastify({
+                ...toastConfig,
+                text: msg,
+                close: false,
+                duration: 2500,
+                ariaLive: "polite"
+            }).showToast();
+        }
+    } catch (error: unknown) {
+        throw new Error("Unable to insert toastify message" + error);
+    }
+}
+
+export function insertImageSvg(imgPath: string, alt: string, options: { onError?: (error: Error) => void } = {}): HTMLImageElement | null {
+    if (!imgPath) {
+        console.warn("No image path provided");
+        return null;
+    }
+
+    try {
+        const imgElement = document.createElement("img") as HTMLImageElement;
+        imgElement.src = imgPath;
+        imgElement.alt = alt;
+        imgElement.loading = "lazy";
+        imgElement.decoding = "async";
+        imgElement.onerror = () => {
+            imgElement.alt = "Image failed to load";
+            if (options.onError) {
+                options.onError(new Error(`Failed to load image: ${imgPath}`));
+            }
+        };
+
+        return imgElement;
+    } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error(`Error while inserting image: ${errorMessage}`);
+
+        if (options.onError) {
+            options.onError(new Error(`Image insertion failed: ${errorMessage}`));
+        }
+
+        return null;
+    }
+}
+
+export function renderModal(modalSource: ModalConfig[]) {
+    const modalsHtml = modalSource.map(modal => `
+        <div id="${modal.id}" class="modal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content rounded-4 shadow-lg">
+                    <div class="modal-header px-4 py-3">
+                        <h5 class="modal-title">${modal.title}</h5>
+                        <button type="button" class="btn-close border border-1 border-secondary-subtle rounded-pill" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body rounded-5">
+                        ${modal.content}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join("");
+
+    return `
+        ${modalsHtml}
+    `;
+}
+
+export function listenForBootstrapModalEventDelegation() {
+    document.body.addEventListener("click", (event: Event) => {
+        const target = event.target as HTMLElement;
+        const modalTrigger = target.closest(".modal-trigger") as HTMLElement;
+
+        if (modalTrigger && modalTrigger.dataset.modal) {
+            event.preventDefault();
+            const modalElement = document.getElementById(modalTrigger.dataset.modal);
+
+            if (modalElement) {
+                const modalInstance = new bootstrap.Modal(modalElement, {
+                    keyboard: true,
+                    backdrop: false,
+                });
+
+                modalInstance.show();
+                // Manually remove backdrop
+                document.body.removeAttribute("style");
+            }
+        }
+    });
 }

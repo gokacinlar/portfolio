@@ -159,7 +159,6 @@ class Updates extends HTMLElement {
             const post = await WordPressGraphQLClient.fetchSinglePost(postId);
 
             if (post) {
-                console.log("Post loaded successfully", post);
                 this.displayPostContent(post);
 
                 // Update URL with slug if requested

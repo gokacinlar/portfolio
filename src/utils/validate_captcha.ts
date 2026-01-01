@@ -8,7 +8,7 @@ export default class ValidateCaptcha {
 
     private validate(_element: string): void {
         try {
-            const form = document.querySelector("form") as HTMLFormElement;
+            const form = document.querySelector("#captchaForm") as HTMLFormElement;
 
             if (!form) {
                 console.error("Form not found");

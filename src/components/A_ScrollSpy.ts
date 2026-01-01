@@ -1,68 +1,16 @@
-import { formatDate, validateEmail } from "../utils/helper";
+import { validateEmail } from "../utils/helper";
 import { loadWeb3Forms, formState } from "../utils/form";
-import EmailForm from "./A_EmailForm";
+import { AboutData } from "../static";
+import { renderEmailForm } from "./A_EmailForm";
 import Accordion from "./A_Accordion";
 import * as Type from "../types/types";
 
 class ScrollSpy {
-    constructor() {
-        // Email input validator
-        document.addEventListener("DOMContentLoaded", () => {
-            validateEmail(".email-validate");
-            formState();
-            loadWeb3Forms();
-        });
-
-        document.querySelectorAll<HTMLFormElement>(".needs-validation").forEach((form) => {
-            form.addEventListener("submit", (event) => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add("was-validated");
-            });
-        });
-    }
-
-    private navLinks: Type.NavLink[] = [
-        { id: "about-me", icon: "🧑", label: "About Me" },
-        { id: "education", icon: "📚", label: "Education" },
-        { id: "work", icon: "📠", label: "Work" },
-        { id: "stack", icon: "🚀", label: "Tech Stack & Tools" },
-        { id: "mailing", icon: "📧", label: "E-mail" },
-        { id: "advanced", icon: "🔎", label: "Advanced" },
-    ];
-
-    private educationRows: Type.TableRow[] = [
-        [
-            "Atatürk University",
-            "English Language Teaching",
-            "Bachelor's Degree",
-            `${formatDate(new Date(2019, 8))} - ${formatDate(new Date(2023, 6))}`,
-        ],
-        [
-            "Atatürk University",
-            "Computer Programming",
-            "Associate Degree",
-            `${formatDate(new Date(2023, 8))} - current`,
-        ],
-    ];
-
-    private stackRows: Type.TableRow[] = [
-        ["Front-end", "JavaScript (ES6+), TypeScript", "React, Redux, Next.js"],
-        ["Back-end", "PHP(7+), Node.js", "Express.js, Codeigniter"],
-        ["Styling", "Bootstrap (+derivatives), SASS, Tailwind CSS", "Shadcn & DaisyUI"],
-        ["Databases", "MySQL, PostgreSQL", "Supabase"],
-        ["DevOps", "Docker, Linux", "-"],
-        ["CMS", "Wordpress, Headless Wordpress", "Next.js"],
-        ["SSG", "Astro & Gatsby", "-"],
-        ["Testing", "Jest & Playwright", "-"],
-        ["Design & UX", "Figma, Adobe Illustrator & Adobe Photoshop", "-"],
-    ];
+    constructor() { }
 
     // Scrollspy list items
     private renderNavLinks() {
-        return this.navLinks.map(({ id, icon, label }) =>
+        return AboutData.navLinks.map(({ id, icon, label }) =>
             `<a class="list-group-item list-group-item-action rounded-pill shadow-sm focus-ring focus-ring-secondary text-center" href="#${id}">${icon} ${label}</a>`
         ).join("");
     }
@@ -98,15 +46,10 @@ class ScrollSpy {
                         </div>
                         <div>
                             <p class="about-li1-text fs-5 fw-medium">
-                                I'm highly interested in creating <mark>content-first</mark> websites as well as crafting stand-alone
-                                <mark>web applications (SPAs)</mark> or <mark>multi-page</mark> static content where <em>speed</em> &amp;
-                                <em>progressive enhancement</em> are critically important. I love building user interfaces with mainly
-                                <strong>React.</strong>
+                                ${AboutData.introduction.first}
                             </p>
                             <p class="about-li1-text fs-5 fw-medium">
-                                My primary field is teaching English in <mark>ESL (English as a Second Language)</mark> context. My main
-                                focus is to maximize practical usage of English in almost every aspect related to casual or academical
-                                way of interacting with the language.
+                                ${AboutData.introduction.last}
                             </p>
                         </div>
                     </div>
@@ -115,7 +58,7 @@ class ScrollSpy {
                             <h4 id="education">📚 Education</h4>
                             <hr class="w-25">
                         </div>
-                        ${this.renderTable(["Institution", "Field", "Degree", "Date"], this.educationRows, "eduTable")}
+                        ${this.renderTable(["Institution", "Field", "Degree", "Date"], AboutData.educationRows, "eduTable")}
                     </div>
                     <div>
                         <div>
@@ -132,7 +75,7 @@ class ScrollSpy {
                             <hr class="w-25">
                         </div>
                         <div>
-                            ${this.renderTable(["Category", "Technologies", "Libraries & Tools"], this.stackRows, "stackTable")}
+                            ${this.renderTable(["Category", "Technologies", "Libraries & Tools"], AboutData.stackRows, "stackTable")}
                         </div>
                     </div>
                     <div>
@@ -141,7 +84,7 @@ class ScrollSpy {
                             <hr class="w-25">
                         </div>
                         <div>
-                            ${new EmailForm().render()}
+                            ${renderEmailForm()}
                         </div>
                     </div>
                     <div>
@@ -156,6 +99,25 @@ class ScrollSpy {
                 </div>
             </section>
         `;
+    }
+
+    connectedCallback(): void {
+        // Email input validator
+        document.addEventListener("DOMContentLoaded", () => {
+            validateEmail(".email-validate");
+            formState();
+            loadWeb3Forms();
+        });
+
+        document.querySelectorAll<HTMLFormElement>(".needs-validation").forEach((form) => {
+            form.addEventListener("submit", (event) => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add("was-validated");
+            });
+        });
     }
 }
 

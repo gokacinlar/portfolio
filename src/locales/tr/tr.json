@@ -1,4 +1,7 @@
 {
+    "maintenance": {
+        "status": "Bu websitesi yapım aşamasındadır. Bazı özellikler çalışmayabilir."
+    },
     "upperNavigation": {
         "home": "Anasayfa",
         "updates": "Blog",

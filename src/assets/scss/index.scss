@@ -141,6 +141,12 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     background: linear-gradient(225deg, #e3c334, #ffe83e) !important;
 }
 
+@mixin custom-box-shadow($p1, $p2, $p3, $p4, $alpha) {
+    box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
+    -webkit-box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
+    -moz-box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
+}
+
 // Reset
 * {
     margin: 0;
@@ -177,6 +183,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     .header-btn-bg-alt,
     .header-day-night-btn,
+    .header-lang-switch-btn,
     .header-btn-bg-important,
     .hero-btn,
     .header-responsive-btn,
@@ -262,7 +269,8 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     #hrBtn,
     #hrDayNightBtn,
-    #responsiveMenuToggleBtn {
+    #responsiveMenuToggleBtn,
+    #hrLangSwitchBtn {
         height: 54px !important;
     }
 
@@ -314,6 +322,10 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
             bottom: 5.5px;
             width: 75%;
         }
+    }
+
+    .lang-switch-box {
+        @include custom-bee-color();
     }
 
     #responsiveNavbar {
@@ -480,11 +492,8 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     .promo-motto-quote-icon {
+        filter: drop-shadow(5px 5px 97px #000000);
         @include dynamic-font-size(2rem, calc(8vw + 4rem), 12rem);
-    }
-
-    .wavy-text {
-        @include wavy-text(var(--clr-two));
     }
 
     #promo_Description {
@@ -801,16 +810,33 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         background: var(--clr-one);
         transition: all .25s ease-in-out;
 
-        &>a>.bi-arrow-right {
+        &:hover {
+            .about-socials-arrow {
+                @include animation(swing-in-left-fwd, .25s, cubic-bezier(0.785, 0.135, 0.150, 0.860), alternate both);
+                opacity: 1;
+            }
+        }
+    }
+
+    .about-socials-arrow {
+        opacity: 0;
+    }
+
+    @keyframes swing-in-left-fwd {
+        0% {
+            -webkit-transform: rotateY(100deg);
+            transform: rotateY(100deg);
+            -webkit-transform-origin: left;
+            transform-origin: left;
             opacity: 0;
-            visibility: hidden;
-            transform: translateX(-6px);
         }
 
-        &:hover>a>.bi-arrow-right {
+        100% {
+            -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+            -webkit-transform-origin: left;
+            transform-origin: left;
             opacity: 1;
-            visibility: visible;
-            transform: translateX(6px);
         }
     }
 
@@ -998,7 +1024,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     .wavy-text {
-        @include wavy-text(var(--clr-two));
+        @include wavy-text(#1f1f24);
     }
 
     #offCanvasControls,

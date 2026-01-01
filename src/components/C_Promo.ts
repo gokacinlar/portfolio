@@ -144,7 +144,7 @@ export class PromoTeachEnglish {
     }
 
     public createImageIconsForPrinciples(): string {
-        const images = new PromoParts().principleImagePaths;
+        const images = PromoParts.principleImagePaths;
 
         return images.map(path =>
             `<li class="list-group-item"><img src="${path}" title="Icon" class="lazyload img-fluid"></li>`
@@ -155,7 +155,7 @@ export class PromoTeachEnglish {
 export class PromoMotto {
     public render(): string {
         return `
-            <div class="promo-motto-quote-container rounded-5 px-4 py-4 shadow-sm d-flex flex-row align-items-center justify-content-baseline gap-4">
+            <div class="promo-motto-quote-container bg-gradient rounded-5 px-4 py-4 shadow-sm d-flex flex-row align-items-center justify-content-baseline gap-4">
                 <div>
                     <i class="promo-motto-quote-icon bi bi-quote"></i>
                 </div>
@@ -181,32 +181,10 @@ export class PromoInterested {
     constructor() {
         this.options = [];
         this.data = [];
-        this.setData([
-            {
-                title: "Do you need assistance in learning English?",
-                description: `
-                    I can offer you P2P online teaching exprience with appropriate enrollments chosen by you. These include plans such as
-                    <strong>Supplementary English Course</strong>, <strong>Proficiency English Course</strong>, and <strong>Exam-Focused English
-                    Course</strong>. For more broad information, see the plans below!
-                `,
-                img: "../assets/images/static/webp/qualifications-main-english.webp",
-                link: new URL("https://dervisoksuzoglu.com.tr")
-            },
-            {
-                title: "Do you have a web project?",
-                description: `
-                    I can design, prototype and develop with on-demand considerations for a fully-functional web application using React as well as
-                    classical CMS approaches like WordPress or multi-page static content websites such as hobby sites, portfolios, blogs and many more!
-                    I also offer maintenance for your personal or business web solutions. For more broad information, see the plans below!
-                `,
-                img: "../assets/images/static/webp/qualifications-main-webdev.webp",
-                link: new URL("https://dervisoksuzoglu.com.tr")
-            }
-        ]);
+        this.setData(PromoParts.promoItems);
     }
 
-    // Function to populate data with actual information
-    public setData(data: InterestedOptions[]): void {
+    private setData(data: InterestedOptions[]): void {
         this.data = data;
     }
 
@@ -244,5 +222,9 @@ export class PromoInterested {
                 </section>
             `;
         }).join("");
+    }
+
+    connectedCallback(): void {
+
     }
 }

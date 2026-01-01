@@ -13,7 +13,7 @@ const Dotenv = require("dotenv-webpack");
 
 // Load .env
 dotenv.config();
-const envKeys = ["GTAG", "WEB3_FORM_ACCESS_KEY", "RECAPTCHA"];
+const envKeys = ["GTAG", "WEB3_FORM_ACCESS_KEY", "RECAPTCHA", "RECAPTCHA_SECRET_KEY"];
 const definePluginEntries = {};
 
 envKeys.forEach((key) => {
@@ -36,7 +36,7 @@ const multipleHtmlPlugins = htmlPageNames.map(name => {
 const scripts = [
     "https://web3forms.com/client/script.js",
     "https://api.web3forms.com/submit",
-    "https://www.googletagmanager.com/gtag/js?id=G-XMT56BGFP8&l=ga4DataLayer",
+    "https://*.googletagmanager.com",
     "https://www.google.com/recaptcha/api.js"
 ];
 
@@ -239,7 +239,7 @@ module.exports = {
                 "style-src": ["'self'"],
                 "img-src": ["'self'", "data:", ...imageConnections],
                 "font-src": ["'self'"],
-                "connect-src": ["'self'", "https://dervisoksuzoglu.com.tr/wp_blog/graphql"],
+                "connect-src": ["'self'", process.env.GRAPHQL_URL, "https://www.google-analytics.com", "https://www.google.com/recaptcha/api.js"],
             },
             {
                 enabled: true,

@@ -1,12 +1,11 @@
 import * as bootstrap from "bootstrap";
 window.bootstrap = bootstrap;
+import { listenForBootstrapModalEventDelegation } from "../utils/helper";
 import { ModalList, AccordionList } from "../static";
 
 class Accordion {
     constructor() {
-        document.addEventListener("DOMContentLoaded", () => {
-            this.connectedCallback();
-        });
+        this.connectedCallback();
     }
 
     public render(): string {
@@ -27,7 +26,7 @@ class Accordion {
 
         const modalsHtml = ModalList.MODALS.map(modal => `
             <div id="${modal.id}" class="modal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content rounded-4 shadow-lg">
                         <div class="modal-header px-4 py-3">
                             <h5 class="modal-title">${modal.title}</h5>
@@ -50,17 +49,8 @@ class Accordion {
     }
 
     connectedCallback(): void {
-        // Event delegation for modal triggers
-        document.body.addEventListener("click", (event) => {
-            const target = event.target as HTMLElement;
-            if (target.classList.contains("modal-trigger") && target.dataset.modal) {
-                event.preventDefault();
-                const modalElement = document.getElementById(target.dataset.modal);
-                if (modalElement) {
-                    const modalInstance = new bootstrap.Modal(modalElement);
-                    modalInstance.show();
-                }
-            }
+        document.addEventListener("DOMContentLoaded", () => {
+            listenForBootstrapModalEventDelegation();
         });
     }
 }

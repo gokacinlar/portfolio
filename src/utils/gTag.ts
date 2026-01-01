@@ -1,4 +1,4 @@
-import Analytics, { AnalyticsInstance } from "analytics";
+import { Analytics, AnalyticsInstance } from "analytics";
 import googleAnalytics from "@analytics/google-analytics";
 
 class GoogleAnalytics {

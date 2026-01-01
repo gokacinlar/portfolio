@@ -1,6 +1,6 @@
 <?php
 namespace App\Security;
-require_once dirname(path: __FILE__) . "../../../vendor/autoload.php";
+require_once dirname(path: __FILE__) . "/../../../vendor/autoload.php";
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client;
@@ -11,6 +11,7 @@ class CaptchaVerifier
 {
     private string $buttonName;
     private string $secretKey;
+    private string $verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
     private Client $httpClient;
 
     public function __construct(string $secretKey, string $buttonName = "captcha_submit")
@@ -37,7 +38,7 @@ class CaptchaVerifier
 
         try {
             # query for siteverify with secret key
-            $verifyResponse = $this->httpClient->get(uri: "https://www.google.com/recaptcha/api/siteverify", options: [
+            $verifyResponse = $this->httpClient->get(uri: $this->verifyUrl, options: [
                 "query" => [
                     "secret" => $this->secretKey,
                     "response" => $recaptchaResponse

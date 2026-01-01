@@ -1,4 +1,4 @@
-import { validateEmail, generateNonce } from "../utils/helper";
+import { generateNonce, insertToastifiedMessage } from "../utils/helper";
 
 // Handle web3forms hCaptcha request
 export function loadWeb3Forms(): Promise<void> {
@@ -12,7 +12,7 @@ export function loadWeb3Forms(): Promise<void> {
         const ng = generateNonce();
 
         // Append the script to page
-        const script = document.createElement("script");
+        const script = document.createElement("script") as HTMLScriptElement;
         script.id = "web3forms-script";
         script.src = "https://web3forms.com/client/script.js";
         script.async = true;
@@ -21,7 +21,6 @@ export function loadWeb3Forms(): Promise<void> {
 
         script.onload = () => {
             resolve();
-            console.log("Web3Forms script loaded successfully. Ready to accept e-mails.");
         };
         script.onerror = () => {
             reject(new Error("Failed to load Web3Forms script"))
@@ -36,15 +35,17 @@ export function formState(): void {
     const form = document.getElementById("emailForm") as HTMLFormElement;
 
     if (form) {
-        form.addEventListener("submit", function (e) {
+        form.addEventListener("submit", function (e: SubmitEvent) {
             e.preventDefault();
             const formData = new FormData(form);
             const object: Object = Object.fromEntries(formData);
             const json: string = JSON.stringify(object);
+            const web3formsUrl: string = "https://api.web3forms.com/submit";
 
-            if (validateEmail(json) === true) {
-                fetch("https://api.web3forms.com/submit", {
+            try {
+                fetch(web3formsUrl, {
                     method: "POST",
+                    mode: "cors",
                     headers: {
                         "Content-Type": "application/json",
                         "Accept": "application/json"
@@ -53,9 +54,10 @@ export function formState(): void {
                 })
                     .then(async (response) => {
                         await response.json();
-                        if (response.status == 200) {
-                            console.log("Your e-mail has been sent.");
+                        if (response && response.status == 200) {
+                            insertToastifiedMessage("Your e-mail has been sent.");
                         } else {
+                            insertToastifiedMessage("Unable to send your e-mail.");
                             throw new Error("Something bad has happened: " + response);
                         }
                     })
@@ -65,6 +67,8 @@ export function formState(): void {
                     .then(function () {
                         form.reset();
                     });
+            } catch (error: unknown) {
+                throw new Error(`Unable to fetch ${web3formsUrl}:` + error);
             }
         });
     } else {

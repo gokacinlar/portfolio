@@ -1,19 +1,20 @@
+import Localize from "../utils/initLocalization";
 import { Template } from "../utils/helper";
 
 export class MaintenanceStatus extends HTMLElement {
     constructor() {
         super();
-
         new Template().createTemplate(MaintenanceStatus.render(), this);
     }
 
     connectedCallback(): void {
+        Localize.init();
         if (this.hasAttribute("maintenance")) {
             MaintenanceStatus.render();
         }
     }
 
-    private static readonly MESSAGE: string = "This site is currently in maintenance mode. Some functionality may not work.";
+    private static readonly MESSAGE: string = Localize.translate("common:maintenance:status");
     // Use the attribute "maintenance" to display status on top of header
     private static render(): string {
         return `

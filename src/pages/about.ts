@@ -90,13 +90,12 @@ class About extends HTMLElement {
     private readonly SocialsElements: SocialsElement[] = [
         { name: "GitHub", icon: "bi bi-github", href: new URL("https://github.com/gokacinlar") },
         { name: "X/Twitter", icon: "bi bi-twitter-x", href: new URL("https://x.com/devDissentNT") },
-        { name: "Mastodon", icon: "bi bi-mastodon", href: new URL("https://mastodon.social/@gokacinlar") },
         { name: "Hashnode", icon: "bi bi-book", href: new URL("https://gokacinlar.hashnode.dev/") },
         { name: "E-mail", icon: "bi bi-mailbox", href: new URL("mailto:gokacinlar@tutanota.com?subject=To%20Dervi%C5%9F ") }
     ]
 
     private render(): void {
-        const template = new Template().createTemplate(this.renderContent(), this);
+        new Template().createTemplate(this.renderContent(), this);
     }
 
     private initializeShuffleEffects(): void {
@@ -152,8 +151,6 @@ class About extends HTMLElement {
     }
 
     private renderHeroSection(): string {
-        // I should probably begin to use destructuring with interfaces on importing elements like these
-        // why didn't I define these as another web component is beyond me
         const { name, className, link, imageSrc, srcSet } = this.heroConfig;
         return `
             ${new HeroImageWithLink().render(name, className, link, imageSrc, srcSet)}
@@ -190,10 +187,10 @@ class About extends HTMLElement {
             <div class="d-flex flex-row flex-wrap align-items-start justify-content-evenly gap-1">
                 ${this.SocialsElements.map(({ name, icon, href }) => `
                     <div class="aside-socials mb-2 rounded-pill shadow-sm flex-grow-1">
-                        <a href="${href}" class="d-flex flex-row align-items-center gap-2 px-2 py-2 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" target="_blank" title="${name}">
+                        <a href="${href}" class="d-flex flex-row align-items-center gap-1 px-2 py-2 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" target="_blank" title="${name}">
                             <i class="${icon} fs-3 px-1 py-1"></i>
                             <p class="aside-social-text h6 fw-medium mb-0">${name}</p>
-                            <i class="bi bi-arrow-right fs-4"></i>
+                            <i class="bi bi-arrow-right fs-5 about-socials-arrow"></i>
                         </a>
                     </div>
                 `).join("")}

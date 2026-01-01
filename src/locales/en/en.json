@@ -1,4 +1,7 @@
 {
+    "maintenance": {
+        "status": "This site is currently in maintenance mode. Some functionality may not work."
+    },
     "upperNavigation": {
         "home": "Homepage",
         "updates": "Blog",

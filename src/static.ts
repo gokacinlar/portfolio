@@ -1,3 +1,5 @@
+import { formatDate } from "./utils/helper";
+import * as Type from "./types/types";
 import Localize from "./utils/initLocalization";
 
 interface Principle {
@@ -70,7 +72,7 @@ export class PromoParts {
         }
     ];
 
-    public principleImagePaths: Array<string> = [
+    public static readonly principleImagePaths: Array<string> = [
         "./assets/images/static/svg/TE_alphabet.svg",
         "./assets/images/static/svg/TE_book.svg",
         "./assets/images/static/svg/TE_booklet.svg",
@@ -80,6 +82,29 @@ export class PromoParts {
         "./assets/images/static/svg/TE_lang.svg",
         "./assets/images/static/svg/TE_quote.svg",
         "./assets/images/static/svg/TE_reception.svg"
+    ]
+
+    public static readonly promoItems = [
+        {
+            title: "Do you need assistance in learning English?",
+            description: `
+                    I can offer you P2P online teaching exprience with appropriate enrollments chosen by you. These include plans such as
+                    <strong>Supplementary English Course</strong>, <strong>Proficiency English Course</strong>, and <strong>Exam-Focused English
+                    Course</strong>. For more broad information, see the plans below!
+                `,
+            img: "../assets/images/static/webp/qualifications-main-english.webp",
+            link: new URL("https://dervisoksuzoglu.com.tr")
+        },
+        {
+            title: "Do you have a web project?",
+            description: `
+                    I can design, prototype and develop with on-demand considerations for a fully-functional web application using React as well as
+                    classical CMS approaches like WordPress or multi-page static content websites such as hobby sites, portfolios, blogs and many more!
+                    I also offer maintenance for your personal or business web solutions. For more broad information, see the plans below!
+                `,
+            img: "../assets/images/static/webp/qualifications-main-webdev.webp",
+            link: new URL("https://dervisoksuzoglu.com.tr")
+        }
     ]
 }
 
@@ -99,6 +124,42 @@ export class FooterLinks {
 }
 
 export class AboutData {
+    public static readonly navLinks: Type.NavLink[] = [
+        { id: "about-me", icon: "🧑", label: "About Me" },
+        { id: "education", icon: "📚", label: "Education" },
+        { id: "work", icon: "📠", label: "Work" },
+        { id: "stack", icon: "🚀", label: "Tech Stack & Tools" },
+        { id: "mailing", icon: "📧", label: "E-mail" },
+        { id: "advanced", icon: "🔎", label: "Advanced" },
+    ];
+
+    public static readonly educationRows: Type.TableRow[] = [
+        [
+            "Atatürk University",
+            "English Language Teaching",
+            "Bachelor's Degree",
+            `${formatDate(new Date(2019, 8))} - ${formatDate(new Date(2023, 6))}`,
+        ],
+        [
+            "Atatürk University",
+            "Computer Programming",
+            "Associate Degree",
+            `${formatDate(new Date(2023, 8))} - current`,
+        ],
+    ];
+
+    public static readonly stackRows: Type.TableRow[] = [
+        ["Front-end", "JavaScript (ES6+), TypeScript", "React, Redux, Next.js"],
+        ["Back-end", "PHP(7+), Node.js", "Express.js, Codeigniter"],
+        ["Styling", "Bootstrap (+derivatives), SASS, Tailwind CSS", "Shadcn & DaisyUI"],
+        ["Databases", "MySQL, PostgreSQL", "Supabase"],
+        ["DevOps", "Docker, Linux", "-"],
+        ["CMS", "Wordpress, Headless Wordpress", "Next.js"],
+        ["SSG", "Astro & Gatsby", "-"],
+        ["Testing", "Jest & Playwright", "-"],
+        ["Design & UX", "Figma, Adobe Illustrator & Adobe Photoshop", "-"],
+    ];
+
     public static readonly tableData = [
         {
             category: "Front-end",
@@ -146,9 +207,23 @@ export class AboutData {
             libraries: "-"
         }
     ];
+
+    public static readonly introduction = {
+        first: `
+            I'm highly interested in creating <mark>content-first</mark> websites as well as crafting stand-alone
+            <mark>web applications (SPAs)</mark> or <mark>multi-page</mark> static content where <em>speed</em> &amp;
+            <em>progressive enhancement</em> are critically important. I love building user interfaces with mainly
+            <strong>React.</strong>
+        `,
+        last: `
+            My primary field is teaching English in <mark>ESL (English as a Second Language)</mark> context. My main
+            focus is to maximize practical usage of English in almost every aspect related to casual or academical
+            way of interacting with the language.
+        `
+    }
 }
 
-interface ModalConfig {
+export interface ModalConfig {
     id: string;
     title: string;
     content: string;
@@ -167,45 +242,71 @@ export class ModalList {
             id: "gnuPgModal",
             title: "🧲 GnuPG Public Key",
             content: `
-            <div class="mt-2 fs-6 fw-medium bg-dark-subtle px-2 py-2">
-                <p>
-                    <code>
-                        -----BEGIN PGP PUBLIC KEY BLOCK-----<br>
-                        mDMEaIQ5/BYJKwYBBAHaRw8BAQdAkPugW/CL7j8YUNjNMfOu+Vzdbzqcy+ej7bgS<br>
-                        sA1YzA20K0RlcnZpxZ8gw5Zrc8O8em/En2x1IDxnb2thY2lubGFyQHlhYW5pLmNv<br>
-                        bT6ImQQTFgoAQRYhBJ/je/y0W1eL4i6+FUY7feypcQnrBQJohDn8AhsDBQkFpUsU<br>
-                        BQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEEY7feypcQnrbUYBAMd5oK3D<br>
-                        qi3Dd8WlaDyYU0gvWzeRYkz5LY60vJg7hnqGAP4yl1zQR4QSUF/Wb3nu1rhf2DY2<br>
-                        UfFDatM+C+dwx+CWDrg4BGiEOfwSCisGAQQBl1UBBQEBB0AqEb35sWJz4KgjMGQf<br>
-                        G/69rSzKDXQzc6Pd+OEXY4gtSwMBCAeIfgQYFgoAJhYhBJ/je/y0W1eL4i6+FUY7<br>
-                        feypcQnrBQJohDn8AhsMBQkFpUsUAAoJEEY7feypcQnrKooBANZf9FjNAEDupyXy<br>
-                        LvovedoNsJBqhWI2xoKJhAL8cJBxAQDNapwGCkPhCyhYSeN2GscmlXNh8BxAFR90<br>
-                        OV5PvJpMAQ==<br>
-                        =BuXQ<br>
-                        -----END PGP PUBLIC KEY BLOCK-----
-                    </code>
-                </p>
-            </div>
-        `
+                <div class="mt-2 fs-6 fw-medium bg-dark-subtle px-2 py-2">
+                    <p>
+                        <code>
+                            -----BEGIN PGP PUBLIC KEY BLOCK-----<br>
+                            mDMEaIQ5/BYJKwYBBAHaRw8BAQdAkPugW/CL7j8YUNjNMfOu+Vzdbzqcy+ej7bgS<br>
+                            sA1YzA20K0RlcnZpxZ8gw5Zrc8O8em/En2x1IDxnb2thY2lubGFyQHlhYW5pLmNv<br>
+                            bT6ImQQTFgoAQRYhBJ/je/y0W1eL4i6+FUY7feypcQnrBQJohDn8AhsDBQkFpUsU<br>
+                            BQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEEY7feypcQnrbUYBAMd5oK3D<br>
+                            qi3Dd8WlaDyYU0gvWzeRYkz5LY60vJg7hnqGAP4yl1zQR4QSUF/Wb3nu1rhf2DY2<br>
+                            UfFDatM+C+dwx+CWDrg4BGiEOfwSCisGAQQBl1UBBQEBB0AqEb35sWJz4KgjMGQf<br>
+                            G/69rSzKDXQzc6Pd+OEXY4gtSwMBCAeIfgQYFgoAJhYhBJ/je/y0W1eL4i6+FUY7<br>
+                            feypcQnrBQJohDn8AhsMBQkFpUsUAAoJEEY7feypcQnrKooBANZf9FjNAEDupyXy<br>
+                            LvovedoNsJBqhWI2xoKJhAL8cJBxAQDNapwGCkPhCyhYSeN2GscmlXNh8BxAFR90<br>
+                            OV5PvJpMAQ==<br>
+                            =BuXQ<br>
+                            -----END PGP PUBLIC KEY BLOCK-----
+                        </code>
+                    </p>
+                </div>
+            `
         },
         {
             id: "requestCVModal",
             title: "👔 See or Download My CV",
             content: `
-            <div class="mt-2 fs-6 fw-medium border border-1 border-secondary-subtl px-2 py-2 rounded-4">
-                <div class="alert alert-warning rounded-4" role="alert">
-                    <i class="bi bi-exclamation-diamond"></i> Please verify <strong>you're human</strong> before proceeding.
-                </div>
-                <div class="d-flex align-items-center justify-content-center">
-                    <div>
-                        <form id="captchaForm" action="./php/captcha_verify.php" method="post">
-                            <div class="g-recaptcha" data-sitekey="${ModalList.RECAPTCHA_SITE_KEY}"></div>
-                            <button id="submitCaptcha" class="btn btn-sm w-100 fw-bold fs-5" type="submit" name="captcha_submit">Confirm Action</button>
-                        </form>
+                <div class="mt-2 fs-6 fw-medium border border-1 border-secondary-subtl px-2 py-2 rounded-4">
+                    <div class="alert alert-warning rounded-4" role="alert">
+                        <i class="bi bi-exclamation-diamond"></i> Please verify <strong>you're human</strong> before proceeding.
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div>
+                            <form id="captchaForm">
+                                <div class="g-recaptcha" data-sitekey="${ModalList.RECAPTCHA_SITE_KEY}"></div>
+                                <button id="submitCaptcha" class="btn btn-sm w-100 fw-bold fs-5" type="submit" name="captcha_submit">Confirm Action</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `
+            `
+        },
+        {
+            id: "langSwitchModal",
+            title: "🎇 Change Language",
+            content: `
+                <div class="lang-switch-box rounded-5 bg-gradient p-0">
+                    <div class="d-flex flex-row align-items-center justify-content-center gap-2 w-100 rounded-pill p-1">
+                        <button class="btn btn-sm btn-secondary-subtle flex-grow-1 fs-5 fw-medium rounded-pill text-black d-flex p-0 gap-2 flex-row align-items-center justify-content-center">
+                            <component-lazy-image class="img-fluid"
+                                src="../assets/images/static/svg/flags/uk.svg"
+                                alt="British Flag"
+                                width="32"
+                                height="32">
+                            </component-lazy-image> English
+                        </button>
+                        <button class="btn btn-sm btn-secondary-subtle flex-grow-1 fs-5 fw-medium rounded-pill text-black d-flex p-0 gap-2 flex-row align-items-center justify-content-center">
+                            <component-lazy-image class="img-fluid"
+                                src="../assets/images/static/svg/flags/tr.svg"
+                                alt="Turkish Flag"
+                                width="32"
+                                height="32">
+                            </component-lazy-image> Türkçe
+                        </button>
+                    </div>
+                </div>
+            `
         }
     ];
 }
@@ -268,7 +369,7 @@ export class AccordionList {
                     <tbody>
                         <tr>
                             <th scope="row">Site Version</th>
-                            <td><code>1.1.0</code></td>
+                            <td><code>1.2.0</code></td>
                         </tr>
                         <tr>
                             <th scope="row">License</th>
@@ -285,5 +386,4 @@ export class AccordionList {
             `
         }
     ];
-
 }
