@@ -1040,6 +1040,17 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         width: var(--def-size);
         height: var(--def-size);
     }
+
+    /* Scroll to top button */
+
+    .scroll-to-top-div {
+        display: hidden;
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        cursor: pointer;
+        @include custom-bee-color();
+    }
 }
 
 @layer secondary {}

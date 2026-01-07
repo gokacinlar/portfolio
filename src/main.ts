@@ -22,6 +22,7 @@ import "./pages/blog";
 import "./pages/work.ts";
 // My Own Components
 import "./components/G_Maintenance";
+import "./components/M_ScrollToTopButton";
 
 class HomePage extends HTMLElement {
     constructor() {
