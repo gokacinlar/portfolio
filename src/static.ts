@@ -33,42 +33,42 @@ export class PromoParts {
     public readonly promoTabData: any = {
         PS: {
             iconData: "bi bi-stack",
-            desc: "I strive to implement solutions to various problems we encounter at anywhere extending from work to casual life."
+            desc: Localize.translate("common:desc:exp:PS")
         },
         PE: {
             iconData: "bi bi-suit-heart",
-            desc: "I try to keep up with the latest and greatest positive developments around the global and embrace them as a whole."
+            desc: Localize.translate("common:desc:exp:PE")
         },
         PL: {
             iconData: "bi bi-wrench-adjustable-circle",
-            desc: "I always try to fit the theory with the experienced reality thus creating a self-sustaining environment through reason."
+            desc: Localize.translate("common:desc:exp:PL")
         },
         RC: {
             iconData: "bi bi-rainbow",
-            desc: "When I encounter a real issue in my classroom or my computer, I search for applicable solution to deal with observed phenomenon."
+            desc: Localize.translate("common:desc:exp:RC")
         }
     }
 
     public readonly principles: Principle[] = [
         {
-            title: "Contextual immersion",
-            description: "I integrate real-world scenarios, like role-playing daily conversations or analyzing various texts depending on our topic in classroom, to make English relevant and engaging for students."
+            title: Localize.translate("common:principles:first:title"),
+            description: Localize.translate("common:principles:first:msg")
         },
         {
-            title: "Scaffolded autonomy",
-            description: "I design tasks that gradually increase in complexity, empowering students to take ownership of their learning, from crafting simple sentences to debating complex ideas."
+            title: Localize.translate("common:principles:second:title"),
+            description: Localize.translate("common:principles:second:msg")
         },
         {
-            title: "Error as opportunity",
-            description: "I encourage students to view mistakes as critical stepping stones, using targeted feedback to refine their language skills without fear of judgment."
+            title: Localize.translate("common:principles:third:title"),
+            description: Localize.translate("common:principles:third:msg")
         },
         {
-            title: "Multimodal engagement",
-            description: "I blend visual, auditory, and kinesthetic activities—like storytelling through comics or pronunciation through rhythm exercises—to cater to diverse learning styles."
+            title: Localize.translate("common:principles:fourth:title"),
+            description: Localize.translate("common:principles:fourth:msg")
         },
         {
-            title: "Cultural storytelling",
-            description: "I weave global and local narratives into lessons, helping students to connect English to their own identities while exploring new perspectives."
+            title: Localize.translate("common:principles:fifth:title"),
+            description: Localize.translate("common:principles:fifth:msg")
         }
     ];
 
@@ -86,22 +86,14 @@ export class PromoParts {
 
     public static readonly promoItems = [
         {
-            title: "Do you need assistance in learning English?",
-            description: `
-                    I can offer you P2P online teaching exprience with appropriate enrollments chosen by you. These include plans such as
-                    <strong>Supplementary English Course</strong>, <strong>Proficiency English Course</strong>, and <strong>Exam-Focused English
-                    Course</strong>. For more broad information, see the plans below!
-                `,
+            title: Localize.translate("common:work:section1:title"),
+            description: Localize.translate("common:work:section1:msg"),
             img: "../assets/images/static/webp/qualifications-main-english.webp",
             link: new URL("https://dervisoksuzoglu.com.tr")
         },
         {
-            title: "Do you have a web project?",
-            description: `
-                    I can design, prototype and develop with on-demand considerations for a fully-functional web application using React as well as
-                    classical CMS approaches like WordPress or multi-page static content websites such as hobby sites, portfolios, blogs and many more!
-                    I also offer maintenance for your personal or business web solutions. For more broad information, see the plans below!
-                `,
+            title: Localize.translate("common:work:section2:title"),
+            description: Localize.translate("common:work:section2:msg"),
             img: "../assets/images/static/webp/qualifications-main-webdev.webp",
             link: new URL("https://dervisoksuzoglu.com.tr")
         }
@@ -112,7 +104,6 @@ export class FooterLinks {
     public static readonly PERSONAL_LINKS = {
         github: "https://github.com/gokacinlar",
         xTwitter: "https://x.com/devDissentNT",
-        mastodon: "https://mastodon.social/@gokacinlar",
         hashnode: "https://gokacinlar.hashnode.dev",
         email: "mailto:gokacinlar@tutanota.com?subject=To%20Dervi%C5%9F"
     };
@@ -240,7 +231,7 @@ export class ModalList {
     public static readonly MODALS: ModalConfig[] = [
         {
             id: "gnuPgModal",
-            title: "🧲 GnuPG Public Key",
+            title: Localize.translate("common:modals:gpg"),
             content: `
                 <div class="mt-2 fs-6 fw-medium bg-dark-subtle px-2 py-2">
                     <p>
@@ -265,17 +256,17 @@ export class ModalList {
         },
         {
             id: "requestCVModal",
-            title: "👔 See or Download My CV",
+            title: Localize.translate("common:modals:cv:title"),
             content: `
                 <div class="mt-2 fs-6 fw-medium border border-1 border-secondary-subtl px-2 py-2 rounded-4">
                     <div class="alert alert-warning rounded-4" role="alert">
-                        <i class="bi bi-exclamation-diamond"></i> Please verify <strong>you're human</strong> before proceeding.
+                        <i class="bi bi-exclamation-diamond"></i> ${Localize.translate("common:modals:cv:msg")}
                     </div>
                     <div class="d-flex align-items-center justify-content-center">
                         <div>
                             <form id="captchaForm">
                                 <div class="g-recaptcha" data-sitekey="${ModalList.RECAPTCHA_SITE_KEY}"></div>
-                                <button id="submitCaptcha" class="btn btn-sm w-100 fw-bold fs-5" type="submit" name="captcha_submit">Confirm Action</button>
+                                <button id="submitCaptcha" class="btn btn-sm w-100 fw-bold fs-5" type="submit" name="captcha_submit">${Localize.translate("common:modals:cv:btnMsg")}</button>
                             </form>
                         </div>
                     </div>
@@ -284,7 +275,7 @@ export class ModalList {
         },
         {
             id: "langSwitchModal",
-            title: "🎇 Change Language",
+            title: Localize.translate("common:modals:lang"),
             content: `
                 <div class="lang-switch-box rounded-5 bg-gradient p-0">
                     <div class="d-flex flex-row align-items-center justify-content-center gap-2 w-100 rounded-pill p-1">

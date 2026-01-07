@@ -48,8 +48,7 @@ class ResponsiveNavbar {
 
     private static NAVBAR_HEADER_LINKS: ResponsiveNavBarElements[] = [
         { title: "GitHub", icon: "bi bi-github", href: "https://www.github.com/gokacinlar" },
-        { title: "X", icon: "bi bi-twitter-x", href: "https://www.x.com/devDissentNT" },
-        { title: "Mastodon", icon: "bi bi-mastodon", href: "https://mastodon.social/@devDissentNT" }
+        { title: "X", icon: "bi bi-twitter-x", href: "https://www.x.com/devDissentNT" }
     ];
 
     private renderNavbarHeaderContent(): string {

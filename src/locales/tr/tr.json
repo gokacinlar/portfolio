@@ -38,9 +38,84 @@
         "teach": "Hayat Boyu Öğretim",
         "code": "Tutku İçin Yazılım"
     },
+    "desc": {
+        "descTitle": "Kendimi Şöyle Biliyorum",
+        "titles": {
+            "PS": "Problem Çözücü",
+            "PE": "İlerici",
+            "PL": "Pratik",
+            "RC": "Gerçekçi"
+        },
+        "exp": {
+            "PS": "İş hayatından gündelik hayata kadar her alanda karşılaştığımız çeşitli sorunlara çözümler üretmeye çalışıyorum.",
+            "PE": "Küresel ölçekteki en son ve en olumlu gelişmeleri takip etmeye ve bunları bütünüyle benimsemeye çalışıyorum.",
+            "PL": "Teoriyi her zaman deneyimlenen gerçeklikle uyumlu hale getirmeye çalışırım ve böylece akıl yoluyla kendi kendini sürdürebilen bir ortam yaratırım.",
+            "RC": "Sınıfımda veya bilgisayarımda gerçek bir sorunla karşılaştığımda, gözlemlediğim olguyu ele almak için uygulanabilir çözümler ararım."
+        }
+    },
+    "skills": {
+        "title": "Şunlarda İyiyim"
+    },
+    "projects": {
+        "title": "Projelerimden Bazıları"
+    },
+    "teach": {
+        "title": "İngilizce Öğretmenliği?",
+        "desc": {
+            "subtitle": "Esas mesleğim <span class=\"mark rounded-4\">İngilizce Öğretmenliğidir!</span>",
+            "desc1": "Mezun olduktan itibaren çeşitli okullarda çalışıyorum. Öğrencilerim genellikle <u>ilkokuldan liseye kadar uzanıyor</u>. <strong>Neredeyse her bir yaştan öğrenciyle</strong> çalışma imkanım oldu...",
+            "approach": "Öğretim hakkında temel yaklaşımlarım ve prensiplerim şunlardır:"
+        }
+    },
+    "principles": {
+        "first": {
+            "title": "Bağlamsal Süreklilik",
+            "msg": "Öğrenciler için İngilizceyi anlamlı ve ilgi çekici hale getirmek için, günlük konuşmaları canlandırmak veya sınıfta işlediğimiz konuya bağlı olarak çeşitli metinleri analiz etmek gibi gerçek dünya senaryolarını entegre ediyorum."
+        },
+        "second": {
+            "title": "Yapılandırılmış Bağımsızlık",
+            "msg": "Öğrencilerin basit cümleler kurmaktan karmaşık fikirleri tartışmaya kadar kendi öğrenme süreçlerinin sorumluluğunu üstlenmelerini sağlayacak şekilde, karmaşıklığı kademeli olarak artan görevler tasarlıyorum."
+        },
+        "third": {
+            "title": "Fırsatlandırılmış Hatalar",
+            "msg": "Öğrencileri hataları kritik basamaklar olarak görmeye, hedefli geri bildirimleri yargılanma korkusu olmadan dil becerilerini geliştirmek için kullanmaya teşvik ediyorum."
+        },
+        "fourth": {
+            "title": "Çoklu Model Katılımı",
+            "msg": "Görsel, işitsel ve kinestetik etkinlikleri bir araya getirerek, çizgi romanlar aracılığıyla hikaye anlatımı veya ritim egzersizleri aracılığıyla telaffuz gibi farklı öğrenme stillerine hitap ediyorum."
+        },
+        "fifth": {
+            "title": "Kültürel Hikayelendirme",
+            "msg": "Derslerime küresel ve yerel anlatıları entegre ederek, öğrencilerin İngilizceyi kendi kimlikleriyle ilişkilendirmelerine ve yeni bakış açıları keşfetmelerine yardımcı oluyorum."
+        }
+    },
+    "quoteAboutEdu": {
+        "title": "Neye İnanıyorum?",
+        "msg": "Çocuklarımız <span class=\"wavy-text\">bizim yetiştirdiğimiz</span> insanların arasında <strong>yaşayacaklar...</strong>."
+    },
+    "work": {
+        "title": "Birlikte çalışmaya hazır mısın?",
+        "section1": {
+            "title": "Eğitimde desteğe mi ihtiyacınız var?",
+            "msg": "Size, sizin seçebileceğiniz uygun kayıtlarla P2P çevrimiçi öğretim deneyimi sunabilirim. Bunlar arasında canlı derslere, etütlere ve birebirlere ek olarak; <strong>Ek İngilizce Kursu</strong>, <strong>İngilizce Yeterlilik Kursu</strong> ve <strong>Sınav Odaklı İngilizce Kursu</strong> gibi planlar bulunmaktadır. Daha kapsamlı bilgi için aşağıdaki planlara bakın!"
+        },
+        "section2": {
+            "title": "Bir web projeniz mi var?",
+            "msg": "React kullanarak tam işlevli bir web uygulaması tasarlayabilir, prototipini oluşturabilir ve geliştirebilirim; ayrıca WordPress gibi klasik CMS yaklaşımlarını veya hobi siteleri, portföyler, bloglar ve daha birçok çok sayfalı statik içerikli web sitesini de tasarlayabilir, prototipini oluşturabilir ve geliştirebilirim! Kişisel veya işletme web çözümleriniz için bakım hizmeti de sunuyorum. Daha kapsamlı bilgi için aşağıdaki planlara göz atabilirsiniz!"
+        }
+    },
     "title": "İngilizce Öğretmeni & Ön-yüz Geliştiricisi",
     "description": {
         "part1": "x",
         "part2": "y"
+    },
+    "modals": {
+        "gpg": "🧲 GnuPG Public Key",
+        "cv": {
+            "title": "👔 CV'mi Görün ya da İndirin",
+            "msg": "Devam etmeden önce lütfen robot olmadığınızı onaylayın.",
+            "btnMsg": "İşlemi Onayla"
+        },
+        "lang": "🎇 Site Dilini Değiştir"
     }
 }

@@ -64,12 +64,11 @@ class FooterNodes {
     }
 
     private createPersonalLinks(): string {
-        const { github, xTwitter, mastodon } = FooterLinks.PERSONAL_LINKS;
+        const { github, xTwitter } = FooterLinks.PERSONAL_LINKS;
 
         const linkData = [
             { title: "GitHub", href: github, iconClass: "bi-github" },
             { title: "X (Twitter)", href: xTwitter, iconClass: "bi-twitter-x" },
-            { title: "Mastodon", href: mastodon, iconClass: "bi-mastodon" },
         ];
 
         return linkData.map(link => `

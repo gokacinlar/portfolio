@@ -5,6 +5,7 @@ import XHR from "i18next-http-backend";
 import EnNs1 from "./locales/en/en.json";
 // Turkish
 import TrNs1 from "./locales/tr/tr.json";
+import { insertToastifiedMessage } from "./utils/helper";
 
 export const defaultNS = "common";
 export const resources = {
@@ -77,7 +78,7 @@ class Localize {
                     return;
                 } else {
                     localStorage.setItem("i18nextLng", language);
-                    window.location.reload();
+                    window.location.reload(); // Refresh the site after language changes
                 }
             });
         } else {

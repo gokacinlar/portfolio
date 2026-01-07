@@ -38,9 +38,84 @@
         "teach": "Teaching for Life",
         "code": "Coding for Passion"
     },
+    "desc": {
+        "descTitle": "I describe myself as",
+        "titles": {
+            "PS": "Problem Solver",
+            "PE": "Progressive",
+            "PL": "Practical",
+            "RC": "Realistic"
+        },
+        "exp": {
+            "PS": "I strive to implement solutions to various problems we encounter at anywhere extending from work to casual life.",
+            "PE": "I try to keep up with the latest and greatest positive developments around the global and embrace them as a whole.",
+            "PL": "I always try to fit the theory with the experienced reality thus creating a self-sustaining environment through reason.",
+            "RC": "When I encounter a real issue in my classroom or my computer, I search for applicable solution to deal with observed phenomenon."
+        }
+    },
+    "skills": {
+        "title": "I'm Proficient In"
+    },
+    "projects": {
+        "title": "Some of My Projects"
+    },
+    "teach": {
+        "title": "Teaching English?",
+        "desc": {
+            "subtitle": "My main profession is being an <span class=\"mark rounded-4\">English Teacher!</span>",
+            "desc1": "I've been teaching mostly in private schools since I graduated with my BA degree. My students range from <u>elementary to high-school level</u>. I literally had the opportunity to <strong>teach students of all ages!</strong>",
+            "approach": "My primary focus and principles about teaching are:"
+        }
+    },
+    "principles": {
+        "first": {
+            "title": "Contextual immersion",
+            "msg": "I integrate real-world scenarios, like role-playing daily conversations or analyzing various texts depending on our topic in classroom, to make English relevant and engaging for students."
+        },
+        "second": {
+            "title": "Scaffolded autonomy",
+            "msg": "I design tasks that gradually increase in complexity, empowering students to take ownership of their learning, from crafting simple sentences to debating complex ideas."
+        },
+        "third": {
+            "title": "Error as opportunity",
+            "msg": "I encourage students to view mistakes as critical stepping stones, using targeted feedback to refine their language skills without fear of judgment."
+        },
+        "fourth": {
+            "title": "Multimodal engagement",
+            "msg": "I blend visual, auditory, and kinesthetic activities—like storytelling through comics or pronunciation through rhythm exercises—to cater to diverse learning styles."
+        },
+        "fifth": {
+            "title": "Cultural storytelling",
+            "msg": "I weave global and local narratives into lessons, helping students to connect English to their own identities while exploring new perspectives."
+        }
+    },
+    "quoteAboutEdu": {
+        "title": "What I believe in?",
+        "msg": "Our children will <span class=\"wavy-text\">live amongst</span> the very people <strong>we educate</strong>."
+    },
+    "work": {
+        "title": "Interested in working?",
+        "section1": {
+            "title": "Do you need assistance in learning English?",
+            "msg": "I can offer you P2P online teaching exprience with appropriate enrollments chosen by you. These include plans such as <strong>Supplementary English Course</strong>, <strong>Proficiency English Course</strong>, and <strong>Exam-Focused English Course</strong>. For more broad information, see the plans below!"
+        },
+        "section2": {
+            "title": "Do you have a web project?",
+            "msg": "I can design, prototype and develop with on-demand considerations for a fully-functional web application using React as well as classical CMS approaches like WordPress or multi-page static content websites such as hobby sites, portfolios, blogs and many more! I also offer maintenance for your personal or business web solutions. For more broad information, see the plans below!"
+        }
+    },
     "title": "İngilizce Öğretmeni & Ön-yüz Geliştiricisi",
     "description": {
         "part1": "x",
         "part2": "y"
+    },
+    "modals": {
+        "gpg": "🧲 GnuPG Public Key",
+        "cv": {
+            "title": "👔 See or Download My CV",
+            "msg": "Please verify <strong>you're human</strong> before proceeding.",
+            "btnMsg": "Confirm Action"
+        },
+        "lang": "🎇 Change Site Language"
     }
 }

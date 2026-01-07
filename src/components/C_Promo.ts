@@ -1,3 +1,4 @@
+import Localize from "../utils/initLocalization";
 import * as Type from "../types/types";
 import { PromoParts } from "../static";
 
@@ -6,7 +7,7 @@ export class PromoTitle {
 
     public render(): string {
         return `
-            <div class="promo-title-container text-center w-100 py-2">
+            <div class="promo-title-container text-center w-100 py-2 mb-3">
                 <h3 class="promo-title display-4 mb-0 fw-bolder pe-none">
                     ${this.titleText}
                 </h3>
@@ -26,16 +27,16 @@ export class PromoDescription {
             <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
                 <ul class="promo-featured-tabs list-unstyled d-flex flex-column gap-4 align-items-baseline">
                     <li>
-                        ${this.renderTabGroupBtn("Problem Solver", "PS")}
+                        ${this.renderTabGroupBtn(Localize.translate("common:desc:titles:PS"), "PS")}
                     </li>
                     <li>
-                        ${this.renderTabGroupBtn("Progressive", "PE")}
+                        ${this.renderTabGroupBtn(Localize.translate("common:desc:titles:PE"), "PE")}
                     </li>
                     <li>
-                        ${this.renderTabGroupBtn("Practical", "PL")}
+                        ${this.renderTabGroupBtn(Localize.translate("common:desc:titles:PL"), "PL")}
                     </li>
                     <li>
-                        ${this.renderTabGroupBtn("Realistic", "RC")}
+                        ${this.renderTabGroupBtn(Localize.translate("common:desc:titles:RC"), "RC")}
                     </li>
                 </ul>
             </div>
@@ -106,17 +107,11 @@ export class PromoTeachEnglish {
         return `
             <div class="col-sm">
                 <div class="pt-head">
-                    <p class="h1">My main profession is being an
-                        <span class="mark rounded-4">English Teacher!</span></p>
+                    <p class="h1">${Localize.translate("common:teach:desc:subtitle")}</p>
                     <hr class="w-25">
-                    <p class="h3 fs-3 lead fw-medium">
-                        I've been teaching mostly in private schools since I graduated with my BA degree. My students range from
-                        <u>elementary to high-school level</u>. I literally had the opportunity to <strong>teach students of all ages!</strong>
-                    </p>
+                    <p class="h3 fs-3 lead fw-medium">${Localize.translate("common:teach:desc:desc1")}</p>
                     <hr class="w-25">
-                    <p class="h3 fs-3 lead fw-medium">
-                        My primary focus and principles about teaching are:
-                    </p>
+                    <p class="h3 fs-3 lead fw-medium">${Localize.translate("common:teach:desc:approach")}</p>
                 </div>
                 <div>
                     <ul class="list-group list-group-numbered list-group-flush fs-5 fw-medium">
@@ -160,7 +155,7 @@ export class PromoMotto {
                     <i class="promo-motto-quote-icon bi bi-quote"></i>
                 </div>
                 <div>
-                    <h3 class="display-3 fw-medium">Our children will <span class="wavy-text">live amongst</span> the very people <strong>we educate</strong>.</h3>
+                    <h3 class="display-3 fw-medium">${Localize.translate("common:quoteAboutEdu:msg")}</h3>
                 </div>
             </div>
         `;

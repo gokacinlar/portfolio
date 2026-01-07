@@ -67,7 +67,7 @@ class PromoTemplate {
                     </div>
                     <div class="promo-projects-container-parent">
                         <div class="mb-4">
-                            ${new PromoTitle("Some of my projects are")}
+                            ${new PromoTitle(Localize.translate("common:projects:title"))}
                         </div>
                         <div class="promo-projects-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center overflow-hidden">
                             ${this.promoProjectCards()}
@@ -89,7 +89,7 @@ class PromoTemplate {
 
     private promoSkills(): string {
         return `
-            ${new PromoTitle("I'm proficient in")}
+            ${new PromoTitle(Localize.translate("common:skills:title"))}
         `;
     }
 
@@ -110,14 +110,14 @@ class PromoTemplate {
 
     private promoDesc(): string {
         return `
-            ${new PromoTitle("I describe myself as")}
+            ${new PromoTitle(Localize.translate("common:desc:descTitle"))}
             <div id="promo_Description" class="container-fluid w-100 d-flex flex-row overflow-hidden">${new PromoDescription().renderPromoDesc()}</div>
         `;
     }
 
     private promoEngTeach(): string {
         return `
-            ${new PromoTitle("Teaching English?")}
+            ${new PromoTitle(Localize.translate("common:teach:title"))}
             <div id="promoTE" class="container-fluid w-100 px-4 py-4 my-4 d-flex flex-row gap-2">
                 ${new PromoTeachEnglish().render()}
             </div>
@@ -126,7 +126,7 @@ class PromoTemplate {
 
     private promoMotto(): string {
         return `
-            ${new PromoTitle("What I believe in?")}
+            ${new PromoTitle(Localize.translate("common:quoteAboutEdu:title"))}
             <div class="promo-motto-base w-100">
                 ${new PromoMotto().render()}
             </div>
@@ -135,7 +135,7 @@ class PromoTemplate {
 
     private promoWork(): string {
         return `
-            ${new PromoTitle("Interested in working?")}
+            ${new PromoTitle(Localize.translate("common:work:title"))}
             <div id="promoWork">
                 ${new PromoInterested().render()}
             </div>
