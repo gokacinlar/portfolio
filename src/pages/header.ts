@@ -1,4 +1,5 @@
 import Localize from "../utils/initLocalization";
+import changeLanguageViaI18n from "../i18n";
 import * as Type from "../types/types";
 import { Template, DarkLightMode, renderModal, listenForBootstrapModalEventDelegation } from "../utils/helper";
 import { HtmxControls } from "../components/M_htmx";
@@ -169,9 +170,15 @@ export class HeaderNode {
         `;
     }
 
+    private initDynamicLanguageSwitcher() {
+        new changeLanguageViaI18n().changeLanguageViaI18n("changeLngToTr", "tr");
+        new changeLanguageViaI18n().changeLanguageViaI18n("changeLngToEn", "en");
+    }
+
     connectedCallback(): void {
         document.addEventListener("DOMContentLoaded", () => {
             listenForBootstrapModalEventDelegation();
+            this.initDynamicLanguageSwitcher();
         });
     }
 }
