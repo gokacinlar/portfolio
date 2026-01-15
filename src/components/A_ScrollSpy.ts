@@ -1,4 +1,3 @@
-import { validateEmail } from "../utils/helper";
 import { loadWeb3Forms, formState } from "../utils/form";
 import { AboutData } from "../static";
 import { renderEmailForm } from "./A_EmailForm";
@@ -101,14 +100,14 @@ class ScrollSpy {
         `;
     }
 
-    connectedCallback(): void {
-        // Email input validator
-        document.addEventListener("DOMContentLoaded", () => {
-            validateEmail(".email-validate");
-            formState();
-            loadWeb3Forms();
-        });
+    private static initWeb3Forms() {
+        setTimeout(() => {
+            loadWeb3Forms().then(() => {
+                formState();
+            });
+        }, 0);
 
+        // Email validation
         document.querySelectorAll<HTMLFormElement>(".needs-validation").forEach((form) => {
             form.addEventListener("submit", (event) => {
                 if (!form.checkValidity()) {
@@ -118,6 +117,10 @@ class ScrollSpy {
                 form.classList.add("was-validated");
             });
         });
+    }
+
+    connectedCallback(): void {
+        ScrollSpy.initWeb3Forms();
     }
 }
 

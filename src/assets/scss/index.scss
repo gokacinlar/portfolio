@@ -1051,6 +1051,10 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         cursor: pointer;
         @include custom-bee-color();
     }
+
+    #submitCaptcha {
+        @include custom-bee-color();
+    }
 }
 
 @layer secondary {}

@@ -263,10 +263,10 @@ export class ModalList {
                         <i class="bi bi-exclamation-diamond"></i> ${Localize.translate("common:modals:cv:msg")}
                     </div>
                     <div class="d-flex align-items-center justify-content-center">
-                        <div>
-                            <form id="captchaForm">
+                        <div class="w-100">
+                            <form id="captchaForm" class="d-flex flex-column align-items-center justify-content-center gap-2">
                                 <div class="g-recaptcha" data-sitekey="${ModalList.RECAPTCHA_SITE_KEY}"></div>
-                                <button id="submitCaptcha" class="btn btn-sm w-100 fw-bold fs-5" type="button">
+                                <button id="submitCaptcha" class="btn btn-sm w-100 fw-medium fs-5 rounded-pill" type="button">
                                     ${Localize.translate("common:modals:cv:btnMsg")}
                                 </button>
                             </form>
