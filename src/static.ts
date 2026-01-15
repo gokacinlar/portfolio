@@ -266,7 +266,9 @@ export class ModalList {
                         <div>
                             <form id="captchaForm">
                                 <div class="g-recaptcha" data-sitekey="${ModalList.RECAPTCHA_SITE_KEY}"></div>
-                                <button id="submitCaptcha" class="btn btn-sm w-100 fw-bold fs-5" type="submit" name="captcha_submit">${Localize.translate("common:modals:cv:btnMsg")}</button>
+                                <button id="submitCaptcha" class="btn btn-sm w-100 fw-bold fs-5" type="button">
+                                    ${Localize.translate("common:modals:cv:btnMsg")}
+                                </button>
                             </form>
                         </div>
                     </div>
