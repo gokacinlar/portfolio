@@ -11,14 +11,9 @@ class LazyImage extends HTMLElement {
         const alt = this.getAttribute("alt");
         const width = this.getAttribute("width");
         const height = this.getAttribute("height");
-
-        if (!src) {
-            console.warn("No image source provided");
-            return;
-        }
-
         const imgElement = document.createElement("img") as HTMLImageElement;
-        imgElement.src = src;
+
+        imgElement.src = src || "";
         imgElement.alt = alt || "Unknown";
         imgElement.title = alt || "Unknown";
         imgElement.loading = "lazy";
