@@ -534,8 +534,6 @@ export function insertApprovedScript({ scriptItself, target, attributes = {} }: 
         // Generate nonce for each creation
         const nonceGenerated = generateNonce();
         element.nonce = nonceGenerated;
-
-        element.crossOrigin = "anonymous"; // for CORS related, mostly unnecessary
         target.appendChild(element);
         return element;
     } catch (error: unknown) {
