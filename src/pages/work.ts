@@ -1,11 +1,9 @@
 import { Template } from "../utils/helper";
-import ValidateCaptcha from "../utils/validate_captcha";
 
 class WorkPage extends HTMLElement {
     constructor() {
         super();
-
-        const template = new Template().createTemplate(this.render(), this);
+        new Template().createTemplate(this.render(), this);
     }
 
     private render(): string {
@@ -54,21 +52,6 @@ class WorkPage extends HTMLElement {
                 <div class="tab-pane fade" id="programmingOptions" role="tabpanel" aria-labelledby="forProgramming">Coming soon...</div>
             </div>
         `;
-    }
-
-    private static watchCaptcha() {
-        const captchaForm = document.querySelector("form") as HTMLFormElement;
-        if (captchaForm) {
-            try {
-                new ValidateCaptcha("submitCaptcha");
-            } catch (error: unknown) {
-                throw new Error("Unable to submit captcha:" + error);
-            }
-        }
-    }
-
-    connectedCallback(): void {
-        WorkPage.watchCaptcha();
     }
 }
 

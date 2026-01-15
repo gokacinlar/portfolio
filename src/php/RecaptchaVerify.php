@@ -1,6 +1,6 @@
 <?php
 namespace App\Security;
-require_once dirname(path: __FILE__) . "/../../../vendor/autoload.php";
+require_once dirname(path: __FILE__) . "../../../vendor/autoload.php";
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client;
@@ -38,8 +38,8 @@ class CaptchaVerifier
 
         try {
             # query for siteverify with secret key
-            $verifyResponse = $this->httpClient->get(uri: $this->verifyUrl, options: [
-                "query" => [
+            $verifyResponse = $this->httpClient->post(uri: $this->verifyUrl, options: [
+                "form_params" => [
                     "secret" => $this->secretKey,
                     "response" => $recaptchaResponse
                 ]
@@ -73,16 +73,15 @@ class FormProcessor
         $dotenv = Dotenv::createImmutable(paths: __DIR__ . "/../../");
         $dotenv->load();
         # Load secret key from environment variable
-        $secret_key = $_ENV["RECAPTCHA_SECRET_KEY"];
-        echo $secret_key;
+        $secret_key = $_ENV["RECAPTCHA_SECRET"];
         try {
             if (!isset($secret_key)) {
                 throw new InvalidArgumentException(message: "RECAPTCHA_SECRET_KEY is not set in the environment.");
             } else {
-                $this->captchaVerifier = new CaptchaVerifier(secretKey: $_ENV["RECAPTCHA_SECRET_KEY"]);
+                $this->captchaVerifier = new CaptchaVerifier(secretKey: $_ENV["RECAPTCHA_SECRET"]);
             }
         } catch (Exception $error) {
-            throw new Exception(message: "Unable to verify captcha" + $error->getMessage());
+            throw new Exception(message: "Unable to verify captcha: " . $error->getMessage());
         }
     }
 

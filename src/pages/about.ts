@@ -1,4 +1,5 @@
 import shuffleLetters from "shuffle-letters";
+import ValidateCaptcha from "../utils/validate_captcha";
 import { Template, HorizontalMiddleMouseScroll, insertApprovedScript } from "../utils/helper";
 import { HeroImageWithLink } from "../components/C_Hero";
 import ScrollSpy from "../components/A_ScrollSpy";
@@ -205,6 +206,12 @@ class About extends HTMLElement {
                 <p><em>Teaching for <strong>life</strong>, coding for <strong>passion</strong>.</em></p>
             </blockquote>
         `;
+    }
+
+    connectedCallback(): void {
+        document.addEventListener("DOMContentLoaded", () => {
+            new ValidateCaptcha().validate("submitCaptcha");
+        });
     }
 }
 
