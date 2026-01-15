@@ -37,7 +37,8 @@ const scripts = [
     "https://web3forms.com/client/script.js",
     "https://api.web3forms.com/submit",
     "https://*.googletagmanager.com",
-    "https://www.google.com/recaptcha/api.js"
+    "https://www.google.com/recaptcha/",
+    "https://www.gstatic.com/recaptcha/"
 ];
 
 const imageConnections = [
@@ -100,6 +101,7 @@ module.exports = {
     mode: "development", // Later change this to "production" for final result
     devtool: "source-map", // Later remove for production since we won"t be needing eval() in prod
     devServer: {
+        headers: { "Access-Control-Allow-Origin": "*" },
         static: {
             directory: path.join(__dirname, "public"),
         },
@@ -239,7 +241,13 @@ module.exports = {
                 "style-src": ["'self'"],
                 "img-src": ["'self'", "data:", ...imageConnections],
                 "font-src": ["'self'"],
-                "connect-src": ["'self'", process.env.GRAPHQL_URL, "https://www.google-analytics.com", "https://www.google.com/recaptcha/api.js"],
+                "connect-src": [
+                    "'self'",
+                    "https://www.google-analytics.com",
+                    "https://www.google.com/recaptcha/",
+                    "https://www.gstatic.com/recaptcha/"
+                ],
+                "frame-src": ["https://www.google.com/recaptcha/"]
             },
             {
                 enabled: true,
