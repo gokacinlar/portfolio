@@ -147,6 +147,10 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     -moz-box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
 }
 
+@mixin glowing-white-drop-shadow() {
+    filter: drop-shadow(0px 6px 46px #f0ebf0);
+}
+
 // Reset
 * {
     margin: 0;
@@ -1055,6 +1059,11 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     #submitCaptcha {
         @include custom-bee-color();
     }
+
+    .glow-white-drop-shadow {
+        @include glowing-white-drop-shadow();
+    }
+
 }
 
 @layer secondary {}

@@ -1,16 +1,21 @@
 import { loadWeb3Forms, formState } from "../utils/form";
+import { addBackgroundBasedOnVerticalScroll } from "../utils/helper";
 import { AboutData } from "../static";
 import { renderEmailForm } from "./A_EmailForm";
 import Accordion from "./A_Accordion";
 import * as Type from "../types/types";
 
 class ScrollSpy {
-    constructor() { }
+    constructor() {
+        document.addEventListener("DOMContentLoaded", () => {
+            addBackgroundBasedOnVerticalScroll("about-main", "about-scroll-spy-id", "glow-white-drop-shadow");
+        });
+    }
 
     // Scrollspy list items
     private renderNavLinks() {
         return AboutData.navLinks.map(({ id, icon, label }) =>
-            `<a class="list-group-item list-group-item-action rounded-pill shadow-sm focus-ring focus-ring-secondary text-center" href="#${id}">${icon} ${label}</a>`
+            `<a class="list-group-item list-group-item-action rounded-pill shadow-sm text-center" href="#${id}">${icon} ${label}</a>`
         ).join("");
     }
 
@@ -33,14 +38,14 @@ class ScrollSpy {
 
     public render(): string {
         return `
-            <section id="aside-content" class="d-flex flex-column gap-4">
-                <div id="about-scroll-spy-id" class="z-0 sticky-top scrollspy-nav list-group d-flex flex-row align-items-center justify-content-between fs-4 fw-medium gap-2 text-truncate">
+            <section id="aside-content" class="aside-main d-flex flex-column gap-4">
+                <div id="about-scroll-spy-id" class="z-1 sticky-top scrollspy-nav list-group d-flex flex-row align-items-center justify-content-between fs-4 fw-medium gap-2 text-truncate rounded-pill">
                     ${this.renderNavLinks()}
                 </div>
-                <div data-bs-spy="scroll" data-bs-target="#about-scroll-spy-id" data-bs-offset="40" data-bs-smooth-scroll="true" class="scrollspy-content" tabindex="0">
+                <div class="scrollspy-content" data-bs-spy="scroll" data-bs-target="#about-scroll-spy-id" data-bs-offset="40" data-bs-smooth-scroll="true" tabindex="0">
                     <div>
                         <div>
-                            <h4 id="about-me">🧑 About Me</h4>
+                            <h4 id="aboutMe">🧑 About Me</h4>
                             <hr class="w-25">
                         </div>
                         <div>

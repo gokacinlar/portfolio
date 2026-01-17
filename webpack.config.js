@@ -117,7 +117,15 @@ module.exports = {
         port: 1234,
         host: "0.0.0.0",
         hot: true,
-        watchFiles: ["src/**/*"] // For constant changes
+        watchFiles: ["src/**/*"], // For constant changes
+        proxy: [
+            {
+                "/php": {
+                    target: 'http://localhost:3000',
+                    changeOrigin: true
+                }
+            }
+        ]
     },
     watchOptions: {
         poll: 1000, // Every 1s check for changes automatically

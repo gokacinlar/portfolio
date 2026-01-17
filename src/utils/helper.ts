@@ -682,3 +682,27 @@ export function listenForBootstrapModalEventDelegation() {
         }
     });
 }
+
+export function addBackgroundBasedOnVerticalScroll(mainElement: string, target: string, className: string): () => void {
+    const mainHtmlElement = document.getElementById(mainElement) as HTMLElement;
+    const targetHtmlElement = document.getElementById(target) as HTMLElement;
+
+    if (!mainHtmlElement && !targetHtmlElement) {
+        console.warn(`Elements with id "${mainHtmlElement} and ${targetHtmlElement}" not found`);
+        return () => { };
+    }
+
+    const handleScroll = () => {
+        if (mainHtmlElement.scrollTop > 15) {
+            targetHtmlElement.classList.add(className);;
+        } else if (mainHtmlElement.scrollTop <= 15) {
+            targetHtmlElement.classList.remove(className);
+        }
+    };
+
+    mainHtmlElement.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    // Return a clean state after all
+    return () => mainHtmlElement.removeEventListener("scroll", handleScroll);
+}

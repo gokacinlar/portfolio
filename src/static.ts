@@ -116,7 +116,7 @@ export class FooterLinks {
 
 export class AboutData {
     public static readonly navLinks: Type.NavLink[] = [
-        { id: "about-me", icon: "🧑", label: "About Me" },
+        { id: "aboutMe", icon: "🧑", label: "About Me" },
         { id: "education", icon: "📚", label: "Education" },
         { id: "work", icon: "📠", label: "Work" },
         { id: "stack", icon: "🚀", label: "Tech Stack & Tools" },
