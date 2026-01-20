@@ -8,14 +8,16 @@ class LazyImage extends HTMLElement {
 
     private render(): void {
         const src = this.getAttribute("src");
+        const srcset = this.getAttribute("srcset");
         const alt = this.getAttribute("alt");
         const width = this.getAttribute("width");
         const height = this.getAttribute("height");
         const imgElement = document.createElement("img") as HTMLImageElement;
 
         imgElement.src = src || "";
-        imgElement.alt = alt || "Unknown";
-        imgElement.title = alt || "Unknown";
+        imgElement.srcset = srcset || "";
+        imgElement.alt = alt || "Lazy Image";
+        imgElement.title = alt || "Lazy Image";
         imgElement.loading = "lazy";
         imgElement.decoding = "async";
 
@@ -29,9 +31,8 @@ class LazyImage extends HTMLElement {
     }
 
     static get observedAttributes(): string[] {
-        return ["src", "alt", "width", "height", "loading"];
+        return ["src", "srcset", "alt", "width", "height", "loading"];
     }
-
 
     get src(): string | null {
         return this.getAttribute("src");

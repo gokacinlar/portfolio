@@ -8,6 +8,7 @@ const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const Dotenv = require("dotenv-webpack");
 
@@ -117,15 +118,7 @@ module.exports = {
         port: 1234,
         host: "0.0.0.0",
         hot: true,
-        watchFiles: ["src/**/*"], // For constant changes
-        proxy: [
-            {
-                "/php": {
-                    target: 'http://localhost:3000',
-                    changeOrigin: true
-                }
-            }
-        ]
+        watchFiles: ["src/**/*"] // For constant changes
     },
     watchOptions: {
         poll: 1000, // Every 1s check for changes automatically
@@ -165,6 +158,7 @@ module.exports = {
     },
     plugins: [
         // new BundleAnalyzerPlugin(),
+        new ESLintPlugin(),
         new webpack.DefinePlugin(definePluginEntries),
         new NodePolyfillPlugin(),
         new Dotenv({

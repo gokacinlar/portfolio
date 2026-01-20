@@ -31,16 +31,25 @@ class ResponsiveNavbar {
     public render(): string {
         return `
             <div id="responsiveNavbar" class="position-relative" data-type="closed">
-                <nav id="headerRM" class="rounded-5 mt-2 shadow" >
-                    <div class="border-1 border-secondary-subtle border-bottom py-2 px-2 d-flex flex-row align-items-center justify-content-between">
-                        ${new HeaderNode().headerLeftIcon()}
-                        <div class="d-flex flex-row align-items-center justify-content-center px-2 gap-3">
-                            ${this.renderNavbarHeaderContent()}
+                <nav id="headerRM" class="rounded-5 mt-2 shadow-lg d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="border-1 border-secondary-subtle border-bottom py-2 px-2 d-flex flex-row align-items-center justify-content-between">
+                            <div>
+                                ${new HeaderNode().headerLeftIcon()}
+                            </div>
+                            <div class="d-flex flex-row align-items-center justify-content-center px-2 gap-3">
+                                ${this.renderNavbarHeaderContent()}
+                            </div>
                         </div>
+                        <ul class="list-unstyled mb-0 d-flex flex-column align-items-center gap-1 bg-gradient p-2">
+                            ${HeaderNode.headerMiddleContent()}
+                        </ul>
                     </div>
-                    <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-column align-items-center gap-1 bg-gradient p-2">
-                        ${HeaderNode.headerMiddleContent()}
-                    </ul>
+                    <div class="mt-4 mb-2">
+                        <blockquote class="blockquote text-center text-secondary">
+                            <p><em>Teaching for <strong>life</strong>, coding for <strong>passion</strong>.</em></p>
+                        </blockquote>
+                    </div>
                 </nav>
             </div>
         `;

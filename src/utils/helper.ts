@@ -1,11 +1,9 @@
 import "toastify-js/src/toastify.css"
 import DOMPurify from "dompurify";
-import * as bootstrap from "bootstrap";
-window.bootstrap = bootstrap;
 import ScrollReveal from "scrollreveal";
 import isEmail from "validator/lib/isEmail";
 import Toastify from "toastify-js";
-import { HeroParts, WhiteListedURLs, ModalConfig } from "../static";
+import { HeroParts, WhiteListedURLs } from "../static";
 
 // Detecting dark/light mode
 export class DarkLightMode {
@@ -220,7 +218,7 @@ export class DomEvents {
         for (let i in content) {
             let p = document.createElement("p") as HTMLParagraphElement;
             p.textContent = content[i];
-            p.classList.add("motto-element", "p-3", "fs-6", "fw-bolder", "rounded-5", "pe-none", "shadow-sm", "mb-0")
+            p.className = "motto-element p-3 fs-6 fw-bolder rounded-5 pe-none shadow-sm mb-0"
             // Use promise-resolve to sequentially place the array items into dom
             await new Promise<void>((resolve) => {
                 setTimeout(() => {
@@ -330,11 +328,38 @@ export class PromoFunctions {
 
     public bindVerticalTabEventsAndautoCycleTabs(data: any): void {
         const buttons = Array.from(document.querySelectorAll(".promo-desc-tab-group-btn")) as HTMLButtonElement[];
-        if (!buttons.length) return;
+        if (!buttons.length) {
+            return;
+        }
 
         let index: number = 0;
         let duration: number = 5000;
         let activeInterval: ReturnType<typeof setInterval> | null = null;
+
+        // Mobile & viewport detection
+        const isMobile = () => window.innerWidth <= 768;
+        const isElementInViewport = (el: HTMLElement): boolean => {
+            const rect = el.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            return rect.top < windowHeight && rect.bottom > 0;
+        };
+
+        // Helper function to scroll active tab into view (mobile + visible only)
+        const scrollToActiveTab = (activeButton: HTMLButtonElement) => {
+            if (!isMobile()) {
+                return;
+            }
+
+            if (!isElementInViewport(activeButton)) {
+                return;
+            }
+
+            activeButton.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+                inline: "center"
+            });
+        };
 
         const clearAllProgressBars = () => {
             buttons.forEach(btn => {
@@ -351,7 +376,7 @@ export class PromoFunctions {
             }
         };
 
-        const startProgressForButton = (button: HTMLElement) => {
+        const startProgressForButton = (button: HTMLButtonElement) => {
             clearAllProgressBars();
 
             const progressBar = button.querySelector(".progress-bar") as HTMLDivElement;
@@ -371,12 +396,14 @@ export class PromoFunctions {
                     clearInterval(activeInterval!);
                     activeInterval = null;
 
-                    // Go to next
+                    // Go to next tab
                     index = (index + 1) % buttons.length;
                     const nextButton = buttons[index];
                     const type = nextButton.getAttribute("data-type");
+
                     if (type) {
                         this.createVerticalTabContent(type, data);
+                        scrollToActiveTab(nextButton);
                     }
                     startProgressForButton(nextButton);
                 }
@@ -391,15 +418,19 @@ export class PromoFunctions {
                 if (type) {
                     this.createVerticalTabContent(type, data);
                     startProgressForButton(btn);
+                    scrollToActiveTab(btn);
                 }
             });
         });
 
-        // Auto-start from the first
-        const initialType = buttons[index].getAttribute("data-type");
-        if (initialType) {
-            this.createVerticalTabContent(initialType, data);
-            startProgressForButton(buttons[index]);
+        // Auto-start from the first tab
+        if (buttons.length > 0) {
+            const initialType = buttons[index].getAttribute("data-type");
+            if (initialType) {
+                this.createVerticalTabContent(initialType, data);
+                scrollToActiveTab(buttons[index]);
+                startProgressForButton(buttons[index]);
+            }
         }
     }
 }
@@ -636,51 +667,6 @@ export function insertImageSvg(imgPath: string, alt: string, options: { onError?
 
         return null;
     }
-}
-
-export function renderModal(modalSource: ModalConfig[]) {
-    const modalsHtml = modalSource.map(modal => `
-        <div id="${modal.id}" class="modal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content rounded-4 shadow-lg">
-                    <div class="modal-header px-4 py-3">
-                        <h5 class="modal-title">${modal.title}</h5>
-                        <button type="button" class="btn-close border border-1 border-secondary-subtle rounded-pill" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body rounded-5">
-                        ${modal.content}
-                    </div>
-                </div>
-            </div>
-        </div>
-    `).join("");
-
-    return `
-        ${modalsHtml}
-    `;
-}
-
-export function listenForBootstrapModalEventDelegation() {
-    document.body.addEventListener("click", (event: Event) => {
-        const target = event.target as HTMLElement;
-        const modalTrigger = target.closest(".modal-trigger") as HTMLElement;
-
-        if (modalTrigger && modalTrigger.dataset.modal) {
-            event.preventDefault();
-            const modalElement = document.getElementById(modalTrigger.dataset.modal);
-
-            if (modalElement) {
-                const modalInstance = new bootstrap.Modal(modalElement, {
-                    keyboard: true,
-                    backdrop: false,
-                });
-
-                modalInstance.show();
-                // Manually remove backdrop
-                document.body.removeAttribute("style");
-            }
-        }
-    });
 }
 
 export function addBackgroundBasedOnVerticalScroll(mainElement: string, target: string, className: string): () => void {

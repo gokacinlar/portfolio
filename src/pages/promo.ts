@@ -21,6 +21,7 @@ class Promo extends HTMLElement {
         // Create vertical tab grouping showcase
         promoFunctions.bindVerticalTabEventsAndautoCycleTabs(new PromoParts().promoTabData);
         new HorizontalMiddleMouseScroll().hmmsScroll(".promo-featured-tabs");
+        new HorizontalMiddleMouseScroll().hmmsScroll(".promo-card-container");
         // Dyanmic scroll revealing
         const dynamicContentDivs: Array<string> =
             ["promo-videos-container",
@@ -96,7 +97,7 @@ class PromoTemplate {
     private promoProjectCards(): string {
         return `
             <div class="promo-scrollable">
-                <div id="promoCardContainer" class="d-flex flex-wrap gap-3 justify-content-center"></div>
+                <div id="promoCardContainer" class="promo-card-container d-flex flex-wrap gap-3 justify-content-center"></div>
             </div>
         `;
     }

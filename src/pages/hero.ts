@@ -26,7 +26,7 @@ class HeroTemplate {
     public hero(): string {
         return `
             <section class="mx-2 my-2 px-2 py-2">
-                <div id="hero" class="container mx-0 my-0 rounded-5 mw-100 bg-gradient shadow-sm py-5">
+                <div id="hero" class="container mx-0 my-0 rounded-5 mw-100 bg-gradient shadow-sm py-5 d-flex flex-column justify-content-between">
                     <div class="row align-items-center justify-content-evenly hero-child px-4">
                         <section class="col-12 col-md-6 d-flex flex-column align-items-start gap-4 ocps-container mb-4 mb-md-0">
                             <div class="hero-title-container">
@@ -38,8 +38,9 @@ class HeroTemplate {
                                     <span class="ocps-written-text"></span><span class="cursor">|</span>
                                 </h1>
                             </div>
-                            <div class="ocps-buttons d-flex flex-row align-items-center gap-2">
-                                ${HeaderNode.headerHireBtn()}
+                            <div class="ocps-buttons d-flex flex-row align-items-center gap-2 w-100">
+                                <component-header-hire-btn class="w-100">
+                                </component-header-hire-btn>
                                 ${this.heroDownloadCVButton()}
                             </div>
                         </section>
@@ -62,7 +63,7 @@ class HeroTemplate {
 
     private heroDownloadCVButton(): string {
         return `
-            <button id="hrGetCvBtn" type="button" class="hero-btn text-truncate hero-get-cv-btn bg-gradient btn btn-lg fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
+            <button id="hrGetCvBtn" type="button" class="hero-btn text-truncate hero-get-cv-btn bg-gradient btn btn-lg fs-4 w-100 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
                 rounded-5 shadow-sm" title="${Localize.translate("common:hero:buttonTitles:downloadCV")}">
                 <i class="bi bi-paperclip"></i>
                 <span class="hr-btn-text">${Localize.translate("common:hero:buttons:cv")}</span>

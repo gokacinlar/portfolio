@@ -67,7 +67,7 @@ class Updates extends HTMLElement {
 
     private offCanvas(): string {
         return `
-            <div class="offcanvas offcanvas-start rounded-end-4 w-75" tabindex="-1" id="blogAsideOffcanvasTemplate" aria-labelledby="blogAsideOffcanvas" data-bs-scroll="true" data-bs-backdrop="true">
+            <div class="offcanvas offcanvas-start rounded-end-4" tabindex="-1" id="blogAsideOffcanvasTemplate" aria-labelledby="blogAsideOffcanvas" data-bs-scroll="true" data-bs-backdrop="true">
                 <div class="offcanvas-header bg-secondary-subtle rounded-end-4">
                     <h5 class="offcanvas-title" id="blogAsideOffcanvas">Latest updates</h5>
                     <button id="dismissOffcanvasBtn" type="button" class="btn btn-sm btn-close fs-5 fw-bold" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -379,7 +379,6 @@ class Updates extends HTMLElement {
 
     async connectedCallback() {
         await this.fetchAndPopulatePosts();
-
         // Check if there"s a post in the URL and load it
         await this.loadPostFromUrl();
 

@@ -1,7 +1,8 @@
 import Localize from "../utils/initLocalization";
 import changeLanguageViaI18n from "../i18n";
 import * as Type from "../types/types";
-import { Template, DarkLightMode, renderModal, listenForBootstrapModalEventDelegation } from "../utils/helper";
+import { Template, DarkLightMode } from "../utils/helper";
+import { listenForBootstrapModalEventDelegation, renderModal } from "../utils/bootstrap";
 import { HtmxControls } from "../components/M_htmx";
 import ResponsiveNavbar from "../components/responsive/R_navbar";
 import LazyImage from "../components/M_image";
@@ -136,7 +137,7 @@ export class HeaderNode {
 
     public static headerHireBtn(): string {
         return `
-            <a id="hrBtn" type="button" class="header-btn-bg-important bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-2"
+            <a id="hrBtn" type="button" class="header-btn-bg-important bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-2"
                 title="${this.primaryBtn.title}" href="${this.primaryBtn.href}"
                 ${new HtmxControls(this.primaryBtn.htmxOptions ?? this.defaultHtmxOptions).render()}>
                 <i class="${this.primaryBtn.icon}"></i>

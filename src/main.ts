@@ -3,8 +3,7 @@ import "./assets/scss/index.scss";
 import "./assets/scss/globals.scss";
 // CSS Framework & Framework-related
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 // Libraries
 import "lazysizes";
@@ -23,6 +22,7 @@ import "./pages/work.ts";
 // My Own Components
 import "./components/G_Maintenance";
 import "./components/M_ScrollToTopButton";
+import "./components/M_Hero";
 
 class HomePage extends HTMLElement {
     constructor() {

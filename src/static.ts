@@ -362,7 +362,7 @@ export class AccordionList {
                     <tbody>
                         <tr>
                             <th scope="row">Site Version</th>
-                            <td><code>1.2.0</code></td>
+                            <td><code>1.2.1</code></td>
                         </tr>
                         <tr>
                             <th scope="row">License</th>

@@ -1,6 +1,4 @@
-import * as bootstrap from "bootstrap";
-window.bootstrap = bootstrap;
-import { listenForBootstrapModalEventDelegation } from "../utils/helper";
+import { listenForBootstrapModalEventDelegation } from "../utils/bootstrap";
 import { ModalList, AccordionList } from "../static";
 
 class Accordion {

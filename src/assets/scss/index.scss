@@ -195,10 +195,6 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         @include custom-bee-color();
     }
 
-    .header-btn-bg-important>span {
-        @include hide-on($mobile-breakpoints);
-    }
-
     .hr-btn-text {
         @include hover-underline(#1F1F24);
         @include transition(all .35s ease-in-out);
@@ -234,8 +230,10 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
             animation: tilt-in-right-1 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
         }
 
-        &>ul {
+        &>div>ul {
             margin: .20rem !important;
+            height: fit-content !important;
+            @include responsive-styling($all-mobile-tablet-breakpoints, width, calc(100dvw - 2rem));
 
             >li {
                 padding: .25rem !important;
@@ -271,6 +269,12 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         @include responsive-styling($all-mobile-tablet-breakpoints, margin, 1rem);
     }
 
+    .header-right {
+        &>#hrBtn>.hr-btn-text {
+            display: none !important;
+        }
+    }
+
     #hrBtn,
     #hrDayNightBtn,
     #responsiveMenuToggleBtn,
@@ -282,7 +286,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         position: sticky;
         top: 10px;
         height: 30%;
-        z-index: 999;
+        z-index: 1;
     }
 
     .header-logo {
@@ -345,19 +349,10 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     .hero-child {
         @include responsive-flex-direction($all-mobile-tablet-breakpoints, column-reverse);
         @include responsive-flex-direction($desktop-breakpoints, row);
+        @include responsive-styling($all-mobile-tablet-breakpoints, padding, .75em);
 
         @each $bp in $all-mobile-tablet-breakpoints {
             @include m_queries.responsive($bp) {
-                padding: .75em !important;
-
-                #hero {
-                    min-height: fit-content !important;
-                }
-
-                #heroLogoBg {
-                    background-position: center;
-                }
-
                 .hero-logo {
                     --logo-mw: 256px;
                     width: var(--logo-mw);
@@ -393,6 +388,10 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     .ocps-buttons {
         @include responsive-styling($all-mobile-tablet-breakpoints, flex-direction, column);
         @include responsive-styling($all-mobile-tablet-breakpoints, width, 100%);
+        @include responsive-styling($desktop-breakpoints, padding-left, 2rem);
+        @include responsive-styling($desktop-breakpoints, padding-right, 2rem);
+        @include responsive-styling($desktop-small-breakpoints, padding-left, .25rem);
+        @include responsive-styling($desktop-small-breakpoints, padding-right, .25rem);
     }
 
     .hero-btn {
@@ -400,6 +399,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     #heroLogoBg {
+        @include responsive-styling($all-mobile-tablet-breakpoints, background-position, center);
         @include borderRadius(var(--rounded-big));
         background-image: radial-gradient(var(--clr-five) 10%, transparent 10%);
         background-position: 5px 8px;
@@ -414,6 +414,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     .motto-element {
+        @include responsive-styling($mobile-breakpoints, flex-grow, 1);
         color: var(--clr-one);
         background: var(--clr-two);
         animation: fade-in-fwd 0.55s cubic-bezier(.25, .46, .45, .94) both;
@@ -540,6 +541,8 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         @include responsive-flex-direction($mobile-breakpoints, row);
         @include responsive-styling($mobile-breakpoints, flex-wrap, nowrap);
         @include responsive-styling($mobile-breakpoints, justify-content, start);
+        @include responsive-styling($mobile-breakpoints, overflow-x, scroll);
+        @include responsive-styling($mobile-breakpoints, scrollbar-width, none);
         @include responsive-styling($tablet-breakpoints, flex-wrap, wrap);
 
         &>div {
@@ -901,7 +904,7 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     }
 
     #blogMain {
-        @include responsive-styling($mobile-breakpoints, height, 85dvh);
+        @include responsive-styling($mobile-breakpoints, height, 70dvh);
     }
 
     #blogMain,
@@ -1036,7 +1039,11 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
         @include responsive-styling($all-mobile-tablet-breakpoints, display, flex);
         @include responsive-styling($desktop-small-breakpoints, display, none);
         @include responsive-styling($desktop-breakpoints, display, none);
+    }
 
+    #blogAsideOffcanvasTemplate {
+        @include responsive-styling($all-mobile-tablet-breakpoints, width, 80%);
+        @include responsive-styling($all-mobile-tablet-breakpoints, z-index, 999);
     }
 
     #displayOffCanvasBtn {
