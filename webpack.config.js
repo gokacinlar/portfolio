@@ -102,7 +102,6 @@ module.exports = {
     mode: "development", // Later change this to "production" for final result
     devtool: "source-map", // Later remove for production since we won"t be needing eval() in prod
     devServer: {
-        headers: { "Access-Control-Allow-Origin": "*" },
         static: {
             directory: path.join(__dirname, "public"),
         },
@@ -247,7 +246,8 @@ module.exports = {
                     "'self'",
                     "https://www.google-analytics.com",
                     "https://www.google.com/recaptcha/",
-                    "https://www.gstatic.com/recaptcha/"
+                    "https://www.gstatic.com/recaptcha/",
+                    "https://api.github.com/repos/gokacinlar/"
                 ],
                 "frame-src": ["https://www.google.com/recaptcha/"]
             },
