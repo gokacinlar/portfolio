@@ -39,7 +39,7 @@ class ScrollSpy {
     public render(): string {
         return `
             <section id="aside-content" class="aside-main d-flex flex-column gap-4">
-                <div id="about-scroll-spy-id" class="z-1 sticky-top scrollspy-nav list-group d-flex flex-row align-items-center justify-content-between fs-4 fw-medium gap-2 text-truncate rounded-pill">
+                <div id="about-scroll-spy-id" class="z-0 sticky-top scrollspy-nav list-group d-flex flex-row align-items-center justify-content-between fs-4 fw-medium gap-2 text-truncate rounded-pill">
                     ${this.renderNavLinks()}
                 </div>
                 <div class="scrollspy-content" data-bs-spy="scroll" data-bs-target="#about-scroll-spy-id" data-bs-offset="40" data-bs-smooth-scroll="true" tabindex="0">

@@ -1043,7 +1043,6 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 
     #blogAsideOffcanvasTemplate {
         @include responsive-styling($all-mobile-tablet-breakpoints, width, 80%);
-        @include responsive-styling($all-mobile-tablet-breakpoints, z-index, 999);
     }
 
     #displayOffCanvasBtn {

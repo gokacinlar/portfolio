@@ -20,7 +20,7 @@ class Accordion {
         `).join("");
 
         const modalsHtml = ModalList.MODALS.map(modal => `
-            <div id="${modal.id}" class="modal" tabindex="-1">
+            <div id="${modal.id}" class="modal fade" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content rounded-4 shadow-lg">
                         <div class="modal-header px-4 py-3">
