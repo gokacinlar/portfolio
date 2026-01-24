@@ -35,7 +35,7 @@ class ResponsiveNavbar {
                     <div>
                         <div class="border-1 border-secondary-subtle border-bottom py-2 px-2 d-flex flex-row align-items-center justify-content-between">
                             <div>
-                                ${new HeaderNode().headerLeftIcon()}
+                                ${HeaderNode.headerLeftIcon()}
                             </div>
                             <div class="d-flex flex-row align-items-center justify-content-center px-2 gap-3">
                                 ${this.renderNavbarHeaderContent()}

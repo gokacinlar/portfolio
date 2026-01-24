@@ -170,11 +170,9 @@ interface InterestedOptions {
 }
 
 export class PromoInterested {
-    private options: InterestedOptions[];
     private data: InterestedOptions[];
 
     constructor() {
-        this.options = [];
         this.data = [];
         this.setData(PromoParts.promoItems);
     }
@@ -191,7 +189,7 @@ export class PromoInterested {
         `;
     }
 
-    private renderTabs(data: InterestedOptions[] = this.options): string {
+    private renderTabs(data: InterestedOptions[] = this.data): string {
         return data.map((item) => {
             return `
                 <section class="container-fluid p-4">

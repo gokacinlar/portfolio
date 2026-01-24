@@ -2,20 +2,21 @@ import Localize from "../utils/initLocalization";
 import { Template } from "../utils/helper";
 
 export class MaintenanceStatus extends HTMLElement {
+    private static MESSAGE: string;
+
     constructor() {
         super();
+        MaintenanceStatus.MESSAGE = Localize.translate("common:maintenance:status");
         new Template().createTemplate(MaintenanceStatus.render(), this);
     }
 
     connectedCallback(): void {
-        Localize.init();
         if (this.hasAttribute("maintenance")) {
-            MaintenanceStatus.render();
+            this.innerHTML = "";
+            new Template().createTemplate(MaintenanceStatus.render(), this);
         }
     }
 
-    private static readonly MESSAGE: string = Localize.translate("common:maintenance:status");
-    // Use the attribute "maintenance" to display status on top of header
     private static render(): string {
         return `
             <div class="alert alert-warning d-block w-100 px-3 py-3 text-center fs-5 border-0 border-bottom rounded-0" role="alert">
@@ -31,11 +32,11 @@ export class MaintenanceStatus extends HTMLElement {
 
     attributeChangedCallback(name: string): void {
         if (name === "maintenance") {
-            MaintenanceStatus.render();
+            this.innerHTML = "";
+            new Template().createTemplate(MaintenanceStatus.render(), this);
         }
     }
 
-    // Special method to observe our element's attribute "maintenance"
     static get observedAttributes(): Array<string> {
         return ["maintenance"];
     }

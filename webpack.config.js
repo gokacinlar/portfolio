@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-const dotenv = require("dotenv");
+// Removed dotenv require as dotenv-webpack handles it
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -12,14 +12,12 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const Dotenv = require("dotenv-webpack");
 
-// Load .env
-dotenv.config();
+// Load .env - Removed manual dotenv.config() as Dotenv plugin handles it.
 const envKeys = ["GTAG", "WEB3_FORM_ACCESS_KEY", "RECAPTCHA", "RECAPTCHA_SECRET_KEY"];
 const definePluginEntries = {};
 
-envKeys.forEach((key) => {
-    definePluginEntries[`process.env.${key}`] = JSON.stringify(process.env[key]);
-});
+// Removed manual definePluginEntries as Dotenv plugin handles injecting process.env variables.
+// If specific variables need to be explicitly defined for other reasons, this part might be re-evaluated.
 
 // For static page"s script linking
 const htmlPageNames = ["about.html", "updates.html", "404.html", "work.html"];
@@ -28,7 +26,7 @@ const multipleHtmlPlugins = htmlPageNames.map(name => {
         template: path.resolve(__dirname, `./src/pages/static/${name}`),
         filename: `${name}`,
         inject: "body",
-        minify: false,
+        minify: false, // Keep false for development, set to true for production build
         chunks: ["main"]
     })
 });
@@ -96,7 +94,7 @@ module.exports = {
         chunkFilename: "js/[name].[contenthash].chunk.js",
         path: path.resolve(__dirname, "public"),
         clean: {
-            keep: "public/index.html",
+            keep: "public/index.html", // This will keep the initial index.html if it exists, but HtmlWebpackPlugin will overwrite it.
         },
     },
     mode: "development", // Later change this to "production" for final result
@@ -158,7 +156,7 @@ module.exports = {
     plugins: [
         // new BundleAnalyzerPlugin(),
         new ESLintPlugin(),
-        new webpack.DefinePlugin(definePluginEntries),
+        // Removed webpack.DefinePlugin(definePluginEntries) as Dotenv plugin handles it.
         new NodePolyfillPlugin(),
         new Dotenv({
             path: "./.env",
@@ -167,7 +165,7 @@ module.exports = {
             systemvars: true,
             silent: false,
             defaults: false,
-            prefix: "import.meta.env.",
+            // prefix: "import.meta.env.", // Removed prefix as process.env is used directly in the code
             override: true
         }),
         new CopyPlugin({
@@ -203,11 +201,11 @@ module.exports = {
             }
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "public/index.html"),
-            inject: "body",
-            minify: false,
+            // Fixed template conflict: only one template property should be used.
             template: "./src/index.html",
             filename: "./index.html",
+            inject: "body",
+            minify: false, // Keep false for development, set to true for production build
             meta: {
                 description: { name: "description", content: "Derviş Öksüzoğlu: İngilizce Öğretmeni & Front-end Web Geliştiricisi; Pedagoji, Teknoloji, Bilim ve Sanat | Eğitimin teknoloji ile buluştuğu yer." },
                 keywords: { name: "keywords", content: "derviş, öksüzoğlu, derviş öksüzoğlu, blog, portfolyo, ingilizce öğretmeni, english teacher, web geliştiricisi, front-end web developer" },

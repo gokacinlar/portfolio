@@ -5,23 +5,26 @@ import { Template, TypeWriterDisplay, DomEvents } from "../utils/helper";
 import { BodyParts, HeroParts } from "../static";
 
 class HeroSection extends HTMLElement {
+    private bodyParts: BodyParts;
     constructor() {
         super();
-        Localize.init();
+        this.bodyParts = new BodyParts();
         new Template().createTemplate(new HeroTemplate().hero(), this);
     }
 
     connectedCallback(): void {
-        new TypeWriterDisplay(new HeroParts, "ocps");
-        new HeroTemplate().connectedCallback();
+        new TypeWriterDisplay(new HeroParts(), "ocps");
+        const domEvents = new DomEvents();
+        const mottosElement = this.querySelector("#mottosSection") as HTMLDivElement;
+        const mottos = this.bodyParts.mottos;
+        if (mottosElement) {
+            domEvents.appendContent(mottosElement, mottos);
+        }
     }
 }
 
 class HeroTemplate {
-    private bodyParts: BodyParts;
-    constructor() {
-        this.bodyParts = new BodyParts();
-    }
+    constructor() { }
 
     public hero(): string {
         return `
@@ -69,15 +72,6 @@ class HeroTemplate {
                 <span class="hr-btn-text">${Localize.translate("common:hero:buttons:cv")}</span>
             </button>
         `;
-    }
-
-    connectedCallback(): void {
-        const domEvents = new DomEvents();
-        document.addEventListener("DOMContentLoaded", () => {
-            const mottosElement = document.querySelector("#mottosSection") as HTMLDivElement;
-            const mottos = this.bodyParts.mottos;
-            domEvents.appendContent(mottosElement, mottos);
-        });
     }
 }
 

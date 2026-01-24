@@ -21,11 +21,13 @@ interface PostPreview {
 }
 
 class Updates extends HTMLElement {
+    private popstateListener: ((event: PopStateEvent) => Promise<void>) | null = null;
+
     constructor() {
         super();
 
         new Template().createTemplate(this.render(), this);
-        this.connectedCallback();
+        // connectedCallback will be called by the browser when the element is added to the DOM
     }
 
     private render(): string {
@@ -382,12 +384,21 @@ class Updates extends HTMLElement {
         // Check if there"s a post in the URL and load it
         await this.loadPostFromUrl();
 
-        // Listen for browser back/forward navigation
-        window.addEventListener("popstate", async (event) => {
+        // Store the listener function to be able to remove it later
+        this.popstateListener = async (event) => {
             if (event.state?.postId) {
                 await this.loadPostFromUrl();
             }
-        });
+        };
+        window.addEventListener("popstate", this.popstateListener);
+    }
+
+    disconnectedCallback(): void {
+        // Remove the popstate listener when the component is disconnected
+        if (this.popstateListener) {
+            window.removeEventListener("popstate", this.popstateListener);
+            this.popstateListener = null;
+        }
     }
 }
 

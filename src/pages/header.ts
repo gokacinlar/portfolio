@@ -1,25 +1,27 @@
 import Localize from "../utils/initLocalization";
-import changeLanguageViaI18n from "../i18n";
 import * as Type from "../types/types";
 import { Template, DarkLightMode } from "../utils/helper";
-import { listenForBootstrapModalEventDelegation, renderModal } from "../utils/bootstrap";
+import { renderModal } from "../utils/bootstrap";
 import { HtmxControls } from "../components/M_htmx";
 import ResponsiveNavbar from "../components/responsive/R_navbar";
-import LazyImage from "../components/M_image";
 import { ModalList } from "../static";
+
+let darkLightModeInstance: DarkLightMode | null = null;
 
 class Header extends HTMLElement {
     constructor() {
         super();
-        Localize.init();
         new Template().createTemplate(new HeaderNode().headerItself(), this);
     }
 
     connectedCallback(): void {
         const dayNightModeSwitchingBtn = this.querySelector("#hrDayNightBtn") as HTMLButtonElement;
-        new DarkLightMode().dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
+        if (!darkLightModeInstance) {
+            darkLightModeInstance = new DarkLightMode();
+        }
+        darkLightModeInstance.dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
         new ResponsiveNavbar().connectedCallback();
-        new LazyImage().connectedCallback();
+        new HeaderNode().initDynamicLanguageSwitcher();
     }
 }
 
@@ -31,9 +33,7 @@ interface NavLink {
 }
 
 export class HeaderNode {
-    constructor() {
-        this.connectedCallback();
-    };
+    constructor() { };
     private static readonly SITE_URL: string = "https://dervisoksuzoglu.com.tr";
 
     public headerItself(): string {
@@ -41,7 +41,7 @@ export class HeaderNode {
             <nav class="m-1 px-2 py-2">
                 <ul class="list-unstyled mb-0 d-flex flex-row align-items-center justify-content-between position-relative">
                     <li class="d-inline-flex header-left">
-                        ${this.headerLeftIcon()}
+                        ${HeaderNode.headerLeftIcon()}
                     </li>
                     <li class="position-absolute top-50 start-50 translate-middle">
                         ${HeaderNode.headerMiddle()}
@@ -55,7 +55,7 @@ export class HeaderNode {
         `;
     }
 
-    public headerLeftIcon(): string {
+    public static headerLeftIcon(): string {
         return `
             <a href="${HeaderNode.SITE_URL}">
                 <img
@@ -84,7 +84,6 @@ export class HeaderNode {
         `;
     }
 
-    // All the HTMX attributes will go here
     private static readonly defaultHtmxOptions: Type.HTMXOptions = {
         hxget: "",
         hxtrigger: "click",
@@ -171,15 +170,10 @@ export class HeaderNode {
         `;
     }
 
-    private initDynamicLanguageSwitcher() {
-        new changeLanguageViaI18n().changeLanguageViaI18n("changeLngToTr", "tr");
-        new changeLanguageViaI18n().changeLanguageViaI18n("changeLngToEn", "en");
-    }
-
-    connectedCallback(): void {
+    public initDynamicLanguageSwitcher() {
         document.addEventListener("DOMContentLoaded", () => {
-            listenForBootstrapModalEventDelegation();
-            this.initDynamicLanguageSwitcher();
+            Localize.changeLanguageViaI18n("changeLngToTr", "tr");
+            Localize.changeLanguageViaI18n("changeLngToEn", "en");
         });
     }
 }

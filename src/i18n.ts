@@ -5,7 +5,6 @@ import XHR from "i18next-http-backend";
 import EnNs1 from "./locales/en/en.json";
 // Turkish
 import TrNs1 from "./locales/tr/tr.json";
-import { insertToastifiedMessage } from "./utils/helper";
 
 export const defaultNS = "common";
 export const resources = {
@@ -64,15 +63,22 @@ class Localize {
         return i18next.t(key);
     }
 
-    public changeLanguageViaI18n(button: string, language: "en" | "tr") {
+    // Made static and refactored to avoid duplicate event listeners if called multiple times.
+    public static changeLanguageViaI18n(buttonId: string, language: "en" | "tr") {
         if (!["en", "tr"].includes(language)) {
             console.error(`Language ${language} is not supported.`);
             return;
         }
 
-        const targetBtn = document.getElementById(button) as HTMLButtonElement;
+        const targetBtn = document.getElementById(buttonId) as HTMLButtonElement;
         if (targetBtn) {
-            targetBtn.addEventListener("click", () => {
+            // Remove existing listener to prevent duplicates if this function is called multiple times
+            const oldListener = (targetBtn as any)._languageChangeListener;
+            if (oldListener) {
+                targetBtn.removeEventListener("click", oldListener);
+            }
+
+            const newListener = () => {
                 if (i18next.language === language) {
                     console.log("Language is already set to target language:", language);
                     return;
@@ -80,9 +86,11 @@ class Localize {
                     localStorage.setItem("i18nextLng", language);
                     window.location.reload(); // Refresh the site after language changes
                 }
-            });
+            };
+            targetBtn.addEventListener("click", newListener);
+            (targetBtn as any)._languageChangeListener = newListener;
         } else {
-            console.error(`Button ${button} does not exist.`);
+            console.error(`Button ${buttonId} does not exist.`);
             return;
         }
     }

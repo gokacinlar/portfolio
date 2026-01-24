@@ -1,5 +1,8 @@
 import { ModalConfig } from "../static";
-import { Modal } from "bootstrap";
+// Removed direct import of Modal from 'bootstrap' to rely on global window.bootstrap
+// import { Modal } from "bootstrap"; 
+
+let delegatedModalClickListener: ((event: Event) => void) | null = null;
 
 export function renderModal(modalSource: ModalConfig[]) {
     const modalsHtml = modalSource.map(modal => `
@@ -23,8 +26,14 @@ export function renderModal(modalSource: ModalConfig[]) {
     `;
 }
 
-export function listenForBootstrapModalEventDelegation() {
-    document.body.addEventListener("click", (event: Event) => {
+// This function now ensures the listener is added only once and returns a cleanup function.
+export function listenForBootstrapModalEventDelegation(): () => void {
+    if (delegatedModalClickListener) {
+        // Listener already exists, return a no-op cleanup
+        return () => {};
+    }
+
+    delegatedModalClickListener = (event: Event) => {
         const target = event.target as HTMLElement;
         const modalTrigger = target.closest(".modal-trigger") as HTMLElement;
 
@@ -33,15 +42,35 @@ export function listenForBootstrapModalEventDelegation() {
             const modalElement = document.getElementById(modalTrigger.dataset.modal);
 
             if (modalElement) {
-                const modalInstance = new Modal(modalElement, {
-                    keyboard: true,
-                    backdrop: false,
-                });
+                // Debugging: Check if window.bootstrap and Modal are available
+                console.log("Attempting to open modal:", modalTrigger.dataset.modal);
+                console.log("window.bootstrap:", window.bootstrap);
+                console.log("window.bootstrap.Modal:", window.bootstrap.Modal);
 
-                modalInstance.show();
-                // Manually remove backdrop
-                document.body.removeAttribute("style");
+                if (window.bootstrap && window.bootstrap.Modal) {
+                    const modalInstance = new (window.bootstrap.Modal)(modalElement, {
+                        keyboard: true,
+                        backdrop: false,
+                    });
+                    modalInstance.show();
+                    // Manually remove backdrop
+                    document.body.removeAttribute("style");
+                } else {
+                    console.error("Bootstrap Modal class not found on window.bootstrap. Modals cannot be opened.");
+                }
+            } else {
+                console.error(`Modal element with ID "${modalTrigger.dataset.modal}" not found in the DOM.`);
             }
         }
-    });
+    };
+
+    document.body.addEventListener("click", delegatedModalClickListener);
+
+    // Return a cleanup function
+    return () => {
+        if (delegatedModalClickListener) {
+            document.body.removeEventListener("click", delegatedModalClickListener);
+            delegatedModalClickListener = null;
+        }
+    };
 }

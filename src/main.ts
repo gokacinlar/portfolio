@@ -11,6 +11,7 @@ import "lazysizes";
 import { DarkLightMode } from "./utils/helper";
 import GoogleAnalytics from "./utils/gTag";
 import EffectiveCaching from "./utils/cache";
+import { listenForBootstrapModalEventDelegation } from "./utils/bootstrap";
 // Pages
 import "./pages/header";
 import "./pages/footer";
@@ -24,15 +25,37 @@ import "./components/G_Maintenance";
 import "./components/M_ScrollToTopButton";
 import "./components/M_Hero";
 
+let darkLightModeInstance: DarkLightMode | null = null;
+let cleanupModalDelegation: (() => void) | null = null;
+
 class HomePage extends HTMLElement {
     constructor() {
         super();
     };
 
     connectedCallback(): void {
-        new DarkLightMode();
+        if (!darkLightModeInstance) {
+            darkLightModeInstance = new DarkLightMode();
+        }
         new GoogleAnalytics().trackPage();
         new EffectiveCaching().ensureCache();
+
+        // Ensure modal delegation listener is set up only once globally
+        if (!cleanupModalDelegation) {
+            cleanupModalDelegation = listenForBootstrapModalEventDelegation();
+        }
+    }
+
+    disconnectedCallback(): void {
+        // Perform global cleanup if the main app component is ever disconnected
+        if (darkLightModeInstance) {
+            darkLightModeInstance.destroy();
+            darkLightModeInstance = null;
+        }
+        if (cleanupModalDelegation) {
+            cleanupModalDelegation();
+            cleanupModalDelegation = null;
+        }
     }
 }
 

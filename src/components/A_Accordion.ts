@@ -1,10 +1,7 @@
-import { listenForBootstrapModalEventDelegation } from "../utils/bootstrap";
 import { ModalList, AccordionList } from "../static";
 
 class Accordion {
-    constructor() {
-        this.connectedCallback();
-    }
+    constructor() { }
 
     public render(): string {
         const accordionItemsHtml = AccordionList.ACCORDION_ITEMS.map((item, idx) => `
@@ -44,12 +41,6 @@ class Accordion {
             </div>
             ${modalsHtml}
         `;
-    }
-
-    connectedCallback(): void {
-        document.addEventListener("DOMContentLoaded", () => {
-            listenForBootstrapModalEventDelegation();
-        });
     }
 }
 

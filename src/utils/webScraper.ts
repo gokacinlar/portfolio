@@ -25,7 +25,7 @@ class GetSiteVersionNumber {
 
     public async scrape(): Promise<string> {
         const data = await this.fetchPhpFile(GetSiteVersionNumber.url);
-        if (data) {
+        if (data && data.length > 0 && data[0].name) {
             return data[0].name;
         } else {
             return "N/A";
@@ -37,7 +37,7 @@ class GetSiteVersionNumber {
     }
 
     public set version(version: string) {
-        version = this._version;
+        this._version = version;
     }
 
     public async init(): Promise<void> {
@@ -45,4 +45,4 @@ class GetSiteVersionNumber {
     }
 }
 
-export default GetSiteVersionNumber;
+export default GetSiteVersionNumber; // Exporting the class

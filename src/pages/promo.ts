@@ -7,6 +7,8 @@ import skills from '../assets/json/promo_Skills.json';
 import Localize from "../utils/initLocalization";
 
 class Promo extends HTMLElement {
+    private hmmsCleanupFunctions: (() => void)[] = [];
+
     constructor() {
         super();
 
@@ -20,8 +22,11 @@ class Promo extends HTMLElement {
         promoFunctions.createPromoContent("#promoSkillsContainer", skills, (skill) => new PromoSkillsShowCase().renderPromoSkillsShowCase(skill));
         // Create vertical tab grouping showcase
         promoFunctions.bindVerticalTabEventsAndautoCycleTabs(new PromoParts().promoTabData);
-        new HorizontalMiddleMouseScroll().hmmsScroll(".promo-featured-tabs");
-        new HorizontalMiddleMouseScroll().hmmsScroll(".promo-card-container");
+
+        // Store cleanup functions for HorizontalMiddleMouseScroll
+        this.hmmsCleanupFunctions.push(new HorizontalMiddleMouseScroll().hmmsScroll(".promo-featured-tabs"));
+        this.hmmsCleanupFunctions.push(new HorizontalMiddleMouseScroll().hmmsScroll(".promo-card-container"));
+
         // Dyanmic scroll revealing
         const dynamicContentDivs: Array<string> =
             ["promo-videos-container",
@@ -32,6 +37,12 @@ class Promo extends HTMLElement {
                 "promo-teacheng-container",
                 "promo-interested-container"];
         new ScrollRevealAction().scrollReveal(dynamicContentDivs);
+    }
+
+    disconnectedCallback(): void {
+        // Call all stored cleanup functions when the component is disconnected
+        this.hmmsCleanupFunctions.forEach(cleanup => cleanup());
+        this.hmmsCleanupFunctions = []; // Clear the array
     }
 }
 

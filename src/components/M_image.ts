@@ -1,6 +1,5 @@
 class LazyImage extends HTMLElement {
     private _imgElement: HTMLImageElement | null = null;
-    private _isConnected: boolean = false;
 
     constructor() {
         super();
@@ -27,6 +26,11 @@ class LazyImage extends HTMLElement {
         }
 
         this._imgElement = imgElement;
+
+        while (this.firstChild) {
+            this.removeChild(this.firstChild);
+        }
+
         this.appendChild(imgElement);
     }
 
@@ -47,12 +51,7 @@ class LazyImage extends HTMLElement {
     }
 
     connectedCallback(): void {
-        this._isConnected = true;
         this.render();
-    }
-
-    disconnectedCallback(): void {
-        this._isConnected = false;
     }
 
     attributeChangedCallback(
@@ -60,7 +59,7 @@ class LazyImage extends HTMLElement {
         oldValue: string,
         newValue: string
     ): void {
-        if (this._isConnected && oldValue !== newValue) {
+        if (this.isConnected && oldValue !== newValue) {
             this.render();
         }
     }

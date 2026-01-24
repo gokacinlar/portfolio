@@ -1,15 +1,29 @@
 import "toastify-js/src/toastify.css"
 import DOMPurify from "dompurify";
 import ScrollReveal from "scrollreveal";
-import isEmail from "validator/lib/isEmail";
 import Toastify from "toastify-js";
 import { HeroParts, WhiteListedURLs } from "../static";
+
+// Centralized Toastify configuration
+export const TOAST_CONFIG = {
+    duration: 2500,
+    newWindow: true,
+    close: true,
+    gravity: "bottom" as const,
+    position: "right" as const,
+    stopOnFocus: true,
+    style: {
+        background: "#0f3d75",
+        borderRadius: "24px"
+    },
+} as const;
 
 // Detecting dark/light mode
 export class DarkLightMode {
     private mediaQuery: MediaQueryList;
     private currentTheme: "dark" | "light" | "auto" = "auto";
     private iconElement: HTMLElement | null = null;
+    private mediaQueryListener: (() => void) | null = null; // Store listener for removal
 
     constructor() {
         this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -19,7 +33,9 @@ export class DarkLightMode {
     private initialize(): void {
         this.loadThemeFromStorage();
         this.applyTheme();
-        this.mediaQuery.addEventListener("change", this.handleSystemThemeChange.bind(this));
+        // Store the bound function to ensure we remove the correct listener
+        this.mediaQueryListener = this.handleSystemThemeChange.bind(this);
+        this.mediaQuery.addEventListener("change", this.mediaQueryListener);
     }
 
     private handleSystemThemeChange(): void {
@@ -37,7 +53,7 @@ export class DarkLightMode {
                 this.currentTheme = savedTheme as "dark" | "light" | "auto";
             }
         } catch (error: unknown) {
-            throw new Error("Could not load theme from localStorage.");
+            console.error("Could not load theme from localStorage.", error);
         }
     }
 
@@ -45,26 +61,13 @@ export class DarkLightMode {
         try {
             localStorage.setItem("userThemePreference", val);
         } catch (error: unknown) {
-            throw new Error("Could not save theme to localStorage");
+            console.error("Could not save theme to localStorage", error);
         }
     }
 
-    private readonly toastConfig = {
-        duration: 2500,
-        newWindow: true,
-        close: true,
-        gravity: "bottom" as const,
-        position: "right" as const,
-        stopOnFocus: true,
-        style: {
-            background: "#0f3d75",
-            borderRadius: "24px"
-        },
-    } as const;
-
     private notifyUserAboutThemeChange(): void {
         Toastify({
-            ...this.toastConfig,
+            ...TOAST_CONFIG, // Using the centralized config
             text: `Saved your theme preference.`,
             close: false,
             duration: 2500,
@@ -119,6 +122,14 @@ export class DarkLightMode {
             this.updateIcon();
         });
     }
+
+    // Method to clean up event listeners
+    public destroy(): void {
+        if (this.mediaQueryListener) {
+            this.mediaQuery.removeEventListener("change", this.mediaQueryListener);
+            this.mediaQueryListener = null;
+        }
+    }
 }
 
 // Create a template content to be appended to every Light DOM
@@ -165,8 +176,11 @@ export class Template {
 
 // Function to scroll horizontally in desired div
 export class HorizontalMiddleMouseScroll {
-    public hmmsScroll(element: string) {
+    // hmmsScroll now returns a cleanup function
+    public hmmsScroll(element: string): () => void {
         const elem = document.querySelector(element) as HTMLElement;
+        if (!elem) return () => { }; // Return a no-op cleanup if element not found
+
         let isScrolling: boolean = false;
         let targetScrollLeft: number = elem.scrollLeft;
 
@@ -208,6 +222,12 @@ export class HorizontalMiddleMouseScroll {
 
         // Listen for window resize events to update behavior
         window.addEventListener("resize", updateScrollBehavior);
+
+        // Return a cleanup function for all listeners added by this instance
+        return () => {
+            elem.removeEventListener("wheel", handleScroll);
+            window.removeEventListener("resize", updateScrollBehavior);
+        };
     }
 }
 
@@ -447,31 +467,6 @@ export function formatDate(date: Date): String {
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })
 };
 
-export function validateEmail(emailString: string): boolean {
-    const eMailInput = document.querySelector(`${emailString}`) as HTMLInputElement | null;
-
-    if (!eMailInput) {
-        console.warn(`Element not found for selector: ${emailString}`);
-        return false;
-    }
-
-    if (eMailInput.value && isEmail(eMailInput.value)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-// Check if input is a valid URL
-export function isValidUrl(url: string): boolean {
-    try {
-        new URL(url);
-        return true;
-    } catch (error: unknown) {
-        return false;
-    }
-}
-
 // Function to generate nonce for each script tag
 export function generateNonce(): string {
     try {
@@ -493,42 +488,6 @@ export function generateNonce(): string {
         console.error("Error retrieving nonce:", error);
         return "";
     }
-}
-
-interface ButtonIconOptions {
-    button: string;
-    iconClass: string;
-    priorIcon: string;
-    newIcon: string;
-}
-
-// Function to dynamically change a button's <i> element's classname with proper Bootstrap icon
-export function dynamicallyChangeButtonIcon({ button, iconClass, priorIcon, newIcon }: ButtonIconOptions): void {
-    const buttonItself = document.querySelector(`#${button}`) as HTMLButtonElement;
-    const buttonIconClass = document.querySelector(`.${iconClass}`) as HTMLElement;
-
-    let isChanged: boolean = false;
-
-    // Store the initial icon class
-    const initialIcon = buttonIconClass.className;
-
-    if (!initialIcon) {
-        throw new Error("Unable to detect target icon's class name.");
-    }
-
-    // Set up the event listener for click
-    buttonItself.addEventListener("click", (_e: MouseEvent) => {
-        if (isChanged) {
-            buttonIconClass.className = initialIcon;
-            isChanged = false;
-        } else {
-            if (buttonIconClass.classList.contains(priorIcon)) {
-                buttonIconClass.classList.remove(priorIcon);
-            }
-            buttonIconClass.classList.add(newIcon);
-            isChanged = true;
-        }
-    });
 }
 
 interface ScriptOptions {
@@ -572,60 +531,12 @@ export function insertApprovedScript({ scriptItself, target, attributes = {} }: 
     }
 }
 
-interface AlertDialogue {
-    target: HTMLElement;
-    alertType: "alert-primary" | "alert-secondary" | "alert-success" | "alert-danger" |
-    "alert-warning" | "alert-info" | "alert-light" | "alert-dark";
-    role: "alert";
-    content: string;
-}
-
-export function insertAlertDialogue({ target, alertType, role, content }: AlertDialogue): void {
-    let elementExists: boolean = false;
-
-    try {
-        const mainElement = target as HTMLElement;
-        if (!mainElement) {
-            console.error("Unable to find target element for alert dialogue to be appended.");
-            return;
-        } else {
-            elementExists = true;
-            if (elementExists === true) {
-                return;
-            } else {
-                const AlertDialogue = document.createElement("div") as HTMLDivElement;
-                AlertDialogue.role = role;
-                AlertDialogue.classList.add("alert");
-                AlertDialogue.classList.add(alertType);
-                AlertDialogue.innerHTML = DOMPurify.sanitize(content);
-
-                mainElement.appendChild(AlertDialogue);
-            }
-        }
-    } catch (error: unknown) {
-        throw new Error("Unable to insert alert dialogue:" + error);
-    }
-}
-
 export function insertToastifiedMessage(message: string) {
-    const toastConfig = {
-        duration: 2500,
-        newWindow: true,
-        close: true,
-        gravity: "bottom" as const,
-        position: "right" as const,
-        stopOnFocus: true,
-        style: {
-            background: "#0f3d75",
-            borderRadius: "24px"
-        },
-    } as const;
-
     try {
         const msg = message as string;
         if (msg) {
             Toastify({
-                ...toastConfig,
+                ...TOAST_CONFIG, // Using the centralized config
                 text: msg,
                 close: false,
                 duration: 2500,
@@ -637,44 +548,12 @@ export function insertToastifiedMessage(message: string) {
     }
 }
 
-export function insertImageSvg(imgPath: string, alt: string, options: { onError?: (error: Error) => void } = {}): HTMLImageElement | null {
-    if (!imgPath) {
-        console.warn("No image path provided");
-        return null;
-    }
-
-    try {
-        const imgElement = document.createElement("img") as HTMLImageElement;
-        imgElement.src = imgPath;
-        imgElement.alt = alt;
-        imgElement.loading = "lazy";
-        imgElement.decoding = "async";
-        imgElement.onerror = () => {
-            imgElement.alt = "Image failed to load";
-            if (options.onError) {
-                options.onError(new Error(`Failed to load image: ${imgPath}`));
-            }
-        };
-
-        return imgElement;
-    } catch (error: unknown) {
-        const errorMessage = error instanceof Error ? error.message : String(error);
-        console.error(`Error while inserting image: ${errorMessage}`);
-
-        if (options.onError) {
-            options.onError(new Error(`Image insertion failed: ${errorMessage}`));
-        }
-
-        return null;
-    }
-}
-
 export function addBackgroundBasedOnVerticalScroll(mainElement: string, target: string, className: string): () => void {
     const mainHtmlElement = document.getElementById(mainElement) as HTMLElement;
     const targetHtmlElement = document.getElementById(target) as HTMLElement;
 
     if (!mainHtmlElement && !targetHtmlElement) {
-        console.warn(`Elements with id "${mainHtmlElement} and ${targetHtmlElement}" not found`);
+        console.warn(`Elements with id "${mainElement} and ${target}" not found`);
         return () => { };
     }
 
