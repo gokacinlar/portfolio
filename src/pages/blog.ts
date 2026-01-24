@@ -34,12 +34,12 @@ class Updates extends HTMLElement {
         return `
             <section class="container-fluid h-100">
                 <div id="blogContainer" class="row gx-3 mb-3 h-100">
-                    <div class="bwrapper col-md-4 col-lg-4 col-sm h-100">
+                    <div class="bwrapper col-md-2 col-lg-4 col-sm-2 col-12 h-100">
                         ${this.blogAside()}
                         ${this.offCanvas()}
                         ${this.initiateOffCanvas()}
                     </div>
-                    <div class="bwrapper col-md-8 col-lg-8 col-sm h-100">
+                    <div class="bwrapper col-md-10 col-lg-8 col-sm-10 col-12 h-100">
                         <main id="blogMain" class="h-100 rounded-5 px-3 py-3 shadow-sm">
                         </main>
                     </div>
