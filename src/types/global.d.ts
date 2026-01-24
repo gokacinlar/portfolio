@@ -1,5 +1,4 @@
 import type * as bootstrap from "bootstrap";
-import * as bootstrap from "bootstrap";
 
 declare global {
     interface Window {

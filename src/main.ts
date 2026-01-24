@@ -11,7 +11,7 @@ import "lazysizes";
 import { DarkLightMode } from "./utils/helper";
 import GoogleAnalytics from "./utils/gTag";
 import EffectiveCaching from "./utils/cache";
-import { listenForBootstrapModalEventDelegation } from "./utils/bootstrap";
+import { listenForBootstrapModalEventDelegation } from "./utils/bootstrap"; // Import the centralized function
 // Pages
 import "./pages/header";
 import "./pages/footer";
@@ -25,6 +25,7 @@ import "./components/G_Maintenance";
 import "./components/M_ScrollToTopButton";
 import "./components/M_Hero";
 
+// Global instances and their cleanup functions
 let darkLightModeInstance: DarkLightMode | null = null;
 let cleanupModalDelegation: (() => void) | null = null;
 
@@ -34,6 +35,7 @@ class HomePage extends HTMLElement {
     };
 
     connectedCallback(): void {
+        // Ensure DarkLightMode is only instantiated once globally
         if (!darkLightModeInstance) {
             darkLightModeInstance = new DarkLightMode();
         }
@@ -41,9 +43,13 @@ class HomePage extends HTMLElement {
         new EffectiveCaching().ensureCache();
 
         // Ensure modal delegation listener is set up only once globally
-        if (!cleanupModalDelegation) {
-            cleanupModalDelegation = listenForBootstrapModalEventDelegation();
-        }
+        // and only after the DOM is fully loaded and Bootstrap is ready.
+        document.addEventListener("DOMContentLoaded", () => {
+            if (!cleanupModalDelegation) {
+                console.log("DOMContentLoaded: Initializing modal delegation.");
+                cleanupModalDelegation = listenForBootstrapModalEventDelegation();
+            }
+        });
     }
 
     disconnectedCallback(): void {

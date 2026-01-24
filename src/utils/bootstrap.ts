@@ -1,6 +1,4 @@
 import { ModalConfig } from "../static";
-// Removed direct import of Modal from 'bootstrap' to rely on global window.bootstrap
-// import { Modal } from "bootstrap"; 
 
 let delegatedModalClickListener: ((event: Event) => void) | null = null;
 
@@ -29,8 +27,7 @@ export function renderModal(modalSource: ModalConfig[]) {
 // This function now ensures the listener is added only once and returns a cleanup function.
 export function listenForBootstrapModalEventDelegation(): () => void {
     if (delegatedModalClickListener) {
-        // Listener already exists, return a no-op cleanup
-        return () => {};
+        return () => { };
     }
 
     delegatedModalClickListener = (event: Event) => {
