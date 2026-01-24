@@ -4,7 +4,7 @@ let delegatedModalClickListener: ((event: Event) => void) | null = null;
 
 export function renderModal(modalSource: ModalConfig[]) {
     const modalsHtml = modalSource.map(modal => `
-        <div id="${modal.id}" class="modal" tabindex="-1">
+        <div id="${modal.id}" class="modal fade" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content rounded-4 shadow-lg">
                     <div class="modal-header px-4 py-3">
@@ -39,24 +39,12 @@ export function listenForBootstrapModalEventDelegation(): () => void {
             const modalElement = document.getElementById(modalTrigger.dataset.modal);
 
             if (modalElement) {
-                // Debugging: Check if window.bootstrap and Modal are available
-                console.log("Attempting to open modal:", modalTrigger.dataset.modal);
-                console.log("window.bootstrap:", window.bootstrap);
-                console.log("window.bootstrap.Modal:", window.bootstrap.Modal);
+                const modalInstance = new (window.bootstrap.Modal)(modalElement);
+                modalInstance.show();
 
-                if (window.bootstrap && window.bootstrap.Modal) {
-                    const modalInstance = new (window.bootstrap.Modal)(modalElement, {
-                        keyboard: true,
-                        backdrop: false,
-                    });
-                    modalInstance.show();
-                    // Manually remove backdrop
-                    document.body.removeAttribute("style");
-                } else {
-                    console.error("Bootstrap Modal class not found on window.bootstrap. Modals cannot be opened.");
-                }
-            } else {
-                console.error(`Modal element with ID "${modalTrigger.dataset.modal}" not found in the DOM.`);
+                modalElement.addEventListener("hidden.bs.modal", () => {
+                    modalInstance.dispose();
+                }, { once: true });
             }
         }
     };

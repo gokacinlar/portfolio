@@ -1,12 +1,13 @@
 import Localize from "../utils/initLocalization";
 import * as Type from "../types/types";
 import { Template, DarkLightMode } from "../utils/helper";
-import { renderModal } from "../utils/bootstrap";
+import { renderModal, listenForBootstrapModalEventDelegation } from "../utils/bootstrap";
 import { HtmxControls } from "../components/M_htmx";
 import ResponsiveNavbar from "../components/responsive/R_navbar";
 import { ModalList } from "../static";
 
 let darkLightModeInstance: DarkLightMode | null = null;
+let cleanupModalDelegation: (() => void) | null = null;
 
 class Header extends HTMLElement {
     constructor() {
@@ -22,6 +23,17 @@ class Header extends HTMLElement {
         darkLightModeInstance.dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
         new ResponsiveNavbar().connectedCallback();
         new HeaderNode().initDynamicLanguageSwitcher();
+
+        if (!cleanupModalDelegation) {
+            cleanupModalDelegation = listenForBootstrapModalEventDelegation();
+        }
+    }
+
+    disconnectedCallback(): void {
+        if (cleanupModalDelegation) {
+            cleanupModalDelegation();
+            cleanupModalDelegation = null;
+        }
     }
 }
 

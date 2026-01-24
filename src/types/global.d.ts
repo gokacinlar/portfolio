@@ -5,11 +5,3 @@ declare global {
         bootstrap: typeof bootstrap;
     }
 }
-
-declare module "simple-parallax-js/vanilla" {
-    export default class SimpleParallax {
-        constructor(elements: HTMLElement | NodeList | HTMLElement[], options?: any);
-        refresh(): void;
-        destroy(): void;
-    }
-}

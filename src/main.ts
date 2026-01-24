@@ -3,15 +3,16 @@ import "./assets/scss/index.scss";
 import "./assets/scss/globals.scss";
 // CSS Framework & Framework-related
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import * as bootstrap from "bootstrap";
+(window as any).bootstrap = bootstrap;
 // Libraries
 import "lazysizes";
 // Utilieis
 import { DarkLightMode } from "./utils/helper";
 import GoogleAnalytics from "./utils/gTag";
 import EffectiveCaching from "./utils/cache";
-import { listenForBootstrapModalEventDelegation } from "./utils/bootstrap"; // Import the centralized function
+import { listenForBootstrapModalEventDelegation } from "./utils/bootstrap";
 // Pages
 import "./pages/header";
 import "./pages/footer";
@@ -25,9 +26,7 @@ import "./components/G_Maintenance";
 import "./components/M_ScrollToTopButton";
 import "./components/M_Hero";
 
-// Global instances and their cleanup functions
 let darkLightModeInstance: DarkLightMode | null = null;
-let cleanupModalDelegation: (() => void) | null = null;
 
 class HomePage extends HTMLElement {
     constructor() {
@@ -35,21 +34,11 @@ class HomePage extends HTMLElement {
     };
 
     connectedCallback(): void {
-        // Ensure DarkLightMode is only instantiated once globally
         if (!darkLightModeInstance) {
             darkLightModeInstance = new DarkLightMode();
         }
         new GoogleAnalytics().trackPage();
         new EffectiveCaching().ensureCache();
-
-        // Ensure modal delegation listener is set up only once globally
-        // and only after the DOM is fully loaded and Bootstrap is ready.
-        document.addEventListener("DOMContentLoaded", () => {
-            if (!cleanupModalDelegation) {
-                console.log("DOMContentLoaded: Initializing modal delegation.");
-                cleanupModalDelegation = listenForBootstrapModalEventDelegation();
-            }
-        });
     }
 
     disconnectedCallback(): void {
@@ -57,10 +46,6 @@ class HomePage extends HTMLElement {
         if (darkLightModeInstance) {
             darkLightModeInstance.destroy();
             darkLightModeInstance = null;
-        }
-        if (cleanupModalDelegation) {
-            cleanupModalDelegation();
-            cleanupModalDelegation = null;
         }
     }
 }
