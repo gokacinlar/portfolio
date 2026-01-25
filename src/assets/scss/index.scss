@@ -1,6 +1,82 @@
 @use "m_queries";
 @use "globals";
 
+@mixin low-level-font-management($val1, $val2, $val3, $val4) {
+    font-feature-settings: #{$val1},
+    #{$val2},
+    #{$val3},
+    #{$val4};
+    -moz-font-feature-settings: #{$val1},
+    #{$val2},
+    #{$val3},
+    #{$val4};
+    -ms-font-feature-settings: #{$val1},
+    #{$val2},
+    #{$val3},
+    #{$val4};
+    -webkit-font-feature-settings: #{$val1},
+    #{$val2},
+    #{$val3},
+    #{$val4};
+}
+
+@font-face {
+    font-family: "Geist";
+    src: url("../fonts/Geist.woff2") format("woff2"),
+        url("../fonts//Geist.woff") format("woff"),
+        url("../fonts/Geist.ttf") format("ttf"),
+        url("../fonts/Geist.eot") format("eot");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    font-variant: no-common-ligatures proportional-nums;
+    @include low-level-font-management("kern", "liga", "clig", "calt");
+}
+
+@font-face {
+    font-family: "Franuces";
+    src: url("../fonts/Franuces.woff2") format("woff2"),
+        url("../fonts/Franuces.woff") format("woff"),
+        url("../fonts/Franuces.ttf") format("ttf"),
+        url("../fonts/Franuces.eot") format("eot");
+    font-weight: normal;
+    font-style: normal;
+    font-display: fallback;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    font-variant: no-common-ligatures proportional-nums;
+    @include low-level-font-management("kern", "liga", "clig", "calt");
+}
+
+// Font fallback stack
+$font-family: "Geist",
+    "Franuces",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+// Monospace context
+$monospace-font-family: "Cascadia Code",
+    "Fira Code",
+    "Source Code Pro",
+    Menlo,
+    Consolas,
+    "Courier New",
+    monospace;
+
+$font-display: fallback;
+
 // Global breakpoints
 $mobile-breakpoints: phone, phone-portrait, phone-landscape;
 $tablet-breakpoints: tablet, tablet-portrait, tablet-landscape;
@@ -152,14 +228,25 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
 }
 
 // Reset
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    font-family: var(--font-family);
-    font-display: var(--font-display);
-    @include transition(background-color 0.25s ease-in-out, color 0.25s ease-in);
+    font-family: $font-family;
+    font-display: $font-display;
+    @include transition(background-color .25s ease-in-out, color .25s ease-in);
+}
+
+html {
+    text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
 }
 
 @layer init, secondary, third;
@@ -483,13 +570,13 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     .promo-motto-quote-container {
         --def-height: 256px;
         min-height: var(--def-height);
-        @include custom-font("Franuces");
         @include custom-bee-color();
         @include responsive-styling($all-mobile-tablet-breakpoints, align-items, start);
         @include responsive-styling($mobile-breakpoints, flex-direction, column);
         @include responsive-styling($mobile-breakpoints, gap, .25em);
 
         &>h3 {
+            @include custom-font(Franuces);
             @include responsive-styling($all-mobile-tablet-breakpoints, font-size, 1rem);
             text-decoration-skip-ink: auto;
             text-emphasis-position: under right;

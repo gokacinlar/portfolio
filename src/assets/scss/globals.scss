@@ -6,73 +6,6 @@
     }
 }
 
-@mixin low-level-font-management($val1, $val2, $val3, $val4) {
-    font-feature-settings: #{$val1},
-    #{$val2},
-    #{$val3},
-    #{$val4};
-    -moz-font-feature-settings: #{$val1},
-    #{$val2},
-    #{$val3},
-    #{$val4};
-    -ms-font-feature-settings: #{$val1},
-    #{$val2},
-    #{$val3},
-    #{$val4};
-    -webkit-font-feature-settings: #{$val1},
-    #{$val2},
-    #{$val3},
-    #{$val4};
-}
-
-@font-face {
-    font-family: "Inter";
-    src: url("../fonts/Geist.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-    font-kerning: normal;
-    text-rendering: optimizeLegibility;
-    @include low-level-font-management("kern", "liga", "clig", "calt");
-}
-
-@font-face {
-    font-family: "Franuces";
-    src: url("../fonts/Franuces.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-    font-kerning: normal;
-    text-rendering: optimizeLegibility;
-    @include low-level-font-management("kern", "liga", "clig", "calt");
-}
-
-// Font fallback stack
-$font-family: "Inter",
-    "Franuces",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Roboto",
-    "Oxygen",
-    "Ubuntu",
-    "Cantarell",
-    "Fira Sans",
-    "Droid Sans",
-    "Helvetica Neue",
-    Arial,
-    sans-serif;
-
-// Monospace context
-$monospace-font-family: "Cascadia Code",
-    "Fira Code",
-    "Source Code Pro",
-    Menlo,
-    Consolas,
-    "Courier New",
-    monospace;
-
-$font-display: fallback;
 $rounded: (
     sm: 18px,
     l: 23px,
@@ -115,8 +48,6 @@ $themes: (
 
 :root {
     font-size: 16px;
-    font-family: #{$font-family};
-    font-display: #{$font-display};
     @include define-css-variables($rounded, "rounded-");
     @include define-css-variables($colors, "clr-");
     @include define-css-variables($sizes, "sizes-");
