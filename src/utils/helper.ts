@@ -9,8 +9,9 @@ export const TOAST_CONFIG = {
     duration: 2500,
     newWindow: true,
     close: true,
+    avatar: "../assets/images/static/webp/logo.webp",
     gravity: "bottom" as const,
-    position: "right" as const,
+    position: "center" as const,
     stopOnFocus: true,
     style: {
         background: "#0f3d75",
