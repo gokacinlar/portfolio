@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-// Removed dotenv require as dotenv-webpack handles it
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -9,15 +9,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
-
-// Load .env - Removed manual dotenv.config() as Dotenv plugin handles it.
-const envKeys = ["GTAG", "WEB3_FORM_ACCESS_KEY", "RECAPTCHA", "RECAPTCHA_SECRET_KEY"];
-const definePluginEntries = {};
-
-// Removed manual definePluginEntries as Dotenv plugin handles injecting process.env variables.
-// If specific variables need to be explicitly defined for other reasons, this part might be re-evaluated.
 
 // For static page"s script linking
 const htmlPageNames = ["about.html", "updates.html", "404.html", "work.html"];
@@ -137,6 +131,7 @@ module.exports = {
                     test: /[\\/]node_modules[\\/]/,
                     name: "vendors",
                     chunks: "all",
+                    enforce: true
                 },
             },
         },
@@ -154,9 +149,14 @@ module.exports = {
         ],
     },
     plugins: [
-        // new BundleAnalyzerPlugin(),
+        /* new BundleAnalyzerPlugin({
+            analyzerMode: "static",
+            openAnalyzer: false,
+            generateStatsFile: true,
+            statsFilename: "statistics.json",
+        }) */,
+        new CleanWebpackPlugin(),
         new ESLintPlugin(),
-        // Removed webpack.DefinePlugin(definePluginEntries) as Dotenv plugin handles it.
         new NodePolyfillPlugin(),
         new Dotenv({
             path: "./.env",
@@ -165,8 +165,11 @@ module.exports = {
             systemvars: true,
             silent: false,
             defaults: false,
-            // prefix: "import.meta.env.", // Removed prefix as process.env is used directly in the code
             override: true
+        }),
+        new WebpackManifestPlugin({
+            fileName: "asset-manifest",
+            useLegacyEmit: true
         }),
         new CopyPlugin({
             patterns: [
@@ -201,11 +204,10 @@ module.exports = {
             }
         }),
         new HtmlWebpackPlugin({
-            // Fixed template conflict: only one template property should be used.
             template: "./src/index.html",
             filename: "./index.html",
             inject: "body",
-            minify: false, // Keep false for development, set to true for production build
+            minify: false,
             meta: {
                 description: { name: "description", content: "Derviş Öksüzoğlu: İngilizce Öğretmeni & Front-end Web Geliştiricisi; Pedagoji, Teknoloji, Bilim ve Sanat | Eğitimin teknoloji ile buluştuğu yer." },
                 keywords: { name: "keywords", content: "derviş, öksüzoğlu, derviş öksüzoğlu, blog, portfolyo, ingilizce öğretmeni, english teacher, web geliştiricisi, front-end web developer" },
