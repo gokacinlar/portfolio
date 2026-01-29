@@ -26,8 +26,40 @@ class GetSiteVersionNumber {
     public async scrape(): Promise<string> {
         const data = await this.fetchPhpFile(GetSiteVersionNumber.url);
         if (data && data.length > 0 && data[0].name) {
-            return data[0].name;
+            const result = data[0].name;
+
+            this.addVersionNumberToLocalStorage(result);
+            return result;
         } else {
+            return "N/A";
+        }
+    }
+
+    private addVersionNumberToLocalStorage(data: string): void {
+        try {
+            const localStorageKeyId: string = "version-number";
+            const currentStoredVersion = localStorage.getItem(localStorageKeyId);;
+
+            if (data !== currentStoredVersion) {
+                localStorage.setItem(localStorageKeyId, data);
+            }
+        } catch (error: unknown) {
+            console.error(`Unable to add site version number to local storage: ${error}`);
+        }
+    }
+
+    public getSiteVersionFromLocalStorage(): string {
+        try {
+            const targetKey: string = "version-number";
+            const storedVersion = localStorage.getItem(targetKey);
+
+            if (!storedVersion) {
+                return "N/A";
+            }
+
+            return storedVersion;
+        } catch (error: unknown) {
+            console.error(`Unable to get site version number from the local storage: ${error}`);
             return "N/A";
         }
     }
@@ -45,4 +77,4 @@ class GetSiteVersionNumber {
     }
 }
 
-export default GetSiteVersionNumber; // Exporting the class
+export default GetSiteVersionNumber;

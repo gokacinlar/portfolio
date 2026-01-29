@@ -8,11 +8,11 @@ import * as bootstrap from "bootstrap";
 (window as any).bootstrap = bootstrap;
 // Libraries
 import "lazysizes";
-// Utilieis
+// Utilities
 import { DarkLightMode } from "./utils/helper";
 import GoogleAnalytics from "./utils/gTag";
 import EffectiveCaching from "./utils/cache";
-import { listenForBootstrapModalEventDelegation } from "./utils/bootstrap";
+import GetSiteVersionNumber from "./utils/webScraper";
 // Pages
 import "./pages/header";
 import "./pages/footer";
@@ -39,6 +39,7 @@ class HomePage extends HTMLElement {
         }
         new GoogleAnalytics().trackPage();
         new EffectiveCaching().ensureCache();
+        new GetSiteVersionNumber().init();
     }
 
     disconnectedCallback(): void {

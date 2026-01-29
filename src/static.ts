@@ -1,4 +1,5 @@
 import { formatDate } from "./utils/helper";
+import GetSiteVersionNumber from "./utils/webScraper";
 import * as Type from "./types/types";
 import Localize from "./utils/initLocalization";
 
@@ -362,7 +363,7 @@ export class AccordionList {
                     <tbody>
                         <tr>
                             <th scope="row">Site Version</th>
-                            <td><code>1.2.1</code></td>
+                            <td><code>${new GetSiteVersionNumber().getSiteVersionFromLocalStorage()}</code></td>
                         </tr>
                         <tr>
                             <th scope="row">License</th>
