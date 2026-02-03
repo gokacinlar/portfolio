@@ -1,7 +1,7 @@
 # Manual entries
 .env
 .git
-public/**/*
+public/
 
 # PHP-composer related
 vendor/
