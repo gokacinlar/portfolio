@@ -1,6 +1,7 @@
 import DOMPurify from "dompurify";
 import WordPressGraphQLClient from "../utils/wp_graphql";
 import { Template } from "../utils/helper";
+import Localize from "../utils/initLocalization";
 
 interface Author {
     name: string;
@@ -50,9 +51,10 @@ class Updates extends HTMLElement {
 
     private initiateOffCanvas() {
         return `
-            <div id="offCanvasControls" class="d-flex flex-row align-items-center justify-content-end" role="group" aria-label="Blog Post Display Settings">
+            <div id="offCanvasControls" class="d-flex flex-row align-items-center justify-content-end gap-2" role="group" aria-label="${Localize.translate("common:offcanvas:btnMessage")}">
+                ${this.downloadRssButton()}
                 <button class="btn btn-sm btn-warning rounded-pill shadow-sm" type="button" id="displayOffCanvasBtn" data-bs-toggle="offcanvas" data-bs-target="#blogAsideOffcanvasTemplate"
-                    aria-controls="blogAsideOffcanvasTemplate" title="Display menu to see posts.">
+                    aria-controls="blogAsideOffcanvasTemplate" title="${Localize.translate("common:offcanvas:btnMessage")}">
                     <i class="offcanvas-menu-icon bi bi-list display-6 fw-bold"></i>
                 </button>
             </div>
@@ -62,8 +64,20 @@ class Updates extends HTMLElement {
     private blogAside(): string {
         return `
             <aside id="blogAside" class="h-100 rounded-5 px-3 py-3 shadow-sm">
-                <section id="blogAsideChild" class="rounded-5 h-100 px-3 py-3 border border-1 border-dark-subtle"></section>
+                <section id="rssInfo">
+                    ${this.downloadRssButton()}
+                </section>
+                <section id="blogAsideChild" class="mt-3 rounded-5 px-3 py-3 border border-1 border-dark-subtle"></section>
             </aside>
+        `;
+    }
+
+    private downloadRssButton(): string {
+        return `
+            <button id="downloadRssBtn" type="button" class="download-rss-button bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1 modal-trigger"
+                role="button" title="${Localize.translate("common:modals:rss:btnTitle")}" data-modal="rssModal">
+                <i class="bi bi-rss-fill fw-bold"></i>
+            </button>
         `;
     }
 

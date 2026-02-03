@@ -227,6 +227,12 @@ $global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet
     filter: drop-shadow(0px 6px 46px #f0ebf0);
 }
 
+@mixin def-yellow-button-size() {
+    --def-size: 54px;
+    width: var(--def-size);
+    height: var(--def-size);
+}
+
 // Reset
 *,
 *::before,
@@ -278,6 +284,7 @@ html {
     .header-btn-bg-important,
     .hero-btn,
     .header-responsive-btn,
+    .download-rss-button,
     #aboutFormSubmitBtn {
         @include custom-bee-color();
     }
@@ -382,9 +389,7 @@ html {
         @include show-on(desktop);
 
         & {
-            --icon-w: 54px;
-            width: var(--icon-w);
-            height: auto;
+            @include def-yellow-button-size();
             object-fit: cover;
             border: 3px solid var(--clr-two);
         }
@@ -426,6 +431,10 @@ html {
     #responsiveNavbar {
         flex-direction: column !important;
         width: 100%;
+    }
+
+    .download-rss-button {
+        @include def-yellow-button-size();
     }
 
     #hero {
@@ -1004,6 +1013,7 @@ html {
     }
 
     #blogAsideChild {
+        height: 90%;
         background: var(--clr-one);
     }
 
@@ -1133,9 +1143,7 @@ html {
     }
 
     #displayOffCanvasBtn {
-        --def-size: 54px;
-        width: var(--def-size);
-        height: var(--def-size);
+        @include def-yellow-button-size();
     }
 
     /* Scroll to top button */

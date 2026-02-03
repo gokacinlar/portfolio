@@ -178,7 +178,7 @@ export class HeaderNode {
                 role="button" title="Change Site Language" data-modal="langSwitchModal">
                 <i class="bi bi-translate text-black fw-bold"></i>
             </button>
-            ${renderModal(ModalList.MODALS.filter(modal => modal.id === "langSwitchModal"))}
+            ${renderModal(ModalList.MODALS.filter(modal => modal.id === "rssModal" || modal.id === "langSwitchModal"))}
         `;
     }
 

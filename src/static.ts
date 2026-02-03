@@ -143,6 +143,7 @@ export class AboutData {
     public static readonly stackRows: Type.TableRow[] = [
         ["Front-end", "JavaScript (ES6+), TypeScript", "React, Redux, Next.js"],
         ["Back-end", "PHP(7+), Node.js", "Express.js, Codeigniter"],
+        ["Cross-platform", "Tauri, Framework7", "-"],
         ["Styling", "Bootstrap (+derivatives), SASS, Tailwind CSS", "Shadcn & DaisyUI"],
         ["Databases", "MySQL, PostgreSQL", "Supabase"],
         ["DevOps", "Docker, Linux", "-"],
@@ -150,54 +151,6 @@ export class AboutData {
         ["SSG", "Astro & Gatsby", "-"],
         ["Testing", "Jest & Playwright", "-"],
         ["Design & UX", "Figma, Adobe Illustrator & Adobe Photoshop", "-"],
-    ];
-
-    public static readonly tableData = [
-        {
-            category: "Front-end",
-            technologies: "JavaScript (ES6+), TypeScript",
-            libraries: "React, Redux"
-        },
-        {
-            category: "Back-end",
-            technologies: "PHP(7+), Node.js, Express.js",
-            libraries: "Laravel"
-        },
-        {
-            category: "Styling",
-            technologies: "Bootstrap (+derivatives), SASS, Tailwind CSS, Material UI",
-            libraries: "Shadcn, DaisyUI"
-        },
-        {
-            category: "Databases",
-            technologies: "MySQL, SQLite, PostgreSQL",
-            libraries: "-"
-        },
-        {
-            category: "DevOps",
-            technologies: "Apache, Docker, Linux (WSL + Native)",
-            libraries: "-"
-        },
-        {
-            category: "CMS",
-            technologies: "Wordpress, Headless Wordpress",
-            libraries: "-"
-        },
-        {
-            category: "Tools",
-            technologies: "Git, Webpack",
-            libraries: "-"
-        },
-        {
-            category: "Testing",
-            technologies: "Mocha, Jest",
-            libraries: "-"
-        },
-        {
-            category: "Design & UX",
-            technologies: "Figma, Adobe Illustrator, Adobe Photoshop",
-            libraries: "-"
-        }
     ];
 
     public static readonly introduction = {
@@ -299,6 +252,46 @@ export class ModalList {
                             </component-lazy-image> Türkçe
                         </button>
                     </div>
+                </div>
+            `
+        },
+        {
+            id: "rssModal",
+            title: Localize.translate("common:modals:rss:btnTitle"),
+            content: `
+                <div class="rss-box rounded-5 bg-gradient p-0">
+                    <table class="table table-bordered table-striped border border-secondary-subtle border-1">
+                        <thead>
+                            <tr>
+                                <th scope="col">${Localize.translate("common:modals:rss:tablePlatformName")}</th>
+                                <th scope="col">${Localize.translate("common:modals:rss:tableLinkName")}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">Site</td>
+                                <td>
+                                    <component-anchor-link
+                                        text="This Site"
+                                        title="This Site"
+                                        href="http://dervisoksuzoglu.com.tr/wp_blog/feed"
+                                        target="_blank"
+                                    ></component-anchor-link>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Hashnode</td>
+                                <td>
+                                    <component-anchor-link
+                                        text="Hashnode"
+                                        title="Hashnode"
+                                        href="https://gokacinlar.hashnode.dev/rss.xml"
+                                        target="_blank"
+                                    ></component-anchor-link>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             `
         }

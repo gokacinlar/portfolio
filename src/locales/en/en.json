@@ -59,6 +59,9 @@
     "projects": {
         "title": "Some of My Projects"
     },
+    "offcanvas": {
+        "btnMessage": "Display menu to see posts."
+    },
     "teach": {
         "title": "Teaching English?",
         "desc": {
@@ -116,6 +119,11 @@
             "msg": "Please verify <strong>you're human</strong> before proceeding.",
             "btnMsg": "Confirm Action"
         },
-        "lang": "🎇 Change Site Language"
+        "lang": "🎇 Change Site Language",
+        "rss": {
+            "btnTitle": "📰 Download RSS Feed",
+            "tablePlatformName": "Platform Name",
+            "tableLinkName": "RSS Link"
+        }
     }
 }

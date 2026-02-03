@@ -59,6 +59,9 @@
     "projects": {
         "title": "Projelerimden Bazıları"
     },
+    "offcanvas": {
+        "btnMessage": "Gönderileri görmek için tıklayın."
+    },
     "teach": {
         "title": "İngilizce Öğretmenliği?",
         "desc": {
@@ -116,6 +119,11 @@
             "msg": "Devam etmeden önce lütfen robot olmadığınızı onaylayın.",
             "btnMsg": "İşlemi Onayla"
         },
-        "lang": "🎇 Site Dilini Değiştir"
+        "lang": "🎇 Site Dilini Değiştir",
+        "rss": {
+            "btnTitle": "📰 RSS Feedi İndir",
+            "tablePlatformName": "Platform İsmi",
+            "tableLinkName": "RSS Bağlantısı"
+        }
     }
 }
