@@ -74,7 +74,7 @@ class Updates extends HTMLElement {
 
     private downloadRssButton(): string {
         return `
-            <button id="downloadRssBtn" type="button" class="download-rss-button bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1 modal-trigger"
+            <button id="downloadRssBtn" type="button" class="download-rss-button bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1 modal-trigger"
                 role="button" title="${Localize.translate("common:modals:rss:btnTitle")}" data-modal="rssModal">
                 <i class="bi bi-rss-fill fw-bold"></i>
             </button>

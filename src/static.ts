@@ -31,7 +31,7 @@ export class HeroParts {
 }
 
 export class PromoParts {
-    public readonly promoTabData: any = {
+    public readonly promoTabData = {
         PS: {
             iconData: "bi bi-stack",
             desc: Localize.translate("common:desc:exp:PS")
@@ -288,6 +288,35 @@ export class ModalList {
                                         href="https://gokacinlar.hashnode.dev/rss.xml"
                                         target="_blank"
                                     ></component-anchor-link>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `
+        },
+        {
+            id: "siteMapModal",
+            title: Localize.translate("common:modals:sitemap:btnTitle"),
+            content: `
+                <div class="sitemap-box rounded-5 p-0">
+                    <table class="table table-bordered table-striped border border-secondary-subtle border-1">
+                        <thead>
+                            <tr>
+                                <th scope="col">${Localize.translate("common:modals:sitemap:tableActionName")}</th>
+                                <th scope="col">${Localize.translate("common:modals:sitemap:tableVisitName")}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">${Localize.translate("common:modals:sitemap:visitSitemap")}</td>
+                                <td>
+                                    <component-anchor-link
+                                        text="${Localize.translate("common:modals:sitemap:visitSitemap")}"
+                                        title="${Localize.translate("common:modals:sitemap:visitSitemap")}"
+                                        href="http://dervisoksuzoglu.com.tr/sitemap.xml"
+                                        target="_blank">
+                                    </component-anchor-link>
                                 </td>
                             </tr>
                         </tbody>

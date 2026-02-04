@@ -124,6 +124,12 @@
             "btnTitle": "📰 RSS Feedi İndir",
             "tablePlatformName": "Platform İsmi",
             "tableLinkName": "RSS Bağlantısı"
+        },
+        "sitemap": {
+            "btnTitle": "🍁 Site Haritası",
+            "tableActionName": "Eylem",
+            "tableVisitName": "Gidin",
+            "visitSitemap": "Site Haritasını Görün"
         }
     }
 }

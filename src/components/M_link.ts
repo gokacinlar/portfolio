@@ -1,5 +1,6 @@
 class AnchorLink extends HTMLElement {
     private _anchorElement: HTMLAnchorElement | null = null;
+    private _isSetUp: boolean = false;
 
     constructor() {
         super();
@@ -8,19 +9,28 @@ class AnchorLink extends HTMLElement {
     private render(): void {
         const href = this.getAttribute("href");
         const text = this.getAttribute("textContent");
+        const type = this.getAttribute("type");
         const title = this.getAttribute("title");
         const referrerpolicy = this.getAttribute("referrerpolicy");
         const target = this.getAttribute("target");
-        const anchorElement = document.createElement("a") as HTMLAnchorElement;
+        const downloadAttr = this.getAttribute("download");
+
+        let anchorElement = this._anchorElement;
+
+        if (!anchorElement) {
+            anchorElement = document.createElement("a") as HTMLAnchorElement;
+            this._anchorElement = anchorElement;
+        }
 
         anchorElement.textContent = text || title || "N/A";
-        anchorElement.className = "link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover";
+        anchorElement.className = "link-primary link-offset-2 link-underlinae-opacity-25 link-underline-opcity-100-hover";
         anchorElement.href = href || "#";
         anchorElement.title = title || "N/A";
         anchorElement.target = target || "_parent";
         anchorElement.referrerPolicy = referrerpolicy || "strict-origin-when-cross-origin";
         anchorElement.rel = "noopener noreferrer"
-        anchorElement.type = "text/html";
+        anchorElement.type = type || "text/html";
+        if (downloadAttr !== null) anchorElement.download = downloadAttr || "";
 
         this._anchorElement = anchorElement;
 
@@ -32,23 +42,24 @@ class AnchorLink extends HTMLElement {
     }
 
     static get observedAttributes(): string[] {
-        return ["src", "title"];
+        return ["href", "title", "text", "target", "referrerpolicy", "download"];
     }
 
     get src(): string | null {
-        return this.getAttribute("src");
+        return this.getAttribute("href");
     }
 
     set src(value: string | null) {
         if (value) {
-            this.setAttribute("src", value);
+            this.setAttribute("href", value);
         } else {
-            this.removeAttribute("src");
+            this.removeAttribute("href");
         }
     }
 
     connectedCallback(): void {
         this.render();
+        this._isSetUp = true;
     }
 
     attributeChangedCallback(
@@ -58,6 +69,14 @@ class AnchorLink extends HTMLElement {
     ): void {
         if (this.isConnected && oldValue !== newValue) {
             this.render();
+        }
+    }
+
+    async disconnectedCallback(): Promise<void> {
+        await Promise.resolve();
+        if (!this.isConnected && this._isSetUp) {
+            this.remove();
+            this._isSetUp = false
         }
     }
 }

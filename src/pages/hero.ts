@@ -1,5 +1,4 @@
 import Localize from "../utils/initLocalization";
-import { HeaderNode } from "./header";
 import { HeroImageWithLink } from "../components/C_Hero";
 import { Template, TypeWriterDisplay, DomEvents } from "../utils/helper";
 import { BodyParts, HeroParts } from "../static";
@@ -66,7 +65,7 @@ class HeroTemplate {
 
     private heroDownloadCVButton(): string {
         return `
-            <button id="hrGetCvBtn" type="button" class="hero-btn text-truncate hero-get-cv-btn bg-gradient btn btn-lg fs-4 w-100 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
+            <button id="hrGetCvBtn" type="button" class="hero-btn bee-color-btn text-truncate hero-get-cv-btn bg-gradient btn btn-lg fs-4 w-100 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
                 rounded-5 shadow-sm" title="${Localize.translate("common:hero:buttonTitles:downloadCV")}">
                 <i class="bi bi-paperclip"></i>
                 <span class="hr-btn-text">${Localize.translate("common:hero:buttons:cv")}</span>

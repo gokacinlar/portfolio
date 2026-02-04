@@ -124,6 +124,12 @@
             "btnTitle": "📰 Download RSS Feed",
             "tablePlatformName": "Platform Name",
             "tableLinkName": "RSS Link"
+        },
+        "sitemap": {
+            "btnTitle": "🍁 Sitemap",
+            "tableActionName": "Action",
+            "tableVisitName": "Go",
+            "visitSitemap": "See Sitemap"
         }
     }
 }

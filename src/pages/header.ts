@@ -1,10 +1,9 @@
 import Localize from "../utils/initLocalization";
 import * as Type from "../types/types";
 import { Template, DarkLightMode } from "../utils/helper";
-import { renderModal, listenForBootstrapModalEventDelegation } from "../utils/bootstrap";
+import { listenForBootstrapModalEventDelegation, insertModalsToDom } from "../utils/bootstrap";
 import { HtmxControls } from "../components/M_htmx";
 import ResponsiveNavbar from "../components/responsive/R_navbar";
-import { ModalList } from "../static";
 
 let darkLightModeInstance: DarkLightMode | null = null;
 let cleanupModalDelegation: (() => void) | null = null;
@@ -12,6 +11,7 @@ let cleanupModalDelegation: (() => void) | null = null;
 class Header extends HTMLElement {
     constructor() {
         super();
+        insertModalsToDom("rssModal, langSwitchModal, siteMapModal");
         new Template().createTemplate(new HeaderNode().headerItself(), this);
     }
 
@@ -46,6 +46,7 @@ interface NavLink {
 
 export class HeaderNode {
     constructor() { };
+
     private static readonly SITE_URL: string = "https://dervisoksuzoglu.com.tr";
 
     public headerItself(): string {
@@ -148,7 +149,7 @@ export class HeaderNode {
 
     public static headerHireBtn(): string {
         return `
-            <a id="hrBtn" type="button" class="header-btn-bg-important bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-2"
+            <a id="hrBtn" type="button" class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-2"
                 title="${this.primaryBtn.title}" href="${this.primaryBtn.href}"
                 ${new HtmxControls(this.primaryBtn.htmxOptions ?? this.defaultHtmxOptions).render()}>
                 <i class="${this.primaryBtn.icon}"></i>
@@ -160,7 +161,7 @@ export class HeaderNode {
     private static headerEtc(): string {
         return `
             <div class="d-flex flex-row align-items-center justify-content-center flex-1 gap-2">
-                <button id="hrDayNightBtn" type="button" class="header-day-night-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1"
+                <button id="hrDayNightBtn" type="button" class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1"
                     title="Change Day/Night Mode">
                     <i class="hr-daynight-switch-icon bi bi-sun text-black fw-bold"></i>
                 </button>
@@ -174,11 +175,10 @@ export class HeaderNode {
 
     private static headerLangSwitch(): string {
         return `
-            <button id="hrLangSwitchBtn" type="button" class="header-lang-switch-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1 modal-trigger"
+            <button id="hrLangSwitchBtn" type="button" class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1 modal-trigger"
                 role="button" title="Change Site Language" data-modal="langSwitchModal">
                 <i class="bi bi-translate text-black fw-bold"></i>
             </button>
-            ${renderModal(ModalList.MODALS.filter(modal => modal.id === "rssModal" || modal.id === "langSwitchModal"))}
         `;
     }
 

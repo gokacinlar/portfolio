@@ -278,14 +278,7 @@ html {
         background: var(--clr-one) !important;
     }
 
-    .header-btn-bg-alt,
-    .header-day-night-btn,
-    .header-lang-switch-btn,
-    .header-btn-bg-important,
-    .hero-btn,
-    .header-responsive-btn,
-    .download-rss-button,
-    #aboutFormSubmitBtn {
+    .bee-color-btn {
         @include custom-bee-color();
     }
 
@@ -854,6 +847,11 @@ html {
         @include responsive-styling($mobile-breakpoints, flex-grow, 1);
     }
 
+    .footer-right {
+        @include responsive-styling($mobile-breakpoints, flex-direction, column);
+        @include responsive-styling($mobile-breakpoints, align-items, end);
+    }
+
     .footer-right-brand {
         --def-h: 42px;
         height: var(--def-h) !important;
@@ -1163,6 +1161,10 @@ html {
 
     .glow-white-drop-shadow {
         @include glowing-white-drop-shadow();
+    }
+
+    #sitemapModalBtn {
+        @include def-yellow-button-size();
     }
 
 }

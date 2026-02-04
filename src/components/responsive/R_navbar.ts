@@ -18,7 +18,7 @@ class ResponsiveNavbar {
 
     public responsiveMenuToggleButton(): string {
         return `
-            <button id="responsiveMenuToggleBtn" type="button" class="header-responsive-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm
+            <button id="responsiveMenuToggleBtn" type="button" class="header-responsive-btn bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm
                 d-flex flex-row align-items-center gap-1" title="Change Day/Night Mode">
                 <i class="bi bi-three-dots"></i>
             </button>

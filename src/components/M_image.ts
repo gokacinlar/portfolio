@@ -1,5 +1,6 @@
 class LazyImage extends HTMLElement {
     private _imgElement: HTMLImageElement | null = null;
+    private _isSetUp: boolean = false;
 
     constructor() {
         super();
@@ -11,7 +12,13 @@ class LazyImage extends HTMLElement {
         const alt = this.getAttribute("alt");
         const width = this.getAttribute("width");
         const height = this.getAttribute("height");
-        const imgElement = document.createElement("img") as HTMLImageElement;
+
+        let imgElement = this._imgElement;
+
+        if (!imgElement) {
+            imgElement = document.createElement("img") as HTMLImageElement;
+            this._imgElement = imgElement;
+        }
 
         imgElement.src = src || "";
         imgElement.srcset = srcset || "";
@@ -61,6 +68,14 @@ class LazyImage extends HTMLElement {
     ): void {
         if (this.isConnected && oldValue !== newValue) {
             this.render();
+        }
+    }
+
+    async disconnectedCallback(): Promise<void> {
+        await Promise.resolve();
+        if (!this.isConnected && this._isSetUp) {
+            this.remove();
+            this._isSetUp = false
         }
     }
 }

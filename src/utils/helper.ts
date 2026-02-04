@@ -236,8 +236,8 @@ export class HorizontalMiddleMouseScroll {
 export class DomEvents {
     // Function to append mottos into DOM with sequential order
     public async appendContent(target: HTMLElement, content: Array<string>): Promise<void> {
-        for (let i in content) {
-            let p = document.createElement("p") as HTMLParagraphElement;
+        for (const i in content) {
+            const p = document.createElement("p") as HTMLParagraphElement;
             p.textContent = content[i];
             p.className = "motto-element p-3 fs-6 fw-bolder rounded-5 pe-none shadow-sm mb-0"
             // Use promise-resolve to sequentially place the array items into dom
@@ -276,7 +276,7 @@ export class TypeWriterDisplay {
 
     private type(): void {
         const currentText = this.heroParts.occupationsData[this.textIndex];
-        let displayedText = currentText.substring(0, this.charIndex);
+        const displayedText = currentText.substring(0, this.charIndex);
 
         const textSpan = this.targetElement.querySelector(".ocps-written-text");
         if (textSpan) {
@@ -347,14 +347,14 @@ export class PromoFunctions {
         }
     }
 
-    public bindVerticalTabEventsAndautoCycleTabs(data: any): void {
+    public bindVerticalTabEventsAndautoCycleTabs(data: Object): void {
         const buttons = Array.from(document.querySelectorAll(".promo-desc-tab-group-btn")) as HTMLButtonElement[];
         if (!buttons.length) {
             return;
         }
 
         let index: number = 0;
-        let duration: number = 5000;
+        const duration: number = 5000;
         let activeInterval: ReturnType<typeof setInterval> | null = null;
 
         // Mobile & viewport detection
@@ -464,7 +464,7 @@ export class ScrollRevealAction {
     }
 }
 
-export function formatDate(date: Date): String {
+export function formatDate(date: Date): string {
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })
 };
 
@@ -571,4 +571,8 @@ export function addBackgroundBasedOnVerticalScroll(mainElement: string, target: 
 
     // Return a clean state after all
     return () => mainHtmlElement.removeEventListener("scroll", handleScroll);
+}
+
+export function downloadFileFromWebsite() {
+
 }

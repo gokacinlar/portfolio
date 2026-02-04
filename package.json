@@ -30,6 +30,7 @@
     "dev": "webpack --config webpack.config.js --mode development",
     "live": "webpack serve --config webpack.config.js --mode development",
     "test": "jest",
+    "lint": "npx eslint eslint.config.mts",
     "toc": "i18next-resources-for-ts toc -i ./src/locales/en ./src/locales/tr -o ./src/types/resources.ts",
     "toc:interface": "i18next-resources-for-ts interface -i ./src/locales/en -o ./src/types/resources.d.ts",
     "composer:install": "composer install",
@@ -37,6 +38,7 @@
     "generate:robotstxt": "npx tsx ./src/scripts/robotsTxt.ts"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@types/bootstrap": "^5.2.10",
     "@types/grecaptcha": "^3.0.9",
     "@types/jquery": "^3.5.32",
@@ -54,6 +56,7 @@
     "eslint": "^9.39.2",
     "eslint-webpack-plugin": "^5.0.2",
     "generate-robotstxt": "^8.0.3",
+    "globals": "^17.3.0",
     "html-webpack-plugin": "^5.6.3",
     "i18next-resources-for-ts": "^1.8.0",
     "jest": "^30.2.0",
@@ -70,6 +73,7 @@
     "tslib": "^2.8.1",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
+    "typescript-eslint": "^8.54.0",
     "webpack": "^5.99.9",
     "webpack-bundle-analyzer": "^5.1.0",
     "webpack-cli": "^6.0.1",

@@ -1,8 +1,8 @@
-import { ModalConfig } from "../static";
+import { ModalConfig, ModalList } from "../static";
 
 let delegatedModalClickListener: ((event: Event) => void) | null = null;
 
-export function renderModal(modalSource: ModalConfig[]) {
+function renderModal(modalSource: ModalConfig[]) {
     const modalsHtml = modalSource.map(modal => `
         <div id="${modal.id}" class="modal fade" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -22,6 +22,16 @@ export function renderModal(modalSource: ModalConfig[]) {
     return `
         ${modalsHtml}
     `;
+}
+
+export function insertModalsToDom(modalIds: string): void {
+    const ids = modalIds.split(", ").map(id => id.trim());
+    const modalsToRender = ModalList.MODALS.filter(modal =>
+        ids.includes(modal.id)
+    );
+
+    const html = renderModal(modalsToRender);
+    document.body.insertAdjacentHTML("beforeend", html);
 }
 
 // This function now ensures the listener is added only once and returns a cleanup function.

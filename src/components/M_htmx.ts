@@ -1,6 +1,6 @@
 import DOMPurify from "dompurify";
 
-interface HTMXOptions {
+export interface HTMXOptions {
     hxget: string;
     hxtrigger: "click" | "change" | "mouseover";
     hxswap: "innerHTML" | "outerHTML" | "beforebegin" | "afterbegin" | "beforeend" | "afterend";

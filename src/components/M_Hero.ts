@@ -35,13 +35,13 @@ export class HeaderHireButton extends HTMLElement {
         const icon = this.getAttribute("icon") || "bi bi-star-half text-black fw-bold pulsate-fwd";
         const btnTextKey = this.getAttribute("btn-text-key") || "common:hero:buttons:workWMe";
         const htmxOptionsJson = this.getAttribute("htmx-options");
-        let htmxOptions: any = {};
+        let htmxOptions;
 
         if (htmxOptionsJson) {
             try {
                 htmxOptions = JSON.parse(htmxOptionsJson);
-            } catch (e) {
-                console.warn("Invalid htmx-options JSON");
+            } catch (error: unknown) {
+                console.warn("Invalid htmx-options JSON" + error);
             }
         }
 
@@ -49,7 +49,7 @@ export class HeaderHireButton extends HTMLElement {
         this._linkElement.id = "hrBtn";
         this._linkElement.href = href;
         this._linkElement.title = title;
-        this._linkElement.className = "header-btn-bg-important bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-2";
+        this._linkElement.className = "bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-2";
         this._linkElement.innerHTML = `
             <i class="${icon}"></i>
             <span class="hr-btn-text">${Localize.translate(btnTextKey)}</span>

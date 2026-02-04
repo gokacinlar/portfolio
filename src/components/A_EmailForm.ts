@@ -36,7 +36,7 @@ export function renderEmailTable(): string {
                 <tr>
                     <td colspan="2">
                         <div class="d-flex flex-row align-items-center justify-content-end">
-                            <button id="aboutFormSubmitBtn" type="submit" class="bg-gradient btn btn-lg rounded-5 fs-5 shadow-sm" title="Submit Form">Send Message</button>
+                            <button id="aboutFormSubmitBtn" type="submit" class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-5 shadow-sm" title="Submit Form">Send Message</button>
                         </div>
                     </td>
                 </tr>
