@@ -54,7 +54,8 @@ export class HeaderHireButton extends HTMLElement {
             <i class="${icon}"></i>
             <span class="hr-btn-text">${Localize.translate(btnTextKey)}</span>
         `;
-        if (Object.keys(htmxOptions).length > 0) {
+
+        if (Object.keys(htmxOptions || {}).length > 0) {
             this._linkElement.innerHTML += new HtmxControls(htmxOptions).render();
         }
 
