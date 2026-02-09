@@ -26,29 +26,32 @@ class ScrollToTopButton extends HTMLElement {
     private handleUpArrowChange() {
         const upArrow = document.querySelector(".bi-arrow-up-circle") as HTMLElement;
         if (upArrow) {
-            try {
-                this.addEventListener("click", () => {
-                    if (!this._isArrowFilled) {
-                        upArrow.classList.remove("bi-arrow-up-circle");
-                        upArrow.classList.add("bi-arrow-up-circle-fill");
-                        this._isArrowFilled = true;
+            this.addEventListener("click", () => {
+                if (!this._isArrowFilled) {
+                    upArrow.classList.remove("bi-arrow-up-circle");
+                    upArrow.classList.add("bi-arrow-up-circle-fill");
+                    this._isArrowFilled = true;
 
-                        setTimeout(() => {
-                            upArrow.classList.remove("bi-arrow-up-circle-fill");
-                            upArrow.classList.add("bi-arrow-up-circle");
-                            this._isArrowFilled = false;
-                        }, 500);
-                    }
-                });
-            } catch (error: unknown) {
-                throw new Error("Something bad happened: " + error);
-            }
+                    setTimeout(() => {
+                        upArrow.classList.remove("bi-arrow-up-circle-fill");
+                        upArrow.classList.add("bi-arrow-up-circle");
+                        this._isArrowFilled = false;
+                    }, 500);
+                }
+            });
         }
     }
 
     private toggleVisibility = (): void => {
         this._isVisible = window.scrollY > ScrollToTopButton.SCROLL_Y_VAL;
         this.style.display = this._isVisible ? "block" : "none";
+
+        // Handle footer visibility
+        if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+            this.style.display = "none";
+        }
+
+        this.handleHidingOnFooter();
     }
 
     private scrollToTop = (): void => {
@@ -62,6 +65,13 @@ class ScrollToTopButton extends HTMLElement {
             top: ScrollToTopButton.TOP_VAL,
             behavior: prefersReducedMotion ? "instant" : "smooth",
         });
+    }
+
+    // Hide element to clear display on footer
+    private handleHidingOnFooter(): void {
+        if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+            this.style.display = "none";
+        }
     }
 
     connectedCallback(): void {
