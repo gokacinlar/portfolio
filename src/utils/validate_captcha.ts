@@ -38,9 +38,11 @@ class ValidateCaptcha {
 
                         const result = await response.json();
                         if (result.success) {
-                            console.log("CAPTCHA SUCCESS!");
+                            insertToastifiedMessage("CAPTCHA has been verified. Beginning download.")
+                            console.log("CAPTCHA Success! Beginning download.");
                         } else {
                             console.error("CAPTCHA verification failed" + result.error);
+                            insertToastifiedMessage("CAPTCHA verification failed. See console for more info (F12).");
                         }
                     } catch (error: unknown) {
                         console.error("Verification error:", error);
