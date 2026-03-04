@@ -3,6 +3,7 @@ import DOMPurify from "dompurify";
 import ScrollReveal from "scrollreveal";
 import Toastify from "toastify-js";
 import { HeroParts, WhiteListedURLs } from "../static";
+import { domSanitizeOptions } from "../domSanitizeOptions";
 
 // Centralized Toastify configuration
 export const TOAST_CONFIG = {
@@ -107,21 +108,25 @@ export class DarkLightMode {
         }
     }
 
-    public dayNightModeSwitching(elem: HTMLButtonElement, elemToBeManip: string) {
+    public dayNightModeSwitching(elem: HTMLButtonElement, elemToBeManip: string): void {
         this.iconElement = document.querySelector(`${elemToBeManip}`) as HTMLElement;
 
         // Set initial icon state based on current theme
         this.updateIcon();
-        elem.addEventListener("click", () => {
-            // Toggle between light and dark (override auto mode)
-            const currentEffectiveTheme = this.getEffectiveTheme();
-            this.currentTheme = currentEffectiveTheme === "dark" ? "light" : "dark";
+        if (elem) {
+            elem.addEventListener("click", () => {
+                // Toggle between light and dark (override auto mode)
+                const currentEffectiveTheme = this.getEffectiveTheme();
+                this.currentTheme = currentEffectiveTheme === "dark" ? "light" : "dark";
 
-            this.notifyUserAboutThemeChange();
-            this.saveThemeToStorage(this.currentTheme);
-            this.applyTheme();
-            this.updateIcon();
-        });
+                this.notifyUserAboutThemeChange();
+                this.saveThemeToStorage(this.currentTheme);
+                this.applyTheme();
+                this.updateIcon();
+            });
+        } else {
+            console.error("Cannot find element:" + elem);
+        }
     }
 
     // Method to clean up event listeners
@@ -144,15 +149,7 @@ export class Template {
         }
 
         const template = document.createElement("template") as HTMLTemplateElement;
-        const sanitizedContent = DOMPurify.sanitize(content, {
-            ADD_ATTR: ["nonce"],
-            CUSTOM_ELEMENT_HANDLING: {
-                tagNameCheck: /^[a-z]+-/,
-                attributeNameCheck: /.*/,
-                allowCustomizedBuiltInElements: false,
-            }
-        });
-
+        const sanitizedContent = DOMPurify.sanitize(content, domSanitizeOptions);
         template.innerHTML = sanitizedContent;
         try {
             if (!content || !target) {
