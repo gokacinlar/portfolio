@@ -5,18 +5,25 @@ use Exception;
 
 class DownloadCv
 {
-    protected static string $_pdfUrl = "";
 
     public function __construct(string $url)
     {
-        self::$_pdfUrl = $url;
         $this->rateLimitCheck(key: "download_cv", limit: 5, period: 60); # Limit: 5 requests per 60 seconds
         $this->download(input: $url);
     }
 
     private function download(string $input): void
     {
-        self::initDownloadCv(input: $input);
+        try {
+            $file = realpath(path: $input);
+            if (file_exists(filename: $file)) {
+                $this->initDownloadCv(file: $file);
+            } else {
+                throw new Exception(message: "File does not exist: " . $file);
+            }
+        } catch (Exception $error) {
+            throw new Exception(message: "Error while downloading PDF: " . $error->getMessage());
+        }
     }
 
     private function rateLimitCheck(string $key, int $limit, int $period): void
@@ -60,31 +67,25 @@ class DownloadCv
         file_put_contents(filename: $filename, data: json_encode(value: $data));
     }
 
-    private static function initDownloadCv(string $input): void
+    private function initDownloadCv(string $file): void
     {
-        $file = $_GET[$input] . ".pdf";
+        try {
+            header(header: "Content-Disposition: attachment; filename=\"" . basename(path: $file) . "\"");
+            header(header: "Content-Length: " . filesize(filename: $file));
+            $this->setHeaders();
+            $this->cleanBuffer();
 
-        if (file_exists(filename: $file)) {
-            try {
-                header(header: "Content-Disposition: attachment; filename=\"" . basename(path: $file) . "\"");
-                header(header: "Content-Length: " . filesize(filename: $file));
-                header(header: "Content-Type: application/pdf");
-                header(header: "Content-Description: File Transfer");
-                self::setHeaders();
-                self::cleanBuffer();
-
-                readfile(filename: $file);
-                exit;
-            } catch (\Throwable $error) {
-                throw new Exception(message: "Error while downloading PDF: " . $error->getMessage());
-            }
-        } else {
-            throw new Exception(message: "File does not exist: " . $file);
+            readfile(filename: $file);
+            exit;
+        } catch (\Throwable $error) {
+            throw new Exception(message: "Error while downloading PDF: " . $error->getMessage());
         }
     }
 
     private static function setHeaders(): void
     {
+        header(header: "Content-Type: application/pdf");
+        header(header: "Content-Description: File Transfer");
         header(header: "X-Content-Type-Options: nosniff");
         header(header: "X-Frame-Options: DENY");
         header(header: "Strict-Transport-Security: max-age=31536000; includeSubDomains");
@@ -94,6 +95,8 @@ class DownloadCv
         header(header: 'Content-Security-Policy: default-src "self";');
         header(header: "Accept-Ranges: bytes");
         header(header: "Content-Transfer-Encoding: binary");
+        header(header: "Content-Disposition: inline");
+        header(header: "Accept-Ranges: bytes");
     }
 
     private static function cleanBuffer(): void
