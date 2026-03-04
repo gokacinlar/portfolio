@@ -1167,6 +1167,11 @@ html {
         @include def-yellow-button-size();
     }
 
+
+    .header-lang-switch-flag {
+        width: 36px !important;
+        height: 36px !important;
+    }
 }
 
 @layer secondary {}

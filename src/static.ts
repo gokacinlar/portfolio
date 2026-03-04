@@ -236,20 +236,11 @@ export class ModalList {
                 <div class="lang-switch-box rounded-5 bg-gradient p-0">
                     <div class="d-flex flex-row align-items-center justify-content-center gap-2 w-100 rounded-pill p-1">
                         <button id="changeLngToEn" class="btn btn-sm btn-secondary-subtle flex-grow-1 fs-5 fw-medium rounded-pill text-black d-flex p-0 gap-2 flex-row align-items-center justify-content-center">
-                            <component-lazy-image class="img-fluid"
-                                src="../assets/images/static/svg/flags/uk.svg"
-                                alt="British Flag"
-                                width="32"
-                                height="32">
-                            </component-lazy-image> English
+                            <img class="header-lang-switch-flag img-fluid" src="./assets/images/static/svg/uk-flag.svg" title="Change Language to English">
+                            English
                         </button>
                         <button id="changeLngToTr" class="btn btn-sm btn-secondary-subtle flex-grow-1 fs-5 fw-medium rounded-pill text-black d-flex p-0 gap-2 flex-row align-items-center justify-content-center">
-                            <component-lazy-image class="img-fluid"
-                                src="../assets/images/static/svg/flags/tr.svg"
-                                alt="Turkish Flag"
-                                width="32"
-                                height="32">
-                            </component-lazy-image> Türkçe
+                            <img class="header-lang-switch-flag img-fluid" src="./assets/images/static/svg/turkish-flag.svg" title="Dili Türkçe'ye Çevir"> Türkçe
                         </button>
                     </div>
                 </div>
