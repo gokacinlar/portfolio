@@ -6,7 +6,7 @@ export class PromoTitle {
     constructor(private titleText: string) { }
 
     public render(): string {
-        return `
+        return /*html*/ `
             <div class="promo-title-container text-center w-100 py-2 mb-3">
                 <h3 class="promo-title display-4 mb-0 fw-bolder pe-none">
                     ${this.titleText}
@@ -23,7 +23,7 @@ export class PromoTitle {
 
 export class PromoDescription {
     public renderPromoDesc(): string {
-        return `
+        return /*html*/ `
             <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
                 <ul class="promo-featured-tabs list-unstyled d-flex flex-column gap-4 align-items-baseline">
                     <li>
@@ -45,7 +45,7 @@ export class PromoDescription {
     }
 
     public renderTabGroupBtn(btnText: string, dataType: string): string {
-        return `
+        return /*html*/ `
             <button class="promo-desc-tab-group-btn btn btn-lg fs-1 d-flex flex-row align-items-center justify-items-start" data-type="${dataType}">
                 <span style="width: 64px">
                     <div class="progress p-vertical rounded-0">
@@ -62,7 +62,7 @@ export class PromoDescription {
 
 export class PromoSkillsShowCase {
     public renderPromoSkillsShowCase(data: Type.PromoSkills): string {
-        return `
+        return /*html*/ `
             <figure class="promo-skills-fig figure d-flex flex-column align-items-center justify-content-center mb-0">
                 <a href="${data.skillAnchor}" target="_blank">
                     <img src="${data.skillLogoSrc}" alt="${data.skillName}" title="${data.skillName}"
@@ -76,7 +76,7 @@ export class PromoSkillsShowCase {
 
 export class PromoCard {
     public renderPromoCard(data: Type.PromoCardData): string {
-        return `
+        return /*html*/ `
             <div id="promoCard" class="card d-flex flex-column align-items-center justify-content-between shadow-sm rounded-4 px-1 py-1">
                 <div class="card-body d-flex flex-column align-items-center justify-content-between px-2 py-2">
                     <div class="text-center">
@@ -104,7 +104,7 @@ export class PromoCard {
 
 export class PromoTeachEnglish {
     public render(): string {
-        return `
+        return /*html*/ `
             <div class="col-sm">
                 <div class="pt-head">
                     <p class="h1">${Localize.translate("common:teach:desc:subtitle")}</p>
@@ -149,7 +149,7 @@ export class PromoTeachEnglish {
 
 export class PromoMotto {
     public render(): string {
-        return `
+        return /*html*/ `
             <div class="promo-motto-quote-container bg-gradient rounded-5 px-4 py-4 shadow-sm d-flex flex-row align-items-center justify-content-baseline gap-4">
                 <div>
                     <i class="promo-motto-quote-icon bi bi-quote"></i>
@@ -182,7 +182,7 @@ export class PromoInterested {
     }
 
     public render(): string {
-        return `
+        return /*html*/ `
             <div class="promo-interested-container row rounded-5 shadow-sm">
                 ${this.renderTabs(this.data)}
             </div>
@@ -191,7 +191,7 @@ export class PromoInterested {
 
     private renderTabs(data: InterestedOptions[] = this.data): string {
         return data.map((item) => {
-            return `
+            return /*html*/ `
                 <section class="container-fluid p-4">
                     <div class="row gy-4 gx-4">
                         <div class="col-lg-6 col-md-6 col-sm">

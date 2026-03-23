@@ -62,7 +62,7 @@ class PromoTemplate {
     });
 
     public promoTemplate(): string {
-        return `
+        return /*html*/ `
             <section id="promo" class="mx-2 my-2 rounded-5">
                 <div class="container-fluid w-100 px-2 py-2 d-flex flex-column gap-4">
                     <div class="promo-videos-container row col-12 mx-auto d-flex flex-row gap-3 align-items-center justify-content-center">
@@ -100,13 +100,13 @@ class PromoTemplate {
     }
 
     private promoSkills(): string {
-        return `
+        return /*html*/ `
             ${new PromoTitle(Localize.translate("common:skills:title"))}
         `;
     }
 
     private promoProjectCards(): string {
-        return `
+        return /*html*/ `
             <div class="promo-scrollable">
                 <div id="promoCardContainer" class="promo-card-container d-flex flex-wrap gap-3 justify-content-center"></div>
             </div>
@@ -114,21 +114,21 @@ class PromoTemplate {
     }
 
     private promoVideos(): string {
-        return `
+        return /*html*/ `
             <div class="col-sm overflow-hidden px-1">${this.videoOne.render(Localize.translate("common:video:teach"))}</div>
             <div class="col-sm overflow-hidden px-1">${this.videoTwo.render(Localize.translate("common:video:code"))}</div>
         `;
     }
 
     private promoDesc(): string {
-        return `
+        return /*html*/ `
             ${new PromoTitle(Localize.translate("common:desc:descTitle"))}
             <div id="promo_Description" class="container-fluid w-100 d-flex flex-row overflow-hidden">${new PromoDescription().renderPromoDesc()}</div>
         `;
     }
 
     private promoEngTeach(): string {
-        return `
+        return /*html*/ `
             ${new PromoTitle(Localize.translate("common:teach:title"))}
             <div id="promoTE" class="container-fluid w-100 px-4 py-4 my-4 d-flex flex-row gap-2">
                 ${new PromoTeachEnglish().render()}
@@ -137,7 +137,7 @@ class PromoTemplate {
     }
 
     private promoMotto(): string {
-        return `
+        return /*html*/ `
             ${new PromoTitle(Localize.translate("common:quoteAboutEdu:title"))}
             <div class="promo-motto-base w-100">
                 ${new PromoMotto().render()}
@@ -146,7 +146,7 @@ class PromoTemplate {
     }
 
     private promoWork(): string {
-        return `
+        return /*html*/ `
             ${new PromoTitle(Localize.translate("common:work:title"))}
             <div id="promoWork">
                 ${new PromoInterested().render()}

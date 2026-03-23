@@ -13,7 +13,7 @@ class FooterNodes {
     constructor() { }
 
     public footerTemplate(): string {
-        return `
+        return /*html*/ `
             <section class="footer-container rounded-top-5 mx-2 my-2 px-2 py-2 d-flex flex-row align-content-center justify-content-between gap-2">
                 <div class="footer-left d-flex align-items-start gap-3 px-2 py-2 rounded-5 bg-secondary-subtle shadow-sm">
                     ${this.footerLeft()}
@@ -38,7 +38,7 @@ class FooterNodes {
     public footerLeft(): string {
         const personalLinks = this.createPersonalLinks();
 
-        return `
+        return /*html*/ `
             <nav>
                 <ul class="footer-promo-links list-unstyled d-flex flex-row align-items-start justify-content-center gap-1 mb-0">
                     ${personalLinks}
@@ -66,7 +66,7 @@ class FooterNodes {
         const brandingHTML = brandingLinks.map(link => `<li>${this.createFooterLink(link.href, link.ariaLabel, link.src, link.title)}</li>`)
             .join("");
 
-        return `
+        return /*html*/ `
             <ul class="footer-brading-list list-unstyled d-flex flex-row align-items-center gap-2 px-2 mb-0 h-100">
                 ${brandingHTML}
             </ul>
@@ -93,7 +93,7 @@ class FooterNodes {
     }
 
     private createFooterLink(href: string, ariaLabel: string, src: string, title: string): string {
-        return `
+        return /*html*/ `
             <a href="${href}" target="_blank" aria-label="${ariaLabel}">
                 <img class="footer-right-brand rounded-pill img-fluid w-100 h-100"
                     src="../assets/images/static/svg/${src}" title="${title}">

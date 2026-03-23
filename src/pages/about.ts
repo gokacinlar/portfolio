@@ -71,8 +71,8 @@ class About extends HTMLElement {
 
     private readonly skillConfigs: SkillConfig[] = [
         {
-            imageOne: "../assets/images/static/svg/flags/uk.svg",
-            imageTwo: "../assets/images/static/svg/flags/tr.svg",
+            imageOne: "../assets/images/static/svg/turkish-flag.svg",
+            imageTwo: "../assets/images/static/svg/uk-flag.svg",
             title: "English Teacher"
         },
         {
@@ -116,7 +116,7 @@ class About extends HTMLElement {
     }
 
     private renderContent(): string {
-        return `
+        return /*html*/ `
             <section id="about-grid" class="container-fluid mb-3">
                 <div id="about-grid-parent" class="row gy-3 gx-3 px-2">
                     <div class="col-12 col-md-4 col-sm">
@@ -131,7 +131,7 @@ class About extends HTMLElement {
     }
 
     private renderAside(): string {
-        return `
+        return /*html*/ `
         <aside id="about-aside" class="bg-gradient rounded-5 shadow-sm py-3 px-4 h-100">
             <div>
                 ${this.renderHeroSection()}
@@ -144,7 +144,7 @@ class About extends HTMLElement {
     }
 
     private renderMain(): string {
-        return `
+        return /*html*/ `
         <section id="about-main" class="bg-gradient rounded-5 shadow-sm py-3 px-3 overflow-auto">
             ${new ScrollSpy().render()}
         </section>
@@ -153,7 +153,7 @@ class About extends HTMLElement {
 
     private renderHeroSection(): string {
         const { name, className, link, imageSrc, srcSet } = this.heroConfig;
-        return `
+        return /*html*/ `
             ${new HeroImageWithLink().render(name, className, link, imageSrc, srcSet)}
             <div class="pe-none">
                 <h1 class="aside-title fw-medium mt-3 mb-0 text-center">${name}</h1>
@@ -163,7 +163,7 @@ class About extends HTMLElement {
     }
 
     private renderSkillsSection(): string {
-        return `
+        return /*html*/ `
             <div>
                 ${this.skillConfigs.map(skill => this.renderSkill(skill)).join("")}
                 <hr class="border border-2 border-secondary">
@@ -172,7 +172,7 @@ class About extends HTMLElement {
     }
 
     private renderSkill({ imageOne, imageTwo, title }: SkillConfig): string {
-        return `
+        return /*html*/ `
             <h2 class="aside-skill-name d-flex flex-row align-items-center gap-1 mb-1">
                 <div class="d-flex align-items-center gap-1 px-1 py-1">
                     <img src="${imageOne}" class="aside-ico img-fluid lazyload rounded-1">
@@ -184,7 +184,7 @@ class About extends HTMLElement {
     }
 
     private renderSocials(): string {
-        return `
+        return /*html*/ `
             <div class="d-flex flex-row flex-wrap align-items-start justify-content-evenly gap-1">
                 ${this.SocialsElements.map(({ name, icon, href }) => `
                     <div class="aside-socials mb-2 rounded-pill shadow-sm flex-grow-1">
@@ -202,7 +202,7 @@ class About extends HTMLElement {
     }
 
     private renderMotto(): string {
-        return `
+        return /*html*/ `
             <blockquote class="blockquote text-center mt-auto mb-auto">
                 <p><em>Teaching for <strong>life</strong>, coding for <strong>passion</strong>.</em></p>
             </blockquote>

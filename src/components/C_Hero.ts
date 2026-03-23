@@ -1,6 +1,6 @@
 export class HeroImageWithLink {
     public render(title: string, id: string, href: string, src: string, srcset: string): string {
-        return `
+        return /*html*/ `
             <a id="${id}" href="${href}" class="d-flex justify-content-center link-offset-2 link-underline link-underline-opacity-0 w-100">
                 <img
                     class="hero-logo img-fluid lazyload"

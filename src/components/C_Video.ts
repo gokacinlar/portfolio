@@ -19,7 +19,7 @@ export class VideoElement {
     }
 
     public render(header: string): string {
-        return `
+        return /*html*/ `
             <div id="component_Video" class="position-relative shadow">
                 <video id="promoVideo" class="promo-video rounded-5 w-100 pe-none" preload="metadata" poster="${this.posterSrc}" loading="lazy"
                     disablepictureinpicture loop muted autoplay

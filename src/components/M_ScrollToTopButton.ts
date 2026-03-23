@@ -15,7 +15,7 @@ class ScrollToTopButton extends HTMLElement {
     }
 
     private content(): string {
-        return `
+        return /*html*/ `
             <div class="btn-warning text-black bg-gradient d-flex flex-row align-items-center justify-content-center gap-2 p-2 fw-medium rounded-5">
                 <i class="bi bi-arrow-up-circle fs-4 fw-medium"></i>
                 <span>Scroll to Top</span>

@@ -32,7 +32,7 @@ class Updates extends HTMLElement {
     }
 
     private render(): string {
-        return `
+        return /*html*/ `
             <section class="container-fluid h-100">
                 <div id="blogContainer" class="row gx-3 mb-3 h-100">
                     <div class="bwrapper col-md-2 col-lg-4 col-sm-2 col-12 h-100">
@@ -50,7 +50,7 @@ class Updates extends HTMLElement {
     }
 
     private initiateOffCanvas() {
-        return `
+        return /*html*/ `
             <div id="offCanvasControls" class="d-flex flex-row align-items-center justify-content-end gap-2" role="group" aria-label="${Localize.translate("common:offcanvas:btnMessage")}">
                 ${this.downloadRssButton()}
                 <button class="btn btn-sm btn-warning rounded-pill shadow-sm" type="button" id="displayOffCanvasBtn" data-bs-toggle="offcanvas" data-bs-target="#blogAsideOffcanvasTemplate"
@@ -62,7 +62,7 @@ class Updates extends HTMLElement {
     }
 
     private blogAside(): string {
-        return `
+        return /*html*/ `
             <aside id="blogAside" class="h-100 rounded-5 px-3 py-3 shadow-sm">
                 <section id="rssInfo">
                     ${this.downloadRssButton()}
@@ -73,7 +73,7 @@ class Updates extends HTMLElement {
     }
 
     private downloadRssButton(): string {
-        return `
+        return /*html*/ `
             <button id="downloadRssBtn" type="button" class="download-rss-button bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1 modal-trigger"
                 role="button" title="${Localize.translate("common:modals:rss:btnTitle")}" data-modal="rssModal">
                 <i class="bi bi-rss-fill fw-bold"></i>
@@ -82,7 +82,7 @@ class Updates extends HTMLElement {
     }
 
     private offCanvas(): string {
-        return `
+        return /*html*/ `
             <div class="offcanvas offcanvas-start rounded-end-4" tabindex="-1" id="blogAsideOffcanvasTemplate" aria-labelledby="blogAsideOffcanvas" data-bs-scroll="true" data-bs-backdrop="true">
                 <div class="offcanvas-header bg-secondary-subtle rounded-end-4">
                     <h5 class="offcanvas-title" id="blogAsideOffcanvas">Latest updates</h5>

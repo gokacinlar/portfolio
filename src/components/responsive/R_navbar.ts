@@ -17,7 +17,7 @@ class ResponsiveNavbar {
     private documentClickHandler?: (e: MouseEvent) => void;
 
     public responsiveMenuToggleButton(): string {
-        return `
+        return /*html*/ `
             <button id="responsiveMenuToggleBtn" type="button" class="header-responsive-btn bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm
                 d-flex flex-row align-items-center gap-1" title="Change Day/Night Mode">
                 <i class="bi bi-three-dots"></i>
@@ -29,7 +29,7 @@ class ResponsiveNavbar {
     }
 
     public render(): string {
-        return `
+        return /*html*/ `
             <div id="responsiveNavbar" class="position-relative" data-type="closed">
                 <nav id="headerRM" class="rounded-5 mt-2 shadow-lg d-flex flex-column justify-content-between">
                     <div>

@@ -26,7 +26,7 @@ class HeroTemplate {
     constructor() { }
 
     public hero(): string {
-        return `
+        return /*html*/ `
             <section class="mx-2 my-2 px-2 py-2">
                 <div id="hero" class="container mx-0 my-0 rounded-5 mw-100 bg-gradient shadow-sm py-5 d-flex flex-column justify-content-between">
                     <div class="row align-items-center justify-content-evenly hero-child px-4">
@@ -64,7 +64,7 @@ class HeroTemplate {
     }
 
     private heroDownloadCVButton(): string {
-        return `
+        return /*html*/ `
             <button id="hrGetCvBtn" type="button" class="hero-btn bee-color-btn text-truncate hero-get-cv-btn bg-gradient btn btn-lg fs-4 w-100 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
                 rounded-5 shadow-sm" title="${Localize.translate("common:hero:buttonTitles:downloadCV")}">
                 <i class="bi bi-paperclip"></i>

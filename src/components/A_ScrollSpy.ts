@@ -20,7 +20,7 @@ class ScrollSpy {
     }
 
     private renderTable(headers: string[], rows: Type.TableRow[], id: string): string {
-        return `
+        return /*html*/ `
             <div class="table-responsive">
                 <table id="${id}" class="table table-striped table-bordered">
                     <thead>
@@ -37,7 +37,7 @@ class ScrollSpy {
     }
 
     public render(): string {
-        return `
+        return /*html*/ `
             <section id="aside-content" class="aside-main d-flex flex-column gap-4">
                 <div id="about-scroll-spy-id" class="z-0 sticky-top scrollspy-nav list-group d-flex flex-row align-items-center justify-content-between fs-4 fw-medium gap-2 text-truncate rounded-pill">
                     ${this.renderNavLinks()}

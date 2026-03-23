@@ -1,5 +1,5 @@
 export function renderEmailTable(): string {
-    return `
+    return /*html*/ `
         <table class="table table-bordered align-middle table-responsive">
             <tbody>
                 <tr>
@@ -46,7 +46,7 @@ export function renderEmailTable(): string {
 }
 
 export function renderEmailForm(): string {
-    return `
+    return /*html*/ `
         <form id="emailForm" class="was-validated" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="${process.env.WEB3_FORM_ACCESS_KEY}">
             <input type="hidden" name="subject" value="New Message">

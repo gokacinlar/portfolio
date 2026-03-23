@@ -50,7 +50,7 @@ export class HeaderNode {
     private static readonly SITE_URL: string = "https://dervisoksuzoglu.com.tr";
 
     public headerItself(): string {
-        return `
+        return /*html*/ `
             <nav class="m-1 px-2 py-2">
                 <ul class="list-unstyled mb-0 d-flex flex-row align-items-center justify-content-between position-relative">
                     <li class="d-inline-flex header-left">
@@ -69,7 +69,7 @@ export class HeaderNode {
     }
 
     public static headerLeftIcon(): string {
-        return `
+        return /*html*/ `
             <a href="${HeaderNode.SITE_URL}">
                 <img
                     class="header-logo img-fluid img-responsive lazyload"
@@ -88,7 +88,7 @@ export class HeaderNode {
     }
 
     public static headerMiddle(): string {
-        return `
+        return /*html*/ `
             <nav id="headerM">
                 <ul class="header-middle-nav-links list-unstyled mb-0 d-flex flex-row gap-1 text-truncate">
                     ${HeaderNode.headerMiddleContent()}
@@ -148,7 +148,7 @@ export class HeaderNode {
     }
 
     public static headerHireBtn(): string {
-        return `
+        return /*html*/ `
             <a id="hrBtn" type="button" class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-2"
                 title="${this.primaryBtn.title}" href="${this.primaryBtn.href}"
                 ${new HtmxControls(this.primaryBtn.htmxOptions ?? this.defaultHtmxOptions).render()}>
@@ -159,7 +159,7 @@ export class HeaderNode {
     }
 
     private static headerEtc(): string {
-        return `
+        return /*html*/ `
             <div class="d-flex flex-row align-items-center justify-content-center flex-1 gap-2">
                 <button id="hrDayNightBtn" type="button" class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1"
                     title="Change Day/Night Mode">
@@ -174,7 +174,7 @@ export class HeaderNode {
     }
 
     private static headerLangSwitch(): string {
-        return `
+        return /*html*/ `
             <button id="hrLangSwitchBtn" type="button" class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1 modal-trigger"
                 role="button" title="Change Site Language" data-modal="langSwitchModal">
                 <i class="bi bi-translate text-black fw-bold"></i>
