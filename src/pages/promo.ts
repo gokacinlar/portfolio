@@ -1,7 +1,7 @@
 import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish, PromoMotto, PromoInterested } from "../components/C_Promo";
 import { VideoElement } from "../components/C_Video";
 import { Template, PromoFunctions, HorizontalMiddleMouseScroll, ScrollRevealAction } from "../utils/helper";
-import { PromoParts } from "../static";
+import { PromoParts, Banner } from "../static";
 import posts from '../assets/json/posts.json';
 import skills from '../assets/json/promo_Skills.json';
 import Localize from "../utils/initLocalization";
@@ -94,6 +94,9 @@ class PromoTemplate {
                     <div class="promo-work-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoWork()}
                     </div>
+                    <div class="promo-work-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
+                        ${this.promoBanner()}
+                    </div>
                 </div>
             </section>
         `;
@@ -151,6 +154,16 @@ class PromoTemplate {
             <div id="promoWork">
                 ${new PromoInterested().render()}
             </div>
+        `;
+    }
+
+    private promoBanner(): string {
+        return /*html*/`
+            <pre class="d-flex justify-content-center align-items-center">
+                <code>
+                    ${Banner.BANNER_ASCII}
+                </code>
+            </pre>
         `;
     }
 }
