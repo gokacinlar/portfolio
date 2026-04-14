@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "esnext",
     /* Modern ES module output */
-    "module": "es2022",
+    "module": "esnext",
     /* Use Node-style resolution to allow importing from node_modules */
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     /* Allow default imports from CommonJS modules */
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -16,10 +16,10 @@
     "noUnusedLocals": false,
     "noUnusedParameters": true,
     "useDefineForClassFields": true,
-    "baseUrl": "./src",
+    "noUncheckedSideEffectImports": false,
     "paths": {
       "@types": [
-        "@types"
+        "./@types/grecaptcha"
       ],
     },
     "typeRoots": [
