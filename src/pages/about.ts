@@ -71,8 +71,8 @@ class About extends HTMLElement {
 
     private readonly skillConfigs: SkillConfig[] = [
         {
-            imageOne: "../assets/images/static/svg/turkish-flag.svg",
-            imageTwo: "../assets/images/static/svg/uk-flag.svg",
+            imageOne: "../assets/images/static/svg/tr.svg",
+            imageTwo: "../assets/images/static/svg/uk.svg",
             title: "English Teacher"
         },
         {
