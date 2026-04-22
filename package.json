@@ -100,7 +100,7 @@
     "htmx.org": "^2.0.4",
     "i18next": "^25.6.3",
     "i18next-browser-languagedetector": "^8.2.0",
-    "i18next-http-backend": "^3.0.2",
+    "i18next-http-backend": "^3.0.5",
     "lazysizes": "^5.3.2",
     "node-polyfill-webpack-plugin": "^4.0.0",
     "scrollreveal": "^4.0.9",
