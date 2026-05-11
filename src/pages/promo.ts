@@ -1,6 +1,6 @@
 import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish, PromoMotto, PromoInterested } from "../components/C_Promo";
 import { VideoElement } from "../components/C_Video";
-import { Template, PromoFunctions, HorizontalMiddleMouseScroll, ScrollRevealAction } from "../utils/helper";
+import { Template, PromoFunctions, HorizontalMiddleMouseScroll, ScrollRevealAction, colorfulBannerName } from "../utils/helper";
 import { PromoParts, Banner } from "../static";
 import posts from '../assets/json/posts.json';
 import skills from '../assets/json/promo_Skills.json';
@@ -37,6 +37,9 @@ class Promo extends HTMLElement {
                 "promo-teacheng-container",
                 "promo-interested-container"];
         new ScrollRevealAction().scrollReveal(dynamicContentDivs);
+
+        // Colorful banner text
+        colorfulBannerName(Banner.BANNER_ASCII, "homePageNameBannerCode");
     }
 
     disconnectedCallback(): void {
@@ -159,10 +162,8 @@ class PromoTemplate {
 
     private promoBanner(): string {
         return /*html*/`
-            <pre class="d-flex justify-content-center align-items-center">
-                <code>
-                    ${Banner.BANNER_ASCII}
-                </code>
+            <pre id="homePageNameBanner">
+                <code id="homePageNameBannerCode" class="d-flex justify-content-center align-items-center"></code>
             </pre>
         `;
     }
