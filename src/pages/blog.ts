@@ -28,19 +28,18 @@ class Updates extends HTMLElement {
         super();
 
         new Template().createTemplate(this.render(), this);
-        // connectedCallback will be called by the browser when the element is added to the DOM
     }
 
     private render(): string {
         return /*html*/ `
-            <section class="container-fluid h-100">
+            <section class="container-fluid h-100 overflow-hidden">
                 <div id="blogContainer" class="row gx-3 mb-3 h-100">
-                    <div class="bwrapper col-md-2 col-lg-4 col-sm-2 col-12 h-100">
+                    <div class="bwrapper col-12 col-lg-4">
                         ${this.blogAside()}
                         ${this.offCanvas()}
                         ${this.initiateOffCanvas()}
                     </div>
-                    <div class="bwrapper col-md-10 col-lg-8 col-sm-10 col-12 h-100">
+                    <div class="bwrapper col-12 col-lg-8">
                         <main id="blogMain" class="h-100 rounded-5 px-3 py-3 shadow-sm">
                         </main>
                     </div>

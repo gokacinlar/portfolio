@@ -988,17 +988,21 @@ html {
 
     /* Blog (updates) */
 
-    #blogContainer,
-    #blogMain {
-        @include responsive-styling($mobile-breakpoints, height, auto);
-    }
-
     #blogContainer {
+        @include responsive-styling($mobile-breakpoints, height, auto);
+        @include responsive-styling($mobile-breakpoints, min-height, 100dvh);
+        @include responsive-styling($mobile-breakpoints, flex-direction, column);
+        @include responsive-styling($mobile-breakpoints, flex-wrap, nowrap);
         @include responsive-styling($mobile-breakpoints, row-gap, 1rem);
+        @include responsive-styling($mobile-breakpoints, margin, 0);
+        @include responsive-styling($mobile-breakpoints, width, 100%);
     }
 
-    #blogMain {
-        @include responsive-styling($mobile-breakpoints, height, 70dvh);
+    #blogContainer>.bwrapper:last-child {
+        @include responsive-styling($mobile-breakpoints, flex-grow, 1);
+        @include responsive-styling($mobile-breakpoints, display, flex);
+        @include responsive-styling($mobile-breakpoints, flex-direction, column);
+        @include responsive-styling($mobile-breakpoints, height, 100);
     }
 
     #blogMain,
@@ -1013,6 +1017,10 @@ html {
     #blogAsideChild {
         height: 90%;
         background: var(--clr-one);
+    }
+
+    .bwrapper {
+        @include responsive-styling($all-mobile-tablet-breakpoints, padding-inline, 0);
     }
 
     /* Promo - Interested In Working */
@@ -1129,6 +1137,11 @@ html {
         @include wavy-text(#1f1f24);
     }
 
+    #offCanvasControls {
+        @include responsive-styling($mobile-breakpoints, margin-bottom, .15rem);
+        @include responsive-styling($tablet-breakpoints, margin-bottom, .55rem);
+    }
+
     #offCanvasControls,
     #blogAsideOffcanvasTemplate {
         @include responsive-styling($all-mobile-tablet-breakpoints, display, flex);
@@ -1171,6 +1184,15 @@ html {
     .header-lang-switch-flag {
         width: 36px !important;
         height: 36px !important;
+    }
+
+    #homePageNameBanner {
+        @include responsive-styling($mobile-breakpoints, justify-content, start);
+        @include responsive-styling($mobile-breakpoints, align-items, start);
+    }
+
+    .banner-letter {
+        text-shadow: 4px 6px 2px rgba(37, 99, 235, 0.5);
     }
 }
 
