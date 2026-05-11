@@ -570,6 +570,35 @@ export function addBackgroundBasedOnVerticalScroll(mainElement: string, target: 
     return () => mainHtmlElement.removeEventListener("scroll", handleScroll);
 }
 
-export function downloadFileFromWebsite() {
+export function colorfulBannerName(array: Array<string>, targetElement: string): void {
+    if (!array) {
+        console.error("Please provide an array.");
+        return;
+    }
 
+    const colors: Array<string> = [
+        "#70369D",
+        "#4B369D",
+        "#487DE7",
+        "#79C314",
+        "#FFFF00",
+        "#FEA500",
+        "#E91416"
+    ]
+
+    const targetElem = document.querySelector(`#${targetElement}`) as HTMLElement;
+    array.forEach((key: string) => {
+        if (targetElem && key) {
+            const eachLetter = document.createElement("span");
+            eachLetter.textContent = key;
+            // Randomize colors
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            eachLetter.style.color = colors[randomIndex];
+
+            targetElem.appendChild(eachLetter);
+        } else {
+            console.error("Target element or array missing for banner.");
+            return;
+        }
+    });
 }
