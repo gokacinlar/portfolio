@@ -1186,7 +1186,7 @@ html {
         height: 36px !important;
     }
 
-    #homePageNameBanner {
+    #homePageNameBannerCode {
         @include responsive-styling($mobile-breakpoints, justify-content, start);
         @include responsive-styling($mobile-breakpoints, align-items, start);
     }
