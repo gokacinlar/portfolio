@@ -3,7 +3,7 @@ import { addBackgroundBasedOnVerticalScroll } from "../utils/helper";
 import { AboutData } from "../static";
 import { renderEmailForm } from "./A_EmailForm";
 import Accordion from "./A_Accordion";
-import * as Type from "../types/types";
+import * as Type from "../ts/types/types";
 
 class ScrollSpy {
     constructor() {

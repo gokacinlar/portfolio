@@ -1,26 +1,53 @@
 import Localize from "../utils/initLocalization";
-import * as Type from "../types/types";
-import { Template, DarkLightMode } from "../utils/helper";
+import * as type from "../ts/types/types";
+import * as iface from "../ts/interfaces/i.global";
+import { Template, DarkLightMode, applyHapticsToModals } from "../utils/helper";
 import { listenForBootstrapModalEventDelegation, insertModalsToDom } from "../utils/bootstrap";
 import { HtmxControls } from "../components/M_htmx";
 import ResponsiveNavbar from "../components/responsive/R_navbar";
+import CustomWebHaptics from "../utils/webHaptics";
 
 let darkLightModeInstance: DarkLightMode | null = null;
 let cleanupModalDelegation: (() => void) | null = null;
 
 class Header extends HTMLElement {
+    private webHaptics = CustomWebHaptics.getInstance();
+
     constructor() {
         super();
-        insertModalsToDom("rssModal, langSwitchModal, siteMapModal");
         new Template().createTemplate(new HeaderNode().headerItself(), this);
     }
 
-    connectedCallback(): void {
+    private handleDarkLightMode(): void {
         const dayNightModeSwitchingBtn = this.querySelector("#hrDayNightBtn") as HTMLButtonElement;
+
         if (!darkLightModeInstance) {
             darkLightModeInstance = new DarkLightMode();
         }
         darkLightModeInstance.dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
+    }
+
+    private handlePageSwitchWebHaptics(): void {
+        document.addEventListener("DOMContentLoaded", () => {
+            const htmxNavigationLinks = document.querySelectorAll(".htmx-nav-button-container") as NodeListOf<HTMLButtonElement>;
+            htmxNavigationLinks.forEach((id) => {
+                id.addEventListener("click", () => {
+                    this.webHaptics.triggerHaptic("success");
+                });
+            });
+        });
+    }
+
+    private handleModalInsertion() {
+        const modalArray: string = "rssModal, langSwitchModal, siteMapModal";
+        insertModalsToDom(modalArray);
+    }
+
+    connectedCallback(): void {
+        applyHapticsToModals();
+        this.handleDarkLightMode();
+        this.handleModalInsertion();
+        this.handlePageSwitchWebHaptics();
         new ResponsiveNavbar().connectedCallback();
         new HeaderNode().initDynamicLanguageSwitcher();
 
@@ -37,16 +64,7 @@ class Header extends HTMLElement {
     }
 }
 
-interface NavLink {
-    href: string;
-    title: string;
-    icon: string;
-    htmxOptions?: Type.HTMXOptions;
-}
-
 export class HeaderNode {
-    constructor() { };
-
     private static readonly SITE_URL: string = "https://dervisoksuzoglu.com.tr";
 
     public headerItself(): string {
@@ -97,14 +115,14 @@ export class HeaderNode {
         `;
     }
 
-    private static readonly defaultHtmxOptions: Type.HTMXOptions = {
+    private static readonly defaultHtmxOptions: type.HTMXOptions = {
         hxget: "",
         hxtrigger: "click",
         hxswap: "innerHTML",
         hxpushurl: true,
     };
 
-    private static readonly navLinks: NavLink[] = [
+    private static readonly navLinks: iface.NavLink[] = [
         {
             href: "/index.html",
             title: Localize.translate("common:upperNavigation:home"),
@@ -128,19 +146,21 @@ export class HeaderNode {
     public static headerMiddleContent(): string {
         return HeaderNode.navLinks
             .map(({ href, title, icon, htmxOptions }) => `
-                <li class="w-100">
+            <li class="w-100">
+                <button class="htmx-nav-button-container bg-transparent w-100">
                     <a
                         href="${href}"
                         ${new HtmxControls(htmxOptions ?? HeaderNode.defaultHtmxOptions).render()}
                         title="${title}"
-                        class="btn header-btn-bg btn-lg rounded-5 fs-4 w-100">
+                        class="htmx-nav-link btn header-btn-bg btn btn-lg rounded-5 fs-4 w-100">
                         <i class="bi ${icon}"></i> ${title}
                     </a>
-                </li>
-                `).join("");
+                </button>
+            </li>
+            `).join("");
     }
 
-    private static readonly primaryBtn: NavLink = {
+    private static readonly primaryBtn: iface.NavLink = {
         href: "/work.html",
         title: Localize.translate("common:hero:buttonTitles:workHire"),
         icon: "bi bi-star-half text-black fw-bold pulsate-fwd",

@@ -28,7 +28,8 @@ class ValidateCaptcha {
                             body: new URLSearchParams({
                                 "captcha_submit": "true",
                                 "g-recaptcha-response": recaptchaResponse
-                            })
+                            }),
+                            credentials: "include"
                         });
 
                         if (!response.ok) {
@@ -38,8 +39,10 @@ class ValidateCaptcha {
 
                         const result = await response.json();
                         if (result.success) {
-                            insertToastifiedMessage("CAPTCHA has been verified. Beginning download.")
+                            insertToastifiedMessage("CAPTCHA has been verified. Beginning download.");
+                            // Download Process
                             console.log("CAPTCHA Success! Beginning download.");
+                            this.handleDownload();
                         } else {
                             console.error("CAPTCHA verification failed" + result.error);
                             insertToastifiedMessage("CAPTCHA verification failed. See console for more info (F12).");
@@ -52,6 +55,27 @@ class ValidateCaptcha {
             }
         } catch (error: unknown) {
             console.error("Validation setup error:", error);
+        }
+    }
+
+    private async handleDownload(): Promise<void> {
+        try {
+            await fetch(
+                "../php/DownloadCv.php",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/pdf",
+                    },
+                    credentials: "include"
+                }
+            ).catch((response) => {
+                if (!response || response.status !== 200) {
+                    throw new Error(`Unable to get response from server for download file: ${response}`);
+                }
+            })
+        } catch (error: unknown) {
+            throw new Error(`Unable to download file: ${error}`);
         }
     }
 }

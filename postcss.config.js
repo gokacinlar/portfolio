@@ -3,7 +3,11 @@ const config = {
     syntax: "postcss-scss",
     plugins: [
         require("autoprefixer")({
-            overrideBrowserslist: ["last 2 versions"]
+            overrideBrowserslist: [
+                "> 1%",
+                "last 2 versions",
+                "not dead"
+            ]
         }),
         require("postcss-nested")
     ]

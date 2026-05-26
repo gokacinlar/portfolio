@@ -30,10 +30,6 @@ import "./components/M_link";
 let darkLightModeInstance: DarkLightMode | null = null;
 
 class HomePage extends HTMLElement {
-    constructor() {
-        super();
-    };
-
     connectedCallback(): void {
         if (!darkLightModeInstance) {
             darkLightModeInstance = new DarkLightMode();

@@ -1,6 +1,6 @@
 import { formatDate } from "./utils/helper";
 import GetSiteVersionNumber from "./utils/webScraper";
-import * as Type from "./types/types";
+import * as Type from "./ts/types/types";
 import Localize from "./utils/initLocalization";
 
 interface Principle {
@@ -236,11 +236,13 @@ export class ModalList {
                 <div class="lang-switch-box rounded-5 bg-gradient p-0">
                     <div class="d-flex flex-row align-items-center justify-content-center gap-2 w-100 rounded-pill p-1">
                         <button id="changeLngToEn" class="btn btn-sm btn-secondary-subtle flex-grow-1 fs-5 fw-medium rounded-pill text-black d-flex p-0 gap-2 flex-row align-items-center justify-content-center">
-                            <img class="header-lang-switch-flag img-fluid" src="./assets/images/static/svg/uk.svg" title="Change Language to English">
+                            <img class="header-lang-switch-flag img-fluid lazyload" src="./assets/images/static/svg/uk.svg"
+                            title="Change Language to English" loading="lazy" decoding="async">
                             English
                         </button>
                         <button id="changeLngToTr" class="btn btn-sm btn-secondary-subtle flex-grow-1 fs-5 fw-medium rounded-pill text-black d-flex p-0 gap-2 flex-row align-items-center justify-content-center">
-                            <img class="header-lang-switch-flag img-fluid" src="./assets/images/static/svg/tr.svg" title="Dili Türkçe'ye Çevir"> Türkçe
+                            <img class="header-lang-switch-flag img-fluid lazyload" src="./assets/images/static/svg/tr.svg"
+                            title="Dili Türkçe'ye Çevir" loading="lazy" decoding="async"> Türkçe
                         </button>
                     </div>
                 </div>

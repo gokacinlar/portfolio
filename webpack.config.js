@@ -1,17 +1,22 @@
 const path = require("path");
+const glob = require("glob");
 const webpack = require("webpack");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 // For static page"s script linking
 const htmlPageNames = ["about.html", "updates.html", "404.html", "work.html"];
@@ -56,7 +61,7 @@ module.exports = {
             },
             {
                 test: /\.s?[ac]ss$/i,
-                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+                use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"],
             },
             {
                 test: /\.(png|jpe?g|gif|svg|ico)$/i,
@@ -129,7 +134,7 @@ module.exports = {
             cacheGroups: {
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
-                    name: "vendors",
+                    name: "bundle",
                     chunks: "all",
                     enforce: true
                 },
@@ -203,6 +208,16 @@ module.exports = {
                 media: "print"
             }
         }),
+        new PurgeCSSPlugin({
+            paths: glob.sync([
+                path.join(__dirname, "src/**/*.html"),
+                path.join(__dirname, "src/**/*.ts"),
+                path.join(__dirname, "src/**/*.js"),
+                path.join(__dirname, "src/**/*.scss"),
+                path.join(__dirname, "src/**/*.sass")
+            ]),
+            only: ["public"],
+        }),
         new HtmlWebpackPlugin({
             template: "./src/index.html",
             filename: "./index.html",
@@ -232,8 +247,12 @@ module.exports = {
                 "geo.region": { name: "geo.region", content: "TR-34" },
                 "geo.placename": { name: "geo.placename", content: "Istanbul" }
             },
-            hash: true
+            cache: true,
+            hash: true,
+            alwaysWriteToDisk: true
         }),
+        new HtmlWebpackHarddiskPlugin(), ,
+        new FaviconsWebpackPlugin("./src/assets/images/static/webp/logo_256x256.webp"),
         new CspHtmlWebpackPlugin(
             {
                 "base-uri": ["'self'"],
@@ -263,6 +282,9 @@ module.exports = {
                     "style-src": true
                 }
             }
-        )
+        ), new CompressionPlugin({
+            test: /\.js(\?.*)?$/i,
+            algorithm: "gzip"
+        })
     ].concat(multipleHtmlPlugins)
 };

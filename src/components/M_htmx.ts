@@ -1,14 +1,10 @@
 import DOMPurify from "dompurify";
-
-export interface HTMXOptions {
-    hxget: string;
-    hxtrigger: "click" | "change" | "mouseover";
-    hxswap: "innerHTML" | "outerHTML" | "beforebegin" | "afterbegin" | "beforeend" | "afterend";
-    hxpushurl: boolean;
-}
+import CustomWebHaptics from "../utils/webHaptics";
+import * as type from "../ts/interfaces/i.global";
 
 export class HtmxControls {
-    constructor(private options: HTMXOptions) { }
+    private webHaptics = new CustomWebHaptics();
+    constructor(private options: type.HTMXOptions) { }
 
     public render(): string {
         if (!this.options) {

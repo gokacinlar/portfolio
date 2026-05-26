@@ -1,3 +1,11 @@
+import type * as bootstrap from "bootstrap";
+
+declare global {
+    interface Window {
+        bootstrap: typeof bootstrap;
+    }
+}
+
 type GenericString = {
     [key: string]: string;
 }

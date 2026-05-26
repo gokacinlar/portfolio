@@ -95,7 +95,7 @@ class FooterNodes {
     private createFooterLink(href: string, ariaLabel: string, src: string, title: string): string {
         return /*html*/ `
             <a href="${href}" target="_blank" aria-label="${ariaLabel}">
-                <img class="footer-right-brand rounded-pill img-fluid w-100 h-100"
+                <img class="footer-right-brand rounded-pill img-fluid w-100 h-100 lazyload" loading="lazy" decoding="async"
                     src="../assets/images/static/svg/${src}" title="${title}">
             </a>
         `;

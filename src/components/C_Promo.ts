@@ -1,5 +1,5 @@
 import Localize from "../utils/initLocalization";
-import * as Type from "../types/types";
+import * as Type from "../ts/types/types";
 import { PromoParts } from "../static";
 
 export class PromoTitle {
@@ -66,7 +66,7 @@ export class PromoSkillsShowCase {
             <figure class="promo-skills-fig figure d-flex flex-column align-items-center justify-content-center mb-0">
                 <a href="${data.skillAnchor}" target="_blank">
                     <img src="${data.skillLogoSrc}" alt="${data.skillName}" title="${data.skillName}"
-                    class="promo-skills-img figure-img rounded-4 lazyload">
+                    class="promo-skills-img figure-img rounded-4 lazyload" loading="lazy" decoding="async">
                 </a>
                 <figcaption class="figure-caption text-center fs-4 ">${data.skillName}</figcaption>
             </figure>
@@ -80,13 +80,13 @@ export class PromoCard {
             <div id="promoCard" class="card d-flex flex-column align-items-center justify-content-between shadow-sm rounded-4 px-1 py-1">
                 <div class="card-body d-flex flex-column align-items-center justify-content-between px-2 py-2">
                     <div class="text-center">
-                        <img class="img-fluid lazyload w-50 rounded-5" src="${data.postImgSrc}" alt="${data.postName}" title="${data.postName}">
+                        <img class="img-fluid lazyload w-50 rounded-5" loading="lazy" decoding="async" src="${data.postImgSrc}" alt="${data.postName}" title="${data.postName}">
                     </div>
                     <div class="text-start">
                         <h4 class="mt-2">${data.postName}</h4>
                     </div>
                     <div>
-                        <img class="post-lang-img img-fluid lazyload shadow-sm" src="${data.postLangTypeImgSrc}" alt="Written in ${data.postLangType}" title="${data.postLangType}">
+                        <img class="post-lang-img img-fluid lazyload shadow-sm" loading="lazy" decoding="async" src="${data.postLangTypeImgSrc}" alt="Written in ${data.postLangType}" title="${data.postLangType}">
                     </div>
                     <div>
                         <p class="card-text my-2">${data.postDesc}</p>
@@ -142,7 +142,7 @@ export class PromoTeachEnglish {
         const images = PromoParts.principleImagePaths;
 
         return images.map(path =>
-            `<li class="list-group-item"><img src="${path}" title="Icon" class="lazyload img-fluid"></li>`
+            `<li class="list-group-item"><img src="${path}" title="Icon" class="lazyload img-fluid" loading="lazy" decoding="async"></li>`
         ).join("");
     }
 }

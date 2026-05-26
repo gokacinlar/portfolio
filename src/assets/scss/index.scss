@@ -402,7 +402,7 @@ html {
         }
     }
 
-    .header-middle-nav-links>li>a {
+    .header-middle-nav-links>li>button>a {
         @include transition(all 0.25s ease-in-out);
         @include hover-underline(var(--clr-two));
 
@@ -1193,6 +1193,11 @@ html {
 
     .banner-letter {
         text-shadow: 4px 6px 2px rgba(37, 99, 235, 0.5);
+    }
+
+    .htmx-nav-button-container {
+        border: 0;
+        padding: 0;
     }
 }
 

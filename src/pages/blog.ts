@@ -261,7 +261,8 @@ class Updates extends HTMLElement {
                     <h1 class="display-6 fw-medium mb-3">${sanitizedTitle}</h1>
                     <div class="d-flex align-items-center justify-content-start gap-2">
                         <div>
-                            <img class="img-fluid rounded-pill" src="${defaultImageSrc}" alt="${authorName}" class="rounded-circle" width="48" height="48">
+                            <img class="img-fluid rounded-pill lazyload" src="${defaultImageSrc}" alt="${authorName}"
+                            class="rounded-circle" width="48" height="48" loading="lazy" decoding="async">
                         </div>
                         <div>
                             <p class="mb-0 fw-semibold">${authorName}</p>

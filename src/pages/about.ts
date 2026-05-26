@@ -175,8 +175,8 @@ class About extends HTMLElement {
         return /*html*/ `
             <h2 class="aside-skill-name d-flex flex-row align-items-center gap-1 mb-1">
                 <div class="d-flex align-items-center gap-1 px-1 py-1">
-                    <img src="${imageOne}" class="aside-ico img-fluid lazyload rounded-1">
-                    <img src="${imageTwo}" class="aside-ico img-fluid lazyload rounded-1">
+                    <img src="${imageOne}" class="aside-ico img-fluid lazyload rounded-1" loading="lazy" decoding="async">
+                    <img src="${imageTwo}" class="aside-ico img-fluid lazyload rounded-1" loading="lazy" decoding="async">
                 </div>
                 <span class="aside-skill fs-4 text-start">${title}</span>
             </h2>

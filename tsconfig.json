@@ -24,7 +24,7 @@
     },
     "typeRoots": [
       "./node_modules/@types",
-      "./src/types"
+      "src/ts/interfaces/types"
     ],
     "allowJs": true,
     "checkJs": false,

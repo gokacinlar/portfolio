@@ -1,4 +1,4 @@
-export const domSanitizeOptions: Object = {
+export const domSanitizeOptions = {
     ADD_ATTR: ["nonce"],
     CUSTOM_ELEMENT_HANDLING: {
         tagNameCheck: /^[a-z]+-/,

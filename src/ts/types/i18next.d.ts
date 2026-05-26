@@ -1,4 +1,4 @@
-import { resources, defaultNS } from "../i18n";
+import { resources, defaultNS } from "../../../i18n";
 
 type ResourceKeys = keyof typeof resources.en.common;
 

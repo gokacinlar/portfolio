@@ -4,6 +4,7 @@ import ScrollReveal from "scrollreveal";
 import Toastify from "toastify-js";
 import { HeroParts, WhiteListedURLs } from "../static";
 import { domSanitizeOptions } from "../domSanitizeOptions";
+import CustomWebHaptics from "../utils/webHaptics";
 
 // Centralized Toastify configuration
 export const TOAST_CONFIG = {
@@ -601,4 +602,29 @@ export function colorfulBannerName(array: Array<string>, targetElement: string):
             return;
         }
     });
+}
+
+export function applyHapticsToModals() {
+    const modalElementsWithCustomWebComponentsDefined = document.querySelectorAll("component-custom-button[data-modal]") as NodeListOf<any>;
+    const modalElementsWithButtons = document.querySelectorAll("button[data-modal]") as NodeListOf<HTMLButtonElement>;
+
+    const haptics = CustomWebHaptics.getInstance();
+
+    if (modalElementsWithCustomWebComponentsDefined && modalElementsWithButtons) {
+        modalElementsWithButtons.forEach(element => {
+            element.addEventListener("click", (e: MouseEvent) => {
+                if (e.target) {
+                    haptics.triggerHaptic("success");
+                }
+            });
+        });
+
+        modalElementsWithCustomWebComponentsDefined.forEach(element => {
+            element.addEventListener("click", (e: MouseEvent) => {
+                if (e.target) {
+                    haptics.triggerHaptic("success");
+                }
+            });
+        });
+    }
 }
