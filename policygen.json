@@ -1,0 +1,84 @@
+{
+  "$schema": "https://policygen.xyz/schemas/0.6/schema.json",
+  "output": {
+    "privacyFilePath": "/public",
+    "termsFilePath": "/public",
+    "fileType": "html",
+    "cssFramework": "classes",
+    "locales": [
+      "en"
+    ]
+  },
+  "entity": {
+    "name": "Derviş Öksüzoğlu",
+    "website": "https://dervisoksuzoglu.com.tr",
+    "address": ""
+  },
+  "privacy": {
+    "privacyEmail": "dervisoksuzoglu@tutamail.com",
+    "platforms": [
+      "web"
+    ],
+    "locations": [
+      "eu",
+      "other"
+    ],
+    "socialSignIn": false,
+    "personalInformation": [],
+    "sensitiveInformation": [],
+    "thirdPartyData": [],
+    "paymentData": false,
+    "paymentProcessors": [],
+    "appUsageData": false,
+    "thirdPartyDisclosure": false,
+    "thirdPartyDisclosureEntities": [],
+    "thirdPartySharing": false,
+    "thirdPartySharingEntities": [],
+    "securityMeasures": true,
+    "webTracking": false,
+    "thirdPartyAnalytics": true,
+    "serviceRequirements": [
+      "communication"
+    ],
+    "legalBasis": [
+      "fraudPrevention",
+      "security"
+    ],
+    "dataRetentionPeriod": "",
+    "usStatePrivacyLaws": true,
+    "privacyPage": "",
+    "dpo": false,
+    "cpraCompliance": false,
+    "vcdpaCompliance": false,
+    "cookieConsent": false,
+    "dataBreachNotification": false,
+    "crossBorderTransfers": false,
+    "coppaCompliance": true,
+    "childrenMinAge": 13
+  },
+  "terms": {
+    "supportEmail": "dervisoksuzoglu@tutamail.com",
+    "underEighteen": true,
+    "underThirteen": false,
+    "purchasableGoods": false,
+    "subscription": false,
+    "freeTrial": false,
+    "autoRenew": false,
+    "refundPolicy": "none",
+    "userContent": false,
+    "userContentLicense": true,
+    "userAccounts": false,
+    "governingLaw": "California",
+    "disputeResolution": "litigation",
+    "mediation": false,
+    "prohibitedUses": [],
+    "serviceSLA": false,
+    "serviceSLAAmount": 0,
+    "serviceSLARefund": false,
+    "liabilityLimitation": true,
+    "liabilityLimitationAmount": 0,
+    "forceMajeure": false,
+    "dmcaTakedown": false,
+    "taxLiability": false
+  }
+}
