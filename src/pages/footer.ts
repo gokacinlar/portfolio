@@ -85,7 +85,7 @@ class FooterNodes {
                 <li class="w-100">
                     <a class="d-flex flex-row align-items-center footer-links gap-2 px-2 py-2
                     fw-medium link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                        title="${link.title}" href="${link.href}" target="_blank">
+                        title="${link.title}" href="${link.href}" hreflang="x-default" target="_blank">
                         <i class="bi ${link.iconClass} fs-3"></i> ${link.title}
                     </a>
                 </li>
@@ -94,7 +94,7 @@ class FooterNodes {
 
     private createFooterLink(href: string, ariaLabel: string, src: string, title: string): string {
         return /*html*/ `
-            <a href="${href}" target="_blank" aria-label="${ariaLabel}">
+            <a href="${href}" hreflang="x-default" target="_blank" aria-label="${ariaLabel}">
                 <img class="footer-right-brand rounded-pill img-fluid w-100 h-100 lazyload" loading="lazy" decoding="async"
                     src="../assets/images/static/svg/${src}" title="${title}">
             </a>

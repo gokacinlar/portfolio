@@ -88,7 +88,7 @@ export class HeaderNode {
 
     public static headerLeftIcon(): string {
         return /*html*/ `
-            <a href="${HeaderNode.SITE_URL}">
+            <a href="${HeaderNode.SITE_URL}" hreflang="x-default">
                 <img
                     class="header-logo img-fluid img-responsive lazyload"
                     src="../assets/images/static/webp/logo.webp"

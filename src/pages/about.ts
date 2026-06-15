@@ -188,7 +188,7 @@ class About extends HTMLElement {
             <div class="d-flex flex-row flex-wrap align-items-start justify-content-evenly gap-1">
                 ${this.SocialsElements.map(({ name, icon, href }) => `
                     <div class="aside-socials mb-2 rounded-pill shadow-sm flex-grow-1">
-                        <a href="${href}" class="d-flex flex-row align-items-center gap-1 px-2 py-2 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" 
+                        <a href="${href}" hreflang="x-default" class="d-flex flex-row align-items-center gap-1 px-2 py-2 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" 
                             target="_blank" title="${name}">
                             <i class="${icon} fs-3 px-1 py-1"></i>
                             <p class="aside-social-text h6 fw-medium mb-0">${name}</p>

@@ -63,7 +63,7 @@ class ResponsiveNavbar {
     private renderNavbarHeaderContent(): string {
         return ResponsiveNavbar.NAVBAR_HEADER_LINKS.map(({ title, icon, href }) =>
             `
-            <a href="${href}" title="${title}" class="link-offset-2 link-underline link-underline-opacity-0 display-2 text-secondary">
+            <a href="${href}" hreflang="x-default" title="${title}" class="link-offset-2 link-underline link-underline-opacity-0 display-2 text-secondary">
                 <i class="${icon}"></i>
             </a>
             `
