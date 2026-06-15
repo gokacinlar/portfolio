@@ -14,7 +14,7 @@ This is a personal portfolio website built with TypeScript, Web Components, and 
 - **Localization**: i18next
 - **SPA Navigation**: HTMX 2.0
 - **Testing**: Jest with JSDom
-- **Linting**: ESLint 9
+- **Linting**: Biome
 
 ---
 
