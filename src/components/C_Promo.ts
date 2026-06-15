@@ -64,7 +64,7 @@ export class PromoSkillsShowCase {
     public renderPromoSkillsShowCase(data: Type.PromoSkills): string {
         return /*html*/ `
             <figure class="promo-skills-fig figure d-flex flex-column align-items-center justify-content-center mb-0">
-                <a href="${data.skillAnchor}" target="_blank">
+                <a href="${data.skillAnchor}" hreflang="x-default" target="_blank">
                     <img src="${data.skillLogoSrc}" alt="${data.skillName}" title="${data.skillName}"
                     class="promo-skills-img figure-img rounded-4 lazyload" loading="lazy" decoding="async">
                 </a>
@@ -93,7 +93,7 @@ export class PromoCard {
                     </div>
                     <div class="w-100">
                         <button id="promoLink" type="button" class="btn fs-4 w-100 rounded-pill shadow-sm border border-secondary-subtle" title="Navigate to ${data.postName}">
-                            <a href="${data.projectLink}" target="_blank"><span class="hr-btn-text">Link</span></a>
+                            <a href="${data.projectLink}" hreflang="x-default" target="_blank"><span class="hr-btn-text">Link</span></a>
                         </button>
                     </div>
                 </div>
@@ -207,7 +207,7 @@ export class PromoInterested {
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm">
-                            <a href="${item.link}" target="_blank">
+                            <a href="${item.link}" hreflang="x-default" target="_blank">
                                 <img class="promo-interested-img lazyload img-fluid rounded-5 w-100" src="${item.img}" alt="${item.title}" title="${item.title}">
                             </a>
                         </div>

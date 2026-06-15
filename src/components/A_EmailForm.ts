@@ -1,13 +1,13 @@
 export function renderEmailTable(): string {
     return /*html*/ `
-        <table class="table table-bordered align-middle table-responsive">
+        <table class="table table-bordered align-middle table-responsive form-floating">
             <tbody>
                 <tr>
                     <th scope="row">
                         <label for="firstName" class="form-label">Your Name</label>
                     </th>
                     <td>
-                        <input type="text" class="form-control" id="firstName" name="First Name" placeholder="John Doe" required autocomplete="name">
+                        <input type="text" class="form-control is-invalid" id="firstName" name="First Name" placeholder="Someone" required autocomplete="name">
                         <div class="invalid-feedback">
                             Please provide your name.
                         </div>
