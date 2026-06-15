@@ -1,7 +1,8 @@
-import Localize from "../utils/initLocalization";
 import { HeroImageWithLink } from "../components/C_Hero";
-import { Template, TypeWriterDisplay, DomEvents } from "../utils/helper";
+import ThreeJs from "../services/threeJs";
 import { BodyParts, HeroParts } from "../static";
+import { DomEvents, Template, TypeWriterDisplay } from "../utils/helper";
+import Localize from "../utils/initLocalization";
 
 class HeroSection extends HTMLElement {
     private bodyParts: BodyParts;
@@ -11,8 +12,7 @@ class HeroSection extends HTMLElement {
         new Template().createTemplate(new HeroTemplate().hero(), this);
     }
 
-    connectedCallback(): void {
-        new TypeWriterDisplay(new HeroParts(), "ocps");
+    private handleDomEvents(): void {
         const domEvents = new DomEvents();
         const mottosElement = this.querySelector("#mottosSection") as HTMLDivElement;
         const mottos = this.bodyParts.mottos;
@@ -20,11 +20,24 @@ class HeroSection extends HTMLElement {
             domEvents.appendContent(mottosElement, mottos);
         }
     }
+
+    private handleTypeWriterEffect(): void {
+        new TypeWriterDisplay(new HeroParts(), "ocps");
+    }
+
+    private handleThreeJsAnimation(): void {
+        const scene = new ThreeJs("#threeJsAnimationContainer");
+        scene.loadModel("../assets/3d/desk.glb");
+    }
+
+    connectedCallback(): void {
+        this.handleDomEvents();
+        this.handleTypeWriterEffect();
+        this.handleThreeJsAnimation();
+    }
 }
 
 class HeroTemplate {
-    constructor() { }
-
     public hero(): string {
         return /*html*/ `
             <section class="mx-2 my-2 px-2 py-2">
@@ -60,6 +73,9 @@ class HeroTemplate {
                     </section>
                 </div>
             </section>
+            <section>
+                ${this.threeJsAnimationContainer()}
+            </section>
         `;
     }
 
@@ -70,6 +86,13 @@ class HeroTemplate {
                 <i class="bi bi-paperclip"></i>
                 <span class="hr-btn-text">${Localize.translate("common:hero:buttons:cv")}</span>
             </button>
+        `;
+    }
+
+    private threeJsAnimationContainer(): string {
+        return /*html*/ `
+            <div id="threeJsAnimationContainer" class="px-3 rounded-5">
+            </div>
         `;
     }
 }
