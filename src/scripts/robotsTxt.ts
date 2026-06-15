@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import robotstxt from "generate-robotstxt";
 
 interface CrawlPolicy {
@@ -42,11 +42,22 @@ class GenerateRobotsTXT {
                 sitemap: `${GenerateRobotsTXT.SITE_NAME}/sitemap.xml`,
                 host: GenerateRobotsTXT.SITE_NAME
             });
-            return content;
+
+            const filePath = path.resolve(__dirname, "../assets/seo/robots.txt");
+            const fileContent = await fs.promises.readFile(filePath, "utf-8");
+            const finalContent = `${fileContent} \n ${content}`;
+
+            if (!fs.existsSync(filePath)) {
+                console.warn(`File not found: ${filePath}`);
+                return content;
+            } else {
+                return finalContent;
+            }
         } catch (error: unknown) {
             throw new Error(`Unable to create robots.txt: ${error}`);
         }
     }
+
 
     public async saveOutput(): Promise<void> {
         const outputPath = path.resolve(__dirname, "../../public/robots.txt");
