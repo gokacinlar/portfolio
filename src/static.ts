@@ -268,6 +268,7 @@ export class ModalList {
                                         text="This Site"
                                         title="This Site"
                                         href="http://dervisoksuzoglu.com.tr/wp_blog/feed"
+                                        hreflang="x-default"
                                         target="_blank"
                                     ></component-anchor-link>
                                 </td>
@@ -279,6 +280,7 @@ export class ModalList {
                                         text="Hashnode"
                                         title="Hashnode"
                                         href="https://gokacinlar.hashnode.dev/rss.xml"
+                                        hreflang="x-default"
                                         target="_blank"
                                     ></component-anchor-link>
                                 </td>
@@ -308,6 +310,7 @@ export class ModalList {
                                         text="${Localize.translate("common:modals:sitemap:visitSitemap")}"
                                         title="${Localize.translate("common:modals:sitemap:visitSitemap")}"
                                         href="http://dervisoksuzoglu.com.tr/sitemap.xml"
+                                        hreflang="x-default"
                                         target="_blank">
                                     </component-anchor-link>
                                 </td>
@@ -335,7 +338,7 @@ export class AccordionList {
             header: "🔑 Secure & Private Communication",
             body: `
                 <p class="lead fs-6 fw-medium">If you want to contact me <mark class="rounded-3">in a more private way</mark>, you can use one of the actions given below.
-                    If you don't know how to use these methods, here's a <a class="link-info link-opacity-75-hover link-offset-2" href="https://www.youtube.com/watch?v=mu2TVYJE5Gc" target="_blank">tutorial</a> on the go.
+                    If you don't know how to use these methods, here's a <a class="link-info link-opacity-75-hover link-offset-2" href="https://www.youtube.com/watch?v=mu2TVYJE5Gc" hreflang="x-default" target="_blank">tutorial</a> on the go.
                     However, you should use this <strong>if you really have good reason to do so.</strong>
                 </p>
                 <table id="commsTable" class="table table-striped table-bordered">
@@ -346,7 +349,7 @@ export class AccordionList {
                         </tr>
                         <tr>
                             <th scope="row">GnuPG (Public Key)</th>
-                            <td>View <a class="link-info link-opacity-75-hover link-offset-2 modal-trigger" data-modal="gnuPgModal" href="#">here.</a></td>
+                            <td>View <a class="link-info link-opacity-75-hover link-offset-2 modal-trigger" data-modal="gnuPgModal" href="#" hreflang="x-default">here.</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -363,7 +366,7 @@ export class AccordionList {
                     <tbody>
                         <tr>
                             <th scope="row">BuyMeACoffee</th>
-                            <td>View <a class="link-info link-opacity-75-hover link-offset-2" href="https://coff.ee/gokacinlar" target="_blank">here.</a></td>
+                            <td>View <a class="link-info link-opacity-75-hover link-offset-2" href="https://coff.ee/gokacinlar" hreflang="x-default" target="_blank">here.</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -387,7 +390,7 @@ export class AccordionList {
                         <tr>
                             <th scope="row">Source Code</th>
                             <td>Available on
-                                <a class="link-info link-opacity-75-hover link-offset-2" href="https://github.com/gokacinlar" target="_blank">GitHub</a>
+                                <a class="link-info link-opacity-75-hover link-offset-2" href="https://github.com/gokacinlar" hreflang="x-default" target="_blank">GitHub</a>
                             </td>
                         </tr>
                     </tbody>
