@@ -14,6 +14,7 @@ const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+const CompressionPlugin = require("compression-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 // CSP configuration for trusted external scripts
@@ -28,7 +29,7 @@ const scripts = [
 const imageConnections = [
     "https://creativecommons.org/publicdomain/zero/1.0/",
     "https://notbyai.fyi/",
-    "https://raw.githubusercontent.com",
+    "https://raw.githubusercontent.com"
 ];
 
 // Meta tags for HTML
@@ -62,7 +63,14 @@ const multipleHtmlPlugins = htmlPageNames.map(name => {
         template: path.resolve(__dirname, `./src/pages/static/${name}`),
         filename: `${name}`,
         inject: "body",
-        minify: false,
+        minify: {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeAttributeQuotes: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true
+        },
         chunks: ["main"],
         meta: htmlWebpackPluginMeta,
         cache: true,
@@ -72,54 +80,31 @@ const multipleHtmlPlugins = htmlPageNames.map(name => {
 });
 
 module.exports = {
-    mode: "development",
+    mode: "production",
     entry: {
         main: "./src/main.ts",
     },
     output: {
         publicPath: "/",
-        filename: "js/[name].js",
-        chunkFilename: "js/[name].chunk.js",
+        filename: "js/[name].[contenthash:8].js",
+        chunkFilename: "js/[name].[contenthash:8].chunk.js",
         path: path.resolve(__dirname, "public"),
         clean: {
             keep: "public/index.html",
         },
+        environment: {
+            arrowFunction: true,
+            bigIntLiteral: false,
+            const: true,
+            destructuring: true,
+            dynamicImport: true,
+            forOf: true,
+            module: true,
+            optionalChaining: true,
+            templateLiteral: true
+        }
     },
-    devtool: "cheap-module-source-map",
-    devServer: {
-        static: {
-            directory: path.join(__dirname, "public"),
-            publicPath: "/",
-        },
-        compress: false,
-        historyApiFallback: true, // Support client-side routing
-        client: {
-            logging: "info",
-            overlay: {
-                errors: true,
-                warnings: true,
-                runtimeErrors: true,
-            },
-            progress: true,
-            reconnect: 5,
-        },
-        port: 1234,
-        host: "0.0.0.0",
-        hot: true,
-        liveReload: true,
-        watchFiles: {
-            paths: ["src/**/*"],
-            options: {
-                usePolling: true,
-                poll: 1000,
-            },
-        },
-    },
-    watchOptions: {
-        poll: 1000,
-        ignored: /node_modules/,
-        aggregateTimeout: 300, // wait for rebuilding
-    },
+    devtool: "source-map", // Use "hidden-source-map" to exclude source maps from bundle but keep them for debugging
     module: {
         rules: [
             {
@@ -141,21 +126,21 @@ module.exports = {
                     },
                 },
                 generator: {
-                    filename: "assets/images/[name][ext]",
+                    filename: "assets/images/[name].[contenthash:8][ext]",
                 },
             },
             {
                 test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/i,
                 type: "asset/resource",
                 generator: {
-                    filename: "assets/fonts/[name][ext]",
+                    filename: "assets/fonts/[name].[contenthash:8][ext]",
                 },
             },
             {
                 test: /\.(mp4|webm|ogg|mov)$/i,
                 type: "asset/resource",
                 generator: {
-                    filename: "assets/videos/[name][ext]",
+                    filename: "assets/videos/[name].[contenthash:8][ext]",
                 },
             }
         ],
@@ -164,48 +149,69 @@ module.exports = {
         extensions: [".ts", ".js", "..."],
     },
     optimization: {
-        usedExports: false,
+        usedExports: true,
         removeEmptyChunks: true,
-        removeAvailableModules: false,
-        realContentHash: false,
-        chunkIds: "named",
-        moduleIds: "named",
+        removeAvailableModules: true,
+        realContentHash: true,
+        chunkIds: "deterministic",
+        moduleIds: "deterministic",
+        runtimeChunk: {
+            name: "runtime"
+        },
         splitChunks: {
-            chunks: "async",
+            chunks: "all",
             cacheGroups: {
-                vendors: {
+                vendor: {
                     test: /[\\/]node_modules[\\/]/,
                     name: "vendors",
                     priority: 10,
                     chunks: "all",
-                    enforce: true,
+                    enforce: true
                 },
+                common: {
+                    minChunks: 2,
+                    priority: 5,
+                    reuseExistingChunk: true
+                }
             },
         },
-        minimize: false,
+        minimize: true,
+        minimizer: [
+            new TerserWebpackPlugin({
+                terserOptions: {
+                    compress: {
+                        drop_console: true, // Remove console.log in production
+                    },
+                    format: {
+                        comments: false,
+                    },
+                },
+                extractComments: false,
+            }),
+            new CssMinimizerPlugin()
+        ],
+    },
+    performance: {
+        hints: "warning",
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
     },
     plugins: [
-        new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: ["**/*", "!.gitkeep"],
-            cleanAfterEveryBuildPatterns: ["!index.html"],
-            dry: false,
-            verbose: false,
-        }),
+        new CleanWebpackPlugin(),
         new NodePolyfillPlugin(),
         new Dotenv({
-            path: "./.env",
+            path: "./.env.production",
             safe: true,
-            allowEmptyValues: true, // Allow empty values in dev
+            allowEmptyValues: false,
             systemvars: true,
-            silent: true,
+            silent: false,
             defaults: false,
-            override: true,
-            expand: true,
+            override: true
         }),
         new WebpackManifestPlugin({
             fileName: "asset-manifest.json",
             useLegacyEmit: false,
-            publicPath: "/",
+            publicPath: "/"
         }),
         new CopyPlugin({
             patterns: [
@@ -213,9 +219,6 @@ module.exports = {
                     from: path.resolve(__dirname, "src/assets/images"),
                     to: "assets/images",
                     noErrorOnMissing: true,
-                    globOptions: {
-                        ignore: ["**/.DS_Store"],
-                    },
                 },
                 {
                     from: path.resolve(__dirname, "src/assets/videos"),
@@ -246,9 +249,8 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             linkType: "text/css",
-            filename: "css/[name].css",
-            chunkFilename: "css/[name].chunk.css",
-            ignoreOrder: true, // Don't warn about order in dev
+            filename: "css/[name].[contenthash:8].css",
+            chunkFilename: "css/[name].[contenthash:8].chunk.css",
         }),
         new PurgeCSSPlugin({
             paths: glob.sync([
@@ -260,25 +262,33 @@ module.exports = {
             ]),
             safelist: {
                 standard: ["html", "body"],
-            },
-            only: ["public"]
+                deep: [],
+                greedy: []
+            }
         }),
         new HtmlWebpackPlugin({
             template: "./src/index.html",
             filename: "./index.html",
             inject: "body",
-            minify: false, // stop minification in development
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeAttributeQuotes: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true
+            },
             meta: htmlWebpackPluginMeta,
             cache: true,
             hash: true,
-            alwaysWriteToDisk: true,
+            alwaysWriteToDisk: true
         }),
         new HtmlWebpackHarddiskPlugin(),
         new FaviconsWebpackPlugin({
             logo: "./src/assets/images/static/webp/logo_256x256.webp",
-            cache: false, // stop rebuilding favicons each time in dev
+            cache: true,
             prefix: "assets/favicons/",
-            inject: true,
+            inject: true
         }),
         new WebpackPwaManifest({
             name: "Derviş Öksüzoğlu",
@@ -289,7 +299,7 @@ module.exports = {
             scope: "/",
             display: "standalone",
             crossorigin: "use-credentials",
-            fingerprints: false,
+            fingerprints: true,
             ios: false,
             orientation: "portrait-primary",
             icons: [
@@ -305,8 +315,8 @@ module.exports = {
             {
                 "base-uri": ["'self'"],
                 "object-src": ["'none'"],
-                "script-src": ["'self'", "'unsafe-inline'", ...scripts],
-                "style-src": ["'self'", "'unsafe-inline'"],
+                "script-src": ["'self'", ...scripts],
+                "style-src": ["'self'"],
                 "img-src": ["'self'", "data:", "blob:", ...imageConnections],
                 "font-src": ["'self'"],
                 "connect-src": [
@@ -323,14 +333,24 @@ module.exports = {
                 enabled: true,
                 hashingMethod: "sha256",
                 hashEnabled: {
-                    "script-src": false,
-                    "style-src": false
+                    "script-src": true,
+                    "style-src": true
                 },
                 nonceEnabled: {
-                    "script-src": false,
-                    "style-src": false
+                    "script-src": true,
+                    "style-src": true
                 }
             }
         ),
+        new CompressionPlugin({
+            test: /\.(js|css|html|svg)$/i,
+            algorithm: "gzip",
+            compressionOptions: {
+                level: 9
+            },
+            threshold: 10240,
+            minRatio: 0.8,
+            deleteOriginalAssets: false
+        })
     ].concat(multipleHtmlPlugins)
 };
