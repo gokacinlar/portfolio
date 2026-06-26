@@ -18,3 +18,13 @@ export interface NavLink {
     icon: string;
     htmxOptions?: Type.HTMXOptions;
 }
+
+export interface OptimizationOptions {
+    dracoCompression?: boolean;
+    quantize?: boolean;
+    deduplication?: boolean;
+    pruning?: boolean;
+    welding?: boolean;
+    meshOptimization?: "medium" | "high";
+    verbose?: boolean;
+}

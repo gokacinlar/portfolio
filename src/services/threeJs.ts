@@ -10,6 +10,8 @@ class ThreeJs {
     private loader = new GLTFLoader();
     private controls!: OrbitControls;
     private readonly AMBIENT_COLOR: string = "#D4A25B";
+    private isAnimating: boolean = true; // Animation state
+    private animationFrameId: number | null = null;
 
     constructor(containerSelector: string) {
         this.setupRenderer(containerSelector);
@@ -17,9 +19,10 @@ class ThreeJs {
         this.setupControls();
         this.setupLighting();
         this.startAnimation();
+        this.observeElement(containerSelector);
     }
 
-    private setupRenderer(containerSelector: string): void {
+    private async setupRenderer(containerSelector: string): Promise<void> {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setClearColor(0x000000, 0);
 
@@ -31,7 +34,6 @@ class ThreeJs {
             return;
         }
 
-        // Handle window resize
         window.addEventListener("resize", () => this.onWindowResize());
     }
 
@@ -88,9 +90,13 @@ class ThreeJs {
 
     private startAnimation(): void {
         const animate = () => {
-            requestAnimationFrame(animate);
-            this.controls.update();
-            this.renderer.render(this.scene, this.camera);
+            if (this.isAnimating) { // Update the animation based on intersection observer's state
+                this.animationFrameId = requestAnimationFrame(animate);
+                this.controls.update();
+                this.renderer.render(this.scene, this.camera);
+            } else {
+                this.animationFrameId = requestAnimationFrame(animate);
+            }
         };
 
         animate();
@@ -103,6 +109,36 @@ class ThreeJs {
         this.camera.aspect = width / height;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(width, height);
+    }
+
+    // Intersection Observer
+    public observeElement(targetSelector: string): void {
+        const targetElement = document.querySelector(targetSelector);
+
+        if (!targetElement) {
+            console.error(`Element with selector "${targetSelector}" not found.`);
+            return;
+        }
+
+        const observerOptions = {
+            root: null,
+            rootMargin: "10px",
+            threshold: 0.1, // Trigger when at least 10% is visible
+        };
+
+        const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    this.isAnimating = true;
+                    this.controls.autoRotate = true;
+                } else {
+                    this.isAnimating = false;
+                    this.controls.autoRotate = false;
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(targetElement);
     }
 }
 
