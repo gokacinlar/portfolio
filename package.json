@@ -117,7 +117,7 @@
     "analytics": "^0.8.19",
     "bootstrap": "^5.3.7",
     "bootstrap-icons": "^1.13.1",
-    "dompurify": "^3.3.2",
+    "dompurify": "^3.4.11",
     "dotenv": "^17.2.1",
     "htmx-ext-class-tools": "^2.0.2",
     "htmx.org": "^2.0.4",
