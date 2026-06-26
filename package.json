@@ -48,7 +48,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.15",
+    "@gltf-transform/cli": "^4.3.0",
+    "@gltf-transform/core": "^4.3.0",
+    "@gltf-transform/extensions": "^4.3.0",
+    "@gltf-transform/functions": "^4.3.0",
     "@types/bootstrap": "^5.2.10",
+    "@types/draco3dgltf": "^1.4.3",
     "@types/grecaptcha": "^3.0.9",
     "@types/jquery": "^3.5.32",
     "@types/node": "^24.10.0",
