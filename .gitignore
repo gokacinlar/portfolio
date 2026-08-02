@@ -3,6 +3,7 @@
 .git
 .htaccess
 public/
+doc/
 
 # PHP-composer related
 vendor/
