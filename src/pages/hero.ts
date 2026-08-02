@@ -81,11 +81,13 @@ class HeroTemplate {
 
     private heroDownloadCVButton(): string {
         return /*html*/ `
-            <button id="hrGetCvBtn" type="button" class="hero-btn bee-color-btn text-truncate hero-get-cv-btn bg-gradient btn btn-lg fs-4 w-100 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
-                rounded-5 shadow-sm" title="${Localize.translate("common:hero:buttonTitles:downloadCV")}">
-                <i class="bi bi-paperclip"></i>
-                <span class="hr-btn-text">${Localize.translate("common:hero:buttons:cv")}</span>
-            </button>
+            <a class="link-offset-2 link-underline link-underline-opacity-0 w-100" href="/about.html#work">
+                <button id="hrGetCvBtn" type="button" class="hero-btn bee-color-btn text-truncate hero-get-cv-btn bg-gradient btn btn-lg fs-4 w-100 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
+                    rounded-5 shadow-sm" title="${Localize.translate("common:hero:buttonTitles:downloadCV")}">
+                    <i class="bi bi-paperclip"></i>
+                    <span class="hr-btn-text">${Localize.translate("common:hero:buttons:cv")}</span>
+                </button>
+            </a>
         `;
     }
 

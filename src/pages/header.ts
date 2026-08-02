@@ -65,7 +65,7 @@ class Header extends HTMLElement {
 }
 
 export class HeaderNode {
-    private static readonly SITE_URL: string = "https://dervisoksuzoglu.com.tr";
+    private static readonly SITE_URL: string = "https://dervisoksuzoglu.xyz";
 
     public headerItself(): string {
         return /*html*/ `
@@ -182,7 +182,7 @@ export class HeaderNode {
         return /*html*/ `
             <div class="d-flex flex-row align-items-center justify-content-center flex-1 gap-2">
                 <button id="hrDayNightBtn" type="button" class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1"
-                    title="Change Day/Night Mode">
+                    title="${Localize.translate("common:header:dayNight")}">
                     <i class="hr-daynight-switch-icon bi bi-sun text-black fw-bold"></i>
                 </button>
                 ${HeaderNode.headerLangSwitch()}
@@ -196,7 +196,7 @@ export class HeaderNode {
     private static headerLangSwitch(): string {
         return /*html*/ `
             <button id="hrLangSwitchBtn" type="button" class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center gap-1 modal-trigger"
-                role="button" title="Change Site Language" data-modal="langSwitchModal">
+                role="button" title="${Localize.translate("common:header:changeLanguage")}" data-modal="langSwitchModal">
                 <i class="bi bi-translate text-black fw-bold"></i>
             </button>
         `;

@@ -86,14 +86,14 @@ export class PromoCard {
                         <h4 class="mt-2">${data.postName}</h4>
                     </div>
                     <div>
-                        <img class="post-lang-img img-fluid lazyload shadow-sm" loading="lazy" decoding="async" src="${data.postLangTypeImgSrc}" alt="Written in ${data.postLangType}" title="${data.postLangType}">
+                        <img class="post-lang-img img-fluid lazyload shadow-sm" loading="lazy" decoding="async" src="${data.postLangTypeImgSrc}" alt="${Localize.translate("common:promo:writtenIn")} ${data.postLangType}" title="${data.postLangType}">
                     </div>
                     <div>
                         <p class="card-text my-2">${data.postDesc}</p>
                     </div>
                     <div class="w-100">
                         <button id="promoLink" type="button" class="btn fs-4 w-100 rounded-pill shadow-sm border border-secondary-subtle" title="Navigate to ${data.postName}">
-                            <a href="${data.projectLink}" hreflang="x-default" target="_blank"><span class="hr-btn-text">Link</span></a>
+                            <a href="${data.projectLink}" hreflang="x-default" target="_blank"><span class="hr-btn-text">${Localize.translate("common:promo:link")}</span></a>
                         </button>
                     </div>
                 </div>
@@ -142,7 +142,7 @@ export class PromoTeachEnglish {
         const images = PromoParts.principleImagePaths;
 
         return images.map(path =>
-            `<li class="list-group-item"><img src="${path}" title="Icon" class="lazyload img-fluid" loading="lazy" decoding="async"></li>`
+            `<li class="list-group-item"><img src="${path}" title="${Localize.translate("common:promo:iconTitle")}" class="lazyload img-fluid" loading="lazy" decoding="async"></li>`
         ).join("");
     }
 }
@@ -202,7 +202,7 @@ export class PromoInterested {
                             <div class="d-flex flex-column align-items-start justify-content-start">
                                 <p class="lead fw-medium fs-4">${item.description}</p>
                                 <button class="promo-interested-button btn btn-lg btn-outline-success border border-2 border-success shadow-sm rounded-5 fs-3 fw-bolder focus-ring focus-ring-primary">
-                                    <a class="text-reset link-offset-2 link-underline link-underline-opacity-0" href="${item.link}">See plans</a>
+                                    <a class="text-reset link-offset-2 link-underline link-underline-opacity-0" href="${item.link}">${Localize.translate("common:promo:seePlans")}</a>
                                 </button>
                             </div>
                         </div>

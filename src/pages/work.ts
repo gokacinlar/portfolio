@@ -1,6 +1,7 @@
 import {
     Template
 } from "../utils/helper";
+import Localize from "../utils/initLocalization";
 
 class WorkPage extends HTMLElement {
     constructor() {
@@ -14,11 +15,11 @@ class WorkPage extends HTMLElement {
     <div class="container text-center h-100">
         <div class="row gy-2 gx-2 align-items-center h-100">
             <div class="col-xs-12 col-sm-12 col-md-6">
-                <h1 class="display-1 text-start fw-medium pe-none"><mark class="px-4 py-1 rounded-end-5">Hire me</mark> or see my plans <span class="wavy-text">below.</span></h1>
+                <h1 class="display-1 text-start fw-medium pe-none"><mark class="px-4 py-1 rounded-end-5">${Localize.translate("common:workPage:hireMe")}</mark> ${Localize.translate("common:workPage:orSeePlans")}</h1>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6">
-                <a type="button" href="#buyOptions" id="workScrollDownBtn" class="btn btn-lg rounded-5 shadow-sm fw-medium fs-2 mx-auto d-flex flex-row align-items-center justify-content-center gap-2" title="Scroll down" type="button">
-                    <span class="work-scroll-down-indicator">See plans</span>
+                <a type="button" href="#buyOptions" id="workScrollDownBtn" class="btn btn-lg rounded-5 shadow-sm fw-medium fs-2 mx-auto d-flex flex-row align-items-center justify-content-center gap-2" title="${Localize.translate("common:workPage:scrollDown")}" type="button">
+                    <span class="work-scroll-down-indicator">${Localize.translate("common:workPage:seePlans")}</span>
                     <i class="work-scroll-down-icon bi bi-arrow-down-circle-fill fs-1"></i>
                 </a>
             </div>
@@ -35,10 +36,10 @@ class WorkPage extends HTMLElement {
         return /*html*/ `
 <ul class="nav nav-pills nav-fill px-0 gap-3" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active rounded-5 fs-2 fw-medium shadow-sm" aria-current="page" data-bs-toggle="tab" data-bs-target="#englishOptions" type="button" role="tab" aria-controls="englishOptions" aria-selected="true" id="forEnglish">For Learning English</button>
+        <button class="nav-link active rounded-5 fs-2 fw-medium shadow-sm" aria-current="page" data-bs-toggle="tab" data-bs-target="#englishOptions" type="button" role="tab" aria-controls="englishOptions" aria-selected="true" id="forEnglish">${Localize.translate("common:workPage:forEnglish")}</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link rounded-5 fs-2 fw-medium shadow-sm" data-bs-toggle="tab" data-bs-target="#programmingOptions" type="button" role="tab" aria-controls="programmingOptions" aria-selected="false" id="forProgramming">For Web Development</button>
+        <button class="nav-link rounded-5 fs-2 fw-medium shadow-sm" data-bs-toggle="tab" data-bs-target="#programmingOptions" type="button" role="tab" aria-controls="programmingOptions" aria-selected="false" id="forProgramming">${Localize.translate("common:workPage:forProgramming")}</button>
     </li>
 </ul>
 `;
@@ -47,8 +48,8 @@ class WorkPage extends HTMLElement {
     public static content(): string {
         return /*html*/ `
 <div id="optionsContent" class="bg-secondary-subtle px-3 py-3 rounded-5 shadow-sm">
-    <div class="tab-pane fade show active" id="englishOptions" role="tabpanel" aria-labelledby="forEnglish">Coming soon...</div>
-    <div class="tab-pane fade" id="programmingOptions" role="tabpanel" aria-labelledby="forProgramming">Coming soon...</div>
+    <div class="tab-pane fade show active" id="englishOptions" role="tabpanel" aria-labelledby="forEnglish">${Localize.translate("common:workPage:comingSoon")}</div>
+    <div class="tab-pane fade" id="programmingOptions" role="tabpanel" aria-labelledby="forProgramming">${Localize.translate("common:workPage:comingSoon")}</div>
 </div>
 `;
     }

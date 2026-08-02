@@ -1,3 +1,5 @@
+import Localize from "../utils/initLocalization";
+
 class ScrollToTopButton extends HTMLElement {
     private _isVisible: boolean = false;
     private _isArrowFilled: boolean = false;
@@ -18,7 +20,7 @@ class ScrollToTopButton extends HTMLElement {
         return /*html*/ `
             <div class="btn-warning text-black bg-gradient d-flex flex-row align-items-center justify-content-center gap-2 p-2 fw-medium rounded-5">
                 <i class="bi bi-arrow-up-circle fs-4 fw-medium"></i>
-                <span>Scroll to Top</span>
+                <span>${Localize.translate("common:scrollToTop:text")}</span>
             </div>
         `;
     }

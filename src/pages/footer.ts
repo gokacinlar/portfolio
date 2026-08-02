@@ -1,6 +1,7 @@
 // Components
 import { Template } from "../utils/helper";
 import { FooterLinks } from "../static";
+import Localize from "../utils/initLocalization";
 
 class Footer extends HTMLElement {
     constructor() {
@@ -26,7 +27,7 @@ class FooterNodes {
                         class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1 modal-trigger"
                         id="sitemapModalBtn"
                         type="button"
-                        title="Sitemap"
+                        title="${Localize.translate("common:footer:sitemap")}"
                         data-modal="siteMapModal">
                         <i class="bi bi-diagram-3 fs-3 fw-bold"></i>
                     </component-custom-button>
@@ -51,15 +52,15 @@ class FooterNodes {
         const brandingLinks = [
             {
                 href: FooterLinks.BRANDING_LINKS.cc010,
-                ariaLabel: "Creative Commons CC0 1.0 Universal License",
+                ariaLabel: Localize.translate("common:footer:ccZero"),
                 src: "cc-zero.svg",
-                title: "Creative Commons CC0 1.0 Universal License"
+                title: Localize.translate("common:footer:ccZero")
             },
             {
                 href: FooterLinks.BRANDING_LINKS.notByAi,
-                ariaLabel: "NotByAI Badge",
+                ariaLabel: Localize.translate("common:footer:notByAi"),
                 src: "notbyai.svg",
-                title: "NotByAI Badge"
+                title: Localize.translate("common:footer:notByAi")
             }
         ];
 
@@ -74,11 +75,10 @@ class FooterNodes {
     }
 
     private createPersonalLinks(): string {
-        const { github, xTwitter } = FooterLinks.PERSONAL_LINKS;
+        const { github } = FooterLinks.PERSONAL_LINKS;
 
         const linkData = [
-            { title: "GitHub", href: github, iconClass: "bi-github" },
-            { title: "X (Twitter)", href: xTwitter, iconClass: "bi-twitter-x" },
+            { title: Localize.translate("common:misc:github"), href: github, iconClass: "bi-github" },
         ];
 
         return linkData.map(link => `

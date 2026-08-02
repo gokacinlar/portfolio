@@ -1,4 +1,5 @@
 import { HeaderNode } from "../../pages/header";
+import Localize from "../../utils/initLocalization";
 
 interface ToggleElements {
     target: HTMLButtonElement;
@@ -19,7 +20,7 @@ class ResponsiveNavbar {
     public responsiveMenuToggleButton(): string {
         return /*html*/ `
             <button id="responsiveMenuToggleBtn" type="button" class="header-responsive-btn bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm
-                d-flex flex-row align-items-center gap-1" title="Change Day/Night Mode">
+                d-flex flex-row align-items-center gap-1" title="${Localize.translate("common:header:dayNight")}">
                 <i class="bi bi-three-dots"></i>
             </button>
             <div class="responsive-navbar-container">
@@ -47,7 +48,7 @@ class ResponsiveNavbar {
                     </div>
                     <div class="mt-4 mb-2">
                         <blockquote class="blockquote text-center text-secondary">
-                            <p><em>Teaching for <strong>life</strong>, coding for <strong>passion</strong>.</em></p>
+                            <p><em>${Localize.translate("common:misc:motto")}</em></p>
                         </blockquote>
                     </div>
                 </nav>
@@ -56,8 +57,7 @@ class ResponsiveNavbar {
     }
 
     private static NAVBAR_HEADER_LINKS: ResponsiveNavBarElements[] = [
-        { title: "GitHub", icon: "bi bi-github", href: "https://www.github.com/gokacinlar" },
-        { title: "X", icon: "bi bi-twitter-x", href: "https://www.x.com/devDissentNT" }
+        { title: Localize.translate("common:misc:github"), icon: "bi bi-github", href: "https://www.github.com/gokacinlar" },
     ];
 
     private renderNavbarHeaderContent(): string {

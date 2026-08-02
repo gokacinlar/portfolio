@@ -2,6 +2,7 @@ import {
     ModalList,
     AccordionList
 } from "../static";
+import Localize from "../utils/initLocalization";
 
 class Accordion {
     constructor() { }
@@ -28,7 +29,7 @@ class Accordion {
         <div class="modal-content rounded-4 shadow-lg">
             <div class="modal-header px-4 py-3">
                 <h5 class="modal-title">${modal.title}</h5>
-                <button type="button" class="btn-close border border-1 border-secondary-subtle rounded-pill" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close border border-1 border-secondary-subtle rounded-pill" data-bs-dismiss="modal" aria-label="${Localize.translate("common:misc:close")}"></button>
             </div>
             <div class="modal-body rounded-5">
                 ${modal.content}

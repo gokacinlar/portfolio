@@ -3,6 +3,7 @@ import ValidateCaptcha from "../utils/validate_captcha";
 import { Template, HorizontalMiddleMouseScroll, insertApprovedScript } from "../utils/helper";
 import { HeroImageWithLink } from "../components/C_Hero";
 import ScrollSpy from "../components/A_ScrollSpy";
+import Localize from "../utils/initLocalization";
 
 // Interfaces
 interface SkillConfig {
@@ -73,12 +74,12 @@ class About extends HTMLElement {
         {
             imageOne: "../assets/images/static/svg/tr.svg",
             imageTwo: "../assets/images/static/svg/uk.svg",
-            title: "English Teacher"
+            title: Localize.translate("common:about:skills:teacher")
         },
         {
             imageOne: "../assets/images/static/svg/js.svg",
             imageTwo: "../assets/images/static/svg/ts.svg",
-            title: "Frontend Developer"
+            title: Localize.translate("common:about:skills:frontend")
         }
     ];
 
@@ -88,11 +89,10 @@ class About extends HTMLElement {
     ];
 
     private readonly SocialsElements: SocialsElement[] = [
-        { name: "GitHub", icon: "bi bi-github", href: new URL("https://github.com/gokacinlar") },
-        { name: "X/Twitter", icon: "bi bi-twitter-x", href: new URL("https://x.com/devDissentNT") },
-        { name: "Hashnode", icon: "bi bi-book", href: new URL("https://gokacinlar.hashnode.dev/") },
-        { name: "Substack", icon: "bi bi-substack", href: new URL("https://substack.com/@gokacinlar") },
-        { name: "E-mail", icon: "bi bi-mailbox", href: new URL("mailto:gokacinlar@tutanota.com?subject=To%20Dervi%C5%9F ") }
+        { name: Localize.translate("common:about:socials:github"), icon: "bi bi-github", href: new URL("https://github.com/gokacinlar") },
+        { name: Localize.translate("common:about:socials:hashnode"), icon: "bi bi-book", href: new URL("https://gokacinlar.hashnode.dev/") },
+        { name: Localize.translate("common:about:socials:substack"), icon: "bi bi-substack", href: new URL("https://substack.com/@gokacinlar") },
+        { name: Localize.translate("common:about:socials:email"), icon: "bi bi-mailbox", href: new URL("mailto:dervisoksuzoglu@tutamail.com?subject=To%20Dervi%C5%9F ") }
     ]
 
     private render(): void {
@@ -204,7 +204,7 @@ class About extends HTMLElement {
     private renderMotto(): string {
         return /*html*/ `
             <blockquote class="blockquote text-center mt-auto mb-auto">
-                <p><em>Teaching for <strong>life</strong>, coding for <strong>passion</strong>.</em></p>
+                <p><em>${Localize.translate("common:misc:motto")}</em></p>
             </blockquote>
         `;
     }

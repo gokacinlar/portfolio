@@ -4,12 +4,20 @@ import { AboutData } from "../static";
 import { renderEmailForm } from "./A_EmailForm";
 import Accordion from "./A_Accordion";
 import * as Type from "../ts/types/types";
+import Localize from "../utils/initLocalization";
 
 class ScrollSpy {
     constructor() {
         document.addEventListener("DOMContentLoaded", () => {
             addBackgroundBasedOnVerticalScroll("about-main", "about-scroll-spy-id", "glow-white-drop-shadow");
         });
+    }
+
+    // Scrollspy heading links
+    private renderHeading(id: string, text: string): string {
+        return /*html*/ `
+            <h4 id="${id}"><a href="#${id}" class="link-body-emphasis link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">${text}</a></h4>
+        `;
     }
 
     // Scrollspy list items
@@ -45,46 +53,55 @@ class ScrollSpy {
                 <div class="scrollspy-content" data-bs-spy="scroll" data-bs-target="#about-scroll-spy-id" data-bs-offset="40" data-bs-smooth-scroll="true" tabindex="0">
                     <div>
                         <div>
-                            <h4 id="aboutMe">🧑 About Me</h4>
+                            ${this.renderHeading("aboutMe", `🧑 ${Localize.translate("common:about:nav:aboutMe")}`)}
                             <hr class="w-25">
                         </div>
                         <div>
                             <p class="about-li1-text fs-5 fw-medium">
-                                ${AboutData.introduction.first}
+                                ${Localize.translate("common:about:introduction:first")}
                             </p>
                             <p class="about-li1-text fs-5 fw-medium">
-                                ${AboutData.introduction.last}
+                                ${Localize.translate("common:about:introduction:last")}
                             </p>
                         </div>
                     </div>
                     <div>
                         <div>
-                            <h4 id="education">📚 Education</h4>
+                            ${this.renderHeading("education", `📚 ${Localize.translate("common:about:nav:education")}`)}
                             <hr class="w-25">
                         </div>
-                        ${this.renderTable(["Institution", "Field", "Degree", "Date"], AboutData.educationRows, "eduTable")}
+                        ${this.renderTable([
+                            Localize.translate("common:about:table:institution"),
+                            Localize.translate("common:about:table:field"),
+                            Localize.translate("common:about:table:degree"),
+                            Localize.translate("common:about:table:date")
+                        ], AboutData.educationRows, "eduTable")}
                     </div>
                     <div>
                         <div>
-                            <h4 id="work">📠 Work</h4>
+                            ${this.renderHeading("work", `📠 ${Localize.translate("common:about:nav:work")}`)}
                             <hr class="w-25">
                         </div>
                         <div>
-                            <p class="fs-5 fw-medium d-flex flex-row align-items-center gap-1">You can download or view my CV <a class="link-info link-opacity-75-hover link-offset-2 modal-trigger" data-modal="requestCVModal" href="#" title="See/Download CV here.">here.</a></p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <h4 id="stack">🚀 Tech Stack & Tools</h4>
-                            <hr class="w-25">
-                        </div>
-                        <div>
-                            ${this.renderTable(["Category", "Technologies", "Libraries & Tools"], AboutData.stackRows, "stackTable")}
+                            <p class="fs-5 fw-medium d-flex flex-row align-items-center gap-1">${Localize.translate("common:about:work:cvIntro")} <a class="link-info link-opacity-75-hover link-offset-2 modal-trigger" data-modal="requestCVModal" href="#" title="${Localize.translate("common:about:work:cvTitle")}">${Localize.translate("common:about:work:cvHere")}</a></p>
                         </div>
                     </div>
                     <div>
                         <div>
-                            <h4 id="mailing">📧 E-mail</h4>
+                            ${this.renderHeading("stack", `🚀 ${Localize.translate("common:about:nav:stack")}`)}
+                            <hr class="w-25">
+                        </div>
+                        <div>
+                            ${this.renderTable([
+                                Localize.translate("common:about:table:category"),
+                                Localize.translate("common:about:table:technologies"),
+                                Localize.translate("common:about:table:librariesTools")
+                            ], AboutData.stackRows, "stackTable")}
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            ${this.renderHeading("mailing", `📧 ${Localize.translate("common:about:nav:mailing")}`)}
                             <hr class="w-25">
                         </div>
                         <div>
@@ -93,7 +110,7 @@ class ScrollSpy {
                     </div>
                     <div>
                         <div>
-                            <h4 id="advanced">🔎 Advanced</h4>
+                            ${this.renderHeading("advanced", `🔎 ${Localize.translate("common:about:nav:advanced")}`)}
                             <hr class="w-25">
                         </div>
                         <div>

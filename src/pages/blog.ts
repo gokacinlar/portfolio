@@ -84,8 +84,8 @@ class Updates extends HTMLElement {
         return /*html*/ `
             <div class="offcanvas offcanvas-start rounded-end-4" tabindex="-1" id="blogAsideOffcanvasTemplate" aria-labelledby="blogAsideOffcanvas" data-bs-scroll="true" data-bs-backdrop="true">
                 <div class="offcanvas-header bg-secondary-subtle rounded-end-4">
-                    <h5 class="offcanvas-title" id="blogAsideOffcanvas">Latest updates</h5>
-                    <button id="dismissOffcanvasBtn" type="button" class="btn btn-sm btn-close fs-5 fw-bold" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <h5 class="offcanvas-title" id="blogAsideOffcanvas">${Localize.translate("common:blog:latestUpdates")}</h5>
+                    <button id="dismissOffcanvasBtn" type="button" class="btn btn-sm btn-close fs-5 fw-bold" data-bs-dismiss="offcanvas" aria-label="${Localize.translate("common:misc:close")}"></button>
                 </div>
                 <div id="offCanvasArea" class="offcanvas-body">
 
@@ -108,7 +108,7 @@ class Updates extends HTMLElement {
                 element.innerHTML = `
                     <div class="d-flex flex-column align-items-center justify-content-center">
                         <h1>☹</h1>
-                        <h2>No blog posts <em>are available.</em></h2>
+                        <h2>${Localize.translate("common:blog:noPosts")}</h2>
                     </div>
                 `;
                 return;
@@ -120,8 +120,8 @@ class Updates extends HTMLElement {
             // Create and append each post button with event listener
             data.forEach((item: PostPreview) => {
                 try {
-                    const title: string = item.title || "Untitled Post";
-                    const authorName: string = item.author?.name || "Unknown Author";
+                    const title: string = item.title || Localize.translate("common:blog:untitledPost");
+                    const authorName: string = item.author?.name || Localize.translate("common:blog:unknownAuthor");
 
                     const button = document.createElement("button") as HTMLButtonElement;
                     button.type = "button";
@@ -151,7 +151,7 @@ class Updates extends HTMLElement {
                 element.innerHTML = `
                     <div class="d-flex flex-column align-items-center justify-content-center">
                         <div>☹</div>
-                        <h2>Unable to <mark>display</mark> blog posts.</h2>
+                        <h2>${Localize.translate("common:blog:unableDisplay")}</h2>
                     </div>
                 `;
             }
@@ -188,9 +188,9 @@ class Updates extends HTMLElement {
             console.error("Error loading post:", error);
             contentArea.innerHTML = `
                 <div class="alert alert-danger shadow-sm rounded-5" role="alert">
-                    <h4 class="alert-heading"><i class="bi bi-exclamation-diamond"></i> Error Loading Post</h4>
+                    <h4 class="alert-heading"><i class="bi bi-exclamation-diamond"></i> ${Localize.translate("common:blog:errorLoading")}</h4>
                     <hr class="my-1 w-50">
-                    <p class="mt-2 mb-0">Something went wrong. Try again later...</p>
+                    <p class="mt-2 mb-0">${Localize.translate("common:blog:somethingWentWrong")}</p>
                 </div>
             `;
         } finally {
@@ -228,7 +228,7 @@ class Updates extends HTMLElement {
 
         const temporarySpinnerContent = document.createElement("span") as HTMLSpanElement;
         temporarySpinnerContent.className = "visually-hidden";
-        temporarySpinnerContent.textContent = "Loading....";
+        temporarySpinnerContent.textContent = Localize.translate("common:blog:loading");
 
         temporarySpinner.appendChild(temporarySpinnerContent);
         spinnerContainer.appendChild(temporarySpinner);
@@ -251,8 +251,8 @@ class Updates extends HTMLElement {
         }
 
         const sanitizedContent = post.content;
-        const sanitizedTitle = post.title || "Untitled Post";
-        const authorName = post.author?.name || "Unknown Author";
+        const sanitizedTitle = post.title || Localize.translate("common:blog:untitledPost");
+        const authorName = post.author?.name || Localize.translate("common:blog:unknownAuthor");
         const defaultImageSrc = "../assets/images/static/webp/logo.webp";
 
         const postHTML = `
@@ -266,7 +266,7 @@ class Updates extends HTMLElement {
                         </div>
                         <div>
                             <p class="mb-0 fw-semibold">${authorName}</p>
-                            <small class="text-muted">Author</small>
+                            <small class="text-muted">${Localize.translate("common:blog:author")}</small>
                         </div>
                     </div>
                     <hr class="w-25">
@@ -307,9 +307,9 @@ class Updates extends HTMLElement {
             console.error("Error loading post from URL:", error);
             contentArea.innerHTML = `
                 <div class="alert alert-warning shadow-sm rounded-5" role="alert">
-                    <h4 class="alert-heading"><i class="bi bi-exclamation-triangle"></i> Post Not Found</h4>
+                    <h4 class="alert-heading"><i class="bi bi-exclamation-triangle"></i> ${Localize.translate("common:blog:postNotFound")}</h4>
                     <hr class="my-1 w-50">
-                    <p class="mt-2 mb-0">The requested post could not be found.</p>
+                    <p class="mt-2 mb-0">${Localize.translate("common:blog:postNotFoundMsg")}</p>
                 </div>
             `;
         } finally {
@@ -337,9 +337,9 @@ class Updates extends HTMLElement {
             console.error("Failed to fetch and populate posts:", error);
             const errorAlert: string = `
                 <div class="alert alert-warning rounded-5 shadow-sm" role="alert">
-                    <h4 class="alert-heading"><i class="bi bi-exclamation-diamond"></i> Error</h4>
+                    <h4 class="alert-heading"><i class="bi bi-exclamation-diamond"></i> ${Localize.translate("common:blog:error")}</h4>
                     <hr class="w-50 my-2">
-                    <p class="my-1">Unable to load blog posts. Please refresh the page.</p>
+                    <p class="my-1">${Localize.translate("common:blog:unableLoad")}</p>
                 </div>
             `;
             blogAside.innerHTML = errorAlert;
@@ -362,11 +362,11 @@ class Updates extends HTMLElement {
 
         const temporarySpinnerContent = document.createElement("span") as HTMLSpanElement;
         temporarySpinnerContent.className = "visually-hidden";
-        temporarySpinnerContent.textContent = "Loading Blog Posts";
+        temporarySpinnerContent.textContent = Localize.translate("common:blog:loadingPosts");
 
         const loadingText = document.createElement("p") as HTMLParagraphElement;
         loadingText.className = "text-muted";
-        loadingText.textContent = "Loading blog posts...";
+        loadingText.textContent = Localize.translate("common:blog:loadingPostsMsg");
 
         temporarySpinner.appendChild(temporarySpinnerContent);
         spinnerContainer.appendChild(temporarySpinner);
