@@ -14,7 +14,7 @@
     "kişisel website"
   ],
   "homepage": "https://github.com/gokacinlar/portfolio",
-  "author": "Derviş Öksüzoğlu <orphansson@outlook.com> (https://dervisoksuzoglu.com.tr)",
+  "author": "Derviş Öksüzoğlu <dervisoksuzoglu@tutamail.com> (https://dervisoksuzoglu.xyz)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gokacinlar/portfolio.git"
@@ -48,10 +48,10 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.15",
-    "@gltf-transform/cli": "^4.3.0",
+    "@gltf-transform/cli": "^4.4.2",
     "@gltf-transform/core": "^4.3.0",
     "@gltf-transform/extensions": "^4.3.0",
-    "@gltf-transform/functions": "^4.3.0",
+    "@gltf-transform/functions": "^3.4.2",
     "@types/bootstrap": "^5.2.10",
     "@types/draco3dgltf": "^1.4.3",
     "@types/grecaptcha": "^3.0.9",
@@ -106,7 +106,7 @@
     "webpack": "^5.105.3",
     "webpack-bundle-analyzer": "^5.1.0",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.4",
+    "webpack-dev-server": "^6.0.0",
     "webpack-manifest-plugin": "^6.0.1",
     "webpack-nano": "^1.1.1",
     "webpack-node-externals": "^3.0.0",
