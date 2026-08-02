@@ -1,4 +1,5 @@
 import { insertToastifiedMessage } from "../utils/helper";
+import Localize from "../utils/initLocalization";
 
 // Handle web3forms hCaptcha request
 export function loadWeb3Forms(): Promise<void> {
@@ -48,14 +49,14 @@ export function formState(): void {
             const data = await response.json();
 
             if (data.success) {
-                insertToastifiedMessage("Your e-mail has been sent.");
+                insertToastifiedMessage(Localize.translate("common:toasts:emailSent"));
                 form.reset();
             } else {
-                insertToastifiedMessage(data.message || "Unable to send your e-mail.");
+                insertToastifiedMessage(data.message || Localize.translate("common:toasts:emailFailed"));
             }
         } catch (error) {
             console.error("Form submission error:", error);
-            insertToastifiedMessage("Unable to send your e-mail. Please try again.");
+            insertToastifiedMessage(Localize.translate("common:toasts:emailFailedTryAgain"));
         }
     });
 }
