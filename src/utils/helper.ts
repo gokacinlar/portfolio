@@ -11,13 +11,14 @@ export const TOAST_CONFIG = {
     duration: 2500,
     newWindow: true,
     close: true,
-    avatar: "../assets/images/static/webp/logo.webp",
-    gravity: "bottom" as const,
-    position: "center" as const,
+    avatar: "../assets/images/static/webp/logo_24x24.webp",
+    gravity: "bottom",
+    position: "center",
     stopOnFocus: true,
     style: {
         background: "#0f3d75",
-        borderRadius: "24px"
+        borderRadius: "24px",
+        text: "center"
     },
 } as const;
 
@@ -605,26 +606,18 @@ export function colorfulBannerName(array: Array<string>, targetElement: string):
 }
 
 export function applyHapticsToModals() {
-    const modalElementsWithCustomWebComponentsDefined = document.querySelectorAll("component-custom-button[data-modal]") as NodeListOf<any>;
-    const modalElementsWithButtons = document.querySelectorAll("button[data-modal]") as NodeListOf<HTMLButtonElement>;
+    const modalElements = [
+        ...document.querySelectorAll("component-custom-button[data-modal]"),
+        ...document.querySelectorAll("button[data-modal]")
+    ] as HTMLElement[];
 
     const haptics = CustomWebHaptics.getInstance();
 
-    if (modalElementsWithCustomWebComponentsDefined && modalElementsWithButtons) {
-        modalElementsWithButtons.forEach(element => {
-            element.addEventListener("click", (e: MouseEvent) => {
-                if (e.target) {
-                    haptics.triggerHaptic("success");
-                }
-            });
+    modalElements.forEach(element => {
+        element.addEventListener("click", (e: MouseEvent) => {
+            if (e.target) {
+                haptics.triggerHaptic("success");
+            }
         });
-
-        modalElementsWithCustomWebComponentsDefined.forEach(element => {
-            element.addEventListener("click", (e: MouseEvent) => {
-                if (e.target) {
-                    haptics.triggerHaptic("success");
-                }
-            });
-        });
-    }
+    });
 }
