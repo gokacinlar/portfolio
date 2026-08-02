@@ -901,6 +901,10 @@ html {
         @include hide-scrollbar();
     }
 
+    #about-main .scrollspy-content h4 {
+        scroll-margin-top: 80px;
+    }
+
     #about-scroll-spy-id {
         &::-webkit-scrollbar {
             display: none;
@@ -1080,9 +1084,7 @@ html {
     }
 
     #workScrollDownBtn {
-        --btn-w: 200px;
-        width: var(--btn-w);
-        position: relative;
+        width: fit-content;
         overflow: hidden;
         transition:
             filter .25s ease-in-out,
@@ -1092,19 +1094,12 @@ html {
         &>.work-scroll-down-icon {
             @include animation(slide-in-blurred-top, .35s, cubic-bezier(0.230, 1.000, 0.320, 1.000), alternate both);
             display: none;
-            position: absolute;
-            left: 35%;
-            top: 20%;
             transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
             z-index: 1;
         }
 
         &:hover {
             border: solid 1px #1F1F24 !important;
-            --max-w: 210px;
-            width: var(--max-w) !important;
             justify-content: space-between !important;
 
             &>.work-scroll-down-icon {
