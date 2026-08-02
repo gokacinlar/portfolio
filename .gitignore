@@ -1,6 +1,7 @@
 # Manual entries
 .env
 .git
+.htaccess
 public/
 
 # PHP-composer related
