@@ -15,7 +15,7 @@ class DownloadCv
     private function download(string $input): void
     {
         try {
-            $file = realpath(path: $input);
+            $file = realpath(path: __DIR__ . "/" . $input);
             if (file_exists(filename: $file)) {
                 $this->initDownloadCv(file: $file);
             } else {
@@ -28,8 +28,15 @@ class DownloadCv
 
     private function rateLimitCheck(string $key, int $limit, int $period): void
     {
-        $filename = "RLIMITER/" . hash(algo: "sha256", data: $key) . ".txt";
+        $dir = __DIR__ . "/RLIMITER";
+
+        if (!is_dir($dir) && !mkdir($dir, 0755, true) && !is_dir($dir)) {
+            throw new Exception(message: "Unable to create rate limiter directory: " . $dir);
+        }
+
+        $filename = $dir . "/" . hash(algo: "sha256", data: $key) . ".txt";
         $ip = $_SERVER["REMOTE_ADDR"];
+
         if (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
             $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
         }
@@ -95,8 +102,6 @@ class DownloadCv
         header(header: 'Content-Security-Policy: default-src "self";');
         header(header: "Accept-Ranges: bytes");
         header(header: "Content-Transfer-Encoding: binary");
-        header(header: "Content-Disposition: inline");
-        header(header: "Accept-Ranges: bytes");
     }
 
     private static function cleanBuffer(): void
@@ -105,3 +110,6 @@ class DownloadCv
         flush();
     }
 }
+
+$url = "../assets/doc/DOO-CV-REDACTED.pdf";
+$download = new DownloadCv($url);
