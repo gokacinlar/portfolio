@@ -56,11 +56,11 @@ class Localize {
         this.initI18n();
     }
 
-    public static translate(key: string): string {
+    public static translate(key: string, options?: object): string {
         if (typeof key !== "string") {
             throw new Error("Input type for i18next localization must be string.");
         }
-        return i18next.t(key);
+        return i18next.t(key, options);
     }
 
     // Made static and refactored to avoid duplicate event listeners if called multiple times.
