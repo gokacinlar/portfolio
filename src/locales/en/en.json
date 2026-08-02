@@ -14,7 +14,7 @@
             "cv": "Get my CV!"
         },
         "buttonTitles": {
-            "workHire": "Proceed to hire me for your web demands.",
+            "workHire": "Proceed to hire me for your web or teaching demands.",
             "downloadCV": "Proceed to download my CV."
         },
         "mottos": {
@@ -123,13 +123,176 @@
         "rss": {
             "btnTitle": "📰 Download RSS Feed",
             "tablePlatformName": "Platform Name",
-            "tableLinkName": "RSS Link"
+            "tableLinkName": "RSS Link",
+            "site": "Site",
+            "thisSite": "This Site",
+            "hashnode": "Hashnode"
         },
         "sitemap": {
             "btnTitle": "🍁 Sitemap",
             "tableActionName": "Action",
             "tableVisitName": "Go",
             "visitSitemap": "See Sitemap"
+        },
+        "langSwitch": {
+            "en": "English",
+            "tr": "Türkçe",
+            "enTitle": "Change Language to English",
+            "trTitle": "Change Language to Turkish"
         }
+    },
+    "misc": {
+        "close": "Close",
+        "github": "GitHub",
+        "motto": "Teaching for <strong>life</strong>, coding for <strong>passion</strong>."
+    },
+    "footer": {
+        "sitemap": "Sitemap",
+        "ccZero": "Creative Commons CC0 1.0 Universal License",
+        "notByAi": "NotByAI Badge"
+    },
+    "header": {
+        "dayNight": "Change Day/Night Mode",
+        "changeLanguage": "Change Site Language"
+    },
+    "scrollToTop": {
+        "text": "Scroll to Top"
+    },
+    "about": {
+        "skills": {
+            "teacher": "English Teacher",
+            "frontend": "Frontend Developer"
+        },
+        "socials": {
+            "github": "GitHub",
+            "hashnode": "Hashnode",
+            "substack": "Substack",
+            "email": "E-mail"
+        },
+        "nav": {
+            "aboutMe": "About Me",
+            "education": "Education",
+            "work": "Work",
+            "stack": "Tech Stack & Tools",
+            "mailing": "E-mail",
+            "advanced": "Advanced"
+        },
+        "introduction": {
+            "first": "I'm highly interested in creating <mark>content-first</mark> websites as well as crafting stand-alone <mark>web applications (SPAs)</mark> or <mark>multi-page</mark> static content where <em>speed</em> &amp; <em>progressive enhancement</em> are critically important. I love building user interfaces with mainly <strong>React.</strong>",
+            "last": "My primary field is teaching English in <mark>ESL (English as a Second Language)</mark> context. My main focus is to maximize practical usage of English in almost every aspect related to casual or academical way of interacting with the language."
+        },
+        "table": {
+            "institution": "Institution",
+            "field": "Field",
+            "degree": "Degree",
+            "date": "Date",
+            "category": "Category",
+            "technologies": "Technologies",
+            "librariesTools": "Libraries & Tools"
+        },
+        "edu": {
+            "university": "Atatürk University",
+            "elte": "English Language Teaching",
+            "bachelor": "Bachelor's Degree",
+            "computerProgramming": "Computer Programming",
+            "associate": "Associate Degree",
+            "current": "current"
+        },
+        "stack": {
+            "frontend": "Front-end",
+            "backend": "Back-end",
+            "crossplatform": "Cross-platform",
+            "styling": "Styling",
+            "databases": "Databases",
+            "devops": "DevOps",
+            "cms": "CMS",
+            "ssg": "SSG",
+            "testing": "Testing",
+            "designUx": "Design & UX"
+        },
+        "work": {
+            "cvIntro": "You can download or view my CV",
+            "cvHere": "here.",
+            "cvTitle": "See/Download CV here."
+        }
+    },
+    "emailForm": {
+        "yourName": "Your Name",
+        "someone": "Someone",
+        "provideName": "Please provide your name.",
+        "email": "Email",
+        "emailPlaceholder": "someone@example.com",
+        "provideEmail": "Please provide your e-mail address.",
+        "message": "Message",
+        "messagePlaceholder": "Type your message here...",
+        "provideMessage": "Please enter a message in the textarea.",
+        "submitTitle": "Submit Form",
+        "sendMessage": "Send Message",
+        "subject": "New Message"
+    },
+    "blog": {
+        "latestUpdates": "Latest updates",
+        "noPosts": "No blog posts <em>are available.</em>",
+        "untitledPost": "Untitled Post",
+        "unknownAuthor": "Unknown Author",
+        "unableDisplay": "Unable to <mark>display</mark> blog posts.",
+        "errorLoading": "Error Loading Post",
+        "somethingWentWrong": "Something went wrong. Try again later...",
+        "postNotFound": "Post Not Found",
+        "postNotFoundMsg": "The requested post could not be found.",
+        "error": "Error",
+        "unableLoad": "Unable to load blog posts. Please refresh the page.",
+        "loadingPosts": "Loading Blog Posts",
+        "loadingPostsMsg": "Loading blog posts...",
+        "loading": "Loading....",
+        "author": "Author"
+    },
+    "workPage": {
+        "hireMe": "Hire me",
+        "orSeePlans": "or see my plans <span class=\"wavy-text\">below.</span>",
+        "scrollDown": "Scroll down",
+        "seePlans": "See plans",
+        "forEnglish": "For Learning English",
+        "forProgramming": "For Web Development",
+        "comingSoon": "Coming soon..."
+    },
+    "promo": {
+        "seePlans": "See plans",
+        "link": "Link",
+        "iconTitle": "Icon",
+        "writtenIn": "Written in"
+    },
+    "accordion": {
+        "secureHeader": "🔑 Secure & Private Communication",
+        "secureIntro": "If you want to contact me <mark class=\"rounded-3\">in a more private way</mark>, you can use one of the actions given below. If you don't know how to use these methods, here's a <a class=\"link-info link-opacity-75-hover link-offset-2\" href=\"https://www.youtube.com/watch?v=mu2TVYJE5Gc\" hreflang=\"x-default\" target=\"_blank\">tutorial</a> on the go. However, you should use this <strong>if you really have good reason to do so.</strong>",
+        "secureJami": "Jami (Client)",
+        "secureGpg": "GnuPG (Public Key)",
+        "secureView": "View",
+        "secureHere": "here.",
+        "donationsHeader": "💞 Donations",
+        "donationsIntro": "If you're <em>somehow</em> interested in my work, you can support me via the options given below:",
+        "donationsBuyMeACoffee": "BuyMeACoffee",
+        "donationsView": "View",
+        "donationsHere": "here.",
+        "aboutSiteHeader": "🍫 About This Site",
+        "aboutSiteIntro": "Here you can find all the necessary information for this website.",
+        "aboutSiteVersion": "Site Version",
+        "aboutSiteLicense": "License",
+        "aboutSiteLicenseValue": "This site is licensed under <code>CC0-1.0 Universal License.</code>",
+        "aboutSiteSource": "Source Code",
+        "aboutSiteAvailableOn": "Available on",
+        "aboutSiteGitHub": "GitHub"
+    },
+    "toasts": {
+        "completeCaptcha": "Please complete the captcha request.",
+        "verified": "CAPTCHA has been verified. Beginning download.",
+        "verificationFailed": "CAPTCHA verification failed. Please try again.",
+        "rateLimit": "Rate limit exceeded. Please wait a moment before trying again.",
+        "rateLimitLater": "Rate limit exceeded. Please try again later.",
+        "downloadFailed": "Unable to download the file. Please try again.",
+        "requestFailed": "Request failed ({{status}}). Please try again.",
+        "emailSent": "Your e-mail has been sent.",
+        "emailFailed": "Unable to send your e-mail.",
+        "emailFailedTryAgain": "Unable to send your e-mail. Please try again."
     }
 }

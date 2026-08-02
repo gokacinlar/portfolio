@@ -14,7 +14,7 @@
             "cv": "CV'mi İndirin"
         },
         "buttonTitles": {
-            "workHire": "Web projesi için çalışalım.",
+            "workHire": "Web projesi veya İngilizce öğretimi için çalışalım.",
             "downloadCV": "CV'mi indirmek için tıklayın."
         },
         "mottos": {
@@ -123,13 +123,176 @@
         "rss": {
             "btnTitle": "📰 RSS Feedi İndir",
             "tablePlatformName": "Platform İsmi",
-            "tableLinkName": "RSS Bağlantısı"
+            "tableLinkName": "RSS Bağlantısı",
+            "site": "Site",
+            "thisSite": "Bu Site",
+            "hashnode": "Hashnode"
         },
         "sitemap": {
             "btnTitle": "🍁 Site Haritası",
             "tableActionName": "Eylem",
             "tableVisitName": "Gidin",
             "visitSitemap": "Site Haritasını Görün"
+        },
+        "langSwitch": {
+            "en": "English",
+            "tr": "Türkçe",
+            "enTitle": "Dili İngilizce'ye Çevir",
+            "trTitle": "Dili Türkçe'ye Çevir"
         }
+    },
+    "misc": {
+        "close": "Kapat",
+        "github": "GitHub",
+        "motto": "Öğretmek <strong>yaşam</strong> içindir, yazılım <strong>tutku</strong> için."
+    },
+    "footer": {
+        "sitemap": "Site Haritası",
+        "ccZero": "Creative Commons CC0 1.0 Evrensel Lisansı",
+        "notByAi": "NotByAI Rozeti"
+    },
+    "header": {
+        "dayNight": "Gündüz/Gece Modunu Değiştir",
+        "changeLanguage": "Site Dilini Değiştir"
+    },
+    "scrollToTop": {
+        "text": "Başa Dön"
+    },
+    "about": {
+        "skills": {
+            "teacher": "İngilizce Öğretmeni",
+            "frontend": "Ön-yüz Geliştiricisi"
+        },
+        "socials": {
+            "github": "GitHub",
+            "hashnode": "Hashnode",
+            "substack": "Substack",
+            "email": "E-posta"
+        },
+        "nav": {
+            "aboutMe": "Hakkımda",
+            "education": "Eğitim",
+            "work": "Çalışmalar",
+            "stack": "Teknoloji Yığını ve Araçlar",
+            "mailing": "E-posta",
+            "advanced": "İleri Düzey"
+        },
+        "introduction": {
+            "first": "<mark>İçerik odaklı</mark> web siteleri oluşturmakla birlikte, <em>hız</em> ve <em>aşamalı geliştirmenin</em> kritik önem taşıdığı <mark>web uygulamaları (SPA)</mark> veya <mark>çok sayfalı</mark> statik içerikler geliştirmekle yakından ilgileniyorum. Kullanıcı arayüzlerini özellikle <strong>React</strong> ile oluşturmayı seviyorum.",
+            "last": "Asıl uzmanlık alanım <mark>ESL (İkinci Dil Olarak İngilizce)</mark> bağlamında İngilizce öğretmektir. Ana odağım, dilin gündelik veya akademik etkileşiminin hemen her alanında pratik kullanımını en üst düzeye çıkarmaktır."
+        },
+        "table": {
+            "institution": "Kurum",
+            "field": "Alan",
+            "degree": "Derece",
+            "date": "Tarih",
+            "category": "Kategori",
+            "technologies": "Teknolojiler",
+            "librariesTools": "Kütüphaneler ve Araçlar"
+        },
+        "edu": {
+            "university": "Atatürk Üniversitesi",
+            "elte": "İngiliz Dili Eğitimi",
+            "bachelor": "Lisans Derecesi",
+            "computerProgramming": "Bilgisayar Programcılığı",
+            "associate": "Ön Lisans Derecesi",
+            "current": "devam ediyor"
+        },
+        "stack": {
+            "frontend": "Ön-yüz",
+            "backend": "Arka-yüz",
+            "crossplatform": "Çapraz Platform",
+            "styling": "Stil",
+            "databases": "Veritabanları",
+            "devops": "DevOps",
+            "cms": "CMS",
+            "ssg": "SSG",
+            "testing": "Test",
+            "designUx": "Tasarım ve UX"
+        },
+        "work": {
+            "cvIntro": "CV'mi görüntüleyebilir veya indirebilirsiniz",
+            "cvHere": "buradan.",
+            "cvTitle": "CV'yi görüntüle/indir."
+        }
+    },
+    "emailForm": {
+        "yourName": "Adınız",
+        "someone": "Örnek: Ahmet",
+        "provideName": "Lütfen adınızı belirtin.",
+        "email": "E-posta",
+        "emailPlaceholder": "ornek@example.com",
+        "provideEmail": "Lütfen e-posta adresinizi belirtin.",
+        "message": "Mesaj",
+        "messagePlaceholder": "Mesajınızı buraya yazın...",
+        "provideMessage": "Lütfen mesaj alanına bir mesaj girin.",
+        "submitTitle": "Formu Gönder",
+        "sendMessage": "Mesaj Gönder",
+        "subject": "Yeni Mesaj"
+    },
+    "blog": {
+        "latestUpdates": "Son Güncellemeler",
+        "noPosts": "Blog yazısı <em>mevcut değil.</em>",
+        "untitledPost": "Başlıksız Gönderi",
+        "unknownAuthor": "Bilinmeyen Yazar",
+        "unableDisplay": "Blog yazıları <mark>görüntülenemiyor.</mark>",
+        "errorLoading": "Gönderi Yüklenirken Hata",
+        "somethingWentWrong": "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin...",
+        "postNotFound": "Gönderi Bulunamadı",
+        "postNotFoundMsg": "İstenen gönderi bulunamadı.",
+        "error": "Hata",
+        "unableLoad": "Blog yazıları yüklenemedi. Lütfen sayfayı yenileyin.",
+        "loadingPosts": "Blog Yazıları Yükleniyor",
+        "loadingPostsMsg": "Blog yazıları yükleniyor...",
+        "loading": "Yükleniyor....",
+        "author": "Yazar"
+    },
+    "workPage": {
+        "hireMe": "Beni İşe Alın",
+        "orSeePlans": "veya planlarımı <span class=\"wavy-text\">aşağıda</span> inceleyin.",
+        "scrollDown": "Aşağı kaydır",
+        "seePlans": "Planları Gör",
+        "forEnglish": "İngilizce Öğrenmek İçin",
+        "forProgramming": "Web Geliştirme İçin",
+        "comingSoon": "Yakında..."
+    },
+    "promo": {
+        "seePlans": "Planları Gör",
+        "link": "Bağlantı",
+        "iconTitle": "Simge",
+        "writtenIn": "Yazıldığı dil:"
+    },
+    "accordion": {
+        "secureHeader": "🔑 Güvenli ve Gizli İletişim",
+        "secureIntro": "Benimle <mark class=\"rounded-3\">daha gizli bir şekilde</mark> iletişime geçmek isterseniz aşağıdaki eylemlerden birini kullanabilirsiniz. Bu yöntemleri nasıl kullanacağınızı bilmiyorsanız, işte <a class=\"link-info link-opacity-75-hover link-offset-2\" href=\"https://www.youtube.com/watch?v=mu2TVYJE5Gc\" hreflang=\"x-default\" target=\"_blank\">bir eğitim videosu</a>. Ancak bunu yalnızca <strong>gerçekten iyi bir nedeniniz varsa</strong> kullanmalısınız.",
+        "secureJami": "Jami (İstemci)",
+        "secureGpg": "GnuPG (Genel Anahtar)",
+        "secureView": "Görüntüle",
+        "secureHere": "buradan.",
+        "donationsHeader": "💞 Bağışlar",
+        "donationsIntro": "Çalışmalarımla <em>herhangi bir şekilde</em> ilgileniyorsanız, aşağıdaki seçeneklerle beni destekleyebilirsiniz:",
+        "donationsBuyMeACoffee": "BuyMeACoffee",
+        "donationsView": "Görüntüle",
+        "donationsHere": "buradan.",
+        "aboutSiteHeader": "🍫 Bu Site Hakkında",
+        "aboutSiteIntro": "Burada bu web sitesi için gerekli tüm bilgileri bulabilirsiniz.",
+        "aboutSiteVersion": "Site Sürümü",
+        "aboutSiteLicense": "Lisans",
+        "aboutSiteLicenseValue": "Bu site <code>CC0-1.0 Evrensel Lisansı</code> altında lisanslıdır.",
+        "aboutSiteSource": "Kaynak Kodu",
+        "aboutSiteAvailableOn": "Şurada mevcut:",
+        "aboutSiteGitHub": "GitHub"
+    },
+    "toasts": {
+        "completeCaptcha": "Lütfen captcha doğrulamasını tamamlayın.",
+        "verified": "Captcha doğrulandı. İndirme başlatılıyor.",
+        "verificationFailed": "Captcha doğrulaması başarısız oldu. Lütfen tekrar deneyin.",
+        "rateLimit": "Hız sınırı aşıldı. Lütfen bir süre bekleyip tekrar deneyin.",
+        "rateLimitLater": "Hız sınırı aşıldı. Lütfen daha sonra tekrar deneyin.",
+        "downloadFailed": "Dosya indirilemedi. Lütfen tekrar deneyin.",
+        "requestFailed": "İstek başarısız oldu ({{status}}). Lütfen tekrar deneyin.",
+        "emailSent": "E-postanız gönderildi.",
+        "emailFailed": "E-postanız gönderilemedi.",
+        "emailFailedTryAgain": "E-postanız gönderilemedi. Lütfen tekrar deneyin."
     }
 }

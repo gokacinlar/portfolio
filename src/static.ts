@@ -90,13 +90,13 @@ export class PromoParts {
             title: Localize.translate("common:work:section1:title"),
             description: Localize.translate("common:work:section1:msg"),
             img: "../assets/images/static/webp/qualifications-main-english.webp",
-            link: new URL("https://dervisoksuzoglu.com.tr")
+            link: new URL("https://dervisoksuzoglu.xyz")
         },
         {
             title: Localize.translate("common:work:section2:title"),
             description: Localize.translate("common:work:section2:msg"),
             img: "../assets/images/static/webp/qualifications-main-webdev.webp",
-            link: new URL("https://dervisoksuzoglu.com.tr")
+            link: new URL("https://dervisoksuzoglu.xyz")
         }
     ]
 }
@@ -117,54 +117,45 @@ export class FooterLinks {
 
 export class AboutData {
     public static readonly navLinks: Type.NavLink[] = [
-        { id: "aboutMe", icon: "🧑", label: "About Me" },
-        { id: "education", icon: "📚", label: "Education" },
-        { id: "work", icon: "📠", label: "Work" },
-        { id: "stack", icon: "🚀", label: "Tech Stack & Tools" },
-        { id: "mailing", icon: "📧", label: "E-mail" },
-        { id: "advanced", icon: "🔎", label: "Advanced" },
+        { id: "aboutMe", icon: "🧑", label: Localize.translate("common:about:nav:aboutMe") },
+        { id: "education", icon: "📚", label: Localize.translate("common:about:nav:education") },
+        { id: "work", icon: "📠", label: Localize.translate("common:about:nav:work") },
+        { id: "stack", icon: "🚀", label: Localize.translate("common:about:nav:stack") },
+        { id: "mailing", icon: "📧", label: Localize.translate("common:about:nav:mailing") },
+        { id: "advanced", icon: "🔎", label: Localize.translate("common:about:nav:advanced") },
     ];
 
     public static readonly educationRows: Type.TableRow[] = [
         [
-            "Atatürk University",
-            "English Language Teaching",
-            "Bachelor's Degree",
+            Localize.translate("common:about:edu:university"),
+            Localize.translate("common:about:edu:elte"),
+            Localize.translate("common:about:edu:bachelor"),
             `${formatDate(new Date(2019, 8))} - ${formatDate(new Date(2023, 6))}`,
         ],
         [
-            "Atatürk University",
-            "Computer Programming",
-            "Associate Degree",
-            `${formatDate(new Date(2023, 8))} - current`,
+            Localize.translate("common:about:edu:university"),
+            Localize.translate("common:about:edu:computerProgramming"),
+            Localize.translate("common:about:edu:associate"),
+            `${formatDate(new Date(2023, 8))} - ${Localize.translate("common:about:edu:current")}`,
         ],
     ];
 
     public static readonly stackRows: Type.TableRow[] = [
-        ["Front-end", "JavaScript (ES6+), TypeScript", "React, Redux, Next.js"],
-        ["Back-end", "PHP(7+), Node.js", "Express.js, Codeigniter"],
-        ["Cross-platform", "Tauri, Framework7", "-"],
-        ["Styling", "Bootstrap (+derivatives), SASS, Tailwind CSS", "Shadcn & DaisyUI"],
-        ["Databases", "MySQL, PostgreSQL", "Supabase"],
-        ["DevOps", "Docker, Linux", "-"],
-        ["CMS", "Wordpress, Headless Wordpress", "Next.js"],
-        ["SSG", "Astro & Gatsby", "-"],
-        ["Testing", "Jest & Playwright", "-"],
-        ["Design & UX", "Figma, Adobe Illustrator & Adobe Photoshop", "-"],
+        [Localize.translate("common:about:stack:frontend"), "JavaScript (ES6+), TypeScript", "React, Redux, Next.js"],
+        [Localize.translate("common:about:stack:backend"), "PHP(7+), Node.js", "Express.js, Codeigniter"],
+        [Localize.translate("common:about:stack:crossplatform"), "Tauri, Framework7", "-"],
+        [Localize.translate("common:about:stack:styling"), "Bootstrap (+derivatives), SASS, Tailwind CSS", "Shadcn & DaisyUI"],
+        [Localize.translate("common:about:stack:databases"), "MySQL, PostgreSQL", "Supabase"],
+        [Localize.translate("common:about:stack:devops"), "Docker, Linux", "-"],
+        [Localize.translate("common:about:stack:cms"), "Wordpress, Headless Wordpress", "Next.js"],
+        [Localize.translate("common:about:stack:ssg"), "Astro & Gatsby", "-"],
+        [Localize.translate("common:about:stack:testing"), "Jest & Playwright", "-"],
+        [Localize.translate("common:about:stack:designUx"), "Figma, Adobe Illustrator & Adobe Photoshop", "-"],
     ];
 
     public static readonly introduction = {
-        first: `
-            I'm highly interested in creating <mark>content-first</mark> websites as well as crafting stand-alone
-            <mark>web applications (SPAs)</mark> or <mark>multi-page</mark> static content where <em>speed</em> &amp;
-            <em>progressive enhancement</em> are critically important. I love building user interfaces with mainly
-            <strong>React.</strong>
-        `,
-        last: `
-            My primary field is teaching English in <mark>ESL (English as a Second Language)</mark> context. My main
-            focus is to maximize practical usage of English in almost every aspect related to casual or academical
-            way of interacting with the language.
-        `
+        first: Localize.translate("common:about:introduction:first"),
+        last: Localize.translate("common:about:introduction:last")
     }
 }
 
@@ -237,12 +228,12 @@ export class ModalList {
                     <div class="d-flex flex-row align-items-center justify-content-center gap-2 w-100 rounded-pill p-1">
                         <button id="changeLngToEn" class="btn btn-sm btn-secondary-subtle flex-grow-1 fs-5 fw-medium rounded-pill text-black d-flex p-0 gap-2 flex-row align-items-center justify-content-center">
                             <img class="header-lang-switch-flag img-fluid lazyload" src="./assets/images/static/svg/uk.svg"
-                            title="Change Language to English" loading="lazy" decoding="async">
-                            English
+                            title="${Localize.translate("common:modals:langSwitch:enTitle")}" loading="lazy" decoding="async">
+                            ${Localize.translate("common:modals:langSwitch:en")}
                         </button>
                         <button id="changeLngToTr" class="btn btn-sm btn-secondary-subtle flex-grow-1 fs-5 fw-medium rounded-pill text-black d-flex p-0 gap-2 flex-row align-items-center justify-content-center">
                             <img class="header-lang-switch-flag img-fluid lazyload" src="./assets/images/static/svg/tr.svg"
-                            title="Dili Türkçe'ye Çevir" loading="lazy" decoding="async"> Türkçe
+                            title="${Localize.translate("common:modals:langSwitch:trTitle")}" loading="lazy" decoding="async"> ${Localize.translate("common:modals:langSwitch:tr")}
                         </button>
                     </div>
                 </div>
@@ -262,23 +253,23 @@ export class ModalList {
                         </thead>
                         <tbody>
                             <tr>
-                                <td scope="row">Site</td>
+                                <td scope="row">${Localize.translate("common:modals:rss:site")}</td>
                                 <td>
                                     <component-anchor-link
-                                        text="This Site"
-                                        title="This Site"
-                                        href="http://dervisoksuzoglu.com.tr/wp_blog/feed"
+                                        text="${Localize.translate("common:modals:rss:thisSite")}"
+                                        title="${Localize.translate("common:modals:rss:thisSite")}"
+                                        href="https://dervisoksuzoglu.xyz/wp_blog/feed"
                                         hreflang="x-default"
                                         target="_blank"
                                     ></component-anchor-link>
                                 </td>
                             </tr>
                             <tr>
-                                <td scope="row">Hashnode</td>
+                                <td scope="row">${Localize.translate("common:modals:rss:hashnode")}</td>
                                 <td>
                                     <component-anchor-link
-                                        text="Hashnode"
-                                        title="Hashnode"
+                                        text="${Localize.translate("common:modals:rss:hashnode")}"
+                                        title="${Localize.translate("common:modals:rss:hashnode")}"
                                         href="https://gokacinlar.hashnode.dev/rss.xml"
                                         hreflang="x-default"
                                         target="_blank"
@@ -309,7 +300,7 @@ export class ModalList {
                                     <component-anchor-link
                                         text="${Localize.translate("common:modals:sitemap:visitSitemap")}"
                                         title="${Localize.translate("common:modals:sitemap:visitSitemap")}"
-                                        href="http://dervisoksuzoglu.com.tr/sitemap.xml"
+                                        href="https://dervisoksuzoglu.xyz/sitemap.xml"
                                         hreflang="x-default"
                                         target="_blank">
                                     </component-anchor-link>
@@ -335,21 +326,18 @@ export class AccordionList {
     public static readonly ACCORDION_ITEMS: AccordionItem[] = [
         {
             id: "One",
-            header: "🔑 Secure & Private Communication",
+            header: Localize.translate("common:accordion:secureHeader"),
             body: `
-                <p class="lead fs-6 fw-medium">If you want to contact me <mark class="rounded-3">in a more private way</mark>, you can use one of the actions given below.
-                    If you don't know how to use these methods, here's a <a class="link-info link-opacity-75-hover link-offset-2" href="https://www.youtube.com/watch?v=mu2TVYJE5Gc" hreflang="x-default" target="_blank">tutorial</a> on the go.
-                    However, you should use this <strong>if you really have good reason to do so.</strong>
-                </p>
+                <p class="lead fs-6 fw-medium">${Localize.translate("common:accordion:secureIntro")}</p>
                 <table id="commsTable" class="table table-striped table-bordered">
                     <tbody>
                         <tr>
-                            <th scope="row">Jami (Client)</th>
+                            <th scope="row">${Localize.translate("common:accordion:secureJami")}</th>
                             <td><code>gokacinlar</code></td>
                         </tr>
                         <tr>
-                            <th scope="row">GnuPG (Public Key)</th>
-                            <td>View <a class="link-info link-opacity-75-hover link-offset-2 modal-trigger" data-modal="gnuPgModal" href="#" hreflang="x-default">here.</a></td>
+                            <th scope="row">${Localize.translate("common:accordion:secureGpg")}</th>
+                            <td>${Localize.translate("common:accordion:secureView")} <a class="link-info link-opacity-75-hover link-offset-2 modal-trigger" data-modal="gnuPgModal" href="#" hreflang="x-default">${Localize.translate("common:accordion:secureHere")}</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -359,14 +347,14 @@ export class AccordionList {
         },
         {
             id: "Two",
-            header: "💞 Donations",
+            header: Localize.translate("common:accordion:donationsHeader"),
             body: `
-                <p class="lead fs-6 fw-medium">If you're <em>somehow</em> interested in my work, you can support me via the options given below:</p>
+                <p class="lead fs-6 fw-medium">${Localize.translate("common:accordion:donationsIntro")}</p>
                 <table id="commsTable" class="table table-striped table-bordered">
                     <tbody>
                         <tr>
-                            <th scope="row">BuyMeACoffee</th>
-                            <td>View <a class="link-info link-opacity-75-hover link-offset-2" href="https://coff.ee/gokacinlar" hreflang="x-default" target="_blank">here.</a></td>
+                            <th scope="row">${Localize.translate("common:accordion:donationsBuyMeACoffee")}</th>
+                            <td>${Localize.translate("common:accordion:donationsView")} <a class="link-info link-opacity-75-hover link-offset-2" href="https://coff.ee/gokacinlar" hreflang="x-default" target="_blank">${Localize.translate("common:accordion:donationsHere")}</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -374,23 +362,23 @@ export class AccordionList {
         },
         {
             id: "Three",
-            header: "🍫 About This Site",
+            header: Localize.translate("common:accordion:aboutSiteHeader"),
             body: `
-                <p class="lead fs-6 fw-medium">Here you can find all the necessary information for this website.</p>
+                <p class="lead fs-6 fw-medium">${Localize.translate("common:accordion:aboutSiteIntro")}</p>
                 <table id="commsTable" class="table table-striped table-bordered">
                     <tbody>
                         <tr>
-                            <th scope="row">Site Version</th>
+                            <th scope="row">${Localize.translate("common:accordion:aboutSiteVersion")}</th>
                             <td><code>${new GetSiteVersionNumber().getSiteVersionFromLocalStorage()}</code></td>
                         </tr>
                         <tr>
-                            <th scope="row">License</th>
-                            <td>This site is licensed under <code>CC0-1.0 Universal License.</code></td>
+                            <th scope="row">${Localize.translate("common:accordion:aboutSiteLicense")}</th>
+                            <td>${Localize.translate("common:accordion:aboutSiteLicenseValue")}</td>
                         </tr>
                         <tr>
-                            <th scope="row">Source Code</th>
-                            <td>Available on
-                                <a class="link-info link-opacity-75-hover link-offset-2" href="https://github.com/gokacinlar" hreflang="x-default" target="_blank">GitHub</a>
+                            <th scope="row">${Localize.translate("common:accordion:aboutSiteSource")}</th>
+                            <td>${Localize.translate("common:accordion:aboutSiteAvailableOn")}
+                                <a class="link-info link-opacity-75-hover link-offset-2" href="https://github.com/gokacinlar" hreflang="x-default" target="_blank">${Localize.translate("common:accordion:aboutSiteGitHub")}</a>
                             </td>
                         </tr>
                     </tbody>
