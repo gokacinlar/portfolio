@@ -12,7 +12,7 @@ interface CrawlPolicy {
 }
 
 class GenerateRobotsTXT {
-    private static readonly SITE_NAME: string = "https://dervisoksuzoglu.com.tr";
+    private static readonly SITE_NAME: string = "https://dervisoksuzoglu.xyz";
     private static readonly POLICY: CrawlPolicy[] = [
         {
             userAgent: "Googlebot",
