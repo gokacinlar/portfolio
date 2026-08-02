@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { SitemapStream, streamToPromise } from "sitemap";
 
-const siteName: URL = new URL("https://dervisoksuzoglu.com.tr");
+const siteName: URL = new URL("https://dervisoksuzoglu.xyz");
 
 async function applySiteMap() {
     // Create empty XML file to be manipulated
