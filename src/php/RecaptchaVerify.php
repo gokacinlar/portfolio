@@ -85,6 +85,48 @@ class FormProcessor
         }
     }
 
+    private function rateLimitCheck(string $key, int $limit, int $period): bool
+    {
+        $dir = __DIR__ . "/RLIMITER";
+        if (!is_dir($dir) && !mkdir($dir, 0755, true) && !is_dir($dir)) {
+            throw new Exception(message: "Unable to create rate limiter directory: " . $dir);
+        }
+        $filename = $dir . "/" . hash(algo: "sha256", data: $key) . ".txt";
+
+        $ip = $_SERVER["REMOTE_ADDR"];
+        if (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+            $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+        }
+
+        if (!filter_var(value: $ip, filter: FILTER_VALIDATE_IP, options: FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6)) {
+            return true;
+        }
+
+        $data = [];
+        if (file_exists(filename: $filename)) {
+            $data = json_decode(json: file_get_contents(filename: $filename), associative: true);
+        }
+
+        $current_time = time();
+
+        if (isset($data[$ip]) && $current_time - $data[$ip]["last_access_time"] >= $period) {
+            $data[$ip]["count"] = 0;
+            $data[$ip]["last_access_time"] = $current_time;
+        }
+
+        if (isset($data[$ip]) && $data[$ip]["count"] >= $limit) {
+            return true;
+        }
+
+        if (!isset($data[$ip])) {
+            $data[$ip] = ["count" => 0, "last_access_time" => $current_time];
+        }
+
+        $data[$ip]["count"]++;
+        file_put_contents(filename: $filename, data: json_encode(value: $data));
+        return false;
+    }
+
     public function processForm(): void
     {
         header(header: "Content-Type: application/json");
@@ -105,6 +147,15 @@ class FormProcessor
             echo json_encode(value: [
                 "success" => false,
                 "message" => "Invalid submission"
+            ]);
+            exit;
+        }
+
+        if ($this->rateLimitCheck(key: "recaptcha_verify", limit: 5, period: 60)) {
+            http_response_code(response_code: 401);
+            echo json_encode(value: [
+                "success" => false,
+                "message" => "Rate limit exceeded. Please try again later."
             ]);
             exit;
         }
