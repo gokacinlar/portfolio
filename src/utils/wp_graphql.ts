@@ -78,8 +78,8 @@ export type {
 };
 
 class WordPressGraphQLClient {
-    private static readonly BASE_DOMAIN: string = "https://dervisoksuzoglu.com.tr";
-    private static readonly GRAPHQL_ENDPOINT: string = "https://dervisoksuzoglu.com.tr/wp_blog/graphql";
+    private static readonly BASE_DOMAIN: string = "https://dervisoksuzoglu.xyz";
+    private static readonly GRAPHQL_ENDPOINT: string = "https://dervisoksuzoglu.xyz/wpb/graphql";
 
     // Query to fetch only post previews (no content for efficient loading & caching)
     private static readonly GRAPHQL_QUERY_FETCH_POST_PREVIEWS: string = `
