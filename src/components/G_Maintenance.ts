@@ -1,20 +1,14 @@
 import Localize from "../utils/initLocalization";
 import { Template } from "../utils/helper";
 
+// Add just "maintenance" attribute without a value to this component to be displayed
+
 export class MaintenanceStatus extends HTMLElement {
     private static MESSAGE: string;
 
     constructor() {
         super();
         MaintenanceStatus.MESSAGE = Localize.translate("common:maintenance:status");
-        new Template().createTemplate(MaintenanceStatus.render(), this);
-    }
-
-    connectedCallback(): void {
-        if (this.hasAttribute("maintenance")) {
-            this.innerHTML = "";
-            new Template().createTemplate(MaintenanceStatus.render(), this);
-        }
     }
 
     private static render(): string {
@@ -28,6 +22,13 @@ export class MaintenanceStatus extends HTMLElement {
                 </div>
             </div>
         `;
+    }
+
+    connectedCallback(): void {
+        if (this.hasAttribute("maintenance")) {
+            this.innerHTML = "";
+            new Template().createTemplate(MaintenanceStatus.render(), this);
+        }
     }
 
     attributeChangedCallback(name: string): void {
