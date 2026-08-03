@@ -1,5 +1,6 @@
 const path = require("path");
 const glob = require("glob");
+const fontaine = require("fontaine");
 const webpack = require("webpack");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
@@ -83,6 +84,7 @@ module.exports = {
     mode: "production",
     entry: {
         main: "./src/main.ts",
+        worker: { import: "./src/worker.ts", filename: "worker.js" },
     },
     output: {
         publicPath: "/",
@@ -156,10 +158,10 @@ module.exports = {
         chunkIds: "deterministic",
         moduleIds: "deterministic",
         runtimeChunk: {
-            name: "runtime"
+            name: (entrypoint) => (entrypoint.name === "sw" ? false : "runtime"),
         },
         splitChunks: {
-            chunks: "all",
+            chunks: (chunk) => chunk.name !== "sw",
             cacheGroups: {
                 vendor: {
                     test: /[\\/]node_modules[\\/]/,
@@ -354,6 +356,34 @@ module.exports = {
             threshold: 10240,
             minRatio: 0.8,
             deleteOriginalAssets: false
-        })
+        }),
+        function fontainePlugin(_context, _options) {
+            return {
+                name: "FontaineFallback",
+                configureWebpack(_config, _isServer) {
+                    return {
+                        plugins: [
+                            fontaine.fontaineTransform.webpack({
+                                fallbacks: [
+                                    "system-ui",
+                                    "-apple-system",
+                                    "BlinkMacSystemFont",
+                                    "Segoe UI",
+                                    "Roboto",
+                                    "Oxygen",
+                                    "Ubuntu",
+                                    "Cantarell",
+                                    "Open Sans",
+                                    "Helvetica Neue",
+                                    "sans-serif",
+                                ],
+                                // You may need to resolve assets like `/fonts/Poppins-Bold.ttf` to a particular directory
+                                resolvePath: (id) => '/src/assets/fonts/' + id,
+                            }),
+                        ],
+                    };
+                },
+            };
+        },
     ].concat(multipleHtmlPlugins)
 };

@@ -75,6 +75,7 @@ module.exports = {
     mode: "development",
     entry: {
         main: "./src/main.ts",
+        worker: { import: "./src/worker.ts", filename: "worker.js" },
     },
     output: {
         publicPath: "/",
