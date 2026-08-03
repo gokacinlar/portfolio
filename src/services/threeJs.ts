@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+// import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
+// CompileError: WebAssembly.instantiate() is because MeshoptDecoder requires unsafe-eval to be in CSP which I'm not gonna allow
 
 class ThreeJs {
     private base = THREE;
@@ -60,6 +62,7 @@ class ThreeJs {
 
     // Actually load the model
     public loadModel(modelPath: string): void {
+        // this.loader.setMeshoptDecoder(MeshoptDecoder);
         this.loader.load(
             modelPath, (gltf) => {
                 const model = gltf.scene;
