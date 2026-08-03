@@ -1,5 +1,6 @@
 # Manual entries
 .env
+.wp-env
 .git
 .htaccess
 public/
