@@ -1,5 +1,4 @@
 import { HeroImageWithLink } from "../components/C_Hero";
-import ThreeJs from "../services/threeJs";
 import { BodyParts, HeroParts } from "../static";
 import { DomEvents, Template, TypeWriterDisplay } from "../utils/helper";
 import Localize from "../utils/initLocalization";
@@ -25,15 +24,9 @@ class HeroSection extends HTMLElement {
         new TypeWriterDisplay(new HeroParts(), "ocps");
     }
 
-    private handleThreeJsAnimation(): void {
-        const scene = new ThreeJs("#threeJsAnimationContainer");
-        scene.loadModel("../assets/3d/desk.glb");
-    }
-
     connectedCallback(): void {
         this.handleDomEvents();
         this.handleTypeWriterEffect();
-        this.handleThreeJsAnimation();
     }
 }
 
@@ -73,9 +66,6 @@ class HeroTemplate {
                     </section>
                 </div>
             </section>
-            <section>
-                ${this.threeJsAnimationContainer()}
-            </section>
         `;
     }
 
@@ -88,13 +78,6 @@ class HeroTemplate {
                     <span class="hr-btn-text">${Localize.translate("common:hero:buttons:cv")}</span>
                 </button>
             </a>
-        `;
-    }
-
-    private threeJsAnimationContainer(): string {
-        return /*html*/ `
-            <div id="threeJsAnimationContainer" class="px-3 rounded-5">
-            </div>
         `;
     }
 }

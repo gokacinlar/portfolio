@@ -49,7 +49,7 @@ export class PromoDescription {
             <button class="promo-desc-tab-group-btn btn btn-lg fs-1 d-flex flex-row align-items-center justify-items-start" data-type="${dataType}">
                 <span style="width: 64px">
                     <div class="progress p-vertical rounded-0">
-                        <div class="progress-bar bg-warning progress-bar-animated" role="progressbar"></div>
+                        <div class="progress-bar bg-warning progress-bar-animated" role="progressbar" aria-label="Progress Bar"></div>
                     </div>
                 </span>
                 <span>

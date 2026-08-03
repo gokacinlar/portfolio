@@ -5,15 +5,21 @@ import { PromoParts, Banner } from "../static";
 import posts from '../assets/json/posts.json';
 import skills from '../assets/json/promo_Skills.json';
 import Localize from "../utils/initLocalization";
+import ThreeJs from "../services/threeJs";
 
 class Promo extends HTMLElement {
     private hmmsCleanupFunctions: (() => void)[] = [];
 
     constructor() {
         super();
-
         new Template().createTemplate(new PromoTemplate().promoTemplate(), this);
     }
+
+    private handleThreeJsAnimation(): void {
+        const scene = new ThreeJs("#threeJsAnimationContainer");
+        scene.loadModel("../assets/3d/desk.glb");
+    }
+
 
     connectedCallback(): void {
         // Create promo elements
@@ -40,6 +46,7 @@ class Promo extends HTMLElement {
 
         // Colorful banner text
         colorfulBannerName(Banner.BANNER_ASCII, "homePageNameBannerCode");
+        this.handleThreeJsAnimation();
     }
 
     disconnectedCallback(): void {
@@ -52,16 +59,14 @@ class Promo extends HTMLElement {
 class PromoTemplate {
     private videoOne = new VideoElement({
         title: Localize.translate("common:video:teach"),
-        webmSrc: "./assets/videos/teach.webm",
-        mp4FallbackSrc: "./assets/videos/teach.mp4",
-        posterSrc: ""
+        webmSrc: "../assets/videos/teach.webm",
+        posterSrc: "../assets/videos/poster/teach.jpeg"
     });
 
     private videoTwo = new VideoElement({
         title: Localize.translate("common:video:code"),
-        webmSrc: "./assets/videos/code.webm",
-        mp4FallbackSrc: "./assets/videos/code.mp4",
-        posterSrc: ""
+        webmSrc: "../assets/videos/code.webm",
+        posterSrc: "../assets/videos/poster/code.jpeg"
     });
 
     public promoTemplate(): string {
@@ -96,6 +101,9 @@ class PromoTemplate {
                     </div>
                     <div class="promo-work-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoWork()}
+                    </div>
+                    <div class="promo-work-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
+                        ${this.threeJsAnimationContainer()}
                     </div>
                     <div class="promo-work-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoBanner()}
@@ -165,6 +173,13 @@ class PromoTemplate {
             <pre id="homePageNameBanner">
                 <code id="homePageNameBannerCode" class="d-flex justify-content-center align-items-center"></code>
             </pre>
+        `;
+    }
+
+    private threeJsAnimationContainer(): string {
+        return /*html*/ `
+            <div id="threeJsAnimationContainer" class="px-3 rounded-5">
+            </div>
         `;
     }
 }
