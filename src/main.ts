@@ -11,7 +11,6 @@ import "lazysizes";
 // Utilities
 import { DarkLightMode } from "./utils/helper";
 import GoogleAnalytics from "./utils/gTag";
-import EffectiveCaching from "./utils/cache";
 import GetSiteVersionNumber from "./utils/webScraper";
 // Pages
 import "./pages/header";
@@ -29,13 +28,25 @@ import "./components/M_link";
 
 let darkLightModeInstance: DarkLightMode | null = null;
 
+function registerServiceWorker(): void {
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+            .register("/worker.js")
+            .catch((error: unknown) => {
+                console.error("Service worker registration failed:", error);
+            });
+    }
+}
+
 class HomePage extends HTMLElement {
     connectedCallback(): void {
         if (!darkLightModeInstance) {
             darkLightModeInstance = new DarkLightMode();
         }
+
+        registerServiceWorker();
+
         new GoogleAnalytics().trackPage();
-        new EffectiveCaching().ensureCache();
         new GetSiteVersionNumber().init();
     }
 
