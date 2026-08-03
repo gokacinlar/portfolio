@@ -3,14 +3,13 @@ export class HeroImageWithLink {
         return /*html*/ `
             <a id="${id}" href="${href}" hreflang="x-default" class="d-flex justify-content-center link-offset-2 link-underline link-underline-opacity-0 w-100">
                 <img
-                    class="hero-logo img-fluid lazyload"
+                    class="hero-logo img-fluid"
                     src="${src}"
                     srcset="${srcset}"
                     sizes="(max-width: 600px) 256px, (max-width: 960px) 512px, 1024px"
                     alt="${title}"
                     title="${title}"
                     height="auto"
-                    loading="lazy"
                     decoding="async"
                     />
             </a>
