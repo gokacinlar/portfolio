@@ -73,6 +73,7 @@
     "favicons": "^7.2.0",
     "favicons-webpack-plugin": "^6.0.1",
     "file-loader": "^6.2.0",
+    "fontaine": "^0.8.0",
     "generate-robotstxt": "^8.0.3",
     "glob": "^13.0.6",
     "globals": "^17.3.0",
