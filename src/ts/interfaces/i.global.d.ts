@@ -28,3 +28,26 @@ export interface OptimizationOptions {
     meshOptimization?: "medium" | "high";
     verbose?: boolean;
 }
+
+export interface CacheOptions {
+    version?: number;
+    maxEntries?: number;
+    maxAgeSeconds?: number;
+    strategy?: "cache-first" | "network-first" | "stale-while-revalidate" | "cache-only" | "network-only";
+}
+
+export interface ExtendableEventLike extends Event {
+    waitUntil(promise: Promise<unknown>): void;
+}
+
+export interface FetchEventLike extends ExtendableEventLike {
+    readonly request: Request;
+    respondWith(response: Promise<Response> | Response): void;
+}
+
+export interface ServiceWorkerGlobalScopeLike {
+    skipWaiting(): Promise<void>;
+    readonly clients: {
+        claim(): Promise<void>;
+    };
+}
