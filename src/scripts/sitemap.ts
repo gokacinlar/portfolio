@@ -33,6 +33,11 @@ async function applySiteMap() {
         const buffer = await streamToPromise(sitemap);
         const stringifiedBuffer = buffer.toString("utf-8");
 
+        if (!outputPath) {
+            console.error(`${outputPath} doesn't exist.`);
+            return;
+        }
+
         // Write stringified buffer to file
         fs.writeFileSync(outputPath, stringifiedBuffer);
 
