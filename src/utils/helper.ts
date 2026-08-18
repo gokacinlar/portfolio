@@ -2,6 +2,7 @@ import "toastify-js/src/toastify.css"
 import DOMPurify from "dompurify";
 import ScrollReveal from "scrollreveal";
 import Toastify from "toastify-js";
+import moment from "moment";
 import { HeroParts, WhiteListedURLs } from "../static";
 import { domSanitizeOptions } from "../domSanitizeOptions";
 import CustomWebHaptics from "../utils/webHaptics";
@@ -620,4 +621,11 @@ export function applyHapticsToModals() {
             }
         });
     });
+}
+
+export function normalizeDateToDayMonthYear(input: string) {
+    if (!input) return "Please provide date";
+
+    const format: string = "DD-MM-YYYY";
+    return moment(input).format(format);
 }
