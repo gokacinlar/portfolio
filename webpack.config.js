@@ -253,12 +253,12 @@ module.exports = {
         }),
         new PurgeCSSPlugin({
             paths: glob.sync([
-                path.join(__dirname, "src/**/*.html"),
-                path.join(__dirname, "src/**/*.ts"),
-                path.join(__dirname, "src/**/*.js"),
-                path.join(__dirname, "src/**/*.scss"),
-                path.join(__dirname, "src/**/*.sass")
-            ]),
+                path.join(__dirname, "./src/**/*.html"),
+                path.join(__dirname, "./src/**/*.ts"),
+                path.join(__dirname, "./src/**/*.js"),
+                path.join(__dirname, "./src/**/*.scss"),
+                path.join(__dirname, "./src/**/*.sass")
+            ], globPatterns, { posix: true, dotRelative: true }),
             safelist: {
                 standard: ["html", "body"],
             },
