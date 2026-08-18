@@ -43,12 +43,12 @@ const htmlWebpackPluginMeta = {
     "og:url": { property: "og:url", content: "https://dervisoksuzoglu.xyz" },
     "og:title": { property: "og:title", content: "Derviş Öksüzoğlu" },
     "og:description": { property: "og:description", content: "Derviş Öksüzoğlu: İngilizce Öğretmeni & Front-end Web Geliştiricisi; Pedagoji, Teknoloji, Bilim ve Sanat | Eğitimin teknoloji ile buluştuğu yer." },
-    "og:image": { property: "og:image", content: "https://dervisoksuzoglu.com.xyz/src/assets/images/static/webp/logo.webp" },
+    "og:image": { property: "og:image", content: "https://dervisoksuzoglu.xyz/src/assets/images/static/webp/logo.webp" },
     "twitter:card": { name: "twitter:card", content: "summary_large_image" },
     "twitter:url": { name: "twitter:url", content: "https://dervisoksuzoglu.xyz" },
     "twitter:title": { name: "twitter:title", content: "Derviş Öksüzoğlu" },
     "twitter:description": { name: "twitter:description", content: "Derviş Öksüzoğlu: İngilizce Öğretmeni & Front-end Web Geliştiricisi; Pedagoji, Teknoloji, Bilim ve Sanat | Eğitimin teknoloji ile buluştuğu yer." },
-    "twitter:image": { name: "twitter:image", content: "https://dervisoksuzoglu.com.xyz/src/assets/images/static/webp/logo.webp" },
+    "twitter:image": { name: "twitter:image", content: "https://dervisoksuzoglu.xyz/src/assets/images/static/webp/logo.webp" },
     robots: { name: "robots", content: "index, follow, noarchive, max-snippet: -1, max-image-preview:standard" },
     "revisit-after": { name: "revisit-after", content: "7 days" },
     "geo.region": { name: "geo.region", content: "TR-34" },
@@ -56,7 +56,7 @@ const htmlWebpackPluginMeta = {
 };
 
 // Static page configuration
-const htmlPageNames = ["about.html", "updates.html", "404.html", "work.html"];
+const htmlPageNames = ["about.html", "admin.html", "updates.html", "404.html", "work.html"];
 const multipleHtmlPlugins = htmlPageNames.map(name => {
     return new HtmlWebpackPlugin({
         template: path.resolve(__dirname, `./src/pages/static/${name}`),

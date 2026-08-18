@@ -58,4 +58,4 @@ Allow: /
 # ============================================
 # Sitemap
 # ============================================
-Sitemap: https://dervisoksuzoglu.com.xyz/sitemap.xml
+Sitemap: https://dervisoksuzoglu.xyz/sitemap.xml
