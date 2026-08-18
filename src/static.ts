@@ -248,7 +248,7 @@ export class ModalList {
                         <thead>
                             <tr>
                                 <th scope="col">${Localize.translate("common:modals:rss:tablePlatformName")}</th>
-                                <th scope="col">${Localize.translate("common:modals:rss:tableLinkName")}</th>
+                                <th scope="col"><i class="bi bi-rss-fill"></i> ${Localize.translate("common:modals:rss:tableLinkName")}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -258,7 +258,7 @@ export class ModalList {
                                     <component-anchor-link
                                         text="${Localize.translate("common:modals:rss:thisSite")}"
                                         title="${Localize.translate("common:modals:rss:thisSite")}"
-                                        href="https://dervisoksuzoglu.xyz/wp_blog/feed"
+                                        href="https://dervisoksuzoglu.xyz/wpb/feed"
                                         hreflang="x-default"
                                         target="_blank"
                                     ></component-anchor-link>
