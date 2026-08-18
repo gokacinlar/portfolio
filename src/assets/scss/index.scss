@@ -1167,6 +1167,8 @@ html {
     #offCanvasControls {
         @include responsive-styling($mobile-breakpoints, margin-bottom, .15rem);
         @include responsive-styling($tablet-breakpoints, margin-bottom, .55rem);
+        @include responsive-styling($tablet-breakpoints, padding-right, .55rem);
+        @include responsive-styling($tablet-breakpoints, padding-left, .55rem);
     }
 
     #offCanvasControls,
