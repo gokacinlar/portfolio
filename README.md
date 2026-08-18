@@ -22,6 +22,9 @@ Site will primarily use;
 * Custom Web Components
 * Headless WordPress for Back-end Stuff *(Blogs, Woo, LMS etc.)*
 * GraphQL
+* A feed timeline similar to Xitter timeline
+* An image timeline similar to Instagram gallery
+* An admin panel (single user, me :3)
 * PHP for server-side implementations
 
 > As this project doesn't require that many entitlement on fancy libraries, **minimal usage of external resources** as well as **maximizing native platforms** was primary choice & motivation for me.
