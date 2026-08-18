@@ -16,6 +16,9 @@
 	},
 	"linter": {
 		"rules": {
+			"complexity": {
+				"noStaticOnlyClass": "off"
+			},
 			"suspicious": {
 				"noConsole": {
 					"level": "warn",
