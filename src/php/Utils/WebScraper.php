@@ -2,7 +2,7 @@
 header(header: "Access-Control-Allow-Headers: Content-Type");
 header(header: "Content-Type: text/plain; charset=utf-8");
 
-require_once dirname(path: __FILE__) . "../../../vendor/autoload.php";
+require_once dirname(path: __FILE__) . "../../vendor/autoload.php";
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
