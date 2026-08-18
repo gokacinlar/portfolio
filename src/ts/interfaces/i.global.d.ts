@@ -51,3 +51,91 @@ export interface ServiceWorkerGlobalScopeLike {
         claim(): Promise<void>;
     };
 }
+
+// Blog
+export interface Author {
+    name: string;
+}
+
+export interface Post {
+    id: string;
+    title: string;
+    author: Author;
+    content: string;
+    url: string;
+}
+
+export interface PostPreview {
+    id: string;
+    title: string;
+    author: Author;
+}
+
+// *** GRAPHQL WordPress Backend Related *** //
+export interface GraphQLAuthorNode {
+    name: string;
+}
+
+export interface GraphQLAuthor {
+    node: GraphQLAuthorNode;
+}
+
+export interface GraphQLPostNode {
+    id: string;
+    title: string;
+    author: GraphQLAuthor;
+    content: string;
+    slug: string;
+}
+
+export interface GraphQLPostsConnection {
+    nodes: GraphQLPostNode[];
+}
+
+export interface GraphQLPostsData {
+    posts: GraphQLPostsConnection;
+}
+
+// Single post query response
+export interface GraphQLSinglePostData {
+    post: GraphQLPostNode;
+}
+
+export interface GraphQLResponse<T> {
+    data: T;
+    errors?: Array<{
+        message: string;
+        locations?: Array<{ line: number; column: number }>;
+        path?: string[];
+    }>;
+}
+
+// Domain types we'll convert from queries
+export interface Author {
+    name: string;
+}
+
+export interface Post {
+    id: string;
+    title: string;
+    author: Author;
+    content: string;
+    url: string;
+}
+
+// Lightweight post for initial listing
+export interface PostPreview {
+    id: string;
+    title: string;
+    author: Author;
+}
+
+// Query variable type
+export interface GetPostsVariables {
+    first?: number;
+    after?: string;
+}
+
+export interface GetSinglePostVariables {
+    id: string;
+}

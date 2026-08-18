@@ -1,25 +1,8 @@
 import DOMPurify from "dompurify";
-import WordPressGraphQLClient from "../utils/wp_graphql";
+import WordPressGraphQLClient from "../utils/gql/wp_graphql";
 import { Template } from "../utils/helper";
 import Localize from "../utils/initLocalization";
-
-interface Author {
-    name: string;
-}
-
-interface Post {
-    id: string;
-    title: string;
-    author: Author;
-    content: string;
-    url: string;
-}
-
-interface PostPreview {
-    id: string;
-    title: string;
-    author: Author;
-}
+import type * as type from "../ts/interfaces/i.global";
 
 class Updates extends HTMLElement {
     private popstateListener: ((event: PopStateEvent) => Promise<void>) | null = null;
@@ -40,7 +23,7 @@ class Updates extends HTMLElement {
                         ${this.initiateOffCanvas()}
                     </div>
                     <div class="bwrapper col-12 col-lg-8">
-                        <main id="blogMain" class="h-100 rounded-5 px-3 py-3 shadow-sm">
+                        <main id="blogMain" class="h-100 overflow-y-auto rounded-5 px-3 py-3 shadow-sm">
                         </main>
                     </div>
                 </div>
@@ -94,7 +77,7 @@ class Updates extends HTMLElement {
         `;
     }
 
-    private async generateDomElementsRelatedToBlogsInAside(targetElement: string, data: PostPreview[]) {
+    private async generateDomElementsRelatedToBlogsInAside(targetElement: string, data: type.PostPreview[]) {
         try {
             const element = this.querySelector(`#${targetElement}`) as HTMLElement | null;
             if (!element) {
@@ -118,7 +101,7 @@ class Updates extends HTMLElement {
             element.innerHTML = "";
 
             // Create and append each post button with event listener
-            data.forEach((item: PostPreview) => {
+            data.forEach((item: type.PostPreview) => {
                 try {
                     const title: string = item.title || Localize.translate("common:blog:untitledPost");
                     const authorName: string = item.author?.name || Localize.translate("common:blog:unknownAuthor");
@@ -200,7 +183,7 @@ class Updates extends HTMLElement {
         }
     }
 
-    private updateUrlWithPost(post: Post): void {
+    private updateUrlWithPost(post: type.Post): void {
         try {
             const slug = post.url.split("/").filter(Boolean).pop() || "";
             const currentUrl = new URL(window.location.href);
@@ -242,7 +225,7 @@ class Updates extends HTMLElement {
         });
     }
 
-    private displayPostContent(post: Post): void {
+    private displayPostContent(post: type.Post): void {
         const contentArea = this.querySelector("#blogMain") as HTMLDivElement | null;
 
         if (!contentArea) {
