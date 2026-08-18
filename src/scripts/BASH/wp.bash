@@ -12,13 +12,14 @@ IFS=$'\n\t'
 DIR="/wp"
 ENV_FILE=".wp-env"
 
-if [ -f "$ENV_FILE" ]; then
-    # Read environment variables regarding our db credentials
-    export $(cat $ENV_FILE | grep -v '^#' | xargs),0
-else
-    echo "Error: .env file not found"
-    exit 1
+if [ ! -f "$ENV_FILE" ]; then
+  echo "Error: .env file not found"
+  exit 1
 fi
+
+set -a
+source "$ENV_FILE"
+set +a
 
 # Create directory if it doesn't exist
 mkdir -p "$DIR"
@@ -45,5 +46,14 @@ wp core install \
     --allow-root
 
 echo "WordPress installed at $DIR"
-echo "Exiting..."
-exit 1
+
+read -p "Do you want to start live server? (Y/N): " choice
+case $choice in
+  [Y]* ) 
+  echo "Starting WordPress live server..."
+  wp server --port=9821
+  echo "Server started at port 9821..."
+  ;;
+  [N]* ) echo "Understood. Exiting..."; exit 0 ;;
+  * ) echo "Invalid choice. Exiting..."; exit 2 ;;
+esac
