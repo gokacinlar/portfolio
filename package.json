@@ -48,7 +48,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.15",
-    "@gltf-transform/cli": "^4.4.2",
     "@gltf-transform/core": "^4.3.0",
     "@gltf-transform/extensions": "^4.3.0",
     "@gltf-transform/functions": "^3.4.2",
@@ -107,11 +106,12 @@
     "webpack": "^5.105.3",
     "webpack-bundle-analyzer": "^5.1.0",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^6.0.0",
+    "webpack-dev-server": "^5.2.5",
     "webpack-manifest-plugin": "^6.0.1",
     "webpack-nano": "^1.1.1",
     "webpack-node-externals": "^3.0.0",
-    "webpack-pwa-manifest": "^4.3.0"
+    "webpack-pwa-manifest": "^4.3.0",
+    "win-node-env": "^0.6.1"
   },
   "dependencies": {
     "@analytics/google-analytics": "^1.1.0",
@@ -132,5 +132,14 @@
     "toastify-js": "^1.12.0",
     "validator": "^13.15.15",
     "web-haptics": "^0.0.6"
+  },
+  "allowScripts": {
+    "sharp@0.34.5": true,
+    "sharp@0.32.6": true,
+    "esbuild@0.28.1": true,
+    "scrollreveal@4.0.9": true,
+    "unrs-resolver@1.12.2": true,
+    "@parcel/watcher@2.5.6": true,
+    "@swc/core@1.15.41": true
   }
 }
