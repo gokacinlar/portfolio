@@ -40,6 +40,7 @@ class WordPressGraphQLClient extends GraphQLQueries {
         return {
             id: node.id || "Unknown ID",
             title: node.title || "Unknown Title",
+            categories: node.categories.nodes,
             author: {
                 name: node.author.node.name || "Unknown Author",
             }
@@ -56,6 +57,8 @@ class WordPressGraphQLClient extends GraphQLQueries {
             return {
                 id: node.id,
                 title: node.title || "Unknown Title",
+                date: node.date || "Date Unknown",
+                categories: node.categories.nodes,
                 content: node.content || "<p>No proper content.</p>",
                 author: {
                     name: node.author.node.name || "Unknown Author",

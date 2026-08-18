@@ -1,6 +1,6 @@
 import DOMPurify from "dompurify";
 import WordPressGraphQLClient from "../utils/gql/wp_graphql";
-import { Template } from "../utils/helper";
+import { Template, normalizeDateToDayMonthYear } from "../utils/helper";
 import Localize from "../utils/initLocalization";
 import type * as type from "../ts/interfaces/i.global";
 
@@ -113,7 +113,6 @@ class Updates extends HTMLElement {
 
                     const buttonContent = `
                         <span class="bg-primary-subtle rounded-pill py-1 px-2 flex-grow-1 text-start">${title}</span>
-                        <small class="bg-primary-subtle py-1 px-2 rounded-pill">${authorName}</small>
                     `;
                     button.innerHTML = DOMPurify.sanitize(buttonContent);
 
@@ -185,12 +184,18 @@ class Updates extends HTMLElement {
 
     private updateUrlWithPost(post: type.Post): void {
         try {
-            const slug = post.url.split("/").filter(Boolean).pop() || "";
-            const currentUrl = new URL(window.location.href);
+            const postPathSlug = (post.url.split("/").filter(Boolean).pop() || "").trim();
 
-            currentUrl.searchParams.set("post", slug);
-            // Add URL state according to article name
-            window.history.pushState({ postId: post.id, slug }, "", currentUrl.toString());
+            const categorySlug = post.categories?.[0]?.slug ?? ""; // First category
+            const datePart = normalizeDateToDayMonthYear(post.date);
+
+            // Avoid slashes since it breakes encoding, resulting in "%2F" in url
+            const dateToken = datePart.replaceAll("/", "-");
+            const finalSlug = `${categorySlug}-${dateToken}-${postPathSlug}`;
+
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set("post", encodeURIComponent(finalSlug));
+            window.history.pushState({ postId: post.id, finalSlug }, "", currentUrl.toString());
         } catch (error) {
             console.error("Error updating URL:", error);
         }
@@ -236,6 +241,7 @@ class Updates extends HTMLElement {
         const sanitizedContent = post.content;
         const sanitizedTitle = post.title || Localize.translate("common:blog:untitledPost");
         const authorName = post.author?.name || Localize.translate("common:blog:unknownAuthor");
+        const postDate = normalizeDateToDayMonthYear(post.date);
         const defaultImageSrc = "../assets/images/static/webp/logo.webp";
 
         const postHTML = `
@@ -250,6 +256,7 @@ class Updates extends HTMLElement {
                         <div>
                             <p class="mb-0 fw-semibold">${authorName}</p>
                             <small class="text-muted">${Localize.translate("common:blog:author")}</small>
+                            <p class="mb-0 fw-semibold">${postDate}</p>
                         </div>
                     </div>
                     <hr class="w-25">

@@ -7,7 +7,14 @@ class GraphQLQueries {
                 id
                 databaseId
                 title
+                date
                 slug
+                categories {
+                    nodes {
+                            name
+                            slug
+                    }
+                }
                 author {
                     node {
                         name
@@ -24,7 +31,14 @@ class GraphQLQueries {
             post(id: $id, idType: ID) {
                 id
                 title
+                date
                 slug
+                categories {
+                    nodes {
+                            name
+                            slug
+                    }
+                }
                 content(format: RENDERED)
                 author {
                     node {
@@ -41,7 +55,14 @@ class GraphQLQueries {
             postBy(slug: $slug) {
                 id
                 title
+                date
                 slug
+                categories {
+                    nodes {
+                            name
+                            slug
+                    }
+                }
                 content(format: RENDERED)
                 author {
                     node {
