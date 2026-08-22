@@ -72,6 +72,15 @@ export interface PostPreview {
 }
 
 // *** GRAPHQL WordPress Backend Related *** //
+export interface GraphQLCategoryNode {
+    name: string;
+    slug: string;
+}
+
+export interface GraphQLCategories {
+    nodes: GraphQLCategoryNode[];
+}
+
 export interface GraphQLAuthorNode {
     name: string;
 }
@@ -83,9 +92,11 @@ export interface GraphQLAuthor {
 export interface GraphQLPostNode {
     id: string;
     title: string;
-    author: GraphQLAuthor;
-    content: string;
+    date: string;
     slug: string;
+    author: GraphQLAuthor;
+    categories: GraphQLCategories;
+    content: string;
 }
 
 export interface GraphQLPostsConnection {
@@ -115,12 +126,19 @@ export interface Author {
     name: string;
 }
 
+export interface Category {
+    name: string;
+    slug: string;
+}
+
 export interface Post {
     id: string;
     title: string;
+    date: string;
     author: Author;
     content: string;
     url: string;
+    categories: Category[];
 }
 
 // Lightweight post for initial listing
@@ -128,6 +146,7 @@ export interface PostPreview {
     id: string;
     title: string;
     author: Author;
+    categories: Category[];
 }
 
 // Query variable type
