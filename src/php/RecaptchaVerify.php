@@ -1,6 +1,7 @@
 <?php
 namespace App\Security;
-require_once dirname(path: __FILE__) . "/vendor/autoload.php";
+
+require_once dirname(__FILE__) . "/vendor/autoload.php";
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client;

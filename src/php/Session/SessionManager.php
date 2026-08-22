@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
-namespace App\Panel;
 
-class SessionManager
+namespace App\Session;
+
+final class SessionManager
 {
     private const LIFETIME = 259200; # 3 days cookie lifetime
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Utilities;
 
 use Dotenv\Dotenv;
@@ -15,7 +17,8 @@ final class LoadDotEnv
             return;
         }
 
-        $projectRoot = dirname(__DIR__, 2);
+        # php/Utilities -> php -> <build root> -> project root
+        $projectRoot = dirname(__DIR__, 3);
 
         if (!is_file($projectRoot . "/.env")) {
             throw new RuntimeException(".ENV files not found.");

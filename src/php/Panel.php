@@ -1,8 +1,18 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Panel;
 
-require_once dirname(__FILE__) . "/../../vendor/autoload.php";
+require_once __DIR__ . "/AppAutoloader.php";
+require_once __DIR__ . "/vendor/autoload.php";
+
+use App\Session\SessionManager;
+use App\Login\Authenticator;
+use App\Login\DataBaseLoginActions;
+use App\Login\DbLoginConfig;
+use App\Utilities\LoadDotEnv;
+
+LoadDotEnv::load();
 
 $session = new SessionManager();
 $session->start();
