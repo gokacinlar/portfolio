@@ -1,0 +1,16 @@
+# grumphp.yml
+grumphp:
+    stop_on_failure: true
+    ignore_unstaged_changes: false
+    hide_circumvention_tip: false
+    process_timeout: 60
+    additional_info: "Don't be so hasty!"
+    parallel:
+        enabled: true
+        max_workers: 32
+    fixer:
+        enabled: true
+        fix_by_default: false
+    tasks: {}
+    testsuites: []
+    extensions: []
