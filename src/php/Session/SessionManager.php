@@ -26,7 +26,8 @@ final class SessionManager
         ini_set("session.cookie_samesite", "Strict");
         ini_set("session.gc_maxlifetime", (string) self::LIFETIME);
 
-        session_id(bin2hex(random_bytes(32)));
+        # Let PHP pick up the session ID from the incoming cookie;
+        # forcing a fresh ID here would discard the logged-in session on every request.
         session_name("PORTFOLIO_ADMIN");
         session_set_cookie_params([
             "lifetime" => self::LIFETIME,
@@ -91,6 +92,5 @@ final class SessionManager
         }
 
         session_destroy();
-        $this->start();
     }
 }
