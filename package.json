@@ -116,6 +116,7 @@
   },
   "dependencies": {
     "@analytics/google-analytics": "^1.1.0",
+    "@visto9259/php-webpack-plugin": "^1.1.0",
     "analytics": "^0.8.19",
     "bootstrap": "^5.3.7",
     "bootstrap-icons": "^1.13.1",

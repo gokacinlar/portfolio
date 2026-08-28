@@ -15,6 +15,7 @@ const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
+const PhpWebpackPlugin = require("@visto9259/php-webpack-plugin");
 
 // CSP configuration for trusted external scripts
 const scripts = [
@@ -186,6 +187,7 @@ module.exports = {
         minimize: false,
     },
     plugins: [
+        new PhpWebpackPlugin(),
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: ["**/*", "!.gitkeep"],
             cleanAfterEveryBuildPatterns: ["!index.html"],
@@ -258,7 +260,7 @@ module.exports = {
                 path.join(__dirname, "./src/**/*.js"),
                 path.join(__dirname, "./src/**/*.scss"),
                 path.join(__dirname, "./src/**/*.sass")
-            ], globPatterns, { posix: true, dotRelative: true }),
+            ]),
             safelist: {
                 standard: ["html", "body"],
             },

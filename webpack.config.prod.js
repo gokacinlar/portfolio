@@ -17,6 +17,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const CompressionPlugin = require("compression-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
+const PhpWebpackPlugin = require("@visto9259/php-webpack-plugin");
 
 // CSP configuration for trusted external scripts
 const scripts = [
@@ -356,6 +357,7 @@ module.exports = {
             minRatio: 0.8,
             deleteOriginalAssets: false
         }),
+        new PhpWebpackPlugin(),
         function fontainePlugin(_context, _options) {
             return {
                 name: "FontaineFallback",
