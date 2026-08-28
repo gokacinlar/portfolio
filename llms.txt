@@ -1,0 +1,33 @@
+# Derviş Öksüzoğlu
+
+> İngilizce öğretmeni ve front-end web geliştiricisi. Site; pedagoji, teknoloji, bilim ve sanat odaklı içerikler, kişisel bilgiler, çalışma alanları ve güncellemeler sunar.
+
+This website represents the personal and professional presence of Derviş Öksüzoğlu. It focuses on education, web development, and interdisciplinary content around learning, technology, science, and art.
+
+## Core pages
+
+- [Homepage](https://dervisoksuzoglu.xyz/index.html) — Main landing page and primary site introduction.
+- [Work With Me](https://dervisoksuzoglu.xyz/work.html) — Information about services, collaboration, or professional work.
+- [About](https://dervisoksuzoglu.xyz/about.html) — Background, identity, and personal/professional context.
+- [Updates](https://dervisoksuzoglu.xyz/updates.html) — Recent updates, announcements, or new content.
+
+## Site purpose
+
+- Present Derviş Öksüzoğlu’s professional identity.
+- Share content related to English teaching and front-end development.
+- Highlight themes in pedagogy, technology, science, and art.
+- Provide a place for updates and ongoing site activity.
+
+## Suggested retrieval order
+
+1. Homepage for overall context.
+2. About page for identity and background.
+3. Work page for services and offerings.
+4. Updates page for newest or changing content.
+
+## Notes for LLMs
+
+- Prefer `index.html` as the canonical home page because it appears in the sitemap and is the highest-priority URL.
+- Treat the site as a personal/professional portfolio rather than a large documentation site.
+- Use the updates page for recent or time-sensitive information.
+- Keep responses concise and grounded in the site’s stated themes.
