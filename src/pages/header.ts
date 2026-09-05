@@ -39,7 +39,7 @@ class Header extends HTMLElement {
     }
 
     private handleModalInsertion() {
-        const modalArray: string = "rssModal, langSwitchModal, siteMapModal";
+        const modalArray: string = "rssModal, langSwitchModal, siteMapModal, llmsTxtModal";
         insertModalsToDom(modalArray);
     }
 
@@ -118,8 +118,8 @@ export class HeaderNode {
     private static readonly defaultHtmxOptions: type.HTMXOptions = {
         hxget: "",
         hxtrigger: "click",
-        hxswap: "innerHTML",
-        hxpushurl: true,
+        hxswap: "innerHTML transition:true",
+        hxpushurl: true
     };
 
     private static readonly navLinks: iface.NavLink[] = [
@@ -128,6 +128,12 @@ export class HeaderNode {
             title: Localize.translate("common:upperNavigation:home"),
             icon: "bi bi-house-door",
             htmxOptions: { ...HeaderNode.defaultHtmxOptions, hxget: "/index.html" },
+        },
+        {
+            href: "/idno",
+            title: Localize.translate("common:upperNavigation:lifeFeed"),
+            icon: "bi bi-bookshelf",
+            htmxOptions: { ...HeaderNode.defaultHtmxOptions, hxget: "/idno" },
         },
         {
             href: "/updates.html",
@@ -145,19 +151,22 @@ export class HeaderNode {
 
     public static headerMiddleContent(): string {
         return HeaderNode.navLinks
-            .map(({ href, title, icon, htmxOptions }) => `
-            <li class="w-100">
-                <button class="htmx-nav-button-container bg-transparent w-100">
-                    <a
-                        href="${href}"
-                        ${new HtmxControls(htmxOptions ?? HeaderNode.defaultHtmxOptions).render()}
-                        title="${title}"
-                        class="htmx-nav-link btn header-btn-bg btn btn-lg rounded-5 fs-4 w-100">
-                        <i class="bi ${icon}"></i> ${title}
-                    </a>
-                </button>
-            </li>
-            `).join("");
+            .map(({ href, title, icon, htmxOptions }) => {
+                const options: type.HTMXOptions = { ...(htmxOptions ?? HeaderNode.defaultHtmxOptions), hxget: htmxOptions?.hxget || href };
+
+                return /*html*/`
+                    <li class="w-100">
+                        <a
+                            href="${href}"
+                            ${new HtmxControls(options).render()}
+                            title="${title}"
+                            class="htmx-nav-link btn header-btn-bg btn-lg rounded-5 fs-3">
+                            <i class="bi ${icon}"></i> ${title}
+                        </a>
+                    </li>
+                `;
+            })
+            .join("");
     }
 
     private static readonly primaryBtn: iface.NavLink = {

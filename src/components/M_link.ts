@@ -28,7 +28,7 @@ class AnchorLink extends HTMLElement {
         anchorElement.title = title || "N/A";
         anchorElement.target = target || "_parent";
         anchorElement.referrerPolicy = referrerpolicy || "strict-origin-when-cross-origin";
-        anchorElement.rel = "noopener noreferrer"
+        anchorElement.rel = "opener"
         anchorElement.type = type || "text/html";
         if (downloadAttr !== null) anchorElement.download = downloadAttr || "";
 

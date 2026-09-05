@@ -82,7 +82,7 @@ class PromoTemplate {
                     <div class="promo-skills-container row col-12 mx-auto d-flex flex-column gap-4 align-items-center justify-content-center overflow-hidden">
                         ${this.promoSkills()}
                         <div class="psc-container w-100 position-relative overflow-hidden rounded-5">
-                            <div id="promoSkillsContainer" class="d-flex flex-row align-items-center justify-content-center gap-4 py-2"></div>
+                            <div id="promoSkillsContainer" class="d-flex flex-row align-items-center justify-content-center gap-4 py-3"></div>
                         </div>
                     </div>
                     <div class="promo-projects-container-parent">
@@ -137,7 +137,9 @@ class PromoTemplate {
     private promoDesc(): string {
         return /*html*/ `
             ${new PromoTitle(Localize.translate("common:desc:descTitle"))}
-            <div id="promo_Description" class="container-fluid w-100 d-flex flex-row overflow-hidden">${new PromoDescription().renderPromoDesc()}</div>
+            <div id="promo_Description" class="w-100 d-flex flex-row align-items-center justify-content-evenly overflow-hidden">
+                ${new PromoDescription().renderPromoDesc()}
+            </div>
         `;
     }
 

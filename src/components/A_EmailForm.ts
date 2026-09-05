@@ -4,7 +4,7 @@ export function renderEmailTable(): string {
     return /*html*/ `
         <table class="table table-bordered align-middle table-responsive form-floating">
             <tbody>
-                <tr>
+                <tr class="col-auto">
                     <th scope="row">
                         <label for="firstName" class="form-label">${Localize.translate("common:emailForm:yourName")}</label>
                     </th>
@@ -15,7 +15,7 @@ export function renderEmailTable(): string {
                         </div>
                     </td>
                 </tr>
-                <tr>
+                <tr class="col-auto">
                     <th scope="row">
                         <label for="email" class="form-label">${Localize.translate("common:emailForm:email")}</label>
                     </th>
@@ -26,7 +26,7 @@ export function renderEmailTable(): string {
                         </div>
                     </td>
                 </tr>
-                <tr>
+                <tr class="col-auto">
                     <th scope="row"><label for="message" class="form-label">${Localize.translate("common:emailForm:message")}</label></th>
                     <td>
                         <textarea class="form-control" id="message" name="message" rows="4" placeholder="${Localize.translate("common:emailForm:messagePlaceholder")}" required></textarea>
@@ -35,7 +35,7 @@ export function renderEmailTable(): string {
                         </div>
                     </td>
                 </tr>
-                <tr>
+                <tr class="col-auto">
                     <td colspan="2">
                         <div class="d-flex flex-row align-items-center justify-content-end">
                             <button id="aboutFormSubmitBtn" type="submit" class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-5 shadow-sm" title="${Localize.translate("common:emailForm:submitTitle")}">${Localize.translate("common:emailForm:sendMessage")}</button>

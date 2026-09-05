@@ -310,6 +310,36 @@ export class ModalList {
                     </table>
                 </div>
             `
+        },
+        {
+            id: "llmsTxtModal",
+            title: Localize.translate("common:modals:llmsTxt:btnTitle"),
+            content: `
+                <div class="sitemap-box rounded-5 p-0">
+                    <table class="table table-bordered table-striped border border-secondary-subtle border-1">
+                        <thead>
+                            <tr>
+                                <th scope="col">${Localize.translate("common:modals:llmsTxt:tableActionName")}</th>
+                                <th scope="col">${Localize.translate("common:modals:llmsTxt:tableVisitName")}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">${Localize.translate("common:modals:llmsTxt:visitLlmsTxt")}</td>
+                                <td>
+                                    <component-anchor-link
+                                        text="${Localize.translate("common:modals:llmsTxt:visitLlmsTxt")}"
+                                        title="${Localize.translate("common:modals:llmsTxt:visitLlmsTxt")}"
+                                        href="https://dervisoksuzoglu.xyz/llms.txt"
+                                        hreflang="x-default"
+                                        target="_blank">
+                                    </component-anchor-link>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `
         }
     ];
 }

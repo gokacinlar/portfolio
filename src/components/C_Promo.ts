@@ -24,7 +24,7 @@ export class PromoTitle {
 export class PromoDescription {
     public renderPromoDesc(): string {
         return /*html*/ `
-            <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
+            <div id="tabGroupProgress" class="col-sm-12 col-md-12 col-lg-12 col-xl-6 d-flex align-items-center justify-content-center mw-100">
                 <ul class="promo-featured-tabs list-unstyled d-flex flex-column gap-4 align-items-baseline">
                     <li>
                         ${this.renderTabGroupBtn(Localize.translate("common:desc:titles:PS"), "PS")}
@@ -40,7 +40,7 @@ export class PromoDescription {
                     </li>
                 </ul>
             </div>
-            <div id="tabGroupDetailsLister" class="col-md-6 col-sm-12 col-sm"></div>
+            <div id="tabGroupDetailsLister" class="col-sm-12 col-md-12 col-lg-12 col-xl-6"></div>
         `;
     }
 

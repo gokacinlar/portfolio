@@ -34,7 +34,7 @@ class HeroTemplate {
     public hero(): string {
         return /*html*/ `
             <section class="mx-2 my-2 px-2 py-2">
-                <div id="hero" class="container mx-0 my-0 rounded-5 mw-100 bg-gradient shadow-sm py-5 d-flex flex-column justify-content-between">
+                <div id="hero" class="container mx-0 my-0 rounded-5 mw-100 shadow-sm py-5 d-flex flex-column justify-content-between">
                     <div class="row align-items-center justify-content-evenly hero-child px-4">
                         <section class="col-12 col-md-6 d-flex flex-column align-items-start gap-4 ocps-container mb-4 mb-md-0">
                             <div class="hero-title-container">

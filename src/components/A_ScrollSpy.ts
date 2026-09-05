@@ -7,16 +7,13 @@ import * as Type from "../ts/types/types";
 import Localize from "../utils/initLocalization";
 
 class ScrollSpy {
-    constructor() {
-        document.addEventListener("DOMContentLoaded", () => {
-            addBackgroundBasedOnVerticalScroll("about-main", "about-scroll-spy-id", "glow-white-drop-shadow");
-        });
-    }
-
-    // Scrollspy heading links
     private renderHeading(id: string, text: string): string {
         return /*html*/ `
-            <h4 id="${id}"><a href="#${id}" class="link-body-emphasis link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">${text}</a></h4>
+            <h4 id="${id}">
+                <a href="#${id}" class="link-body-emphasis link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                    ${text}
+                </a>
+            </h4>
         `;
     }
 
@@ -71,11 +68,11 @@ class ScrollSpy {
                             <hr class="w-25">
                         </div>
                         ${this.renderTable([
-                            Localize.translate("common:about:table:institution"),
-                            Localize.translate("common:about:table:field"),
-                            Localize.translate("common:about:table:degree"),
-                            Localize.translate("common:about:table:date")
-                        ], AboutData.educationRows, "eduTable")}
+            Localize.translate("common:about:table:institution"),
+            Localize.translate("common:about:table:field"),
+            Localize.translate("common:about:table:degree"),
+            Localize.translate("common:about:table:date")
+        ], AboutData.educationRows, "eduTable")}
                     </div>
                     <div>
                         <div>
@@ -83,7 +80,14 @@ class ScrollSpy {
                             <hr class="w-25">
                         </div>
                         <div>
-                            <p class="fs-5 fw-medium d-flex flex-row align-items-center gap-1">${Localize.translate("common:about:work:cvIntro")} <a class="link-info link-opacity-75-hover link-offset-2 modal-trigger" data-modal="requestCVModal" href="#" title="${Localize.translate("common:about:work:cvTitle")}">${Localize.translate("common:about:work:cvHere")}</a></p>
+                            <p class="fs-5 fw-medium d-flex flex-row align-items-center gap-1 text-break">
+                                <span>
+                                    ${Localize.translate("common:about:work:cvIntro")}
+                                    <a class="link-info link-opacity-75-hover link-offset-2 modal-trigger" data-modal="requestCVModal" href="#" title="${Localize.translate("common:about:work:cvTitle")}">
+                                        ${Localize.translate("common:about:work:cvHere")}
+                                    </a>
+                                </span> 
+                            </p>
                         </div>
                     </div>
                     <div>
@@ -93,10 +97,10 @@ class ScrollSpy {
                         </div>
                         <div>
                             ${this.renderTable([
-                                Localize.translate("common:about:table:category"),
-                                Localize.translate("common:about:table:technologies"),
-                                Localize.translate("common:about:table:librariesTools")
-                            ], AboutData.stackRows, "stackTable")}
+            Localize.translate("common:about:table:category"),
+            Localize.translate("common:about:table:technologies"),
+            Localize.translate("common:about:table:librariesTools")
+        ], AboutData.stackRows, "stackTable")}
                         </div>
                     </div>
                     <div>
@@ -143,6 +147,10 @@ class ScrollSpy {
 
     connectedCallback(): void {
         ScrollSpy.initWeb3Forms();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            addBackgroundBasedOnVerticalScroll("about-main", "about-scroll-spy-id", "glow-white-drop-shadow");
+        });
     }
 }
 

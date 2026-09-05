@@ -90,7 +90,7 @@ class ClientSideLoginPage extends HTMLElement implements RequiredCallbacksOnComp
         btn.textContent = "Logging in...";
 
         try {
-            const response = await fetch("/php/Login.php", {
+            const response = await fetch("../php/Login.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: new URLSearchParams({ username, password }).toString(),
@@ -106,8 +106,9 @@ class ClientSideLoginPage extends HTMLElement implements RequiredCallbacksOnComp
             } else {
                 this.showError(data.message || "Invalid credentials.");
             }
-        } catch {
+        } catch (error: unknown) {
             this.showError("Something went wrong. Please try again.");
+            throw new Error(`Error while proceeding on login: ${error}`);
         } finally {
             btn.disabled = false;
             btn.textContent = "Login";

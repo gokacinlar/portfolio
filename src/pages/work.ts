@@ -14,10 +14,10 @@ class WorkPage extends HTMLElement {
 <section id="mainWork">
     <div class="container text-center h-100">
         <div class="row gy-2 gx-2 align-items-center h-100">
-            <div class="col-xs-12 col-sm-12 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
                 <h1 class="display-1 text-start fw-medium pe-none"><mark class="px-4 py-1 rounded-end-5">${Localize.translate("common:workPage:hireMe")}</mark> ${Localize.translate("common:workPage:orSeePlans")}</h1>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 colg-lg-4">
                 <a type="button" href="#buyOptions" id="workScrollDownBtn" class="btn btn-lg rounded-5 shadow-sm fw-medium fs-2 mx-auto d-flex flex-row align-items-center justify-content-center gap-2" title="${Localize.translate("common:workPage:scrollDown")}" type="button">
                     <span class="work-scroll-down-indicator">${Localize.translate("common:workPage:seePlans")}</span>
                     <i class="work-scroll-down-icon bi bi-arrow-down-circle-fill fs-1"></i>
@@ -69,7 +69,7 @@ class Options extends HTMLElement {
         <div class="row">
             ${WorkPage.navigate()}
         </div>
-        <div class="row mt-3 h-75">
+        <div class="row mt-3">
             ${WorkPage.content()}
         </div>
     </div>

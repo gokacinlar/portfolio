@@ -77,7 +77,7 @@ class Updates extends HTMLElement {
         `;
     }
 
-    private async generateDomElementsRelatedToBlogsInAside(targetElement: string, data: type.PostPreview[]) {
+    private async generateDomElementsRelatedToBlogsInAside(targetElement: string, data: type.PostPreviewSingle[]) {
         try {
             const element = this.querySelector(`#${targetElement}`) as HTMLElement | null;
             if (!element) {
@@ -101,12 +101,11 @@ class Updates extends HTMLElement {
             element.innerHTML = "";
 
             // Create and append each post button with event listener
-            data.forEach((item: type.PostPreview) => {
+            data.forEach((item: type.PostPreviewSingle) => {
                 try {
                     const title: string = item.title || Localize.translate("common:blog:untitledPost");
-                    const authorName: string = item.author?.name || Localize.translate("common:blog:unknownAuthor");
-
                     const button = document.createElement("button") as HTMLButtonElement;
+
                     button.type = "button";
                     button.className = "blog-post-link btn btn-sm fs-5 d-flex flex-row gap-2 align-items-center justify-content-between w-100 py-2 px-2 bg-secondary-subtle rounded-pill link-offset-2 link-underline link-underline-opacity-0 mb-2";
                     button.dataset.postId = item.id; // Store the post ID for fetching

@@ -4,32 +4,7 @@ import { Template, HorizontalMiddleMouseScroll, insertApprovedScript } from "../
 import { HeroImageWithLink } from "../components/C_Hero";
 import ScrollSpy from "../components/A_ScrollSpy";
 import Localize from "../utils/initLocalization";
-
-// Interfaces
-interface SkillConfig {
-    imageOne: string;
-    imageTwo: string;
-    title: string;
-}
-
-interface HeroConfig {
-    name: string;
-    className: string;
-    link: string;
-    imageSrc: string;
-    srcSet: string;
-}
-
-interface ShuffleElement {
-    selector: string;
-    multiple: boolean;
-}
-
-interface SocialsElement {
-    name: string;
-    icon: string;
-    href: URL;
-}
+import type * as iFace from "../ts/interfaces/i.global";
 
 class About extends HTMLElement {
     constructor() {
@@ -62,7 +37,7 @@ class About extends HTMLElement {
         });
     }
 
-    private readonly heroConfig: HeroConfig = {
+    private readonly heroConfig: iFace.HeroConfig = {
         name: "Derviş Öksüzoğlu",
         className: "heroLogoBg",
         link: "",
@@ -70,7 +45,7 @@ class About extends HTMLElement {
         srcSet: "../assets/images/static/webp/logo_256x256.webp 256w, ../assets/images/static/webp/logo_512x512.webp 512w, ../assets/images/static/webp/logo.webp 1024w"
     };
 
-    private readonly skillConfigs: SkillConfig[] = [
+    private readonly skillConfigs: iFace.SkillConfig[] = [
         {
             imageOne: "../assets/images/static/svg/tr.svg",
             imageTwo: "../assets/images/static/svg/uk.svg",
@@ -83,12 +58,12 @@ class About extends HTMLElement {
         }
     ];
 
-    private readonly shuffleElements: ShuffleElement[] = [
+    private readonly shuffleElements: iFace.ShuffleElement[] = [
         { selector: ".aside-title", multiple: false },
         { selector: ".aside-skill", multiple: true }
     ];
 
-    private readonly SocialsElements: SocialsElement[] = [
+    private readonly SocialsElements: iFace.SocialsElement[] = [
         { name: Localize.translate("common:about:socials:github"), icon: "bi bi-github", href: new URL("https://github.com/gokacinlar") },
         { name: Localize.translate("common:about:socials:hashnode"), icon: "bi bi-book", href: new URL("https://gokacinlar.hashnode.dev/") },
         { name: Localize.translate("common:about:socials:substack"), icon: "bi bi-substack", href: new URL("https://substack.com/@gokacinlar") },
@@ -132,7 +107,7 @@ class About extends HTMLElement {
 
     private renderAside(): string {
         return /*html*/ `
-        <aside id="about-aside" class="bg-gradient rounded-5 shadow-sm py-3 px-4 h-100">
+        <aside id="about-aside" class="rounded-5 shadow-sm py-3 px-4 h-100">
             <div>
                 ${this.renderHeroSection()}
                 ${this.renderSkillsSection()}
@@ -145,7 +120,7 @@ class About extends HTMLElement {
 
     private renderMain(): string {
         return /*html*/ `
-        <section id="about-main" class="bg-gradient rounded-5 shadow-sm py-3 px-3 overflow-auto">
+        <section id="about-main" class="rounded-5 shadow-sm py-3 px-3 overflow-auto">
             ${new ScrollSpy().render()}
         </section>
     `;
@@ -171,7 +146,7 @@ class About extends HTMLElement {
         `;
     }
 
-    private renderSkill({ imageOne, imageTwo, title }: SkillConfig): string {
+    private renderSkill({ imageOne, imageTwo, title }: iFace.SkillConfig): string {
         return /*html*/ `
             <h2 class="aside-skill-name d-flex flex-row align-items-center gap-1 mb-1">
                 <div class="d-flex align-items-center gap-1 px-1 py-1">
@@ -187,7 +162,7 @@ class About extends HTMLElement {
         return /*html*/ `
             <div class="d-flex flex-row flex-wrap align-items-start justify-content-evenly gap-1">
                 ${this.SocialsElements.map(({ name, icon, href }) => `
-                    <div class="aside-socials mb-2 rounded-pill shadow-sm flex-grow-1">
+                    <div class="aside-section-socials mb-2 rounded-pill shadow-sm flex-grow-1">
                         <a href="${href}" hreflang="x-default" class="d-flex flex-row align-items-center gap-1 px-2 py-2 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" 
                             target="_blank" title="${name}">
                             <i class="${icon} fs-3 px-1 py-1"></i>

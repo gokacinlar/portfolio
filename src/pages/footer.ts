@@ -23,14 +23,24 @@ class FooterNodes {
                     <div class="align-items-center bg-secondary-subtle rounded-5">
                         ${this.footerRight()}
                     </div>
-                    <component-custom-button
-                        class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1 modal-trigger"
-                        id="sitemapModalBtn"
-                        type="button"
-                        title="${Localize.translate("common:footer:sitemap")}"
-                        data-modal="siteMapModal">
-                        <i class="bi bi-diagram-3 fs-3 fw-bold"></i>
-                    </component-custom-button>
+                    <div class="footer-additional-info-button-container d-flex flex-row align-items-center justify-content-end gap-2">
+                        <component-custom-button
+                            class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1 modal-trigger"
+                            id="llmsTxtBtn"
+                            type="button"   
+                            title="${Localize.translate("common:footer:llmsTxt")}"
+                            data-modal="llmsTxtModal">
+                            <i class="bi bi-robot fs-3 fw-bold"></i>
+                        </component-custom-button>
+                        <component-custom-button
+                            class="bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1 modal-trigger"
+                            id="sitemapModalBtn"
+                            type="button"
+                            title="${Localize.translate("common:footer:sitemap")}"
+                            data-modal="siteMapModal">
+                            <i class="bi bi-diagram-3 fs-3 fw-bold"></i>
+                        </component-custom-button>
+                    </div>
                 </div>
             </section>
         `;
