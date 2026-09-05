@@ -1,0 +1,177 @@
+@use "m_queries.scss" as mquery;
+
+@mixin low-level-font-management($val1, $val2, $val3, $val4) {
+    font-feature-settings: #{$val1},
+    #{$val2},
+    #{$val3},
+    #{$val4};
+    -moz-font-feature-settings: #{$val1},
+    #{$val2},
+    #{$val3},
+    #{$val4};
+    -ms-font-feature-settings: #{$val1},
+    #{$val2},
+    #{$val3},
+    #{$val4};
+    -webkit-font-feature-settings: #{$val1},
+    #{$val2},
+    #{$val3},
+    #{$val4};
+}
+
+@mixin transition($props...) {
+    transition: $props;
+}
+
+@mixin animation($name, $duration, $timing-function, $fill-mode) {
+    -webkit-animation: #{$name} #{$duration} #{$timing-function} #{$fill-mode};
+    animation: #{$name} #{$duration} #{$timing-function} #{$fill-mode};
+}
+
+@mixin borderRadius($radius) {
+    border-radius: $radius;
+}
+
+@mixin hover-underline($color) {
+    position: relative;
+    display: inline-block;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 100%;
+        border: 1px solid $color;
+        border-radius: 24px;
+        transform: translateX(-50%) scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+        z-index: 999;
+    }
+
+    &:hover::after {
+        transform: translateX(-50%) scaleX(1);
+    }
+}
+
+@mixin responsive-font-size($breakpoints, $size) {
+    @each $bp in $breakpoints {
+        @include mquery.responsive($bp) {
+            font-size: $size !important;
+        }
+    }
+}
+
+@mixin hide-on($breakpoints) {
+    @each $bp in $breakpoints {
+        @include mquery.responsive($bp) {
+            display: none !important;
+        }
+    }
+}
+
+@mixin show-on($breakpoint) {
+    @include mquery.responsive($breakpoint) {
+        display: block !important;
+    }
+}
+
+@mixin gradient-inset-box-shadow {
+    box-shadow:
+        inset 30px 0 30px -20px rgba(0, 0, 0, 0.05),
+        inset -30px 0 30px -20px rgba(0, 0, 0, 0.05);
+}
+
+@mixin apply-to-selectors($selectors, $rules) {
+    @each $selector in $selectors {
+        #{$selector} {
+            @content;
+        }
+    }
+}
+
+@mixin responsive-flex-direction($breakpoints, $direction) {
+    @each $bp in $breakpoints {
+        @include mquery.responsive($bp) {
+            flex-direction: $direction !important;
+        }
+    }
+}
+
+@mixin responsive-styling($breakpoints, $property, $value) {
+    @each $bp in $breakpoints {
+        @include mquery.responsive($bp) {
+            #{$property}: $value !important;
+        }
+    }
+}
+
+@mixin hide-scrollbar {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    & {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
+    }
+}
+
+@mixin background-cover($image-path) {
+    background: url($image-path);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@mixin custom-font($font-family) {
+    font-family: $font-family !important;
+}
+
+@mixin wavy-text($color) {
+    -webkit-text-decoration-style: wavy;
+    -moz-text-decoration-style: wavy;
+    text-decoration-style: wavy;
+    text-decoration: underline wavy .07em $color;
+}
+
+@mixin dynamic-font-size($min-size, $viewport-factor, $max-size) {
+    font-size: clamp($min-size, $viewport-factor, $max-size);
+}
+
+@mixin custom-bee-color {
+    color: #1F1F24 !important;
+    background: var(--clr-six) !important;
+}
+
+@mixin neumorphic-background($border-radius: 50px) {
+    background: linear-gradient(225deg, #e3c334, #ffe83e) !important;
+}
+
+@mixin custom-box-shadow($p1, $p2, $p3, $p4, $alpha) {
+    box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
+    -webkit-box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
+    -moz-box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
+}
+
+@mixin glowing-white-drop-shadow() {
+    filter: drop-shadow(0px 6px 46px #f0ebf0);
+}
+
+@mixin def-yellow-button-size() {
+    --def-size: 54px;
+    width: var(--def-size);
+    height: var(--def-size);
+}
+
+@mixin scroll-by-mwhell() {
+    align-items: unset !important;
+    justify-content: unset !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: scroll !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-padding-left: 0 !important;
+}

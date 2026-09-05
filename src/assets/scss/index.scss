@@ -1,54 +1,10 @@
-@use "m_queries";
+@use "reset" as *;
 @use "globals";
-
-@mixin low-level-font-management($val1, $val2, $val3, $val4) {
-    font-feature-settings: #{$val1},
-    #{$val2},
-    #{$val3},
-    #{$val4};
-    -moz-font-feature-settings: #{$val1},
-    #{$val2},
-    #{$val3},
-    #{$val4};
-    -ms-font-feature-settings: #{$val1},
-    #{$val2},
-    #{$val3},
-    #{$val4};
-    -webkit-font-feature-settings: #{$val1},
-    #{$val2},
-    #{$val3},
-    #{$val4};
-}
-
-@font-face {
-    font-family: "Geist";
-    src: url("../fonts/Geist.woff2") format("woff2"),
-        url("../fonts//Geist.woff") format("woff"),
-        url("../fonts/Geist.ttf") format("ttf"),
-        url("../fonts/Geist.eot") format("eot");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-    font-kerning: normal;
-    text-rendering: optimizeLegibility;
-    font-variant: no-common-ligatures proportional-nums;
-    @include low-level-font-management("kern", "liga", "clig", "calt");
-}
-
-@font-face {
-    font-family: "Franuces";
-    src: url("../fonts/Franuces.woff2") format("woff2"),
-        url("../fonts/Franuces.woff") format("woff"),
-        url("../fonts/Franuces.ttf") format("ttf"),
-        url("../fonts/Franuces.eot") format("eot");
-    font-weight: normal;
-    font-style: normal;
-    font-display: fallback;
-    font-kerning: normal;
-    text-rendering: optimizeLegibility;
-    font-variant: no-common-ligatures proportional-nums;
-    @include low-level-font-management("kern", "liga", "clig", "calt");
-}
+@use "fonts";
+@use "keyframes";
+@use "mixins" as mixin;
+@use "m_queries" as mquery;
+@use "breakpoints" as breakpoint;
 
 // Font fallback stack
 $font-family: "Geist",
@@ -56,15 +12,16 @@ $font-family: "Geist",
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
-    "Roboto",
-    "Oxygen",
-    "Ubuntu",
-    "Cantarell",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
     "Fira Sans",
     "Droid Sans",
     "Helvetica Neue",
     Arial,
     sans-serif;
+
 
 // Monospace context
 $monospace-font-family: "Cascadia Code",
@@ -75,187 +32,13 @@ $monospace-font-family: "Cascadia Code",
     "Courier New",
     monospace;
 
-$font-display: fallback;
-
-// Global breakpoints
-$mobile-breakpoints: phone, phone-portrait, phone-landscape;
-$tablet-breakpoints: tablet, tablet-portrait, tablet-landscape;
-$desktop-small-breakpoints: desktop-small, desktop-large;
-$desktop-breakpoints: desktop-small, desktop-large, large-screen;
-$all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet-landscape;
-$global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet-landscape, desktop-small, desktop-large, large-screen;
-
-// Helper mixins
-@mixin transition($props...) {
-    transition: $props;
-}
-
-@mixin animation($name, $duration, $timing-function, $fill-mode) {
-    -webkit-animation: #{$name} #{$duration} #{$timing-function} #{$fill-mode};
-    animation: #{$name} #{$duration} #{$timing-function} #{$fill-mode};
-}
-
-@mixin borderRadius($radius) {
-    border-radius: $radius;
-}
-
-@mixin hover-underline($color) {
-    position: relative;
-    display: inline-block;
-
-    &::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        width: 100%;
-        border: 1px solid $color;
-        border-radius: 24px;
-        transform: translateX(-50%) scaleX(0);
-        transform-origin: left;
-        transition: transform 0.25s ease;
-        z-index: 999;
-    }
-
-    &:hover::after {
-        transform: translateX(-50%) scaleX(1);
-    }
-}
-
-@mixin responsive-font-size($breakpoints, $size) {
-    @each $bp in $breakpoints {
-        @include m_queries.responsive($bp) {
-            font-size: $size !important;
-        }
-    }
-}
-
-@mixin hide-on($breakpoints) {
-    @each $bp in $breakpoints {
-        @include m_queries.responsive($bp) {
-            display: none !important;
-        }
-    }
-}
-
-@mixin show-on($breakpoint) {
-    @include m_queries.responsive($breakpoint) {
-        display: block !important;
-    }
-}
-
-@mixin gradient-inset-box-shadow {
-    box-shadow:
-        inset 30px 0 30px -20px rgba(0, 0, 0, 0.05),
-        inset -30px 0 30px -20px rgba(0, 0, 0, 0.05);
-}
-
-@mixin apply-to-selectors($selectors, $rules) {
-    @each $selector in $selectors {
-        #{$selector} {
-            @content;
-        }
-    }
-}
-
-@mixin responsive-flex-direction($breakpoints, $direction) {
-    @each $bp in $breakpoints {
-        @include m_queries.responsive($bp) {
-            flex-direction: $direction !important;
-        }
-    }
-}
-
-@mixin responsive-styling($breakpoints, $property, $value) {
-    @each $bp in $breakpoints {
-        @include m_queries.responsive($bp) {
-            #{$property}: $value !important;
-        }
-    }
-}
-
-@mixin hide-scrollbar {
-    &::-webkit-scrollbar {
-        display: none;
-    }
-
-    & {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-        scroll-behavior: smooth;
-    }
-}
-
-@mixin background-cover($image-path) {
-    background: url($image-path);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-@mixin custom-font($font-family) {
-    font-family: $font-family !important;
-}
-
-@mixin wavy-text($color) {
-    -webkit-text-decoration-style: wavy;
-    -moz-text-decoration-style: wavy;
-    text-decoration-style: wavy;
-    text-decoration: underline wavy .07em $color;
-}
-
-@mixin dynamic-font-size($min-size, $viewport-factor, $max-size) {
-    font-size: clamp($min-size, $viewport-factor, $max-size);
-}
-
-@mixin custom-bee-color {
-    color: #1F1F24 !important;
-    background: var(--clr-six) !important;
-}
-
-@mixin neumorphic-background($border-radius: 50px) {
-    background: linear-gradient(225deg, #e3c334, #ffe83e) !important;
-}
-
-@mixin custom-box-shadow($p1, $p2, $p3, $p4, $alpha) {
-    box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
-    -webkit-box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
-    -moz-box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
-}
-
-@mixin glowing-white-drop-shadow() {
-    filter: drop-shadow(0px 6px 46px #f0ebf0);
-}
-
-@mixin def-yellow-button-size() {
-    --def-size: 54px;
-    width: var(--def-size);
-    height: var(--def-size);
-}
-
-// Reset
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
-
 * {
-    margin: 0;
-    padding: 0;
-    font-family: $font-family;
-    font-display: $font-display;
-    @include transition(background-color .25s ease-in-out, color .25s ease-in);
+    font-family: $font-family $monospace-font-family;
+    font-display: swap;
+    @include mixin.transition(background-color .25s ease-in-out, color .25s ease-in);
 }
 
-html {
-    text-size-adjust: none;
-    -webkit-text-size-adjust: none;
-    -webkit-font-smoothing: antialiased;
-}
-
-@layer init, secondary, third;
+@layer init;
 
 @layer init {
 
@@ -269,6 +52,11 @@ html {
         transition: opacity ease-in 900ms;
     }
 
+    .htmx-nav-link {
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, font-size, 1.75rem);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, font-size, 1.95rem);
+    }
+
     body {
         background: var(--clr-one) !important;
     }
@@ -279,17 +67,17 @@ html {
     }
 
     .bee-color-btn {
-        @include custom-bee-color();
+        @include mixin.custom-bee-color();
     }
 
     .hr-btn-text {
-        @include hover-underline(#1F1F24);
-        @include transition(all .35s ease-in-out);
+        @include mixin.hover-underline(#1F1F24);
+        @include mixin.transition(all .35s ease-in-out);
     }
 
     .hr-daynight-switch-icon {
         transform: rotate(0);
-        @include transition(transform .25s ease-in-out !important);
+        @include mixin.transition(transform .25s ease-in-out !important);
 
         &:hover {
             transform: rotate(90deg);
@@ -297,63 +85,31 @@ html {
     }
 
     .header-day-night-btn {
-        @include transition(all 0.25s ease-in-out);
+        @include mixin.transition(all 0.25s ease-in-out);
     }
 
     #headerM {
-        @include hide-on($all-mobile-tablet-breakpoints);
+        @include mixin.hide-on(breakpoint.$all-mobile-tablet-breakpoints);
     }
 
     #headerRM {
-        @include hide-on($desktop-breakpoints);
-
-        & {
-            width: max-content !important;
-            position: absolute;
-            z-index: 999 !important;
-            inset-inline-end: 0;
-            inset-block-start: 6px;
-            background: var(--bs-body-color) !important;
-            animation: tilt-in-right-1 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-        }
-
-        &>div>ul {
-            margin: .20rem !important;
-            height: fit-content !important;
-            @include responsive-styling($all-mobile-tablet-breakpoints, width, calc(100dvw - 2rem));
-
-            >li {
-                padding: .25rem !important;
-
-                >a {
-                    min-width: 150px !important;
-                }
-            }
-        }
+        @include mixin.hide-on(breakpoint.$desktop-breakpoints);
     }
 
-    @keyframes tilt-in-right-1 {
-        0% {
-            transform: rotateX(-30deg) translateX(300px) skewX(30deg);
-            opacity: 0;
-        }
-
-        100% {
-            transform: rotateX(0deg) translateX(0) skewX(0deg);
-            opacity: 1;
-        }
+    #responsiveHeaderOffcanvas {
+        @include mixin.hide-on(breakpoint.$desktop-breakpoints);
     }
 
     .header-responsive-btn {
-        @include borderRadius(var(--rounded-sm));
-        @include hide-on($desktop-breakpoints);
-        @include show-on(phone);
+        @include mixin.borderRadius(var(--rounded-sm));
+        @include mixin.hide-on(breakpoint.$desktop-breakpoints);
+        @include mixin.show-on(phone);
     }
 
     .header-middle-nav-links {
-        @include responsive-styling($all-mobile-tablet-breakpoints, width, calc(100dvw - 2rem));
-        @include responsive-styling($all-mobile-tablet-breakpoints, min-height, calc(75dvh - 2rem));
-        @include responsive-styling($all-mobile-tablet-breakpoints, margin, 1rem);
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, width, calc(100dvw - 2rem));
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, min-height, calc(75dvh - 2rem));
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, margin, 1rem);
     }
 
     .header-right {
@@ -377,12 +133,12 @@ html {
     }
 
     .header-logo {
-        @include borderRadius(50%);
-        @include responsive-font-size($mobile-breakpoints, 54px);
-        @include show-on(desktop);
+        @include mixin.borderRadius(50%);
+        @include mixin.responsive-font-size(breakpoint.$mobile-breakpoints, 54px);
+        @include mixin.show-on(desktop);
 
         & {
-            @include def-yellow-button-size();
+            @include mixin.def-yellow-button-size();
             object-fit: cover;
             border: 3px solid var(--clr-two);
         }
@@ -392,19 +148,9 @@ html {
         animation: pulsate-fwd 4s cubic-bezier(0.445, 0.050, 0.550, 0.950) infinite both;
     }
 
-    @keyframes pulsate-fwd {
-        100% {
-            transform: scale(1);
-        }
-
-        50% {
-            transform: scale(1.15);
-        }
-    }
-
     .header-middle-nav-links>li>button>a {
-        @include transition(all 0.25s ease-in-out);
-        @include hover-underline(var(--clr-two));
+        @include mixin.transition(all 0.25s ease-in-out);
+        @include mixin.hover-underline(var(--clr-two));
 
         & {
             position: relative;
@@ -418,16 +164,12 @@ html {
     }
 
     .lang-switch-box {
-        @include custom-bee-color();
+        @include mixin.custom-bee-color();
     }
 
     #responsiveNavbar {
         flex-direction: column !important;
         width: 100%;
-    }
-
-    .download-rss-button {
-        @include def-yellow-button-size();
     }
 
     #hero {
@@ -436,12 +178,12 @@ html {
     }
 
     .hero-child {
-        @include responsive-flex-direction($all-mobile-tablet-breakpoints, column-reverse);
-        @include responsive-flex-direction($desktop-breakpoints, row);
-        @include responsive-styling($all-mobile-tablet-breakpoints, padding, .75em);
+        @include mixin.responsive-flex-direction(breakpoint.$all-mobile-tablet-breakpoints, column-reverse);
+        @include mixin.responsive-flex-direction(breakpoint.$desktop-breakpoints, row);
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, padding, .75em);
 
-        @each $bp in $all-mobile-tablet-breakpoints {
-            @include m_queries.responsive($bp) {
+        @each $bp in breakpoint.$all-mobile-tablet-breakpoints {
+            @include mquery.responsive($bp) {
                 .hero-logo {
                     --logo-mw: 256px;
                     width: var(--logo-mw);
@@ -503,25 +245,25 @@ html {
     }
 
     .hero-title-container {
-        @include responsive-styling($all-mobile-tablet-breakpoints, margin-top, .75rem);
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, margin-top, .75rem);
     }
 
     .ocps-buttons {
-        @include responsive-styling($all-mobile-tablet-breakpoints, flex-direction, column);
-        @include responsive-styling($all-mobile-tablet-breakpoints, width, 100%);
-        @include responsive-styling($desktop-breakpoints, padding-left, 2rem);
-        @include responsive-styling($desktop-breakpoints, padding-right, 2rem);
-        @include responsive-styling($desktop-small-breakpoints, padding-left, .25rem);
-        @include responsive-styling($desktop-small-breakpoints, padding-right, .25rem);
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, flex-direction, column);
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, width, 100%);
+        @include mixin.responsive-styling(breakpoint.$desktop-breakpoints, padding-left, 2rem);
+        @include mixin.responsive-styling(breakpoint.$desktop-breakpoints, padding-right, 2rem);
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, padding-left, .25rem);
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, padding-right, .25rem);
     }
 
     .hero-btn {
-        @include responsive-styling($all-mobile-tablet-breakpoints, width, 100%);
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, width, 100%);
     }
 
     #heroLogoBg {
-        @include responsive-styling($all-mobile-tablet-breakpoints, background-position, center);
-        @include borderRadius(var(--rounded-big));
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, background-position, center);
+        @include mixin.borderRadius(var(--rounded-big));
         background-image: radial-gradient(var(--clr-five) 10%, transparent 10%);
         background-position: 5px 8px;
         background-size: 24px 24px;
@@ -531,31 +273,19 @@ html {
         width: var(--sizes-logo);
         height: auto;
         object-fit: cover;
-        @include borderRadius(50%);
+        @include mixin.borderRadius(50%);
     }
 
     .motto-element {
-        @include responsive-styling($mobile-breakpoints, flex-grow, 1);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-grow, 1);
         color: var(--clr-one);
         background: var(--clr-two);
         animation: fade-in-fwd 0.55s cubic-bezier(.25, .46, .45, .94) both;
     }
 
-    @keyframes fade-in-fwd {
-        0% {
-            transform: translateZ(-80px);
-            opacity: 0;
-        }
-
-        100% {
-            transform: translateZ(0);
-            opacity: 1;
-        }
-    }
-
     #ocps {
         min-height: 2ch;
-        @include responsive-styling($mobile-breakpoints, min-height, 4ch);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, min-height, 4ch);
     }
 
     #mottosSection {
@@ -572,16 +302,6 @@ html {
         width: 32px;
     }
 
-    @keyframes blink {
-        100% {
-            opacity: 1;
-        }
-
-        50% {
-            opacity: 0;
-        }
-    }
-
     #promo,
     #promoFinalNote {
         min-height: var(--sizes-content);
@@ -592,9 +312,9 @@ html {
     }
 
     .promo-videos-container {
-        @include responsive-flex-direction($mobile-breakpoints, column);
-        @include responsive-flex-direction($tablet-breakpoints, column);
-        @include responsive-flex-direction($desktop-breakpoints, row);
+        @include mixin.responsive-flex-direction(breakpoint.$mobile-breakpoints, column);
+        @include mixin.responsive-flex-direction(breakpoint.$tablet-breakpoints, column);
+        @include mixin.responsive-flex-direction(breakpoint.$desktop-breakpoints, row);
 
         & {
             gap: .55rem !important;
@@ -604,14 +324,14 @@ html {
     .promo-motto-quote-container {
         --def-height: 256px;
         min-height: var(--def-height);
-        @include custom-bee-color();
-        @include responsive-styling($all-mobile-tablet-breakpoints, align-items, start);
-        @include responsive-styling($mobile-breakpoints, flex-direction, column);
-        @include responsive-styling($mobile-breakpoints, gap, .25em);
+        @include mixin.custom-bee-color();
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, align-items, start);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, gap, .25em);
 
         &>h3 {
-            @include custom-font(Franuces);
-            @include responsive-styling($all-mobile-tablet-breakpoints, font-size, 1rem);
+            @include mixin.custom-font(Franuces);
+            @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, font-size, 1rem);
             text-decoration-skip-ink: auto;
             text-emphasis-position: under right;
         }
@@ -619,7 +339,7 @@ html {
 
     .promo-motto-quote-icon {
         filter: drop-shadow(5px 5px 97px #000000);
-        @include dynamic-font-size(2rem, calc(8vw + 4rem), 12rem);
+        @include mixin.dynamic-font-size(2rem, calc(8vw + 4rem), 12rem);
     }
 
     #promo_Description {
@@ -627,53 +347,63 @@ html {
             min-height: 450px !important;
         }
 
-        @include responsive-styling($mobile-breakpoints, flex-direction, column-reverse);
-        @include responsive-styling($tablet-breakpoints, flex-direction, column-reverse);
-        @include responsive-styling($mobile-breakpoints, margin, 0);
-        @include responsive-styling($mobile-breakpoints, padding, .25em);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column-reverse);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, margin, 0);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, padding, .25em);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, flex-direction, column-reverse);
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, flex-direction, column-reverse);
     }
 
     .promo-featured-tabs {
-        @include responsive-styling($mobile-breakpoints, flex-direction, row);
-        @include hide-scrollbar();
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, row);
+        // Tablet grid view
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, width, 100%);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, display, grid);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, grid-template-rows, repeat(2, 1fr));
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, grid-template-columns, repeat(2, 1fr));
+        // Small desktop grid view
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, display, grid);
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, grid-template-rows, repeat(2, 1fr));
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, grid-template-columns, repeat(2, 1fr));
 
         & {
             overflow-x: scroll;
+            @include mixin.hide-scrollbar();
         }
     }
 
     .promo-projects-container {
-        @include responsive-styling($mobile-breakpoints, align-items, baseline);
-        @include responsive-styling($mobile-breakpoints, justify-content, baseline);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, align-items, baseline);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, justify-content, baseline);
 
-        @each $bp in $mobile-breakpoints {
-            @include m_queries.responsive($bp) {
+        @each $bp in breakpoint.$mobile-breakpoints {
+            @include mquery.responsive($bp) {
                 flex-direction: row !important;
                 flex-wrap: nowrap !important;
                 overflow-x: scroll !important;
                 scroll-snap-type: x mandatory;
                 scroll-padding-left: 0 !important;
-                @include hide-scrollbar();
+                @include mixin.hide-scrollbar();
             }
         }
     }
 
     #promoCardContainer {
-        @include responsive-flex-direction($mobile-breakpoints, row);
-        @include responsive-styling($mobile-breakpoints, flex-wrap, nowrap);
-        @include responsive-styling($mobile-breakpoints, justify-content, start);
-        @include responsive-styling($mobile-breakpoints, overflow-x, scroll);
-        @include responsive-styling($mobile-breakpoints, scrollbar-width, none);
-        @include responsive-styling($tablet-breakpoints, flex-wrap, wrap);
+        @include mixin.responsive-flex-direction(breakpoint.$mobile-breakpoints, row);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-wrap, nowrap);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, justify-content, start);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, overflow-x, scroll);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, scrollbar-width, none);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, flex-wrap, wrap);
 
         &>div {
-            @include responsive-styling($mobile-breakpoints, scroll-snap-align, start);
-            @include responsive-styling($mobile-breakpoints, flex-shrink, 0);
+            @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, scroll-snap-align, start);
+            @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-shrink, 0);
         }
     }
 
     .promo-interested-button {
-        @include responsive-styling($mobile-breakpoints, width, 100%);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, width, 100%);
     }
 
     .marquee-container:hover .marquee-content {
@@ -684,28 +414,19 @@ html {
         animation: marquee 30s linear infinite;
     }
 
-    @keyframes marquee {
-        0% {
-            transform: translateX(100%);
-        }
-
-        100% {
-            transform: translateX(-75%);
-        }
-    }
 
     .psc-container {
         width: 100%;
         background: var(--clr-eight);
-        @include gradient-inset-box-shadow;
+        @include mixin.gradient-inset-box-shadow;
     }
 
     #promoSkillsContainer {
         width: 100%;
         white-space: nowrap;
 
-        @each $bp in $mobile-breakpoints {
-            @include m_queries.responsive($bp) {
+        @each $bp in breakpoint.$mobile-breakpoints {
+            @include mquery.responsive($bp) {
                 animation: marquee 30s linear infinite;
 
                 &:hover {
@@ -716,16 +437,6 @@ html {
                     filter: brightness(100%) grayscale(0%);
                 }
             }
-        }
-    }
-
-    @keyframes marquee {
-        0% {
-            transform: translateX(150%);
-        }
-
-        100% {
-            transform: translateX(-150%);
         }
     }
 
@@ -754,10 +465,10 @@ html {
         width: 34ch;
         height: 34ch;
         min-height: 375px;
-        @include borderRadius(var(--rounded-sm));
+        @include mixin.borderRadius(var(--rounded-sm));
 
-        @each $bp in $mobile-breakpoints {
-            @include m_queries.responsive($bp) {
+        @each $bp in breakpoint.$mobile-breakpoints {
+            @include mquery.responsive($bp) {
                 width: 27ch !important;
             }
         }
@@ -794,8 +505,8 @@ html {
     }
 
     .promo-title-container {
-        @each $bp in $all-mobile-tablet-breakpoints {
-            @include m_queries.responsive($bp) {
+        @each $bp in breakpoint.$all-mobile-tablet-breakpoints {
+            @include mquery.responsive($bp) {
                 text-align: start !important;
             }
         }
@@ -813,8 +524,8 @@ html {
 
     /* Teaching Section */
     #promoTE {
-        @each $bp in $all-mobile-tablet-breakpoints {
-            @include m_queries.responsive($bp) {
+        @each $bp in breakpoint.$all-mobile-tablet-breakpoints {
+            @include mquery.responsive($bp) {
                 display: flex !important;
                 flex-direction: column !important;
                 margin-top: 0 !important;
@@ -824,27 +535,27 @@ html {
         }
 
         &>div>.pt-head>p.h1 {
-            @include responsive-font-size($mobile-breakpoints, 1.85em);
+            @include mixin.responsive-font-size(breakpoint.$mobile-breakpoints, 1.85em);
 
-            @each $bp in $mobile-breakpoints {
-                @include m_queries.responsive($bp) {
+            @each $bp in breakpoint.$mobile-breakpoints {
+                @include mquery.responsive($bp) {
                     line-height: 1.45em !important;
                 }
             }
         }
 
         &>div>.pt-head>p {
-            @include responsive-font-size($mobile-breakpoints, 1.65em);
+            @include mixin.responsive-font-size(breakpoint.$mobile-breakpoints, 1.65em);
 
-            @each $bp in $mobile-breakpoints {
-                @include m_queries.responsive($bp) {
+            @each $bp in breakpoint.$mobile-breakpoints {
+                @include mquery.responsive($bp) {
                     line-height: 1.35em !important;
                 }
             }
         }
 
         &>.te-img-container {
-            @include hide-on($mobile-breakpoints);
+            @include mixin.hide-on(breakpoint.$mobile-breakpoints);
         }
     }
 
@@ -866,22 +577,22 @@ html {
     }
 
     .footer-promo-links {
-        @include responsive-styling($mobile-breakpoints, flex-direction, column);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
     }
 
     .footer-brading-list {
-        @include responsive-styling($mobile-breakpoints, flex-direction, column);
-        @include responsive-styling($mobile-breakpoints, align-items, end);
-        @include responsive-styling($mobile-breakpoints, justify-content, space-evenly);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, align-items, end);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, justify-content, space-evenly);
     }
 
     .footer-left {
-        @include responsive-styling($mobile-breakpoints, flex-grow, 1);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-grow, 1);
     }
 
     .footer-right {
-        @include responsive-styling($mobile-breakpoints, flex-direction, column);
-        @include responsive-styling($mobile-breakpoints, align-items, end);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, align-items, end);
     }
 
     .footer-right-brand {
@@ -896,9 +607,9 @@ html {
     }
 
     #about-main {
-        @include responsive-styling($desktop-breakpoints, height, 100dvh);
-        @include responsive-styling($desktop-breakpoints, min-height, 664px);
-        @include hide-scrollbar();
+        @include mixin.responsive-styling(breakpoint.$desktop-breakpoints, height, 100dvh);
+        @include mixin.responsive-styling(breakpoint.$desktop-breakpoints, min-height, 664px);
+        @include mixin.hide-scrollbar();
     }
 
     #about-main .scrollspy-content h4 {
@@ -906,50 +617,37 @@ html {
     }
 
     #about-scroll-spy-id {
-        &::-webkit-scrollbar {
-            display: none;
-        }
-
         & {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            @include mixin.hide-scrollbar();
         }
 
-        @each $bp in $mobile-breakpoints {
-            @include m_queries.responsive($bp) {
-                align-items: unset !important;
-                justify-content: unset !important;
-                flex-direction: row !important;
-                flex-wrap: nowrap !important;
-                overflow-x: scroll !important;
-                scroll-snap-type: x mandatory !important;
-                scroll-padding-left: 0 !important;
-            }
+        @each $bp in breakpoint.$mobile-breakpoints {
+            @include mixin.scroll-by-mwhell();
         }
     }
 
     .aside-skill-name {
-        @include responsive-styling($tablet-breakpoints, flex-direction, column);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, flex-direction, column);
     }
 
     .aside-skill {
-        @include responsive-font-size($mobile-breakpoints, .80em);
-        @include responsive-font-size($tablet-breakpoints, .65em);
-        @include responsive-font-size($desktop-small-breakpoints, .65em);
+        @include mixin.responsive-font-size(breakpoint.$mobile-breakpoints, .80em);
+        @include mixin.responsive-font-size(breakpoint.$tablet-breakpoints, .65em);
+        @include mixin.responsive-font-size(breakpoint.$desktop-small-breakpoints, .65em);
     }
 
     .about-li1-text>mark {
         border-radius: var(--rounded-sm);
     }
 
-    .aside-socials {
+    .aside-section-socials {
         color: var(--clr-two);
         background: var(--clr-one);
         transition: all .25s ease-in-out;
 
         &:hover {
             .about-socials-arrow {
-                @include animation(swing-in-left-fwd, .25s, cubic-bezier(0.785, 0.135, 0.150, 0.860), alternate both);
+                @include mixin.animation(swing-in-left-fwd, .25s, cubic-bezier(0.785, 0.135, 0.150, 0.860), alternate both);
                 opacity: 1;
             }
         }
@@ -957,24 +655,6 @@ html {
 
     .about-socials-arrow {
         opacity: 0;
-    }
-
-    @keyframes swing-in-left-fwd {
-        0% {
-            -webkit-transform: rotateY(100deg);
-            transform: rotateY(100deg);
-            -webkit-transform-origin: left;
-            transform-origin: left;
-            opacity: 0;
-        }
-
-        100% {
-            -webkit-transform: rotateY(0);
-            transform: rotateY(0);
-            -webkit-transform-origin: left;
-            transform-origin: left;
-            opacity: 1;
-        }
     }
 
     .aside-ico {
@@ -986,7 +666,7 @@ html {
     /* Modals */
     .modal-content {
         background-color: var(--clr-eight) !important;
-        @include animation(scale-in-center, .45s, cubic-bezier(0.770, 0.000, 0.175, 1.000), alternate both);
+        @include mixin.animation(scale-in-center, .45s, cubic-bezier(0.770, 0.000, 0.175, 1.000), alternate both);
     }
 
     @-webkit-keyframes scale-in-center {
@@ -1003,42 +683,28 @@ html {
         }
     }
 
-    @keyframes scale-in-center {
-        0% {
-            -webkit-transform: scale(0);
-            transform: scale(0);
-            opacity: 1;
-        }
-
-        100% {
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            opacity: 1;
-        }
-    }
-
     /* 404 */
     #err_404 {
-        @include background-cover("../images/static/svg/parabolic-rectangle.svg");
+        @include mixin.background-cover("../images/static/svg/parabolic-rectangle.svg");
     }
 
     /* Blog (updates) */
 
     #blogContainer {
-        @include responsive-styling($mobile-breakpoints, height, auto);
-        @include responsive-styling($mobile-breakpoints, min-height, 100dvh);
-        @include responsive-styling($mobile-breakpoints, flex-direction, column);
-        @include responsive-styling($mobile-breakpoints, flex-wrap, nowrap);
-        @include responsive-styling($mobile-breakpoints, row-gap, 1rem);
-        @include responsive-styling($mobile-breakpoints, margin, 0);
-        @include responsive-styling($mobile-breakpoints, width, 100%);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, height, auto);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, min-height, 100dvh);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-wrap, nowrap);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, row-gap, 1rem);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, margin, 0);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, width, 100%);
     }
 
     #blogContainer>.bwrapper:last-child {
-        @include responsive-styling($mobile-breakpoints, flex-grow, 1);
-        @include responsive-styling($mobile-breakpoints, display, flex);
-        @include responsive-styling($mobile-breakpoints, flex-direction, column);
-        @include responsive-styling($mobile-breakpoints, height, 100);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-grow, 1);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, display, flex);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, height, 100);
     }
 
     #blogMain,
@@ -1047,7 +713,7 @@ html {
     }
 
     #blogAside {
-        @include responsive-styling($all-mobile-tablet-breakpoints, display, none);
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, display, none);
     }
 
     #blogAsideChild {
@@ -1056,7 +722,7 @@ html {
     }
 
     .bwrapper {
-        @include responsive-styling($all-mobile-tablet-breakpoints, padding-inline, 0);
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, padding-inline, 0);
     }
 
     /* Promo - Interested In Working */
@@ -1089,10 +755,10 @@ html {
         transition:
             filter .25s ease-in-out,
             width .25s ease-in-out;
-        @include custom-bee-color();
+        @include mixin.custom-bee-color();
 
         &>.work-scroll-down-icon {
-            @include animation(slide-in-blurred-top, .35s, cubic-bezier(0.230, 1.000, 0.320, 1.000), alternate both);
+            @include mixin.animation(slide-in-blurred-top, .35s, cubic-bezier(0.230, 1.000, 0.320, 1.000), alternate both);
             display: none;
             transform: translate(-50%, -50%);
             z-index: 1;
@@ -1112,81 +778,31 @@ html {
         }
     }
 
-    @-webkit-keyframes slide-in-blurred-top {
-        0% {
-            -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
-            transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
-            -webkit-transform-origin: 50% 0%;
-            transform-origin: 50% 0%;
-            -webkit-filter: blur(40px);
-            filter: blur(40px);
-            opacity: 0;
-        }
-
-        100% {
-            -webkit-transform: translateY(0) scaleY(1) scaleX(1);
-            transform: translateY(0) scaleY(1) scaleX(1);
-            -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-            -webkit-filter: blur(0);
-            filter: blur(0);
-            opacity: 1;
-        }
-    }
-
-    @keyframes slide-in-blurred-top {
-        0% {
-            -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
-            transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
-            -webkit-transform-origin: 50% 0%;
-            transform-origin: 50% 0%;
-            -webkit-filter: blur(40px);
-            filter: blur(40px);
-            opacity: 0;
-        }
-
-        100% {
-            -webkit-transform: translateY(0) scaleY(1) scaleX(1);
-            transform: translateY(0) scaleY(1) scaleX(1);
-            -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-            -webkit-filter: blur(0);
-            filter: blur(0);
-            opacity: 1;
-        }
-    }
-
     #buyOptions {
         background: var(--clr-eight);
     }
 
     .wavy-text {
-        @include wavy-text(#1f1f24);
+        @include mixin.wavy-text(#1f1f24);
     }
 
     #offCanvasControls {
-        @include responsive-styling($mobile-breakpoints, margin-bottom, .15rem);
-        @include responsive-styling($tablet-breakpoints, margin-bottom, .55rem);
-        @include responsive-styling($tablet-breakpoints, padding-right, .55rem);
-        @include responsive-styling($tablet-breakpoints, padding-left, .55rem);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, margin-bottom, .15rem);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, margin-bottom, .55rem);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, padding-right, .55rem);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, padding-left, .55rem);
     }
 
     #offCanvasControls,
     #blogAsideOffcanvasTemplate {
-        @include responsive-styling($all-mobile-tablet-breakpoints, display, flex);
-        @include responsive-styling($desktop-small-breakpoints, display, none);
-        @include responsive-styling($desktop-breakpoints, display, none);
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, display, flex);
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, display, none);
+        @include mixin.responsive-styling(breakpoint.$desktop-breakpoints, display, none);
     }
 
     #blogAsideOffcanvasTemplate {
-        @include responsive-styling($all-mobile-tablet-breakpoints, width, 80%);
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, width, 80%);
     }
-
-    #displayOffCanvasBtn {
-        @include def-yellow-button-size();
-    }
-
-    /* Scroll to top button */
 
     .scroll-to-top-div {
         display: hidden;
@@ -1194,21 +810,23 @@ html {
         bottom: 24px;
         right: 24px;
         cursor: pointer;
-        @include custom-bee-color();
+        @include mixin.custom-bee-color();
     }
 
     #submitCaptcha {
-        @include custom-bee-color();
+        @include mixin.custom-bee-color();
     }
 
     .glow-white-drop-shadow {
-        @include glowing-white-drop-shadow();
+        @include mixin.glowing-white-drop-shadow();
     }
 
-    #sitemapModalBtn {
-        @include def-yellow-button-size();
+    #sitemapModalBtn,
+    #llmsTxtBtn,
+    #displayOffCanvasBtn,
+    .download-rss-button {
+        @include mixin.def-yellow-button-size();
     }
-
 
     .header-lang-switch-flag {
         width: 36px !important;
@@ -1216,18 +834,11 @@ html {
     }
 
     #homePageNameBannerCode {
-        @include responsive-styling($mobile-breakpoints, justify-content, start);
-        @include responsive-styling($mobile-breakpoints, align-items, start);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, justify-content, start);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, align-items, start);
     }
 
     .banner-letter {
         text-shadow: 4px 6px 2px rgba(37, 99, 235, 0.5);
     }
-
-    .htmx-nav-button-container {
-        border: 0;
-        padding: 0;
-    }
 }
-
-@layer secondary {}

@@ -1,0 +1,7 @@
+// Global breakpoints
+$mobile-breakpoints: phone, phone-portrait, phone-landscape;
+$tablet-breakpoints: tablet, tablet-portrait, tablet-landscape;
+$desktop-small-breakpoints: desktop-small, desktop-large;
+$desktop-breakpoints: desktop-small, desktop-large, large-screen;
+$all-mobile-tablet-breakpoints: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet-landscape;
+$global: phone, phone-portrait, phone-landscape, tablet, tablet-portrait, tablet-landscape, desktop-small, desktop-large, large-screen;

@@ -1,0 +1,31 @@
+@use "mixins" as mixin;
+
+@font-face {
+    font-family: "Geist";
+    src: url("../fonts/Geist.woff2") format("woff2"),
+        url("../fonts//Geist.woff") format("woff"),
+        url("../fonts/Geist.ttf") format("ttf"),
+        url("../fonts/Geist.eot") format("eot");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    font-variant: no-common-ligatures proportional-nums;
+    @include mixin.low-level-font-management("kern", "liga", "clig", "calt");
+}
+
+@font-face {
+    font-family: "Franuces";
+    src: url("../fonts/Franuces.woff2") format("woff2"),
+        url("../fonts/Franuces.woff") format("woff"),
+        url("../fonts/Franuces.ttf") format("ttf"),
+        url("../fonts/Franuces.eot") format("eot");
+    font-weight: normal;
+    font-style: normal;
+    font-display: fallback;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    font-variant: no-common-ligatures proportional-nums;
+    @include mixin.low-level-font-management("kern", "liga", "clig", "calt");
+}
