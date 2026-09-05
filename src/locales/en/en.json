@@ -4,6 +4,7 @@
     },
     "upperNavigation": {
         "home": "Homepage",
+        "lifeFeed": "Feed",
         "updates": "Blog",
         "about": "About"
     },
@@ -134,6 +135,12 @@
             "tableVisitName": "Go",
             "visitSitemap": "See Sitemap"
         },
+        "llmsTxt": {
+            "btnTitle": "🤖 LLMs.txt",
+            "tableActionName": "Action",
+            "tableVisitName": "Go",
+            "visitLlmsTxt": "See LLMs.txt"
+        },
         "langSwitch": {
             "en": "English",
             "tr": "Türkçe",
@@ -147,6 +154,7 @@
         "motto": "Teaching for <strong>life</strong>, coding for <strong>passion</strong>."
     },
     "footer": {
+        "llmsTxt": "LLMs.txt",
         "sitemap": "Sitemap",
         "ccZero": "Creative Commons CC0 1.0 Universal License",
         "notByAi": "NotByAI Badge"

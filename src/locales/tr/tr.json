@@ -4,6 +4,7 @@
     },
     "upperNavigation": {
         "home": "Anasayfa",
+        "lifeFeed": "Feed",
         "updates": "Blog",
         "about": "Hakkımda"
     },
@@ -134,6 +135,12 @@
             "tableVisitName": "Gidin",
             "visitSitemap": "Site Haritasını Görün"
         },
+        "llmsTxt": {
+            "btnTitle": "🤖 LLMs.txt",
+            "tableActionName": "Eylem",
+            "tableVisitName": "Gidin",
+            "visitLlmsTxt": "İndirin: LLMs.txt"
+        },
         "langSwitch": {
             "en": "English",
             "tr": "Türkçe",
@@ -147,6 +154,7 @@
         "motto": "Öğretmek <strong>yaşam</strong> içindir, yazılım <strong>tutku</strong> için."
     },
     "footer": {
+        "llmsTxt": "LLMs.txt",
         "sitemap": "Site Haritası",
         "ccZero": "Creative Commons CC0 1.0 Evrensel Lisansı",
         "notByAi": "NotByAI Rozeti"
