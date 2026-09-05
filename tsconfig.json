@@ -13,10 +13,13 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "useDefineForClassFields": true,
     "noUnusedLocals": false,
     "noUnusedParameters": true,
-    "useDefineForClassFields": true,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": false,
+    "exactOptionalPropertyTypes": true,
     "paths": {
       "@types": [
         "./@types/grecaptcha"
