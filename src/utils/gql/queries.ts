@@ -9,17 +9,6 @@ class GraphQLQueries {
                 title
                 date
                 slug
-                categories {
-                    nodes {
-                            name
-                            slug
-                    }
-                }
-                author {
-                    node {
-                        name
-                    }
-                }
             }
         }
     }

@@ -36,14 +36,10 @@ class WordPressGraphQLClient extends GraphQLQueries {
     }
 
     // Transform GraphQL data to readable as a readable JSON output (partial)
-    private static transformPostPreview(node: type.GraphQLPostNode): type.PostPreview {
+    private static transformPostPreview(node: type.GraphQLPreviewPostNode): type.PostPreviewSingle {
         return {
             id: node.id || "Unknown ID",
-            title: node.title || "Unknown Title",
-            categories: node.categories.nodes,
-            author: {
-                name: node.author.node.name || "Unknown Author",
-            }
+            title: node.title || "Unknown Title"
         };
     }
 
@@ -73,8 +69,8 @@ class WordPressGraphQLClient extends GraphQLQueries {
     private static readonly CACHE_KEY_POST_PREFIX: string = "wordpress_blog_post_";
     private static readonly CACHE_EXPIRATION_HOURS: number = 24; // Valid for 1 day
 
-    // Fetch post previews (titles and authors only)
-    public static async fetchBlogPostPreviews(variables: type.GetPostsVariables = { first: WordPressGraphQLClient.DEF_BLOG_POST_NUMBER_TO_BE_FETCHED }): Promise<type.PostPreview[]> {
+    // Fetch post previews (titles only)
+    public static async fetchBlogPostPreviews(variables: type.GetPostsVariables = { first: WordPressGraphQLClient.DEF_BLOG_POST_NUMBER_TO_BE_FETCHED }): Promise<type.PostPreviewSingle[]> {
         const cachedData = this.getCachedPreviews();
         if (cachedData && cachedData.length > 0) {
             return cachedData;
@@ -170,7 +166,7 @@ class WordPressGraphQLClient extends GraphQLQueries {
         }
     }
 
-    private static cachePreviews(previews: type.PostPreview[]): void {
+    private static cachePreviews(previews: type.PostPreviewSingle[]): void {
         try {
             const cacheItem = {
                 timestamp: new Date().getTime(),
