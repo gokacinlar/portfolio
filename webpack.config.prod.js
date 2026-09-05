@@ -111,10 +111,30 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.(?:js|mjs|cjs)$/,
+                exclude: /node_modules/,
+                type: "javascript/auto",
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        targets: "defaults",
+                        presets: [
+                            ["@babel/preset-env"]
+                        ]
+                    }
+                },
+                resolve: {
+                    fullySpecified: false,
+                }
+            },
+            {
                 test: /\.ts$/,
                 use: "ts-loader",
                 include: [path.resolve(__dirname, "src")],
                 exclude: /node_modules/,
+                resolve: {
+                    fullySpecified: false,
+                }
             },
             {
                 test: /\.s?[ac]ss$/i,
