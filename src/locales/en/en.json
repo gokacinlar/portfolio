@@ -86,7 +86,7 @@
         },
         "fourth": {
             "title": "Multimodal engagement",
-            "msg": "I blend visual, auditory, and kinesthetic activities—like storytelling through comics or pronunciation through rhythm exercises—to cater to diverse learning styles."
+            "msg": "I blend visual, auditory, and kinesthetic activities-like storytelling through comics or pronunciation through rhythm exercises-to cater to diverse learning styles."
         },
         "fifth": {
             "title": "Cultural storytelling",
@@ -262,7 +262,148 @@
         "seePlans": "See plans",
         "forEnglish": "For Learning English",
         "forProgramming": "For Web Development",
-        "comingSoon": "Coming soon..."
+        "comingSoon": "Coming soon...",
+        "featured": {
+            "title": "Most Popular Plans",
+            "subtitle": "Pick the plan that fits your goal & upgrade anytime.",
+            "plans": {
+                "free": {
+                    "label": "Starter",
+                    "subtitle": "Perfect for beginners",
+                    "pricePeriod": "/hour",
+                    "badge": "",
+                    "features": [
+                        "Small group (max 4) conversation",
+                        "Weekly practice & feedback",
+                        "Basic materials included",
+                        "Email support"
+                    ],
+                    "excludedFeatures": [
+                        "1:1 live mentoring",
+                        "Personal roadmap"
+                    ],
+                    "buttonLabel": "Join Group",
+                    "buttonIcon": "bi-people-fill"
+                },
+                "starter": {
+                    "label": "Starter",
+                    "subtitle": "Perfect for beginners",
+                    "pricePeriod": "/hour",
+                    "badge": "",
+                    "features": [
+                        "Small group (max 4) conversation",
+                        "Weekly practice & feedback",
+                        "Basic materials included",
+                        "Email support"
+                    ],
+                    "excludedFeatures": [
+                        "1:1 live mentoring",
+                        "Personal roadmap"
+                    ],
+                    "buttonLabel": "Join Group",
+                    "buttonIcon": "bi-people-fill"
+                },
+                "pro": {
+                    "label": "Pro",
+                    "subtitle": "Most popular & personalized",
+                    "pricePeriod": "/hour",
+                    "badge": "Most Popular",
+                    "features": [
+                        "1:1 Live 60-min lessons",
+                        "Personalized level & roadmap",
+                        "Speaking + grammar focus",
+                        "Homework & detailed correction",
+                        "Flexible rescheduling"
+                    ],
+                    "buttonLabel": "Contact to Book",
+                    "buttonIcon": "bi-send-fill",
+                    "secondaryButtonLabel": "WhatsApp",
+                    "secondaryButtonIcon": "bi-whatsapp"
+                },
+                "max": {
+                    "label": "Max",
+                    "subtitle": "For serious learners",
+                    "pricePeriod": "/hour",
+                    "badge": "",
+                    "features": [
+                        "Everything in Pro",
+                        "Business English Sprint (4-week)",
+                        "Presentations, emails & interviews",
+                        "Mock exams (YDS/TOEFL/IELTS)",
+                        "Priority support & certificate"
+                    ],
+                    "buttonLabel": "Buy on Udemy",
+                    "buttonIcon": "bi-bag-fill"
+                }
+            }
+        },
+        "cards": {
+            "english": {
+                "live-1-1": {
+                    "name": "1:1 Live Lesson",
+                    "description": "Personalized 60-minute live session tailored to your level and goals & ideal for speaking, grammar and real conversation practice.",
+                    "buttonLabel": "Contact to Book",
+                    "buttonIcon": "bi-send-fill",
+                    "whatsappLabel": "WhatsApp"
+                },
+                "group": {
+                    "name": "Group Conversation",
+                    "description": "Small group (max 4) interactive lessons focused on fluency and confidence through discussion, role-play and feedback.",
+                    "buttonLabel": "Join Group",
+                    "buttonIcon": "bi-people-fill"
+                },
+                "exam": {
+                    "name": "Exam Preparation",
+                    "description": "Intensive program for YDS / TOEFL / IELTS / Proficiency with strategies, mock exams and detailed error correction.",
+                    "buttonLabel": "Buy on Udemy",
+                    "buttonIcon": "bi-bag-fill"
+                },
+                "business": {
+                    "name": "Business English Sprint",
+                    "description": "Career-focused intensive: presentations, emails, interviews and meetings. 4-week sprint with homework review.",
+                    "buttonLabel": "Buy on Udemy",
+                    "buttonIcon": "bi-bag-fill"
+                }
+            },
+            "programming": {
+                "frontend": {
+                    "name": "Frontend Sprint",
+                    "description": "Hands-on React / TypeScript mentorship w/building real projects with code reviews and best practices.",
+                    "buttonLabel": "View on GitHub",
+                    "buttonIcon": "bi-github"
+                },
+                "backend": {
+                    "name": "Backend Boost",
+                    "description": "Node.js / PHP / API design sessions with architecture guidance and performance tuning.",
+                    "buttonLabel": "Buy on Udemy",
+                    "buttonIcon": "bi-bag-fill"
+                },
+                "fullstack": {
+                    "name": "Full-Stack Project",
+                    "description": "End-to-end project mentoring from idea to deployment including DevOps basics.",
+                    "buttonLabel": "Start Project",
+                    "buttonIcon": "bi-rocket-takeoff-fill"
+                },
+                "review": {
+                    "name": "Code Review Pack",
+                    "description": "Async code reviews with detailed feedback, refactoring suggestions and video walkthroughs.",
+                    "buttonLabel": "Request Review",
+                    "buttonIcon": "bi-code-slash"
+                }
+            }
+        },
+        "stillUnsure": {
+            "title": "Still unsure?",
+            "subtitle": "Let's find the right fit together",
+            "description": "Not sure which plan suits you? Send me a quick message and I'll help you choose in minutes, no pressure.",
+            "cta": "Chat on WhatsApp",
+            "ctaTitle": "Chat on WhatsApp",
+            "note": "Usually reply within a day • No spam • No commitment"
+        },
+        "individualPlan": {
+            "title": "Do you need individual plan?",
+            "subtitle": "Browse individual options for English & Development"
+        }
     },
     "promo": {
         "seePlans": "See plans",

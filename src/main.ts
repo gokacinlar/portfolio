@@ -8,6 +8,7 @@ import * as bootstrap from "bootstrap";
 (window as any).bootstrap = bootstrap;
 // Libraries
 import "lazysizes";
+import * as OfflinePluginRuntime from "offline-plugin/runtime";
 // Utilities
 import { DarkLightMode } from "./utils/helper";
 import GoogleAnalytics from "./utils/gTag";
@@ -28,6 +29,13 @@ import "./components/M_link";
 import "./components/D_Login";
 
 let darkLightModeInstance: DarkLightMode | null = null;
+// Use singleton to avoid duplicate MediaQuery listeners (header also uses DarkLightMode)
+function getSharedDarkLightMode(): DarkLightMode {
+    if (!darkLightModeInstance) {
+        darkLightModeInstance = DarkLightMode.getInstance();
+    }
+    return darkLightModeInstance;
+}
 
 function registerServiceWorker(): void {
     if ("serviceWorker" in navigator) {
@@ -39,13 +47,19 @@ function registerServiceWorker(): void {
     }
 }
 
+function registerOfflinePlugin() {
+    OfflinePluginRuntime.install({
+        onUpdateReady: () => OfflinePluginRuntime.applyUpdate(),
+        onUpdated: () => location.reload()
+    });
+}
+
 class HomePage extends HTMLElement {
     connectedCallback(): void {
-        if (!darkLightModeInstance) {
-            darkLightModeInstance = new DarkLightMode();
-        }
+        getSharedDarkLightMode();
 
         registerServiceWorker();
+        registerOfflinePlugin();
 
         new GoogleAnalytics().trackPage();
         new GetSiteVersionNumber().init();
@@ -53,8 +67,9 @@ class HomePage extends HTMLElement {
 
     disconnectedCallback(): void {
         // Perform global cleanup if the main app component is ever disconnected
+        // Only destroy singleton if no other consumer holds reference; header will recreate lazily
         if (darkLightModeInstance) {
-            darkLightModeInstance.destroy();
+            DarkLightMode.destroyInstance();
             darkLightModeInstance = null;
         }
     }

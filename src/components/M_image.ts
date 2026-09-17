@@ -59,6 +59,7 @@ class LazyImage extends HTMLElement {
 
     connectedCallback(): void {
         this.render();
+        this._isSetUp = true;
     }
 
     attributeChangedCallback(
@@ -71,12 +72,8 @@ class LazyImage extends HTMLElement {
         }
     }
 
-    async disconnectedCallback(): Promise<void> {
-        await Promise.resolve();
-        if (!this.isConnected && this._isSetUp) {
-            this.remove();
-            this._isSetUp = false
-        }
+    disconnectedCallback(): void {
+        this._isSetUp = false;
     }
 }
 

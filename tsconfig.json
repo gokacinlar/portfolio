@@ -19,6 +19,7 @@
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": false,
+    "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "paths": {
       "@types": [

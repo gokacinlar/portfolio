@@ -1,4 +1,4 @@
-import { HeaderNode } from "../../pages/header";
+import { headerLeftIcon, headerMiddleContent } from "../../pages/headerShared";
 import Localize from "../../utils/initLocalization";
 
 interface ResponsiveNavBarElements {
@@ -64,7 +64,7 @@ class ResponsiveNavbar {
                 <div class="offcanvas-header bg-secondary-subtle rounded-start-4">
                     <div class="d-flex flex-wrap align-items-center justify-content-center gap-2">
                         <div>
-                            ${HeaderNode.headerLeftIcon()}
+                            ${headerLeftIcon()}
                         </div>
                         <h5 class="offcanvas-title" id="responsiveHeaderOffcanvasTitle">
                             Derviş Öksüzoğlu
@@ -79,7 +79,7 @@ class ResponsiveNavbar {
                     <nav id="headerRM" class="h-100 rounded-5 mt-2 shadow-sm d-flex flex-column justify-content-between">
                         <div>
                             <ul class="list-unstyled mb-0 d-flex flex-column align-items-center gap-1 p-2">
-                                ${HeaderNode.headerMiddleContent()}
+                                ${headerMiddleContent()}
                             </ul>
                         </div>
 

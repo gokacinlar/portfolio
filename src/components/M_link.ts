@@ -72,12 +72,8 @@ class AnchorLink extends HTMLElement {
         }
     }
 
-    async disconnectedCallback(): Promise<void> {
-        await Promise.resolve();
-        if (!this.isConnected && this._isSetUp) {
-            this.remove();
-            this._isSetUp = false
-        }
+    disconnectedCallback(): void {
+        this._isSetUp = false;
     }
 }
 

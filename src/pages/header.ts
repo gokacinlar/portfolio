@@ -1,17 +1,25 @@
 import Localize from "../utils/initLocalization";
-import * as type from "../ts/types/types";
 import * as iface from "../ts/interfaces/i.global";
 import { Template, DarkLightMode, applyHapticsToModals } from "../utils/helper";
 import { listenForBootstrapModalEventDelegation, insertModalsToDom } from "../utils/bootstrap";
 import { HtmxControls } from "../components/M_htmx";
 import ResponsiveNavbar from "../components/responsive/R_navbar";
 import CustomWebHaptics from "../utils/webHaptics";
+import {
+    headerLeftIcon as sharedHeaderLeftIcon, headerMiddleContent as sharedHeaderMiddleContent,
+    defaultHtmxOptions as sharedDefaultHtmxOptions,
+} from "./headerShared";
 
 let darkLightModeInstance: DarkLightMode | null = null;
 let cleanupModalDelegation: (() => void) | null = null;
 
 class Header extends HTMLElement {
     private webHaptics = CustomWebHaptics.getInstance();
+    private hapticsCleanup: (() => void) | null = null;
+    private pageSwitchDomReadyHandler: (() => void) | null = null;
+    private pageSwitchClickCleanups: Array<() => void> = [];
+    private languageSwitcherDomReadyHandler: (() => void) | null = null;
+    private responsiveNavbar: ResponsiveNavbar | null = null;
 
     constructor() {
         super();
@@ -22,20 +30,51 @@ class Header extends HTMLElement {
         const dayNightModeSwitchingBtn = this.querySelector("#hrDayNightBtn") as HTMLButtonElement;
 
         if (!darkLightModeInstance) {
-            darkLightModeInstance = new DarkLightMode();
+            darkLightModeInstance = DarkLightMode.getInstance();
         }
-        darkLightModeInstance.dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
+        if (dayNightModeSwitchingBtn) {
+            darkLightModeInstance.dayNightModeSwitching(dayNightModeSwitchingBtn, ".hr-daynight-switch-icon");
+        }
     }
 
     private handlePageSwitchWebHaptics(): void {
-        document.addEventListener("DOMContentLoaded", () => {
+        // Clean previous if re-connected
+        this.cleanupPageSwitchHaptics();
+
+        const attach = () => {
             const htmxNavigationLinks = document.querySelectorAll(".htmx-nav-button-container") as NodeListOf<HTMLButtonElement>;
-            htmxNavigationLinks.forEach((id) => {
-                id.addEventListener("click", () => {
+            htmxNavigationLinks.forEach((el) => {
+                const handler = () => {
                     this.webHaptics.triggerHaptic("success");
-                });
+                };
+                el.addEventListener("click", handler);
+                this.pageSwitchClickCleanups.push(() => el.removeEventListener("click", handler));
             });
-        });
+        };
+
+        this.pageSwitchDomReadyHandler = () => {
+            attach();
+            if (this.pageSwitchDomReadyHandler) {
+                document.removeEventListener("DOMContentLoaded", this.pageSwitchDomReadyHandler);
+                this.pageSwitchDomReadyHandler = null;
+            }
+        };
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", this.pageSwitchDomReadyHandler);
+        } else {
+            attach();
+            this.pageSwitchDomReadyHandler = null;
+        }
+    }
+
+    private cleanupPageSwitchHaptics(): void {
+        if (this.pageSwitchDomReadyHandler) {
+            document.removeEventListener("DOMContentLoaded", this.pageSwitchDomReadyHandler);
+            this.pageSwitchDomReadyHandler = null;
+        }
+        this.pageSwitchClickCleanups.forEach((fn) => fn());
+        this.pageSwitchClickCleanups = [];
     }
 
     private handleModalInsertion() {
@@ -43,13 +82,33 @@ class Header extends HTMLElement {
         insertModalsToDom(modalArray);
     }
 
-    connectedCallback(): void {
-        applyHapticsToModals();
+    private handleUtilitites(): void {
+        this.hapticsCleanup = applyHapticsToModals();
         this.handleDarkLightMode();
         this.handleModalInsertion();
         this.handlePageSwitchWebHaptics();
-        new ResponsiveNavbar().connectedCallback();
-        new HeaderNode().initDynamicLanguageSwitcher();
+        this.responsiveNavbar = new ResponsiveNavbar();
+        this.responsiveNavbar.connectedCallback();
+
+        // Language switcher: store DOMContentLoaded handler for cleanup
+        const langHandler = () => {
+            Localize.changeLanguageViaI18n("changeLngToTr", "tr");
+            Localize.changeLanguageViaI18n("changeLngToEn", "en");
+            if (this.languageSwitcherDomReadyHandler) {
+                document.removeEventListener("DOMContentLoaded", this.languageSwitcherDomReadyHandler);
+                this.languageSwitcherDomReadyHandler = null;
+            }
+        };
+        this.languageSwitcherDomReadyHandler = langHandler;
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", this.languageSwitcherDomReadyHandler);
+        } else {
+            langHandler();
+        }
+    }
+
+    connectedCallback(): void {
+        this.handleUtilitites();
 
         if (!cleanupModalDelegation) {
             cleanupModalDelegation = listenForBootstrapModalEventDelegation();
@@ -61,11 +120,42 @@ class Header extends HTMLElement {
             cleanupModalDelegation();
             cleanupModalDelegation = null;
         }
+        if (this.hapticsCleanup) {
+            this.hapticsCleanup();
+            this.hapticsCleanup = null;
+        }
+        this.cleanupPageSwitchHaptics();
+        if (this.languageSwitcherDomReadyHandler) {
+            document.removeEventListener("DOMContentLoaded", this.languageSwitcherDomReadyHandler);
+            this.languageSwitcherDomReadyHandler = null;
+        }
+        if (this.responsiveNavbar) {
+            this.responsiveNavbar.disconnectedCallback();
+            this.responsiveNavbar = null;
+        }
+        // Note: darkLightModeInstance is module-singleton; destroy only if we own it
+        // and header is being permanently removed. Keep listener cleanup lightweight.
+        if (darkLightModeInstance) {
+            // Do not null the singleton here to avoid re-creation churn on nav,
+            // but ensure click handler is idempotent via DarkLightMode's own cleanup
+            // on next dayNightModeSwitching. If header is destroyed permanently,
+            // uncomment the next two lines:
+            // darkLightModeInstance.destroy();
+            // darkLightModeInstance = null;
+        }
     }
 }
 
 export class HeaderNode {
-    private static readonly SITE_URL: string = "https://dervisoksuzoglu.xyz";
+    public static headerLeftIcon(): string {
+        return sharedHeaderLeftIcon();
+    }
+
+    public static headerMiddleContent(): string {
+        return sharedHeaderMiddleContent();
+    }
+
+    private static readonly defaultHtmxOptions = sharedDefaultHtmxOptions;
 
     public headerItself(): string {
         return /*html*/ `
@@ -86,25 +176,6 @@ export class HeaderNode {
         `;
     }
 
-    public static headerLeftIcon(): string {
-        return /*html*/ `
-            <a href="${HeaderNode.SITE_URL}" hreflang="x-default">
-                <img
-                    class="header-logo img-fluid img-responsive lazyload"
-                    src="../assets/images/static/webp/logo.webp"
-                    srcset="../assets/images/static/webp/logo_256x256.webp 256w, ../assets/images/static/webp/logo_512x512.webp 512w,
-                    ../assets/images/static/webp/logo.webp 1024w"
-                    sizes="(max-width: 600px) 256px, (max-width: 960px) 512px, 1024px"
-                    alt="Derviş Öksüzoğlu"
-                    title="Derviş Öksüzoğlu"
-                    height="auto"
-                    loading="lazy"
-                    decoding="async"
-                    />
-            </a>
-        `;
-    }
-
     public static headerMiddle(): string {
         return /*html*/ `
             <nav id="headerM">
@@ -113,60 +184,6 @@ export class HeaderNode {
                 </ul>
             </nav>
         `;
-    }
-
-    private static readonly defaultHtmxOptions: type.HTMXOptions = {
-        hxget: "",
-        hxtrigger: "click",
-        hxswap: "innerHTML transition:true",
-        hxpushurl: true
-    };
-
-    private static readonly navLinks: iface.NavLink[] = [
-        {
-            href: "/index.html",
-            title: Localize.translate("common:upperNavigation:home"),
-            icon: "bi bi-house-door",
-            htmxOptions: { ...HeaderNode.defaultHtmxOptions, hxget: "/index.html" },
-        },
-        {
-            href: "/idno",
-            title: Localize.translate("common:upperNavigation:lifeFeed"),
-            icon: "bi bi-bookshelf",
-            htmxOptions: { ...HeaderNode.defaultHtmxOptions, hxget: "/idno" },
-        },
-        {
-            href: "/updates.html",
-            title: Localize.translate("common:upperNavigation:updates"),
-            icon: "bi bi-journals",
-            htmxOptions: { ...HeaderNode.defaultHtmxOptions, hxget: "/updates.html" },
-        },
-        {
-            href: "/about.html",
-            title: Localize.translate("common:upperNavigation:about"),
-            icon: "bi bi-person-circle",
-            htmxOptions: { ...HeaderNode.defaultHtmxOptions, hxget: "/about.html" },
-        }
-    ];
-
-    public static headerMiddleContent(): string {
-        return HeaderNode.navLinks
-            .map(({ href, title, icon, htmxOptions }) => {
-                const options: type.HTMXOptions = { ...(htmxOptions ?? HeaderNode.defaultHtmxOptions), hxget: htmxOptions?.hxget || href };
-
-                return /*html*/`
-                    <li class="w-100">
-                        <a
-                            href="${href}"
-                            ${new HtmxControls(options).render()}
-                            title="${title}"
-                            class="htmx-nav-link btn header-btn-bg btn-lg rounded-5 fs-3">
-                            <i class="bi ${icon}"></i> ${title}
-                        </a>
-                    </li>
-                `;
-            })
-            .join("");
     }
 
     private static readonly primaryBtn: iface.NavLink = {
@@ -211,11 +228,16 @@ export class HeaderNode {
         `;
     }
 
-    public initDynamicLanguageSwitcher() {
-        document.addEventListener("DOMContentLoaded", () => {
+    public initDynamicLanguageSwitcher(): void {
+        const handler = () => {
             Localize.changeLanguageViaI18n("changeLngToTr", "tr");
             Localize.changeLanguageViaI18n("changeLngToEn", "en");
-        });
+        };
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", handler, { once: true });
+        } else {
+            handler();
+        }
     }
 }
 

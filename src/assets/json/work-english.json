@@ -1,0 +1,54 @@
+[
+  {
+    "courseName": "1:1 Live Lesson",
+    "courseLabel": "live-1-1",
+    "courseDescription": "Personalized 60-minute live session tailored to your level and goals & ideal for speaking, grammar and real conversation practice.",
+    "courseUrl": "/about.html#mailing",
+    "coursePromoImageUrl": "assets/images/static/webp/work/teach-one.webp",
+    "coursePrice": 500,
+    "courseActionType": "contact",
+    "courseButtonLabel": "Contact to Book",
+    "courseButtonIcon": "bi-send-fill",
+    "courseExtraButtons": [
+      {
+        "label": "WhatsApp",
+        "url": "https://wa.me/905000000000?text=Hi%20I%20want%20to%20book%20a%201%3A1%20Live%20Lesson",
+        "actionType": "whatsapp",
+        "icon": "bi-whatsapp"
+      }
+    ]
+  },
+  {
+    "courseName": "Group Conversation",
+    "courseLabel": "group",
+    "courseDescription": "Small group (max 4) interactive lessons focused on fluency and confidence through discussion, role-play and feedback.",
+    "courseUrl": "/about.html#mailing",
+    "coursePromoImageUrl": "assets/images/static/webp/work/teach-two.webp",
+    "coursePrice": 600,
+    "courseActionType": "enroll",
+    "courseButtonLabel": "Join Group",
+    "courseButtonIcon": "bi-people-fill"
+  },
+  {
+    "courseName": "Exam Preparation",
+    "courseLabel": "exam",
+    "courseDescription": "Intensive program for YDS / TOEFL / IELTS / Proficiency with strategies, mock exams and detailed error correction.",
+    "courseUrl": "https://www.udemy.com/",
+    "coursePromoImageUrl": "assets/images/static/webp/work/teach-three.webp",
+    "coursePrice": 1000,
+    "courseActionType": "udemy",
+    "courseButtonLabel": "Buy on Udemy",
+    "courseButtonIcon": "bi-bag-fill"
+  },
+  {
+    "courseName": "Business English Sprint",
+    "courseLabel": "business",
+    "courseDescription": "Career-focused intensive: presentations, emails, interviews and meetings & 4-week sprint with homework review.",
+    "courseUrl": "https://www.udemy.com/",
+    "coursePromoImageUrl": "assets/images/static/webp/work/teach-four.webp",
+    "coursePrice": 1450,
+    "courseActionType": "udemy",
+    "courseButtonLabel": "Buy on Udemy",
+    "courseButtonIcon": "bi-bag-fill"
+  }
+]

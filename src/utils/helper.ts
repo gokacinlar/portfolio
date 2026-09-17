@@ -25,14 +25,31 @@ export const TOAST_CONFIG = {
 
 // Detecting dark/light mode
 export class DarkLightMode {
+    private static singleton: DarkLightMode | null = null;
     private mediaQuery: MediaQueryList;
     private currentTheme: "dark" | "light" | "auto" = "auto";
     private iconElement: HTMLElement | null = null;
+    private darkLightButton: HTMLButtonElement | null = null;
     private mediaQueryListener: (() => void) | null = null; // Store listener for removal
+    private darkLightClickHandler: (() => void) | null = null;
 
     constructor() {
         this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         this.initialize();
+    }
+
+    public static getInstance(): DarkLightMode {
+        if (!DarkLightMode.singleton) {
+            DarkLightMode.singleton = new DarkLightMode();
+        }
+        return DarkLightMode.singleton;
+    }
+
+    public static destroyInstance(): void {
+        if (DarkLightMode.singleton) {
+            DarkLightMode.singleton.destroy();
+            DarkLightMode.singleton = null;
+        }
     }
 
     private initialize(): void {
@@ -116,20 +133,29 @@ export class DarkLightMode {
 
         // Set initial icon state based on current theme
         this.updateIcon();
-        if (elem) {
-            elem.addEventListener("click", () => {
-                // Toggle between light and dark (override auto mode)
-                const currentEffectiveTheme = this.getEffectiveTheme();
-                this.currentTheme = currentEffectiveTheme === "dark" ? "light" : "dark";
-
-                this.notifyUserAboutThemeChange();
-                this.saveThemeToStorage(this.currentTheme);
-                this.applyTheme();
-                this.updateIcon();
-            });
-        } else {
+        if (!elem) {
             console.error("Cannot find element:" + elem);
+            return;
         }
+
+        // Remove previous click handler to avoid duplicate listeners on re-connect
+        if (this.darkLightButton && this.darkLightClickHandler) {
+            this.darkLightButton.removeEventListener("click", this.darkLightClickHandler);
+        }
+
+        this.darkLightButton = elem;
+        this.darkLightClickHandler = () => {
+            // Toggle between light and dark (override auto mode)
+            const currentEffectiveTheme = this.getEffectiveTheme();
+            this.currentTheme = currentEffectiveTheme === "dark" ? "light" : "dark";
+
+            this.notifyUserAboutThemeChange();
+            this.saveThemeToStorage(this.currentTheme);
+            this.applyTheme();
+            this.updateIcon();
+        };
+
+        elem.addEventListener("click", this.darkLightClickHandler);
     }
 
     // Method to clean up event listeners
@@ -138,6 +164,12 @@ export class DarkLightMode {
             this.mediaQuery.removeEventListener("change", this.mediaQueryListener);
             this.mediaQueryListener = null;
         }
+        if (this.darkLightButton && this.darkLightClickHandler) {
+            this.darkLightButton.removeEventListener("click", this.darkLightClickHandler);
+            this.darkLightClickHandler = null;
+            this.darkLightButton = null;
+        }
+        this.iconElement = null;
     }
 }
 
@@ -234,20 +266,44 @@ export class HorizontalMiddleMouseScroll {
 
 // For DOM Manipulation
 export class DomEvents {
+    private pendingTimeouts: Set<ReturnType<typeof setTimeout>> = new Set();
+
     // Function to append mottos into DOM with sequential order
     public async appendContent(target: HTMLElement, content: Array<string>): Promise<void> {
-        for (const i in content) {
-            const p = document.createElement("p") as HTMLParagraphElement;
-            p.textContent = content[i];
-            p.className = "motto-element p-3 fs-6 fw-bolder rounded-5 pe-none shadow-sm mb-0"
-            // Use promise-resolve to sequentially place the array items into dom
-            await new Promise<void>((resolve) => {
-                setTimeout(() => {
-                    target.appendChild(p);
-                    resolve();
-                }, 1000);
-            });
+        if (!target && !content) {
+            console.error("Please provide DOM properties to be generated.");
+            return;
         }
+
+        try {
+            for (const i in content) {
+                const p = document.createElement("p") as HTMLParagraphElement;
+                p.textContent = content[i] as string;
+                p.className = "motto-element p-3 fs-6 fw-bolder rounded-5 pe-none shadow-sm mb-0"
+
+                await new Promise<void>((resolve) => {
+                    const id = setTimeout(() => {
+                        this.pendingTimeouts.delete(id);
+                        if (document.contains(target)) {
+                            target.appendChild(p);
+                        }
+                        resolve();
+                    }, 1000);
+                    this.pendingTimeouts.add(id);
+                });
+
+                if (this.pendingTimeouts.size === 0 && !document.contains(target)) {
+                    break;
+                }
+            }
+        } catch (error: unknown) {
+            throw new Error(`Error while generating motto elements: ${error}`)
+        }
+    }
+
+    public destroy(): void {
+        this.pendingTimeouts.forEach((id) => clearTimeout(id));
+        this.pendingTimeouts.clear();
     }
 }
 
@@ -258,6 +314,8 @@ export class TypeWriterDisplay {
     private textIndex: number = 0;
     private charIndex: number = 0;
     private isDeleting: boolean = false;
+    private timeoutId: ReturnType<typeof setTimeout> | null = null;
+    private destroyed: boolean = false;
 
     // Initialize the core elements
     constructor(heroParts: HeroParts, elementId: string) {
@@ -275,10 +333,18 @@ export class TypeWriterDisplay {
     }
 
     private type(): void {
-        const currentText = this.heroParts.occupationsData[this.textIndex];
-        const displayedText = currentText.substring(0, this.charIndex);
+        if (this.destroyed) return;
 
+        const currentText = this.heroParts.occupationsData[this.textIndex];
+
+        if (!currentText) {
+            console.error("Please provide text for typing effect.");
+            return;
+        }
+
+        const displayedText = currentText.substring(0, this.charIndex);
         const textSpan = this.targetElement.querySelector(".ocps-written-text");
+
         if (textSpan) {
             textSpan.textContent = displayedText;
         }
@@ -304,9 +370,17 @@ export class TypeWriterDisplay {
             }
         }
 
-        setTimeout(() => {
+        this.timeoutId = setTimeout(() => {
             this.type();
         }, typingDelay);
+    }
+
+    public destroy(): void {
+        this.destroyed = true;
+        if (this.timeoutId !== null) {
+            clearTimeout(this.timeoutId);
+            this.timeoutId = null;
+        }
     }
 }
 
@@ -347,15 +421,16 @@ export class PromoFunctions {
         }
     }
 
-    public bindVerticalTabEventsAndautoCycleTabs(data: Object): void {
+    public bindVerticalTabEventsAndautoCycleTabs(data: Object): () => void {
         const buttons = Array.from(document.querySelectorAll(".promo-desc-tab-group-btn")) as HTMLButtonElement[];
         if (!buttons.length) {
-            return;
+            return () => { };
         }
 
         let index: number = 0;
         const duration: number = 5000;
         let activeInterval: ReturnType<typeof setInterval> | null = null;
+        const clickHandlers: Array<{ btn: HTMLButtonElement; handler: () => void }> = [];
 
         // Mobile & viewport detection
         const isMobile = () => window.innerWidth <= 768;
@@ -419,7 +494,7 @@ export class PromoFunctions {
 
                     // Go to next tab
                     index = (index + 1) % buttons.length;
-                    const nextButton = buttons[index];
+                    const nextButton = buttons[index] as HTMLButtonElement;
                     const type = nextButton.getAttribute("data-type");
 
                     if (type) {
@@ -433,7 +508,7 @@ export class PromoFunctions {
 
         // Bind click events to buttons
         buttons.forEach((btn, i) => {
-            btn.addEventListener("click", () => {
+            const handler = () => {
                 index = i;
                 const type = btn.getAttribute("data-type");
                 if (type) {
@@ -441,18 +516,33 @@ export class PromoFunctions {
                     startProgressForButton(btn);
                     scrollToActiveTab(btn);
                 }
-            });
+            };
+            btn.addEventListener("click", handler);
+            clickHandlers.push({ btn, handler });
         });
 
         // Auto-start from the first tab
         if (buttons.length > 0) {
-            const initialType = buttons[index].getAttribute("data-type");
+            const firstButton = buttons[index];
+            if (!firstButton) return () => { };
+            const initialType = firstButton.getAttribute("data-type");
             if (initialType) {
                 this.createVerticalTabContent(initialType, data);
-                scrollToActiveTab(buttons[index]);
-                startProgressForButton(buttons[index]);
+                scrollToActiveTab(firstButton);
+                startProgressForButton(firstButton);
             }
         }
+
+        return () => {
+            if (activeInterval) {
+                clearInterval(activeInterval);
+                activeInterval = null;
+            }
+            clickHandlers.forEach(({ btn, handler }) => {
+                btn.removeEventListener("click", handler);
+            });
+            clearAllProgressBars();
+        };
     }
 }
 
@@ -596,7 +686,7 @@ export function colorfulBannerName(array: Array<string>, targetElement: string):
             eachLetter.textContent = key;
             // Randomize colors
             const randomIndex = Math.floor(Math.random() * colors.length);
-            eachLetter.style.color = colors[randomIndex];
+            eachLetter.style.color = colors[randomIndex] as string;
 
             targetElem.appendChild(eachLetter);
         } else {
@@ -606,21 +696,28 @@ export function colorfulBannerName(array: Array<string>, targetElement: string):
     });
 }
 
-export function applyHapticsToModals() {
+export function applyHapticsToModals(): () => void {
     const modalElements = [
         ...document.querySelectorAll("component-custom-button[data-modal]"),
         ...document.querySelectorAll("button[data-modal]")
     ] as HTMLElement[];
 
     const haptics = CustomWebHaptics.getInstance();
+    const cleanups: Array<() => void> = [];
 
     modalElements.forEach(element => {
-        element.addEventListener("click", (e: MouseEvent) => {
+        const handler = (e: MouseEvent) => {
             if (e.target) {
                 haptics.triggerHaptic("success");
             }
-        });
+        };
+        element.addEventListener("click", handler);
+        cleanups.push(() => element.removeEventListener("click", handler));
     });
+
+    return () => {
+        cleanups.forEach((fn) => fn());
+    };
 }
 
 export function normalizeDateToDayMonthYear(input: string) {

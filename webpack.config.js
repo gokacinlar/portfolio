@@ -251,8 +251,23 @@ module.exports = {
                     noErrorOnMissing: true,
                 },
                 {
+                    from: path.resolve(__dirname, "node_modules/three/examples/jsm/libs/draco"),
+                    to: "assets/draco",
+                    noErrorOnMissing: true,
+                },
+                {
                     from: path.resolve(__dirname, "src/assets/files"),
                     to: "assets/files",
+                    noErrorOnMissing: true,
+                },
+                {
+                    from: path.resolve(__dirname, "src/assets/json"),
+                    to: "assets/json",
+                    noErrorOnMissing: true,
+                },
+                {
+                    from: path.resolve(__dirname, "src/assets/json"),
+                    to: "json",
                     noErrorOnMissing: true,
                 },
                 {

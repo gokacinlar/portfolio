@@ -5,6 +5,9 @@ import Localize from "../utils/initLocalization";
 
 class HeroSection extends HTMLElement {
     private bodyParts: BodyParts;
+    private domEvents: DomEvents | null = null;
+    private typeWriter: TypeWriterDisplay | null = null;
+
     constructor() {
         super();
         this.bodyParts = new BodyParts();
@@ -12,21 +15,36 @@ class HeroSection extends HTMLElement {
     }
 
     private handleDomEvents(): void {
-        const domEvents = new DomEvents();
+        this.domEvents = new DomEvents();
         const mottosElement = this.querySelector("#mottosSection") as HTMLDivElement;
         const mottos = this.bodyParts.mottos;
         if (mottosElement) {
-            domEvents.appendContent(mottosElement, mottos);
+            this.domEvents.appendContent(mottosElement, mottos);
         }
     }
 
     private handleTypeWriterEffect(): void {
-        new TypeWriterDisplay(new HeroParts(), "ocps");
+        // Ensure previous instance is destroyed before creating a new one
+        if (this.typeWriter) {
+            this.typeWriter.destroy();
+        }
+        this.typeWriter = new TypeWriterDisplay(new HeroParts(), "ocps");
     }
 
     connectedCallback(): void {
         this.handleDomEvents();
         this.handleTypeWriterEffect();
+    }
+
+    disconnectedCallback(): void {
+        if (this.typeWriter) {
+            this.typeWriter.destroy();
+            this.typeWriter = null;
+        }
+        if (this.domEvents) {
+            this.domEvents.destroy();
+            this.domEvents = null;
+        }
     }
 }
 

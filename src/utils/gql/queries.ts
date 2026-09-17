@@ -7,7 +7,6 @@ class GraphQLQueries {
                 id
                 databaseId
                 title
-                date
                 slug
             }
         }

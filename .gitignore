@@ -148,3 +148,4 @@ dist
 
 # Prettier config
 .prettierrc.js
+.fallow/

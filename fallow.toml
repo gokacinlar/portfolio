@@ -1,0 +1,25 @@
+entry = ["src/*.{ts,tsx,js,jsx}"]
+ignoreDependencies = ["autoprefixer", "@types/node"]
+ignoreExportsUsedInFile = true
+production = true
+
+[duplicates]
+minLines = 5
+minOccurrences = 3
+minTokens = 50
+mode = "mild"
+threshold = 10
+
+[rules]
+unused-dependencies = "warn"
+
+[health]
+ignore = ["node_modules/**/*"]
+maxCognitive = 15
+maxCyclomatic = 20
+
+[audit]
+cacheMaxAgeDays = 14
+css = true
+cssDeep = true
+gate = "all"

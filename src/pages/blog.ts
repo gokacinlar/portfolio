@@ -141,6 +141,7 @@ class Updates extends HTMLElement {
 
     private async loadAndDisplayPost(postId: string, button: HTMLButtonElement, updateUrl: boolean = true) {
         const contentArea = this.querySelector("#blogMain") as HTMLDivElement | null;
+
         if (!contentArea) {
             console.error("Content area not found");
             return;
@@ -151,6 +152,7 @@ class Updates extends HTMLElement {
         button.innerHTML = `<span class="spinner-border spinner-border text-info" role="status" aria-hidden="true"></span>`;
 
         this.appendSpinner(contentArea);
+
         try {
             const post = await WordPressGraphQLClient.fetchSinglePost(postId);
 

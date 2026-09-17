@@ -1,9 +1,11 @@
 class CustomButton extends HTMLElement {
     private _buttonElement: HTMLButtonElement | null = null;
     private _isSetUp: boolean = false;
+    private boundHandleClick: ((e: MouseEvent) => void) | null = null;
 
     constructor() {
         super();
+        this.boundHandleClick = this.handleClick.bind(this);
     }
 
     private render(): void {
@@ -19,7 +21,9 @@ class CustomButton extends HTMLElement {
         if (!buttonElement) {
             buttonElement = document.createElement("button") as HTMLButtonElement;
             this._buttonElement = buttonElement;
-            buttonElement.addEventListener("click", this.handleClick.bind(this));
+            if (this.boundHandleClick) {
+                buttonElement.addEventListener("click", this.boundHandleClick);
+            }
         }
 
         while (this.firstChild) {
@@ -75,12 +79,11 @@ class CustomButton extends HTMLElement {
         }
     }
 
-    async disconnectedCallback(): Promise<void> {
-        await Promise.resolve();
-        if (!this.isConnected && this._isSetUp) {
-            this.remove();
-            this._isSetUp = false
+    disconnectedCallback(): void {
+        if (this._buttonElement && this.boundHandleClick) {
+            this._buttonElement.removeEventListener("click", this.boundHandleClick);
         }
+        this._isSetUp = false;
     }
 }
 

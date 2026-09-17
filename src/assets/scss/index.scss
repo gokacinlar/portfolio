@@ -219,9 +219,9 @@ $monospace-font-family: "Cascadia Code",
         overflow: hidden;
 
         &::after {
-            content: "Learn, Learn, Learn";
+            content: "Learn, Work, Grow";
             position: absolute;
-            font-size: calc(7rem + 3.3vw);
+            font-size: calc(5rem + 3.3vw);
             font-weight: bolder;
             text-align: center;
             display: flex;
@@ -840,5 +840,343 @@ $monospace-font-family: "Cascadia Code",
 
     .banner-letter {
         text-shadow: 4px 6px 2px rgba(37, 99, 235, 0.5);
+    }
+
+    // Work page - hide bottom scrollbar while keeping scroll + responsive cards
+
+    .work-no-scrollbar {
+        @include mixin.hide-scrollbar();
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+
+        &::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+    }
+
+    // Ensure no horizontal bottom bar leaks from Bootstrap row gutters
+    #optionsContent,
+    #englishOptions,
+    #programmingOptions,
+    #buyOptions,
+    component-options {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        overflow-x: hidden !important;
+
+        &::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+    }
+
+    #optionsContent {
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+        @include mixin.hide-scrollbar();
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, padding, .5rem);
+    }
+
+    #englishOptions,
+    #programmingOptions {
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        @include mixin.hide-scrollbar();
+
+        .row {
+            align-items: stretch;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            width: 100%;
+        }
+    }
+
+    .work-card {
+        transition: all .25s ease-in-out, box-shadow .25s ease-in-out;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 .5rem 1.25rem rgba(0, 0, 0, .12) !important;
+        }
+
+        .card-body {
+            .card-text {
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                line-clamp: 4;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+
+                @include mquery.responsive(phone) {
+                    -webkit-line-clamp: unset;
+                    line-clamp: unset;
+                }
+            }
+        }
+    }
+
+    .work-card-btn {
+        transition: filter .2s ease, transform .2s ease;
+
+        &:hover {
+            filter: brightness(1.05);
+        }
+
+        &:active {
+            transform: scale(.98);
+        }
+
+        &--udemy {
+            background: #a435f0 !important;
+            border-color: #a435f0 !important;
+            color: #fff !important;
+
+            &:hover {
+                background: #8710d8 !important;
+                border-color: #8710d8 !important;
+                color: #fff !important;
+            }
+        }
+
+        &--github:hover {
+            filter: brightness(1.15);
+        }
+
+        &--whatsapp {
+            background: #25d366 !important;
+            border-color: #25d366 !important;
+            color: #fff !important;
+
+            &:hover {
+                background: #1da851 !important;
+                border-color: #1da851 !important;
+                color: #fff !important;
+            }
+        }
+
+        &--whatsapp-outline {
+            color: #25d366 !important;
+            border-color: #25d366 !important;
+            background: transparent !important;
+
+            &:hover {
+                background: #25d366 !important;
+                color: #fff !important;
+            }
+        }
+    }
+
+    .work-card-actions {
+
+        // Two-button stack stays full-width, equal-height friendly
+        .btn {
+            min-height: 48px;
+        }
+
+        @include mquery.responsive(phone) {
+            gap: .5rem !important;
+        }
+    }
+
+    #featuredPlans {
+        .row {
+            align-items: stretch;
+        }
+    }
+
+    .featured-plan {
+        transition: transform .2s ease, box-shadow .2s ease;
+        border-width: 2px !important;
+
+        &:hover {
+            transform: translateY(-4px);
+        }
+
+        &--highlighted {
+            transform: scale(1.02);
+
+            &:hover {
+                transform: scale(1.02) translateY(-4px);
+            }
+
+            @include mquery.responsive(phone) {
+                transform: none;
+
+                &:hover {
+                    transform: translateY(-4px);
+                }
+            }
+        }
+
+        &--pro {
+            // subtle glow for most popular
+            box-shadow: 0 1rem 2rem rgba(252, 217, 58, .25) !important;
+        }
+
+        .card-header {
+            border-bottom: 1px solid var(--bs-border-color-translucent);
+        }
+
+        .card-body ul li {
+            font-size: .95rem;
+            line-height: 1.4;
+        }
+
+        // Ensure 3 cards stay responsive: already row-cols-1 row-cols-md-3 via HTML,
+        // but tighten heights on large screens
+        @include mquery.responsive(desktop-small) {
+            min-height: 460px;
+        }
+    }
+
+    .work-card-img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-top-left-radius: var(--rounded-l) !important;
+        border-top-right-radius: var(--rounded-l) !important;
+        flex-shrink: 0;
+
+        &--placeholder {
+            height: 180px;
+            min-height: 180px;
+        }
+
+        @include mquery.responsive(phone) {
+            height: 160px;
+
+            &--placeholder {
+                height: 160px;
+                min-height: 160px;
+            }
+        }
+
+        @include mquery.responsive(tablet) {
+            height: 170px;
+
+            &--placeholder {
+                height: 170px;
+                min-height: 170px;
+            }
+        }
+
+        @include mquery.responsive(desktop-small) {
+            height: 175px;
+
+            &--placeholder {
+                height: 175px;
+                min-height: 175px;
+            }
+        }
+    }
+
+    #buyOptions {
+        @include mquery.responsive(phone) {
+            margin-left: .5rem !important;
+            margin-right: .5rem !important;
+        }
+    }
+
+    #stillUnsure {
+        @include mquery.responsive(phone) {
+            padding-left: .5rem !important;
+            padding-right: .5rem !important;
+        }
+    }
+
+    .still-unsure-card,
+    .featured-title-card,
+    .individual-plan-title {
+        background: var(--clr-eight);
+        border: 1px solid var(--bs-border-color-translucent);
+    }
+
+    .still-unsure-card {
+        min-height: 360px;
+        @include mixin.animation(fade-in-fwd, .45s, cubic-bezier(.25, .46, .45, .94), both);
+
+        @include mquery.responsive(phone) {
+            min-height: 300px;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+    }
+
+    .featured-title-card {
+        @include mixin.animation(fade-in-fwd, .45s, cubic-bezier(.25, .46, .45, .94), both);
+    }
+
+    .still-unsure-icon-wrap {
+        width: 72px;
+        height: 72px;
+        background: #25d366;
+        color: #fff;
+        @include mixin.animation(still-float, 3s, ease-in-out, infinite);
+        @include mixin.borderRadius(50%);
+
+        @include mquery.responsive(phone) {
+            width: 64px;
+            height: 64px;
+        }
+    }
+
+    .still-unsure-icon {
+        font-size: 2rem !important;
+        line-height: 1;
+    }
+
+    .still-unsure-subtitle {
+        @include mixin.responsive-font-size(breakpoint.$mobile-breakpoints, 1.05rem);
+    }
+
+    .still-unsure-desc {
+        @include mixin.responsive-font-size(breakpoint.$mobile-breakpoints, 1rem);
+    }
+
+    .still-unsure-cta {
+        background: #25d366 !important;
+        border-color: #25d366 !important;
+        color: #fff !important;
+        min-width: 240px;
+        @include mixin.transition(transform .2s ease, background-color .2s ease, border-color .2s ease);
+
+        &:hover {
+            background: #1da851 !important;
+            border-color: #1da851 !important;
+            color: #fff !important;
+            transform: translateY(-2px);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+
+        @include mquery.responsive(phone) {
+            width: 100% !important;
+            min-width: 0 !important;
+        }
+    }
+
+    .still-unsure-note {
+        font-size: .85rem;
+
+        @include mquery.responsive(phone) {
+            font-size: .8rem;
+        }
+    }
+
+    @keyframes still-float {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-6px);
+        }
     }
 }

@@ -1,0 +1,80 @@
+[
+  {
+    "tier": "free",
+    "tierLabel": "Starter",
+    "subtitle": "Perfect for beginners",
+    "price": 600,
+    "pricePeriod": "/saatlik",
+    "badge": "",
+    "highlighted": false,
+    "accent": "border-secondary-subtle",
+    "features": [
+      "Small group (max 4) conversation",
+      "Weekly practice & feedback",
+      "Basic materials included",
+      "Email support"
+    ],
+    "excludedFeatures": [
+      "1:1 live mentoring",
+      "Personal roadmap"
+    ],
+    "button": {
+      "label": "Join Group",
+      "url": "/about.html#mailing",
+      "actionType": "enroll",
+      "icon": "bi-people-fill"
+    }
+  },
+  {
+    "tier": "pro",
+    "tierLabel": "Pro",
+    "subtitle": "Most popular & personalized",
+    "price": 850,
+    "pricePeriod": "/saatlik",
+    "badge": "Most Popular",
+    "highlighted": true,
+    "accent": "border-warning",
+    "features": [
+      "1:1 Live 60-min lessons",
+      "Personalized level & roadmap",
+      "Speaking + grammar focus",
+      "Homework & detailed correction",
+      "Flexible rescheduling"
+    ],
+    "button": {
+      "label": "Contact to Book",
+      "url": "/about.html#mailing",
+      "actionType": "contact",
+      "icon": "bi-send-fill"
+    },
+    "secondaryButton": {
+      "label": "WhatsApp",
+      "url": "https://wa.me/905000000000?text=Hi%20I%20want%20to%20book%20Pro%20plan",
+      "actionType": "whatsapp",
+      "icon": "bi-whatsapp"
+    }
+  },
+  {
+    "tier": "max",
+    "tierLabel": "Max",
+    "subtitle": "For serious learners",
+    "price": 1450,
+    "pricePeriod": "/saatlik",
+    "badge": "",
+    "highlighted": false,
+    "accent": "border-dark",
+    "features": [
+      "Everything in Pro",
+      "Business English Sprint (4-week)",
+      "Presentations, emails & interviews",
+      "Mock exams (YDS/TOEFL/IELTS)",
+      "Priority support & certificate"
+    ],
+    "button": {
+      "label": "Buy on Udemy",
+      "url": "https://www.udemy.com/",
+      "actionType": "udemy",
+      "icon": "bi-bag-fill"
+    }
+  }
+]

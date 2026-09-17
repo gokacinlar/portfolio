@@ -1,0 +1,46 @@
+[
+  {
+    "courseName": "Frontend Sprint",
+    "courseLabel": "frontend",
+    "courseDescription": "Hands-on React / TypeScript mentorship: build real projects with code reviews and best practices.",
+    "courseUrl": "/about.html#mailing",
+    "coursePromoImageUrl": "",
+    "coursePrice": 500,
+    "courseActionType": "github",
+    "courseButtonLabel": "View on GitHub",
+    "courseButtonIcon": "bi-github"
+  },
+  {
+    "courseName": "Backend Boost",
+    "courseLabel": "backend",
+    "courseDescription": "Node.js / PHP / API design sessions with architecture guidance and performance tuning.",
+    "courseUrl": "https://www.udemy.com/",
+    "coursePromoImageUrl": "",
+    "coursePrice": 650,
+    "courseActionType": "udemy",
+    "courseButtonLabel": "Buy on Udemy",
+    "courseButtonIcon": "bi-bag-fill"
+  },
+  {
+    "courseName": "Full-Stack Project",
+    "courseLabel": "fullstack",
+    "courseDescription": "End-to-end project mentoring from idea to deployment including DevOps basics.",
+    "courseUrl": "/about.html#mailing",
+    "coursePromoImageUrl": "",
+    "coursePrice": 1200,
+    "courseActionType": "enroll",
+    "courseButtonLabel": "Start Project",
+    "courseButtonIcon": "bi-rocket-takeoff-fill"
+  },
+  {
+    "courseName": "Code Review Pack",
+    "courseLabel": "review",
+    "courseDescription": "Async code reviews with detailed feedback, refactoring suggestions and video walkthroughs.",
+    "courseUrl": "/about.html#mailing",
+    "coursePromoImageUrl": "",
+    "coursePrice": 1200,
+    "courseActionType": "contact",
+    "courseButtonLabel": "Request Review",
+    "courseButtonIcon": "bi-code-slash"
+  }
+]

@@ -7,6 +7,11 @@ import * as Type from "../ts/types/types";
 import Localize from "../utils/initLocalization";
 
 class ScrollSpy {
+    private bgCleanup: (() => void) | null = null;
+    private domReadyBgHandler: (() => void) | null = null;
+    private formSubmitHandlers: Array<{ form: HTMLFormElement; handler: (event: Event) => void }> = [];
+    private web3FormsTimeoutId: ReturnType<typeof setTimeout> | null = null;
+
     private renderHeading(id: string, text: string): string {
         return /*html*/ `
             <h4 id="${id}">
@@ -126,31 +131,66 @@ class ScrollSpy {
         `;
     }
 
-    private static initWeb3Forms() {
-        setTimeout(() => {
+    private initWeb3Forms(): void {
+        this.web3FormsTimeoutId = setTimeout(() => {
             loadWeb3Forms().then(() => {
                 formState();
             });
         }, 0);
 
-        // Email validation
+        // Email validation - track handlers for cleanup
         document.querySelectorAll<HTMLFormElement>(".needs-validation").forEach((form) => {
-            form.addEventListener("submit", (event) => {
+            const handler = (event: Event) => {
                 if (!form.checkValidity()) {
                     event.preventDefault();
                     event.stopPropagation();
                 }
                 form.classList.add("was-validated");
-            });
+            };
+            form.addEventListener("submit", handler);
+            this.formSubmitHandlers.push({ form, handler });
         });
     }
 
     connectedCallback(): void {
-        ScrollSpy.initWeb3Forms();
+        this.initWeb3Forms();
 
-        document.addEventListener("DOMContentLoaded", () => {
-            addBackgroundBasedOnVerticalScroll("about-main", "about-scroll-spy-id", "glow-white-drop-shadow");
+        const attachBg = () => {
+            this.bgCleanup = addBackgroundBasedOnVerticalScroll("about-main", "about-scroll-spy-id", "glow-white-drop-shadow");
+        };
+
+        this.domReadyBgHandler = () => {
+            attachBg();
+            if (this.domReadyBgHandler) {
+                document.removeEventListener("DOMContentLoaded", this.domReadyBgHandler);
+                this.domReadyBgHandler = null;
+            }
+        };
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", this.domReadyBgHandler);
+        } else {
+            attachBg();
+        }
+    }
+
+    disconnectedCallback(): void {
+        if (this.web3FormsTimeoutId !== null) {
+            clearTimeout(this.web3FormsTimeoutId);
+            this.web3FormsTimeoutId = null;
+        }
+        this.formSubmitHandlers.forEach(({ form, handler }) => {
+            form.removeEventListener("submit", handler);
         });
+        this.formSubmitHandlers = [];
+        if (this.bgCleanup) {
+            this.bgCleanup();
+            this.bgCleanup = null;
+        }
+        if (this.domReadyBgHandler) {
+            document.removeEventListener("DOMContentLoaded", this.domReadyBgHandler);
+            this.domReadyBgHandler = null;
+        }
     }
 }
 

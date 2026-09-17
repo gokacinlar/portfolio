@@ -34,7 +34,7 @@ type PromoSocials = {
 type HTMXOptions = {
     hxget: string;
     hxtrigger: "click" | "change" | "mouseover";
-    hxswap: "innerHTML" | "outerHTML" | "beforebegin" | "afterbegin" | "beforeend" | "afterend";
+    hxswap: "innerHTML transition:true" | "outerHTML" | "beforebegin" | "afterbegin" | "beforeend" | "afterend";
     hxpushurl: boolean;
 }
 

@@ -9,6 +9,7 @@ import ThreeJs from "../services/threeJs";
 
 class Promo extends HTMLElement {
     private hmmsCleanupFunctions: (() => void)[] = [];
+    private promoTabCleanup: (() => void) | null = null;
 
     constructor() {
         super();
@@ -26,8 +27,8 @@ class Promo extends HTMLElement {
         const promoFunctions = new PromoFunctions();
         promoFunctions.createPromoContent("#promoCardContainer", posts, (post) => new PromoCard().renderPromoCard(post));
         promoFunctions.createPromoContent("#promoSkillsContainer", skills, (skill) => new PromoSkillsShowCase().renderPromoSkillsShowCase(skill));
-        // Create vertical tab grouping showcase
-        promoFunctions.bindVerticalTabEventsAndautoCycleTabs(new PromoParts().promoTabData);
+        // Create vertical tab grouping showcase - store cleanup for interval + click listeners
+        this.promoTabCleanup = promoFunctions.bindVerticalTabEventsAndautoCycleTabs(new PromoParts().promoTabData);
 
         // Store cleanup functions for HorizontalMiddleMouseScroll
         this.hmmsCleanupFunctions.push(new HorizontalMiddleMouseScroll().hmmsScroll(".promo-featured-tabs"));
@@ -53,6 +54,11 @@ class Promo extends HTMLElement {
         // Call all stored cleanup functions when the component is disconnected
         this.hmmsCleanupFunctions.forEach(cleanup => cleanup());
         this.hmmsCleanupFunctions = []; // Clear the array
+
+        if (this.promoTabCleanup) {
+            this.promoTabCleanup();
+            this.promoTabCleanup = null;
+        }
     }
 }
 

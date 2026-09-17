@@ -262,7 +262,148 @@
         "seePlans": "Planları Gör",
         "forEnglish": "İngilizce Öğrenmek İçin",
         "forProgramming": "Web Geliştirme İçin",
-        "comingSoon": "Yakında..."
+        "comingSoon": "Yakında...",
+        "featured": {
+            "title": "En Popüler Planlar",
+            "subtitle": "Hedefine uygun planı seç & istediğin zaman yükselt.",
+            "plans": {
+                "free": {
+                    "label": "Başlangıç",
+                    "subtitle": "Yeni başlayanlar için ideal",
+                    "pricePeriod": "/saat",
+                    "badge": "",
+                    "features": [
+                        "Küçük grup (en fazla 4 kişi) sohbeti",
+                        "Haftalık pratik & geri bildirim",
+                        "Temel materyaller dahil",
+                        "E-posta desteği"
+                    ],
+                    "excludedFeatures": [
+                        "1:1 canlı mentorluk",
+                        "Kişisel yol haritası"
+                    ],
+                    "buttonLabel": "Gruba Katıl",
+                    "buttonIcon": "bi-people-fill"
+                },
+                "starter": {
+                    "label": "Başlangıç",
+                    "subtitle": "Yeni başlayanlar için ideal",
+                    "pricePeriod": "/saat",
+                    "badge": "",
+                    "features": [
+                        "Küçük grup (en fazla 4 kişi) sohbeti",
+                        "Haftalık pratik & geri bildirim",
+                        "Temel materyaller dahil",
+                        "E-posta desteği"
+                    ],
+                    "excludedFeatures": [
+                        "1:1 canlı mentorluk",
+                        "Kişisel yol haritası"
+                    ],
+                    "buttonLabel": "Gruba Katıl",
+                    "buttonIcon": "bi-people-fill"
+                },
+                "pro": {
+                    "label": "Pro",
+                    "subtitle": "En popüler & kişiselleştirilmiş",
+                    "pricePeriod": "/saat",
+                    "badge": "En Popüler",
+                    "features": [
+                        "1:1 Canlı 60 dakikalık dersler",
+                        "Kişiselleştirilmiş seviye & yol haritası",
+                        "Konuşma + dilbilgisi odaklı",
+                        "Ödev & detaylı düzeltme",
+                        "Esnek yeniden planlama"
+                    ],
+                    "buttonLabel": "Rezervasyon İçin İletişim",
+                    "buttonIcon": "bi-send-fill",
+                    "secondaryButtonLabel": "WhatsApp",
+                    "secondaryButtonIcon": "bi-whatsapp"
+                },
+                "max": {
+                    "label": "Max",
+                    "subtitle": "Ciddi öğrenenler için",
+                    "pricePeriod": "/saat",
+                    "badge": "",
+                    "features": [
+                        "Pro'daki her şey",
+                        "İş İngilizcesi Sprint (4 hafta)",
+                        "Sunumlar, e-postalar & mülakatlar",
+                        "Deneme sınavları (YDS/TOEFL/IELTS)",
+                        "Öncelikli destek & sertifika"
+                    ],
+                    "buttonLabel": "Udemy'de Satın Al",
+                    "buttonIcon": "bi-bag-fill"
+                }
+            }
+        },
+        "cards": {
+            "english": {
+                "live-1-1": {
+                    "name": "1:1 Canlı Ders",
+                    "description": "Seviyenize ve hedeflerinize özel 60 dakikalık canlı ders ve konuşma, dilbilgisi ve gerçek sohbet pratiği için ideal.",
+                    "buttonLabel": "Rezervasyon İçin İletişim",
+                    "buttonIcon": "bi-send-fill",
+                    "whatsappLabel": "WhatsApp"
+                },
+                "group": {
+                    "name": "Grup Sohbeti",
+                    "description": "Küçük gruplar (en fazla 4 kişi) ile akıcılık ve özgüven odaklı interaktif dersler ve tartışma, rol yapma ve geri bildirim.",
+                    "buttonLabel": "Gruba Katıl",
+                    "buttonIcon": "bi-people-fill"
+                },
+                "exam": {
+                    "name": "Sınav Hazırlığı",
+                    "description": "YDS / TOEFL / IELTS / Proficiency için yoğun program ve stratejiler, deneme sınavları ve detaylı hata düzeltme.",
+                    "buttonLabel": "Udemy'de Satın Al",
+                    "buttonIcon": "bi-bag-fill"
+                },
+                "business": {
+                    "name": "İş İngilizcesi Sprint",
+                    "description": "Kariyer odaklı yoğun program: sunumlar, e-postalar, mülakatlar ve toplantılar, ödev incelemeli 4 haftalık sprint.",
+                    "buttonLabel": "Udemy'de Satın Al",
+                    "buttonIcon": "bi-bag-fill"
+                }
+            },
+            "programming": {
+                "frontend": {
+                    "name": "Frontend Sprint",
+                    "description": "React / TypeScript ile birebir mentorluk ve gerçek projeler, kod incelemeleri ve en iyi pratikler.",
+                    "buttonLabel": "GitHub'da Gör",
+                    "buttonIcon": "bi-github"
+                },
+                "backend": {
+                    "name": "Backend Boost",
+                    "description": "Node.js / PHP / API tasarım oturumları ve mimari rehberlik ve performans optimizasyonu.",
+                    "buttonLabel": "Udemy'de Satın Al",
+                    "buttonIcon": "bi-bag-fill"
+                },
+                "fullstack": {
+                    "name": "Full-Stack Proje",
+                    "description": "Fikirden yayına uçtan uca proje mentorluğu ve DevOps temelleri dahil.",
+                    "buttonLabel": "Projeye Başla",
+                    "buttonIcon": "bi-rocket-takeoff-fill"
+                },
+                "review": {
+                    "name": "Kod İnceleme Paketi",
+                    "description": "Detaylı geri bildirim, yeniden düzenleme önerileri ve video anlatımlı asenkron kod incelemeleri.",
+                    "buttonLabel": "İnceleme İste",
+                    "buttonIcon": "bi-code-slash"
+                }
+            }
+        },
+        "stillUnsure": {
+            "title": "Hala kararsız mısın?",
+            "subtitle": "Doğru planı birlikte bulalım",
+            "description": "Hangi planın sana uygun olduğundan emin değil misin? WhatsApp'tan hızlıca yaz,  dakikalar içinde yardımcı olayım, baskı yok.",
+            "cta": "WhatsApp'tan Yaz",
+            "ctaTitle": "WhatsApp'tan yaz",
+            "note": "Genellikle gün içerisinde dönüş • Spam yok • Taahhüt yok"
+        },
+        "individualPlan": {
+            "title": "Bireysel bir plana mı ihtiyacın var?",
+            "subtitle": "İngilizce ve Yazılım için bireysel seçeneklere göz at"
+        }
     },
     "promo": {
         "seePlans": "Planları Gör",

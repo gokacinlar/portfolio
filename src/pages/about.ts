@@ -7,17 +7,18 @@ import Localize from "../utils/initLocalization";
 import type * as iFace from "../ts/interfaces/i.global";
 
 class About extends HTMLElement {
+    private hmmsCleanup: (() => void) | null = null;
+    private captchaDomReadyHandler: (() => void) | null = null;
+    private validateCaptchaDomReadyHandler: (() => void) | null = null;
+
     constructor() {
         super();
         this.render();
-        this.initializeShuffleEffects();
-        this.initCaptcha();
-        new HorizontalMiddleMouseScroll().hmmsScroll(".scrollspy-nav");
     }
 
     private initCaptcha() {
         // Load reCAPTCHA script after DOMContentLoaded and render when loaded
-        document.addEventListener("DOMContentLoaded", () => {
+        this.captchaDomReadyHandler = () => {
             const scriptUrl: string = "https://www.google.com/recaptcha/api.js";
             const scriptOptions = {
                 scriptItself: scriptUrl,
@@ -34,7 +35,20 @@ class About extends HTMLElement {
                 console.error("Error while inserting script:", error);
                 return;
             }
-        });
+
+            // Remove self after execution to avoid duplicate inserts on re-connect
+            if (this.captchaDomReadyHandler) {
+                document.removeEventListener("DOMContentLoaded", this.captchaDomReadyHandler);
+                this.captchaDomReadyHandler = null;
+            }
+        };
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", this.captchaDomReadyHandler);
+        } else {
+            // DOM already ready
+            this.captchaDomReadyHandler();
+        }
     }
 
     private readonly heroConfig: iFace.HeroConfig = {
@@ -185,9 +199,41 @@ class About extends HTMLElement {
     }
 
     connectedCallback(): void {
-        document.addEventListener("DOMContentLoaded", () => {
+        // Initialize effects that require DOM presence
+        this.initializeShuffleEffects();
+        this.initCaptcha();
+
+        // Horizontal scroll with proper cleanup
+        this.hmmsCleanup = new HorizontalMiddleMouseScroll().hmmsScroll(".scrollspy-nav");
+
+        this.validateCaptchaDomReadyHandler = () => {
             new ValidateCaptcha().validate("submitCaptcha");
-        });
+            if (this.validateCaptchaDomReadyHandler) {
+                document.removeEventListener("DOMContentLoaded", this.validateCaptchaDomReadyHandler);
+                this.validateCaptchaDomReadyHandler = null;
+            }
+        };
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", this.validateCaptchaDomReadyHandler);
+        } else {
+            this.validateCaptchaDomReadyHandler();
+        }
+    }
+
+    disconnectedCallback(): void {
+        if (this.hmmsCleanup) {
+            this.hmmsCleanup();
+            this.hmmsCleanup = null;
+        }
+        if (this.captchaDomReadyHandler) {
+            document.removeEventListener("DOMContentLoaded", this.captchaDomReadyHandler);
+            this.captchaDomReadyHandler = null;
+        }
+        if (this.validateCaptchaDomReadyHandler) {
+            document.removeEventListener("DOMContentLoaded", this.validateCaptchaDomReadyHandler);
+            this.validateCaptchaDomReadyHandler = null;
+        }
     }
 }
 

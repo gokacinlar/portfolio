@@ -7,10 +7,10 @@ const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
+const MinimizerPlugin = require("minimizer-webpack-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -18,6 +18,7 @@ const Dotenv = require("dotenv-webpack");
 const CompressionPlugin = require("compression-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const PhpWebpackPlugin = require("@visto9259/php-webpack-plugin");
+const DashboardPlugin = require("webpack-dashboard/plugin");
 
 // CSP configuration for trusted external scripts
 const scripts = [
@@ -151,6 +152,7 @@ module.exports = {
                 generator: {
                     filename: "assets/images/[name].[contenthash:8][ext]",
                 },
+                type: "javascript/auto"
             },
             {
                 test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/i,
@@ -200,18 +202,33 @@ module.exports = {
         },
         minimize: true,
         minimizer: [
-            new TerserWebpackPlugin({
-                terserOptions: {
-                    compress: {
-                        drop_console: true, // Remove console.log in production
-                    },
-                    format: {
-                        comments: false,
-                    },
-                },
+            new MinimizerPlugin({
+                test: /\.(?:[cm]?js|jpe?g|png|gif|svg)(\?.*)?$/i,
                 extractComments: false,
+                minify: [
+                    {
+                        implementation: MinimizerPlugin.terserMinify,
+                        options: { format: { comments: false } },
+                    },
+                    {
+                        implementation: MinimizerPlugin.sharpMinify,
+                        options: {
+                            encodeOptions: {
+                                jpeg: { quality: 85, progressive: true, mozjpeg: true },
+                                png: { compressionLevel: 9, adaptiveFiltering: true, palette: true },
+                                gif: { effort: 5 },
+                            },
+                        },
+                    },
+                    {
+                        implementation: MinimizerPlugin.svgoMinify,
+                        options: {
+                            encodeOptions: { multipass: true, plugins: ["preset-default"] },
+                        },
+                    },
+                ],
             }),
-            new CssMinimizerPlugin()
+            new CssMinimizerPlugin(),
         ],
     },
     performance: {
@@ -220,6 +237,7 @@ module.exports = {
         maxAssetSize: 512000
     },
     plugins: [
+        new DashboardPlugin(),
         new CleanWebpackPlugin(),
         new NodePolyfillPlugin(),
         new Dotenv({
@@ -260,6 +278,16 @@ module.exports = {
                     globOptions: {
                         dot: true,
                     },
+                },
+                {
+                    from: path.resolve(__dirname, "src/assets/json"),
+                    to: "assets/json",
+                    noErrorOnMissing: true,
+                },
+                {
+                    from: path.resolve(__dirname, "src/assets/json"),
+                    to: "json",
+                    noErrorOnMissing: true,
                 },
                 {
                     from: path.resolve(__dirname, "src/php"),
@@ -398,7 +426,6 @@ module.exports = {
                                     "Helvetica Neue",
                                     "sans-serif",
                                 ],
-                                // You may need to resolve assets like `/fonts/Poppins-Bold.ttf` to a particular directory
                                 resolvePath: (id) => '/src/assets/fonts/' + id,
                             }),
                         ],

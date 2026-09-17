@@ -1,3 +1,28 @@
+export interface HeroConfig {
+    name: string,
+    className: string,
+    link: string,
+    imageSrc: string,
+    srcSet: string
+}
+
+export interface SkillConfig {
+    imageOne: string
+    imageTwo: string
+    title: string
+}
+
+export interface ShuffleElement {
+    selector: string,
+    multiple: boolean
+}
+
+export interface SocialsElement {
+    name: string,
+    icon: string,
+    href: URL;
+}
+
 export interface WebHapticPatterns {
     success: [{ duration: 50 }, { delay: 50, duration: 50 }]
     nudge: [{ duration: 80, intensity: 0.8 }, { delay: 80, duration: 50, intensity: 0.3 }]
@@ -8,7 +33,7 @@ export interface WebHapticPatterns {
 export interface HTMXOptions {
     hxget: string;
     hxtrigger: "click" | "change" | "mouseover";
-    hxswap: "innerHTML" | "outerHTML" | "beforebegin" | "afterbegin" | "beforeend" | "afterend";
+    hxswap: "innerHTML transition:true" | "outerHTML" | "beforebegin" | "afterbegin" | "beforeend" | "afterend";
     hxpushurl: boolean;
 }
 
@@ -69,6 +94,12 @@ export interface PostPreview {
     id: string;
     title: string;
     author: Author;
+    categories: Category[];
+}
+
+export interface PostPreviewSingle {
+    id: string;
+    title: string;
 }
 
 // *** GRAPHQL WordPress Backend Related *** //
@@ -97,6 +128,11 @@ export interface GraphQLPostNode {
     author: GraphQLAuthor;
     categories: GraphQLCategories;
     content: string;
+}
+
+export interface GraphQLPreviewPostNode {
+    id: string;
+    title: string;
 }
 
 export interface GraphQLPostsConnection {
@@ -141,14 +177,6 @@ export interface Post {
     categories: Category[];
 }
 
-// Lightweight post for initial listing
-export interface PostPreview {
-    id: string;
-    title: string;
-    author: Author;
-    categories: Category[];
-}
-
 // Query variable type
 export interface GetPostsVariables {
     first?: number;
@@ -157,4 +185,45 @@ export interface GetPostsVariables {
 
 export interface GetSinglePostVariables {
     id: string;
+}
+
+// Work
+
+export type WorkActionType = "Contact" | "udemy" | "enroll" | "external" | "github" | "whatsapp" | "custom";
+
+export interface WorkButtonConfig {
+    label: string
+    url: string
+    actionType?: WorkActionType
+    icon?: string
+}
+
+export interface EnglishWorkBuyingOptions {
+    courseName: string
+    courseLabel: string
+    courseDescription: string
+    courseUrl: string
+    coursePromoImageUrl: string
+    coursePrice: number
+    courseActionType?: WorkActionType
+    courseButtonLabel?: string
+    courseButtonIcon?: string
+    // Optional extra buttons (e.g. WhatsApp) rendered alongside primary CTA
+    courseExtraButtons?: WorkButtonConfig[]
+}
+
+export interface FeaturedPlanConfig {
+    tier: "free" | "pro" | "max" | string
+    tierLabel: string
+    subtitle: string
+    price: number
+    pricePeriod?: string
+    badge?: string
+    highlighted?: boolean
+    features: string[]
+    // Optional excluded features shown as muted
+    excludedFeatures?: string[]
+    button: WorkButtonConfig
+    secondaryButton?: WorkButtonConfig
+    accent?: string
 }
