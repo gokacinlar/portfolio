@@ -61,6 +61,35 @@ class GraphQLQueries {
         }
     `;
 
+    protected static readonly GRAPHQL_QUERY_FETCH_ALL_POSTS: string = `
+		query GetAllPosts($first: Int, $after: String) {
+			posts(first: $first, after: $after, where: {orderby: {field: DATE, order: DESC}}) {
+				pageInfo {
+					hasNextPage
+					endCursor
+				}
+				nodes {
+					id
+					databaseId
+					title
+					date
+					slug
+					content(format: RENDERED)
+					categories {
+						nodes {
+							name
+							slug
+						}
+					}
+					author {
+						node {
+							name
+						}
+					}
+				}
+			}
+		}
+	`;
 }
 
 export default GraphQLQueries;

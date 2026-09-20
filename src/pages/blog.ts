@@ -3,18 +3,20 @@ import WordPressGraphQLClient from "../utils/gql/wp_graphql";
 import { Template, normalizeDateToDayMonthYear } from "../utils/helper";
 import Localize from "../utils/initLocalization";
 import type * as type from "../ts/interfaces/i.global";
+import type { BlogManifest, StaticPost } from "../services/blog/blogTypes";
 
 class Updates extends HTMLElement {
-    private popstateListener: ((event: PopStateEvent) => Promise<void>) | null = null;
+	private popstateListener: ((event: PopStateEvent) => Promise<void>) | null =
+		null;
 
-    constructor() {
-        super();
+	constructor() {
+		super();
 
-        new Template().createTemplate(this.render(), this);
-    }
+		new Template().createTemplate(this.render(), this);
+	}
 
-    private render(): string {
-        return /*html*/ `
+	private render(): string {
+		return /*html*/ `
             <section class="container-fluid h-100 overflow-hidden">
                 <div id="blogContainer" class="row gx-3 mb-3 h-100">
                     <div class="bwrapper col-12 col-lg-4">
@@ -29,10 +31,10 @@ class Updates extends HTMLElement {
                 </div>
             </section>
         `;
-    }
+	}
 
-    private initiateOffCanvas() {
-        return /*html*/ `
+	private initiateOffCanvas() {
+		return /*html*/ `
             <div id="offCanvasControls" class="d-flex flex-row align-items-center justify-content-end gap-2" role="group" aria-label="${Localize.translate("common:offcanvas:btnMessage")}">
                 ${this.downloadRssButton()}
                 <button class="btn btn-sm btn-warning rounded-pill shadow-sm" type="button" id="displayOffCanvasBtn" data-bs-toggle="offcanvas" data-bs-target="#blogAsideOffcanvasTemplate"
@@ -41,10 +43,10 @@ class Updates extends HTMLElement {
                 </button>
             </div>
         `;
-    }
+	}
 
-    private blogAside(): string {
-        return /*html*/ `
+	private blogAside(): string {
+		return /*html*/ `
             <aside id="blogAside" class="h-100 rounded-5 px-3 py-3 shadow-sm">
                 <section id="rssInfo">
                     ${this.downloadRssButton()}
@@ -52,19 +54,19 @@ class Updates extends HTMLElement {
                 <section id="blogAsideChild" class="mt-3 rounded-5 px-3 py-3 border border-1 border-dark-subtle"></section>
             </aside>
         `;
-    }
+	}
 
-    private downloadRssButton(): string {
-        return /*html*/ `
+	private downloadRssButton(): string {
+		return /*html*/ `
             <button id="downloadRssBtn" type="button" class="download-rss-button bee-color-btn bg-gradient btn btn-lg rounded-5 fs-4 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1 modal-trigger"
                 role="button" title="${Localize.translate("common:modals:rss:btnTitle")}" data-modal="rssModal">
                 <i class="bi bi-rss-fill fw-bold"></i>
             </button>
         `;
-    }
+	}
 
-    private offCanvas(): string {
-        return /*html*/ `
+	private offCanvas(): string {
+		return /*html*/ `
             <div class="offcanvas offcanvas-start rounded-end-4" tabindex="-1" id="blogAsideOffcanvasTemplate" aria-labelledby="blogAsideOffcanvas" data-bs-scroll="true" data-bs-backdrop="true">
                 <div class="offcanvas-header bg-secondary-subtle rounded-end-4">
                     <h5 class="offcanvas-title" id="blogAsideOffcanvas">${Localize.translate("common:blog:latestUpdates")}</h5>
@@ -75,177 +77,231 @@ class Updates extends HTMLElement {
                 </div>
             </div>
         `;
-    }
+	}
 
-    private async generateDomElementsRelatedToBlogsInAside(targetElement: string, data: type.PostPreviewSingle[]) {
-        try {
-            const element = this.querySelector(`#${targetElement}`) as HTMLElement | null;
-            if (!element) {
-                console.error(`Element with id "${targetElement}" not found`);
-                return;
-            }
+	private async generateDomElementsRelatedToBlogsInAside(
+		targetElement: string,
+		data: type.PostPreviewSingle[],
+	) {
+		try {
+			const element = this.querySelector(
+				`#${targetElement}`,
+			) as HTMLElement | null;
+			if (!element) {
+				console.error(`Element with id "${targetElement}" not found`);
+				return;
+			}
 
-            // Check if data is empty or undefined
-            if (!data || data.length === 0) {
-                console.warn("No blog posts have been found");
-                element.innerHTML = `
+			// Check if data is empty or undefined
+			if (!data || data.length === 0) {
+				console.warn("No blog posts have been found");
+				element.innerHTML = `
                     <div class="d-flex flex-column align-items-center justify-content-center">
                         <h1>☹</h1>
                         <h2>${Localize.translate("common:blog:noPosts")}</h2>
                     </div>
                 `;
-                return;
-            }
+				return;
+			}
 
-            // Clear existing content first to avoid conflictions
-            element.innerHTML = "";
+			// Clear existing content first to avoid conflictions
+			element.innerHTML = "";
 
-            // Create and append each post button with event listener
-            data.forEach((item: type.PostPreviewSingle) => {
-                try {
-                    const title: string = item.title || Localize.translate("common:blog:untitledPost");
-                    const button = document.createElement("button") as HTMLButtonElement;
+			// Create and append each post button with event listener
+			data.forEach((item: type.PostPreviewSingle) => {
+				try {
+					const title: string =
+						item.title || Localize.translate("common:blog:untitledPost");
+					const button = document.createElement("button") as HTMLButtonElement;
 
-                    button.type = "button";
-                    button.className = "blog-post-link btn btn-sm fs-5 d-flex flex-row gap-2 align-items-center justify-content-between w-100 py-2 px-2 bg-secondary-subtle rounded-pill link-offset-2 link-underline link-underline-opacity-0 mb-2";
-                    button.dataset.postId = item.id; // Store the post ID for fetching
+					button.type = "button";
+					button.className =
+						"blog-post-link btn btn-sm fs-5 d-flex flex-row gap-2 align-items-center justify-content-between w-100 py-2 px-2 bg-secondary-subtle rounded-pill link-offset-2 link-underline link-underline-opacity-0 mb-2";
+					button.dataset.postId = item.id; // Store the post ID for fetching
 
-                    const buttonContent = `
+					const buttonContent = `
                         <span class="bg-primary-subtle rounded-pill py-1 px-2 flex-grow-1 text-start">${title}</span>
                     `;
-                    button.innerHTML = DOMPurify.sanitize(buttonContent);
+					button.innerHTML = DOMPurify.sanitize(buttonContent);
 
-                    // Actually load content with async call
-                    button.addEventListener("click", async () => {
-                        await this.loadAndDisplayPost(item.id, button, true);
-                    });
+					// Actually load content with async call
+					button.addEventListener("click", async () => {
+						await this.loadAndDisplayPost(item.id, button, true);
+					});
 
-                    element.appendChild(button);
-                } catch (error: unknown) {
-                    console.error("Error creating button for post:", error);
-                }
-            });
-        } catch (error: unknown) {
-            console.error("Error during creating DOM Elements for Blog Post Entries:", error);
-            const element = this.querySelector(`#${targetElement}`) as HTMLElement | null;
-            if (element) {
-                element.innerHTML = `
+					element.appendChild(button);
+				} catch (error: unknown) {
+					console.error("Error creating button for post:", error);
+				}
+			});
+		} catch (error: unknown) {
+			console.error(
+				"Error during creating DOM Elements for Blog Post Entries:",
+				error,
+			);
+			const element = this.querySelector(
+				`#${targetElement}`,
+			) as HTMLElement | null;
+			if (element) {
+				element.innerHTML = `
                     <div class="d-flex flex-column align-items-center justify-content-center">
                         <div>☹</div>
                         <h2>${Localize.translate("common:blog:unableDisplay")}</h2>
                     </div>
                 `;
-            }
-        }
-    }
+			}
+		}
+	}
 
-    private async loadAndDisplayPost(postId: string, button: HTMLButtonElement, updateUrl: boolean = true) {
-        const contentArea = this.querySelector("#blogMain") as HTMLDivElement | null;
+	private async loadAndDisplayPost(
+		postId: string,
+		button: HTMLButtonElement,
+		updateUrl: boolean = true,
+	) {
+		const contentArea = this.querySelector(
+			"#blogMain",
+		) as HTMLDivElement | null;
 
-        if (!contentArea) {
-            console.error("Content area not found");
-            return;
-        }
+		if (!contentArea) {
+			console.error("Content area not found");
+			return;
+		}
 
-        button.disabled = true;
-        const originalButtonHTML = button.innerHTML;
-        button.innerHTML = `<span class="spinner-border spinner-border text-info" role="status" aria-hidden="true"></span>`;
+		button.disabled = true;
+		const originalButtonHTML = button.innerHTML;
+		button.innerHTML = `<span class="spinner-border spinner-border text-info" role="status" aria-hidden="true"></span>`;
 
-        this.appendSpinner(contentArea);
+		this.appendSpinner(contentArea);
 
-        try {
-            const post = await WordPressGraphQLClient.fetchSinglePost(postId);
+		try {
+			const manifest: BlogManifest | null = await this.fetchStaticManifest();
 
-            if (post) {
-                this.displayPostContent(post);
+			if (manifest) {
+				const staticPost: StaticPost | undefined = manifest.posts.find(
+					(p) => p.id === postId,
+				);
 
-                // Update URL with slug if requested
-                if (updateUrl) {
-                    this.updateUrlWithPost(post);
-                }
-            } else {
-                console.error("Post cannot be loaded properly.");
-                return;
-            }
-        } catch (error: unknown) {
-            console.error("Error loading post:", error);
-            contentArea.innerHTML = `
+				if (staticPost) {
+					const post: type.Post = this.staticPostToDomain(staticPost);
+					this.displayPostContent(post);
+
+					if (updateUrl) {
+						this.updateUrlWithPost(post);
+					}
+
+					return;
+				}
+			}
+
+			const post = await WordPressGraphQLClient.fetchSinglePost(postId);
+
+			if (post) {
+				this.displayPostContent(post);
+
+				// Update URL with slug if requested
+				if (updateUrl) {
+					this.updateUrlWithPost(post);
+				}
+			} else {
+				console.error("Post cannot be loaded properly.");
+				return;
+			}
+		} catch (error: unknown) {
+			console.error("Error loading post:", error);
+			contentArea.innerHTML = `
                 <div class="alert alert-danger shadow-sm rounded-5" role="alert">
                     <h4 class="alert-heading"><i class="bi bi-exclamation-diamond"></i> ${Localize.translate("common:blog:errorLoading")}</h4>
                     <hr class="my-1 w-50">
                     <p class="mt-2 mb-0">${Localize.translate("common:blog:somethingWentWrong")}</p>
                 </div>
             `;
-        } finally {
-            this.removeSpinner();
-            button.disabled = false;
-            button.innerHTML = originalButtonHTML;
-        }
-    }
+		} finally {
+			this.removeSpinner();
+			button.disabled = false;
+			button.innerHTML = originalButtonHTML;
+		}
+	}
 
-    private updateUrlWithPost(post: type.Post): void {
-        try {
-            const postPathSlug = (post.url.split("/").filter(Boolean).pop() || "").trim();
+	private updateUrlWithPost(post: type.Post): void {
+		try {
+			const postPathSlug = (
+				post.url.split("/").filter(Boolean).pop() || ""
+			).trim();
 
-            const categorySlug = post.categories?.[0]?.slug ?? ""; // First category
-            const datePart = normalizeDateToDayMonthYear(post.date);
+			const categorySlug = post.categories?.[0]?.slug ?? ""; // First category
+			const datePart = normalizeDateToDayMonthYear(post.date);
 
-            // Avoid slashes since it breakes encoding, resulting in "%2F" in url
-            const dateToken = datePart.replaceAll("/", "-");
-            const finalSlug = `${categorySlug}-${dateToken}-${postPathSlug}`;
+			// Avoid slashes since it breakes encoding, resulting in "%2F" in url
+			const dateToken = datePart.replaceAll("/", "-");
+			const finalSlug = `${categorySlug}-${dateToken}-${postPathSlug}`;
 
-            const currentUrl = new URL(window.location.href);
-            currentUrl.searchParams.set("post", encodeURIComponent(finalSlug));
-            window.history.pushState({ postId: post.id, finalSlug }, "", currentUrl.toString());
-        } catch (error) {
-            console.error("Error updating URL:", error);
-        }
-    }
+			const currentUrl = new URL(window.location.href);
+			currentUrl.searchParams.set("post", encodeURIComponent(finalSlug));
+			window.history.pushState(
+				{ postId: post.id, finalSlug },
+				"",
+				currentUrl.toString(),
+			);
+		} catch (error) {
+			console.error("Error updating URL:", error);
+		}
+	}
 
-    // Spinner-related dom manip
-    private appendSpinner(target: HTMLElement) {
-        this.removeSpinner();
+	// Spinner-related dom manip
+	private appendSpinner(target: HTMLElement) {
+		this.removeSpinner();
 
-        const spinnerContainer = document.createElement("div") as HTMLDivElement;
-        spinnerContainer.className = "blog-post-loader d-flex justify-content-center align-items-center h-100";
+		const spinnerContainer = document.createElement("div") as HTMLDivElement;
+		spinnerContainer.className =
+			"blog-post-loader d-flex justify-content-center align-items-center h-100";
 
-        const temporarySpinner = document.createElement("div") as HTMLDivElement;
-        temporarySpinner.className = "spinner-border text-primary";
-        temporarySpinner.role = "status";
-        temporarySpinner.style.width = "3rem";
-        temporarySpinner.style.height = "3rem";
+		const temporarySpinner = document.createElement("div") as HTMLDivElement;
+		temporarySpinner.className = "spinner-border text-primary";
+		temporarySpinner.role = "status";
+		temporarySpinner.style.width = "3rem";
+		temporarySpinner.style.height = "3rem";
 
-        const temporarySpinnerContent = document.createElement("span") as HTMLSpanElement;
-        temporarySpinnerContent.className = "visually-hidden";
-        temporarySpinnerContent.textContent = Localize.translate("common:blog:loading");
+		const temporarySpinnerContent = document.createElement(
+			"span",
+		) as HTMLSpanElement;
+		temporarySpinnerContent.className = "visually-hidden";
+		temporarySpinnerContent.textContent = Localize.translate(
+			"common:blog:loading",
+		);
 
-        temporarySpinner.appendChild(temporarySpinnerContent);
-        spinnerContainer.appendChild(temporarySpinner);
-        target.appendChild(spinnerContainer);
-    }
+		temporarySpinner.appendChild(temporarySpinnerContent);
+		spinnerContainer.appendChild(temporarySpinner);
+		target.appendChild(spinnerContainer);
+	}
 
-    private removeSpinner() {
-        const elementsToBeRemoved = document.querySelectorAll(".blog-post-loader") as NodeListOf<HTMLElement>;
-        elementsToBeRemoved.forEach((elem) => {
-            elem.remove();
-        });
-    }
+	private removeSpinner() {
+		const elementsToBeRemoved = document.querySelectorAll(
+			".blog-post-loader",
+		) as NodeListOf<HTMLElement>;
+		elementsToBeRemoved.forEach((elem) => {
+			elem.remove();
+		});
+	}
 
-    private displayPostContent(post: type.Post): void {
-        const contentArea = this.querySelector("#blogMain") as HTMLDivElement | null;
+	private displayPostContent(post: type.Post): void {
+		const contentArea = this.querySelector(
+			"#blogMain",
+		) as HTMLDivElement | null;
 
-        if (!contentArea) {
-            console.error("Content area not found");
-            return;
-        }
+		if (!contentArea) {
+			console.error("Content area not found");
+			return;
+		}
 
-        const sanitizedContent = post.content;
-        const sanitizedTitle = post.title || Localize.translate("common:blog:untitledPost");
-        const authorName = post.author?.name || Localize.translate("common:blog:unknownAuthor");
-        const postDate = normalizeDateToDayMonthYear(post.date);
-        const defaultImageSrc = "../assets/images/static/webp/logo.webp";
+		const sanitizedContent = post.content;
+		const sanitizedTitle =
+			post.title || Localize.translate("common:blog:untitledPost");
+		const authorName =
+			post.author?.name || Localize.translate("common:blog:unknownAuthor");
+		const postDate = normalizeDateToDayMonthYear(post.date);
+		const defaultImageSrc = "../assets/images/static/webp/logo.webp";
 
-        const postHTML = `
+		const postHTML = `
             <article class="blog-post">
                 <header class="mb-4">
                     <h1 class="display-6 fw-medium mb-3">${sanitizedTitle}</h1>
@@ -268,143 +324,262 @@ class Updates extends HTMLElement {
             </article>
         `;
 
-        contentArea.innerHTML = DOMPurify.sanitize(postHTML);
-        contentArea.scrollTop = 0;
-    }
+		contentArea.innerHTML = DOMPurify.sanitize(postHTML);
+		contentArea.scrollTop = 0;
+	}
 
-    // Add method to load post from URL (slug)
-    private async loadPostFromUrl(): Promise<void> {
-        const urlParams = new URLSearchParams(window.location.search);
-        const postSlug = urlParams.get("post");
+	// Add method to load post from URL (slug) - prefers static manifest
+	private async loadPostFromUrl(): Promise<void> {
+		const urlParams = new URLSearchParams(window.location.search);
+		const postSlug = urlParams.get("post");
 
-        if (!postSlug) {
-            return;
-        }
+		if (!postSlug) {
+			return;
+		}
 
-        const contentArea = this.querySelector("#blogMain") as HTMLDivElement | null;
-        if (!contentArea) {
-            return;
-        }
+		const contentArea = this.querySelector(
+			"#blogMain",
+		) as HTMLDivElement | null;
+		if (!contentArea) {
+			return;
+		}
 
-        this.appendSpinner(contentArea);
-        try {
-            const post = await WordPressGraphQLClient.fetchPostBySlug(postSlug);
-            if (post) {
-                // Visual enhancements
-                this.displayPostContent(post);
-                this.highlightActivePost(post.id);
-            }
-        } catch (error) {
-            console.error("Error loading post from URL:", error);
-            contentArea.innerHTML = `
+		this.appendSpinner(contentArea);
+		try {
+			const manifest: BlogManifest | null = await this.fetchStaticManifest();
+
+			if (manifest) {
+				const staticPost: StaticPost | null = this.findStaticPostBySlug(
+					manifest,
+					postSlug,
+				);
+
+				if (staticPost) {
+					const post: type.Post = this.staticPostToDomain(staticPost);
+					this.displayPostContent(post);
+					this.highlightActivePost(post.id);
+					return;
+				}
+			}
+
+			const post = await WordPressGraphQLClient.fetchPostBySlug(postSlug);
+			if (post) {
+				// Visual enhancements
+				this.displayPostContent(post);
+				this.highlightActivePost(post.id);
+			}
+		} catch (error) {
+			console.error("Error loading post from URL:", error);
+			contentArea.innerHTML = `
                 <div class="alert alert-warning shadow-sm rounded-5" role="alert">
                     <h4 class="alert-heading"><i class="bi bi-exclamation-triangle"></i> ${Localize.translate("common:blog:postNotFound")}</h4>
                     <hr class="my-1 w-50">
                     <p class="mt-2 mb-0">${Localize.translate("common:blog:postNotFoundMsg")}</p>
                 </div>
             `;
-        } finally {
-            this.removeSpinner();
-        }
-    }
+		} finally {
+			this.removeSpinner();
+		}
+	}
 
-    private async fetchAndPopulatePosts() {
-        const blogAside = this.querySelector("#blogAsideChild") as HTMLElement | null;
-        const offCanvasAside = this.querySelector("#offCanvasArea") as HTMLElement | null;
+	private async fetchStaticManifest(): Promise<BlogManifest | null> {
+		try {
+			const response: Response = await fetch(
+				"/assets/json/generated/blog-manifest.json",
+				{
+					method: "GET",
+					headers: { Accept: "application/json" },
+				},
+			);
 
-        if (!blogAside || !offCanvasAside) {
-            console.error("Blog aside child element not found");
-            return;
-        }
+			if (!response.ok) {
+				return null;
+			}
 
-        this.appendSpinnerInAside(blogAside);
-        this.appendSpinnerInAside(offCanvasAside);
-        try {
-            // Fetch only previews (lightweight data)
-            const previews = await WordPressGraphQLClient.fetchBlogPostPreviews();
-            await this.generateDomElementsRelatedToBlogsInAside("blogAsideChild", previews);
-            await this.generateDomElementsRelatedToBlogsInAside("offCanvasArea", previews);
-        } catch (error: unknown) {
-            console.error("Failed to fetch and populate posts:", error);
-            const errorAlert: string = `
+			const manifest: BlogManifest = (await response.json()) as BlogManifest;
+
+			if (!manifest || !Array.isArray(manifest.posts)) {
+				return null;
+			}
+
+			return manifest;
+		} catch (error: unknown) {
+			console.warn(
+				"Static blog manifest not available, falling back to GraphQL:",
+				error,
+			);
+			return null;
+		}
+	}
+
+	private findStaticPostBySlug(
+		manifest: BlogManifest,
+		slug: string,
+	): StaticPost | null {
+		const decoded: string = decodeURIComponent(slug).trim();
+		const rawSlug: string = decoded.split("-").pop() ?? decoded;
+
+		// Try exact slug first, then raw slug without category-date prefix
+		const exact: StaticPost | undefined = manifest.posts.find(
+			(p) => p.slug === decoded,
+		);
+		if (exact) {
+			return exact;
+		}
+
+		const byRaw: StaticPost | undefined = manifest.posts.find(
+			(p) => p.slug === rawSlug,
+		);
+		return byRaw ?? null;
+	}
+
+	private staticPostToDomain(post: StaticPost): type.Post {
+		return {
+			id: post.id,
+			title: post.title,
+			date: post.date,
+			categories: post.categories,
+			content: post.content,
+			author: post.author,
+			url: post.url,
+		};
+	}
+
+	private async fetchAndPopulatePosts() {
+		const blogAside = this.querySelector(
+			"#blogAsideChild",
+		) as HTMLElement | null;
+		const offCanvasAside = this.querySelector(
+			"#offCanvasArea",
+		) as HTMLElement | null;
+
+		if (!blogAside || !offCanvasAside) {
+			console.error("Blog aside child element not found");
+			return;
+		}
+
+		this.appendSpinnerInAside(blogAside);
+		this.appendSpinnerInAside(offCanvasAside);
+		try {
+			const manifest: BlogManifest | null = await this.fetchStaticManifest();
+
+			if (manifest && manifest.posts.length > 0) {
+				const previews: type.PostPreviewSingle[] = manifest.posts.map((p) => ({
+					id: p.id,
+					title: p.title,
+				}));
+
+				await this.generateDomElementsRelatedToBlogsInAside(
+					"blogAsideChild",
+					previews,
+				);
+				await this.generateDomElementsRelatedToBlogsInAside(
+					"offCanvasArea",
+					previews,
+				);
+				return;
+			}
+
+			// Fallback to runtime GraphQL without static checks
+			const previews = await WordPressGraphQLClient.fetchBlogPostPreviews();
+			await this.generateDomElementsRelatedToBlogsInAside(
+				"blogAsideChild",
+				previews,
+			);
+			await this.generateDomElementsRelatedToBlogsInAside(
+				"offCanvasArea",
+				previews,
+			);
+		} catch (error: unknown) {
+			console.error("Failed to fetch and populate posts:", error);
+			const errorAlert: string = `
                 <div class="alert alert-warning rounded-5 shadow-sm" role="alert">
                     <h4 class="alert-heading"><i class="bi bi-exclamation-diamond"></i> ${Localize.translate("common:blog:error")}</h4>
                     <hr class="w-50 my-2">
                     <p class="my-1">${Localize.translate("common:blog:unableLoad")}</p>
                 </div>
             `;
-            blogAside.innerHTML = errorAlert;
-            offCanvasAside.innerHTML = errorAlert;
-        } finally {
-            this.removeSpinnerInAside();
-        }
-    }
+			blogAside.innerHTML = errorAlert;
+			offCanvasAside.innerHTML = errorAlert;
+		} finally {
+			this.removeSpinnerInAside();
+		}
+	}
 
-    // Placeholder spinner element
-    private appendSpinnerInAside(target: HTMLElement) {
-        const spinnerContainer = document.createElement("div") as HTMLDivElement;
-        spinnerContainer.className = "blog-aside-loader d-flex flex-column justify-content-center align-items-center h-100";
+	// Placeholder spinner element
+	private appendSpinnerInAside(target: HTMLElement) {
+		const spinnerContainer = document.createElement("div") as HTMLDivElement;
+		spinnerContainer.className =
+			"blog-aside-loader d-flex flex-column justify-content-center align-items-center h-100";
 
-        const temporarySpinner = document.createElement("div") as HTMLDivElement;
-        temporarySpinner.className = "spinner-border text-primary mb-3";
-        temporarySpinner.role = "status";
-        temporarySpinner.style.width = "3rem";
-        temporarySpinner.style.height = "3rem";
+		const temporarySpinner = document.createElement("div") as HTMLDivElement;
+		temporarySpinner.className = "spinner-border text-primary mb-3";
+		temporarySpinner.role = "status";
+		temporarySpinner.style.width = "3rem";
+		temporarySpinner.style.height = "3rem";
 
-        const temporarySpinnerContent = document.createElement("span") as HTMLSpanElement;
-        temporarySpinnerContent.className = "visually-hidden";
-        temporarySpinnerContent.textContent = Localize.translate("common:blog:loadingPosts");
+		const temporarySpinnerContent = document.createElement(
+			"span",
+		) as HTMLSpanElement;
+		temporarySpinnerContent.className = "visually-hidden";
+		temporarySpinnerContent.textContent = Localize.translate(
+			"common:blog:loadingPosts",
+		);
 
-        const loadingText = document.createElement("p") as HTMLParagraphElement;
-        loadingText.className = "text-muted";
-        loadingText.textContent = Localize.translate("common:blog:loadingPostsMsg");
+		const loadingText = document.createElement("p") as HTMLParagraphElement;
+		loadingText.className = "text-muted";
+		loadingText.textContent = Localize.translate("common:blog:loadingPostsMsg");
 
-        temporarySpinner.appendChild(temporarySpinnerContent);
-        spinnerContainer.appendChild(temporarySpinner);
-        spinnerContainer.appendChild(loadingText);
-        target.appendChild(spinnerContainer);
-    }
+		temporarySpinner.appendChild(temporarySpinnerContent);
+		spinnerContainer.appendChild(temporarySpinner);
+		spinnerContainer.appendChild(loadingText);
+		target.appendChild(spinnerContainer);
+	}
 
-    private removeSpinnerInAside() {
-        const elementsToBeRemoved = document.querySelectorAll(".blog-aside-loader") as NodeListOf<HTMLElement>;
-        elementsToBeRemoved.forEach((elem) => {
-            elem.remove();
-        });
-    }
+	private removeSpinnerInAside() {
+		const elementsToBeRemoved = document.querySelectorAll(
+			".blog-aside-loader",
+		) as NodeListOf<HTMLElement>;
+		elementsToBeRemoved.forEach((elem) => {
+			elem.remove();
+		});
+	}
 
-    // Add method to highlight active post button
-    private highlightActivePost(postId: string): void {
-        const buttons = this.querySelectorAll(".blog-post-link") as NodeListOf<HTMLButtonElement>;
-        buttons.forEach(button => {
-            if (button.dataset.postId === postId) {
-                button.classList.add("active", "border", "border-primary");
-            } else {
-                button.classList.remove("active", "border", "border-primary");
-            }
-        });
-    }
+	// Add method to highlight active post button
+	private highlightActivePost(postId: string): void {
+		const buttons = this.querySelectorAll(
+			".blog-post-link",
+		) as NodeListOf<HTMLButtonElement>;
+		buttons.forEach((button) => {
+			if (button.dataset.postId === postId) {
+				button.classList.add("active", "border", "border-primary");
+			} else {
+				button.classList.remove("active", "border", "border-primary");
+			}
+		});
+	}
 
-    async connectedCallback() {
-        await this.fetchAndPopulatePosts();
-        // Check if there"s a post in the URL and load it
-        await this.loadPostFromUrl();
+	async connectedCallback() {
+		await this.fetchAndPopulatePosts();
+		// Check if there"s a post in the URL and load it
+		await this.loadPostFromUrl();
 
-        // Store the listener function to be able to remove it later
-        this.popstateListener = async (event) => {
-            if (event.state?.postId) {
-                await this.loadPostFromUrl();
-            }
-        };
-        window.addEventListener("popstate", this.popstateListener);
-    }
+		// Store the listener function to be able to remove it later
+		this.popstateListener = async (event) => {
+			if (event.state?.postId) {
+				await this.loadPostFromUrl();
+			}
+		};
+		window.addEventListener("popstate", this.popstateListener);
+	}
 
-    disconnectedCallback(): void {
-        // Remove the popstate listener when the component is disconnected
-        if (this.popstateListener) {
-            window.removeEventListener("popstate", this.popstateListener);
-            this.popstateListener = null;
-        }
-    }
+	disconnectedCallback(): void {
+		// Remove the popstate listener when the component is disconnected
+		if (this.popstateListener) {
+			window.removeEventListener("popstate", this.popstateListener);
+			this.popstateListener = null;
+		}
+	}
 }
 
 customElements.define("app-updates", Updates);
