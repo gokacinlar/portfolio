@@ -1,6 +1,6 @@
 {
   "name": "new-portfolio",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "description": "Derviş's Personel Website",
   "keywords": [
     "derviş",
@@ -32,7 +32,7 @@
   "license": "CC0-1.0",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack --config webpack.config.prod.js --mode production && npm run html:minifyall",
+    "build": "npm run generate:blog && NODE_ENV=production webpack --config webpack.config.prod.js --mode production && npm run generate:blog && npm run generate:sitemap && npm run html:minifyall",
     "dev": "webpack-dashboard -- webpack --config webpack.config.js --mode development",
     "live": "webpack-dashboard -- webpack serve --config webpack.config.js --mode development",
     "test": "jest",
@@ -43,7 +43,10 @@
     "toc": "i18next-resources-for-ts toc -i ./src/locales/en ./src/locales/tr -o ./src/types/resources.ts",
     "toc:interface": "i18next-resources-for-ts interface -i ./src/locales/en -o ./src/types/resources.d.ts",
     "composer:install": "composer install",
+    "generate:blog": "npx tsx ./src/scripts/generateBlog.ts",
+    "generate:blog:watch": "npx tsx ./src/scripts/generateBlog.ts --watch",
     "generate:sitemap": "npx tsx ./src/scripts/sitemap.ts",
+    "optimize:glb": "npx tsx ./src/scripts/optimizeGlb.ts",
     "generate:robotstxt": "npx tsx ./src/scripts/robotsTxt.ts",
     "check:spelling": "npx cspell ./src/**/*"
   },
@@ -53,7 +56,7 @@
     "@biomejs/biome": "2.4.15",
     "@gltf-transform/core": "^4.3.0",
     "@gltf-transform/extensions": "^4.3.0",
-    "@gltf-transform/functions": "^3.4.2",
+    "@gltf-transform/functions": "^4.0.0",
     "@types/bootstrap": "^5.2.10",
     "@types/draco3dgltf": "^1.4.3",
     "@types/grecaptcha": "^3.0.9",
@@ -74,8 +77,6 @@
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^8.0.0",
     "dotenv-webpack": "^8.1.1",
-    "favicons": "^7.2.0",
-    "favicons-webpack-plugin": "^6.0.1",
     "file-loader": "^6.2.0",
     "fontaine": "^0.8.0",
     "generate-robotstxt": "^8.0.3",
@@ -103,7 +104,7 @@
     "responsive-loader": "^3.1.2",
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
-    "sharp": "^0.35.3",
+    "sharp": "^0.34.0",
     "sitemap": "^9.0.0",
     "style-loader": "^4.0.0",
     "svgo": "^4.0.2",
@@ -123,7 +124,8 @@
     "webpack-manifest-plugin": "^6.0.1",
     "webpack-nano": "^1.1.1",
     "webpack-node-externals": "^3.0.0",
-    "webpack-pwa-manifest": "^4.3.0"
+    "webpack-pwa-manifest": "^4.3.0",
+    "win-node-env": "^0.6.1"
   },
   "dependencies": {
     "@analytics/google-analytics": "^1.1.0",
@@ -147,8 +149,6 @@
     "web-haptics": "^0.0.6"
   },
   "allowScripts": {
-    "sharp@0.34.5": true,
-    "sharp@0.32.6": true,
     "esbuild@0.28.1": true,
     "scrollreveal@4.0.9": true,
     "unrs-resolver@1.12.2": true,
