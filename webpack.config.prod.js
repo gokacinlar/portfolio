@@ -12,7 +12,6 @@ const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 const MinimizerPlugin = require("minimizer-webpack-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
-const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const CompressionPlugin = require("compression-webpack-plugin");
@@ -93,9 +92,7 @@ module.exports = {
         filename: "js/[name].[contenthash:8].js",
         chunkFilename: "js/[name].[contenthash:8].chunk.js",
         path: path.resolve(__dirname, "public"),
-        clean: {
-            keep: "public/index.html",
-        },
+        clean: false,
         environment: {
             arrowFunction: true,
             bigIntLiteral: false,
@@ -211,16 +208,6 @@ module.exports = {
                         options: { format: { comments: false } },
                     },
                     {
-                        implementation: MinimizerPlugin.sharpMinify,
-                        options: {
-                            encodeOptions: {
-                                jpeg: { quality: 85, progressive: true, mozjpeg: true },
-                                png: { compressionLevel: 9, adaptiveFiltering: true, palette: true },
-                                gif: { effort: 5 },
-                            },
-                        },
-                    },
-                    {
                         implementation: MinimizerPlugin.svgoMinify,
                         options: {
                             encodeOptions: { multipass: true, plugins: ["preset-default"] },
@@ -238,7 +225,11 @@ module.exports = {
     },
     plugins: [
         new DashboardPlugin(),
-        new CleanWebpackPlugin(),
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: ["**/*", "!blog/**", "!assets/json/generated/**", "!.gitkeep"],
+            cleanAfterEveryBuildPatterns: [],
+            verbose: false,
+        }),
         new NodePolyfillPlugin(),
         new Dotenv({
             path: "./.env",
@@ -337,12 +328,6 @@ module.exports = {
             alwaysWriteToDisk: true
         }),
         new HtmlWebpackHarddiskPlugin(),
-        new FaviconsWebpackPlugin({
-            logo: "./src/assets/images/static/webp/logo_256x256.webp",
-            cache: true,
-            prefix: "assets/favicons/",
-            inject: true
-        }),
         new WebpackPwaManifest({
             name: "Derviş Öksüzoğlu",
             short_name: "Derviş Öksüzoğlu",

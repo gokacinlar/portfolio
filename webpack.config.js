@@ -11,7 +11,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
-const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
@@ -251,11 +250,6 @@ module.exports = {
                     noErrorOnMissing: true,
                 },
                 {
-                    from: path.resolve(__dirname, "node_modules/three/examples/jsm/libs/draco"),
-                    to: "assets/draco",
-                    noErrorOnMissing: true,
-                },
-                {
                     from: path.resolve(__dirname, "src/assets/files"),
                     to: "assets/files",
                     noErrorOnMissing: true,
@@ -312,12 +306,6 @@ module.exports = {
             alwaysWriteToDisk: true,
         }),
         new HtmlWebpackHarddiskPlugin(),
-        new FaviconsWebpackPlugin({
-            logo: "./src/assets/images/static/webp/logo_256x256.webp",
-            cache: false, // stop rebuilding favicons each time in dev
-            prefix: "assets/favicons/",
-            inject: true,
-        }),
         new WebpackPwaManifest({
             name: "Derviş Öksüzoğlu",
             short_name: "Derviş Öksüzoğlu",
