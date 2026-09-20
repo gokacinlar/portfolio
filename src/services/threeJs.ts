@@ -1,9 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
-// CompileError: WebAssembly.instantiate() is because MeshoptDecoder requires unsafe-eval to be in CSP which I'm not gonna allow
 
 class ThreeJs {
     private base = THREE;
@@ -11,11 +8,9 @@ class ThreeJs {
     private camera = new this.base.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     private renderer = new this.base.WebGLRenderer();
     private loader = new GLTFLoader();
-    private draco = new DRACOLoader();
     private controls!: OrbitControls;
     private readonly AMBIENT_COLOR: string = "#D4A25B";
     private isAnimating: boolean = true; // Animation state
-    private animationFrameId: number | null = null;
 
     constructor(containerSelector: string) {
         this.setupRenderer(containerSelector);
@@ -63,9 +58,15 @@ class ThreeJs {
     }
 
     // Actually load the model
+    // NOTE: no DRACOLoader / MeshoptDecoder on purpose. Both need WebAssembly
+    // (meshopt_decoder.module.js calls WebAssembly.instantiate() on import,
+    // DRACOLoader fetches a .wasm binary + spawns blob: workers), which our
+    // CSP deliberately blocks (no 'unsafe-eval' / 'wasm-unsafe-eval').
+    // desk.glb uses neither KHR_draco_mesh_compression nor EXT_meshopt_compression,
+    // so plain GLTFLoader is all it needs. If a future model IS compressed,
+    // re-encode it without compression (see npm run optimize:glb) instead of
+    // loosening the CSP.
     public loadModel(modelPath: string): void {
-        this.loader.setDRACOLoader(this.draco);
-        this.loader.setMeshoptDecoder(MeshoptDecoder);
         this.loader.load(
             modelPath, (gltf) => {
                 const model = gltf.scene;
@@ -96,13 +97,10 @@ class ThreeJs {
 
     private startAnimation(): void {
         const animate = () => {
-            if (this.isAnimating) { // Update the animation based on intersection observer's state
-                this.animationFrameId = requestAnimationFrame(animate);
-                this.controls.update();
-                this.renderer.render(this.scene, this.camera);
-            } else {
-                this.animationFrameId = requestAnimationFrame(animate);
-            }
+            requestAnimationFrame(animate);
+            if (!this.isAnimating) return; // off-screen: skip render work, keep the loop alive
+            this.controls.update();
+            this.renderer.render(this.scene, this.camera);
         };
 
         animate();
