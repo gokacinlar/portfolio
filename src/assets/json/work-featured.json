@@ -3,7 +3,7 @@
     "tier": "free",
     "tierLabel": "Starter",
     "subtitle": "Perfect for beginners",
-    "price": 600,
+    "price": 750,
     "pricePeriod": "/saatlik",
     "badge": "",
     "highlighted": false,
@@ -19,7 +19,7 @@
       "Personal roadmap"
     ],
     "button": {
-      "label": "Join Group",
+      "label": "Contact to Book",
       "url": "/about.html#mailing",
       "actionType": "enroll",
       "icon": "bi-people-fill"

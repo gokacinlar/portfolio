@@ -282,7 +282,7 @@
                         "1:1 live mentoring",
                         "Personal roadmap"
                     ],
-                    "buttonLabel": "Join Group",
+                    "buttonLabel": "Contact to Book",
                     "buttonIcon": "bi-people-fill"
                 },
                 "starter": {
@@ -300,7 +300,7 @@
                         "1:1 live mentoring",
                         "Personal roadmap"
                     ],
-                    "buttonLabel": "Join Group",
+                    "buttonLabel": "Contact to Book",
                     "buttonIcon": "bi-people-fill"
                 },
                 "pro": {
@@ -349,7 +349,7 @@
                 "group": {
                     "name": "Group Conversation",
                     "description": "Small group (max 4) interactive lessons focused on fluency and confidence through discussion, role-play and feedback.",
-                    "buttonLabel": "Join Group",
+                    "buttonLabel": "Contact to Book",
                     "buttonIcon": "bi-people-fill"
                 },
                 "exam": {

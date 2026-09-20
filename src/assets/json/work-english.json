@@ -5,7 +5,7 @@
     "courseDescription": "Personalized 60-minute live session tailored to your level and goals & ideal for speaking, grammar and real conversation practice.",
     "courseUrl": "/about.html#mailing",
     "coursePromoImageUrl": "assets/images/static/webp/work/teach-one.webp",
-    "coursePrice": 500,
+    "coursePrice": 750,
     "courseActionType": "contact",
     "courseButtonLabel": "Contact to Book",
     "courseButtonIcon": "bi-send-fill",
@@ -24,10 +24,10 @@
     "courseDescription": "Small group (max 4) interactive lessons focused on fluency and confidence through discussion, role-play and feedback.",
     "courseUrl": "/about.html#mailing",
     "coursePromoImageUrl": "assets/images/static/webp/work/teach-two.webp",
-    "coursePrice": 600,
+    "coursePrice": 750,
     "courseActionType": "enroll",
-    "courseButtonLabel": "Join Group",
-    "courseButtonIcon": "bi-people-fill"
+    "courseButtonLabel": "Contact to Book",
+    "courseButtonIcon": "bi-send-fill"
   },
   {
     "courseName": "Exam Preparation",

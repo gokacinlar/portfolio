@@ -282,7 +282,7 @@
                         "1:1 canlı mentorluk",
                         "Kişisel yol haritası"
                     ],
-                    "buttonLabel": "Gruba Katıl",
+                    "buttonLabel": "Rezervasyon İçin İletişim",
                     "buttonIcon": "bi-people-fill"
                 },
                 "starter": {
@@ -300,7 +300,7 @@
                         "1:1 canlı mentorluk",
                         "Kişisel yol haritası"
                     ],
-                    "buttonLabel": "Gruba Katıl",
+                    "buttonLabel": "Rezervasyon İçin İletişim",
                     "buttonIcon": "bi-people-fill"
                 },
                 "pro": {
@@ -349,7 +349,7 @@
                 "group": {
                     "name": "Grup Sohbeti",
                     "description": "Küçük gruplar (en fazla 4 kişi) ile akıcılık ve özgüven odaklı interaktif dersler ve tartışma, rol yapma ve geri bildirim.",
-                    "buttonLabel": "Gruba Katıl",
+                    "buttonLabel": "Rezervasyon İçin İletişim",
                     "buttonIcon": "bi-people-fill"
                 },
                 "exam": {
