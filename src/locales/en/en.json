@@ -398,7 +398,8 @@
             "description": "Not sure which plan suits you? Send me a quick message and I'll help you choose in minutes, no pressure.",
             "cta": "Chat on WhatsApp",
             "ctaTitle": "Chat on WhatsApp",
-            "note": "Usually reply within a day • No spam • No commitment"
+            "note": "Usually reply within a day • No spam • No commitment",
+            "bookingNote": "Book an Appointment"
         },
         "individualPlan": {
             "title": "Do you need individual plan?",

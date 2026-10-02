@@ -1160,6 +1160,30 @@ $monospace-font-family: "Cascadia Code",
         }
     }
 
+    .still-unsure-cta-alt {
+        background: #0c63e2 !important;
+        border-color: #0c63e2 !important;
+        color: #fff !important;
+        min-width: 240px;
+        @include mixin.transition(transform .2s ease, background-color .2s ease, border-color .2s ease);
+
+        &:hover {
+            background: #0a57ca !important;
+            border-color: #0a57ca !important;
+            color: #fff !important;
+            transform: translateY(-2px);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+
+        @include mquery.responsive(phone) {
+            width: 100% !important;
+            min-width: 0 !important;
+        }
+    }
+
     .still-unsure-note {
         font-size: .85rem;
 

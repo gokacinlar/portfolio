@@ -398,7 +398,8 @@
             "description": "Hangi planın sana uygun olduğundan emin değil misin? WhatsApp'tan hızlıca yaz,  dakikalar içinde yardımcı olayım, baskı yok.",
             "cta": "WhatsApp'tan Yaz",
             "ctaTitle": "WhatsApp'tan yaz",
-            "note": "Genellikle gün içerisinde dönüş • Spam yok • Taahhüt yok"
+            "note": "Genellikle gün içerisinde dönüş • Spam yok • Taahhüt yok",
+            "bookingNote": "Randevu al"
         },
         "individualPlan": {
             "title": "Bireysel bir plana mı ihtiyacın var?",

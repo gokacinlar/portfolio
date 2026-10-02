@@ -123,20 +123,25 @@ class WorkTemplate {
         return data.map((item) => this.workCard.render(item)).join("");
     }
 
+    private static readonly wpUrl: URL = new URL("https://wa.me/905000000000?text=Hi%20I%27m%20still%20unsure%20which%20plan%20fits%20me%20—%20could%20you%20help%3F");
+    private static readonly contactUrl: URL = new URL("https://dervisoksuzoglu.xyz/kayit");
+
     private stillUnsure(): string {
         const title = Localize.translate("common:workPage:stillUnsure:title");
         const subtitle = Localize.translate("common:workPage:stillUnsure:subtitle");
         const description = Localize.translate("common:workPage:stillUnsure:description");
         const cta = Localize.translate("common:workPage:stillUnsure:cta");
         const ctaTitle = Localize.translate("common:workPage:stillUnsure:ctaTitle");
+        const bookingNote = Localize.translate("common:workPage:stillUnsure:bookingNote");
         const note = Localize.translate("common:workPage:stillUnsure:note");
-        const waUrl = "https://wa.me/905000000000?text=Hi%20I%27m%20still%20unsure%20which%20plan%20fits%20me%20—%20could%20you%20help%3F";
+        const waUrl = WorkTemplate.wpUrl;
 
         const displayTitle = title === "common:workPage:stillUnsure:title" ? "Still unsure?" : title;
         const displaySubtitle = subtitle === "common:workPage:stillUnsure:subtitle" ? "Let's find the right fit together" : subtitle;
         const displayDesc = description === "common:workPage:stillUnsure:description" ? "Not sure which plan suits you? Send me a quick message. I'll help you choose in minutes, no pressure." : description;
         const displayCta = cta === "common:workPage:stillUnsure:cta" ? "Chat on WhatsApp" : cta;
         const displayCtaTitle = ctaTitle === "common:workPage:stillUnsure:ctaTitle" ? "Chat on WhatsApp" : ctaTitle;
+        const displaybookingNote = bookingNote === "common:workPage:stillUnsure:bookingNote" ? "Book an Appointment" : bookingNote;
         const displayNote = note === "common:workPage:stillUnsure:note" ? "Usually replies within an hour • No spam • No commitment" : note;
 
         return /*html*/ `
@@ -149,12 +154,23 @@ class WorkTemplate {
                         <h2 class="display-6 fw-bold mb-1"><i class="bi bi-emoji-smile-upside-down"></i> ${displayTitle}</h2>
                         <p class="still-unsure-subtitle fs-5 fw-medium text-body-secondary mb-0">${displaySubtitle}</p>
                     </div>
-                    <p class="still-unsure-desc lead fs-5 text-body-secondary mx-auto mb-1" style="max-width: 48ch;">${displayDesc}</p>
-                    <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-lg still-unsure-cta rounded-pill px-4 py-3 fw-semibold d-inline-flex align-items-center justify-content-center gap-2" title="${displayCtaTitle}" aria-label="${displayCtaTitle}">
-                        <i class="bi bi-whatsapp" aria-hidden="true"></i>
-                        <span>${displayCta}</span>
-                        <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                    </a>
+                    <div>
+                        <p class="still-unsure-desc lead fs-5 text-body-secondary mx-auto mb-1" style="max-width: 48ch;">${displayDesc}</p>
+                        <div class="d-flex flex-row align-items-center justify-content-center gap-2 flex-grow-1 flex-wrap my-2">
+                            <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-lg still-unsure-cta rounded-pill px-4 py-3 fw-semibold d-inline-flex align-items-center justify-content-center gap-2" 
+                            title="${displayCtaTitle}" aria-label="${displayCtaTitle}">
+                            <i class="bi bi-whatsapp" aria-hidden="true"></i>
+                                <span>${displayCta}</span>
+                            <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                            </a>
+                            <a href="${WorkTemplate.contactUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-lg still-unsure-cta-alt rounded-pill px-4 py-3 fw-semibold d-inline-flex align-items-center justify-content-center gap-2" 
+                                title="${displaybookingNote}" aria-label="${displaybookingNote}">
+                                <i class="bi bi-telephone-outbound" aria-hidden="true"></i>
+                                    <span>${displaybookingNote}</span>
+                                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
                     <small class="still-unsure-note text-body-secondary">${displayNote}</small>
                 </div>
             </section>
