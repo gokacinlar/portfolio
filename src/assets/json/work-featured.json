@@ -20,7 +20,7 @@
     ],
     "button": {
       "label": "Contact to Book",
-      "url": "/about.html#mailing",
+      "url": "https://dervisoksuzoglu.xyz/kayit/",
       "actionType": "enroll",
       "icon": "bi-people-fill"
     }
@@ -43,7 +43,7 @@
     ],
     "button": {
       "label": "Contact to Book",
-      "url": "/about.html#mailing",
+      "url": "https://dervisoksuzoglu.xyz/kayit/",
       "actionType": "contact",
       "icon": "bi-send-fill"
     },
