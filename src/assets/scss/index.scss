@@ -90,6 +90,7 @@ $monospace-font-family: "Cascadia Code",
 
     #headerM {
         @include mixin.hide-on(breakpoint.$all-mobile-tablet-breakpoints);
+        @include mixin.hide-on(breakpoint.$desktop-small-breakpoints);
     }
 
     #headerRM {
