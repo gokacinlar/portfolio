@@ -679,15 +679,17 @@ export function colorfulBannerName(array: Array<string>, targetElement: string):
         "#E91416"
     ]
 
+    const shuffledColors = [...colors].sort(() => Math.random() - 0.7);
     const targetElem = document.querySelector(`#${targetElement}`) as HTMLElement;
+
+    let colorIndex = 0;
     array.forEach((key: string) => {
         if (targetElem && key) {
             const eachLetter = document.createElement("span");
             eachLetter.textContent = key;
-            // Randomize colors
-            const randomIndex = Math.floor(Math.random() * colors.length);
-            eachLetter.style.color = colors[randomIndex] as string;
+            eachLetter.style.color = shuffledColors[colorIndex] as string;
 
+            colorIndex++;
             targetElem.appendChild(eachLetter);
         } else {
             console.error("Target element or array missing for banner.");
