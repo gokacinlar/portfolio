@@ -90,13 +90,13 @@ export class PromoParts {
             title: Localize.translate("common:work:section1:title"),
             description: Localize.translate("common:work:section1:msg"),
             img: "../assets/images/static/webp/qualifications-main-english.webp",
-            link: new URL("https://dervisoksuzoglu.xyz")
+            link: new URL("https://dervisoksuzoglu.xyz/work")
         },
         {
             title: Localize.translate("common:work:section2:title"),
             description: Localize.translate("common:work:section2:msg"),
             img: "../assets/images/static/webp/qualifications-main-webdev.webp",
-            link: new URL("https://dervisoksuzoglu.xyz")
+            link: new URL("https://dervisoksuzoglu.xyz/work")
         }
     ]
 }
