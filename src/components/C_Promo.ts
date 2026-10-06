@@ -7,10 +7,10 @@ export class PromoTitle {
 
     public render(): string {
         return /*html*/ `
-            <div class="promo-title-container text-center w-100 py-2 mb-3">
-                <h3 class="promo-title display-4 mb-0 fw-bolder pe-none">
+            <div class="promo-title-container featured-title-card rounded-5 text-center w-100 py-3 mb-3">
+                <h2 class="promo-title display-6 mb-0 fw-bolder pe-none text-center">
                     ${this.titleText}
-                </h3>
+                </h2>
             </div>
         `;
     }
@@ -216,8 +216,85 @@ export class PromoInterested {
             `;
         }).join("");
     }
+}
 
-    connectedCallback(): void {
-
+export class PromoThingsISupport {
+    public render(): string {
+        return /*html*/`
+            <section class="container-fluid p-4">
+                <div id="supportGrid" class="row gy-4 gx-4">
+                    <div class="col-lg-6 col-md-8 col-sm-12 d-flex align-items-center justify-content-center d-flex align-items-center justify-content-center">
+                        <component-anchor-link
+                            href="https://wearehumanwearefree.org/"
+                            target="_blank"
+                            class="d-flex w-100"
+                        >
+                            <component-lazy-image
+                                src="../assets/images/static/webp/misc/we-are-human-we-are-free.webp"
+                                alt="We are Human We Are Free"
+                                width="100%"
+                            >
+                            </component-lazy-image>
+                        </component-anchor-link>
+                    </div>
+                    <div class="col-lg-6 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
+                        <component-anchor-link
+                            href="https://www.darussafaka.org/"
+                            target="_blank"
+                            class="d-flex w-100"
+                        >
+                            <component-lazy-image
+                                src="../assets/images/static/svg/misc/darussafaka.svg"
+                                alt="Daruşşafaka"
+                                width="100%"
+                            >
+                            </component-lazy-image>
+                        </component-anchor-link>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
+                        <component-anchor-link
+                            href="https://add.org.tr/"
+                            target="_blank"
+                            class="d-flex w-100"
+                        >
+                            <component-lazy-image
+                                src="../assets/images/static/svg/misc/add.svg"
+                                alt="Atatürkçü Düşünce Derneği"
+                                width="100%"
+                            >
+                            </component-lazy-image>
+                        </component-anchor-link>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
+                        <component-anchor-link
+                            href="https://www.losev.org.tr"
+                            target="_blank"
+                            class="d-flex w-100"
+                        >
+                            <component-lazy-image
+                                src="../assets/images/static/svg/misc/losev.svg"
+                                alt="LÖSEV"
+                                width="100%"
+                            >
+                            </component-lazy-image>
+                        </component-anchor-link>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
+                        <component-anchor-link
+                            href="https://notbyai.fyi/"
+                            target="_blank"
+                            class="d-flex w-100"
+                        >
+                            <component-lazy-image
+                                src="../assets/images/static/png/notbyai.png"
+                                alt="NotByAI"
+                                width="100%"
+                            >
+                            </component-lazy-image>
+                        </component-anchor-link>
+                    </div>
+                </div>
+            </section>
+        `;
     }
 }

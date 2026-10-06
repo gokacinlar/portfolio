@@ -1,4 +1,4 @@
-import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish, PromoMotto, PromoInterested } from "../components/C_Promo";
+import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish, PromoMotto, PromoInterested, PromoThingsISupport } from "../components/C_Promo";
 import { VideoElement } from "../components/C_Video";
 import { Template, PromoFunctions, HorizontalMiddleMouseScroll, ScrollRevealAction, colorfulBannerName } from "../utils/helper";
 import { PromoParts, Banner } from "../static";
@@ -21,19 +21,23 @@ class Promo extends HTMLElement {
         scene.loadModel("../assets/3d/desk.glb");
     }
 
-
-    connectedCallback(): void {
+    private handlePromoElements(): void {
         // Create promo elements
         const promoFunctions = new PromoFunctions();
         promoFunctions.createPromoContent("#promoCardContainer", posts, (post) => new PromoCard().renderPromoCard(post));
         promoFunctions.createPromoContent("#promoSkillsContainer", skills, (skill) => new PromoSkillsShowCase().renderPromoSkillsShowCase(skill));
+
         // Create vertical tab grouping showcase - store cleanup for interval + click listeners
         this.promoTabCleanup = promoFunctions.bindVerticalTabEventsAndautoCycleTabs(new PromoParts().promoTabData);
+    }
 
+    private handleMiddleMouseScroll(): void {
         // Store cleanup functions for HorizontalMiddleMouseScroll
         this.hmmsCleanupFunctions.push(new HorizontalMiddleMouseScroll().hmmsScroll(".promo-featured-tabs"));
         this.hmmsCleanupFunctions.push(new HorizontalMiddleMouseScroll().hmmsScroll(".promo-card-container"));
+    }
 
+    private handleDynamicDivs(): void {
         // Dyanmic scroll revealing
         const dynamicContentDivs: Array<string> =
             ["promo-videos-container",
@@ -44,9 +48,17 @@ class Promo extends HTMLElement {
                 "promo-teacheng-container",
                 "promo-interested-container"];
         new ScrollRevealAction().scrollReveal(dynamicContentDivs);
+    }
 
-        // Colorful banner text
+    private handleColorfulBannerName(): void {
         colorfulBannerName(Banner.BANNER_ASCII, "homePageNameBannerCode");
+    }
+
+    connectedCallback(): void {
+        this.handlePromoElements();
+        this.handleMiddleMouseScroll();
+        this.handleDynamicDivs();
+        this.handleColorfulBannerName();
         this.handleThreeJsAnimation();
     }
 
@@ -108,10 +120,17 @@ class PromoTemplate {
                     <div class="promo-work-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoWork()}
                     </div>
-                    <div class="promo-work-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
+                    <div class="promo-animation-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.threeJsAnimationContainer()}
                     </div>
-                    <div class="promo-work-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
+                    <div class="promo-support-container-parent">
+                        <div>${new PromoTitle(Localize.translate("common:support:title") + "*")}</div>
+                        <div class="promo-support-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center rounded-5">
+                            ${this.thingsISupport()}
+                            <span class="text-center text-italic mb-3">*:${Localize.translate("common:support:supportMsg")}</span>
+                        </div>
+                    </div>
+                    <div class="promo-banner-container row col-12 mx-auto d-flex flex-column gap-2 align-items-center justify-content-center">
                         ${this.promoBanner()}
                     </div>
                 </div>
@@ -187,6 +206,14 @@ class PromoTemplate {
     private threeJsAnimationContainer(): string {
         return /*html*/ `
             <div id="threeJsAnimationContainer" class="px-3 rounded-5">
+            </div>
+        `;
+    }
+
+    private thingsISupport(): string {
+        return /*html*/`
+            <div id="thingsISupportDiv">
+                ${new PromoThingsISupport().render()}
             </div>
         `;
     }

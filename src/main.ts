@@ -26,6 +26,7 @@ import "./components/G_Maintenance";
 import "./components/M_ScrollToTopButton";
 import "./components/M_Hero";
 import "./components/M_link";
+import "./components/M_image";
 import "./components/D_Login";
 
 let darkLightModeInstance: DarkLightMode | null = null;
