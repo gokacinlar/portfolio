@@ -26,8 +26,8 @@ class CustomButton extends HTMLElement {
             }
         }
 
-        while (this.firstChild) {
-            this.removeChild(this.firstChild);
+        while (this.firstElementChild) {
+            this.removeChild(this.firstElementChild);
         }
 
         if (href) buttonElement.setAttribute("aria-label", `Go to ${href}`);
