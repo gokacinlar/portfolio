@@ -8,12 +8,13 @@ This is my own portfolio site which I'll be using to briefly introduce myself to
 * A proper blog (like anecdotes containing fixed length with limited scope & lengthy articles) **powered by Headless WordPress**.
 * Course Management for education purposes
 
-| Feature                 | Status |
-| ----------------------- | ------ |
-| LMS                     | ❌      |
-| Courses via WooCommerce | ❌      |
-| Microblog Timeline      | ✅      |
-| Image Timeline          | ❌      |
+| Feature                                           | Status |
+| ------------------------------------------------- | ------ |
+| LMS                                               | ❌      |
+| Courses via WooCommerce                           | ❌      |
+| Courses via Udemy                                 | ❌      |
+| Microblog Timeline ([IDNO](https://www.idno.co/)) | ✅      |
+| Image Timeline ([Piwigo](https://piwigo.org/))    | ✅      |
 
 ## What I'm planning to use in it?
 
