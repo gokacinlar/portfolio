@@ -5,6 +5,7 @@
     "upperNavigation": {
         "home": "Homepage",
         "lifeFeed": "Feed",
+        "gallery": "Gallery",
         "updates": "Blog",
         "about": "About"
     },

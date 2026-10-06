@@ -4,7 +4,8 @@
     },
     "upperNavigation": {
         "home": "Anasayfa",
-        "lifeFeed": "Feed",
+        "lifeFeed": "Hikayeler",
+        "gallery": "Galeri",
         "updates": "Blog",
         "about": "Hakkımda"
     },
