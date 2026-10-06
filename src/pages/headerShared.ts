@@ -26,6 +26,12 @@ export const navLinks: iface.NavLink[] = [
         htmxOptions: { ...defaultHtmxOptions, hxget: "/idno" },
     },
     {
+        href: "/galeri/index.php",
+        title: Localize.translate("common:upperNavigation:gallery"),
+        icon: "bi bi-images",
+        htmxOptions: { ...defaultHtmxOptions, hxget: "/galeri/index.php" },
+    },
+    {
         href: "/updates.html",
         title: Localize.translate("common:upperNavigation:updates"),
         icon: "bi bi-journals",
