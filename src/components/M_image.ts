@@ -7,11 +7,10 @@ class LazyImage extends HTMLElement {
     }
 
     private render(): void {
+        const className = this.getAttribute("class");
         const src = this.getAttribute("src");
         const srcset = this.getAttribute("srcset");
         const alt = this.getAttribute("alt");
-        const width = this.getAttribute("width");
-        const height = this.getAttribute("height");
 
         let imgElement = this._imgElement;
 
@@ -20,6 +19,7 @@ class LazyImage extends HTMLElement {
             this._imgElement = imgElement;
         }
 
+        imgElement.className = className || "d-flex";
         imgElement.src = src || "";
         imgElement.srcset = srcset || "";
         imgElement.alt = alt || "Lazy Image";
@@ -27,22 +27,32 @@ class LazyImage extends HTMLElement {
         imgElement.loading = "lazy";
         imgElement.decoding = "async";
 
-        if (width && height) {
-            imgElement.width = parseInt(width);
-            imgElement.height = parseInt(height);
+        let widthVal = this.getAttribute("width");
+
+        // Handle Width
+        if (widthVal && widthVal.includes("%")) {
+            imgElement.style.width = widthVal;
+            imgElement.style.height = "auto";
+        } else if (widthVal) {
+            // Parse if pixel-based val is provided
+            const pxWidth = parseInt(widthVal);
+
+            if (!isNaN(pxWidth)) {
+                imgElement.width = pxWidth;
+            }
         }
 
         this._imgElement = imgElement;
 
-        while (this.firstChild) {
-            this.removeChild(this.firstChild);
+        while (this.firstElementChild) {
+            this.removeChild(this.firstElementChild);
         }
 
         this.appendChild(imgElement);
     }
 
     static get observedAttributes(): string[] {
-        return ["src", "srcset", "alt", "width", "height", "loading"];
+        return ["class", "src", "srcset", "alt", "width", "loading"];
     }
 
     get src(): string | null {
