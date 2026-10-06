@@ -108,7 +108,11 @@
             "msg": "I can design, prototype and develop with on-demand considerations for a fully-functional web application using React as well as classical CMS approaches like WordPress or multi-page static content websites such as hobby sites, portfolios, blogs and many more! I also offer maintenance for your personal or business web solutions. For more broad information, see the plans below!"
         }
     },
-    "title": "İngilizce Öğretmeni & Ön-yüz Geliştiricisi",
+    "support": {
+        "title": "Organizations I support",
+        "supportMsg": "Please support both by moral and material ways."
+    },
+    "title": "English Teacher & Web Developer",
     "description": {
         "part1": "x",
         "part2": "y"

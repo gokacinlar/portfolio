@@ -108,6 +108,10 @@
             "msg": "React kullanarak tam işlevli bir web uygulaması tasarlayabilir, prototipini oluşturabilir ve geliştirebilirim; ayrıca WordPress gibi klasik CMS yaklaşımlarını veya hobi siteleri, portföyler, bloglar ve daha birçok çok sayfalı statik içerikli web sitesini de tasarlayabilir, prototipini oluşturabilir ve geliştirebilirim! Kişisel veya işletme web çözümleriniz için bakım hizmeti de sunuyorum. Daha kapsamlı bilgi için aşağıdaki planlara göz atabilirsiniz!"
         }
     },
+    "support": {
+        "title": "Desteklediğim Organizasyonlar",
+        "supportMsg": "Maddi & manevi destek olunuz."
+    },
     "title": "İngilizce Öğretmeni & Ön-yüz Geliştiricisi",
     "description": {
         "part1": "x",
