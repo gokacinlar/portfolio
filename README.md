@@ -12,6 +12,8 @@ This is my own portfolio site which I'll be using to briefly introduce myself to
 | ----------------------- | ------ |
 | LMS                     | ❌      |
 | Courses via WooCommerce | ❌      |
+| Microblog Timeline      | ✅      |
+| Image Timeline          | ❌      |
 
 ## What I'm planning to use in it?
 
