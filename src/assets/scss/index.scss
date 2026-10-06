@@ -726,7 +726,6 @@ $monospace-font-family: "Cascadia Code",
     }
 
     /* Promo - Interested In Working */
-
     .promo-interested-container {
         background: var(--clr-eight);
     }
@@ -1192,15 +1191,7 @@ $monospace-font-family: "Cascadia Code",
         }
     }
 
-    @keyframes still-float {
-
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-6px);
-        }
+    .promo-support-container {
+        background: var(--clr-eight);
     }
 }
