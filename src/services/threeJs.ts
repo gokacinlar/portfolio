@@ -95,15 +95,24 @@ class ThreeJs {
         model.scale.multiplyScalar(scale);
     }
 
+    private animationId: number | null = null;
+
     private startAnimation(): void {
         const animate = () => {
-            requestAnimationFrame(animate);
+            this.animationId = requestAnimationFrame(animate);
             if (!this.isAnimating) return; // off-screen: skip render work, keep the loop alive
             this.controls.update();
             this.renderer.render(this.scene, this.camera);
         };
 
         animate();
+    }
+
+    public stopAnimation(): void {
+        if (this.animationId !== null) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+        }
     }
 
     // Responsive design related adjustments
