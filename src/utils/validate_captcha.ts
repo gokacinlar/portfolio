@@ -1,9 +1,11 @@
-import { insertToastifiedMessage } from "./helper";
+import { insertToastifiedMessage } from "./helpers/toast";
 import Localize from "./initLocalization";
 
 class ValidateCaptcha {
     private lastClickTime = 0;
     private static readonly CLICK_COOLDOWN_MS = 5000;
+    private clickHandler: (() => void) | null = null;
+    private clickHandlerAdded = false;
 
     public validate(element: string): void {
         try {
@@ -12,57 +14,67 @@ class ValidateCaptcha {
             if (!targetElement) {
                 console.error(`Element with name of ${targetElement} not found...`);
                 return;
-            } else {
-                targetElement.addEventListener("click", async () => {
-                    if (Date.now() - this.lastClickTime < ValidateCaptcha.CLICK_COOLDOWN_MS) {
-                        insertToastifiedMessage(Localize.translate("common:toasts:rateLimit"));
+            }
+
+            // Remove any previously added listener to prevent accumulation
+            if (this.clickHandlerAdded && this.clickHandler) {
+                targetElement.removeEventListener("click", this.clickHandler);
+            }
+
+            this.clickHandlerAdded = true;
+
+            const handler = async () => {
+                if (Date.now() - this.lastClickTime < ValidateCaptcha.CLICK_COOLDOWN_MS) {
+                    insertToastifiedMessage(Localize.translate("common:toasts:rateLimit"));
+                    return;
+                }
+
+                // Verify reCAPTCHA response
+                const recaptchaResponse = grecaptcha.getResponse();
+                if (!recaptchaResponse) {
+                    insertToastifiedMessage(Localize.translate("common:toasts:completeCaptcha"));
+                    return;
+                }
+
+                this.lastClickTime = Date.now();
+
+                try {
+                    const response = await fetch("../php/RecaptchaVerify.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: new URLSearchParams({
+                            "captcha_submit": "true",
+                            "g-recaptcha-response": recaptchaResponse
+                        }),
+                        credentials: "include"
+                    });
+
+                    const result = await response.json().catch(() => null);
+
+                    if (!response.ok) {
+                        insertToastifiedMessage(result?.message || Localize.translate("common:toasts:requestFailed", { status: response.status }));
                         return;
                     }
 
-                    // Verify reCAPTCHA response
-                    const recaptchaResponse = grecaptcha.getResponse();
-                    if (!recaptchaResponse) {
-                        insertToastifiedMessage(Localize.translate("common:toasts:completeCaptcha"));
-                        return;
-                    }
-
-                    this.lastClickTime = Date.now();
-
-                    try {
-                        const response = await fetch("../php/RecaptchaVerify.php", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/x-www-form-urlencoded",
-                            },
-                            body: new URLSearchParams({
-                                "captcha_submit": "true",
-                                "g-recaptcha-response": recaptchaResponse
-                            }),
-                            credentials: "include"
-                        });
-
-                        const result = await response.json().catch(() => null);
-
-                        if (!response.ok) {
-                            insertToastifiedMessage(result?.message || Localize.translate("common:toasts:requestFailed", { status: response.status }));
-                            return;
-                        }
-
-                        if (result?.success) {
-                            insertToastifiedMessage(Localize.translate("common:toasts:verified"));
-                            console.log("CAPTCHA Success! Beginning download.");
-                            this.handleDownload(); // Download process begins
-                        } else {
-                            console.error(`Too many requests ${result?.error ?? ""}`);
-                            insertToastifiedMessage(result?.message || Localize.translate("common:toasts:verificationFailed"));
-                            grecaptcha.reset();
-                        }
-                    } catch (error: unknown) {
-                        console.error("Verification error:", error);
+                    if (result?.success) {
+                        insertToastifiedMessage(Localize.translate("common:toasts:verified"));
+                        console.log("CAPTCHA Success! Beginning download.");
+                        this.handleDownload(); // Download process begins
+                    } else {
+                        console.error(`Too many requests ${result?.error ?? ""}`);
+                        insertToastifiedMessage(result?.message || Localize.translate("common:toasts:verificationFailed"));
                         grecaptcha.reset();
                     }
-                });
-            }
+                } catch (error: unknown) {
+                    console.error("Verification error:", error);
+                    grecaptcha.reset();
+                }
+            };
+
+            this.clickHandler = handler;
+            targetElement.addEventListener("click", handler);
         } catch (error: unknown) {
             console.error("Validation setup error:", error);
         }

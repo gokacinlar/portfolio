@@ -1,6 +1,8 @@
 import Localize from "../utils/initLocalization";
 import * as iface from "../ts/interfaces/i.global";
-import { Template, DarkLightMode, applyHapticsToModals } from "../utils/helper";
+import { Template } from "../utils/helpers/template";
+import { DarkLightMode } from "../utils/helpers/theme";
+import { applyHapticsToModals } from "../utils/helpers/haptics";
 import { listenForBootstrapModalEventDelegation, insertModalsToDom } from "../utils/bootstrap";
 import { HtmxControls } from "../components/M_htmx";
 import ResponsiveNavbar from "../components/responsive/R_navbar";

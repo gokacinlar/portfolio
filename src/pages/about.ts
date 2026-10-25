@@ -1,6 +1,8 @@
 import shuffleLetters from "shuffle-letters";
 import ValidateCaptcha from "../utils/validate_captcha";
-import { Template, HorizontalMiddleMouseScroll, insertApprovedScript } from "../utils/helper";
+import { Template } from "../utils/helpers/template";
+import { HorizontalMiddleMouseScroll } from "../utils/helpers/scroll";
+import { insertApprovedScript } from "../utils/helpers/script";
 import { HeroImageWithLink } from "../components/C_Hero";
 import ScrollSpy from "../components/A_ScrollSpy";
 import Localize from "../utils/initLocalization";

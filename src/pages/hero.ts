@@ -1,6 +1,8 @@
 import { HeroImageWithLink } from "../components/C_Hero";
 import { BodyParts, HeroParts } from "../static";
-import { DomEvents, Template, TypeWriterDisplay } from "../utils/helper";
+import { DomEvents } from "../utils/helpers/dom";
+import { Template } from "../utils/helpers/template";
+import { TypeWriterDisplay } from "../utils/helpers/typewriter";
 import Localize from "../utils/initLocalization";
 
 class HeroSection extends HTMLElement {

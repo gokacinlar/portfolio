@@ -1,4 +1,4 @@
-import { insertToastifiedMessage } from "../utils/helper";
+import { insertToastifiedMessage } from "../utils/helpers/toast";
 import Localize from "../utils/initLocalization";
 
 // Handle web3forms hCaptcha request

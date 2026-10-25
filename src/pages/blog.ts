@@ -1,6 +1,7 @@
 import DOMPurify from "dompurify";
 import WordPressGraphQLClient from "../utils/gql/wp_graphql";
-import { Template, normalizeDateToDayMonthYear } from "../utils/helper";
+import { Template } from "../utils/helpers/template";
+import { normalizeDateToDayMonthYear } from "../utils/helpers/date";
 import Localize from "../utils/initLocalization";
 import type * as type from "../ts/interfaces/i.global";
 import type { BlogManifest, StaticPost } from "../services/blog/blogTypes";

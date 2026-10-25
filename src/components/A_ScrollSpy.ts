@@ -1,10 +1,11 @@
 import { loadWeb3Forms, formState } from "../utils/form";
-import { addBackgroundBasedOnVerticalScroll } from "../utils/helper";
+import { addBackgroundBasedOnVerticalScroll } from "../utils/helpers/scroll";
 import { AboutData } from "../static";
 import { renderEmailForm } from "./A_EmailForm";
 import Accordion from "./A_Accordion";
 import * as Type from "../ts/types/types";
 import Localize from "../utils/initLocalization";
+import { Template } from "../utils/helpers/template";
 
 class ScrollSpy {
     private bgCleanup: (() => void) | null = null;

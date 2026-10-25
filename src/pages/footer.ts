@@ -1,5 +1,5 @@
 // Components
-import { Template } from "../utils/helper";
+import { Template } from "../utils/helpers/template";
 import { FooterLinks } from "../static";
 import Localize from "../utils/initLocalization";
 

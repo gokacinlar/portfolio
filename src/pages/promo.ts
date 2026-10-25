@@ -1,6 +1,10 @@
 import { PromoTitle, PromoDescription, PromoCard, PromoSkillsShowCase, PromoTeachEnglish, PromoMotto, PromoInterested, PromoThingsISupport } from "../components/C_Promo";
 import { VideoElement } from "../components/C_Video";
-import { Template, PromoFunctions, HorizontalMiddleMouseScroll, ScrollRevealAction, colorfulBannerName } from "../utils/helper";
+import { Template } from "../utils/helpers/template";
+import { PromoFunctions } from "../utils/helpers/promo";
+import { HorizontalMiddleMouseScroll } from "../utils/helpers/scroll";
+import { ScrollRevealAction } from "../utils/helpers/scroll";
+import { colorfulBannerName } from "../utils/helpers/dom";
 import { PromoParts, Banner } from "../static";
 import posts from '../assets/json/posts.json';
 import skills from '../assets/json/promo_Skills.json';

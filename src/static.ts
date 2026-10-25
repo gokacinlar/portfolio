@@ -1,4 +1,4 @@
-import { formatDate } from "./utils/helper";
+import { formatDate } from "./utils/helpers/date";
 import GetSiteVersionNumber from "./utils/webScraper";
 import * as Type from "./ts/types/types";
 import Localize from "./utils/initLocalization";

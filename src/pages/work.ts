@@ -1,4 +1,4 @@
-import { Template } from "../utils/helper";
+import { Template } from "../utils/helpers/template";
 import Localize from "../utils/initLocalization";
 import { WorkCard, WorkFeaturedSection } from "../components/C_Work";
 import workEnglishData from "../assets/json/work-english.json";

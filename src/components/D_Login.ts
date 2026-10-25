@@ -1,5 +1,5 @@
+import { Template } from "../utils/helpers/template";
 import { RequiredCallbacksOnComponent } from "../ts/interfaces/i.callback";
-import { Template } from "../utils/helper";
 
 class ClientSideLoginPage extends HTMLElement implements RequiredCallbacksOnComponent {
     private form: HTMLFormElement | null = null;

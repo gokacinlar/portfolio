@@ -1,5 +1,5 @@
 import Localize from "../utils/initLocalization";
-import { Template } from "../utils/helper";
+import { Template } from "../utils/helpers/template";
 
 // Add just "maintenance" attribute without a value to this component to be displayed
 

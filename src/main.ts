@@ -10,7 +10,7 @@ import * as bootstrap from "bootstrap";
 import "lazysizes";
 import * as OfflinePluginRuntime from "offline-plugin/runtime";
 // Utilities
-import { DarkLightMode } from "./utils/helper";
+import { DarkLightMode } from "./utils/helpers/theme";
 import GoogleAnalytics from "./utils/gTag";
 import GetSiteVersionNumber from "./utils/webScraper";
 // Pages
