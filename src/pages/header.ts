@@ -10,6 +10,7 @@ import CustomWebHaptics from "../utils/webHaptics";
 import {
     headerLeftIcon as sharedHeaderLeftIcon, headerMiddleContent as sharedHeaderMiddleContent,
     defaultHtmxOptions as sharedDefaultHtmxOptions,
+    Routes,
 } from "./headerShared";
 
 let darkLightModeInstance: DarkLightMode | null = null;
@@ -189,10 +190,10 @@ export class HeaderNode {
     }
 
     private static readonly primaryBtn: iface.NavLink = {
-        href: "/work.html",
+        href: Routes.WORK,
         title: Localize.translate("common:hero:buttonTitles:workHire"),
         icon: "bi bi-star-half text-black fw-bold pulsate-fwd",
-        htmxOptions: { ...HeaderNode.defaultHtmxOptions, hxget: "/work.html" },
+        htmxOptions: { ...HeaderNode.defaultHtmxOptions, hxget: Routes.WORK },
     }
 
     public static headerHireBtn(): string {

@@ -1,49 +1,42 @@
-import Localize from "../utils/initLocalization";
-import * as type from "../ts/types/types";
+import { Routes, defaultHtmxOptions, NavLinkHtmxOptions } from "../utils/helpers/routes";
 import * as iface from "../ts/interfaces/i.global";
 import { HtmxControls } from "../components/M_htmx";
 
 export const SITE_URL: string = "https://dervisoksuzoglu.xyz";
+export { Routes, defaultHtmxOptions };
 
-export const defaultHtmxOptions: type.HTMXOptions = {
-    hxget: "",
-    hxtrigger: "click",
-    hxswap: "innerHTML transition:true",
-    hxpushurl: true,
-};
-
-export const navLinks: iface.NavLink[] = [
+export const navLinks = ((): iface.NavLink[] => [
     {
-        href: "/index.html",
-        title: Localize.translate("common:upperNavigation:home"),
+        href: Routes.HOME,
+        title: "Home",
         icon: "bi bi-house-door",
-        htmxOptions: { ...defaultHtmxOptions, hxget: "/index.html" },
+        htmxOptions: NavLinkHtmxOptions[Routes.HOME],
     },
     {
-        href: "/idno",
-        title: Localize.translate("common:upperNavigation:lifeFeed"),
+        href: Routes.LIFE_FEED,
+        title: "Life Feed",
         icon: "bi bi-bookshelf",
-        htmxOptions: { ...defaultHtmxOptions, hxget: "/idno" },
+        htmxOptions: NavLinkHtmxOptions[Routes.LIFE_FEED],
     },
     {
-        href: "/galeri/index.php",
-        title: Localize.translate("common:upperNavigation:gallery"),
+        href: Routes.GALLERY,
+        title: "Gallery",
         icon: "bi bi-images",
-        htmxOptions: { ...defaultHtmxOptions, hxget: "/galeri/index.php" },
+        htmxOptions: NavLinkHtmxOptions[Routes.GALLERY],
     },
     {
-        href: "/updates.html",
-        title: Localize.translate("common:upperNavigation:updates"),
+        href: Routes.UPDATES,
+        title: "Updates",
         icon: "bi bi-journals",
-        htmxOptions: { ...defaultHtmxOptions, hxget: "/updates.html" },
+        htmxOptions: NavLinkHtmxOptions[Routes.UPDATES],
     },
     {
-        href: "/about.html",
-        title: Localize.translate("common:upperNavigation:about"),
+        href: Routes.ABOUT,
+        title: "About",
         icon: "bi bi-person-circle",
-        htmxOptions: { ...defaultHtmxOptions, hxget: "/about.html" },
+        htmxOptions: NavLinkHtmxOptions[Routes.ABOUT],
     },
-];
+])();
 
 export function headerLeftIcon(): string {
     return /*html*/ `
@@ -67,13 +60,11 @@ export function headerLeftIcon(): string {
 export function headerMiddleContent(): string {
     return navLinks
         .map(({ href, title, icon, htmxOptions }) => {
-            const options: type.HTMXOptions = { ...(htmxOptions ?? defaultHtmxOptions), hxget: htmxOptions?.hxget || href };
-
             return /*html*/`
                     <li class="w-100">
                         <a
                             href="${href}"
-                            ${new HtmxControls(options).render()}
+                            ${new HtmxControls(htmxOptions ?? defaultHtmxOptions).render()}
                             title="${title}"
                             class="htmx-nav-link btn header-btn-bg btn-lg rounded-5 fs-3">
                             <i class="bi ${icon}"></i> ${title}

@@ -1,5 +1,6 @@
 import { HtmxControls } from "../components/M_htmx";
 import Localize from "../utils/initLocalization";
+import { Routes } from "../utils/helpers/routes";
 
 export class HeaderHireButton extends HTMLElement {
     private _linkElement: HTMLAnchorElement | null = null;
@@ -30,7 +31,7 @@ export class HeaderHireButton extends HTMLElement {
             this.removeChild(this._linkElement);
         }
 
-        const href = this.getAttribute("href") || "/work.html";
+        const href = this.getAttribute("href") || Routes.WORK;
         const title = this.getAttribute("title") || Localize.translate("common:hero:buttonTitles:workHire");
         const icon = this.getAttribute("icon") || "bi bi-star-half text-black fw-bold pulsate-fwd";
         const btnTextKey = this.getAttribute("btn-text-key") || "common:hero:buttons:workWMe";
