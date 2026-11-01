@@ -6,6 +6,9 @@
 public/
 doc/
 
+# AI
+.agents
+
 # PHP-composer related
 vendor/
 
