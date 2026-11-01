@@ -5,8 +5,6 @@ const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
 const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
@@ -16,7 +14,6 @@ const Dotenv = require("dotenv-webpack");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const PhpWebpackPlugin = require("@visto9259/php-webpack-plugin");
 
-// CSP configuration for trusted external scripts
 const scripts = [
     "https://web3forms.com/client/script.js",
     "https://api.web3forms.com/submit",
