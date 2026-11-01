@@ -1,17 +1,19 @@
+import BaseComponent from "../utils/helpers/baseComponent";
 import Localize from "../utils/initLocalization";
 
-class ScrollToTopButton extends HTMLElement {
+class ScrollToTopButton extends BaseComponent {
     private _isVisible: boolean = false;
     private _isArrowFilled: boolean = false;
+    private arrowTimeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    private upArrowClickHandler: ((e: MouseEvent) => void) | null = null;
+
     private static readonly TOP_VAL: number = 0;
     private static readonly SCROLL_Y_VAL: number = 500;
-    private upArrowClickHandler: (() => void) | null = null;
-    private arrowTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
     constructor() {
         super();
         this.className = "scroll-to-top-div rounded-pill slide-from-right shadow-lg";
-        this.innerHTML = this.content();
     }
 
     private content(): string {
@@ -24,12 +26,10 @@ class ScrollToTopButton extends HTMLElement {
     }
 
     private handleUpArrowChange() {
-        // Query within component to avoid global leak; fallback to document for legacy markup
         const upArrow = this.querySelector(".bi-arrow-up-circle") as HTMLElement || document.querySelector(".bi-arrow-up-circle") as HTMLElement;
 
         if (!upArrow) return;
 
-        // Prevent duplicate registration
         if (this.upArrowClickHandler) {
             this.removeEventListener("click", this.upArrowClickHandler);
         }
@@ -59,7 +59,6 @@ class ScrollToTopButton extends HTMLElement {
         this._isVisible = window.scrollY > ScrollToTopButton.SCROLL_Y_VAL;
         this.style.display = this._isVisible ? "block" : "none";
 
-        // Handle footer visibility
         if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
             this.style.display = "none";
         }
@@ -80,15 +79,18 @@ class ScrollToTopButton extends HTMLElement {
         });
     }
 
-    // Hide element to clear display on footer
     private handleHidingOnFooter(): void {
         if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
             this.style.display = "none";
         }
     }
 
+    render(): string {
+        return this.content();
+    }
+
     connectedCallback(): void {
-        // Attach listeners here (not in constructor) for proper lifecycle pairing
+        super.connectedCallback();
         this.addEventListener("click", this.scrollToTop);
         this.handleUpArrowChange();
         window.addEventListener("scroll", this.toggleVisibility, { passive: true });

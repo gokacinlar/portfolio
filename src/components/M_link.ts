@@ -1,26 +1,24 @@
-class AnchorLink extends HTMLElement {
-    private _anchorElement: HTMLAnchorElement | null = null;
-    private _isSetUp: boolean = false;
+import BaseComponent from "../utils/helpers/baseComponent";
 
-    constructor() {
-        super();
+class AnchorLink extends BaseComponent {
+    private _anchorElement: HTMLAnchorElement | null = null;
+
+    static get observedAttributes(): string[] {
+        return ["href", "text", "type", "title", "referrerpolicy", "target", "download", "hreflang"];
     }
 
-    private render(): void {
+    render(): string {
         const href = this.getAttribute("href");
         const text = this.getAttribute("text");
         const type = this.getAttribute("type");
         const title = this.getAttribute("title");
         const referrerpolicy = this.getAttribute("referrerpolicy");
-        const target = this.getAttribute("target");
+        const target = this.getAttribute("target") || "_parent";
         const downloadAttr = this.getAttribute("download");
+        const hreflang = this.getAttribute("hreflang");
+        const anchorElement = this._anchorElement ?? document.createElement("a");
 
-        let anchorElement = this._anchorElement;
-
-        if (!anchorElement) {
-            anchorElement = document.createElement("a");
-            this._anchorElement = anchorElement;
-        }
+        this._anchorElement = anchorElement;
 
         const componentToBePreserved =
             this.querySelector(":scope > component-lazy-image") ?? anchorElement.querySelector(":scope > component-lazy-image");
@@ -31,11 +29,22 @@ class AnchorLink extends HTMLElement {
         anchorElement.className = "link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover w-100";
         anchorElement.href = href || "#";
         anchorElement.title = title || "N/A";
-        anchorElement.target = target || "_parent";
+        anchorElement.target = target;
         anchorElement.referrerPolicy =
             referrerpolicy || "strict-origin-when-cross-origin";
-        anchorElement.rel = "opener";
         anchorElement.type = type || "text/html";
+
+        if (target === "_blank") {
+            anchorElement.rel = "noopener noreferrer";
+        } else {
+            anchorElement.removeAttribute("rel");
+        }
+
+        if (hreflang) {
+            anchorElement.hreflang = hreflang;
+        } else {
+            anchorElement.removeAttribute("hreflang");
+        }
 
         if (downloadAttr !== null) {
             anchorElement.download = downloadAttr;
@@ -53,41 +62,8 @@ class AnchorLink extends HTMLElement {
         }
 
         this.appendChild(anchorElement);
-    }
 
-    static get observedAttributes(): string[] {
-        return ["href", "title", "text", "target", "referrerpolicy", "download"];
-    }
-
-    get src(): string | null {
-        return this.getAttribute("href");
-    }
-
-    set src(value: string | null) {
-        if (value) {
-            this.setAttribute("href", value);
-        } else {
-            this.removeAttribute("href");
-        }
-    }
-
-    connectedCallback(): void {
-        this.render();
-        this._isSetUp = true;
-    }
-
-    attributeChangedCallback(
-        _name: string,
-        oldValue: string,
-        newValue: string
-    ): void {
-        if (this.isConnected && oldValue !== newValue) {
-            this.render();
-        }
-    }
-
-    disconnectedCallback(): void {
-        this._isSetUp = false;
+        return "";
     }
 }
 

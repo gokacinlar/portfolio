@@ -3,9 +3,8 @@ import { addBackgroundBasedOnVerticalScroll } from "../utils/helpers/scroll";
 import { AboutData } from "../static";
 import { renderEmailForm } from "./A_EmailForm";
 import Accordion from "./A_Accordion";
-import * as Type from "../ts/types/types";
+import type * as Type from "../ts/types/types";
 import Localize from "../utils/initLocalization";
-import { Template } from "../utils/helpers/template";
 
 class ScrollSpy {
     private bgCleanup: (() => void) | null = null;
@@ -13,41 +12,7 @@ class ScrollSpy {
     private formSubmitHandlers: Array<{ form: HTMLFormElement; handler: (event: Event) => void }> = [];
     private web3FormsTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
-    private renderHeading(id: string, text: string): string {
-        return /*html*/ `
-            <h4 id="${id}">
-                <a href="#${id}" class="link-body-emphasis link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-                    ${text}
-                </a>
-            </h4>
-        `;
-    }
-
-    // Scrollspy list items
-    private renderNavLinks() {
-        return AboutData.navLinks.map(({ id, icon, label }) =>
-            `<a class="list-group-item list-group-item-action rounded-pill shadow-sm text-center" href="#${id}">${icon} ${label}</a>`
-        ).join("");
-    }
-
-    private renderTable(headers: string[], rows: Type.TableRow[], id: string): string {
-        return /*html*/ `
-            <div class="table-responsive">
-                <table id="${id}" class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            ${headers.map((h) => `<th scope="col">${h}</th>`).join("")}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${rows.map((row) => `<tr>${row.map((cell, i) => i === 0 ? `<th scope="row">${cell}</th>` : `<td>${cell}</td>`).join("")}</tr>`).join("")}
-                    </tbody>
-                </table>
-            </div>
-        `;
-    }
-
-    public render(): string {
+    render(): string {
         return /*html*/ `
             <section id="aside-content" class="aside-main d-flex flex-column gap-4">
                 <div id="about-scroll-spy-id" class="z-0 sticky-top scrollspy-nav list-group d-flex flex-row align-items-center justify-content-between fs-4 fw-medium gap-2 text-truncate rounded-pill">
@@ -129,6 +94,40 @@ class ScrollSpy {
                     </div>
                 </div>
             </section>
+        `;
+    }
+
+    private renderHeading(id: string, text: string): string {
+        return /*html*/`
+            <h4 id="${id}">
+                <a href="#${id}" class="link-body-emphasis link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                    ${text}
+                </a>
+            </h4>
+        `;
+    }
+
+    // Scrollspy list items
+    private renderNavLinks() {
+        return AboutData.navLinks.map(({ id, icon, label }) =>
+            `<a class="list-group-item list-group-item-action rounded-pill shadow-sm text-center" href="#${id}">${icon} ${label}</a>`
+        ).join("");
+    }
+
+    private renderTable(headers: string[], rows: Type.TableRow[], id: string): string {
+        return /*html*/`
+            <div class="table-responsive">
+                <table id="${id}" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            ${headers.map((h) => `<th scope="col">${h}</th>`).join("")}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rows.map((row) => `<tr>${row.map((cell, i) => i === 0 ? `<th scope="row">${cell}</th>` : `<td>${cell}</td>`).join("")}</tr>`).join("")}
+                    </tbody>
+                </table>
+            </div>
         `;
     }
 

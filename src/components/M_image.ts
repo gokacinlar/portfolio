@@ -1,22 +1,25 @@
-class LazyImage extends HTMLElement {
-    private _imgElement: HTMLImageElement | null = null;
-    private _isSetUp: boolean = false;
+import BaseComponent from "../utils/helpers/baseComponent";
 
-    constructor() {
-        super();
+export class LazyImage extends BaseComponent {
+    private _imgElement: HTMLImageElement | null = null;
+
+    static get observedAttributes(): string[] {
+        return ["class", "src", "srcset", "alt", "width"];
     }
 
-    private render(): void {
+    render(): string {
         const className = this.getAttribute("class");
         const src = this.getAttribute("src");
         const srcset = this.getAttribute("srcset");
         const alt = this.getAttribute("alt");
+        const imgElement = this._imgElement ?? document.createElement("img");
 
-        let imgElement = this._imgElement;
+        this._imgElement = imgElement;
 
-        if (!imgElement) {
-            imgElement = document.createElement("img") as HTMLImageElement;
-            this._imgElement = imgElement;
+        for (const child of Array.from(this.childNodes)) {
+            if (child !== imgElement) {
+                child.remove();
+            }
         }
 
         imgElement.className = className || "d-flex";
@@ -26,64 +29,27 @@ class LazyImage extends HTMLElement {
         imgElement.title = alt || "Lazy Image";
         imgElement.loading = "lazy";
         imgElement.decoding = "async";
+        imgElement.style.width = "";
+        imgElement.style.height = "";
+        imgElement.removeAttribute("width");
 
-        let widthVal = this.getAttribute("width");
-
-        // Handle Width
-        if (widthVal && widthVal.includes("%")) {
+        const widthVal = this.getAttribute("width");
+        if (widthVal?.includes("%")) {
             imgElement.style.width = widthVal;
             imgElement.style.height = "auto";
         } else if (widthVal) {
-            // Parse if pixel-based val is provided
-            const pxWidth = parseInt(widthVal);
+            const pxWidth = Number.parseInt(widthVal, 10);
 
-            if (!isNaN(pxWidth)) {
+            if (!Number.isNaN(pxWidth)) {
                 imgElement.width = pxWidth;
             }
         }
 
-        this._imgElement = imgElement;
-
-        while (this.firstElementChild) {
-            this.removeChild(this.firstElementChild);
+        if (imgElement.parentNode !== this) {
+            this.appendChild(imgElement);
         }
 
-        this.appendChild(imgElement);
-    }
-
-    static get observedAttributes(): string[] {
-        return ["class", "src", "srcset", "alt", "width", "loading"];
-    }
-
-    get src(): string | null {
-        return this.getAttribute("src");
-    }
-
-    set src(value: string | null) {
-        if (value) {
-            this.setAttribute("src", value);
-        } else {
-            this.removeAttribute("src");
-        }
-    }
-
-    connectedCallback(): void {
-        this.render();
-        this._isSetUp = true;
-    }
-
-    attributeChangedCallback(
-        _name: string,
-        oldValue: string,
-        newValue: string
-    ): void {
-        if (this.isConnected && oldValue !== newValue) {
-            this.render();
-        }
-    }
-
-    disconnectedCallback(): void {
-        this._isSetUp = false;
+        return "";
     }
 }
 
