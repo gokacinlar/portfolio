@@ -1,0 +1,16 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "autoupdate": true,
+    "snapshot": true,
+    "formatter": true,
+    "shell": "/usr/bin/fish",
+    "plugin": [
+        "opencode-agent-memory",
+        "@knikolov/opencode-plugin-simple-memory"
+    ],
+    "disabled_providers": [
+        "openai",
+        "anthropic",
+        "gemini"
+    ]
+}
