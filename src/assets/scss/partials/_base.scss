@@ -1,0 +1,102 @@
+@use "../mixins" as mixin;
+@use "../breakpoints" as breakpoint;
+@use "../m_queries" as mquery;
+
+@layer init {
+
+    .htmx-anim.faded {
+        opacity: .25;
+    }
+
+    .htmx-anim {
+        opacity: 1;
+        transition: opacity ease-in 900ms;
+    }
+
+    .htmx-nav-link {
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, font-size, 1.75rem);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, font-size, 1.95rem);
+    }
+
+    body {
+        background: var(--clr-one) !important;
+    }
+
+    .header-btn-bg {
+        color: var(--clr-two) !important;
+        background: var(--clr-one) !important;
+    }
+
+    .bee-color-btn {
+        @include mixin.custom-bee-color();
+    }
+
+    .hr-btn-text {
+        @include mixin.hover-underline(var(--clr-two));
+        @include mixin.transition(all .35s ease-in-out);
+    }
+
+    .hr-daynight-switch-icon {
+        transform: rotate(0);
+        @include mixin.transition(transform .25s ease-in-out !important);
+
+        &:hover {
+            transform: rotate(90deg);
+        }
+    }
+
+    .header-day-night-btn {
+        @include mixin.transition(all 0.25s ease-in-out);
+    }
+
+    #offCanvasControls {
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, margin-bottom, .15rem);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, margin-bottom, .55rem);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, padding-inline, .55rem);
+    }
+
+    :is(#offCanvasControls, #blogAsideOffcanvasTemplate) {
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, display, flex);
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, display, none);
+        @include mixin.responsive-styling(breakpoint.$desktop-breakpoints, display, none);
+    }
+
+    #blogAsideOffcanvasTemplate {
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, width, 80%);
+    }
+
+    .scroll-to-top-div {
+        display: none;
+        position: fixed;
+        inset: auto 24px 24px auto;
+        cursor: pointer;
+        @include mixin.custom-bee-color();
+    }
+
+    #submitCaptcha {
+        @include mixin.custom-bee-color();
+    }
+
+    .glow-white-drop-shadow {
+        @include mixin.glowing-white-drop-shadow();
+    }
+
+    :is(#sitemapModalBtn, #llmsTxtBtn, #displayOffCanvasBtn),
+    .download-rss-button {
+        @include mixin.def-yellow-button-size();
+    }
+
+    .header-lang-switch-flag {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    #homePageNameBannerCode {
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, justify-content, start);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, align-items, start);
+    }
+
+    .banner-letter {
+        text-shadow: 4px 6px 2px rgba(37, 99, 235, 0.5);
+    }
+}

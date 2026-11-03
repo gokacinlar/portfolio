@@ -1,0 +1,66 @@
+@use "../mixins" as mixin;
+@use "../breakpoints" as breakpoint;
+@use "../m_queries" as mquery;
+
+@layer init {
+
+    #about-aside,
+    #about-main {
+        background: var(--clr-eight);
+    }
+
+    #about-main {
+        @include mixin.responsive-styling(breakpoint.$desktop-breakpoints, height, 100dvh);
+        @include mixin.responsive-styling(breakpoint.$desktop-breakpoints, min-height, 664px);
+        @include mixin.hide-scrollbar();
+    }
+
+    #about-main .scrollspy-content h4 {
+        scroll-margin-top: 80px;
+    }
+
+    #about-scroll-spy-id {
+        @include mixin.hide-scrollbar();
+
+        @include mquery.responsive(phone) {
+            @include mixin.scroll-by-mwhell();
+        }
+    }
+
+    .aside-skill-name {
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, flex-direction, column);
+    }
+
+    .aside-skill {
+        @include mixin.responsive-font-size(breakpoint.$mobile-breakpoints, .80em);
+        @include mixin.responsive-font-size(breakpoint.$tablet-breakpoints, .65em);
+        @include mixin.responsive-font-size(breakpoint.$desktop-small-breakpoints, .65em);
+    }
+
+    .about-li1-text>mark {
+        border-radius: var(--rounded-sm);
+    }
+
+    .aside-section-socials {
+        color: var(--clr-two);
+        background: var(--clr-one);
+        transition: all .25s ease-in-out;
+
+        &:hover {
+            .about-socials-arrow {
+                @include mixin.animation(swing-in-left-fwd, .25s, cubic-bezier(0.785, 0.135, 0.150, 0.860), alternate both);
+                opacity: 1;
+            }
+        }
+    }
+
+    .about-socials-arrow {
+        opacity: 0;
+    }
+
+    .aside-ico {
+        --ico-w: 34px;
+        width: var(--ico-w);
+        height: auto;
+    }
+}

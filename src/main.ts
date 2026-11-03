@@ -1,6 +1,5 @@
 // CSS & SCSS
 import "./assets/scss/index.scss";
-import "./assets/scss/globals.scss";
 // CSS Framework & Framework-related
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";

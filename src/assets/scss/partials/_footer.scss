@@ -1,0 +1,37 @@
+@use "../mixins" as mixin;
+@use "../breakpoints" as breakpoint;
+@use "../m_queries" as mquery;
+
+@layer init {
+    .footer-container {
+        background: var(--clr-eight);
+    }
+
+    .footer-links {
+        white-space: nowrap;
+    }
+
+    .footer-promo-links {
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
+    }
+
+    .footer-brading-list {
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, align-items, end);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, justify-content, space-evenly);
+    }
+
+    .footer-left {
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-grow, 1);
+    }
+
+    .footer-right {
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, align-items, end);
+    }
+
+    .footer-right-brand {
+        --def-h: 42px;
+        height: var(--def-h) !important;
+    }
+}

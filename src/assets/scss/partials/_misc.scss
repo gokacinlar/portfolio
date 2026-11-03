@@ -1,0 +1,17 @@
+@use "../mixins" as mixin;
+@use "../breakpoints" as breakpoint;
+@use "../m_queries" as mquery;
+
+@layer init {
+
+    /* Modals */
+    .modal-content {
+        background-color: var(--clr-eight) !important;
+        @include mixin.animation(scale-in-center, .45s, cubic-bezier(0.770, 0.000, 0.175, 1.000), alternate both);
+    }
+
+    /* 404 */
+    #err_404 {
+        @include mixin.background-cover("../images/static/svg/parabolic-rectangle.svg");
+    }
+}

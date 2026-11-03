@@ -5,18 +5,6 @@
     #{$val2},
     #{$val3},
     #{$val4};
-    -moz-font-feature-settings: #{$val1},
-    #{$val2},
-    #{$val3},
-    #{$val4};
-    -ms-font-feature-settings: #{$val1},
-    #{$val2},
-    #{$val3},
-    #{$val4};
-    -webkit-font-feature-settings: #{$val1},
-    #{$val2},
-    #{$val3},
-    #{$val4};
 }
 
 @mixin transition($props...) {
@@ -24,7 +12,6 @@
 }
 
 @mixin animation($name, $duration, $timing-function, $fill-mode) {
-    -webkit-animation: #{$name} #{$duration} #{$timing-function} #{$fill-mode};
     animation: #{$name} #{$duration} #{$timing-function} #{$fill-mode};
 }
 
@@ -83,14 +70,6 @@
         inset -30px 0 30px -20px rgba(0, 0, 0, 0.05);
 }
 
-@mixin apply-to-selectors($selectors, $rules) {
-    @each $selector in $selectors {
-        #{$selector} {
-            @content;
-        }
-    }
-}
-
 @mixin responsive-flex-direction($breakpoints, $direction) {
     @each $bp in $breakpoints {
         @include mquery.responsive($bp) {
@@ -113,7 +92,6 @@
     }
 
     & {
-        -ms-overflow-style: none;
         scrollbar-width: none;
         scroll-behavior: smooth;
     }
@@ -131,9 +109,6 @@
 }
 
 @mixin wavy-text($color) {
-    -webkit-text-decoration-style: wavy;
-    -moz-text-decoration-style: wavy;
-    text-decoration-style: wavy;
     text-decoration: underline wavy .07em $color;
 }
 
@@ -144,16 +119,6 @@
 @mixin custom-bee-color {
     color: #1F1F24 !important;
     background: var(--clr-six) !important;
-}
-
-@mixin neumorphic-background($border-radius: 50px) {
-    background: linear-gradient(225deg, #e3c334, #ffe83e) !important;
-}
-
-@mixin custom-box-shadow($p1, $p2, $p3, $p4, $alpha) {
-    box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
-    -webkit-box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
-    -moz-box-shadow: $p1 $p2 $p3 $p4 rgba(0, 0, 0, $alpha);
 }
 
 @mixin glowing-white-drop-shadow() {

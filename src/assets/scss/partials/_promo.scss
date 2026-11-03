@@ -1,0 +1,276 @@
+@use "../mixins" as mixin;
+@use "../breakpoints" as breakpoint;
+@use "../m_queries" as mquery;
+
+@layer init {
+    :is(#promo, #promoFinalNote) {
+        min-height: var(--sizes-content);
+    }
+
+    #pfnSocials {
+        background: var(--clr-eight);
+    }
+
+    .promo-videos-container {
+        @include mixin.responsive-flex-direction(breakpoint.$mobile-breakpoints, column);
+        @include mixin.responsive-flex-direction(breakpoint.$tablet-breakpoints, column);
+        @include mixin.responsive-flex-direction(breakpoint.$desktop-breakpoints, row);
+        gap: .55rem !important;
+    }
+
+    .promo-motto-quote-container {
+        --def-height: 256px;
+        min-height: var(--def-height);
+        @include mixin.custom-bee-color();
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, align-items, start);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, gap, .25em);
+
+        &>h3 {
+            @include mixin.custom-font(Franuces);
+            @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, font-size, 1rem);
+            text-decoration-skip-ink: auto;
+            text-emphasis-position: under right;
+        }
+    }
+
+    .promo-motto-quote-icon {
+        filter: drop-shadow(5px 5px 97px #000000);
+        @include mixin.dynamic-font-size(2rem, calc(8vw + 4rem), 12rem);
+    }
+
+    #promo_Description {
+        min-height: 450px !important;
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column-reverse);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, margin, 0);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, padding, .25em);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, flex-direction, column-reverse);
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, flex-direction, column-reverse);
+    }
+
+    .promo-featured-tabs {
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, row);
+        // Tablet grid view
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, width, 100%);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, display, grid);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, grid-template-rows, repeat(2, 1fr));
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, grid-template-columns, repeat(2, 1fr));
+        // Small desktop grid view
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, display, grid);
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, grid-template-rows, repeat(2, 1fr));
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, grid-template-columns, repeat(2, 1fr));
+        overflow-x: scroll;
+        @include mixin.hide-scrollbar();
+    }
+
+    .promo-projects-container {
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, align-items, baseline);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, justify-content, baseline);
+
+        @each $bp in breakpoint.$mobile-breakpoints {
+            @include mquery.responsive($bp) {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                overflow-x: scroll !important;
+                scroll-snap-type: x mandatory;
+                scroll-padding-inline-start: 0 !important;
+                @include mixin.hide-scrollbar();
+            }
+        }
+    }
+
+    #promoCardContainer {
+        @include mixin.responsive-flex-direction(breakpoint.$mobile-breakpoints, row);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-wrap, nowrap);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, justify-content, start);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, overflow-x, scroll);
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, scrollbar-width, none);
+        @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, flex-wrap, wrap);
+
+        &>div {
+            @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, scroll-snap-align, start);
+            @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-shrink, 0);
+        }
+    }
+
+    .promo-interested-button {
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, width, 100%);
+    }
+
+    .marquee-container:hover .marquee-content {
+        animation-play-state: paused;
+    }
+
+    .marquee-content {
+        animation: marquee 30s linear infinite;
+    }
+
+
+    .psc-container {
+        width: 100%;
+        background: var(--clr-eight);
+        @include mixin.gradient-inset-box-shadow;
+    }
+
+    #promoSkillsContainer {
+        width: 100%;
+        white-space: nowrap;
+
+        @each $bp in breakpoint.$mobile-breakpoints {
+            @include mquery.responsive($bp) {
+                animation: marquee 30s linear infinite;
+
+                &:hover {
+                    animation-play-state: paused;
+                }
+
+                &>.promo-skills-fig {
+                    filter: brightness(100%) grayscale(0%);
+                }
+            }
+        }
+    }
+
+    .promo-skills-fig {
+        flex: 0 0 auto;
+        min-height: 16.1ch !important;
+        width: 100px;
+        height: auto;
+        object-fit: cover;
+        filter: brightness(65%) grayscale(25%);
+
+        &:hover {
+            filter: brightness(100%) grayscale(0%);
+        }
+    }
+
+    .promo-skills-img {
+        --def-wh: 100px !important;
+        min-height: var(--def-wh);
+        max-width: var(--def-wh);
+    }
+
+    #promoCard {
+        color: var(--clr-one);
+        background: var(--clr-two);
+        width: 34ch;
+        height: 34ch;
+        min-height: 375px;
+        @include mixin.borderRadius(var(--rounded-sm));
+
+        @each $bp in breakpoint.$mobile-breakpoints {
+            @include mquery.responsive($bp) {
+                width: 27ch !important;
+            }
+        }
+    }
+
+    #promoLink {
+        transition: all .25s ease-in-out;
+
+        &:hover {
+            border: 1px solid var(--clr-five) !important;
+        }
+    }
+
+    .promo-project-link-icon {
+        display: none;
+    }
+
+    .promo-video {
+        filter: opacity(85%);
+    }
+
+    .promo-socials-fig>a>img {
+        width: 46px;
+    }
+
+    .p-vertical {
+        width: 60px !important;
+        transform: rotate(90deg);
+    }
+
+    .promo-tc-icon {
+        font-size: 6rem !important;
+        animation: fade-in-fwd 0.55s cubic-bezier(.25, .46, .45, .94) both;
+    }
+
+    .promo-title-container {
+        @each $bp in breakpoint.$all-mobile-tablet-breakpoints {
+            @include mquery.responsive($bp) {
+                text-align: start !important;
+            }
+        }
+    }
+
+    .pfns-link {
+        color: var(--clr-one) !important;
+        background: var(--clr-two);
+
+        &>.pfns-icon {
+            color: var(--clr-two);
+            background: var(--clr-one);
+        }
+    }
+
+    /* Teaching Section */
+    #promoTE {
+        @each $bp in breakpoint.$all-mobile-tablet-breakpoints {
+            @include mquery.responsive($bp) {
+                display: flex !important;
+                flex-direction: column !important;
+                margin-top: 0 !important;
+                padding: .25em !important;
+                font-size: smaller !important;
+            }
+        }
+
+        &>div>.pt-head>p.h1 {
+            @include mixin.responsive-font-size(breakpoint.$mobile-breakpoints, 1.85em);
+
+            @each $bp in breakpoint.$mobile-breakpoints {
+                @include mquery.responsive($bp) {
+                    line-height: 1.45em !important;
+                }
+            }
+        }
+
+        &>div>.pt-head>p {
+            @include mixin.responsive-font-size(breakpoint.$mobile-breakpoints, 1.65em);
+
+            @each $bp in breakpoint.$mobile-breakpoints {
+                @include mquery.responsive($bp) {
+                    line-height: 1.35em !important;
+                }
+            }
+        }
+
+        &>.te-img-container {
+            @include mixin.hide-on(breakpoint.$mobile-breakpoints);
+        }
+    }
+
+    .te-img-container>ul>li {
+        border: none !important;
+    }
+
+    .te-img-container>ul>li>img {
+        width: 128px;
+    }
+
+    /* Promo - Interested In Working */
+    .promo-interested-container {
+        background: var(--clr-eight);
+    }
+
+    .promo-interested-img {
+        --def-height: 512px;
+        max-width: 100%;
+        max-height: var(--def-height);
+        object-fit: cover;
+    }
+
+    .promo-support-container {
+        background: var(--clr-eight);
+    }
+}

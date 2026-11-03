@@ -1,0 +1,130 @@
+@use "../mixins" as mixin;
+@use "../breakpoints" as breakpoint;
+@use "../m_queries" as mquery;
+
+@layer init {
+    #hero {
+        min-height: var(--sizes-content);
+        background: var(--clr-eight);
+    }
+
+    .hero-child {
+        @include mixin.responsive-flex-direction(breakpoint.$all-mobile-tablet-breakpoints, column-reverse);
+        @include mixin.responsive-flex-direction(breakpoint.$desktop-breakpoints, row);
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, padding, .75em);
+
+        @each $bp in breakpoint.$all-mobile-tablet-breakpoints {
+            @include mquery.responsive($bp) {
+                .hero-logo {
+                    --logo-mw: 256px;
+                    width: var(--logo-mw);
+                }
+
+                .ocps-hero-img-container,
+                .ocps-container {
+                    min-width: 100% !important;
+                }
+
+                .ocps-container {
+                    margin-top: .75em !important;
+                    gap: .65rem !important;
+                }
+
+                #mottosSection {
+                    padding-bottom: .55em !important;
+                }
+
+                .motto-element {
+                    font-size: .25em !important;
+                    font-weight: 400 !important;
+                    margin-bottom: .15em !important;
+                }
+            }
+        }
+    }
+
+    #threeJsAnimationContainer {
+        width: 100%;
+        min-height: 400px;
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+            content: "Learn, Work, Grow";
+            position: absolute;
+            inset: 0;
+            font-size: calc(5rem + 3.3vw);
+            font-weight: bolder;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            border-radius: 0;
+            z-index: 1;
+        }
+
+        canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 2rem !important
+        }
+    }
+
+    .hero-title-container {
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, margin-top, .75rem);
+    }
+
+    .ocps-buttons {
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, flex-direction, column);
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, width, 100%);
+        @include mixin.responsive-styling(breakpoint.$desktop-breakpoints, padding-inline, 2rem);
+        @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, padding-inline, .25rem);
+    }
+
+    .hero-btn {
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, width, 100%);
+    }
+
+    #heroLogoBg {
+        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, background-position, center);
+        @include mixin.borderRadius(var(--rounded-xxl));
+        background-image: radial-gradient(var(--clr-five) 10%, transparent 10%);
+        background-position: 5px 8px;
+        background-size: 24px 24px;
+    }
+
+    .hero-logo {
+        width: var(--sizes-logo);
+        height: auto;
+        object-fit: cover;
+        @include mixin.borderRadius(50%);
+    }
+
+    .motto-element {
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-grow, 1);
+        color: var(--clr-one);
+        background: var(--clr-two);
+        animation: fade-in-fwd 0.55s cubic-bezier(.25, .46, .45, .94) both;
+    }
+
+    #ocps {
+        min-height: 2ch;
+        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, min-height, 4ch);
+    }
+
+    #mottosSection {
+        min-height: 8ch;
+    }
+
+    .cursor {
+        display: inline-block;
+        width: 1ch;
+        animation: blink 1s step-end infinite;
+    }
+
+    .post-lang-img {
+        width: 32px;
+    }
+}

@@ -48,42 +48,41 @@ $themes: (
 
 :root {
     font-size: 16px;
+    color-scheme: light;
     @include define-css-variables($rounded, "rounded-");
     @include define-css-variables($colors, "clr-");
     @include define-css-variables($sizes, "sizes-");
 
     &[data-bs-theme="light"] {
+        color-scheme: light;
         @include define-css-variables(map.get($themes, light));
     }
 
     &[data-bs-theme="dark"] {
+        color-scheme: dark;
         @include define-css-variables(map.get($themes, dark));
     }
 }
 
 article {
-    @supports (text-wrap: avoid-short-last-lines) {
-        text-wrap: avoid-short-last-lines;
-    }
-
-    @supports not (text-wrap: avoid-short-last-lines) {
+    @supports (text-wrap: pretty) {
         text-wrap: pretty;
     }
 }
 
-.htmx-animation {
-    -webkit-animation: fade-in 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) alternate both;
-    animation: fade-in 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) alternate both;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @supports (text-wrap: balance) {
+        text-wrap: balance;
+    }
 }
 
-@-webkit-keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
+.htmx-animation {
+    animation: fade-in 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) alternate both;
 }
 
 @keyframes fade-in {
@@ -97,69 +96,51 @@ article {
 }
 
 .tooltip-animation {
-    -webkit-animation: scale-in-top 0.66s cubic-bezier(0.785, 0.135, 0.150, 0.860) alternate both;
     animation: scale-in-top 0.66s cubic-bezier(0.785, 0.135, 0.150, 0.860) alternate both;
-}
-
-@-webkit-keyframes scale-in-top {
-    0% {
-        -webkit-transform: scale(0);
-        transform: scale(0);
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-        opacity: 1;
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-        opacity: 1;
-    }
 }
 
 @keyframes scale-in-top {
     0% {
-        -webkit-transform: scale(0);
         transform: scale(0);
-        -webkit-transform-origin: 50% 0%;
         transform-origin: 50% 0%;
         opacity: 1;
     }
 
     100% {
-        -webkit-transform: scale(1);
         transform: scale(1);
-        -webkit-transform-origin: 50% 0%;
         transform-origin: 50% 0%;
         opacity: 1;
     }
 }
 
 .slide-from-right {
-    -webkit-animation: slide-in-blurred-right .6s cubic-bezier(1.000, 0.000, 0.000, 1.000) alternate both;
     animation: slide-in-blurred-right .6s cubic-bezier(1.000, 0.000, 0.000, 1.000) alternate both;
 }
 
 @keyframes slide-in-blurred-right {
     0% {
-        -webkit-transform: translateX(1000px) scaleX(2.5) scaleY(0.2);
         transform: translateX(1000px) scaleX(2.5) scaleY(0.2);
-        -webkit-transform-origin: 0% 50%;
         transform-origin: 0% 50%;
-        -webkit-filter: blur(40px);
         filter: blur(40px);
         opacity: 0;
     }
 
     100% {
-        -webkit-transform: translateX(0) scaleY(1) scaleX(1);
         transform: translateX(0) scaleY(1) scaleX(1);
-        -webkit-transform-origin: 50% 50%;
         transform-origin: 50% 50%;
-        -webkit-filter: blur(0);
         filter: blur(0);
         opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
