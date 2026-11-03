@@ -6,7 +6,9 @@ async function run(): Promise<void> {
 	const service: BlogStaticService = new BlogStaticService();
 	const args: string[] = process.argv.slice(2);
 	const isWatch: boolean = args.includes("--watch");
-	const watchMsArg: string | undefined = args.find((a) => a.startsWith("--interval="),);
+	const watchMsArg: string | undefined = args.find((a) =>
+		a.startsWith("--interval="),
+	);
 
 	const intervalMs: number = watchMsArg
 		? Number.parseInt(watchMsArg.split("=")[1] ?? "60000", 10)
@@ -34,7 +36,8 @@ async function run(): Promise<void> {
 	}
 
 	try {
-		const result: Awaited<ReturnType<typeof service.generate>> = await service.generate();
+		const result: Awaited<ReturnType<typeof service.generate>> =
+			await service.generate();
 		console.info(`Blog generation complete: ${result.manifest.count} posts`);
 
 		// Lightweight blog+sitemap build without full webpack - keeps sitemap in sync

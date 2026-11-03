@@ -1,27 +1,27 @@
 [
-    {
-        "skillName": "JavaScript",
-        "skillLogoSrc": "./assets/images/static/svg/js.svg",
-        "skillAnchor": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
-    },
-    {
-        "skillName": "TypeScript",
-        "skillLogoSrc": "./assets/images/static/svg/ts.svg",
-        "skillAnchor": "https://www.typescriptlang.org/"
-    },
-    {
-        "skillName": "ReactJS",
-        "skillLogoSrc": "./assets/images/static/svg/react.svg",
-        "skillAnchor": "https://react.dev/"
-    },
-    {
-        "skillName": "PHP",
-        "skillLogoSrc": "./assets/images/static/svg/php.svg",
-        "skillAnchor": "https://www.php.net/"
-    },
-    {
-        "skillName": "WordPress",
-        "skillLogoSrc": "./assets/images/static/svg/wp.svg",
-        "skillAnchor": "https://wordpress.com/"
-    }
+	{
+		"skillName": "JavaScript",
+		"skillLogoSrc": "./assets/images/static/svg/js.svg",
+		"skillAnchor": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+	},
+	{
+		"skillName": "TypeScript",
+		"skillLogoSrc": "./assets/images/static/svg/ts.svg",
+		"skillAnchor": "https://www.typescriptlang.org/"
+	},
+	{
+		"skillName": "ReactJS",
+		"skillLogoSrc": "./assets/images/static/svg/react.svg",
+		"skillAnchor": "https://react.dev/"
+	},
+	{
+		"skillName": "PHP",
+		"skillLogoSrc": "./assets/images/static/svg/php.svg",
+		"skillAnchor": "https://www.php.net/"
+	},
+	{
+		"skillName": "WordPress",
+		"skillLogoSrc": "./assets/images/static/svg/wp.svg",
+		"skillAnchor": "https://wordpress.com/"
+	}
 ]

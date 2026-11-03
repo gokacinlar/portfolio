@@ -27,54 +27,61 @@ const MAX_TEXTURE_SIZE = 2048;
 const WEBP_QUALITY = 80;
 
 async function main(): Promise<void> {
-    const io = new NodeIO();
-    const document = await io.read(INPUT);
+	const io = new NodeIO();
+	const document = await io.read(INPUT);
 
-    // 1. Re-encode embedded PNG textures as WebP (biggest win: ~11 MB -> ~2-3 MB).
-    for (const texture of document.getRoot().listTextures()) {
-        const image = texture.getImage();
-        if (!image) continue;
+	// 1. Re-encode embedded PNG textures as WebP (biggest win: ~11 MB -> ~2-3 MB).
+	for (const texture of document.getRoot().listTextures()) {
+		const image = texture.getImage();
+		if (!image) continue;
 
-        const meta = await sharp(image).metadata();
-        console.log(
-            `Texture "${texture.getName() || "(unnamed)"}": ` +
-            `${texture.getMimeType()} ${meta.width}x${meta.height} ` +
-            `${(image.byteLength / 1024 / 1024).toFixed(2)} MB`
-        );
+		const meta = await sharp(image).metadata();
+		console.log(
+			`Texture "${texture.getName() || "(unnamed)"}": ` +
+				`${texture.getMimeType()} ${meta.width}x${meta.height} ` +
+				`${(image.byteLength / 1024 / 1024).toFixed(2)} MB`,
+		);
 
-        let pipeline = sharp(image).rotate(); // honor EXIF orientation
-        if ((meta.width ?? 0) > MAX_TEXTURE_SIZE || (meta.height ?? 0) > MAX_TEXTURE_SIZE) {
-            pipeline = pipeline.resize(MAX_TEXTURE_SIZE, MAX_TEXTURE_SIZE, {
-                fit: "inside",
-                withoutEnlargement: true,
-            });
-        }
-        const webp = await pipeline.webp({ quality: WEBP_QUALITY, effort: 6 }).toBuffer();
-        texture.setImage(new Uint8Array(webp));
-        texture.setMimeType("image/webp");
-        console.log(`  -> image/webp ${(webp.byteLength / 1024 / 1024).toFixed(2)} MB`);
-    }
+		let pipeline = sharp(image).rotate(); // honor EXIF orientation
+		if (
+			(meta.width ?? 0) > MAX_TEXTURE_SIZE ||
+			(meta.height ?? 0) > MAX_TEXTURE_SIZE
+		) {
+			pipeline = pipeline.resize(MAX_TEXTURE_SIZE, MAX_TEXTURE_SIZE, {
+				fit: "inside",
+				withoutEnlargement: true,
+			});
+		}
+		const webp = await pipeline
+			.webp({ quality: WEBP_QUALITY, effort: 6 })
+			.toBuffer();
+		texture.setImage(new Uint8Array(webp));
+		texture.setMimeType("image/webp");
+		console.log(
+			`  -> image/webp ${(webp.byteLength / 1024 / 1024).toFixed(2)} MB`,
+		);
+	}
 
-    // 2. Geometry + document transforms. All runtime-decoder-free.
-    await document.transform(
-        dedup(),
-        prune(),
-        weld(),
-        quantize({
-            pattern: /^(POSITION|NORMAL|TEXCOORD|COLOR|JOINTS|WEIGHTS)$/,
-            quantizePosition: 14,
-            quantizeNormal: 10,
-            quantizeTexcoord: 12,
-            quantizeColor: 8,
-            quantizeGeneric: 12,
-        })
-    );
+	// 2. Geometry + document transforms. All runtime-decoder-free.
+	await document.transform(
+		dedup(),
+		prune(),
+		weld(),
+		quantize({
+			pattern: /^(POSITION|NORMAL|TEXCOORD|COLOR|JOINTS|WEIGHTS)$/,
+			quantizePosition: 14,
+			quantizeNormal: 10,
+			quantizeTexcoord: 12,
+			quantizeColor: 8,
+			quantizeGeneric: 12,
+		}),
+	);
 
-    await io.write(OUTPUT, document);
-    console.log(`Wrote ${OUTPUT}`);
+	await io.write(OUTPUT, document);
+	console.log(`Wrote ${OUTPUT}`);
 }
 
 main().catch((error: unknown) => {
-    console.error(error);
-    process.exit(1);
+	console.error(error);
+	process.exit(1);
 });

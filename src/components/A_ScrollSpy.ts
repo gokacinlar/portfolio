@@ -7,13 +7,16 @@ import type * as Type from "../ts/types/types";
 import Localize from "../utils/initLocalization";
 
 class ScrollSpy {
-    private bgCleanup: (() => void) | null = null;
-    private domReadyBgHandler: (() => void) | null = null;
-    private formSubmitHandlers: Array<{ form: HTMLFormElement; handler: (event: Event) => void }> = [];
-    private web3FormsTimeoutId: ReturnType<typeof setTimeout> | null = null;
+	private bgCleanup: (() => void) | null = null;
+	private domReadyBgHandler: (() => void) | null = null;
+	private formSubmitHandlers: Array<{
+		form: HTMLFormElement;
+		handler: (event: Event) => void;
+	}> = [];
+	private web3FormsTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
-    render(): string {
-        return /*html*/ `
+	render(): string {
+		return /*html*/ `
             <section id="aside-content" class="aside-main d-flex flex-column gap-4">
                 <div id="about-scroll-spy-id" class="z-0 sticky-top scrollspy-nav list-group d-flex flex-row align-items-center justify-content-between fs-4 fw-medium gap-2 text-truncate rounded-pill">
                     ${this.renderNavLinks()}
@@ -38,12 +41,18 @@ class ScrollSpy {
                             ${this.renderHeading("education", `📚 ${Localize.translate("common:about:nav:education")}`)}
                             <hr class="w-25">
                         </div>
-                        ${this.renderTable([
-            Localize.translate("common:about:table:institution"),
-            Localize.translate("common:about:table:field"),
-            Localize.translate("common:about:table:degree"),
-            Localize.translate("common:about:table:date")
-        ], AboutData.educationRows, "eduTable")}
+                        ${this.renderTable(
+													[
+														Localize.translate(
+															"common:about:table:institution",
+														),
+														Localize.translate("common:about:table:field"),
+														Localize.translate("common:about:table:degree"),
+														Localize.translate("common:about:table:date"),
+													],
+													AboutData.educationRows,
+													"eduTable",
+												)}
                     </div>
                     <div>
                         <div>
@@ -67,11 +76,21 @@ class ScrollSpy {
                             <hr class="w-25">
                         </div>
                         <div>
-                            ${this.renderTable([
-            Localize.translate("common:about:table:category"),
-            Localize.translate("common:about:table:technologies"),
-            Localize.translate("common:about:table:librariesTools")
-        ], AboutData.stackRows, "stackTable")}
+                            ${this.renderTable(
+															[
+																Localize.translate(
+																	"common:about:table:category",
+																),
+																Localize.translate(
+																	"common:about:table:technologies",
+																),
+																Localize.translate(
+																	"common:about:table:librariesTools",
+																),
+															],
+															AboutData.stackRows,
+															"stackTable",
+														)}
                         </div>
                     </div>
                     <div>
@@ -95,27 +114,34 @@ class ScrollSpy {
                 </div>
             </section>
         `;
-    }
+	}
 
-    private renderHeading(id: string, text: string): string {
-        return /*html*/`
+	private renderHeading(id: string, text: string): string {
+		return /*html*/ `
             <h4 id="${id}">
                 <a href="#${id}" class="link-body-emphasis link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                     ${text}
                 </a>
             </h4>
         `;
-    }
+	}
 
-    // Scrollspy list items
-    private renderNavLinks() {
-        return AboutData.navLinks.map(({ id, icon, label }) =>
-            `<a class="list-group-item list-group-item-action rounded-pill shadow-sm text-center" href="#${id}">${icon} ${label}</a>`
-        ).join("");
-    }
+	// Scrollspy list items
+	private renderNavLinks() {
+		return AboutData.navLinks
+			.map(
+				({ id, icon, label }) =>
+					`<a class="list-group-item list-group-item-action rounded-pill shadow-sm text-center" href="#${id}">${icon} ${label}</a>`,
+			)
+			.join("");
+	}
 
-    private renderTable(headers: string[], rows: Type.TableRow[], id: string): string {
-        return /*html*/`
+	private renderTable(
+		headers: string[],
+		rows: Type.TableRow[],
+		id: string,
+	): string {
+		return /*html*/ `
             <div class="table-responsive">
                 <table id="${id}" class="table table-striped table-bordered">
                     <thead>
@@ -124,74 +150,83 @@ class ScrollSpy {
                         </tr>
                     </thead>
                     <tbody>
-                        ${rows.map((row) => `<tr>${row.map((cell, i) => i === 0 ? `<th scope="row">${cell}</th>` : `<td>${cell}</td>`).join("")}</tr>`).join("")}
+                        ${rows.map((row) => `<tr>${row.map((cell, i) => (i === 0 ? `<th scope="row">${cell}</th>` : `<td>${cell}</td>`)).join("")}</tr>`).join("")}
                     </tbody>
                 </table>
             </div>
         `;
-    }
+	}
 
-    private initWeb3Forms(): void {
-        this.web3FormsTimeoutId = setTimeout(() => {
-            loadWeb3Forms().then(() => {
-                formState();
-            });
-        }, 0);
+	private initWeb3Forms(): void {
+		this.web3FormsTimeoutId = setTimeout(() => {
+			loadWeb3Forms().then(() => {
+				formState();
+			});
+		}, 0);
 
-        // Email validation - track handlers for cleanup
-        document.querySelectorAll<HTMLFormElement>(".needs-validation").forEach((form) => {
-            const handler = (event: Event) => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add("was-validated");
-            };
-            form.addEventListener("submit", handler);
-            this.formSubmitHandlers.push({ form, handler });
-        });
-    }
+		// Email validation - track handlers for cleanup
+		document
+			.querySelectorAll<HTMLFormElement>(".needs-validation")
+			.forEach((form) => {
+				const handler = (event: Event) => {
+					if (!form.checkValidity()) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					form.classList.add("was-validated");
+				};
+				form.addEventListener("submit", handler);
+				this.formSubmitHandlers.push({ form, handler });
+			});
+	}
 
-    connectedCallback(): void {
-        this.initWeb3Forms();
+	connectedCallback(): void {
+		this.initWeb3Forms();
 
-        const attachBg = () => {
-            this.bgCleanup = addBackgroundBasedOnVerticalScroll("about-main", "about-scroll-spy-id", "glow-white-drop-shadow");
-        };
+		const attachBg = () => {
+			this.bgCleanup = addBackgroundBasedOnVerticalScroll(
+				"about-main",
+				"about-scroll-spy-id",
+				"glow-white-drop-shadow",
+			);
+		};
 
-        this.domReadyBgHandler = () => {
-            attachBg();
-            if (this.domReadyBgHandler) {
-                document.removeEventListener("DOMContentLoaded", this.domReadyBgHandler);
-                this.domReadyBgHandler = null;
-            }
-        };
+		this.domReadyBgHandler = () => {
+			attachBg();
+			if (this.domReadyBgHandler) {
+				document.removeEventListener(
+					"DOMContentLoaded",
+					this.domReadyBgHandler,
+				);
+				this.domReadyBgHandler = null;
+			}
+		};
 
-        if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", this.domReadyBgHandler);
-        } else {
-            attachBg();
-        }
-    }
+		if (document.readyState === "loading") {
+			document.addEventListener("DOMContentLoaded", this.domReadyBgHandler);
+		} else {
+			attachBg();
+		}
+	}
 
-    disconnectedCallback(): void {
-        if (this.web3FormsTimeoutId !== null) {
-            clearTimeout(this.web3FormsTimeoutId);
-            this.web3FormsTimeoutId = null;
-        }
-        this.formSubmitHandlers.forEach(({ form, handler }) => {
-            form.removeEventListener("submit", handler);
-        });
-        this.formSubmitHandlers = [];
-        if (this.bgCleanup) {
-            this.bgCleanup();
-            this.bgCleanup = null;
-        }
-        if (this.domReadyBgHandler) {
-            document.removeEventListener("DOMContentLoaded", this.domReadyBgHandler);
-            this.domReadyBgHandler = null;
-        }
-    }
+	disconnectedCallback(): void {
+		if (this.web3FormsTimeoutId !== null) {
+			clearTimeout(this.web3FormsTimeoutId);
+			this.web3FormsTimeoutId = null;
+		}
+		this.formSubmitHandlers.forEach(({ form, handler }) => {
+			form.removeEventListener("submit", handler);
+		});
+		this.formSubmitHandlers = [];
+		if (this.bgCleanup) {
+			this.bgCleanup();
+			this.bgCleanup = null;
+		}
+		if (this.domReadyBgHandler) {
+			document.removeEventListener("DOMContentLoaded", this.domReadyBgHandler);
+			this.domReadyBgHandler = null;
+		}
+	}
 }
 
 export default ScrollSpy;

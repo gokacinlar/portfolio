@@ -6,7 +6,6 @@
 @use "mixins" as mixin;
 @use "m_queries" as mquery;
 @use "breakpoints" as breakpoint;
-
 @use "partials/base";
 @use "partials/header";
 @use "partials/hero";
@@ -19,5 +18,6 @@
 
 * {
     font-family: $font-family;
+
     @include mixin.transition(background-color .25s ease-in-out, color .25s ease-in);
 }

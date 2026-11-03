@@ -1,14 +1,12 @@
-import {
-    ModalList,
-    AccordionList
-} from "../static";
+import { ModalList, AccordionList } from "../static";
 import Localize from "../utils/initLocalization";
 
 class Accordion {
-    constructor() { }
+	constructor() {}
 
-    public render(): string {
-        const accordionItemsHtml = AccordionList.ACCORDION_ITEMS.map((item, idx) => `
+	public render(): string {
+		const accordionItemsHtml = AccordionList.ACCORDION_ITEMS.map(
+			(item, idx) => `
 <div class="accordion-item${idx > 0 ? " border border-0" : ""}">
     <h2 class="accordion-header" id="flush-heading${item.id}">
         <button class="accordion-button fs-5 fw-medium collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${item.id}" aria-expanded="false" aria-controls="flush-collapse${item.id}">
@@ -21,9 +19,11 @@ class Accordion {
         </div>
     </div>
 </div>
-`).join("");
+`,
+		).join("");
 
-        const modalsHtml = ModalList.MODALS.map(modal => `
+		const modalsHtml = ModalList.MODALS.map(
+			(modal) => `
 <div id="${modal.id}" class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content rounded-4 shadow-lg">
@@ -37,15 +37,16 @@ class Accordion {
         </div>
     </div>
 </div>
-`).join("");
+`,
+		).join("");
 
-        return /*html*/ `
+		return /*html*/ `
 <div class="accordion accordion-flush" id="aboutAccordion">
     ${accordionItemsHtml}
 </div>
 ${modalsHtml}
 `;
-    }
+	}
 }
 
 export default Accordion;

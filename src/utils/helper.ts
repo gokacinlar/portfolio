@@ -1,7 +1,10 @@
 export { TOAST_CONFIG, insertToastifiedMessage } from "./helpers/toast";
 export { DarkLightMode } from "./helpers/theme";
 export { Template } from "./helpers/template";
-export { HorizontalMiddleMouseScroll, ScrollRevealAction } from "./helpers/scroll";
+export {
+	HorizontalMiddleMouseScroll,
+	ScrollRevealAction,
+} from "./helpers/scroll";
 export { DomEvents, colorfulBannerName } from "./helpers/dom";
 export { TypeWriterDisplay } from "./helpers/typewriter";
 export { PromoFunctions } from "./helpers/promo";

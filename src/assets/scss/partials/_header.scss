@@ -35,13 +35,13 @@
     }
 
     :is(#hrBtn, #hrDayNightBtn, #responsiveMenuToggleBtn, #hrLangSwitchBtn) {
-        height: 54px !important;
+        block-size: 54px !important;
     }
 
     #headerResponsive {
         position: sticky;
-        top: 10px;
-        height: 30%;
+        inset-block-start: 10px;
+        block-size: 30%;
         z-index: 1;
     }
 
@@ -50,6 +50,7 @@
         @include mixin.responsive-font-size(breakpoint.$mobile-breakpoints, 54px);
         @include mixin.show-on(desktop);
         @include mixin.def-yellow-button-size();
+
         object-fit: cover;
         border: 3px solid var(--clr-two);
     }
@@ -63,8 +64,8 @@
         @include mixin.hover-underline(var(--clr-two));
 
         &::after {
-            bottom: 5.5px;
-            width: 75%;
+            inset-block-end: 5.5px;
+            inline-size: 75%;
         }
     }
 
@@ -74,6 +75,6 @@
 
     #responsiveNavbar {
         flex-direction: column !important;
-        width: 100%;
+        inline-size: 100%;
     }
 }

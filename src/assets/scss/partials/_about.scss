@@ -3,7 +3,6 @@
 @use "../m_queries" as mquery;
 
 @layer init {
-
     #about-aside,
     #about-main {
         background: var(--clr-eight);
@@ -49,6 +48,7 @@
         &:hover {
             .about-socials-arrow {
                 @include mixin.animation(swing-in-left-fwd, .25s, cubic-bezier(0.785, 0.135, 0.150, 0.860), alternate both);
+
                 opacity: 1;
             }
         }
@@ -60,7 +60,8 @@
 
     .aside-ico {
         --ico-w: 34px;
-        width: var(--ico-w);
-        height: auto;
+
+        inline-size: var(--ico-w);
+        block-size: auto;
     }
 }

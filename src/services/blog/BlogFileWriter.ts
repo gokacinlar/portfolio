@@ -8,7 +8,8 @@ class BlogFileWriter {
 	private readonly blogPublicDir: string;
 
 	constructor(generatedDir?: string, publicDir?: string) {
-		this.generatedDir = generatedDir ?? path.resolve(__dirname, "../../assets/json/generated");
+		this.generatedDir =
+			generatedDir ?? path.resolve(__dirname, "../../assets/json/generated");
 		this.publicDir = publicDir ?? path.resolve(__dirname, "../../../public");
 		this.blogPublicDir = path.resolve(this.publicDir, "blog");
 	}
@@ -159,7 +160,7 @@ class BlogFileWriter {
 		const author: string = esc(post.author.name);
 		const date: string = esc(post.date);
 
-		return /*html*/`
+		return /*html*/ `
 			<!doctype html>
 			<html lang="en">
 			<head>

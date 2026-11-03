@@ -12,7 +12,6 @@ $rounded: (
     xl: 28px,
     xxl: 42px
 );
-
 $colors: (
     one: #FDF9FD,
     two: #1F1F24,
@@ -23,14 +22,12 @@ $colors: (
     seven: #F9C80E,
     eight: #f0ebf0
 );
-
 $sizes: (
     content: 650px,
     logo: 412px,
     icon-sm: 54px,
     icon: 72px
 );
-
 $themes: (
     light: (clr-one: #FDF9FD,
         clr-two: #1F1F24,
@@ -49,17 +46,20 @@ $themes: (
 :root {
     font-size: 16px;
     color-scheme: light;
+
     @include define-css-variables($rounded, "rounded-");
     @include define-css-variables($colors, "clr-");
     @include define-css-variables($sizes, "sizes-");
 
     &[data-bs-theme="light"] {
         color-scheme: light;
+
         @include define-css-variables(map.get($themes, light));
     }
 
     &[data-bs-theme="dark"] {
         color-scheme: dark;
+
         @include define-css-variables(map.get($themes, dark));
     }
 }
@@ -134,7 +134,6 @@ h6 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
     *,
     *::before,
     *::after {

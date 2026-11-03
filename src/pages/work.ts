@@ -7,22 +7,22 @@ import featuredPlansData from "../assets/json/work-featured.json";
 import type * as iFace from "../ts/interfaces/i.global";
 
 class WorkPage extends HTMLElement {
-    constructor() {
-        super();
-        new Template().createTemplate(new WorkTemplate().template(), this);
-    }
+	constructor() {
+		super();
+		new Template().createTemplate(new WorkTemplate().template(), this);
+	}
 
-    connectedCallback(): void { }
+	connectedCallback(): void {}
 
-    disconnectedCallback(): void { }
+	disconnectedCallback(): void {}
 }
 
 class WorkTemplate {
-    private featuredSection = new WorkFeaturedSection();
-    private workCard = new WorkCard();
+	private featuredSection = new WorkFeaturedSection();
+	private workCard = new WorkCard();
 
-    public template(): string {
-        return /*html*/ `
+	public template(): string {
+		return /*html*/ `
             <section id="mainWork">
                 <div class="container text-center h-100">
                     <div class="row gy-3 gx-3 align-items-center h-100">
@@ -59,14 +59,16 @@ class WorkTemplate {
             </article>
             ${this.stillUnsure()}
         `;
-    }
+	}
 
-    private featured(): string {
-        return this.featuredSection.render(featuredPlansData as unknown as iFace.FeaturedPlanConfig[]);
-    }
+	private featured(): string {
+		return this.featuredSection.render(
+			featuredPlansData as unknown as iFace.FeaturedPlanConfig[],
+		);
+	}
 
-    private tabsNav(): string {
-        return /*html*/ `
+	private tabsNav(): string {
+		return /*html*/ `
             <ul class="nav nav-pills nav-fill px-0 gap-3" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active rounded-5 fs-2 fw-medium shadow-sm" aria-current="page" data-bs-toggle="tab" data-bs-target="#englishOptions" type="button" role="tab" aria-controls="englishOptions" aria-selected="true" id="forEnglish">${Localize.translate("common:workPage:forEnglish")}</button>
@@ -76,10 +78,10 @@ class WorkTemplate {
                 </li>
             </ul>
         `;
-    }
+	}
 
-    private tabsContent(): string {
-        return /*html*/ `
+	private tabsContent(): string {
+		return /*html*/ `
             <div id="optionsContent" class="bg-secondary-subtle px-2 px-md-3 py-3 rounded-5 shadow-sm h-100 flex-grow-1 overflow-hidden d-flex flex-column work-no-scrollbar" style="min-height: 0;">
                 <div class="tab-content flex-grow-1 d-flex flex-column overflow-hidden" style="min-height: 0;">
                     <div class="tab-pane fade show active flex-grow-1 overflow-y-auto overflow-x-hidden work-no-scrollbar" 
@@ -103,48 +105,75 @@ class WorkTemplate {
                 </div>
             </div>
         `;
-    }
+	}
 
-    private englishCards(): string {
-        const data = workEnglishData as unknown as iFace.EnglishWorkBuyingOptions[];
-        if (!data.length) return "";
-        return data.map((item) => this.workCard.render(item)).join("");
-    }
+	private englishCards(): string {
+		const data = workEnglishData as unknown as iFace.EnglishWorkBuyingOptions[];
+		if (!data.length) return "";
+		return data.map((item) => this.workCard.render(item)).join("");
+	}
 
-    private programmingCards(): string {
-        const data = workProgrammingData as unknown as iFace.EnglishWorkBuyingOptions[];
-        if (!data.length) {
-            const fallback = Localize.translate("common:workPage:comingSoon");
-            const msg = fallback === "common:workPage:comingSoon" ? "Coming soon..." : fallback;
-            return /*html*/ `<div class="col-12"><div class="alert alert-info rounded-4 text-center mb-0" 
+	private programmingCards(): string {
+		const data =
+			workProgrammingData as unknown as iFace.EnglishWorkBuyingOptions[];
+		if (!data.length) {
+			const fallback = Localize.translate("common:workPage:comingSoon");
+			const msg =
+				fallback === "common:workPage:comingSoon" ? "Coming soon..." : fallback;
+			return /*html*/ `<div class="col-12"><div class="alert alert-info rounded-4 text-center mb-0" 
                                 role="alert">${msg}</div>
                              </div>`;
-        }
-        return data.map((item) => this.workCard.render(item)).join("");
-    }
+		}
+		return data.map((item) => this.workCard.render(item)).join("");
+	}
 
-    private static readonly wpUrl: URL = new URL("https://wa.me/905000000000?text=Hi%20I%27m%20still%20unsure%20which%20plan%20fits%20me%20—%20could%20you%20help%3F");
-    private static readonly contactUrl: URL = new URL("https://dervisoksuzoglu.xyz/kayit");
+	private static readonly wpUrl: URL = new URL(
+		"https://wa.me/905000000000?text=Hi%20I%27m%20still%20unsure%20which%20plan%20fits%20me%20—%20could%20you%20help%3F",
+	);
+	private static readonly contactUrl: URL = new URL(
+		"https://dervisoksuzoglu.xyz/kayit",
+	);
 
-    private stillUnsure(): string {
-        const title = Localize.translate("common:workPage:stillUnsure:title");
-        const subtitle = Localize.translate("common:workPage:stillUnsure:subtitle");
-        const description = Localize.translate("common:workPage:stillUnsure:description");
-        const cta = Localize.translate("common:workPage:stillUnsure:cta");
-        const ctaTitle = Localize.translate("common:workPage:stillUnsure:ctaTitle");
-        const bookingNote = Localize.translate("common:workPage:stillUnsure:bookingNote");
-        const note = Localize.translate("common:workPage:stillUnsure:note");
-        const waUrl = WorkTemplate.wpUrl;
+	private stillUnsure(): string {
+		const title = Localize.translate("common:workPage:stillUnsure:title");
+		const subtitle = Localize.translate("common:workPage:stillUnsure:subtitle");
+		const description = Localize.translate(
+			"common:workPage:stillUnsure:description",
+		);
+		const cta = Localize.translate("common:workPage:stillUnsure:cta");
+		const ctaTitle = Localize.translate("common:workPage:stillUnsure:ctaTitle");
+		const bookingNote = Localize.translate(
+			"common:workPage:stillUnsure:bookingNote",
+		);
+		const note = Localize.translate("common:workPage:stillUnsure:note");
+		const waUrl = WorkTemplate.wpUrl;
 
-        const displayTitle = title === "common:workPage:stillUnsure:title" ? "Still unsure?" : title;
-        const displaySubtitle = subtitle === "common:workPage:stillUnsure:subtitle" ? "Let's find the right fit together" : subtitle;
-        const displayDesc = description === "common:workPage:stillUnsure:description" ? "Not sure which plan suits you? Send me a quick message. I'll help you choose in minutes, no pressure." : description;
-        const displayCta = cta === "common:workPage:stillUnsure:cta" ? "Chat on WhatsApp" : cta;
-        const displayCtaTitle = ctaTitle === "common:workPage:stillUnsure:ctaTitle" ? "Chat on WhatsApp" : ctaTitle;
-        const displaybookingNote = bookingNote === "common:workPage:stillUnsure:bookingNote" ? "Book an Appointment" : bookingNote;
-        const displayNote = note === "common:workPage:stillUnsure:note" ? "Usually replies within an hour • No spam • No commitment" : note;
+		const displayTitle =
+			title === "common:workPage:stillUnsure:title" ? "Still unsure?" : title;
+		const displaySubtitle =
+			subtitle === "common:workPage:stillUnsure:subtitle"
+				? "Let's find the right fit together"
+				: subtitle;
+		const displayDesc =
+			description === "common:workPage:stillUnsure:description"
+				? "Not sure which plan suits you? Send me a quick message. I'll help you choose in minutes, no pressure."
+				: description;
+		const displayCta =
+			cta === "common:workPage:stillUnsure:cta" ? "Chat on WhatsApp" : cta;
+		const displayCtaTitle =
+			ctaTitle === "common:workPage:stillUnsure:ctaTitle"
+				? "Chat on WhatsApp"
+				: ctaTitle;
+		const displaybookingNote =
+			bookingNote === "common:workPage:stillUnsure:bookingNote"
+				? "Book an Appointment"
+				: bookingNote;
+		const displayNote =
+			note === "common:workPage:stillUnsure:note"
+				? "Usually replies within an hour • No spam • No commitment"
+				: note;
 
-        return /*html*/ `
+		return /*html*/ `
             <section id="stillUnsure" class="container-fluid px-2 px-md-3 py-3 py-md-4">
                 <div class="still-unsure-card rounded-5 px-3 py-4 px-md-5 py-md-5 shadow-sm d-flex flex-column align-items-center justify-content-center text-center gap-3">
                     <div class="still-unsure-icon-wrap d-flex align-items-center justify-content-center rounded-circle">
@@ -175,7 +204,7 @@ class WorkTemplate {
                 </div>
             </section>
         `;
-    }
+	}
 }
 
 customElements.define("app-work", WorkPage);

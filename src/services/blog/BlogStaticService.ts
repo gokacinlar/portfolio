@@ -23,7 +23,10 @@ class BlogStaticService extends GraphQLQueries {
 		this.writer = writer ?? new BlogFileWriter();
 	}
 
-	private static async executeQuery<TData, TVariables = Record<string, unknown>,>(
+	private static async executeQuery<
+		TData,
+		TVariables = Record<string, unknown>,
+	>(
 		query: string,
 		variables?: TVariables,
 	): Promise<gql.GraphQLResponse<TData>> {
@@ -272,8 +275,7 @@ class BlogStaticService extends GraphQLQueries {
 
 			if (missing.length > 0) {
 				try {
-					const htmlFiles: string[] =
-						this.writer.writePerPostHtml(missing);
+					const htmlFiles: string[] = this.writer.writePerPostHtml(missing);
 					written.push(...htmlFiles);
 				} catch {
 					// ignore

@@ -1,183 +1,240 @@
 import { formatDate } from "./utils/helpers/date";
 import GetSiteVersionNumber from "./utils/webScraper";
-import * as Type from "./ts/types/types";
+import type * as Type from "./ts/types/types";
 import Localize from "./utils/initLocalization";
 
 interface Principle {
-    title: string;
-    description: string;
+	title: string;
+	description: string;
 }
 
 export class BodyParts {
-    public readonly mottos: Array<string> = [
-        Localize.translate("common:hero:mottos:prof"),
-        Localize.translate("common:hero:mottos:problemSolver"),
-        Localize.translate("common:hero:mottos:realistic"),
-        Localize.translate("common:hero:mottos:practical"),
-        Localize.translate("common:hero:mottos:applicable"),
-        Localize.translate("common:hero:mottos:inDemand"),
-    ];
+	public readonly mottos: Array<string> = [
+		Localize.translate("common:hero:mottos:prof"),
+		Localize.translate("common:hero:mottos:problemSolver"),
+		Localize.translate("common:hero:mottos:realistic"),
+		Localize.translate("common:hero:mottos:practical"),
+		Localize.translate("common:hero:mottos:applicable"),
+		Localize.translate("common:hero:mottos:inDemand"),
+	];
 }
 
 export class HeroParts {
-    public readonly occupationsData: Array<string> = [
-        Localize.translate("common:fields:teacher"),
-        Localize.translate("common:fields:frontEnd"),
-        Localize.translate("common:fields:react"),
-        Localize.translate("common:fields:wordpress"),
-        Localize.translate("common:fields:js"),
-        Localize.translate("common:fields:ts")
-    ]
+	public readonly occupationsData: Array<string> = [
+		Localize.translate("common:fields:teacher"),
+		Localize.translate("common:fields:frontEnd"),
+		Localize.translate("common:fields:react"),
+		Localize.translate("common:fields:wordpress"),
+		Localize.translate("common:fields:js"),
+		Localize.translate("common:fields:ts"),
+	];
 }
 
 export class PromoParts {
-    public readonly promoTabData = {
-        PS: {
-            iconData: "bi bi-stack",
-            desc: Localize.translate("common:desc:exp:PS")
-        },
-        PE: {
-            iconData: "bi bi-suit-heart",
-            desc: Localize.translate("common:desc:exp:PE")
-        },
-        PL: {
-            iconData: "bi bi-wrench-adjustable-circle",
-            desc: Localize.translate("common:desc:exp:PL")
-        },
-        RC: {
-            iconData: "bi bi-rainbow",
-            desc: Localize.translate("common:desc:exp:RC")
-        }
-    }
+	public readonly promoTabData = {
+		PS: {
+			iconData: "bi bi-stack",
+			desc: Localize.translate("common:desc:exp:PS"),
+		},
+		PE: {
+			iconData: "bi bi-suit-heart",
+			desc: Localize.translate("common:desc:exp:PE"),
+		},
+		PL: {
+			iconData: "bi bi-wrench-adjustable-circle",
+			desc: Localize.translate("common:desc:exp:PL"),
+		},
+		RC: {
+			iconData: "bi bi-rainbow",
+			desc: Localize.translate("common:desc:exp:RC"),
+		},
+	};
 
-    public readonly principles: Principle[] = [
-        {
-            title: Localize.translate("common:principles:first:title"),
-            description: Localize.translate("common:principles:first:msg")
-        },
-        {
-            title: Localize.translate("common:principles:second:title"),
-            description: Localize.translate("common:principles:second:msg")
-        },
-        {
-            title: Localize.translate("common:principles:third:title"),
-            description: Localize.translate("common:principles:third:msg")
-        },
-        {
-            title: Localize.translate("common:principles:fourth:title"),
-            description: Localize.translate("common:principles:fourth:msg")
-        },
-        {
-            title: Localize.translate("common:principles:fifth:title"),
-            description: Localize.translate("common:principles:fifth:msg")
-        }
-    ];
+	public readonly principles: Principle[] = [
+		{
+			title: Localize.translate("common:principles:first:title"),
+			description: Localize.translate("common:principles:first:msg"),
+		},
+		{
+			title: Localize.translate("common:principles:second:title"),
+			description: Localize.translate("common:principles:second:msg"),
+		},
+		{
+			title: Localize.translate("common:principles:third:title"),
+			description: Localize.translate("common:principles:third:msg"),
+		},
+		{
+			title: Localize.translate("common:principles:fourth:title"),
+			description: Localize.translate("common:principles:fourth:msg"),
+		},
+		{
+			title: Localize.translate("common:principles:fifth:title"),
+			description: Localize.translate("common:principles:fifth:msg"),
+		},
+	];
 
-    public static readonly principleImagePaths: Array<string> = [
-        "./assets/images/static/svg/TE_alphabet.svg",
-        "./assets/images/static/svg/TE_book.svg",
-        "./assets/images/static/svg/TE_booklet.svg",
-        "./assets/images/static/svg/TE_brightness.svg",
-        "./assets/images/static/svg/TE_globe.svg",
-        "./assets/images/static/svg/TE_keywords.svg",
-        "./assets/images/static/svg/TE_lang.svg",
-        "./assets/images/static/svg/TE_quote.svg",
-        "./assets/images/static/svg/TE_reception.svg"
-    ]
+	public static readonly principleImagePaths: Array<string> = [
+		"./assets/images/static/svg/TE_alphabet.svg",
+		"./assets/images/static/svg/TE_book.svg",
+		"./assets/images/static/svg/TE_booklet.svg",
+		"./assets/images/static/svg/TE_brightness.svg",
+		"./assets/images/static/svg/TE_globe.svg",
+		"./assets/images/static/svg/TE_keywords.svg",
+		"./assets/images/static/svg/TE_lang.svg",
+		"./assets/images/static/svg/TE_quote.svg",
+		"./assets/images/static/svg/TE_reception.svg",
+	];
 
-    public static readonly promoItems = [
-        {
-            title: Localize.translate("common:work:section1:title"),
-            description: Localize.translate("common:work:section1:msg"),
-            img: "../assets/images/static/webp/qualifications-main-english.webp",
-            link: new URL("https://dervisoksuzoglu.xyz/work")
-        },
-        {
-            title: Localize.translate("common:work:section2:title"),
-            description: Localize.translate("common:work:section2:msg"),
-            img: "../assets/images/static/webp/qualifications-main-webdev.webp",
-            link: new URL("https://dervisoksuzoglu.xyz/work")
-        }
-    ]
+	public static readonly promoItems = [
+		{
+			title: Localize.translate("common:work:section1:title"),
+			description: Localize.translate("common:work:section1:msg"),
+			img: "../assets/images/static/webp/qualifications-main-english.webp",
+			link: new URL("https://dervisoksuzoglu.xyz/work"),
+		},
+		{
+			title: Localize.translate("common:work:section2:title"),
+			description: Localize.translate("common:work:section2:msg"),
+			img: "../assets/images/static/webp/qualifications-main-webdev.webp",
+			link: new URL("https://dervisoksuzoglu.xyz/work"),
+		},
+	];
 }
 
 export class FooterLinks {
-    public static readonly PERSONAL_LINKS = {
-        github: "https://github.com/gokacinlar",
-        xTwitter: "https://x.com/devDissentNT",
-        hashnode: "https://gokacinlar.hashnode.dev",
-        email: "mailto:gokacinlar@tutanota.com?subject=To%20Dervi%C5%9F"
-    };
+	public static readonly PERSONAL_LINKS = {
+		github: "https://github.com/gokacinlar",
+		xTwitter: "https://x.com/devDissentNT",
+		hashnode: "https://gokacinlar.hashnode.dev",
+		email: "mailto:gokacinlar@tutanota.com?subject=To%20Dervi%C5%9F",
+	};
 
-    public static readonly BRANDING_LINKS = {
-        cc010: "https://creativecommons.org/publicdomain/zero/1.0/",
-        notByAi: "https://notbyai.fyi/"
-    };
+	public static readonly BRANDING_LINKS = {
+		cc010: "https://creativecommons.org/publicdomain/zero/1.0/",
+		notByAi: "https://notbyai.fyi/",
+	};
 }
 
 export class AboutData {
-    public static readonly navLinks: Type.NavLink[] = [
-        { id: "aboutMe", icon: "🧑", label: Localize.translate("common:about:nav:aboutMe") },
-        { id: "education", icon: "📚", label: Localize.translate("common:about:nav:education") },
-        { id: "work", icon: "📠", label: Localize.translate("common:about:nav:work") },
-        { id: "stack", icon: "🚀", label: Localize.translate("common:about:nav:stack") },
-        { id: "mailing", icon: "📧", label: Localize.translate("common:about:nav:mailing") },
-        { id: "advanced", icon: "🔎", label: Localize.translate("common:about:nav:advanced") },
-    ];
+	public static readonly navLinks: Type.NavLink[] = [
+		{
+			id: "aboutMe",
+			icon: "🧑",
+			label: Localize.translate("common:about:nav:aboutMe"),
+		},
+		{
+			id: "education",
+			icon: "📚",
+			label: Localize.translate("common:about:nav:education"),
+		},
+		{
+			id: "work",
+			icon: "📠",
+			label: Localize.translate("common:about:nav:work"),
+		},
+		{
+			id: "stack",
+			icon: "🚀",
+			label: Localize.translate("common:about:nav:stack"),
+		},
+		{
+			id: "mailing",
+			icon: "📧",
+			label: Localize.translate("common:about:nav:mailing"),
+		},
+		{
+			id: "advanced",
+			icon: "🔎",
+			label: Localize.translate("common:about:nav:advanced"),
+		},
+	];
 
-    public static readonly educationRows: Type.TableRow[] = [
-        [
-            Localize.translate("common:about:edu:university"),
-            Localize.translate("common:about:edu:elte"),
-            Localize.translate("common:about:edu:bachelor"),
-            `${formatDate(new Date(2019, 8))} - ${formatDate(new Date(2023, 6))}`,
-        ],
-        [
-            Localize.translate("common:about:edu:university"),
-            Localize.translate("common:about:edu:computerProgramming"),
-            Localize.translate("common:about:edu:associate"),
-            `${formatDate(new Date(2023, 8))} - ${Localize.translate("common:about:edu:current")}`,
-        ],
-    ];
+	public static readonly educationRows: Type.TableRow[] = [
+		[
+			Localize.translate("common:about:edu:university"),
+			Localize.translate("common:about:edu:elte"),
+			Localize.translate("common:about:edu:bachelor"),
+			`${formatDate(new Date(2019, 8))} - ${formatDate(new Date(2023, 6))}`,
+		],
+		[
+			Localize.translate("common:about:edu:university"),
+			Localize.translate("common:about:edu:computerProgramming"),
+			Localize.translate("common:about:edu:associate"),
+			`${formatDate(new Date(2023, 8))} - ${Localize.translate("common:about:edu:current")}`,
+		],
+	];
 
-    public static readonly stackRows: Type.TableRow[] = [
-        [Localize.translate("common:about:stack:frontend"), "JavaScript (ES6+), TypeScript", "React, Redux, Next.js"],
-        [Localize.translate("common:about:stack:backend"), "PHP(7+), Node.js", "Express.js, Codeigniter"],
-        [Localize.translate("common:about:stack:crossplatform"), "Tauri, Framework7", "-"],
-        [Localize.translate("common:about:stack:styling"), "Bootstrap (+derivatives), SASS, Tailwind CSS", "Shadcn & DaisyUI"],
-        [Localize.translate("common:about:stack:databases"), "MySQL, PostgreSQL", "Supabase"],
-        [Localize.translate("common:about:stack:devops"), "Docker, Linux", "-"],
-        [Localize.translate("common:about:stack:cms"), "Wordpress, Headless Wordpress", "Next.js"],
-        [Localize.translate("common:about:stack:ssg"), "Astro & Gatsby", "-"],
-        [Localize.translate("common:about:stack:testing"), "Jest & Playwright", "-"],
-        [Localize.translate("common:about:stack:designUx"), "Figma, Adobe Illustrator & Adobe Photoshop", "-"],
-    ];
+	public static readonly stackRows: Type.TableRow[] = [
+		[
+			Localize.translate("common:about:stack:frontend"),
+			"JavaScript (ES6+), TypeScript",
+			"React, Redux, Next.js",
+		],
+		[
+			Localize.translate("common:about:stack:backend"),
+			"PHP(7+), Node.js",
+			"Express.js, Codeigniter",
+		],
+		[
+			Localize.translate("common:about:stack:crossplatform"),
+			"Tauri, Framework7",
+			"-",
+		],
+		[
+			Localize.translate("common:about:stack:styling"),
+			"Bootstrap (+derivatives), SASS, Tailwind CSS",
+			"Shadcn & DaisyUI",
+		],
+		[
+			Localize.translate("common:about:stack:databases"),
+			"MySQL, PostgreSQL",
+			"Supabase",
+		],
+		[Localize.translate("common:about:stack:devops"), "Docker, Linux", "-"],
+		[
+			Localize.translate("common:about:stack:cms"),
+			"Wordpress, Headless Wordpress",
+			"Next.js",
+		],
+		[Localize.translate("common:about:stack:ssg"), "Astro & Gatsby", "-"],
+		[
+			Localize.translate("common:about:stack:testing"),
+			"Jest & Playwright",
+			"-",
+		],
+		[
+			Localize.translate("common:about:stack:designUx"),
+			"Figma, Adobe Illustrator & Adobe Photoshop",
+			"-",
+		],
+	];
 
-    public static readonly introduction = {
-        first: Localize.translate("common:about:introduction:first"),
-        last: Localize.translate("common:about:introduction:last")
-    }
+	public static readonly introduction = {
+		first: Localize.translate("common:about:introduction:first"),
+		last: Localize.translate("common:about:introduction:last"),
+	};
 }
 
 export interface ModalConfig {
-    id: string;
-    title: string;
-    content: string;
+	id: string;
+	title: string;
+	content: string;
 }
 
 export class WhiteListedURLs {
-    public static readonly approvedScripts: Set<string> = new Set([
-        "https://www.google.com/recaptcha/api.js", // reCAPTCHAv3 client-side API
-    ]);
+	public static readonly approvedScripts: Set<string> = new Set([
+		"https://www.google.com/recaptcha/api.js", // reCAPTCHAv3 client-side API
+	]);
 }
 
 export class ModalList {
-    private static readonly RECAPTCHA_SITE_KEY: string = `${process.env.RECAPTCHA}`;
-    public static readonly MODALS: ModalConfig[] = [
-        {
-            id: "gnuPgModal",
-            title: Localize.translate("common:modals:gpg"),
-            content: `
+	private static readonly RECAPTCHA_SITE_KEY: string =
+		`${process.env.RECAPTCHA}`;
+	public static readonly MODALS: ModalConfig[] = [
+		{
+			id: "gnuPgModal",
+			title: Localize.translate("common:modals:gpg"),
+			content: `
                 <div class="mt-2 fs-6 fw-medium bg-dark-subtle px-2 py-2">
                     <p>
                         <code>
@@ -197,12 +254,12 @@ export class ModalList {
                         </code>
                     </p>
                 </div>
-            `
-        },
-        {
-            id: "requestCVModal",
-            title: Localize.translate("common:modals:cv:title"),
-            content: `
+            `,
+		},
+		{
+			id: "requestCVModal",
+			title: Localize.translate("common:modals:cv:title"),
+			content: `
                 <div class="mt-2 fs-6 fw-medium border border-1 border-secondary-subtl px-2 py-2 rounded-4">
                     <div class="alert alert-warning rounded-4" role="alert">
                         <i class="bi bi-exclamation-diamond"></i> ${Localize.translate("common:modals:cv:msg")}
@@ -218,12 +275,12 @@ export class ModalList {
                         </div>
                     </div>
                 </div>
-            `
-        },
-        {
-            id: "langSwitchModal",
-            title: Localize.translate("common:modals:lang"),
-            content: `
+            `,
+		},
+		{
+			id: "langSwitchModal",
+			title: Localize.translate("common:modals:lang"),
+			content: `
                 <div class="lang-switch-box rounded-5 bg-gradient p-0">
                     <div class="d-flex flex-row align-items-center justify-content-center gap-2 w-100 rounded-pill p-1">
                         <button id="changeLngToEn" class="btn btn-sm btn-secondary-subtle flex-grow-1 fs-5 fw-medium rounded-pill text-black d-flex p-0 gap-2 flex-row align-items-center justify-content-center">
@@ -237,12 +294,12 @@ export class ModalList {
                         </button>
                     </div>
                 </div>
-            `
-        },
-        {
-            id: "rssModal",
-            title: Localize.translate("common:modals:rss:btnTitle"),
-            content: `
+            `,
+		},
+		{
+			id: "rssModal",
+			title: Localize.translate("common:modals:rss:btnTitle"),
+			content: `
                 <div class="rss-box rounded-5 bg-gradient p-0">
                     <table class="table table-bordered table-striped border border-secondary-subtle border-1">
                         <thead>
@@ -279,12 +336,12 @@ export class ModalList {
                         </tbody>
                     </table>
                 </div>
-            `
-        },
-        {
-            id: "siteMapModal",
-            title: Localize.translate("common:modals:sitemap:btnTitle"),
-            content: `
+            `,
+		},
+		{
+			id: "siteMapModal",
+			title: Localize.translate("common:modals:sitemap:btnTitle"),
+			content: `
                 <div class="sitemap-box rounded-5 p-0">
                     <table class="table table-bordered table-striped border border-secondary-subtle border-1">
                         <thead>
@@ -309,12 +366,12 @@ export class ModalList {
                         </tbody>
                     </table>
                 </div>
-            `
-        },
-        {
-            id: "llmsTxtModal",
-            title: Localize.translate("common:modals:llmsTxt:btnTitle"),
-            content: `
+            `,
+		},
+		{
+			id: "llmsTxtModal",
+			title: Localize.translate("common:modals:llmsTxt:btnTitle"),
+			content: `
                 <div class="sitemap-box rounded-5 p-0">
                     <table class="table table-bordered table-striped border border-secondary-subtle border-1">
                         <thead>
@@ -339,25 +396,25 @@ export class ModalList {
                         </tbody>
                     </table>
                 </div>
-            `
-        }
-    ];
+            `,
+		},
+	];
 }
 
 interface AccordionItem {
-    id: string;
-    header: string;
-    body: string;
-    modalTriggerId?: string;
-    modalId?: string;
+	id: string;
+	header: string;
+	body: string;
+	modalTriggerId?: string;
+	modalId?: string;
 }
 
 export class AccordionList {
-    public static readonly ACCORDION_ITEMS: AccordionItem[] = [
-        {
-            id: "One",
-            header: Localize.translate("common:accordion:secureHeader"),
-            body: `
+	public static readonly ACCORDION_ITEMS: AccordionItem[] = [
+		{
+			id: "One",
+			header: Localize.translate("common:accordion:secureHeader"),
+			body: `
                 <p class="lead fs-6 fw-medium">${Localize.translate("common:accordion:secureIntro")}</p>
                 <table id="commsTable" class="table table-striped table-bordered">
                     <tbody>
@@ -372,13 +429,13 @@ export class AccordionList {
                     </tbody>
                 </table>
             `,
-            modalTriggerId: "gnupgKey",
-            modalId: "gnuPgModal"
-        },
-        {
-            id: "Two",
-            header: Localize.translate("common:accordion:donationsHeader"),
-            body: `
+			modalTriggerId: "gnupgKey",
+			modalId: "gnuPgModal",
+		},
+		{
+			id: "Two",
+			header: Localize.translate("common:accordion:donationsHeader"),
+			body: `
                 <p class="lead fs-6 fw-medium">${Localize.translate("common:accordion:donationsIntro")}</p>
                 <table id="commsTable" class="table table-striped table-bordered">
                     <tbody>
@@ -388,12 +445,12 @@ export class AccordionList {
                         </tr>
                     </tbody>
                 </table>
-            `
-        },
-        {
-            id: "Three",
-            header: Localize.translate("common:accordion:aboutSiteHeader"),
-            body: `
+            `,
+		},
+		{
+			id: "Three",
+			header: Localize.translate("common:accordion:aboutSiteHeader"),
+			body: `
                 <p class="lead fs-6 fw-medium">${Localize.translate("common:accordion:aboutSiteIntro")}</p>
                 <table id="commsTable" class="table table-striped table-bordered">
                     <tbody>
@@ -413,14 +470,14 @@ export class AccordionList {
                         </tr>
                     </tbody>
                 </table>
-            `
-        }
-    ];
+            `,
+		},
+	];
 }
 
 export class Banner {
-    public static readonly BANNER_ASCII: Array<string> = [
-        `
+	public static readonly BANNER_ASCII: Array<string> = [
+		`
 ██████████
 ░░███░░░░███
  ░███   ░░███
@@ -430,7 +487,7 @@ export class Banner {
  ██████████
 ░░░░░░░░░░
         `,
-        `
+		`
    ██████████
  ░░███░░░░░█░
  ░███  █ ░
@@ -440,7 +497,7 @@ export class Banner {
    ██████████
    ░░░░░░░░░░
         `,
-        `
+		`
  ███████████
 ░███░░░░░███
 ░███    ░███
@@ -450,7 +507,7 @@ export class Banner {
  █████   █████
  ░░░░░   ░░░░░
         `,
-        `
+		`
    █████   █████
  ░░███   ░░███
   ░███    ░███
@@ -460,7 +517,7 @@ export class Banner {
     ░░███    
       ░░░    
         `,
-        `
+		`
  █████
 ░░███
  ░███
@@ -470,7 +527,7 @@ export class Banner {
 █████░
 ░░░░░
         `,
-        `
+		`
   █████████
   ███░░░░░███
  ░███    ░░░
@@ -479,6 +536,6 @@ export class Banner {
   ███    ░███
 ░█████████
 ░░░░░░░░░
-        `
-    ];
+        `,
+	];
 }

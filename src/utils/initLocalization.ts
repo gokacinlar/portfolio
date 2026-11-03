@@ -1,7 +1,7 @@
 import Localize from "../i18n";
 
 function initializeI18n() {
-    Localize.init();
+	Localize.init();
 }
 
 initializeI18n();

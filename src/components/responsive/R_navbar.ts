@@ -2,35 +2,35 @@ import { headerLeftIcon, headerMiddleContent } from "../../pages/headerShared";
 import Localize from "../../utils/initLocalization";
 
 interface ResponsiveNavBarElements {
-    title: string;
-    icon: string;
-    href: string;
+	title: string;
+	icon: string;
+	href: string;
 }
 
 class ResponsiveNavbar {
-    private static readonly isOffcanvasScrollable: boolean = false;
-    private static readonly NAVBAR_HEADER_LINKS: ResponsiveNavBarElements[] = [
-        {
-            title: Localize.translate("common:misc:github"),
-            icon: "bi bi-github",
-            href: "https://www.github.com/gokacinlar",
-        },
-    ];
+	private static readonly isOffcanvasScrollable: boolean = false;
+	private static readonly NAVBAR_HEADER_LINKS: ResponsiveNavBarElements[] = [
+		{
+			title: Localize.translate("common:misc:github"),
+			icon: "bi bi-github",
+			href: "https://www.github.com/gokacinlar",
+		},
+	];
 
-    private offcanvas?: HTMLElement;
-    private toggleButton?: HTMLButtonElement;
-    private toggleButtonIcon?: HTMLElement;
+	private offcanvas?: HTMLElement;
+	private toggleButton?: HTMLButtonElement;
+	private toggleButtonIcon?: HTMLElement;
 
-    private handleOffcanvasShown = (): void => {
-        this.setMenuIcon("bi-three-dots-vertical");
-    };
+	private handleOffcanvasShown = (): void => {
+		this.setMenuIcon("bi-three-dots-vertical");
+	};
 
-    private handleOffcanvasHidden = (): void => {
-        this.setMenuIcon("bi-three-dots");
-    };
+	private handleOffcanvasHidden = (): void => {
+		this.setMenuIcon("bi-three-dots");
+	};
 
-    public responsiveMenuToggleButton(): string {
-        return /* html */ `
+	public responsiveMenuToggleButton(): string {
+		return /* html */ `
             <button
                 id="responsiveMenuToggleBtn"
                 type="button"
@@ -49,10 +49,10 @@ class ResponsiveNavbar {
                 ${this.renderResponsiveNavbar()}
             </div>
         `;
-    }
+	}
 
-    public renderResponsiveNavbar(): string {
-        return /* html */ `
+	public renderResponsiveNavbar(): string {
+		return /* html */ `
             <div
                 class="offcanvas offcanvas-end rounded-start-4"
                 tabindex="-1"
@@ -103,12 +103,11 @@ class ResponsiveNavbar {
                 </div>
             </div>
         `;
-    }
+	}
 
-    private renderNavbarHeaderContent(): string {
-        return ResponsiveNavbar.NAVBAR_HEADER_LINKS
-            .map(
-                ({ title, icon, href }) => /* html */ `
+	private renderNavbarHeaderContent(): string {
+		return ResponsiveNavbar.NAVBAR_HEADER_LINKS.map(
+			({ title, icon, href }) => /* html */ `
                     <a
                         href="${href}"
                         hreflang="x-default"
@@ -119,41 +118,61 @@ class ResponsiveNavbar {
                         <i class="${icon}"></i>
                     </a>
                 `,
-            )
-            .join("");
-    }
+		).join("");
+	}
 
-    private setMenuIcon(iconName: string): void {
-        if (!this.toggleButtonIcon) {
-            return;
-        }
+	private setMenuIcon(iconName: string): void {
+		if (!this.toggleButtonIcon) {
+			return;
+		}
 
-        this.toggleButtonIcon.classList.remove("bi-three-dots", "bi-three-dots-vertical");
-        this.toggleButtonIcon.classList.add(iconName);
-    }
+		this.toggleButtonIcon.classList.remove(
+			"bi-three-dots",
+			"bi-three-dots-vertical",
+		);
+		this.toggleButtonIcon.classList.add(iconName);
+	}
 
-    connectedCallback(): void {
-        this.toggleButton = document.querySelector("#responsiveMenuToggleBtn") as HTMLButtonElement;
-        this.toggleButtonIcon = document.querySelector("#responsiveMenuToggleBtn > i") as HTMLElement;
-        this.offcanvas = document.querySelector("#responsiveHeaderOffcanvas") as HTMLElement;
+	connectedCallback(): void {
+		this.toggleButton = document.querySelector(
+			"#responsiveMenuToggleBtn",
+		) as HTMLButtonElement;
+		this.toggleButtonIcon = document.querySelector(
+			"#responsiveMenuToggleBtn > i",
+		) as HTMLElement;
+		this.offcanvas = document.querySelector(
+			"#responsiveHeaderOffcanvas",
+		) as HTMLElement;
 
-        if (!this.toggleButton || !this.toggleButtonIcon || !this.offcanvas) {
-            console.warn("Responsive navbar elements were not found.");
-            return;
-        }
+		if (!this.toggleButton || !this.toggleButtonIcon || !this.offcanvas) {
+			console.warn("Responsive navbar elements were not found.");
+			return;
+		}
 
-        this.offcanvas.addEventListener("shown.bs.offcanvas", this.handleOffcanvasShown);
-        this.offcanvas.addEventListener("hidden.bs.offcanvas", this.handleOffcanvasHidden);
-    }
+		this.offcanvas.addEventListener(
+			"shown.bs.offcanvas",
+			this.handleOffcanvasShown,
+		);
+		this.offcanvas.addEventListener(
+			"hidden.bs.offcanvas",
+			this.handleOffcanvasHidden,
+		);
+	}
 
-    disconnectedCallback(): void {
-        if (!this.offcanvas) {
-            return;
-        }
+	disconnectedCallback(): void {
+		if (!this.offcanvas) {
+			return;
+		}
 
-        this.offcanvas.removeEventListener("shown.bs.offcanvas", this.handleOffcanvasShown);
-        this.offcanvas.removeEventListener("hidden.bs.offcanvas", this.handleOffcanvasHidden);
-    }
+		this.offcanvas.removeEventListener(
+			"shown.bs.offcanvas",
+			this.handleOffcanvasShown,
+		);
+		this.offcanvas.removeEventListener(
+			"hidden.bs.offcanvas",
+			this.handleOffcanvasHidden,
+		);
+	}
 }
 
 export default ResponsiveNavbar;

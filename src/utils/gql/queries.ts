@@ -1,6 +1,6 @@
 class GraphQLQueries {
-    // Query to fetch only post previews (no content for efficient loading & caching)
-    protected static readonly GRAPHQL_QUERY_FETCH_POST_PREVIEWS: string = `
+	// Query to fetch only post previews (no content for efficient loading & caching)
+	protected static readonly GRAPHQL_QUERY_FETCH_POST_PREVIEWS: string = `
     query GetPostPreviews($first: Int, $after: String) {
         posts(first: $first, after: $after) {
             nodes {
@@ -13,8 +13,8 @@ class GraphQLQueries {
     }
     `;
 
-    // Query to fetch single post with full content on demand
-    protected static readonly GRAPHQL_QUERY_FETCH_SINGLE_POST: string = `
+	// Query to fetch single post with full content on demand
+	protected static readonly GRAPHQL_QUERY_FETCH_SINGLE_POST: string = `
         query GetSinglePost($id: ID!) {
             post(id: $id, idType: ID) {
                 id
@@ -37,8 +37,8 @@ class GraphQLQueries {
         }
     `;
 
-    // Query to fetch single post with "URL"
-    protected static readonly GRAPHQL_QUERY_FETCH_POST_BY_SLUG: string = `
+	// Query to fetch single post with "URL"
+	protected static readonly GRAPHQL_QUERY_FETCH_POST_BY_SLUG: string = `
         query GetPostBySlug($slug: String!) {
             postBy(slug: $slug) {
                 id
@@ -61,7 +61,7 @@ class GraphQLQueries {
         }
     `;
 
-    protected static readonly GRAPHQL_QUERY_FETCH_ALL_POSTS: string = `
+	protected static readonly GRAPHQL_QUERY_FETCH_ALL_POSTS: string = `
 		query GetAllPosts($first: Int, $after: String) {
 			posts(first: $first, after: $after, where: {orderby: {field: DATE, order: DESC}}) {
 				pageInfo {

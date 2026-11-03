@@ -1,453 +1,447 @@
 {
-    "maintenance": {
-        "status": "Bu websitesi yapım aşamasındadır. Bazı özellikler çalışmayabilir."
-    },
-    "upperNavigation": {
-        "home": "Anasayfa",
-        "lifeFeed": "Hikayeler",
-        "gallery": "Galeri",
-        "updates": "Blog",
-        "about": "Hakkımda"
-    },
-    "hero": {
-        "greet": "Merhaba! Ben",
-        "buttons": {
-            "workWMe": "Benimle Çalışın",
-            "cv": "CV'mi İndirin"
-        },
-        "buttonTitles": {
-            "workHire": "Web projesi veya İngilizce öğretimi için çalışalım.",
-            "downloadCV": "CV'mi indirmek için tıklayın."
-        },
-        "mottos": {
-            "prof": "Profesyonel",
-            "problemSolver": "Problem Çözücü",
-            "realistic": "Gerçekçi",
-            "practical": "Pratik",
-            "applicable": "Uyumlu",
-            "inDemand": "Hızlı"
-        }
-    },
-    "fields": {
-        "teacher": "İngilizce Öğretmeni",
-        "frontEnd": "Ön-yüz Geliştiricisi",
-        "react": "React Geliştiricisi",
-        "wordpress": "WordPress Geliştiricisi",
-        "js": "JavaScript Geliştiricisi",
-        "ts": "TypeScript Geliştiricisi"
-    },
-    "video": {
-        "teach": "Hayat Boyu Öğretim",
-        "code": "Tutku İçin Yazılım"
-    },
-    "desc": {
-        "descTitle": "Kendimi Şöyle Biliyorum",
-        "titles": {
-            "PS": "Problem Çözücü",
-            "PE": "İlerici",
-            "PL": "Pratik",
-            "RC": "Gerçekçi"
-        },
-        "exp": {
-            "PS": "İş hayatından gündelik hayata kadar her alanda karşılaştığımız çeşitli sorunlara çözümler üretmeye çalışıyorum.",
-            "PE": "Küresel ölçekteki en son ve en olumlu gelişmeleri takip etmeye ve bunları bütünüyle benimsemeye çalışıyorum.",
-            "PL": "Teoriyi her zaman deneyimlenen gerçeklikle uyumlu hale getirmeye çalışırım ve böylece akıl yoluyla kendi kendini sürdürebilen bir ortam yaratırım.",
-            "RC": "Sınıfımda veya bilgisayarımda gerçek bir sorunla karşılaştığımda, gözlemlediğim olguyu ele almak için uygulanabilir çözümler ararım."
-        }
-    },
-    "skills": {
-        "title": "Şunlarda İyiyim"
-    },
-    "projects": {
-        "title": "Projelerimden Bazıları"
-    },
-    "offcanvas": {
-        "btnMessage": "Gönderileri görmek için tıklayın."
-    },
-    "teach": {
-        "title": "İngilizce Öğretmenliği?",
-        "desc": {
-            "subtitle": "Esas mesleğim <span class=\"mark rounded-4\">İngilizce Öğretmenliğidir!</span>",
-            "desc1": "Mezun olduktan itibaren çeşitli okullarda çalışıyorum. Öğrencilerim genellikle <u>ilkokuldan liseye kadar uzanıyor</u>. <strong>Neredeyse her bir yaştan öğrenciyle</strong> çalışma imkanım oldu...",
-            "approach": "Öğretim hakkında temel yaklaşımlarım ve prensiplerim şunlardır:"
-        }
-    },
-    "principles": {
-        "first": {
-            "title": "Bağlamsal Süreklilik",
-            "msg": "Öğrenciler için İngilizceyi anlamlı ve ilgi çekici hale getirmek için, günlük konuşmaları canlandırmak veya sınıfta işlediğimiz konuya bağlı olarak çeşitli metinleri analiz etmek gibi gerçek dünya senaryolarını entegre ediyorum."
-        },
-        "second": {
-            "title": "Yapılandırılmış Bağımsızlık",
-            "msg": "Öğrencilerin basit cümleler kurmaktan karmaşık fikirleri tartışmaya kadar kendi öğrenme süreçlerinin sorumluluğunu üstlenmelerini sağlayacak şekilde, karmaşıklığı kademeli olarak artan görevler tasarlıyorum."
-        },
-        "third": {
-            "title": "Fırsatlandırılmış Hatalar",
-            "msg": "Öğrencileri hataları kritik basamaklar olarak görmeye, hedefli geri bildirimleri yargılanma korkusu olmadan dil becerilerini geliştirmek için kullanmaya teşvik ediyorum."
-        },
-        "fourth": {
-            "title": "Çoklu Model Katılımı",
-            "msg": "Görsel, işitsel ve kinestetik etkinlikleri bir araya getirerek, çizgi romanlar aracılığıyla hikaye anlatımı veya ritim egzersizleri aracılığıyla telaffuz gibi farklı öğrenme stillerine hitap ediyorum."
-        },
-        "fifth": {
-            "title": "Kültürel Hikayelendirme",
-            "msg": "Derslerime küresel ve yerel anlatıları entegre ederek, öğrencilerin İngilizceyi kendi kimlikleriyle ilişkilendirmelerine ve yeni bakış açıları keşfetmelerine yardımcı oluyorum."
-        }
-    },
-    "quoteAboutEdu": {
-        "title": "Neye İnanıyorum?",
-        "msg": "Çocuklarımız <span class=\"wavy-text\">bizim yetiştirdiğimiz</span> insanların arasında <strong>yaşayacaklar...</strong>."
-    },
-    "work": {
-        "title": "Birlikte çalışmaya hazır mısın?",
-        "section1": {
-            "title": "Eğitimde desteğe mi ihtiyacınız var?",
-            "msg": "Size, sizin seçebileceğiniz uygun kayıtlarla P2P çevrimiçi öğretim deneyimi sunabilirim. Bunlar arasında canlı derslere, etütlere ve birebirlere ek olarak; <strong>Ek İngilizce Kursu</strong>, <strong>İngilizce Yeterlilik Kursu</strong> ve <strong>Sınav Odaklı İngilizce Kursu</strong> gibi planlar bulunmaktadır. Daha kapsamlı bilgi için aşağıdaki planlara bakın!"
-        },
-        "section2": {
-            "title": "Bir web projeniz mi var?",
-            "msg": "React kullanarak tam işlevli bir web uygulaması tasarlayabilir, prototipini oluşturabilir ve geliştirebilirim; ayrıca WordPress gibi klasik CMS yaklaşımlarını veya hobi siteleri, portföyler, bloglar ve daha birçok çok sayfalı statik içerikli web sitesini de tasarlayabilir, prototipini oluşturabilir ve geliştirebilirim! Kişisel veya işletme web çözümleriniz için bakım hizmeti de sunuyorum. Daha kapsamlı bilgi için aşağıdaki planlara göz atabilirsiniz!"
-        }
-    },
-    "support": {
-        "title": "Desteklediğim Organizasyonlar",
-        "supportMsg": "Maddi & manevi destek olunuz."
-    },
-    "title": "İngilizce Öğretmeni & Ön-yüz Geliştiricisi",
-    "description": {
-        "part1": "x",
-        "part2": "y"
-    },
-    "modals": {
-        "gpg": "🧲 GnuPG Public Key",
-        "cv": {
-            "title": "👔 CV'mi Görün ya da İndirin",
-            "msg": "Devam etmeden önce lütfen robot olmadığınızı onaylayın.",
-            "btnMsg": "İşlemi Onayla"
-        },
-        "lang": "🎇 Site Dilini Değiştir",
-        "rss": {
-            "btnTitle": "📰 RSS Feedi İndir",
-            "tablePlatformName": "Platform İsmi",
-            "tableLinkName": "RSS Bağlantısı",
-            "site": "Site",
-            "thisSite": "Bu Site",
-            "hashnode": "Hashnode"
-        },
-        "sitemap": {
-            "btnTitle": "🍁 Site Haritası",
-            "tableActionName": "Eylem",
-            "tableVisitName": "Gidin",
-            "visitSitemap": "Site Haritasını Görün"
-        },
-        "llmsTxt": {
-            "btnTitle": "🤖 LLMs.txt",
-            "tableActionName": "Eylem",
-            "tableVisitName": "Gidin",
-            "visitLlmsTxt": "İndirin: LLMs.txt"
-        },
-        "langSwitch": {
-            "en": "English",
-            "tr": "Türkçe",
-            "enTitle": "Dili İngilizce'ye Çevir",
-            "trTitle": "Dili Türkçe'ye Çevir"
-        }
-    },
-    "misc": {
-        "close": "Kapat",
-        "github": "GitHub",
-        "motto": "Öğretmek <strong>yaşam</strong> içindir, yazılım <strong>tutku</strong> için."
-    },
-    "footer": {
-        "llmsTxt": "LLMs.txt",
-        "sitemap": "Site Haritası",
-        "ccZero": "Creative Commons CC0 1.0 Evrensel Lisansı",
-        "notByAi": "NotByAI Rozeti"
-    },
-    "header": {
-        "dayNight": "Gündüz/Gece Modunu Değiştir",
-        "changeLanguage": "Site Dilini Değiştir"
-    },
-    "scrollToTop": {
-        "text": "Başa Dön"
-    },
-    "about": {
-        "skills": {
-            "teacher": "İngilizce Öğretmeni",
-            "frontend": "Ön-yüz Geliştiricisi"
-        },
-        "socials": {
-            "github": "GitHub",
-            "hashnode": "Hashnode",
-            "substack": "Substack",
-            "email": "E-posta"
-        },
-        "nav": {
-            "aboutMe": "Hakkımda",
-            "education": "Eğitim",
-            "work": "Çalışmalar",
-            "stack": "Teknoloji Yığını ve Araçlar",
-            "mailing": "E-posta",
-            "advanced": "İleri Düzey"
-        },
-        "introduction": {
-            "first": "<mark>İçerik odaklı</mark> web siteleri oluşturmakla birlikte, <em>hız</em> ve <em>aşamalı geliştirmenin</em> kritik önem taşıdığı <mark>web uygulamaları (SPA)</mark> veya <mark>çok sayfalı</mark> statik içerikler geliştirmekle yakından ilgileniyorum. Kullanıcı arayüzlerini özellikle <strong>React</strong> ile oluşturmayı seviyorum.",
-            "last": "Asıl uzmanlık alanım <mark>ESL (İkinci Dil Olarak İngilizce)</mark> bağlamında İngilizce öğretmektir. Ana odağım, dilin gündelik veya akademik etkileşiminin hemen her alanında pratik kullanımını en üst düzeye çıkarmaktır."
-        },
-        "table": {
-            "institution": "Kurum",
-            "field": "Alan",
-            "degree": "Derece",
-            "date": "Tarih",
-            "category": "Kategori",
-            "technologies": "Teknolojiler",
-            "librariesTools": "Kütüphaneler ve Araçlar"
-        },
-        "edu": {
-            "university": "Atatürk Üniversitesi",
-            "elte": "İngiliz Dili Eğitimi",
-            "bachelor": "Lisans Derecesi",
-            "computerProgramming": "Bilgisayar Programcılığı",
-            "associate": "Ön Lisans Derecesi",
-            "current": "devam ediyor"
-        },
-        "stack": {
-            "frontend": "Ön-yüz",
-            "backend": "Arka-yüz",
-            "crossplatform": "Çapraz Platform",
-            "styling": "Stil",
-            "databases": "Veritabanları",
-            "devops": "DevOps",
-            "cms": "CMS",
-            "ssg": "SSG",
-            "testing": "Test",
-            "designUx": "Tasarım ve UX"
-        },
-        "work": {
-            "cvIntro": "CV'mi görüntüleyebilir veya indirebilirsiniz",
-            "cvHere": "buradan.",
-            "cvTitle": "CV'yi görüntüle/indir."
-        }
-    },
-    "emailForm": {
-        "yourName": "Adınız",
-        "someone": "Örnek: Ahmet",
-        "provideName": "Lütfen adınızı belirtin.",
-        "email": "E-posta",
-        "emailPlaceholder": "ornek@example.com",
-        "provideEmail": "Lütfen e-posta adresinizi belirtin.",
-        "message": "Mesaj",
-        "messagePlaceholder": "Mesajınızı buraya yazın...",
-        "provideMessage": "Lütfen mesaj alanına bir mesaj girin.",
-        "submitTitle": "Formu Gönder",
-        "sendMessage": "Mesaj Gönder",
-        "subject": "Yeni Mesaj"
-    },
-    "blog": {
-        "latestUpdates": "Son Güncellemeler",
-        "noPosts": "Blog yazısı <em>mevcut değil.</em>",
-        "untitledPost": "Başlıksız Gönderi",
-        "unknownAuthor": "Bilinmeyen Yazar",
-        "unableDisplay": "Blog yazıları <mark>görüntülenemiyor.</mark>",
-        "errorLoading": "Gönderi Yüklenirken Hata",
-        "somethingWentWrong": "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin...",
-        "postNotFound": "Gönderi Bulunamadı",
-        "postNotFoundMsg": "İstenen gönderi bulunamadı.",
-        "error": "Hata",
-        "unableLoad": "Blog yazıları yüklenemedi. Lütfen sayfayı yenileyin.",
-        "loadingPosts": "Blog Yazıları Yükleniyor",
-        "loadingPostsMsg": "Blog yazıları yükleniyor...",
-        "loading": "Yükleniyor....",
-        "author": "Yazar"
-    },
-    "workPage": {
-        "hireMe": "Beni İşe Alın",
-        "orSeePlans": "veya planlarımı <span class=\"wavy-text\">aşağıda</span> inceleyin.",
-        "scrollDown": "Aşağı kaydır",
-        "seePlans": "Planları Gör",
-        "forEnglish": "İngilizce Öğrenmek İçin",
-        "forProgramming": "Web Geliştirme İçin",
-        "comingSoon": "Yakında...",
-        "featured": {
-            "title": "En Popüler Planlar",
-            "subtitle": "Hedefine uygun planı seç & istediğin zaman yükselt.",
-            "plans": {
-                "free": {
-                    "label": "Başlangıç",
-                    "subtitle": "Yeni başlayanlar için ideal",
-                    "pricePeriod": "/saat",
-                    "badge": "",
-                    "features": [
-                        "Küçük grup (en fazla 4 kişi) sohbeti",
-                        "Haftalık pratik & geri bildirim",
-                        "Temel materyaller dahil",
-                        "E-posta desteği"
-                    ],
-                    "excludedFeatures": [
-                        "1:1 canlı mentorluk",
-                        "Kişisel yol haritası"
-                    ],
-                    "buttonLabel": "Rezervasyon İçin İletişim",
-                    "buttonIcon": "bi-people-fill"
-                },
-                "starter": {
-                    "label": "Başlangıç",
-                    "subtitle": "Yeni başlayanlar için ideal",
-                    "pricePeriod": "/saat",
-                    "badge": "",
-                    "features": [
-                        "Küçük grup (en fazla 4 kişi) sohbeti",
-                        "Haftalık pratik & geri bildirim",
-                        "Temel materyaller dahil",
-                        "E-posta desteği"
-                    ],
-                    "excludedFeatures": [
-                        "1:1 canlı mentorluk",
-                        "Kişisel yol haritası"
-                    ],
-                    "buttonLabel": "Rezervasyon İçin İletişim",
-                    "buttonIcon": "bi-people-fill"
-                },
-                "pro": {
-                    "label": "Pro",
-                    "subtitle": "En popüler & kişiselleştirilmiş",
-                    "pricePeriod": "/saat",
-                    "badge": "En Popüler",
-                    "features": [
-                        "1:1 Canlı 60 dakikalık dersler",
-                        "Kişiselleştirilmiş seviye & yol haritası",
-                        "Konuşma + dilbilgisi odaklı",
-                        "Ödev & detaylı düzeltme",
-                        "Esnek yeniden planlama"
-                    ],
-                    "buttonLabel": "Rezervasyon İçin İletişim",
-                    "buttonIcon": "bi-send-fill",
-                    "secondaryButtonLabel": "WhatsApp",
-                    "secondaryButtonIcon": "bi-whatsapp"
-                },
-                "max": {
-                    "label": "Max",
-                    "subtitle": "Ciddi öğrenenler için",
-                    "pricePeriod": "/saat",
-                    "badge": "",
-                    "features": [
-                        "Pro'daki her şey",
-                        "İş İngilizcesi Sprint (4 hafta)",
-                        "Sunumlar, e-postalar & mülakatlar",
-                        "Deneme sınavları (YDS/TOEFL/IELTS)",
-                        "Öncelikli destek & sertifika"
-                    ],
-                    "buttonLabel": "Udemy'de Satın Al",
-                    "buttonIcon": "bi-bag-fill"
-                }
-            }
-        },
-        "cards": {
-            "english": {
-                "live-1-1": {
-                    "name": "1:1 Canlı Ders",
-                    "description": "Seviyenize ve hedeflerinize özel 60 dakikalık canlı ders ve konuşma, dilbilgisi ve gerçek sohbet pratiği için ideal.",
-                    "buttonLabel": "Rezervasyon İçin İletişim",
-                    "buttonIcon": "bi-send-fill",
-                    "whatsappLabel": "WhatsApp"
-                },
-                "group": {
-                    "name": "Grup Sohbeti",
-                    "description": "Küçük gruplar (en fazla 4 kişi) ile akıcılık ve özgüven odaklı interaktif dersler ve tartışma, rol yapma ve geri bildirim.",
-                    "buttonLabel": "Rezervasyon İçin İletişim",
-                    "buttonIcon": "bi-people-fill"
-                },
-                "exam": {
-                    "name": "Sınav Hazırlığı",
-                    "description": "YDS / TOEFL / IELTS / Proficiency için yoğun program ve stratejiler, deneme sınavları ve detaylı hata düzeltme.",
-                    "buttonLabel": "Udemy'de Satın Al",
-                    "buttonIcon": "bi-bag-fill"
-                },
-                "business": {
-                    "name": "İş İngilizcesi Sprint",
-                    "description": "Kariyer odaklı yoğun program: sunumlar, e-postalar, mülakatlar ve toplantılar, ödev incelemeli 4 haftalık sprint.",
-                    "buttonLabel": "Udemy'de Satın Al",
-                    "buttonIcon": "bi-bag-fill"
-                }
-            },
-            "programming": {
-                "frontend": {
-                    "name": "Frontend Sprint",
-                    "description": "React / TypeScript ile birebir mentorluk ve gerçek projeler, kod incelemeleri ve en iyi pratikler.",
-                    "buttonLabel": "GitHub'da Gör",
-                    "buttonIcon": "bi-github"
-                },
-                "backend": {
-                    "name": "Backend Boost",
-                    "description": "Node.js / PHP / API tasarım oturumları ve mimari rehberlik ve performans optimizasyonu.",
-                    "buttonLabel": "Udemy'de Satın Al",
-                    "buttonIcon": "bi-bag-fill"
-                },
-                "fullstack": {
-                    "name": "Full-Stack Proje",
-                    "description": "Fikirden yayına uçtan uca proje mentorluğu ve DevOps temelleri dahil.",
-                    "buttonLabel": "Projeye Başla",
-                    "buttonIcon": "bi-rocket-takeoff-fill"
-                },
-                "review": {
-                    "name": "Kod İnceleme Paketi",
-                    "description": "Detaylı geri bildirim, yeniden düzenleme önerileri ve video anlatımlı asenkron kod incelemeleri.",
-                    "buttonLabel": "İnceleme İste",
-                    "buttonIcon": "bi-code-slash"
-                }
-            }
-        },
-        "stillUnsure": {
-            "title": "Hala kararsız mısın?",
-            "subtitle": "Doğru planı birlikte bulalım",
-            "description": "Hangi planın sana uygun olduğundan emin değil misin? WhatsApp'tan hızlıca yaz,  dakikalar içinde yardımcı olayım, baskı yok.",
-            "cta": "WhatsApp'tan Yaz",
-            "ctaTitle": "WhatsApp'tan yaz",
-            "note": "Genellikle gün içerisinde dönüş • Spam yok • Taahhüt yok",
-            "bookingNote": "Randevu al"
-        },
-        "individualPlan": {
-            "title": "Bireysel bir plana mı ihtiyacın var?",
-            "subtitle": "İngilizce ve Yazılım için bireysel seçeneklere göz at"
-        }
-    },
-    "promo": {
-        "seePlans": "Planları Gör",
-        "link": "Bağlantı",
-        "iconTitle": "Simge",
-        "writtenIn": "Yazıldığı dil:"
-    },
-    "accordion": {
-        "secureHeader": "🔑 Güvenli ve Gizli İletişim",
-        "secureIntro": "Benimle <mark class=\"rounded-3\">daha gizli bir şekilde</mark> iletişime geçmek isterseniz aşağıdaki eylemlerden birini kullanabilirsiniz. Bu yöntemleri nasıl kullanacağınızı bilmiyorsanız, işte <a class=\"link-info link-opacity-75-hover link-offset-2\" href=\"https://www.youtube.com/watch?v=mu2TVYJE5Gc\" hreflang=\"x-default\" target=\"_blank\">bir eğitim videosu</a>. Ancak bunu yalnızca <strong>gerçekten iyi bir nedeniniz varsa</strong> kullanmalısınız.",
-        "secureJami": "Jami (İstemci)",
-        "secureGpg": "GnuPG (Genel Anahtar)",
-        "secureView": "Görüntüle",
-        "secureHere": "buradan.",
-        "donationsHeader": "💞 Bağışlar",
-        "donationsIntro": "Çalışmalarımla <em>herhangi bir şekilde</em> ilgileniyorsanız, aşağıdaki seçeneklerle beni destekleyebilirsiniz:",
-        "donationsBuyMeACoffee": "BuyMeACoffee",
-        "donationsView": "Görüntüle",
-        "donationsHere": "buradan.",
-        "aboutSiteHeader": "🍫 Bu Site Hakkında",
-        "aboutSiteIntro": "Burada bu web sitesi için gerekli tüm bilgileri bulabilirsiniz.",
-        "aboutSiteVersion": "Site Sürümü",
-        "aboutSiteLicense": "Lisans",
-        "aboutSiteLicenseValue": "Bu site <code>CC0-1.0 Evrensel Lisansı</code> altında lisanslıdır.",
-        "aboutSiteSource": "Kaynak Kodu",
-        "aboutSiteAvailableOn": "Şurada mevcut:",
-        "aboutSiteGitHub": "GitHub"
-    },
-    "toasts": {
-        "completeCaptcha": "Lütfen captcha doğrulamasını tamamlayın.",
-        "verified": "Captcha doğrulandı. İndirme başlatılıyor.",
-        "verificationFailed": "Captcha doğrulaması başarısız oldu. Lütfen tekrar deneyin.",
-        "rateLimit": "Hız sınırı aşıldı. Lütfen bir süre bekleyip tekrar deneyin.",
-        "rateLimitLater": "Hız sınırı aşıldı. Lütfen daha sonra tekrar deneyin.",
-        "downloadFailed": "Dosya indirilemedi. Lütfen tekrar deneyin.",
-        "requestFailed": "İstek başarısız oldu ({{status}}). Lütfen tekrar deneyin.",
-        "emailSent": "E-postanız gönderildi.",
-        "emailFailed": "E-postanız gönderilemedi.",
-        "emailFailedTryAgain": "E-postanız gönderilemedi. Lütfen tekrar deneyin."
-    }
+	"maintenance": {
+		"status": "Bu websitesi yapım aşamasındadır. Bazı özellikler çalışmayabilir."
+	},
+	"upperNavigation": {
+		"home": "Anasayfa",
+		"lifeFeed": "Hikayeler",
+		"gallery": "Galeri",
+		"updates": "Blog",
+		"about": "Hakkımda"
+	},
+	"hero": {
+		"greet": "Merhaba! Ben",
+		"buttons": {
+			"workWMe": "Benimle Çalışın",
+			"cv": "CV'mi İndirin"
+		},
+		"buttonTitles": {
+			"workHire": "Web projesi veya İngilizce öğretimi için çalışalım.",
+			"downloadCV": "CV'mi indirmek için tıklayın."
+		},
+		"mottos": {
+			"prof": "Profesyonel",
+			"problemSolver": "Problem Çözücü",
+			"realistic": "Gerçekçi",
+			"practical": "Pratik",
+			"applicable": "Uyumlu",
+			"inDemand": "Hızlı"
+		}
+	},
+	"fields": {
+		"teacher": "İngilizce Öğretmeni",
+		"frontEnd": "Ön-yüz Geliştiricisi",
+		"react": "React Geliştiricisi",
+		"wordpress": "WordPress Geliştiricisi",
+		"js": "JavaScript Geliştiricisi",
+		"ts": "TypeScript Geliştiricisi"
+	},
+	"video": {
+		"teach": "Hayat Boyu Öğretim",
+		"code": "Tutku İçin Yazılım"
+	},
+	"desc": {
+		"descTitle": "Kendimi Şöyle Biliyorum",
+		"titles": {
+			"PS": "Problem Çözücü",
+			"PE": "İlerici",
+			"PL": "Pratik",
+			"RC": "Gerçekçi"
+		},
+		"exp": {
+			"PS": "İş hayatından gündelik hayata kadar her alanda karşılaştığımız çeşitli sorunlara çözümler üretmeye çalışıyorum.",
+			"PE": "Küresel ölçekteki en son ve en olumlu gelişmeleri takip etmeye ve bunları bütünüyle benimsemeye çalışıyorum.",
+			"PL": "Teoriyi her zaman deneyimlenen gerçeklikle uyumlu hale getirmeye çalışırım ve böylece akıl yoluyla kendi kendini sürdürebilen bir ortam yaratırım.",
+			"RC": "Sınıfımda veya bilgisayarımda gerçek bir sorunla karşılaştığımda, gözlemlediğim olguyu ele almak için uygulanabilir çözümler ararım."
+		}
+	},
+	"skills": {
+		"title": "Şunlarda İyiyim"
+	},
+	"projects": {
+		"title": "Projelerimden Bazıları"
+	},
+	"offcanvas": {
+		"btnMessage": "Gönderileri görmek için tıklayın."
+	},
+	"teach": {
+		"title": "İngilizce Öğretmenliği?",
+		"desc": {
+			"subtitle": "Esas mesleğim <span class=\"mark rounded-4\">İngilizce Öğretmenliğidir!</span>",
+			"desc1": "Mezun olduktan itibaren çeşitli okullarda çalışıyorum. Öğrencilerim genellikle <u>ilkokuldan liseye kadar uzanıyor</u>. <strong>Neredeyse her bir yaştan öğrenciyle</strong> çalışma imkanım oldu...",
+			"approach": "Öğretim hakkında temel yaklaşımlarım ve prensiplerim şunlardır:"
+		}
+	},
+	"principles": {
+		"first": {
+			"title": "Bağlamsal Süreklilik",
+			"msg": "Öğrenciler için İngilizceyi anlamlı ve ilgi çekici hale getirmek için, günlük konuşmaları canlandırmak veya sınıfta işlediğimiz konuya bağlı olarak çeşitli metinleri analiz etmek gibi gerçek dünya senaryolarını entegre ediyorum."
+		},
+		"second": {
+			"title": "Yapılandırılmış Bağımsızlık",
+			"msg": "Öğrencilerin basit cümleler kurmaktan karmaşık fikirleri tartışmaya kadar kendi öğrenme süreçlerinin sorumluluğunu üstlenmelerini sağlayacak şekilde, karmaşıklığı kademeli olarak artan görevler tasarlıyorum."
+		},
+		"third": {
+			"title": "Fırsatlandırılmış Hatalar",
+			"msg": "Öğrencileri hataları kritik basamaklar olarak görmeye, hedefli geri bildirimleri yargılanma korkusu olmadan dil becerilerini geliştirmek için kullanmaya teşvik ediyorum."
+		},
+		"fourth": {
+			"title": "Çoklu Model Katılımı",
+			"msg": "Görsel, işitsel ve kinestetik etkinlikleri bir araya getirerek, çizgi romanlar aracılığıyla hikaye anlatımı veya ritim egzersizleri aracılığıyla telaffuz gibi farklı öğrenme stillerine hitap ediyorum."
+		},
+		"fifth": {
+			"title": "Kültürel Hikayelendirme",
+			"msg": "Derslerime küresel ve yerel anlatıları entegre ederek, öğrencilerin İngilizceyi kendi kimlikleriyle ilişkilendirmelerine ve yeni bakış açıları keşfetmelerine yardımcı oluyorum."
+		}
+	},
+	"quoteAboutEdu": {
+		"title": "Neye İnanıyorum?",
+		"msg": "Çocuklarımız <span class=\"wavy-text\">bizim yetiştirdiğimiz</span> insanların arasında <strong>yaşayacaklar...</strong>."
+	},
+	"work": {
+		"title": "Birlikte çalışmaya hazır mısın?",
+		"section1": {
+			"title": "Eğitimde desteğe mi ihtiyacınız var?",
+			"msg": "Size, sizin seçebileceğiniz uygun kayıtlarla P2P çevrimiçi öğretim deneyimi sunabilirim. Bunlar arasında canlı derslere, etütlere ve birebirlere ek olarak; <strong>Ek İngilizce Kursu</strong>, <strong>İngilizce Yeterlilik Kursu</strong> ve <strong>Sınav Odaklı İngilizce Kursu</strong> gibi planlar bulunmaktadır. Daha kapsamlı bilgi için aşağıdaki planlara bakın!"
+		},
+		"section2": {
+			"title": "Bir web projeniz mi var?",
+			"msg": "React kullanarak tam işlevli bir web uygulaması tasarlayabilir, prototipini oluşturabilir ve geliştirebilirim; ayrıca WordPress gibi klasik CMS yaklaşımlarını veya hobi siteleri, portföyler, bloglar ve daha birçok çok sayfalı statik içerikli web sitesini de tasarlayabilir, prototipini oluşturabilir ve geliştirebilirim! Kişisel veya işletme web çözümleriniz için bakım hizmeti de sunuyorum. Daha kapsamlı bilgi için aşağıdaki planlara göz atabilirsiniz!"
+		}
+	},
+	"support": {
+		"title": "Desteklediğim Organizasyonlar",
+		"supportMsg": "Maddi & manevi destek olunuz."
+	},
+	"title": "İngilizce Öğretmeni & Ön-yüz Geliştiricisi",
+	"description": {
+		"part1": "x",
+		"part2": "y"
+	},
+	"modals": {
+		"gpg": "🧲 GnuPG Public Key",
+		"cv": {
+			"title": "👔 CV'mi Görün ya da İndirin",
+			"msg": "Devam etmeden önce lütfen robot olmadığınızı onaylayın.",
+			"btnMsg": "İşlemi Onayla"
+		},
+		"lang": "🎇 Site Dilini Değiştir",
+		"rss": {
+			"btnTitle": "📰 RSS Feedi İndir",
+			"tablePlatformName": "Platform İsmi",
+			"tableLinkName": "RSS Bağlantısı",
+			"site": "Site",
+			"thisSite": "Bu Site",
+			"hashnode": "Hashnode"
+		},
+		"sitemap": {
+			"btnTitle": "🍁 Site Haritası",
+			"tableActionName": "Eylem",
+			"tableVisitName": "Gidin",
+			"visitSitemap": "Site Haritasını Görün"
+		},
+		"llmsTxt": {
+			"btnTitle": "🤖 LLMs.txt",
+			"tableActionName": "Eylem",
+			"tableVisitName": "Gidin",
+			"visitLlmsTxt": "İndirin: LLMs.txt"
+		},
+		"langSwitch": {
+			"en": "English",
+			"tr": "Türkçe",
+			"enTitle": "Dili İngilizce'ye Çevir",
+			"trTitle": "Dili Türkçe'ye Çevir"
+		}
+	},
+	"misc": {
+		"close": "Kapat",
+		"github": "GitHub",
+		"motto": "Öğretmek <strong>yaşam</strong> içindir, yazılım <strong>tutku</strong> için."
+	},
+	"footer": {
+		"llmsTxt": "LLMs.txt",
+		"sitemap": "Site Haritası",
+		"ccZero": "Creative Commons CC0 1.0 Evrensel Lisansı",
+		"notByAi": "NotByAI Rozeti"
+	},
+	"header": {
+		"dayNight": "Gündüz/Gece Modunu Değiştir",
+		"changeLanguage": "Site Dilini Değiştir"
+	},
+	"scrollToTop": {
+		"text": "Başa Dön"
+	},
+	"about": {
+		"skills": {
+			"teacher": "İngilizce Öğretmeni",
+			"frontend": "Ön-yüz Geliştiricisi"
+		},
+		"socials": {
+			"github": "GitHub",
+			"hashnode": "Hashnode",
+			"substack": "Substack",
+			"email": "E-posta"
+		},
+		"nav": {
+			"aboutMe": "Hakkımda",
+			"education": "Eğitim",
+			"work": "Çalışmalar",
+			"stack": "Teknoloji Yığını ve Araçlar",
+			"mailing": "E-posta",
+			"advanced": "İleri Düzey"
+		},
+		"introduction": {
+			"first": "<mark>İçerik odaklı</mark> web siteleri oluşturmakla birlikte, <em>hız</em> ve <em>aşamalı geliştirmenin</em> kritik önem taşıdığı <mark>web uygulamaları (SPA)</mark> veya <mark>çok sayfalı</mark> statik içerikler geliştirmekle yakından ilgileniyorum. Kullanıcı arayüzlerini özellikle <strong>React</strong> ile oluşturmayı seviyorum.",
+			"last": "Asıl uzmanlık alanım <mark>ESL (İkinci Dil Olarak İngilizce)</mark> bağlamında İngilizce öğretmektir. Ana odağım, dilin gündelik veya akademik etkileşiminin hemen her alanında pratik kullanımını en üst düzeye çıkarmaktır."
+		},
+		"table": {
+			"institution": "Kurum",
+			"field": "Alan",
+			"degree": "Derece",
+			"date": "Tarih",
+			"category": "Kategori",
+			"technologies": "Teknolojiler",
+			"librariesTools": "Kütüphaneler ve Araçlar"
+		},
+		"edu": {
+			"university": "Atatürk Üniversitesi",
+			"elte": "İngiliz Dili Eğitimi",
+			"bachelor": "Lisans Derecesi",
+			"computerProgramming": "Bilgisayar Programcılığı",
+			"associate": "Ön Lisans Derecesi",
+			"current": "devam ediyor"
+		},
+		"stack": {
+			"frontend": "Ön-yüz",
+			"backend": "Arka-yüz",
+			"crossplatform": "Çapraz Platform",
+			"styling": "Stil",
+			"databases": "Veritabanları",
+			"devops": "DevOps",
+			"cms": "CMS",
+			"ssg": "SSG",
+			"testing": "Test",
+			"designUx": "Tasarım ve UX"
+		},
+		"work": {
+			"cvIntro": "CV'mi görüntüleyebilir veya indirebilirsiniz",
+			"cvHere": "buradan.",
+			"cvTitle": "CV'yi görüntüle/indir."
+		}
+	},
+	"emailForm": {
+		"yourName": "Adınız",
+		"someone": "Örnek: Ahmet",
+		"provideName": "Lütfen adınızı belirtin.",
+		"email": "E-posta",
+		"emailPlaceholder": "ornek@example.com",
+		"provideEmail": "Lütfen e-posta adresinizi belirtin.",
+		"message": "Mesaj",
+		"messagePlaceholder": "Mesajınızı buraya yazın...",
+		"provideMessage": "Lütfen mesaj alanına bir mesaj girin.",
+		"submitTitle": "Formu Gönder",
+		"sendMessage": "Mesaj Gönder",
+		"subject": "Yeni Mesaj"
+	},
+	"blog": {
+		"latestUpdates": "Son Güncellemeler",
+		"noPosts": "Blog yazısı <em>mevcut değil.</em>",
+		"untitledPost": "Başlıksız Gönderi",
+		"unknownAuthor": "Bilinmeyen Yazar",
+		"unableDisplay": "Blog yazıları <mark>görüntülenemiyor.</mark>",
+		"errorLoading": "Gönderi Yüklenirken Hata",
+		"somethingWentWrong": "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin...",
+		"postNotFound": "Gönderi Bulunamadı",
+		"postNotFoundMsg": "İstenen gönderi bulunamadı.",
+		"error": "Hata",
+		"unableLoad": "Blog yazıları yüklenemedi. Lütfen sayfayı yenileyin.",
+		"loadingPosts": "Blog Yazıları Yükleniyor",
+		"loadingPostsMsg": "Blog yazıları yükleniyor...",
+		"loading": "Yükleniyor....",
+		"author": "Yazar"
+	},
+	"workPage": {
+		"hireMe": "Beni İşe Alın",
+		"orSeePlans": "veya planlarımı <span class=\"wavy-text\">aşağıda</span> inceleyin.",
+		"scrollDown": "Aşağı kaydır",
+		"seePlans": "Planları Gör",
+		"forEnglish": "İngilizce Öğrenmek İçin",
+		"forProgramming": "Web Geliştirme İçin",
+		"comingSoon": "Yakında...",
+		"featured": {
+			"title": "En Popüler Planlar",
+			"subtitle": "Hedefine uygun planı seç & istediğin zaman yükselt.",
+			"plans": {
+				"free": {
+					"label": "Başlangıç",
+					"subtitle": "Yeni başlayanlar için ideal",
+					"pricePeriod": "/saat",
+					"badge": "",
+					"features": [
+						"Küçük grup (en fazla 4 kişi) sohbeti",
+						"Haftalık pratik & geri bildirim",
+						"Temel materyaller dahil",
+						"E-posta desteği"
+					],
+					"excludedFeatures": ["1:1 canlı mentorluk", "Kişisel yol haritası"],
+					"buttonLabel": "Rezervasyon İçin İletişim",
+					"buttonIcon": "bi-people-fill"
+				},
+				"starter": {
+					"label": "Başlangıç",
+					"subtitle": "Yeni başlayanlar için ideal",
+					"pricePeriod": "/saat",
+					"badge": "",
+					"features": [
+						"Küçük grup (en fazla 4 kişi) sohbeti",
+						"Haftalık pratik & geri bildirim",
+						"Temel materyaller dahil",
+						"E-posta desteği"
+					],
+					"excludedFeatures": ["1:1 canlı mentorluk", "Kişisel yol haritası"],
+					"buttonLabel": "Rezervasyon İçin İletişim",
+					"buttonIcon": "bi-people-fill"
+				},
+				"pro": {
+					"label": "Pro",
+					"subtitle": "En popüler & kişiselleştirilmiş",
+					"pricePeriod": "/saat",
+					"badge": "En Popüler",
+					"features": [
+						"1:1 Canlı 60 dakikalık dersler",
+						"Kişiselleştirilmiş seviye & yol haritası",
+						"Konuşma + dilbilgisi odaklı",
+						"Ödev & detaylı düzeltme",
+						"Esnek yeniden planlama"
+					],
+					"buttonLabel": "Rezervasyon İçin İletişim",
+					"buttonIcon": "bi-send-fill",
+					"secondaryButtonLabel": "WhatsApp",
+					"secondaryButtonIcon": "bi-whatsapp"
+				},
+				"max": {
+					"label": "Max",
+					"subtitle": "Ciddi öğrenenler için",
+					"pricePeriod": "/saat",
+					"badge": "",
+					"features": [
+						"Pro'daki her şey",
+						"İş İngilizcesi Sprint (4 hafta)",
+						"Sunumlar, e-postalar & mülakatlar",
+						"Deneme sınavları (YDS/TOEFL/IELTS)",
+						"Öncelikli destek & sertifika"
+					],
+					"buttonLabel": "Udemy'de Satın Al",
+					"buttonIcon": "bi-bag-fill"
+				}
+			}
+		},
+		"cards": {
+			"english": {
+				"live-1-1": {
+					"name": "1:1 Canlı Ders",
+					"description": "Seviyenize ve hedeflerinize özel 60 dakikalık canlı ders ve konuşma, dilbilgisi ve gerçek sohbet pratiği için ideal.",
+					"buttonLabel": "Rezervasyon İçin İletişim",
+					"buttonIcon": "bi-send-fill",
+					"whatsappLabel": "WhatsApp"
+				},
+				"group": {
+					"name": "Grup Sohbeti",
+					"description": "Küçük gruplar (en fazla 4 kişi) ile akıcılık ve özgüven odaklı interaktif dersler ve tartışma, rol yapma ve geri bildirim.",
+					"buttonLabel": "Rezervasyon İçin İletişim",
+					"buttonIcon": "bi-people-fill"
+				},
+				"exam": {
+					"name": "Sınav Hazırlığı",
+					"description": "YDS / TOEFL / IELTS / Proficiency için yoğun program ve stratejiler, deneme sınavları ve detaylı hata düzeltme.",
+					"buttonLabel": "Udemy'de Satın Al",
+					"buttonIcon": "bi-bag-fill"
+				},
+				"business": {
+					"name": "İş İngilizcesi Sprint",
+					"description": "Kariyer odaklı yoğun program: sunumlar, e-postalar, mülakatlar ve toplantılar, ödev incelemeli 4 haftalık sprint.",
+					"buttonLabel": "Udemy'de Satın Al",
+					"buttonIcon": "bi-bag-fill"
+				}
+			},
+			"programming": {
+				"frontend": {
+					"name": "Frontend Sprint",
+					"description": "React / TypeScript ile birebir mentorluk ve gerçek projeler, kod incelemeleri ve en iyi pratikler.",
+					"buttonLabel": "GitHub'da Gör",
+					"buttonIcon": "bi-github"
+				},
+				"backend": {
+					"name": "Backend Boost",
+					"description": "Node.js / PHP / API tasarım oturumları ve mimari rehberlik ve performans optimizasyonu.",
+					"buttonLabel": "Udemy'de Satın Al",
+					"buttonIcon": "bi-bag-fill"
+				},
+				"fullstack": {
+					"name": "Full-Stack Proje",
+					"description": "Fikirden yayına uçtan uca proje mentorluğu ve DevOps temelleri dahil.",
+					"buttonLabel": "Projeye Başla",
+					"buttonIcon": "bi-rocket-takeoff-fill"
+				},
+				"review": {
+					"name": "Kod İnceleme Paketi",
+					"description": "Detaylı geri bildirim, yeniden düzenleme önerileri ve video anlatımlı asenkron kod incelemeleri.",
+					"buttonLabel": "İnceleme İste",
+					"buttonIcon": "bi-code-slash"
+				}
+			}
+		},
+		"stillUnsure": {
+			"title": "Hala kararsız mısın?",
+			"subtitle": "Doğru planı birlikte bulalım",
+			"description": "Hangi planın sana uygun olduğundan emin değil misin? WhatsApp'tan hızlıca yaz,  dakikalar içinde yardımcı olayım, baskı yok.",
+			"cta": "WhatsApp'tan Yaz",
+			"ctaTitle": "WhatsApp'tan yaz",
+			"note": "Genellikle gün içerisinde dönüş • Spam yok • Taahhüt yok",
+			"bookingNote": "Randevu al"
+		},
+		"individualPlan": {
+			"title": "Bireysel bir plana mı ihtiyacın var?",
+			"subtitle": "İngilizce ve Yazılım için bireysel seçeneklere göz at"
+		}
+	},
+	"promo": {
+		"seePlans": "Planları Gör",
+		"link": "Bağlantı",
+		"iconTitle": "Simge",
+		"writtenIn": "Yazıldığı dil:"
+	},
+	"accordion": {
+		"secureHeader": "🔑 Güvenli ve Gizli İletişim",
+		"secureIntro": "Benimle <mark class=\"rounded-3\">daha gizli bir şekilde</mark> iletişime geçmek isterseniz aşağıdaki eylemlerden birini kullanabilirsiniz. Bu yöntemleri nasıl kullanacağınızı bilmiyorsanız, işte <a class=\"link-info link-opacity-75-hover link-offset-2\" href=\"https://www.youtube.com/watch?v=mu2TVYJE5Gc\" hreflang=\"x-default\" target=\"_blank\">bir eğitim videosu</a>. Ancak bunu yalnızca <strong>gerçekten iyi bir nedeniniz varsa</strong> kullanmalısınız.",
+		"secureJami": "Jami (İstemci)",
+		"secureGpg": "GnuPG (Genel Anahtar)",
+		"secureView": "Görüntüle",
+		"secureHere": "buradan.",
+		"donationsHeader": "💞 Bağışlar",
+		"donationsIntro": "Çalışmalarımla <em>herhangi bir şekilde</em> ilgileniyorsanız, aşağıdaki seçeneklerle beni destekleyebilirsiniz:",
+		"donationsBuyMeACoffee": "BuyMeACoffee",
+		"donationsView": "Görüntüle",
+		"donationsHere": "buradan.",
+		"aboutSiteHeader": "🍫 Bu Site Hakkında",
+		"aboutSiteIntro": "Burada bu web sitesi için gerekli tüm bilgileri bulabilirsiniz.",
+		"aboutSiteVersion": "Site Sürümü",
+		"aboutSiteLicense": "Lisans",
+		"aboutSiteLicenseValue": "Bu site <code>CC0-1.0 Evrensel Lisansı</code> altında lisanslıdır.",
+		"aboutSiteSource": "Kaynak Kodu",
+		"aboutSiteAvailableOn": "Şurada mevcut:",
+		"aboutSiteGitHub": "GitHub"
+	},
+	"toasts": {
+		"completeCaptcha": "Lütfen captcha doğrulamasını tamamlayın.",
+		"verified": "Captcha doğrulandı. İndirme başlatılıyor.",
+		"verificationFailed": "Captcha doğrulaması başarısız oldu. Lütfen tekrar deneyin.",
+		"rateLimit": "Hız sınırı aşıldı. Lütfen bir süre bekleyip tekrar deneyin.",
+		"rateLimitLater": "Hız sınırı aşıldı. Lütfen daha sonra tekrar deneyin.",
+		"downloadFailed": "Dosya indirilemedi. Lütfen tekrar deneyin.",
+		"requestFailed": "İstek başarısız oldu ({{status}}). Lütfen tekrar deneyin.",
+		"emailSent": "E-postanız gönderildi.",
+		"emailFailed": "E-postanız gönderilemedi.",
+		"emailFailedTryAgain": "E-postanız gönderilemedi. Lütfen tekrar deneyin."
+	}
 }

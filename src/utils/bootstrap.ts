@@ -1,9 +1,11 @@
-import { ModalConfig, ModalList } from "../static";
+import { type ModalConfig, ModalList } from "../static";
 
 let delegatedModalClickListener: ((event: Event) => void) | null = null;
 
 function renderModal(modalSource: ModalConfig[]) {
-    const modalsHtml = modalSource.map(modal => `
+	const modalsHtml = modalSource
+		.map(
+			(modal) => `
         <div id="${modal.id}" class="modal fade" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content rounded-4 shadow-lg">
@@ -17,55 +19,61 @@ function renderModal(modalSource: ModalConfig[]) {
                 </div>
             </div>
         </div>
-    `).join("");
+    `,
+		)
+		.join("");
 
-    return `
+	return `
         ${modalsHtml}
     `;
 }
 
 export function insertModalsToDom(modalIds: string): void {
-    const ids = modalIds.split(", ").map(id => id.trim());
-    const modalsToRender = ModalList.MODALS.filter(modal =>
-        ids.includes(modal.id)
-    );
+	const ids = modalIds.split(", ").map((id) => id.trim());
+	const modalsToRender = ModalList.MODALS.filter((modal) =>
+		ids.includes(modal.id),
+	);
 
-    const html = renderModal(modalsToRender);
-    document.body.insertAdjacentHTML("beforeend", html);
+	const html = renderModal(modalsToRender);
+	document.body.insertAdjacentHTML("beforeend", html);
 }
 
 // This function now ensures the listener is added only once and returns a cleanup function.
 export function listenForBootstrapModalEventDelegation(): () => void {
-    if (delegatedModalClickListener) {
-        return () => { };
-    }
+	if (delegatedModalClickListener) {
+		return () => {};
+	}
 
-    delegatedModalClickListener = (event: Event) => {
-        const target = event.target as HTMLElement;
-        const modalTrigger = target.closest(".modal-trigger") as HTMLElement;
+	delegatedModalClickListener = (event: Event) => {
+		const target = event.target as HTMLElement;
+		const modalTrigger = target.closest(".modal-trigger") as HTMLElement;
 
-        if (modalTrigger && modalTrigger.dataset.modal) {
-            event.preventDefault();
-            const modalElement = document.getElementById(modalTrigger.dataset.modal);
+		if (modalTrigger && modalTrigger.dataset.modal) {
+			event.preventDefault();
+			const modalElement = document.getElementById(modalTrigger.dataset.modal);
 
-            if (modalElement) {
-                const modalInstance = new (window.bootstrap.Modal)(modalElement);
-                modalInstance.show();
+			if (modalElement) {
+				const modalInstance = new window.bootstrap.Modal(modalElement);
+				modalInstance.show();
 
-                modalElement.addEventListener("hidden.bs.modal", () => {
-                    modalInstance.dispose();
-                }, { once: true });
-            }
-        }
-    };
+				modalElement.addEventListener(
+					"hidden.bs.modal",
+					() => {
+						modalInstance.dispose();
+					},
+					{ once: true },
+				);
+			}
+		}
+	};
 
-    document.body.addEventListener("click", delegatedModalClickListener);
+	document.body.addEventListener("click", delegatedModalClickListener);
 
-    // Return a cleanup function
-    return () => {
-        if (delegatedModalClickListener) {
-            document.body.removeEventListener("click", delegatedModalClickListener);
-            delegatedModalClickListener = null;
-        }
-    };
+	// Return a cleanup function
+	return () => {
+		if (delegatedModalClickListener) {
+			document.body.removeEventListener("click", delegatedModalClickListener);
+			delegatedModalClickListener = null;
+		}
+	};
 }

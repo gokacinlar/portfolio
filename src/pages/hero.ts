@@ -6,53 +6,55 @@ import { TypeWriterDisplay } from "../utils/helpers/typewriter";
 import Localize from "../utils/initLocalization";
 
 class HeroSection extends HTMLElement {
-    private bodyParts: BodyParts;
-    private domEvents: DomEvents | null = null;
-    private typeWriter: TypeWriterDisplay | null = null;
+	private bodyParts: BodyParts;
+	private domEvents: DomEvents | null = null;
+	private typeWriter: TypeWriterDisplay | null = null;
 
-    constructor() {
-        super();
-        this.bodyParts = new BodyParts();
-        new Template().createTemplate(new HeroTemplate().hero(), this);
-    }
+	constructor() {
+		super();
+		this.bodyParts = new BodyParts();
+		new Template().createTemplate(new HeroTemplate().hero(), this);
+	}
 
-    private handleDomEvents(): void {
-        this.domEvents = new DomEvents();
-        const mottosElement = this.querySelector("#mottosSection") as HTMLDivElement;
-        const mottos = this.bodyParts.mottos;
-        if (mottosElement) {
-            this.domEvents.appendContent(mottosElement, mottos);
-        }
-    }
+	private handleDomEvents(): void {
+		this.domEvents = new DomEvents();
+		const mottosElement = this.querySelector(
+			"#mottosSection",
+		) as HTMLDivElement;
+		const mottos = this.bodyParts.mottos;
+		if (mottosElement) {
+			this.domEvents.appendContent(mottosElement, mottos);
+		}
+	}
 
-    private handleTypeWriterEffect(): void {
-        // Ensure previous instance is destroyed before creating a new one
-        if (this.typeWriter) {
-            this.typeWriter.destroy();
-        }
-        this.typeWriter = new TypeWriterDisplay(new HeroParts(), "ocps");
-    }
+	private handleTypeWriterEffect(): void {
+		// Ensure previous instance is destroyed before creating a new one
+		if (this.typeWriter) {
+			this.typeWriter.destroy();
+		}
+		this.typeWriter = new TypeWriterDisplay(new HeroParts(), "ocps");
+	}
 
-    connectedCallback(): void {
-        this.handleDomEvents();
-        this.handleTypeWriterEffect();
-    }
+	connectedCallback(): void {
+		this.handleDomEvents();
+		this.handleTypeWriterEffect();
+	}
 
-    disconnectedCallback(): void {
-        if (this.typeWriter) {
-            this.typeWriter.destroy();
-            this.typeWriter = null;
-        }
-        if (this.domEvents) {
-            this.domEvents.destroy();
-            this.domEvents = null;
-        }
-    }
+	disconnectedCallback(): void {
+		if (this.typeWriter) {
+			this.typeWriter.destroy();
+			this.typeWriter = null;
+		}
+		if (this.domEvents) {
+			this.domEvents.destroy();
+			this.domEvents = null;
+		}
+	}
 }
 
 class HeroTemplate {
-    public hero(): string {
-        return /*html*/ `
+	public hero(): string {
+		return /*html*/ `
             <section class="mx-2 my-2 px-2 py-2">
                 <div id="hero" class="container mx-0 my-0 rounded-5 mw-100 shadow-sm py-5 d-flex flex-column justify-content-between">
                     <div class="row align-items-center justify-content-evenly hero-child px-4">
@@ -74,12 +76,12 @@ class HeroTemplate {
                         </section>
                         <section class="col-12 col-md-6 d-flex justify-content-center ocps-hero-img-container">
                             ${new HeroImageWithLink().render(
-            "Derviş Öksüzoğlu",
-            "heroLogoBg",
-            "",
-            "../assets/images/static/webp/logo.webp",
-            "../assets/images/static/webp/logo_256x256.webp 256w, ../assets/images/static/webp/logo_512x512.webp 512w, ../assets/images/static/webp/logo.webp 1024w",
-        )}
+															"Derviş Öksüzoğlu",
+															"heroLogoBg",
+															"",
+															"../assets/images/static/webp/logo.webp",
+															"../assets/images/static/webp/logo_256x256.webp 256w, ../assets/images/static/webp/logo_512x512.webp 512w, ../assets/images/static/webp/logo.webp 1024w",
+														)}
                         </section>
                     </div>
                     <section id="mottosSection" class="d-flex flex-row flex-wrap align-items-center justify-content-center gap-2 mt-4 mb-0">
@@ -87,10 +89,10 @@ class HeroTemplate {
                 </div>
             </section>
         `;
-    }
+	}
 
-    private heroDownloadCVButton(): string {
-        return /*html*/ `
+	private heroDownloadCVButton(): string {
+		return /*html*/ `
             <a class="link-offset-2 link-underline link-underline-opacity-0 w-100" href="/about.html#work">
                 <button id="hrGetCvBtn" type="button" class="hero-btn bee-color-btn text-truncate hero-get-cv-btn bg-gradient btn btn-lg fs-4 w-100 shadow-sm d-flex flex-row align-items-center justify-content-center gap-1
                     rounded-5 shadow-sm" title="${Localize.translate("common:hero:buttonTitles:downloadCV")}">
@@ -99,7 +101,7 @@ class HeroTemplate {
                 </button>
             </a>
         `;
-    }
+	}
 }
 
 export default HeroSection;

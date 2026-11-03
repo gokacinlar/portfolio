@@ -4,74 +4,76 @@ import path from "node:path";
 import robotstxt from "generate-robotstxt";
 
 interface CrawlPolicy {
-    userAgent: string;
-    allow: string | string[];
-    disallow: string | string[];
-    crawlDelay: number;
-    cleanParam?: string;
+	userAgent: string;
+	allow: string | string[];
+	disallow: string | string[];
+	crawlDelay: number;
+	cleanParam?: string;
 }
 
 class GenerateRobotsTXT {
-    private static readonly SITE_NAME: string = "https://dervisoksuzoglu.xyz";
-    private static readonly POLICY: CrawlPolicy[] = [
-        {
-            userAgent: "Googlebot",
-            allow: "/",
-            disallow: "/search",
-            crawlDelay: 2,
-        },
-        {
-            userAgent: "OtherBot",
-            allow: ["/allow-for-all-bots", "/allow-only-for-other-bot"],
-            disallow: ["/admin", "/login"],
-            crawlDelay: 2,
-        },
-        {
-            userAgent: "*",
-            allow: "/",
-            disallow: "/search",
-            crawlDelay: 10,
-            cleanParam: "ref /articles/",
-        },
-    ];
+	private static readonly SITE_NAME: string = "https://dervisoksuzoglu.xyz";
+	private static readonly POLICY: CrawlPolicy[] = [
+		{
+			userAgent: "Googlebot",
+			allow: "/",
+			disallow: "/search",
+			crawlDelay: 2,
+		},
+		{
+			userAgent: "OtherBot",
+			allow: ["/allow-for-all-bots", "/allow-only-for-other-bot"],
+			disallow: ["/admin", "/login"],
+			crawlDelay: 2,
+		},
+		{
+			userAgent: "*",
+			allow: "/",
+			disallow: "/search",
+			crawlDelay: 10,
+			cleanParam: "ref /articles/",
+		},
+	];
 
-    public async initRobotsGeneration(): Promise<string> {
-        try {
-            const content = await robotstxt({
-                policy: GenerateRobotsTXT.POLICY,
-                sitemap: `${GenerateRobotsTXT.SITE_NAME}/sitemap.xml`,
-                host: GenerateRobotsTXT.SITE_NAME
-            });
+	public async initRobotsGeneration(): Promise<string> {
+		try {
+			const content = await robotstxt({
+				policy: GenerateRobotsTXT.POLICY,
+				sitemap: `${GenerateRobotsTXT.SITE_NAME}/sitemap.xml`,
+				host: GenerateRobotsTXT.SITE_NAME,
+			});
 
-            const filePath = path.resolve(__dirname, "../assets/seo/robots.txt");
-            const fileContent = await fs.promises.readFile(filePath, "utf-8");
-            const finalContent = `${fileContent} \n ${content}`;
+			const filePath = path.resolve(__dirname, "../assets/seo/robots.txt");
+			const fileContent = await fs.promises.readFile(filePath, "utf-8");
+			const finalContent = `${fileContent} \n ${content}`;
 
-            if (!fs.existsSync(filePath)) {
-                console.warn(`File not found: ${filePath}`);
-                return content;
-            } else {
-                return finalContent;
-            }
-        } catch (error: unknown) {
-            throw new Error(`Unable to create robots.txt: ${error}`);
-        }
-    }
+			if (!fs.existsSync(filePath)) {
+				console.warn(`File not found: ${filePath}`);
+				return content;
+			} else {
+				return finalContent;
+			}
+		} catch (error: unknown) {
+			throw new Error(`Unable to create robots.txt: ${error}`);
+		}
+	}
 
+	public async saveOutput(): Promise<void> {
+		const outputPath = path.resolve(__dirname, "../../public/robots.txt");
 
-    public async saveOutput(): Promise<void> {
-        const outputPath = path.resolve(__dirname, "../../public/robots.txt");
+		try {
+			// Generate robots.txt content
+			const content = await this.initRobotsGeneration();
+			fs.writeFileSync(outputPath, content);
 
-        try {
-            // Generate robots.txt content
-            const content = await this.initRobotsGeneration();
-            fs.writeFileSync(outputPath, content);
-
-            console.log("ROBOTS.TXT has been successfully generated into: ", outputPath);
-        } catch (error: unknown) {
-            console.error("Failed to generate robots.txt:", error);
-        }
-    }
+			console.log(
+				"ROBOTS.TXT has been successfully generated into: ",
+				outputPath,
+			);
+		} catch (error: unknown) {
+			console.error("Failed to generate robots.txt:", error);
+		}
+	}
 }
 
 const generator = new GenerateRobotsTXT();

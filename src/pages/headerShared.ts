@@ -1,45 +1,49 @@
-import { Routes, defaultHtmxOptions, NavLinkHtmxOptions } from "../utils/helpers/routes";
-import * as iface from "../ts/interfaces/i.global";
+import {
+	Routes,
+	defaultHtmxOptions,
+	NavLinkHtmxOptions,
+} from "../utils/helpers/routes";
+import type * as iface from "../ts/interfaces/i.global";
 import { HtmxControls } from "../components/M_htmx";
 
 export const SITE_URL: string = "https://dervisoksuzoglu.xyz";
 export { Routes, defaultHtmxOptions };
 
 export const navLinks = ((): iface.NavLink[] => [
-    {
-        href: Routes.HOME,
-        title: "Home",
-        icon: "bi bi-house-door",
-        htmxOptions: NavLinkHtmxOptions[Routes.HOME],
-    },
-    {
-        href: Routes.LIFE_FEED,
-        title: "Life Feed",
-        icon: "bi bi-bookshelf",
-        htmxOptions: NavLinkHtmxOptions[Routes.LIFE_FEED],
-    },
-    {
-        href: Routes.GALLERY,
-        title: "Gallery",
-        icon: "bi bi-images",
-        htmxOptions: NavLinkHtmxOptions[Routes.GALLERY],
-    },
-    {
-        href: Routes.UPDATES,
-        title: "Updates",
-        icon: "bi bi-journals",
-        htmxOptions: NavLinkHtmxOptions[Routes.UPDATES],
-    },
-    {
-        href: Routes.ABOUT,
-        title: "About",
-        icon: "bi bi-person-circle",
-        htmxOptions: NavLinkHtmxOptions[Routes.ABOUT],
-    },
+	{
+		href: Routes.HOME,
+		title: "Home",
+		icon: "bi bi-house-door",
+		htmxOptions: NavLinkHtmxOptions[Routes.HOME],
+	},
+	{
+		href: Routes.LIFE_FEED,
+		title: "Life Feed",
+		icon: "bi bi-bookshelf",
+		htmxOptions: NavLinkHtmxOptions[Routes.LIFE_FEED],
+	},
+	{
+		href: Routes.GALLERY,
+		title: "Gallery",
+		icon: "bi bi-images",
+		htmxOptions: NavLinkHtmxOptions[Routes.GALLERY],
+	},
+	{
+		href: Routes.UPDATES,
+		title: "Updates",
+		icon: "bi bi-journals",
+		htmxOptions: NavLinkHtmxOptions[Routes.UPDATES],
+	},
+	{
+		href: Routes.ABOUT,
+		title: "About",
+		icon: "bi bi-person-circle",
+		htmxOptions: NavLinkHtmxOptions[Routes.ABOUT],
+	},
 ])();
 
 export function headerLeftIcon(): string {
-    return /*html*/ `
+	return /*html*/ `
             <a href="${SITE_URL}" hreflang="x-default">
                 <img
                     class="header-logo img-fluid img-responsive lazyload"
@@ -58,9 +62,9 @@ export function headerLeftIcon(): string {
 }
 
 export function headerMiddleContent(): string {
-    return navLinks
-        .map(({ href, title, icon, htmxOptions }) => {
-            return /*html*/`
+	return navLinks
+		.map(({ href, title, icon, htmxOptions }) => {
+			return /*html*/ `
                     <li class="w-100">
                         <a
                             href="${href}"
@@ -71,6 +75,6 @@ export function headerMiddleContent(): string {
                         </a>
                     </li>
                 `;
-        })
-        .join("");
+		})
+		.join("");
 }

@@ -31,49 +31,47 @@ import "./components/D_Login";
 let darkLightModeInstance: DarkLightMode | null = null;
 // Use singleton to avoid duplicate MediaQuery listeners (header also uses DarkLightMode)
 function getSharedDarkLightMode(): DarkLightMode {
-    if (!darkLightModeInstance) {
-        darkLightModeInstance = DarkLightMode.getInstance();
-    }
-    return darkLightModeInstance;
+	if (!darkLightModeInstance) {
+		darkLightModeInstance = DarkLightMode.getInstance();
+	}
+	return darkLightModeInstance;
 }
 
 function registerServiceWorker(): void {
-    if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-            .register("/worker.js")
-            .catch((error: unknown) => {
-                console.error("Service worker registration failed:", error);
-            });
-    }
+	if ("serviceWorker" in navigator) {
+		navigator.serviceWorker.register("/worker.js").catch((error: unknown) => {
+			console.error("Service worker registration failed:", error);
+		});
+	}
 }
 
 function registerOfflinePlugin() {
-    OfflinePluginRuntime.install({
-        onUpdateReady: () => OfflinePluginRuntime.applyUpdate(),
-        onUpdated: () => location.reload()
-    });
+	OfflinePluginRuntime.install({
+		onUpdateReady: () => OfflinePluginRuntime.applyUpdate(),
+		onUpdated: () => location.reload(),
+	});
 }
 
 class HomePage extends HTMLElement {
-    connectedCallback(): void {
-        getSharedDarkLightMode();
+	connectedCallback(): void {
+		getSharedDarkLightMode();
 
-        registerServiceWorker();
-        registerOfflinePlugin();
+		registerServiceWorker();
+		registerOfflinePlugin();
 
-        new GoogleAnalytics().trackPage();
-        new GetSiteVersionNumber().init();
-    }
+		new GoogleAnalytics().trackPage();
+		new GetSiteVersionNumber().init();
+	}
 
-    disconnectedCallback(): void {
-        // Perform global cleanup if the main app component is ever disconnected
-        // Only destroy singleton if no other consumer holds reference; header will recreate lazily
-        if (darkLightModeInstance) {
-            DarkLightMode.destroyInstance();
-            darkLightModeInstance = null;
-        }
-    }
+	disconnectedCallback(): void {
+		// Perform global cleanup if the main app component is ever disconnected
+		// Only destroy singleton if no other consumer holds reference; header will recreate lazily
+		if (darkLightModeInstance) {
+			DarkLightMode.destroyInstance();
+			darkLightModeInstance = null;
+		}
+	}
 }
 
 export default HomePage;
-customElements.define("app-main", HomePage)
+customElements.define("app-main", HomePage);

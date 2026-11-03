@@ -1,29 +1,29 @@
 import Localize from "../utils/initLocalization";
-import * as Type from "../ts/types/types";
+import type * as Type from "../ts/types/types";
 import { PromoParts } from "../static";
 
 export class PromoTitle {
-    constructor(private titleText: string) { }
+	constructor(private titleText: string) {}
 
-    public render(): string {
-        return /*html*/ `
+	public render(): string {
+		return /*html*/ `
             <div class="promo-title-container featured-title-card rounded-5 text-center w-100 py-3 mb-3">
                 <h2 class="promo-title display-6 mb-0 fw-bolder pe-none text-center">
                     ${this.titleText}
                 </h2>
             </div>
         `;
-    }
+	}
 
-    // Stringify the output
-    public toString(): string {
-        return this.render();
-    }
+	// Stringify the output
+	public toString(): string {
+		return this.render();
+	}
 }
 
 export class PromoDescription {
-    public renderPromoDesc(): string {
-        return /*html*/ `
+	public renderPromoDesc(): string {
+		return /*html*/ `
             <div id="tabGroupProgress" class="col-sm-12 col-md-12 col-lg-12 col-xl-6 d-flex align-items-center justify-content-center mw-100">
                 <ul class="promo-featured-tabs list-unstyled d-flex flex-column gap-4 align-items-baseline">
                     <li>
@@ -42,10 +42,10 @@ export class PromoDescription {
             </div>
             <div id="tabGroupDetailsLister" class="col-sm-12 col-md-12 col-lg-12 col-xl-6"></div>
         `;
-    }
+	}
 
-    public renderTabGroupBtn(btnText: string, dataType: string): string {
-        return /*html*/ `
+	public renderTabGroupBtn(btnText: string, dataType: string): string {
+		return /*html*/ `
             <button class="promo-desc-tab-group-btn btn btn-lg fs-1 d-flex flex-row align-items-center justify-items-start" data-type="${dataType}">
                 <span style="width: 64px">
                     <div class="progress p-vertical rounded-0">
@@ -57,12 +57,12 @@ export class PromoDescription {
                 </span>
             </button>
         `;
-    }
+	}
 }
 
 export class PromoSkillsShowCase {
-    public renderPromoSkillsShowCase(data: Type.PromoSkills): string {
-        return /*html*/ `
+	public renderPromoSkillsShowCase(data: Type.PromoSkills): string {
+		return /*html*/ `
             <figure class="promo-skills-fig figure d-flex flex-column align-items-center justify-content-center mb-0">
                 <a href="${data.skillAnchor}" hreflang="x-default" target="_blank">
                     <img src="${data.skillLogoSrc}" alt="${data.skillName}" title="${data.skillName}"
@@ -71,12 +71,12 @@ export class PromoSkillsShowCase {
                 <figcaption class="figure-caption text-center fs-4 ">${data.skillName}</figcaption>
             </figure>
         `;
-    }
+	}
 }
 
 export class PromoCard {
-    public renderPromoCard(data: Type.PromoCardData): string {
-        return /*html*/ `
+	public renderPromoCard(data: Type.PromoCardData): string {
+		return /*html*/ `
             <div id="promoCard" class="card d-flex flex-column align-items-center justify-content-between shadow-sm rounded-4 px-1 py-1">
                 <div class="card-body d-flex flex-column align-items-center justify-content-between px-2 py-2">
                     <div class="text-center">
@@ -99,12 +99,12 @@ export class PromoCard {
                 </div>
             </div>
     `;
-    }
+	}
 }
 
 export class PromoTeachEnglish {
-    public render(): string {
-        return /*html*/ `
+	public render(): string {
+		return /*html*/ `
             <div class="col-sm">
                 <div class="pt-head">
                     <p class="h1">${Localize.translate("common:teach:desc:subtitle")}</p>
@@ -125,31 +125,37 @@ export class PromoTeachEnglish {
                 </ul>
             </div>
         `;
-    }
+	}
 
-    public createListContentForPrinciples(): string {
-        const principles = new PromoParts().principles;
-        if (!principles) {
-            throw new Error("Unable to fetch content");
-        }
+	public createListContentForPrinciples(): string {
+		const principles = new PromoParts().principles;
+		if (!principles) {
+			throw new Error("Unable to fetch content");
+		}
 
-        return principles.map(content =>
-            `<li class="list-group-item"><strong>${content.title}</strong>: ${content.description}</li>`
-        ).join('');
-    }
+		return principles
+			.map(
+				(content) =>
+					`<li class="list-group-item"><strong>${content.title}</strong>: ${content.description}</li>`,
+			)
+			.join("");
+	}
 
-    public createImageIconsForPrinciples(): string {
-        const images = PromoParts.principleImagePaths;
+	public createImageIconsForPrinciples(): string {
+		const images = PromoParts.principleImagePaths;
 
-        return images.map(path =>
-            `<li class="list-group-item"><img src="${path}" title="${Localize.translate("common:promo:iconTitle")}" class="lazyload img-fluid" loading="lazy" decoding="async"></li>`
-        ).join("");
-    }
+		return images
+			.map(
+				(path) =>
+					`<li class="list-group-item"><img src="${path}" title="${Localize.translate("common:promo:iconTitle")}" class="lazyload img-fluid" loading="lazy" decoding="async"></li>`,
+			)
+			.join("");
+	}
 }
 
 export class PromoMotto {
-    public render(): string {
-        return /*html*/ `
+	public render(): string {
+		return /*html*/ `
             <div class="promo-motto-quote-container bg-gradient rounded-5 px-4 py-4 shadow-sm d-flex flex-row align-items-center justify-content-baseline gap-4">
                 <div>
                     <i class="promo-motto-quote-icon bi bi-quote"></i>
@@ -159,39 +165,40 @@ export class PromoMotto {
                 </div>
             </div>
         `;
-    }
+	}
 }
 
 interface InterestedOptions {
-    title: string;
-    description: string;
-    img: string;
-    link: URL;
+	title: string;
+	description: string;
+	img: string;
+	link: URL;
 }
 
 export class PromoInterested {
-    private data: InterestedOptions[];
+	private data: InterestedOptions[];
 
-    constructor() {
-        this.data = [];
-        this.setData(PromoParts.promoItems);
-    }
+	constructor() {
+		this.data = [];
+		this.setData(PromoParts.promoItems);
+	}
 
-    private setData(data: InterestedOptions[]): void {
-        this.data = data;
-    }
+	private setData(data: InterestedOptions[]): void {
+		this.data = data;
+	}
 
-    public render(): string {
-        return /*html*/ `
+	public render(): string {
+		return /*html*/ `
             <div class="promo-interested-container row rounded-5 shadow-sm">
                 ${this.renderTabs(this.data)}
             </div>
         `;
-    }
+	}
 
-    private renderTabs(data: InterestedOptions[] = this.data): string {
-        return data.map((item) => {
-            return /*html*/ `
+	private renderTabs(data: InterestedOptions[] = this.data): string {
+		return data
+			.map((item) => {
+				return /*html*/ `
                 <section class="container-fluid p-4">
                     <div class="row gy-4 gx-4">
                         <div class="col-lg-6 col-md-6 col-sm">
@@ -214,13 +221,14 @@ export class PromoInterested {
                     </div>
                 </section>
             `;
-        }).join("");
-    }
+			})
+			.join("");
+	}
 }
 
 export class PromoThingsISupport {
-    public render(): string {
-        return /*html*/`
+	public render(): string {
+		return /*html*/ `
             <section class="container-fluid p-4">
                 <div id="supportGrid" class="row gy-4 gx-4">
                     <div class="col-lg-6 col-md-8 col-sm-12 d-flex align-items-center justify-content-center d-flex align-items-center justify-content-center">
@@ -296,5 +304,5 @@ export class PromoThingsISupport {
                 </div>
             </section>
         `;
-    }
+	}
 }

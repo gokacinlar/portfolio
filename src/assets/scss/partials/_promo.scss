@@ -4,7 +4,7 @@
 
 @layer init {
     :is(#promo, #promoFinalNote) {
-        min-height: var(--sizes-content);
+        min-block-size: var(--sizes-content);
     }
 
     #pfnSocials {
@@ -15,12 +15,15 @@
         @include mixin.responsive-flex-direction(breakpoint.$mobile-breakpoints, column);
         @include mixin.responsive-flex-direction(breakpoint.$tablet-breakpoints, column);
         @include mixin.responsive-flex-direction(breakpoint.$desktop-breakpoints, row);
+
         gap: .55rem !important;
     }
 
     .promo-motto-quote-container {
         --def-height: 256px;
-        min-height: var(--def-height);
+
+        min-block-size: var(--def-height);
+
         @include mixin.custom-bee-color();
         @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, align-items, start);
         @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
@@ -29,18 +32,21 @@
         &>h3 {
             @include mixin.custom-font(Franuces);
             @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, font-size, 1rem);
+
             text-decoration-skip-ink: auto;
             text-emphasis-position: under right;
         }
     }
 
     .promo-motto-quote-icon {
-        filter: drop-shadow(5px 5px 97px #000000);
+        filter: drop-shadow(5px 5px 97px #000);
+
         @include mixin.dynamic-font-size(2rem, calc(8vw + 4rem), 12rem);
     }
 
     #promo_Description {
-        min-height: 450px !important;
+        min-block-size: 450px !important;
+
         @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column-reverse);
         @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, margin, 0);
         @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, padding, .25em);
@@ -50,16 +56,20 @@
 
     .promo-featured-tabs {
         @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, row);
+
         // Tablet grid view
         @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, width, 100%);
         @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, display, grid);
         @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, grid-template-rows, repeat(2, 1fr));
         @include mixin.responsive-styling(breakpoint.$tablet-breakpoints, grid-template-columns, repeat(2, 1fr));
+
         // Small desktop grid view
         @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, display, grid);
         @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, grid-template-rows, repeat(2, 1fr));
         @include mixin.responsive-styling(breakpoint.$desktop-small-breakpoints, grid-template-columns, repeat(2, 1fr));
+
         overflow-x: scroll;
+
         @include mixin.hide-scrollbar();
     }
 
@@ -69,11 +79,11 @@
 
         @each $bp in breakpoint.$mobile-breakpoints {
             @include mquery.responsive($bp) {
-                flex-direction: row !important;
-                flex-wrap: nowrap !important;
+                flex-flow: row nowrap !important;
                 overflow-x: scroll !important;
                 scroll-snap-type: x mandatory;
                 scroll-padding-inline-start: 0 !important;
+
                 @include mixin.hide-scrollbar();
             }
         }
@@ -107,13 +117,14 @@
 
 
     .psc-container {
-        width: 100%;
+        inline-size: 100%;
         background: var(--clr-eight);
+
         @include mixin.gradient-inset-box-shadow;
     }
 
     #promoSkillsContainer {
-        width: 100%;
+        inline-size: 100%;
         white-space: nowrap;
 
         @each $bp in breakpoint.$mobile-breakpoints {
@@ -133,9 +144,9 @@
 
     .promo-skills-fig {
         flex: 0 0 auto;
-        min-height: 16.1ch !important;
-        width: 100px;
-        height: auto;
+        min-block-size: 16.1ch !important;
+        inline-size: 100px;
+        block-size: auto;
         object-fit: cover;
         filter: brightness(65%) grayscale(25%);
 
@@ -146,21 +157,23 @@
 
     .promo-skills-img {
         --def-wh: 100px !important;
-        min-height: var(--def-wh);
-        max-width: var(--def-wh);
+
+        min-block-size: var(--def-wh);
+        max-inline-size: var(--def-wh);
     }
 
     #promoCard {
         color: var(--clr-one);
         background: var(--clr-two);
-        width: 34ch;
-        height: 34ch;
-        min-height: 375px;
+        inline-size: 34ch;
+        block-size: 34ch;
+        min-block-size: 375px;
+
         @include mixin.borderRadius(var(--rounded-sm));
 
         @each $bp in breakpoint.$mobile-breakpoints {
             @include mquery.responsive($bp) {
-                width: 27ch !important;
+                inline-size: 27ch !important;
             }
         }
     }
@@ -182,11 +195,11 @@
     }
 
     .promo-socials-fig>a>img {
-        width: 46px;
+        inline-size: 46px;
     }
 
     .p-vertical {
-        width: 60px !important;
+        inline-size: 60px !important;
         transform: rotate(90deg);
     }
 
@@ -219,7 +232,7 @@
             @include mquery.responsive($bp) {
                 display: flex !important;
                 flex-direction: column !important;
-                margin-top: 0 !important;
+                margin-block-start: 0 !important;
                 padding: .25em !important;
                 font-size: smaller !important;
             }
@@ -255,7 +268,7 @@
     }
 
     .te-img-container>ul>li>img {
-        width: 128px;
+        inline-size: 128px;
     }
 
     /* Promo - Interested In Working */
@@ -265,8 +278,9 @@
 
     .promo-interested-img {
         --def-height: 512px;
-        max-width: 100%;
-        max-height: var(--def-height);
+
+        max-inline-size: 100%;
+        max-block-size: var(--def-height);
         object-fit: cover;
     }
 

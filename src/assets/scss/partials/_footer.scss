@@ -32,6 +32,7 @@
 
     .footer-right-brand {
         --def-h: 42px;
-        height: var(--def-h) !important;
+
+        block-size: var(--def-h) !important;
     }
 }

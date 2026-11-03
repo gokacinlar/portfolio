@@ -26,9 +26,9 @@
     &::after {
         content: "";
         position: absolute;
-        left: 50%;
-        bottom: 0;
-        width: 100%;
+        inset-inline-start: 50%;
+        inset-block-end: 0;
+        inline-size: 100%;
         border: 1px solid $color;
         border-radius: 24px;
         transform: translateX(-50%) scaleX(0);
@@ -66,8 +66,8 @@
 
 @mixin gradient-inset-box-shadow {
     box-shadow:
-        inset 30px 0 30px -20px rgba(0, 0, 0, 0.05),
-        inset -30px 0 30px -20px rgba(0, 0, 0, 0.05);
+        inset 30px 0 30px -20px rgb(0 0 0 / 5%),
+        inset -30px 0 30px -20px rgb(0 0 0 / 5%);
 }
 
 @mixin responsive-flex-direction($breakpoints, $direction) {
@@ -122,20 +122,20 @@
 }
 
 @mixin glowing-white-drop-shadow() {
-    filter: drop-shadow(0px 6px 46px #f0ebf0);
+    filter: drop-shadow(0 6px 46px #f0ebf0);
 }
 
 @mixin def-yellow-button-size() {
     --def-size: 54px;
-    width: var(--def-size);
-    height: var(--def-size);
+
+    inline-size: var(--def-size);
+    block-size: var(--def-size);
 }
 
 @mixin scroll-by-mwhell() {
     align-items: unset !important;
     justify-content: unset !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
+    flex-flow: row nowrap !important;
     overflow-x: scroll !important;
     scroll-snap-type: x mandatory !important;
     scroll-padding-left: 0 !important;

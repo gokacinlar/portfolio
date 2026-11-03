@@ -1,22 +1,22 @@
 interface VideoElementOptions {
-    title: string;
-    webmSrc: string;
-    posterSrc: string;
+	title: string;
+	webmSrc: string;
+	posterSrc: string;
 }
 
 export class VideoElement {
-    private title: string;
-    private webmSrc: string;
-    private posterSrc: string;
+	private title: string;
+	private webmSrc: string;
+	private posterSrc: string;
 
-    constructor({ title, webmSrc, posterSrc }: VideoElementOptions) {
-        this.title = title;
-        this.webmSrc = webmSrc;
-        this.posterSrc = posterSrc;
-    }
+	constructor({ title, webmSrc, posterSrc }: VideoElementOptions) {
+		this.title = title;
+		this.webmSrc = webmSrc;
+		this.posterSrc = posterSrc;
+	}
 
-    public render(header: string): string {
-        return /*html*/ `
+	public render(header: string): string {
+		return /*html*/ `
             <div id="component_Video" class="position-relative shadow">
                 <video id="promoVideo" class="promo-video rounded-5 w-100 pe-none" preload="metadata" poster="${this.posterSrc}" loading="lazy"
                     disablepictureinpicture loop muted autoplay
@@ -30,5 +30,5 @@ export class VideoElement {
                 </h4>
             </div>
         `;
-    }
+	}
 }

@@ -1,453 +1,447 @@
 {
-    "maintenance": {
-        "status": "This site is currently in maintenance mode. Some functionality may not work."
-    },
-    "upperNavigation": {
-        "home": "Homepage",
-        "lifeFeed": "Feed",
-        "gallery": "Gallery",
-        "updates": "Blog",
-        "about": "About"
-    },
-    "hero": {
-        "greet": "Hi! I'm",
-        "buttons": {
-            "workWMe": "Work w/me!",
-            "cv": "Get my CV!"
-        },
-        "buttonTitles": {
-            "workHire": "Proceed to hire me for your web or teaching demands.",
-            "downloadCV": "Proceed to download my CV."
-        },
-        "mottos": {
-            "prof": "Professional",
-            "problemSolver": "Problem Solver",
-            "realistic": "Realist",
-            "practical": "Practical",
-            "applicable": "Applicable",
-            "inDemand": "In-demand"
-        }
-    },
-    "fields": {
-        "teacher": "English Teacher",
-        "frontEnd": "Front-end Developer",
-        "react": "React Developer",
-        "wordpress": "WordPress Developer",
-        "js": "JavaScript Developer",
-        "ts": "TypeScript Developer"
-    },
-    "video": {
-        "teach": "Teaching for Life",
-        "code": "Coding for Passion"
-    },
-    "desc": {
-        "descTitle": "I describe myself as",
-        "titles": {
-            "PS": "Problem Solver",
-            "PE": "Progressive",
-            "PL": "Practical",
-            "RC": "Realistic"
-        },
-        "exp": {
-            "PS": "I strive to implement solutions to various problems we encounter at anywhere extending from work to casual life.",
-            "PE": "I try to keep up with the latest and greatest positive developments around the global and embrace them as a whole.",
-            "PL": "I always try to fit the theory with the experienced reality thus creating a self-sustaining environment through reason.",
-            "RC": "When I encounter a real issue in my classroom or my computer, I search for applicable solution to deal with observed phenomenon."
-        }
-    },
-    "skills": {
-        "title": "I'm Proficient In"
-    },
-    "projects": {
-        "title": "Some of My Projects"
-    },
-    "offcanvas": {
-        "btnMessage": "Display menu to see posts."
-    },
-    "teach": {
-        "title": "Teaching English?",
-        "desc": {
-            "subtitle": "My main profession is being an <span class=\"mark rounded-4\">English Teacher!</span>",
-            "desc1": "I've been teaching mostly in private schools since I graduated with my BA degree. My students range from <u>elementary to high-school level</u>. I literally had the opportunity to <strong>teach students of all ages!</strong>",
-            "approach": "My primary focus and principles about teaching are:"
-        }
-    },
-    "principles": {
-        "first": {
-            "title": "Contextual immersion",
-            "msg": "I integrate real-world scenarios, like role-playing daily conversations or analyzing various texts depending on our topic in classroom, to make English relevant and engaging for students."
-        },
-        "second": {
-            "title": "Scaffolded autonomy",
-            "msg": "I design tasks that gradually increase in complexity, empowering students to take ownership of their learning, from crafting simple sentences to debating complex ideas."
-        },
-        "third": {
-            "title": "Error as opportunity",
-            "msg": "I encourage students to view mistakes as critical stepping stones, using targeted feedback to refine their language skills without fear of judgment."
-        },
-        "fourth": {
-            "title": "Multimodal engagement",
-            "msg": "I blend visual, auditory, and kinesthetic activities-like storytelling through comics or pronunciation through rhythm exercises-to cater to diverse learning styles."
-        },
-        "fifth": {
-            "title": "Cultural storytelling",
-            "msg": "I weave global and local narratives into lessons, helping students to connect English to their own identities while exploring new perspectives."
-        }
-    },
-    "quoteAboutEdu": {
-        "title": "What I believe in?",
-        "msg": "Our children will <span class=\"wavy-text\">live amongst</span> the very people <strong>we educate</strong>."
-    },
-    "work": {
-        "title": "Interested in working?",
-        "section1": {
-            "title": "Do you need assistance in learning English?",
-            "msg": "I can offer you P2P online teaching exprience with appropriate enrollments chosen by you. These include plans such as <strong>Supplementary English Course</strong>, <strong>Proficiency English Course</strong>, and <strong>Exam-Focused English Course</strong>. For more broad information, see the plans below!"
-        },
-        "section2": {
-            "title": "Do you have a web project?",
-            "msg": "I can design, prototype and develop with on-demand considerations for a fully-functional web application using React as well as classical CMS approaches like WordPress or multi-page static content websites such as hobby sites, portfolios, blogs and many more! I also offer maintenance for your personal or business web solutions. For more broad information, see the plans below!"
-        }
-    },
-    "support": {
-        "title": "Organizations I support",
-        "supportMsg": "Please support both by moral and material ways."
-    },
-    "title": "English Teacher & Web Developer",
-    "description": {
-        "part1": "x",
-        "part2": "y"
-    },
-    "modals": {
-        "gpg": "🧲 GnuPG Public Key",
-        "cv": {
-            "title": "👔 See or Download My CV",
-            "msg": "Please verify <strong>you're human</strong> before proceeding.",
-            "btnMsg": "Confirm Action"
-        },
-        "lang": "🎇 Change Site Language",
-        "rss": {
-            "btnTitle": "📰 Download RSS Feed",
-            "tablePlatformName": "Platform Name",
-            "tableLinkName": "RSS Link",
-            "site": "Site",
-            "thisSite": "This Site",
-            "hashnode": "Hashnode"
-        },
-        "sitemap": {
-            "btnTitle": "🍁 Sitemap",
-            "tableActionName": "Action",
-            "tableVisitName": "Go",
-            "visitSitemap": "See Sitemap"
-        },
-        "llmsTxt": {
-            "btnTitle": "🤖 LLMs.txt",
-            "tableActionName": "Action",
-            "tableVisitName": "Go",
-            "visitLlmsTxt": "See LLMs.txt"
-        },
-        "langSwitch": {
-            "en": "English",
-            "tr": "Türkçe",
-            "enTitle": "Change Language to English",
-            "trTitle": "Change Language to Turkish"
-        }
-    },
-    "misc": {
-        "close": "Close",
-        "github": "GitHub",
-        "motto": "Teaching for <strong>life</strong>, coding for <strong>passion</strong>."
-    },
-    "footer": {
-        "llmsTxt": "LLMs.txt",
-        "sitemap": "Sitemap",
-        "ccZero": "Creative Commons CC0 1.0 Universal License",
-        "notByAi": "NotByAI Badge"
-    },
-    "header": {
-        "dayNight": "Change Day/Night Mode",
-        "changeLanguage": "Change Site Language"
-    },
-    "scrollToTop": {
-        "text": "Scroll to Top"
-    },
-    "about": {
-        "skills": {
-            "teacher": "English Teacher",
-            "frontend": "Frontend Developer"
-        },
-        "socials": {
-            "github": "GitHub",
-            "hashnode": "Hashnode",
-            "substack": "Substack",
-            "email": "E-mail"
-        },
-        "nav": {
-            "aboutMe": "About Me",
-            "education": "Education",
-            "work": "Work",
-            "stack": "Tech Stack & Tools",
-            "mailing": "E-mail",
-            "advanced": "Advanced"
-        },
-        "introduction": {
-            "first": "I'm highly interested in creating <mark>content-first</mark> websites as well as crafting stand-alone <mark>web applications (SPAs)</mark> or <mark>multi-page</mark> static content where <em>speed</em> &amp; <em>progressive enhancement</em> are critically important. I love building user interfaces with mainly <strong>React.</strong>",
-            "last": "My primary field is teaching English in <mark>ESL (English as a Second Language)</mark> context. My main focus is to maximize practical usage of English in almost every aspect related to casual or academical way of interacting with the language."
-        },
-        "table": {
-            "institution": "Institution",
-            "field": "Field",
-            "degree": "Degree",
-            "date": "Date",
-            "category": "Category",
-            "technologies": "Technologies",
-            "librariesTools": "Libraries & Tools"
-        },
-        "edu": {
-            "university": "Atatürk University",
-            "elte": "English Language Teaching",
-            "bachelor": "Bachelor's Degree",
-            "computerProgramming": "Computer Programming",
-            "associate": "Associate Degree",
-            "current": "current"
-        },
-        "stack": {
-            "frontend": "Front-end",
-            "backend": "Back-end",
-            "crossplatform": "Cross-platform",
-            "styling": "Styling",
-            "databases": "Databases",
-            "devops": "DevOps",
-            "cms": "CMS",
-            "ssg": "SSG",
-            "testing": "Testing",
-            "designUx": "Design & UX"
-        },
-        "work": {
-            "cvIntro": "You can download or view my CV",
-            "cvHere": "here.",
-            "cvTitle": "See/Download CV here."
-        }
-    },
-    "emailForm": {
-        "yourName": "Your Name",
-        "someone": "Someone",
-        "provideName": "Please provide your name.",
-        "email": "Email",
-        "emailPlaceholder": "someone@example.com",
-        "provideEmail": "Please provide your e-mail address.",
-        "message": "Message",
-        "messagePlaceholder": "Type your message here...",
-        "provideMessage": "Please enter a message in the textarea.",
-        "submitTitle": "Submit Form",
-        "sendMessage": "Send Message",
-        "subject": "New Message"
-    },
-    "blog": {
-        "latestUpdates": "Latest updates",
-        "noPosts": "No blog posts <em>are available.</em>",
-        "untitledPost": "Untitled Post",
-        "unknownAuthor": "Unknown Author",
-        "unableDisplay": "Unable to <mark>display</mark> blog posts.",
-        "errorLoading": "Error Loading Post",
-        "somethingWentWrong": "Something went wrong. Try again later...",
-        "postNotFound": "Post Not Found",
-        "postNotFoundMsg": "The requested post could not be found.",
-        "error": "Error",
-        "unableLoad": "Unable to load blog posts. Please refresh the page.",
-        "loadingPosts": "Loading Blog Posts",
-        "loadingPostsMsg": "Loading blog posts...",
-        "loading": "Loading....",
-        "author": "Author"
-    },
-    "workPage": {
-        "hireMe": "Hire me",
-        "orSeePlans": "or see my plans <span class=\"wavy-text\">below.</span>",
-        "scrollDown": "Scroll down",
-        "seePlans": "See plans",
-        "forEnglish": "For Learning English",
-        "forProgramming": "For Web Development",
-        "comingSoon": "Coming soon...",
-        "featured": {
-            "title": "Most Popular Plans",
-            "subtitle": "Pick the plan that fits your goal & upgrade anytime.",
-            "plans": {
-                "free": {
-                    "label": "Starter",
-                    "subtitle": "Perfect for beginners",
-                    "pricePeriod": "/hour",
-                    "badge": "",
-                    "features": [
-                        "Small group (max 4) conversation",
-                        "Weekly practice & feedback",
-                        "Basic materials included",
-                        "Email support"
-                    ],
-                    "excludedFeatures": [
-                        "1:1 live mentoring",
-                        "Personal roadmap"
-                    ],
-                    "buttonLabel": "Contact to Book",
-                    "buttonIcon": "bi-people-fill"
-                },
-                "starter": {
-                    "label": "Starter",
-                    "subtitle": "Perfect for beginners",
-                    "pricePeriod": "/hour",
-                    "badge": "",
-                    "features": [
-                        "Small group (max 4) conversation",
-                        "Weekly practice & feedback",
-                        "Basic materials included",
-                        "Email support"
-                    ],
-                    "excludedFeatures": [
-                        "1:1 live mentoring",
-                        "Personal roadmap"
-                    ],
-                    "buttonLabel": "Contact to Book",
-                    "buttonIcon": "bi-people-fill"
-                },
-                "pro": {
-                    "label": "Pro",
-                    "subtitle": "Most popular & personalized",
-                    "pricePeriod": "/hour",
-                    "badge": "Most Popular",
-                    "features": [
-                        "1:1 Live 60-min lessons",
-                        "Personalized level & roadmap",
-                        "Speaking + grammar focus",
-                        "Homework & detailed correction",
-                        "Flexible rescheduling"
-                    ],
-                    "buttonLabel": "Contact to Book",
-                    "buttonIcon": "bi-send-fill",
-                    "secondaryButtonLabel": "WhatsApp",
-                    "secondaryButtonIcon": "bi-whatsapp"
-                },
-                "max": {
-                    "label": "Max",
-                    "subtitle": "For serious learners",
-                    "pricePeriod": "/hour",
-                    "badge": "",
-                    "features": [
-                        "Everything in Pro",
-                        "Business English Sprint (4-week)",
-                        "Presentations, emails & interviews",
-                        "Mock exams (YDS/TOEFL/IELTS)",
-                        "Priority support & certificate"
-                    ],
-                    "buttonLabel": "Buy on Udemy",
-                    "buttonIcon": "bi-bag-fill"
-                }
-            }
-        },
-        "cards": {
-            "english": {
-                "live-1-1": {
-                    "name": "1:1 Live Lesson",
-                    "description": "Personalized 60-minute live session tailored to your level and goals & ideal for speaking, grammar and real conversation practice.",
-                    "buttonLabel": "Contact to Book",
-                    "buttonIcon": "bi-send-fill",
-                    "whatsappLabel": "WhatsApp"
-                },
-                "group": {
-                    "name": "Group Conversation",
-                    "description": "Small group (max 4) interactive lessons focused on fluency and confidence through discussion, role-play and feedback.",
-                    "buttonLabel": "Contact to Book",
-                    "buttonIcon": "bi-people-fill"
-                },
-                "exam": {
-                    "name": "Exam Preparation",
-                    "description": "Intensive program for YDS / TOEFL / IELTS / Proficiency with strategies, mock exams and detailed error correction.",
-                    "buttonLabel": "Buy on Udemy",
-                    "buttonIcon": "bi-bag-fill"
-                },
-                "business": {
-                    "name": "Business English Sprint",
-                    "description": "Career-focused intensive: presentations, emails, interviews and meetings. 4-week sprint with homework review.",
-                    "buttonLabel": "Buy on Udemy",
-                    "buttonIcon": "bi-bag-fill"
-                }
-            },
-            "programming": {
-                "frontend": {
-                    "name": "Frontend Sprint",
-                    "description": "Hands-on React / TypeScript mentorship w/building real projects with code reviews and best practices.",
-                    "buttonLabel": "View on GitHub",
-                    "buttonIcon": "bi-github"
-                },
-                "backend": {
-                    "name": "Backend Boost",
-                    "description": "Node.js / PHP / API design sessions with architecture guidance and performance tuning.",
-                    "buttonLabel": "Buy on Udemy",
-                    "buttonIcon": "bi-bag-fill"
-                },
-                "fullstack": {
-                    "name": "Full-Stack Project",
-                    "description": "End-to-end project mentoring from idea to deployment including DevOps basics.",
-                    "buttonLabel": "Start Project",
-                    "buttonIcon": "bi-rocket-takeoff-fill"
-                },
-                "review": {
-                    "name": "Code Review Pack",
-                    "description": "Async code reviews with detailed feedback, refactoring suggestions and video walkthroughs.",
-                    "buttonLabel": "Request Review",
-                    "buttonIcon": "bi-code-slash"
-                }
-            }
-        },
-        "stillUnsure": {
-            "title": "Still unsure?",
-            "subtitle": "Let's find the right fit together",
-            "description": "Not sure which plan suits you? Send me a quick message and I'll help you choose in minutes, no pressure.",
-            "cta": "Chat on WhatsApp",
-            "ctaTitle": "Chat on WhatsApp",
-            "note": "Usually reply within a day • No spam • No commitment",
-            "bookingNote": "Book an Appointment"
-        },
-        "individualPlan": {
-            "title": "Do you need individual plan?",
-            "subtitle": "Browse individual options for English & Development"
-        }
-    },
-    "promo": {
-        "seePlans": "See plans",
-        "link": "Link",
-        "iconTitle": "Icon",
-        "writtenIn": "Written in"
-    },
-    "accordion": {
-        "secureHeader": "🔑 Secure & Private Communication",
-        "secureIntro": "If you want to contact me <mark class=\"rounded-3\">in a more private way</mark>, you can use one of the actions given below. If you don't know how to use these methods, here's a <a class=\"link-info link-opacity-75-hover link-offset-2\" href=\"https://www.youtube.com/watch?v=mu2TVYJE5Gc\" hreflang=\"x-default\" target=\"_blank\">tutorial</a> on the go. However, you should use this <strong>if you really have good reason to do so.</strong>",
-        "secureJami": "Jami (Client)",
-        "secureGpg": "GnuPG (Public Key)",
-        "secureView": "View",
-        "secureHere": "here.",
-        "donationsHeader": "💞 Donations",
-        "donationsIntro": "If you're <em>somehow</em> interested in my work, you can support me via the options given below:",
-        "donationsBuyMeACoffee": "BuyMeACoffee",
-        "donationsView": "View",
-        "donationsHere": "here.",
-        "aboutSiteHeader": "🍫 About This Site",
-        "aboutSiteIntro": "Here you can find all the necessary information for this website.",
-        "aboutSiteVersion": "Site Version",
-        "aboutSiteLicense": "License",
-        "aboutSiteLicenseValue": "This site is licensed under <code>CC0-1.0 Universal License.</code>",
-        "aboutSiteSource": "Source Code",
-        "aboutSiteAvailableOn": "Available on",
-        "aboutSiteGitHub": "GitHub"
-    },
-    "toasts": {
-        "completeCaptcha": "Please complete the captcha request.",
-        "verified": "CAPTCHA has been verified. Beginning download.",
-        "verificationFailed": "CAPTCHA verification failed. Please try again.",
-        "rateLimit": "Rate limit exceeded. Please wait a moment before trying again.",
-        "rateLimitLater": "Rate limit exceeded. Please try again later.",
-        "downloadFailed": "Unable to download the file. Please try again.",
-        "requestFailed": "Request failed ({{status}}). Please try again.",
-        "emailSent": "Your e-mail has been sent.",
-        "emailFailed": "Unable to send your e-mail.",
-        "emailFailedTryAgain": "Unable to send your e-mail. Please try again."
-    }
+	"maintenance": {
+		"status": "This site is currently in maintenance mode. Some functionality may not work."
+	},
+	"upperNavigation": {
+		"home": "Homepage",
+		"lifeFeed": "Feed",
+		"gallery": "Gallery",
+		"updates": "Blog",
+		"about": "About"
+	},
+	"hero": {
+		"greet": "Hi! I'm",
+		"buttons": {
+			"workWMe": "Work w/me!",
+			"cv": "Get my CV!"
+		},
+		"buttonTitles": {
+			"workHire": "Proceed to hire me for your web or teaching demands.",
+			"downloadCV": "Proceed to download my CV."
+		},
+		"mottos": {
+			"prof": "Professional",
+			"problemSolver": "Problem Solver",
+			"realistic": "Realist",
+			"practical": "Practical",
+			"applicable": "Applicable",
+			"inDemand": "In-demand"
+		}
+	},
+	"fields": {
+		"teacher": "English Teacher",
+		"frontEnd": "Front-end Developer",
+		"react": "React Developer",
+		"wordpress": "WordPress Developer",
+		"js": "JavaScript Developer",
+		"ts": "TypeScript Developer"
+	},
+	"video": {
+		"teach": "Teaching for Life",
+		"code": "Coding for Passion"
+	},
+	"desc": {
+		"descTitle": "I describe myself as",
+		"titles": {
+			"PS": "Problem Solver",
+			"PE": "Progressive",
+			"PL": "Practical",
+			"RC": "Realistic"
+		},
+		"exp": {
+			"PS": "I strive to implement solutions to various problems we encounter at anywhere extending from work to casual life.",
+			"PE": "I try to keep up with the latest and greatest positive developments around the global and embrace them as a whole.",
+			"PL": "I always try to fit the theory with the experienced reality thus creating a self-sustaining environment through reason.",
+			"RC": "When I encounter a real issue in my classroom or my computer, I search for applicable solution to deal with observed phenomenon."
+		}
+	},
+	"skills": {
+		"title": "I'm Proficient In"
+	},
+	"projects": {
+		"title": "Some of My Projects"
+	},
+	"offcanvas": {
+		"btnMessage": "Display menu to see posts."
+	},
+	"teach": {
+		"title": "Teaching English?",
+		"desc": {
+			"subtitle": "My main profession is being an <span class=\"mark rounded-4\">English Teacher!</span>",
+			"desc1": "I've been teaching mostly in private schools since I graduated with my BA degree. My students range from <u>elementary to high-school level</u>. I literally had the opportunity to <strong>teach students of all ages!</strong>",
+			"approach": "My primary focus and principles about teaching are:"
+		}
+	},
+	"principles": {
+		"first": {
+			"title": "Contextual immersion",
+			"msg": "I integrate real-world scenarios, like role-playing daily conversations or analyzing various texts depending on our topic in classroom, to make English relevant and engaging for students."
+		},
+		"second": {
+			"title": "Scaffolded autonomy",
+			"msg": "I design tasks that gradually increase in complexity, empowering students to take ownership of their learning, from crafting simple sentences to debating complex ideas."
+		},
+		"third": {
+			"title": "Error as opportunity",
+			"msg": "I encourage students to view mistakes as critical stepping stones, using targeted feedback to refine their language skills without fear of judgment."
+		},
+		"fourth": {
+			"title": "Multimodal engagement",
+			"msg": "I blend visual, auditory, and kinesthetic activities-like storytelling through comics or pronunciation through rhythm exercises-to cater to diverse learning styles."
+		},
+		"fifth": {
+			"title": "Cultural storytelling",
+			"msg": "I weave global and local narratives into lessons, helping students to connect English to their own identities while exploring new perspectives."
+		}
+	},
+	"quoteAboutEdu": {
+		"title": "What I believe in?",
+		"msg": "Our children will <span class=\"wavy-text\">live amongst</span> the very people <strong>we educate</strong>."
+	},
+	"work": {
+		"title": "Interested in working?",
+		"section1": {
+			"title": "Do you need assistance in learning English?",
+			"msg": "I can offer you P2P online teaching exprience with appropriate enrollments chosen by you. These include plans such as <strong>Supplementary English Course</strong>, <strong>Proficiency English Course</strong>, and <strong>Exam-Focused English Course</strong>. For more broad information, see the plans below!"
+		},
+		"section2": {
+			"title": "Do you have a web project?",
+			"msg": "I can design, prototype and develop with on-demand considerations for a fully-functional web application using React as well as classical CMS approaches like WordPress or multi-page static content websites such as hobby sites, portfolios, blogs and many more! I also offer maintenance for your personal or business web solutions. For more broad information, see the plans below!"
+		}
+	},
+	"support": {
+		"title": "Organizations I support",
+		"supportMsg": "Please support both by moral and material ways."
+	},
+	"title": "English Teacher & Web Developer",
+	"description": {
+		"part1": "x",
+		"part2": "y"
+	},
+	"modals": {
+		"gpg": "🧲 GnuPG Public Key",
+		"cv": {
+			"title": "👔 See or Download My CV",
+			"msg": "Please verify <strong>you're human</strong> before proceeding.",
+			"btnMsg": "Confirm Action"
+		},
+		"lang": "🎇 Change Site Language",
+		"rss": {
+			"btnTitle": "📰 Download RSS Feed",
+			"tablePlatformName": "Platform Name",
+			"tableLinkName": "RSS Link",
+			"site": "Site",
+			"thisSite": "This Site",
+			"hashnode": "Hashnode"
+		},
+		"sitemap": {
+			"btnTitle": "🍁 Sitemap",
+			"tableActionName": "Action",
+			"tableVisitName": "Go",
+			"visitSitemap": "See Sitemap"
+		},
+		"llmsTxt": {
+			"btnTitle": "🤖 LLMs.txt",
+			"tableActionName": "Action",
+			"tableVisitName": "Go",
+			"visitLlmsTxt": "See LLMs.txt"
+		},
+		"langSwitch": {
+			"en": "English",
+			"tr": "Türkçe",
+			"enTitle": "Change Language to English",
+			"trTitle": "Change Language to Turkish"
+		}
+	},
+	"misc": {
+		"close": "Close",
+		"github": "GitHub",
+		"motto": "Teaching for <strong>life</strong>, coding for <strong>passion</strong>."
+	},
+	"footer": {
+		"llmsTxt": "LLMs.txt",
+		"sitemap": "Sitemap",
+		"ccZero": "Creative Commons CC0 1.0 Universal License",
+		"notByAi": "NotByAI Badge"
+	},
+	"header": {
+		"dayNight": "Change Day/Night Mode",
+		"changeLanguage": "Change Site Language"
+	},
+	"scrollToTop": {
+		"text": "Scroll to Top"
+	},
+	"about": {
+		"skills": {
+			"teacher": "English Teacher",
+			"frontend": "Frontend Developer"
+		},
+		"socials": {
+			"github": "GitHub",
+			"hashnode": "Hashnode",
+			"substack": "Substack",
+			"email": "E-mail"
+		},
+		"nav": {
+			"aboutMe": "About Me",
+			"education": "Education",
+			"work": "Work",
+			"stack": "Tech Stack & Tools",
+			"mailing": "E-mail",
+			"advanced": "Advanced"
+		},
+		"introduction": {
+			"first": "I'm highly interested in creating <mark>content-first</mark> websites as well as crafting stand-alone <mark>web applications (SPAs)</mark> or <mark>multi-page</mark> static content where <em>speed</em> &amp; <em>progressive enhancement</em> are critically important. I love building user interfaces with mainly <strong>React.</strong>",
+			"last": "My primary field is teaching English in <mark>ESL (English as a Second Language)</mark> context. My main focus is to maximize practical usage of English in almost every aspect related to casual or academical way of interacting with the language."
+		},
+		"table": {
+			"institution": "Institution",
+			"field": "Field",
+			"degree": "Degree",
+			"date": "Date",
+			"category": "Category",
+			"technologies": "Technologies",
+			"librariesTools": "Libraries & Tools"
+		},
+		"edu": {
+			"university": "Atatürk University",
+			"elte": "English Language Teaching",
+			"bachelor": "Bachelor's Degree",
+			"computerProgramming": "Computer Programming",
+			"associate": "Associate Degree",
+			"current": "current"
+		},
+		"stack": {
+			"frontend": "Front-end",
+			"backend": "Back-end",
+			"crossplatform": "Cross-platform",
+			"styling": "Styling",
+			"databases": "Databases",
+			"devops": "DevOps",
+			"cms": "CMS",
+			"ssg": "SSG",
+			"testing": "Testing",
+			"designUx": "Design & UX"
+		},
+		"work": {
+			"cvIntro": "You can download or view my CV",
+			"cvHere": "here.",
+			"cvTitle": "See/Download CV here."
+		}
+	},
+	"emailForm": {
+		"yourName": "Your Name",
+		"someone": "Someone",
+		"provideName": "Please provide your name.",
+		"email": "Email",
+		"emailPlaceholder": "someone@example.com",
+		"provideEmail": "Please provide your e-mail address.",
+		"message": "Message",
+		"messagePlaceholder": "Type your message here...",
+		"provideMessage": "Please enter a message in the textarea.",
+		"submitTitle": "Submit Form",
+		"sendMessage": "Send Message",
+		"subject": "New Message"
+	},
+	"blog": {
+		"latestUpdates": "Latest updates",
+		"noPosts": "No blog posts <em>are available.</em>",
+		"untitledPost": "Untitled Post",
+		"unknownAuthor": "Unknown Author",
+		"unableDisplay": "Unable to <mark>display</mark> blog posts.",
+		"errorLoading": "Error Loading Post",
+		"somethingWentWrong": "Something went wrong. Try again later...",
+		"postNotFound": "Post Not Found",
+		"postNotFoundMsg": "The requested post could not be found.",
+		"error": "Error",
+		"unableLoad": "Unable to load blog posts. Please refresh the page.",
+		"loadingPosts": "Loading Blog Posts",
+		"loadingPostsMsg": "Loading blog posts...",
+		"loading": "Loading....",
+		"author": "Author"
+	},
+	"workPage": {
+		"hireMe": "Hire me",
+		"orSeePlans": "or see my plans <span class=\"wavy-text\">below.</span>",
+		"scrollDown": "Scroll down",
+		"seePlans": "See plans",
+		"forEnglish": "For Learning English",
+		"forProgramming": "For Web Development",
+		"comingSoon": "Coming soon...",
+		"featured": {
+			"title": "Most Popular Plans",
+			"subtitle": "Pick the plan that fits your goal & upgrade anytime.",
+			"plans": {
+				"free": {
+					"label": "Starter",
+					"subtitle": "Perfect for beginners",
+					"pricePeriod": "/hour",
+					"badge": "",
+					"features": [
+						"Small group (max 4) conversation",
+						"Weekly practice & feedback",
+						"Basic materials included",
+						"Email support"
+					],
+					"excludedFeatures": ["1:1 live mentoring", "Personal roadmap"],
+					"buttonLabel": "Contact to Book",
+					"buttonIcon": "bi-people-fill"
+				},
+				"starter": {
+					"label": "Starter",
+					"subtitle": "Perfect for beginners",
+					"pricePeriod": "/hour",
+					"badge": "",
+					"features": [
+						"Small group (max 4) conversation",
+						"Weekly practice & feedback",
+						"Basic materials included",
+						"Email support"
+					],
+					"excludedFeatures": ["1:1 live mentoring", "Personal roadmap"],
+					"buttonLabel": "Contact to Book",
+					"buttonIcon": "bi-people-fill"
+				},
+				"pro": {
+					"label": "Pro",
+					"subtitle": "Most popular & personalized",
+					"pricePeriod": "/hour",
+					"badge": "Most Popular",
+					"features": [
+						"1:1 Live 60-min lessons",
+						"Personalized level & roadmap",
+						"Speaking + grammar focus",
+						"Homework & detailed correction",
+						"Flexible rescheduling"
+					],
+					"buttonLabel": "Contact to Book",
+					"buttonIcon": "bi-send-fill",
+					"secondaryButtonLabel": "WhatsApp",
+					"secondaryButtonIcon": "bi-whatsapp"
+				},
+				"max": {
+					"label": "Max",
+					"subtitle": "For serious learners",
+					"pricePeriod": "/hour",
+					"badge": "",
+					"features": [
+						"Everything in Pro",
+						"Business English Sprint (4-week)",
+						"Presentations, emails & interviews",
+						"Mock exams (YDS/TOEFL/IELTS)",
+						"Priority support & certificate"
+					],
+					"buttonLabel": "Buy on Udemy",
+					"buttonIcon": "bi-bag-fill"
+				}
+			}
+		},
+		"cards": {
+			"english": {
+				"live-1-1": {
+					"name": "1:1 Live Lesson",
+					"description": "Personalized 60-minute live session tailored to your level and goals & ideal for speaking, grammar and real conversation practice.",
+					"buttonLabel": "Contact to Book",
+					"buttonIcon": "bi-send-fill",
+					"whatsappLabel": "WhatsApp"
+				},
+				"group": {
+					"name": "Group Conversation",
+					"description": "Small group (max 4) interactive lessons focused on fluency and confidence through discussion, role-play and feedback.",
+					"buttonLabel": "Contact to Book",
+					"buttonIcon": "bi-people-fill"
+				},
+				"exam": {
+					"name": "Exam Preparation",
+					"description": "Intensive program for YDS / TOEFL / IELTS / Proficiency with strategies, mock exams and detailed error correction.",
+					"buttonLabel": "Buy on Udemy",
+					"buttonIcon": "bi-bag-fill"
+				},
+				"business": {
+					"name": "Business English Sprint",
+					"description": "Career-focused intensive: presentations, emails, interviews and meetings. 4-week sprint with homework review.",
+					"buttonLabel": "Buy on Udemy",
+					"buttonIcon": "bi-bag-fill"
+				}
+			},
+			"programming": {
+				"frontend": {
+					"name": "Frontend Sprint",
+					"description": "Hands-on React / TypeScript mentorship w/building real projects with code reviews and best practices.",
+					"buttonLabel": "View on GitHub",
+					"buttonIcon": "bi-github"
+				},
+				"backend": {
+					"name": "Backend Boost",
+					"description": "Node.js / PHP / API design sessions with architecture guidance and performance tuning.",
+					"buttonLabel": "Buy on Udemy",
+					"buttonIcon": "bi-bag-fill"
+				},
+				"fullstack": {
+					"name": "Full-Stack Project",
+					"description": "End-to-end project mentoring from idea to deployment including DevOps basics.",
+					"buttonLabel": "Start Project",
+					"buttonIcon": "bi-rocket-takeoff-fill"
+				},
+				"review": {
+					"name": "Code Review Pack",
+					"description": "Async code reviews with detailed feedback, refactoring suggestions and video walkthroughs.",
+					"buttonLabel": "Request Review",
+					"buttonIcon": "bi-code-slash"
+				}
+			}
+		},
+		"stillUnsure": {
+			"title": "Still unsure?",
+			"subtitle": "Let's find the right fit together",
+			"description": "Not sure which plan suits you? Send me a quick message and I'll help you choose in minutes, no pressure.",
+			"cta": "Chat on WhatsApp",
+			"ctaTitle": "Chat on WhatsApp",
+			"note": "Usually reply within a day • No spam • No commitment",
+			"bookingNote": "Book an Appointment"
+		},
+		"individualPlan": {
+			"title": "Do you need individual plan?",
+			"subtitle": "Browse individual options for English & Development"
+		}
+	},
+	"promo": {
+		"seePlans": "See plans",
+		"link": "Link",
+		"iconTitle": "Icon",
+		"writtenIn": "Written in"
+	},
+	"accordion": {
+		"secureHeader": "🔑 Secure & Private Communication",
+		"secureIntro": "If you want to contact me <mark class=\"rounded-3\">in a more private way</mark>, you can use one of the actions given below. If you don't know how to use these methods, here's a <a class=\"link-info link-opacity-75-hover link-offset-2\" href=\"https://www.youtube.com/watch?v=mu2TVYJE5Gc\" hreflang=\"x-default\" target=\"_blank\">tutorial</a> on the go. However, you should use this <strong>if you really have good reason to do so.</strong>",
+		"secureJami": "Jami (Client)",
+		"secureGpg": "GnuPG (Public Key)",
+		"secureView": "View",
+		"secureHere": "here.",
+		"donationsHeader": "💞 Donations",
+		"donationsIntro": "If you're <em>somehow</em> interested in my work, you can support me via the options given below:",
+		"donationsBuyMeACoffee": "BuyMeACoffee",
+		"donationsView": "View",
+		"donationsHere": "here.",
+		"aboutSiteHeader": "🍫 About This Site",
+		"aboutSiteIntro": "Here you can find all the necessary information for this website.",
+		"aboutSiteVersion": "Site Version",
+		"aboutSiteLicense": "License",
+		"aboutSiteLicenseValue": "This site is licensed under <code>CC0-1.0 Universal License.</code>",
+		"aboutSiteSource": "Source Code",
+		"aboutSiteAvailableOn": "Available on",
+		"aboutSiteGitHub": "GitHub"
+	},
+	"toasts": {
+		"completeCaptcha": "Please complete the captcha request.",
+		"verified": "CAPTCHA has been verified. Beginning download.",
+		"verificationFailed": "CAPTCHA verification failed. Please try again.",
+		"rateLimit": "Rate limit exceeded. Please wait a moment before trying again.",
+		"rateLimitLater": "Rate limit exceeded. Please try again later.",
+		"downloadFailed": "Unable to download the file. Please try again.",
+		"requestFailed": "Request failed ({{status}}). Please try again.",
+		"emailSent": "Your e-mail has been sent.",
+		"emailFailed": "Unable to send your e-mail.",
+		"emailFailedTryAgain": "Unable to send your e-mail. Please try again."
+	}
 }

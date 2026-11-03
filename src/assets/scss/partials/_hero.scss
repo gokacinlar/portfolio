@@ -4,7 +4,7 @@
 
 @layer init {
     #hero {
-        min-height: var(--sizes-content);
+        min-block-size: var(--sizes-content);
         background: var(--clr-eight);
     }
 
@@ -17,35 +17,36 @@
             @include mquery.responsive($bp) {
                 .hero-logo {
                     --logo-mw: 256px;
-                    width: var(--logo-mw);
+
+                    inline-size: var(--logo-mw);
                 }
 
                 .ocps-hero-img-container,
                 .ocps-container {
-                    min-width: 100% !important;
+                    min-inline-size: 100% !important;
                 }
 
                 .ocps-container {
-                    margin-top: .75em !important;
+                    margin-block-start: .75em !important;
                     gap: .65rem !important;
                 }
 
                 #mottosSection {
-                    padding-bottom: .55em !important;
+                    padding-block-end: .55em !important;
                 }
 
                 .motto-element {
                     font-size: .25em !important;
                     font-weight: 400 !important;
-                    margin-bottom: .15em !important;
+                    margin-block-end: .15em !important;
                 }
             }
         }
     }
 
     #threeJsAnimationContainer {
-        width: 100%;
-        min-height: 400px;
+        inline-size: 100%;
+        min-block-size: 400px;
         position: relative;
         overflow: hidden;
 
@@ -66,8 +67,8 @@
 
         canvas {
             display: block;
-            width: 100% !important;
-            height: 100% !important;
+            inline-size: 100% !important;
+            block-size: 100% !important;
             border-radius: 2rem !important
         }
     }
@@ -90,41 +91,45 @@
     #heroLogoBg {
         @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, background-position, center);
         @include mixin.borderRadius(var(--rounded-xxl));
+
         background-image: radial-gradient(var(--clr-five) 10%, transparent 10%);
         background-position: 5px 8px;
         background-size: 24px 24px;
     }
 
     .hero-logo {
-        width: var(--sizes-logo);
-        height: auto;
+        inline-size: var(--sizes-logo);
+        block-size: auto;
         object-fit: cover;
+
         @include mixin.borderRadius(50%);
     }
 
     .motto-element {
         @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-grow, 1);
+
         color: var(--clr-one);
         background: var(--clr-two);
         animation: fade-in-fwd 0.55s cubic-bezier(.25, .46, .45, .94) both;
     }
 
     #ocps {
-        min-height: 2ch;
+        min-block-size: 2ch;
+
         @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, min-height, 4ch);
     }
 
     #mottosSection {
-        min-height: 8ch;
+        min-block-size: 8ch;
     }
 
     .cursor {
         display: inline-block;
-        width: 1ch;
+        inline-size: 1ch;
         animation: blink 1s step-end infinite;
     }
 
     .post-lang-img {
-        width: 32px;
+        inline-size: 32px;
     }
 }

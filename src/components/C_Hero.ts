@@ -1,6 +1,12 @@
 export class HeroImageWithLink {
-    public render(title: string, id: string, href: string, src: string, srcset: string): string {
-        return /*html*/ `
+	public render(
+		title: string,
+		id: string,
+		href: string,
+		src: string,
+		srcset: string,
+	): string {
+		return /*html*/ `
             <a id="${id}" href="${href}" hreflang="x-default" class="d-flex justify-content-center link-offset-2 link-underline link-underline-opacity-0 w-100">
                 <img
                     class="hero-logo img-fluid"
@@ -14,11 +20,16 @@ export class HeroImageWithLink {
                     />
             </a>
         `;
-    }
+	}
 
-    // Stringify the output
-    public toString(): string {
-        return this.render("Derviş Öksüzoğlu", "heroLogoBg", "https://www.github.com/gokacinlar",
-            "../assets/images/static/webp/logo.webp", "../assets/images/static/webp/logo_256x256.webp 256w, ../assets/images/static/webp/logo_512x512.webp 512w, ../assets/images/static/webp/logo.webp 1024w");
-    }
+	// Stringify the output
+	public toString(): string {
+		return this.render(
+			"Derviş Öksüzoğlu",
+			"heroLogoBg",
+			"https://www.github.com/gokacinlar",
+			"../assets/images/static/webp/logo.webp",
+			"../assets/images/static/webp/logo_256x256.webp 256w, ../assets/images/static/webp/logo_512x512.webp 512w, ../assets/images/static/webp/logo.webp 1024w",
+		);
+	}
 }

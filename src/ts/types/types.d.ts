@@ -1,64 +1,70 @@
 import type * as bootstrap from "bootstrap";
 
 declare global {
-    interface Window {
-        bootstrap: typeof bootstrap;
-    }
+	interface Window {
+		bootstrap: typeof bootstrap;
+	}
 }
 
 type GenericString = {
-    [key: string]: string;
-}
+	[key: string]: string;
+};
 
 type PromoCardData = {
-    postName: string;
-    postDesc: string;
-    postImgSrc: string;
-    postLangType: string;
-    postLangTypeImgSrc: string;
-    projectLink: string;
+	postName: string;
+	postDesc: string;
+	postImgSrc: string;
+	postLangType: string;
+	postLangTypeImgSrc: string;
+	projectLink: string;
 };
 
 type PromoSkills = {
-    skillName: string;
-    skillLogoSrc: string;
-    skillAnchor: string;
-}
+	skillName: string;
+	skillLogoSrc: string;
+	skillAnchor: string;
+};
 
 type PromoSocials = {
-    socialName: string;
-    socialClass: string;
-    socialLink: string;
-}
+	socialName: string;
+	socialClass: string;
+	socialLink: string;
+};
 
 type HTMXOptions = {
-    hxget: string;
-    hxtrigger: "click" | "change" | "mouseover";
-    hxswap: "innerHTML transition:true" | "outerHTML" | "beforebegin" | "afterbegin" | "beforeend" | "afterend";
-    hxpushurl: boolean;
-}
+	hxget: string;
+	hxtrigger: "click" | "change" | "mouseover";
+	hxswap:
+		| "innerHTML transition:true"
+		| "outerHTML"
+		| "beforebegin"
+		| "afterbegin"
+		| "beforeend"
+		| "afterend";
+	hxpushurl: boolean;
+};
 
 type Education = {
-    institution: string;
-    field: string;
-    degree: string;
-}
+	institution: string;
+	field: string;
+	degree: string;
+};
 
 type NavLink = {
-    id: string;
-    icon: string;
-    label: string
+	id: string;
+	icon: string;
+	label: string;
 };
 
 type TableRow = string[];
 
 export type {
-    GenericString,
-    PromoCardData,
-    PromoSkills,
-    PromoSocials,
-    HTMXOptions,
-    Education,
-    NavLink,
-    TableRow
-}
+	GenericString,
+	PromoCardData,
+	PromoSkills,
+	PromoSocials,
+	HTMXOptions,
+	Education,
+	NavLink,
+	TableRow,
+};

@@ -9,105 +9,130 @@ import Localize from "../utils/initLocalization";
 import type * as iFace from "../ts/interfaces/i.global";
 
 class About extends HTMLElement {
-    private hmmsCleanup: (() => void) | null = null;
-    private captchaDomReadyHandler: (() => void) | null = null;
-    private validateCaptchaDomReadyHandler: (() => void) | null = null;
+	private hmmsCleanup: (() => void) | null = null;
+	private captchaDomReadyHandler: (() => void) | null = null;
+	private validateCaptchaDomReadyHandler: (() => void) | null = null;
 
-    constructor() {
-        super();
-        this.render();
-    }
+	constructor() {
+		super();
+		this.render();
+	}
 
-    private initCaptcha() {
-        // Load reCAPTCHA script after DOMContentLoaded and render when loaded
-        this.captchaDomReadyHandler = () => {
-            const scriptUrl: string = "https://www.google.com/recaptcha/api.js";
-            const scriptOptions = {
-                scriptItself: scriptUrl,
-                target: document.head,
-                attributes: {
-                    defer: true,
-                    async: true
-                }
-            }
+	private initCaptcha() {
+		// Load reCAPTCHA script after DOMContentLoaded and render when loaded
+		this.captchaDomReadyHandler = () => {
+			const scriptUrl: string = "https://www.google.com/recaptcha/api.js";
+			const scriptOptions = {
+				scriptItself: scriptUrl,
+				target: document.head,
+				attributes: {
+					defer: true,
+					async: true,
+				},
+			};
 
-            try {
-                insertApprovedScript(scriptOptions);
-            } catch (error: unknown) {
-                console.error("Error while inserting script:", error);
-                return;
-            }
+			try {
+				insertApprovedScript(scriptOptions);
+			} catch (error: unknown) {
+				console.error("Error while inserting script:", error);
+				return;
+			}
 
-            // Remove self after execution to avoid duplicate inserts on re-connect
-            if (this.captchaDomReadyHandler) {
-                document.removeEventListener("DOMContentLoaded", this.captchaDomReadyHandler);
-                this.captchaDomReadyHandler = null;
-            }
-        };
+			// Remove self after execution to avoid duplicate inserts on re-connect
+			if (this.captchaDomReadyHandler) {
+				document.removeEventListener(
+					"DOMContentLoaded",
+					this.captchaDomReadyHandler,
+				);
+				this.captchaDomReadyHandler = null;
+			}
+		};
 
-        if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", this.captchaDomReadyHandler);
-        } else {
-            // DOM already ready
-            this.captchaDomReadyHandler();
-        }
-    }
+		if (document.readyState === "loading") {
+			document.addEventListener(
+				"DOMContentLoaded",
+				this.captchaDomReadyHandler,
+			);
+		} else {
+			// DOM already ready
+			this.captchaDomReadyHandler();
+		}
+	}
 
-    private readonly heroConfig: iFace.HeroConfig = {
-        name: "Derviş Öksüzoğlu",
-        className: "heroLogoBg",
-        link: "",
-        imageSrc: "../assets/images/static/webp/logo.webp",
-        srcSet: "../assets/images/static/webp/logo_256x256.webp 256w, ../assets/images/static/webp/logo_512x512.webp 512w, ../assets/images/static/webp/logo.webp 1024w"
-    };
+	private readonly heroConfig: iFace.HeroConfig = {
+		name: "Derviş Öksüzoğlu",
+		className: "heroLogoBg",
+		link: "",
+		imageSrc: "../assets/images/static/webp/logo.webp",
+		srcSet:
+			"../assets/images/static/webp/logo_256x256.webp 256w, ../assets/images/static/webp/logo_512x512.webp 512w, ../assets/images/static/webp/logo.webp 1024w",
+	};
 
-    private readonly skillConfigs: iFace.SkillConfig[] = [
-        {
-            imageOne: "../assets/images/static/svg/tr.svg",
-            imageTwo: "../assets/images/static/svg/uk.svg",
-            title: Localize.translate("common:about:skills:teacher")
-        },
-        {
-            imageOne: "../assets/images/static/svg/js.svg",
-            imageTwo: "../assets/images/static/svg/ts.svg",
-            title: Localize.translate("common:about:skills:frontend")
-        }
-    ];
+	private readonly skillConfigs: iFace.SkillConfig[] = [
+		{
+			imageOne: "../assets/images/static/svg/tr.svg",
+			imageTwo: "../assets/images/static/svg/uk.svg",
+			title: Localize.translate("common:about:skills:teacher"),
+		},
+		{
+			imageOne: "../assets/images/static/svg/js.svg",
+			imageTwo: "../assets/images/static/svg/ts.svg",
+			title: Localize.translate("common:about:skills:frontend"),
+		},
+	];
 
-    private readonly shuffleElements: iFace.ShuffleElement[] = [
-        { selector: ".aside-title", multiple: false },
-        { selector: ".aside-skill", multiple: true }
-    ];
+	private readonly shuffleElements: iFace.ShuffleElement[] = [
+		{ selector: ".aside-title", multiple: false },
+		{ selector: ".aside-skill", multiple: true },
+	];
 
-    private readonly SocialsElements: iFace.SocialsElement[] = [
-        { name: Localize.translate("common:about:socials:github"), icon: "bi bi-github", href: new URL("https://github.com/gokacinlar") },
-        { name: Localize.translate("common:about:socials:hashnode"), icon: "bi bi-book", href: new URL("https://gokacinlar.hashnode.dev/") },
-        { name: Localize.translate("common:about:socials:substack"), icon: "bi bi-substack", href: new URL("https://substack.com/@gokacinlar") },
-        { name: Localize.translate("common:about:socials:email"), icon: "bi bi-mailbox", href: new URL("mailto:dervisoksuzoglu@tutamail.com?subject=To%20Dervi%C5%9F ") }
-    ]
+	private readonly SocialsElements: iFace.SocialsElement[] = [
+		{
+			name: Localize.translate("common:about:socials:github"),
+			icon: "bi bi-github",
+			href: new URL("https://github.com/gokacinlar"),
+		},
+		{
+			name: Localize.translate("common:about:socials:hashnode"),
+			icon: "bi bi-book",
+			href: new URL("https://gokacinlar.hashnode.dev/"),
+		},
+		{
+			name: Localize.translate("common:about:socials:substack"),
+			icon: "bi bi-substack",
+			href: new URL("https://substack.com/@gokacinlar"),
+		},
+		{
+			name: Localize.translate("common:about:socials:email"),
+			icon: "bi bi-mailbox",
+			href: new URL(
+				"mailto:dervisoksuzoglu@tutamail.com?subject=To%20Dervi%C5%9F ",
+			),
+		},
+	];
 
-    private render(): void {
-        new Template().createTemplate(this.renderContent(), this);
-    }
+	private render(): void {
+		new Template().createTemplate(this.renderContent(), this);
+	}
 
-    private initializeShuffleEffects(): void {
-        // Case for choosing multiple or singular elements
-        this.shuffleElements.forEach(({ selector, multiple }) => {
-            if (multiple) {
-                document.querySelectorAll(selector).forEach(element => {
-                    shuffleLetters(element);
-                });
-            } else {
-                const element = document.querySelector(selector);
-                if (element) {
-                    shuffleLetters(element);
-                }
-            }
-        });
-    }
+	private initializeShuffleEffects(): void {
+		// Case for choosing multiple or singular elements
+		this.shuffleElements.forEach(({ selector, multiple }) => {
+			if (multiple) {
+				document.querySelectorAll(selector).forEach((element) => {
+					shuffleLetters(element);
+				});
+			} else {
+				const element = document.querySelector(selector);
+				if (element) {
+					shuffleLetters(element);
+				}
+			}
+		});
+	}
 
-    private renderContent(): string {
-        return /*html*/ `
+	private renderContent(): string {
+		return /*html*/ `
             <section id="about-grid" class="container-fluid mb-3">
                 <div id="about-grid-parent" class="row gy-3 gx-3 px-2">
                     <div class="col-12 col-md-4 col-sm">
@@ -119,10 +144,10 @@ class About extends HTMLElement {
                 </div>
             </section>
         `;
-    }
+	}
 
-    private renderAside(): string {
-        return /*html*/ `
+	private renderAside(): string {
+		return /*html*/ `
         <aside id="about-aside" class="rounded-5 shadow-sm py-3 px-4 h-100">
             <div>
                 ${this.renderHeroSection()}
@@ -132,38 +157,42 @@ class About extends HTMLElement {
             </div>
         </aside>
     `;
-    }
+	}
 
-    private renderMain(): string {
-        return /*html*/ `
+	private renderMain(): string {
+		return /*html*/ `
         <section id="about-main" class="rounded-5 shadow-sm py-3 px-3 overflow-auto">
             ${new ScrollSpy().render()}
         </section>
     `;
-    }
+	}
 
-    private renderHeroSection(): string {
-        const { name, className, link, imageSrc, srcSet } = this.heroConfig;
-        return /*html*/ `
+	private renderHeroSection(): string {
+		const { name, className, link, imageSrc, srcSet } = this.heroConfig;
+		return /*html*/ `
             ${new HeroImageWithLink().render(name, className, link, imageSrc, srcSet)}
             <div class="pe-none">
                 <h1 class="aside-title fw-medium mt-3 mb-0 text-center">${name}</h1>
                 <hr class="border border-2 border-secondary">
             </div>
         `;
-    }
+	}
 
-    private renderSkillsSection(): string {
-        return /*html*/ `
+	private renderSkillsSection(): string {
+		return /*html*/ `
             <div>
-                ${this.skillConfigs.map(skill => this.renderSkill(skill)).join("")}
+                ${this.skillConfigs.map((skill) => this.renderSkill(skill)).join("")}
                 <hr class="border border-2 border-secondary">
             </div>
         `;
-    }
+	}
 
-    private renderSkill({ imageOne, imageTwo, title }: iFace.SkillConfig): string {
-        return /*html*/ `
+	private renderSkill({
+		imageOne,
+		imageTwo,
+		title,
+	}: iFace.SkillConfig): string {
+		return /*html*/ `
             <h2 class="aside-skill-name d-flex flex-row align-items-center gap-1 mb-1">
                 <div class="d-flex align-items-center gap-1 px-1 py-1">
                     <img src="${imageOne}" class="aside-ico img-fluid lazyload rounded-1" loading="lazy" decoding="async">
@@ -172,12 +201,13 @@ class About extends HTMLElement {
                 <span class="aside-skill fs-4 text-start">${title}</span>
             </h2>
         `;
-    }
+	}
 
-    private renderSocials(): string {
-        return /*html*/ `
+	private renderSocials(): string {
+		return /*html*/ `
             <div class="d-flex flex-row flex-wrap align-items-start justify-content-evenly gap-1">
-                ${this.SocialsElements.map(({ name, icon, href }) => `
+                ${this.SocialsElements.map(
+									({ name, icon, href }) => `
                     <div class="aside-section-socials mb-2 rounded-pill shadow-sm flex-grow-1">
                         <a href="${href}" hreflang="x-default" class="d-flex flex-row align-items-center gap-1 px-2 py-2 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" 
                             target="_blank" title="${name}">
@@ -186,57 +216,72 @@ class About extends HTMLElement {
                             <i class="bi bi-arrow-right fs-5 about-socials-arrow"></i>
                         </a>
                     </div>
-                `).join("")}
+                `,
+								).join("")}
             </div>
             <hr class="border border-2 border-secondary">
         `;
-    }
+	}
 
-    private renderMotto(): string {
-        return /*html*/ `
+	private renderMotto(): string {
+		return /*html*/ `
             <blockquote class="blockquote text-center mt-auto mb-auto">
                 <p><em>${Localize.translate("common:misc:motto")}</em></p>
             </blockquote>
         `;
-    }
+	}
 
-    connectedCallback(): void {
-        // Initialize effects that require DOM presence
-        this.initializeShuffleEffects();
-        this.initCaptcha();
+	connectedCallback(): void {
+		// Initialize effects that require DOM presence
+		this.initializeShuffleEffects();
+		this.initCaptcha();
 
-        // Horizontal scroll with proper cleanup
-        this.hmmsCleanup = new HorizontalMiddleMouseScroll().hmmsScroll(".scrollspy-nav");
+		// Horizontal scroll with proper cleanup
+		this.hmmsCleanup = new HorizontalMiddleMouseScroll().hmmsScroll(
+			".scrollspy-nav",
+		);
 
-        this.validateCaptchaDomReadyHandler = () => {
-            new ValidateCaptcha().validate("submitCaptcha");
-            if (this.validateCaptchaDomReadyHandler) {
-                document.removeEventListener("DOMContentLoaded", this.validateCaptchaDomReadyHandler);
-                this.validateCaptchaDomReadyHandler = null;
-            }
-        };
+		this.validateCaptchaDomReadyHandler = () => {
+			new ValidateCaptcha().validate("submitCaptcha");
+			if (this.validateCaptchaDomReadyHandler) {
+				document.removeEventListener(
+					"DOMContentLoaded",
+					this.validateCaptchaDomReadyHandler,
+				);
+				this.validateCaptchaDomReadyHandler = null;
+			}
+		};
 
-        if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", this.validateCaptchaDomReadyHandler);
-        } else {
-            this.validateCaptchaDomReadyHandler();
-        }
-    }
+		if (document.readyState === "loading") {
+			document.addEventListener(
+				"DOMContentLoaded",
+				this.validateCaptchaDomReadyHandler,
+			);
+		} else {
+			this.validateCaptchaDomReadyHandler();
+		}
+	}
 
-    disconnectedCallback(): void {
-        if (this.hmmsCleanup) {
-            this.hmmsCleanup();
-            this.hmmsCleanup = null;
-        }
-        if (this.captchaDomReadyHandler) {
-            document.removeEventListener("DOMContentLoaded", this.captchaDomReadyHandler);
-            this.captchaDomReadyHandler = null;
-        }
-        if (this.validateCaptchaDomReadyHandler) {
-            document.removeEventListener("DOMContentLoaded", this.validateCaptchaDomReadyHandler);
-            this.validateCaptchaDomReadyHandler = null;
-        }
-    }
+	disconnectedCallback(): void {
+		if (this.hmmsCleanup) {
+			this.hmmsCleanup();
+			this.hmmsCleanup = null;
+		}
+		if (this.captchaDomReadyHandler) {
+			document.removeEventListener(
+				"DOMContentLoaded",
+				this.captchaDomReadyHandler,
+			);
+			this.captchaDomReadyHandler = null;
+		}
+		if (this.validateCaptchaDomReadyHandler) {
+			document.removeEventListener(
+				"DOMContentLoaded",
+				this.validateCaptchaDomReadyHandler,
+			);
+			this.validateCaptchaDomReadyHandler = null;
+		}
+	}
 }
 
 export default About;

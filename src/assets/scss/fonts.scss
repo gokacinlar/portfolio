@@ -1,23 +1,25 @@
 @use "mixins" as mixin;
 
 @font-face {
-    font-family: "Geist";
+    font-family: Geist;
     src: url("../fonts/Geist.woff2") format("woff2"),
         url("../fonts/Geist.woff") format("woff"),
         url("../fonts/Geist.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
+
     @include mixin.low-level-font-management("kern", "liga", "clig", "calt");
 }
 
 @font-face {
-    font-family: "Franuces";
+    font-family: Franuces;
     src: url("../fonts/Franuces.woff2") format("woff2"),
         url("../fonts/Franuces.woff") format("woff"),
         url("../fonts/Franuces.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
+
     @include mixin.low-level-font-management("kern", "liga", "clig", "calt");
 }
