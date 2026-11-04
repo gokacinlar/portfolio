@@ -1,6 +1,24 @@
 {
   "version": 1,
   "skills": {
+    "ai-project-manager": {
+      "source": "ChrisTitusTech/titstack",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/ai-project-manager/SKILL.md",
+      "computedHash": "b36d256bba55450e5a269a5ca8325b9e98e597a486ccb39725ff4aa7d79d6e27"
+    },
+    "autofix": {
+      "source": "ChrisTitusTech/titstack",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/autofix/SKILL.md",
+      "computedHash": "99dfc4f532e7d613bf3777cc2a0864d31e6511b2da0855ea4a9b5eaa54bed5e9"
+    },
+    "bash-scripting": {
+      "source": "ChrisTitusTech/titstack",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/bash-scripting/SKILL.md",
+      "computedHash": "8a6faf71defef3df8c48e3d9e645bc682af3f9db9a29b901c10b7620e96f9123"
+    },
     "code-review": {
       "source": "mattpocock/skills",
       "sourceType": "github",
