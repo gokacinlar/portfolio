@@ -232,31 +232,6 @@ export class ModalList {
 		`${process.env.RECAPTCHA}`;
 	public static readonly MODALS: ModalConfig[] = [
 		{
-			id: "gnuPgModal",
-			title: Localize.translate("common:modals:gpg"),
-			content: `
-                <div class="mt-2 fs-6 fw-medium bg-dark-subtle px-2 py-2">
-                    <p>
-                        <code>
-                            -----BEGIN PGP PUBLIC KEY BLOCK-----<br>
-                            mDMEaIQ5/BYJKwYBBAHaRw8BAQdAkPugW/CL7j8YUNjNMfOu+Vzdbzqcy+ej7bgS<br>
-                            sA1YzA20K0RlcnZpxZ8gw5Zrc8O8em/En2x1IDxnb2thY2lubGFyQHlhYW5pLmNv<br>
-                            bT6ImQQTFgoAQRYhBJ/je/y0W1eL4i6+FUY7feypcQnrBQJohDn8AhsDBQkFpUsU<br>
-                            BQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEEY7feypcQnrbUYBAMd5oK3D<br>
-                            qi3Dd8WlaDyYU0gvWzeRYkz5LY60vJg7hnqGAP4yl1zQR4QSUF/Wb3nu1rhf2DY2<br>
-                            UfFDatM+C+dwx+CWDrg4BGiEOfwSCisGAQQBl1UBBQEBB0AqEb35sWJz4KgjMGQf<br>
-                            G/69rSzKDXQzc6Pd+OEXY4gtSwMBCAeIfgQYFgoAJhYhBJ/je/y0W1eL4i6+FUY7<br>
-                            feypcQnrBQJohDn8AhsMBQkFpUsUAAoJEEY7feypcQnrKooBANZf9FjNAEDupyXy<br>
-                            LvovedoNsJBqhWI2xoKJhAL8cJBxAQDNapwGCkPhCyhYSeN2GscmlXNh8BxAFR90<br>
-                            OV5PvJpMAQ==<br>
-                            =BuXQ<br>
-                            -----END PGP PUBLIC KEY BLOCK-----
-                        </code>
-                    </p>
-                </div>
-            `,
-		},
-		{
 			id: "requestCVModal",
 			title: Localize.translate("common:modals:cv:title"),
 			content: `
@@ -413,27 +388,6 @@ export class AccordionList {
 	public static readonly ACCORDION_ITEMS: AccordionItem[] = [
 		{
 			id: "One",
-			header: Localize.translate("common:accordion:secureHeader"),
-			body: `
-                <p class="lead fs-6 fw-medium">${Localize.translate("common:accordion:secureIntro")}</p>
-                <table id="commsTable" class="table table-striped table-bordered">
-                    <tbody>
-                        <tr>
-                            <th scope="row">${Localize.translate("common:accordion:secureJami")}</th>
-                            <td><code>gokacinlar</code></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">${Localize.translate("common:accordion:secureGpg")}</th>
-                            <td>${Localize.translate("common:accordion:secureView")} <a class="link-info link-opacity-75-hover link-offset-2 modal-trigger" data-modal="gnuPgModal" href="#" hreflang="x-default">${Localize.translate("common:accordion:secureHere")}</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            `,
-			modalTriggerId: "gnupgKey",
-			modalId: "gnuPgModal",
-		},
-		{
-			id: "Two",
 			header: Localize.translate("common:accordion:donationsHeader"),
 			body: `
                 <p class="lead fs-6 fw-medium">${Localize.translate("common:accordion:donationsIntro")}</p>
@@ -448,7 +402,7 @@ export class AccordionList {
             `,
 		},
 		{
-			id: "Three",
+			id: "Two",
 			header: Localize.translate("common:accordion:aboutSiteHeader"),
 			body: `
                 <p class="lead fs-6 fw-medium">${Localize.translate("common:accordion:aboutSiteIntro")}</p>

@@ -119,7 +119,6 @@
 		"part2": "y"
 	},
 	"modals": {
-		"gpg": "🧲 GnuPG Public Key",
 		"cv": {
 			"title": "👔 CV'mi Görün ya da İndirin",
 			"msg": "Devam etmeden önce lütfen robot olmadığınızı onaylayın.",
@@ -283,7 +282,10 @@
 						"Temel materyaller dahil",
 						"E-posta desteği"
 					],
-					"excludedFeatures": ["1:1 canlı mentorluk", "Kişisel yol haritası"],
+					"excludedFeatures": [
+						"1:1 canlı mentorluk",
+						"Kişisel yol haritası"
+					],
 					"buttonLabel": "Rezervasyon İçin İletişim",
 					"buttonIcon": "bi-people-fill"
 				},
@@ -298,7 +300,10 @@
 						"Temel materyaller dahil",
 						"E-posta desteği"
 					],
-					"excludedFeatures": ["1:1 canlı mentorluk", "Kişisel yol haritası"],
+					"excludedFeatures": [
+						"1:1 canlı mentorluk",
+						"Kişisel yol haritası"
+					],
 					"buttonLabel": "Rezervasyon İçin İletişim",
 					"buttonIcon": "bi-people-fill"
 				},
@@ -414,8 +419,6 @@
 	"accordion": {
 		"secureHeader": "🔑 Güvenli ve Gizli İletişim",
 		"secureIntro": "Benimle <mark class=\"rounded-3\">daha gizli bir şekilde</mark> iletişime geçmek isterseniz aşağıdaki eylemlerden birini kullanabilirsiniz. Bu yöntemleri nasıl kullanacağınızı bilmiyorsanız, işte <a class=\"link-info link-opacity-75-hover link-offset-2\" href=\"https://www.youtube.com/watch?v=mu2TVYJE5Gc\" hreflang=\"x-default\" target=\"_blank\">bir eğitim videosu</a>. Ancak bunu yalnızca <strong>gerçekten iyi bir nedeniniz varsa</strong> kullanmalısınız.",
-		"secureJami": "Jami (İstemci)",
-		"secureGpg": "GnuPG (Genel Anahtar)",
 		"secureView": "Görüntüle",
 		"secureHere": "buradan.",
 		"donationsHeader": "💞 Bağışlar",

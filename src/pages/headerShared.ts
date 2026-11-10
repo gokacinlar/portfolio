@@ -1,3 +1,4 @@
+import Localize from "../utils/initLocalization";
 import {
 	Routes,
 	defaultHtmxOptions,
@@ -12,31 +13,31 @@ export { Routes, defaultHtmxOptions };
 export const navLinks = ((): iface.NavLink[] => [
 	{
 		href: Routes.HOME,
-		title: "Home",
+		title: Localize.translate("common:upperNavigation:home"),
 		icon: "bi bi-house-door",
 		htmxOptions: NavLinkHtmxOptions[Routes.HOME],
 	},
 	{
 		href: Routes.LIFE_FEED,
-		title: "Life Feed",
+		title: Localize.translate("common:upperNavigation:lifeFeed"),
 		icon: "bi bi-bookshelf",
 		htmxOptions: NavLinkHtmxOptions[Routes.LIFE_FEED],
 	},
 	{
 		href: Routes.GALLERY,
-		title: "Gallery",
+		title: Localize.translate("common:upperNavigation:gallery"),
 		icon: "bi bi-images",
 		htmxOptions: NavLinkHtmxOptions[Routes.GALLERY],
 	},
 	{
 		href: Routes.UPDATES,
-		title: "Updates",
+		title: Localize.translate("common:upperNavigation:updates"),
 		icon: "bi bi-journals",
 		htmxOptions: NavLinkHtmxOptions[Routes.UPDATES],
 	},
 	{
 		href: Routes.ABOUT,
-		title: "About",
+		title: Localize.translate("common:upperNavigation:about"),
 		icon: "bi bi-person-circle",
 		htmxOptions: NavLinkHtmxOptions[Routes.ABOUT],
 	},
