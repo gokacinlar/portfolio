@@ -88,9 +88,21 @@ class About extends HTMLElement {
 
 	private readonly SocialsElements: iFace.SocialsElement[] = [
 		{
+			name: Localize.translate("common:about:socials:email"),
+			icon: "bi bi-mailbox",
+			href: new URL(
+				"mailto:dervisoksuzoglu@tutamail.com?subject=To%20Dervi%C5%9F ",
+			),
+		},
+		{
 			name: Localize.translate("common:about:socials:github"),
 			icon: "bi bi-github",
 			href: new URL("https://github.com/gokacinlar"),
+		},
+		{
+			name: Localize.translate("common:about:socials:hn"),
+			icon: "bi bi-braces",
+			href: new URL("https://news.ycombinator.com/user?id=gkcnlr"),
 		},
 		{
 			name: Localize.translate("common:about:socials:hashnode"),
@@ -101,13 +113,6 @@ class About extends HTMLElement {
 			name: Localize.translate("common:about:socials:substack"),
 			icon: "bi bi-substack",
 			href: new URL("https://substack.com/@gokacinlar"),
-		},
-		{
-			name: Localize.translate("common:about:socials:email"),
-			icon: "bi bi-mailbox",
-			href: new URL(
-				"mailto:dervisoksuzoglu@tutamail.com?subject=To%20Dervi%C5%9F ",
-			),
 		},
 	];
 
@@ -207,7 +212,7 @@ class About extends HTMLElement {
 		return /*html*/ `
             <div class="d-flex flex-row flex-wrap align-items-start justify-content-evenly gap-1">
                 ${this.SocialsElements.map(
-									({ name, icon, href }) => `
+			({ name, icon, href }) => `
                     <div class="aside-section-socials mb-2 rounded-pill shadow-sm flex-grow-1">
                         <a href="${href}" hreflang="x-default" class="d-flex flex-row align-items-center gap-1 px-2 py-2 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" 
                             target="_blank" title="${name}">
@@ -217,7 +222,7 @@ class About extends HTMLElement {
                         </a>
                     </div>
                 `,
-								).join("")}
+		).join("")}
             </div>
             <hr class="border border-2 border-secondary">
         `;
