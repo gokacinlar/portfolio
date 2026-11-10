@@ -177,6 +177,7 @@
 		},
 		"socials": {
 			"github": "GitHub",
+			"hn": "Hacker News",
 			"hashnode": "Hashnode",
 			"substack": "Substack",
 			"email": "E-mail"
