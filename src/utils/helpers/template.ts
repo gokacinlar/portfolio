@@ -1,38 +1,12 @@
 import DOMPurify from "dompurify";
 import { domSanitizeOptions } from "../../domSanitizeOptions";
-
-// Function to generate nonce for each script tag
-export function generateNonce(): string {
-	try {
-		// csp-html-webpack-plugin adds nonce to script tags automatically
-		const scriptWithNonce = document.querySelector(
-			"script[nonce]",
-		) as HTMLScriptElement;
-		if (scriptWithNonce) {
-			return scriptWithNonce.getAttribute("nonce") || "";
-		}
-
-		// check nonce in styletags
-		const styleWithNonce = document.querySelector(
-			"style[nonce]",
-		) as HTMLStyleElement;
-		if (styleWithNonce) {
-			return styleWithNonce.getAttribute("nonce") || "";
-		}
-
-		console.warn("No nonce found. CSP may block dynamic content.");
-		return "";
-	} catch (error: unknown) {
-		console.error("Error retrieving nonce:", error);
-		return "";
-	}
-}
+import { applyNonce, getNonce } from "./nonce";
 
 // Create a template content to be appended to every Light DOM
 export class Template {
 	private nonce: string;
 	constructor() {
-		this.nonce = generateNonce();
+		this.nonce = getNonce();
 	}
 
 	public createTemplate(
@@ -55,7 +29,10 @@ export class Template {
 			// Add nonce to all style and script elements if nonce exists
 			if (this.nonce) {
 				fragment.querySelectorAll("style, script").forEach((element) => {
-					element.setAttribute("nonce", this.nonce);
+					applyNonce(
+						element as HTMLScriptElement | HTMLStyleElement,
+						this.nonce,
+					);
 				});
 			}
 

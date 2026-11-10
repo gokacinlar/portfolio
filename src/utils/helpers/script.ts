@@ -1,19 +1,6 @@
+import type { ScriptOptions } from "../../ts/interfaces/i.global";
 import { WhiteListedURLs } from "../../static";
-import { generateNonce } from "./template";
-
-interface ScriptOptions {
-	scriptItself: string;
-	target: HTMLElement;
-	attributes?: ScriptAttributes;
-}
-
-interface ScriptAttributes {
-	src?: string | null;
-	defer?: boolean;
-	async?: boolean;
-	nonce?: string;
-	crossorigin?: "anonymous" | "use-credentials";
-}
+import { getNonce } from "./nonce";
 
 // Function to insert custom script into the page
 export function insertApprovedScript({
@@ -41,7 +28,7 @@ export function insertApprovedScript({
 		element.async = attributes.async ?? false;
 
 		// Generate nonce for each creation
-		const nonceGenerated = generateNonce();
+		const nonceGenerated = getNonce();
 		element.nonce = nonceGenerated;
 		target.appendChild(element);
 		return element;
