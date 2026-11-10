@@ -26,11 +26,7 @@ module.exports = {
     "plugin/no-unsupported-browser-features": [
       true,
       { ignore: ["css-nesting"] }
-    ],
-    "selector-id-pattern": null,
-    "scss/at-mixin-argumentless-call-parentheses": null,
-    "color-function-alias-notation": null,
-    "order/properties-alphabetical-order": null
+    ]
   },
   ignoreFiles: [
     "public/**",
