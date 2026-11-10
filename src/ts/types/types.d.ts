@@ -35,12 +35,12 @@ type HTMXOptions = {
 	hxget: string;
 	hxtrigger: "click" | "change" | "mouseover";
 	hxswap:
-		| "innerHTML transition:true"
-		| "outerHTML"
-		| "beforebegin"
-		| "afterbegin"
-		| "beforeend"
-		| "afterend";
+	| "innerHTML transition:true"
+	| "outerHTML"
+	| "beforebegin"
+	| "afterbegin"
+	| "beforeend"
+	| "afterend";
 	hxpushurl: boolean;
 };
 
@@ -58,6 +58,8 @@ type NavLink = {
 
 type TableRow = string[];
 
+type NonceElement = HTMLScriptElement | HTMLStyleElement;
+
 export type {
 	GenericString,
 	PromoCardData,
@@ -67,4 +69,5 @@ export type {
 	Education,
 	NavLink,
 	TableRow,
+	NonceElement
 };

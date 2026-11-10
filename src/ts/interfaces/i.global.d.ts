@@ -37,12 +37,12 @@ export interface HTMXOptions {
 	hxget: string;
 	hxtrigger: "click" | "change" | "mouseover";
 	hxswap:
-		| "innerHTML transition:true"
-		| "outerHTML"
-		| "beforebegin"
-		| "afterbegin"
-		| "beforeend"
-		| "afterend";
+	| "innerHTML transition:true"
+	| "outerHTML"
+	| "beforebegin"
+	| "afterbegin"
+	| "beforeend"
+	| "afterend";
 	hxpushurl: boolean;
 }
 
@@ -68,11 +68,11 @@ export interface CacheOptions {
 	maxEntries?: number;
 	maxAgeSeconds?: number;
 	strategy?:
-		| "cache-first"
-		| "network-first"
-		| "stale-while-revalidate"
-		| "cache-only"
-		| "network-only";
+	| "cache-first"
+	| "network-first"
+	| "stale-while-revalidate"
+	| "cache-only"
+	| "network-only";
 }
 
 export interface ExtendableEventLike extends Event {
@@ -247,4 +247,28 @@ export interface FeaturedPlanConfig {
 	button: WorkButtonConfig;
 	secondaryButton?: WorkButtonConfig;
 	accent?: string;
+}
+
+export interface TwitterWidgets {
+	load: () => void;
+}
+
+export interface TwitterGlobal extends Window {
+	twttr?: {
+		widgets?: TwitterWidgets;
+	};
+}
+
+export interface ScriptOptions {
+	scriptItself: string;
+	target: HTMLElement;
+	attributes?: ScriptAttributes;
+}
+
+export interface ScriptAttributes {
+	src?: string | null;
+	defer?: boolean;
+	async?: boolean;
+	nonce?: string;
+	crossorigin?: "anonymous" | "use-credentials";
 }
