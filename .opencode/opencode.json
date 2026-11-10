@@ -4,10 +4,6 @@
     "snapshot": true,
     "formatter": true,
     "shell": "/usr/bin/fish",
-    "plugin": [
-        "opencode-agent-memory",
-        "@knikolov/opencode-plugin-simple-memory"
-    ],
     "disabled_providers": [
         "openai",
         "anthropic",
