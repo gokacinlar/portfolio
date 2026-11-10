@@ -3,38 +3,67 @@
 @use "../m_queries" as mquery;
 
 @layer init {
-    #blogContainer {
-        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, height, auto);
-        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, min-height, 100dvh);
-        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
-        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-wrap, nowrap);
-        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, row-gap, 1rem);
-        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, margin, 0);
-        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, width, 100%);
-    }
+	#blogContainer {
+		@include mixin.responsive-styling(breakpoint.$mobile-breakpoints,
+			height,
+			auto);
+		@include mixin.responsive-styling(breakpoint.$desktop-breakpoints,
+			min-height,
+			100dvh);
+		@include mixin.responsive-styling(breakpoint.$mobile-breakpoints,
+			min-height,
+			100dvh);
+		@include mixin.responsive-styling(breakpoint.$mobile-breakpoints,
+			flex-direction,
+			column);
+		@include mixin.responsive-styling(breakpoint.$mobile-breakpoints,
+			flex-wrap,
+			nowrap);
+		@include mixin.responsive-styling(breakpoint.$mobile-breakpoints,
+			row-gap,
+			1rem);
+		@include mixin.responsive-styling(breakpoint.$mobile-breakpoints,
+			margin,
+			0);
+		@include mixin.responsive-styling(breakpoint.$mobile-breakpoints,
+			width,
+			100%);
+	}
 
-    #blogContainer>.bwrapper:last-child {
-        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-grow, 1);
-        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, display, flex);
-        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, flex-direction, column);
-        @include mixin.responsive-styling(breakpoint.$mobile-breakpoints, height, 100%);
-    }
+	#blogContainer>.bwrapper:last-child {
+		@include mixin.responsive-styling(breakpoint.$mobile-breakpoints,
+			flex-grow,
+			1);
+		@include mixin.responsive-styling(breakpoint.$mobile-breakpoints,
+			display,
+			flex);
+		@include mixin.responsive-styling(breakpoint.$mobile-breakpoints,
+			flex-direction,
+			column);
+		@include mixin.responsive-styling(breakpoint.$mobile-breakpoints,
+			height,
+			100%);
+	}
 
-    #blogMain,
-    #blogAside {
-        background: var(--clr-eight);
-    }
+	#blogMain,
+	#blogAside {
+		background: var(--clr-eight);
+	}
 
-    #blogAside {
-        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, display, none);
-    }
+	#blogAside {
+		@include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints,
+			display,
+			none);
+	}
 
-    #blogAsideChild {
-        block-size: 90%;
-        background: var(--clr-one);
-    }
+	#blogAsideChild {
+		block-size: 90%;
+		background: var(--clr-one);
+	}
 
-    .bwrapper {
-        @include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints, padding-inline, 0);
-    }
+	.bwrapper {
+		@include mixin.responsive-styling(breakpoint.$all-mobile-tablet-breakpoints,
+			padding-inline,
+			0);
+	}
 }
