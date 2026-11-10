@@ -418,7 +418,8 @@ class Updates extends HTMLElement {
 		slug: string,
 	): StaticPost | null {
 		const decoded: string = decodeURIComponent(slug).trim();
-		const rawSlug: string = decoded.split("-").pop() ?? decoded;
+		const parts: string[] = decoded.split("-");
+		const rawSlug: string = parts.slice(4).join("-") ?? decoded; // Adjust the slug structure
 
 		// Try exact slug first, then raw slug without category-date prefix
 		const exact: StaticPost | undefined = manifest.posts.find(
