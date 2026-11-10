@@ -3,6 +3,7 @@
 @use "../m_queries" as mquery;
 
 @layer init {
+
     /* Modals */
     .modal-content {
         background-color: var(--clr-eight) !important;
@@ -13,5 +14,11 @@
     /* 404 */
     #err_404 {
         @include mixin.background-cover("../images/static/svg/parabolic-rectangle.svg");
+    }
+
+    /* Twitter embed cards */
+
+    div.twitter-tweet>iframe {
+        border-radius: 24px !important;
     }
 }
