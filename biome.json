@@ -6,7 +6,9 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"includes": ["src/**/*"]
+		"includes": [
+			"src/**/*"
+		]
 	},
 	"formatter": {
 		"enabled": true,
@@ -21,7 +23,13 @@
 				"noConsole": {
 					"level": "warn",
 					"options": {
-						"allow": ["assert", "error", "info", "warn", "clear"]
+						"allow": [
+							"assert",
+							"error",
+							"info",
+							"warn",
+							"clear"
+						]
 					}
 				}
 			}
@@ -36,7 +44,7 @@
 		"enabled": true,
 		"actions": {
 			"source": {
-				"organizeImports": "off"
+				"organizeImports": "on"
 			}
 		}
 	}
