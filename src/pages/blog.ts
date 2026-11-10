@@ -1,10 +1,14 @@
 import DOMPurify from "dompurify";
-import WordPressGraphQLClient from "../utils/gql/wp_graphql";
-import { Template } from "../utils/helpers/template";
-import { normalizeDateToDayMonthYear } from "../utils/helpers/date";
-import Localize from "../utils/initLocalization";
-import type * as type from "../ts/interfaces/i.global";
 import type { BlogManifest, StaticPost } from "../services/blog/blogTypes";
+import type * as type from "../ts/interfaces/i.global";
+import WordPressGraphQLClient from "../utils/gql/wp_graphql";
+import { normalizeDateToDayMonthYear } from "../utils/helpers/date";
+import { Template } from "../utils/helpers/template";
+import Localize from "../utils/initLocalization";
+import {
+	loadTwitterWidget,
+	renderTwitterWidgets,
+} from "../utils/twitter-widget";
 
 class Updates extends HTMLElement {
 	private popstateListener: ((event: PopStateEvent) => Promise<void>) | null =
@@ -327,6 +331,8 @@ class Updates extends HTMLElement {
 
 		contentArea.innerHTML = DOMPurify.sanitize(postHTML);
 		contentArea.scrollTop = 0;
+
+		renderTwitterWidgets();
 	}
 
 	// Add method to load post from URL (slug) - prefers static manifest
@@ -565,6 +571,9 @@ class Updates extends HTMLElement {
 		await this.fetchAndPopulatePosts();
 		// Check if there"s a post in the URL and load it
 		await this.loadPostFromUrl();
+
+		// Twitter embed
+		loadTwitterWidget();
 
 		// Store the listener function to be able to remove it later
 		this.popstateListener = async (event) => {

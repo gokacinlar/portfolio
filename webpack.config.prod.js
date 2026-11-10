@@ -25,14 +25,37 @@ const scripts = [
     "https://api.web3forms.com/submit",
     "https://*.googletagmanager.com",
     "https://www.google.com/recaptcha/",
-    "https://www.gstatic.com/recaptcha/"
+    "https://www.gstatic.com/recaptcha/",
 ];
 
 const imageConnections = [
     "https://creativecommons.org/publicdomain/zero/1.0/",
     "https://notbyai.fyi/",
-    "https://raw.githubusercontent.com"
+    "https://raw.githubusercontent.com",
 ];
+
+const twitterSources = {
+    script: ["https://platform.twitter.com", "https://platform.x.com"],
+    connect: [
+        "https://platform.twitter.com",
+        "https://cdn.syndication.twimg.com",
+        "https://syndication.twitter.com",
+    ],
+    frame: [
+        "https://platform.twitter.com",
+        "https://platform.x.com",
+        "https://syndication.twitter.com",
+        "https://publish.twitter.com",
+    ],
+    image: [
+        "https://pbs.twimg.com",
+        "https://abs.twimg.com",
+        "https://cdn.syndication.twimg.com",
+    ],
+};
+
+// Form submissions are performed via fetch(), so the API origin needs connect-src
+const apiConnections = ["https://api.web3forms.com"];
 
 // Meta tags for HTML
 const htmlWebpackPluginMeta = {
@@ -353,9 +376,9 @@ module.exports = {
             {
                 "base-uri": ["'self'"],
                 "object-src": ["'none'"],
-                "script-src": ["'self'", ...scripts],
-                "style-src": ["'self'"],
-                "img-src": ["'self'", "data:", "blob:", ...imageConnections],
+                "script-src": ["'self'", "'unsafe-inline'", ...scripts, ...twitterSources.script],
+                "style-src": ["'self'", "'unsafe-inline'"],
+                "img-src": ["'self'", "data:", "blob:", ...imageConnections, ...twitterSources.image],
                 "font-src": ["'self'"],
                 "connect-src": [
                     "'self'",
@@ -363,9 +386,14 @@ module.exports = {
                     "https://www.google-analytics.com",
                     "https://www.google.com/recaptcha/",
                     "https://www.gstatic.com/recaptcha/",
-                    "https://api.github.com/repos/gokacinlar/"
+                    "https://api.github.com/repos/gokacinlar/",
+                    ...apiConnections,
+                    ...twitterSources.connect
                 ],
-                "frame-src": ["https://www.google.com/recaptcha/"]
+                "frame-src": [
+                    "https://www.google.com/recaptcha/",
+                    ...twitterSources.frame
+                ]
             },
             {
                 enabled: true,
